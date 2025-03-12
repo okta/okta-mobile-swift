@@ -15,31 +15,37 @@ import Foundation
 extension AuthorizationCodeFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(issuerURL:clientId:scope:redirectUri:additionalParameters:)")
-    public convenience init(issuer: URL,
-                            clientId: String,
-                            scopes: String,
-                            redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+    public init(issuer: URL,
+                clientId: String,
+                scopes: String,
+                redirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        fatalError()
+        self.init(issuerURL: issuer, clientId: clientId, scope: scopes, redirectUri: redirectUri)
     }
     
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(client:additionalParameters:)")
-    public convenience init(redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]?,
-                            client: OAuth2Client)
+    public init(redirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]?,
+                client: OAuth2Client) throws
     {
-        fatalError()
+        var configuration = client.configuration
+        configuration.redirectUri = redirectUri
+
+        try self.init(client: OAuth2Client(configuration, session: client.session),
+                      additionalParameters: additionalParameters)
     }
     
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "start(with:completion:)")
     public func start(with context: Context? = nil,
                       additionalParameters: [String: String]?,
-                      completion: @escaping (Result<URL, OAuth2Error>) -> Void)
+                      completion: @escaping @Sendable (Result<URL, OAuth2Error>) -> Void)
     {
-        fatalError()
+        var context = context ?? .init()
+        context.additionalParameters = additionalParameters
+        start(with: context, completion: completion)
     }
 }
 
@@ -49,7 +55,9 @@ extension AuthorizationCodeFlow {
     @available(*, deprecated, renamed: "start(with:)")
     public func start(with context: Context?, additionalParameters: [String: String]?) async throws -> URL
     {
-        fatalError()
+        var context = context ?? .init()
+        context.additionalParameters = additionalParameters
+        return try await start(with: context)
     }
 }
 
@@ -58,8 +66,11 @@ extension OAuth2Client {
     @available(*, deprecated, renamed: "authorizationCodeFlow(additionalParameters:)")
     public func authorizationCodeFlow(
         redirectUri: URL,
-        additionalParameters: [String: String]?) -> AuthorizationCodeFlow
+        additionalParameters: [String: String]?) throws -> AuthorizationCodeFlow
     {
-        fatalError()
+        var configuration = configuration
+        configuration.redirectUri = redirectUri
+        return try AuthorizationCodeFlow(client: OAuth2Client(configuration, session: session),
+                                         additionalParameters: additionalParameters)
     }
 }

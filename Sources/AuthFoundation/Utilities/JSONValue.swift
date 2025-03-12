@@ -13,57 +13,103 @@
 import Foundation
 
 public enum JSONError: Error {
-    case cannotDecode(value: Any?)
+    case cannotDecode(value: (any Sendable)?)
     case invalidContentEncoding
 }
 
 /// Efficiently represents ``JSON`` values, and exchanges between its String or Data representations.
 ///
 /// JSON data may be imported from multiple sources, be it Data, a String, or an alread-parsed JSON object. Transforming data between these states, and dealing with error conditions every time, can be cumbersome. AnyJSON is a convenience wrapper class that allows underlying JSON to be lazily mapped between types as needed.
-public class AnyJSON {
-    private enum Value {
+public final class AnyJSON: Sendable {
+    private enum Value: Sendable {
         case json(JSON)
         case string(String)
         case data(Data)
     }
     
     private let value: Value
-    
+    private let lock = Lock()
+    nonisolated(unsafe) private var _stringValue: String?
+    nonisolated(unsafe) private var _dataValue: Data?
+    nonisolated(unsafe) private var _jsonValue: JSON?
+
     /// The string encoding of the JSON data.
-    public lazy var stringValue: String = {
+    public var stringValue: String {
         if case let .string(string) = value {
             return string
         }
-        return String(data: dataValue, encoding: .utf8) ?? ""
-    }()
+
+        return lock.withLock { getStringValue() }
+    }
     
     /// The data encoding of the JSON value.
-    public lazy var dataValue: Data = {
-        switch value {
-        case .json(let json):
-            guard let anyValue = json.anyValue else {
-                return Data()
-            }
-            return (try? JSONSerialization.data(withJSONObject: anyValue)) ?? Data()
-        case .string(let string):
-            return string.data(using: .utf8) ?? Data()
-        case .data(let data):
+    public var dataValue: Data {
+        if case let .data(data) = value {
             return data
         }
-    }()
+
+        return lock.withLock { getDataValue() }
+    }
     
     /// The ``JSON`` representation of the JSON data.
-    public lazy var jsonValue: JSON = {
-        switch value {
-        case .json(let json):
+    public var jsonValue: JSON {
+        if case let .json(json) = value {
             return json
-        case .string(let string):
-            return (try? JSON(string)) ?? JSON.null
-        case .data(let data):
-            return (try? JSON(data)) ?? JSON.null
         }
-    }()
-    
+
+        return lock.withLock { getJsonValue() }
+    }
+
+    private func getStringValue() -> String {
+        if let result = _stringValue {
+            return result
+        }
+
+        let result = String(data: getDataValue(), encoding: .utf8) ?? ""
+        _stringValue = result
+        return result
+    }
+
+    private func getDataValue() -> Data {
+        if let result = _dataValue {
+            return result
+        }
+
+        let result: Data
+        valueBlock: switch value {
+        case .json(let json):
+            guard let anyValue = json.anyValue else {
+                result = Data()
+                break valueBlock
+            }
+            result = (try? JSONSerialization.data(withJSONObject: anyValue)) ?? Data()
+        case .string(let string):
+            result = string.data(using: .utf8) ?? Data()
+        case .data(let data):
+            result = data
+        }
+
+        _dataValue = result
+        return result
+    }
+
+    private func getJsonValue() -> JSON {
+        if let result = _jsonValue {
+            return result
+        }
+
+        let result: JSON
+        if case let .string(string) = value {
+            result = (try? JSON(string)) ?? .null
+        } else if case let .data(data) = value {
+            result = (try? JSON(data)) ?? .null
+        } else {
+            result = .null
+        }
+        _jsonValue = result
+        return result
+    }
+
     /// Initializes the JSON data based on a string value.
     /// - Parameter string: JSON string.
     public init(_ string: String) {
@@ -85,7 +131,7 @@ public class AnyJSON {
 }
 
 /// Represent mixed JSON values as instances of `Any`. This is used to expose API response values to Swift native types where Swift enums are not supported.
-public enum JSON: Equatable {
+public enum JSON: Sendable, Equatable {
     /// String JSON key value.
     case string(String)
 
@@ -96,35 +142,39 @@ public enum JSON: Equatable {
     case bool(Bool)
     
     /// Object JSON key value, containing its own nested key/value pairs.
-    case object([String: JSON])
-    
+    indirect case object([String: JSON])
+
     /// Array JSON key value, containing its own nested JSON values.
-    case array([JSON])
-    
+    indirect case array([JSON])
+
     /// Null JSON key value.
     case null
     
     /// Initializes a JSON object from a variety of supported types.
     /// - Parameter value: Value to represent as a JSON stru ture.
-    public init(_ value: Any?) throws {
+    public init(_ value: (any Sendable)?) throws {
         guard let value = value
         else {
             self = .null
             return
         }
-        
+
+        try self.init(value)
+    }
+
+    public init(_ value: Any) throws {
         if let value = value as? String {
             self = .string(value)
         } else if let value = value as? NSNumber {
             self = .number(value)
         } else if let value = value as? Bool {
             self = .bool(value)
-        } else if let value = value as? [String: Any] {
+        } else if let value = value as? [String: any Sendable] {
             self = .object(try value.mapValues({ try JSON($0) }))
-        } else if let value = value as? [Any] {
+        } else if let value = value as? [any Sendable] {
             self = .array(try value.map({ try JSON($0) }))
         } else {
-            throw JSONError.cannotDecode(value: value as Any)
+            throw JSONError.cannotDecode(value: nil)
         }
     }
     
@@ -140,7 +190,7 @@ public enum JSON: Equatable {
     /// Initializes a JSON object from its data representation.
     /// - Parameter value: The data value for a JSON object.
     public init(_ value: Data) throws {
-        try self.init(JSONSerialization.jsonObject(with: value))
+        try self.init(try JSONSerialization.jsonObject(with: value))
     }
     
     /// Returns the value as an instance of `Any`.
@@ -202,7 +252,7 @@ public enum JSON: Equatable {
 
 extension JSON: Codable {
     @_documentation(visibility: internal)
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let value = try? container.decode(String.self) {
             self = .string(value)
@@ -225,7 +275,7 @@ extension JSON: Codable {
     }
     
     @_documentation(visibility: internal)
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case let .string(value):

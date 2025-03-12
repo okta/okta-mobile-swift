@@ -13,7 +13,8 @@
 import Foundation
 @testable import AuthFoundation
 
-class MockTokenHashValidator: TokenHashValidator {
+class MockTokenHashValidator: @unchecked Sendable, TokenHashValidator {
+    @LockedValue
     var error: JWTError?
     private(set) var string: String?
     private(set) var idToken: JWT?

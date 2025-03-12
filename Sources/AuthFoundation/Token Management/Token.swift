@@ -13,26 +13,54 @@
 import Foundation
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
-public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expires {
+public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer, Expires {
     public typealias ClaimType = TokenClaim
 
     /// The object used to ensure ID tokens are valid.
-    public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()
-    
+    public static var idTokenValidator: any IDTokenValidator {
+        get {
+            lock.withLock { _idTokenValidator }
+        }
+        set {
+            lock.withLock { _idTokenValidator = newValue }
+        }
+    }
+
     /// The object used to ensure access tokens can be validated against its associated ID token.
-    public static var accessTokenValidator: TokenHashValidator = DefaultTokenHashValidator(hashKey: .accessToken)
-    
+    public static var accessTokenValidator: any TokenHashValidator  {
+        get {
+            lock.withLock { _accessTokenValidator }
+        }
+        set {
+            lock.withLock { _accessTokenValidator = newValue }
+        }
+    }
+
     /// The object used to ensure device secrets are validated against its associated ID token.
-    public static var deviceSecretValidator: TokenHashValidator = DefaultTokenHashValidator(hashKey: .deviceSecret)
-    
+    public static var deviceSecretValidator: any TokenHashValidator  {
+        get {
+            lock.withLock { _deviceSecretValidator }
+        }
+        set {
+            lock.withLock { _deviceSecretValidator = newValue }
+        }
+    }
+
     /// Coordinates important operations during token exchange.
     ///
     /// > Note: This property and interface is currently marked as internal, but may be exposed publicly in the future.
-    static var exchangeCoordinator: TokenExchangeCoordinator = DefaultTokenExchangeCoordinator()
-    
+    static var exchangeCoordinator: any TokenExchangeCoordinator  {
+        get {
+            lock.withLock { _exchangeCoordinator }
+        }
+        set {
+            lock.withLock { _exchangeCoordinator = newValue }
+        }
+    }
+
     /// The unique identifier for this token.
-    public internal(set) var id: String
-    
+    public let id: String
+
     /// The date this token was issued at.
     public let issuedAt: Date?
     
@@ -66,8 +94,8 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     public var issuedTokenType: String? { self[.issuedTokenType] }
     
     /// The claim payload container for this token
-    public var payload: [String: Any] { jsonPayload.jsonValue.anyValue as? [String: Any] ?? [:] }
-    
+    public var payload: [String: any Sendable] { jsonPayload.jsonValue.anyValue as? [String: any Sendable] ?? [:] }
+
     /// Indicates whether or not the token is being refreshed.
     public var isRefreshing: Bool {
         refreshAction.isActive
@@ -96,7 +124,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     /// - Parameters:
     ///   - client: Client to validate the token's claims against.
     ///   - context: Optional ``IDTokenValidatorContext`` to use when validating the token.
-    public func validate(using client: OAuth2Client, with context: IDTokenValidatorContext) async throws {
+    public func validate(using client: OAuth2Client, with context: any IDTokenValidatorContext) async throws {
         guard let idToken = idToken else {
             return
         }
@@ -128,7 +156,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
                                            scope: scope?.joined(separator: " "),
                                            id: Token.RefreshRequest.placeholderId)
         let response = try await client.exchange(token: request)
-        NotificationCenter.default.post(name: .tokenRefreshed, object: response.result)
+        TaskData.notificationCenter.post(name: .tokenRefreshed, object: response.result)
         return response.result
     }
     
@@ -163,7 +191,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
         self.jsonPayload = json
         self.refreshAction = .init(taskName: "Refresh Token \(id)")
         
-        let payload = json.jsonValue.anyValue as? [String: Any] ?? [:]
+        let payload = json.jsonValue.anyValue as? [String: any Sendable] ?? [:]
         if let value = payload[TokenClaim.idToken.rawValue] as? String {
             idToken = try JWT(value)
         } else {
@@ -199,6 +227,13 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
         try container.encode(context, forKey: .context)
         try container.encode(jsonPayload.stringValue, forKey: .rawValue)
     }
+
+    // MARK: Private properties / methods
+    private static let lock = Lock()
+    nonisolated(unsafe) private static var _idTokenValidator: any IDTokenValidator = DefaultIDTokenValidator()
+    nonisolated(unsafe) private static var _accessTokenValidator: any TokenHashValidator = DefaultTokenHashValidator(hashKey: .accessToken)
+    nonisolated(unsafe) private static var _deviceSecretValidator: any TokenHashValidator = DefaultTokenHashValidator(hashKey: .deviceSecret)
+    nonisolated(unsafe) private static var _exchangeCoordinator: any TokenExchangeCoordinator = DefaultTokenExchangeCoordinator()
 }
 
 extension Token {
@@ -211,7 +246,7 @@ extension Token {
     public static func from(refreshToken: String,
                             scope: [String]? = nil,
                             using client: OAuth2Client,
-                            completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+                            completion: @Sendable @escaping (Result<Token, OAuth2Error>) -> Void)
     {
         Task {
             do {

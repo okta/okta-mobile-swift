@@ -42,7 +42,7 @@ extension KeychainGettable {
         return result
     }
 
-    func performGet(prompt: String?, authenticationContext: KeychainAuthenticationContext?) throws -> Keychain.Item {
+    func performGet(prompt: String?, authenticationContext: (any KeychainAuthenticationContext)?) throws -> Keychain.Item {
         var cfQuery = self.getQuery
         if let prompt = prompt {
             cfQuery[kSecUseOperationPrompt as String] = prompt
@@ -53,8 +53,11 @@ extension KeychainGettable {
         }
 
         var ref: AnyObject?
-        
-        let status = Keychain.implementation.copyItemMatching(cfQuery as CFDictionary, &ref)
+        let status = Keychain
+            .implementation
+            .wrappedValue
+            .copyItemMatching(cfQuery as CFDictionary, &ref)
+
         guard status == noErr else {
             if status == errSecItemNotFound {
                 throw KeychainError.notFound
@@ -82,8 +85,11 @@ extension KeychainListable {
     func performList() throws -> [Keychain.Search.Result] {
         let cfQuery = self.listQuery as CFDictionary
         var ref: CFTypeRef?
-        let status = Keychain.implementation.copyItemMatching(cfQuery, &ref)
-        
+        let status = Keychain
+            .implementation
+            .wrappedValue
+            .copyItemMatching(cfQuery, &ref)
+
         guard status != errSecItemNotFound else {
             return []
         }
@@ -117,7 +123,7 @@ extension KeychainUpdatable {
         }
     }
 
-    func performUpdate(_ item: Keychain.Item, authenticationContext: KeychainAuthenticationContext?) throws {
+    func performUpdate(_ item: Keychain.Item, authenticationContext: (any KeychainAuthenticationContext)?) throws {
         let updateSearchQuery = self.updateQuery
 
         var saveQuery = item.query
@@ -127,7 +133,11 @@ extension KeychainUpdatable {
             saveQuery[kSecUseAuthenticationContext as String] = authenticationContext
         }
 
-        let status = Keychain.implementation.updateItem(updateSearchQuery as CFDictionary, saveQuery as CFDictionary)
+        let status = Keychain
+            .implementation
+            .wrappedValue
+            .updateItem(updateSearchQuery as CFDictionary, saveQuery as CFDictionary)
+
         if status == errSecItemNotFound {
             throw KeychainError.notFound
         } else if status != noErr {
@@ -147,7 +157,11 @@ extension KeychainDeletable {
     }
 
     func performDelete() throws {
-        let status = Keychain.implementation.deleteItem(deleteQuery as CFDictionary)
+        let status = Keychain
+            .implementation
+            .wrappedValue
+            .deleteItem(deleteQuery as CFDictionary)
+
         if status == errSecItemNotFound {
             throw KeychainError.notFound
         } else if status != noErr {
@@ -251,8 +265,8 @@ extension Keychain.Search.Result: KeychainGettable, KeychainUpdatable, KeychainD
     }
 }
 
-fileprivate let _kSecAttrAccessibleAlways = "dk" as CFString
-fileprivate let _kSecAttrAccessibleAlwaysThisDeviceOnly = "dku" as CFString
+nonisolated(unsafe) fileprivate let _kSecAttrAccessibleAlways = "dk" as CFString
+nonisolated(unsafe) fileprivate let _kSecAttrAccessibleAlwaysThisDeviceOnly = "dku" as CFString
 
 extension Keychain.Accessibility: RawRepresentable {
     public typealias RawValue = String

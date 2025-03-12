@@ -17,11 +17,11 @@ import OktaOAuth2
 import AuthenticationServices
 
 @available(iOS 12.0, macCatalyst 13.0, macOS 10.15, watchOS 6.2, tvOS 16.0, *)
-protocol AuthenticationServicesProviderSession: NSObjectProtocol {
+protocol AuthenticationServicesProviderSession: NSObjectProtocol, Sendable {
     init(url URL: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler)
 
     @available(iOS 13.0, macOS 10.15, *)
-    var presentationContextProvider: ASWebAuthenticationPresentationContextProviding? { get set }
+    var presentationContextProvider: (any ASWebAuthenticationPresentationContextProviding)? { get set }
 
     @available(iOS 13.0, macOS 10.15, watchOS 6.2, *)
     var prefersEphemeralWebBrowserSession: Bool { get set }
@@ -34,26 +34,32 @@ protocol AuthenticationServicesProviderSession: NSObjectProtocol {
     func cancel()
 }
 
-extension ASWebAuthenticationSession: AuthenticationServicesProviderSession {}
+extension ASWebAuthenticationSession: @retroactive @unchecked Sendable, AuthenticationServicesProviderSession {}
 
 protocol WebAuthenticationProviderFactory {
     static func createWebAuthenticationProvider(for webAuth: WebAuthentication,
                                                 from window: WebAuthentication.WindowAnchor?,
-                                                usesEphemeralSession: Bool) throws -> (any WebAuthenticationProvider)?
+                                                usesEphemeralSession: Bool) async throws -> (any WebAuthenticationProvider)?
 }
 
-class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
-    private(set) var authenticationSession: AuthenticationServicesProviderSession?
-    private let anchor: ASPresentationAnchor?
-    private let usesEphemeralSession: Bool
-    
+final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
+    private(set) var authenticationSession: (any AuthenticationServicesProviderSession)? {
+        get {
+            lock.withLock { _authenticationSession }
+        }
+        set {
+            lock.withLock { _authenticationSession = newValue }
+        }
+    }
+
     init(from window: WebAuthentication.WindowAnchor?, usesEphemeralSession: Bool = false) throws {
         self.anchor = window
         self.usesEphemeralSession = usesEphemeralSession
         
         super.init()
     }
-    
+
+    @MainActor
     func open(authorizeUrl: URL, redirectUri: URL) async throws -> URL {
         return try await withCheckedThrowingContinuation { continuation in
             let session = Self.authenticationSessionClass.init(
@@ -90,7 +96,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         authenticationSession = nil
     }
     
-    func process(redirectUri: URL, url: URL?, error: Error?) -> Result<URL, Error> {
+    func process(redirectUri: URL, url: URL?, error: (any Error)?) -> Result<URL, any Error> {
         defer { authenticationSession = nil }
         
         if let error = error {
@@ -109,13 +115,32 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         
         return .success(url)
     }
-    
-    static var authenticationSessionClass: any AuthenticationServicesProviderSession.Type = ASWebAuthenticationSession.self
-    
-    // Used for testing only
-    static func resetToDefault() {
-        authenticationSessionClass = ASWebAuthenticationSession.self
+
+    // MARK: Internal test properties / methods
+
+    static var authenticationSessionClass: any AuthenticationServicesProviderSession.Type {
+        get {
+            lock.withLock { _authenticationSessionClass }
+        }
+        set {
+            lock.withLock { _authenticationSessionClass = newValue }
+        }
     }
+
+    static func resetToDefault() {
+        lock.withLock {
+            _authenticationSessionClass = ASWebAuthenticationSession.self
+        }
+    }
+
+    // MARK: Private properties / methods
+    private static let lock = Lock()
+    private let lock = Lock()
+    private let anchor: ASPresentationAnchor?
+    private let usesEphemeralSession: Bool
+
+    nonisolated(unsafe) static private var _authenticationSessionClass: any AuthenticationServicesProviderSession.Type = ASWebAuthenticationSession.self
+    nonisolated(unsafe) private var _authenticationSession: (any AuthenticationServicesProviderSession)?
 }
 
 extension AuthenticationServicesProvider: ASWebAuthenticationPresentationContextProviding {

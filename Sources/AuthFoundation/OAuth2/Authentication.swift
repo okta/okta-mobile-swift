@@ -30,7 +30,7 @@ public protocol AuthenticationDelegate: AnyObject {
 /// A protocol defining a type of authentication flow.
 ///
 /// OAuth2 supports a variety of authentication flows, each with its own capabilities, configuration, and limitations. To normalize these differences, the AuthenticationFlow protocol is used to represent the common capabilities provided by all flows.
-public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection, IDTokenValidatorContext {
+public protocol AuthenticationFlow: Actor, UsesDelegateCollection, IDTokenValidatorContext {
     associatedtype Context: AuthenticationContext
     
     /// The object that stores the context and state for the current authentication session.
@@ -40,13 +40,13 @@ public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection, IDTokenVa
     var isAuthenticating: Bool { get }
     
     /// Optional request parameters to be added to requests made from this flow.
-    var additionalParameters: [String: APIRequestArgument]? { get }
+    var additionalParameters: [String: any APIRequestArgument]? { get }
 
     /// Resets the authentication session.
     func reset()
     
     /// The collection of delegates this flow notifies for key authentication events.
-    var delegateCollection: DelegateCollection<Delegate> { get }
+    nonisolated var delegateCollection: DelegateCollection<Delegate> { get }
     
     /// Required minimal initializer shared by all authentication flows.
     init(client: OAuth2Client,
@@ -55,8 +55,8 @@ public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection, IDTokenVa
 
 extension AuthenticationFlow {
     @_documentation(visibility: private)
-    public var nonce: String? {
-        guard let validatorContext = context as? IDTokenValidatorContext
+    nonisolated public var nonce: String? {
+        guard let validatorContext = withIsolationSync({ await self.context }) as? any IDTokenValidatorContext
         else {
             return nil
         }
@@ -65,8 +65,8 @@ extension AuthenticationFlow {
     }
 
     @_documentation(visibility: private)
-    public var maxAge: TimeInterval? {
-        guard let validatorContext = context as? IDTokenValidatorContext
+    nonisolated public var maxAge: TimeInterval? {
+        guard let validatorContext = withIsolationSync({ await self.context }) as? any IDTokenValidatorContext
         else {
             return nil
         }
@@ -94,7 +94,7 @@ extension AuthenticationFlow {
 /// Common protocol that all ``AuthenticationFlow`` ``AuthenticationFlow/Context`` type aliases must conform to.
 ///
 /// While instances of a particular ``AuthenticationFlow`` is configured for a particular OAuth2 client, the context supplied to the flow's `start` function represents the specific settings to customize an individual sign-in using that flow.
-public protocol AuthenticationContext: ProvidesOAuth2Parameters {
+public protocol AuthenticationContext: Sendable, ProvidesOAuth2Parameters {
     /// The ACR values, if any, which should be requested by the client.
     var acrValues: [String]? { get }
     
@@ -118,7 +118,7 @@ extension AuthenticationContext {
 }
 
 /// Common ``AuthenticationContext`` implementation for common or generic implementations of ``AuthenticationFlow``.
-public struct StandardAuthenticationContext: AuthenticationContext {
+public struct StandardAuthenticationContext: Sendable, AuthenticationContext {
     /// The ACR values, if any, which should be requested by the client.
     @ClaimCollection
     public var acrValues: [String]?

@@ -13,7 +13,7 @@
 import Foundation
 
 /// Represents the contents of a JWT token, providing access to its payload contents.
-public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
+public struct JWT: RawRepresentable, Sendable, Codable, HasClaims, Expires {
     public typealias ClaimType = JWTClaim
     public typealias RawValue = String
     
@@ -32,6 +32,7 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     /// The date this token was issued.
     public var issuedAt: Date? { self[.issuedAt] }
     
+    /// The date before which this token should not yet beconsidered valid.
     public var notBefore: Date? { self[.notBefore] }
     
     /// The time interval in which the token will expire.
@@ -46,7 +47,7 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     public var authenticationContext: String? { self[.authContextClassReference] }
     
     /// JWT header information describing the contents of the token.
-    public struct Header: Decodable {
+    public struct Header: Sendable, Decodable {
         /// The ID of the key used to sign this JWT token.
         public let keyId: String
 
@@ -56,13 +57,6 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
         enum CodingKeys: String, CodingKey {
             case keyId = "kid"
             case algorithm = "alg"
-        }
-
-        @_documentation(visibility: internal)
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            keyId = try container.decode(String.self, forKey: .keyId)
-            algorithm = try container.decode(JWK.Algorithm.self, forKey: .algorithm)
         }
     }
     
@@ -89,7 +83,8 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
         rawValue = token
         
         let components = JWT.tokenComponents(from: rawValue)
-        guard components.count == 3 else {
+        guard components.count >= 2, components.count <= 3
+        else {
             throw JWTError.badTokenStructure
         }
         
@@ -98,15 +93,24 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
         else { throw JWTError.invalidBase64Encoding }
         
         self.header = try JSONDecoder().decode(JWT.Header.self, from: headerData)
-        guard let payload = try JSONSerialization.jsonObject(with: payloadData, options: []) as? [String: Any] else {
+        guard let payload = try JSONSerialization.jsonObject(with: payloadData,
+                                                             options: []) as? [String: any Sendable]
+        else {
             throw JWTError.badTokenStructure
         }
-        
+
         self.payload = payload
+
+        if components.count == 3 {
+            self.signature = components[2]
+        }
     }
     
     /// Raw paylaod of claims, as a dictionary representation.
-    public let payload: [String: Any]
+    public var payload: [String: any Sendable]
+    
+    /// Signature of the JWT token.
+    public var signature: String?
 
     static func tokenComponents(from token: String) -> [String] {
         token

@@ -19,15 +19,15 @@ import XCTest
 @testable import WebAuthenticationUI
 import AuthenticationServices
 
-class MockAuthenticationServicesProviderSession: NSObject, AuthenticationServicesProviderSession {
+class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, AuthenticationServicesProviderSession {
     let url: URL
     let callbackURLScheme: String?
     let completionHandler: ASWebAuthenticationSession.CompletionHandler
     var state: State = .initialized
     
-    static var result: Result<URL, Error>?
-    static var startResult: Bool = true
-    
+    static let result: LockedValue<Result<URL, any Error>?> = nil
+    static let startResult: LockedValue<Bool> = true
+
     enum State {
         case initialized, started, cancelled
     }
@@ -38,16 +38,18 @@ class MockAuthenticationServicesProviderSession: NSObject, AuthenticationService
         self.completionHandler = completionHandler
     }
     
-    var presentationContextProvider: ASWebAuthenticationPresentationContextProviding?
+    var presentationContextProvider: (any ASWebAuthenticationPresentationContextProviding)?
     var prefersEphemeralWebBrowserSession = false
     
     var canStart: Bool = true
-    
+
     func start() -> Bool {
         state = .started
-        let result = Self.result
-        
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
+        let result = Self.result.wrappedValue
+
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(0.5))
+
             switch result {
             case .success(let url):
                 self.completionHandler(url, nil)
@@ -57,7 +59,8 @@ class MockAuthenticationServicesProviderSession: NSObject, AuthenticationService
                 self.completionHandler(nil, nil)
             }
         }
-        return Self.startResult
+
+        return Self.startResult.wrappedValue
     }
     
     func cancel() {
@@ -88,7 +91,7 @@ class AuthenticationServicesProviderTests: XCTestCase {
         let redirectUri = try XCTUnwrap(redirectUri)
         let responseUrl = try XCTUnwrap(successResponseUrl)
         
-        MockAuthenticationServicesProviderSession.result = .success(responseUrl)
+        MockAuthenticationServicesProviderSession.result.wrappedValue = .success(responseUrl)
         let response = try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri)
         
         XCTAssertEqual(response, responseUrl)
@@ -100,7 +103,7 @@ class AuthenticationServicesProviderTests: XCTestCase {
         let redirectUri = try XCTUnwrap(redirectUri)
         let responseError = NSError(domain: "SomeDomain", code: 1, userInfo: nil)
         
-        MockAuthenticationServicesProviderSession.result = .failure(responseError)
+        MockAuthenticationServicesProviderSession.result.wrappedValue = .failure(responseError)
         let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
         
         guard let webAuthError = response as? WebAuthenticationError,
@@ -121,7 +124,7 @@ class AuthenticationServicesProviderTests: XCTestCase {
                             code: ASWebAuthenticationSessionError.canceledLogin.rawValue,
                             userInfo: nil)
 
-        MockAuthenticationServicesProviderSession.result = .failure(error)
+        MockAuthenticationServicesProviderSession.result.wrappedValue = .failure(error)
         let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
         
         XCTAssertEqual(response as? WebAuthenticationError, .userCancelledLogin)
@@ -132,7 +135,7 @@ class AuthenticationServicesProviderTests: XCTestCase {
         let authorizeUrl = try XCTUnwrap(authorizeUrl)
         let redirectUri = try XCTUnwrap(redirectUri)
 
-        MockAuthenticationServicesProviderSession.result = nil
+        MockAuthenticationServicesProviderSession.result.wrappedValue = nil
         let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
         
         XCTAssertEqual(response as? WebAuthenticationError, .noAuthenticatorProviderResonse)

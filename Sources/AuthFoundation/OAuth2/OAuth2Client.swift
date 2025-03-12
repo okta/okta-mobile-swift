@@ -17,7 +17,7 @@ import FoundationNetworking
 #endif
 
 /// Delegate protocol used by ``OAuth2Client`` to communicate important events.
-public protocol OAuth2ClientDelegate: APIClientDelegate {
+public protocol OAuth2ClientDelegate: AnyObject, APIClientDelegate {
     /// Sent before a token will begin to refresh.
     func oauth(client: OAuth2Client, willRefresh token: Token)
 
@@ -32,16 +32,29 @@ extension OAuth2ClientDelegate {
 
 // swiftlint:disable type_body_length
 /// An OAuth2 client, used to interact with a given authorization server.
-public final class OAuth2Client {
+public final class OAuth2Client: Sendable, UsesDelegateCollection {
+    public typealias Delegate = OAuth2ClientDelegate
+
     /// The URLSession used by this client for network requests.
-    public let session: URLSessionProtocol
+    public let session: any URLSessionProtocol
     
     /// The configuration that identifies this OAuth2 client.
     public let configuration: Configuration
     
     /// Additional HTTP headers to include in outgoing network requests.
-    public var additionalHttpHeaders: [String: String]?
-    
+    nonisolated(unsafe) public var additionalHttpHeaders: [String: String]? {
+        get {
+            lock.withLock {
+                _additionalHttpHeaders
+            }
+        }
+        set {
+            lock.withLock {
+                _additionalHttpHeaders = newValue
+            }
+        }
+    }
+
     /// The OpenID configuration for this org.
     ///
     /// This value will be `nil` until the configuration has been retrieved through the ``openIdConfiguration(completion:)`` or ``openIdConfiguration()`` functions.
@@ -72,7 +85,7 @@ public final class OAuth2Client {
                             redirectUri: URL? = nil,
                             logoutRedirectUri: URL? = nil,
                             authentication: ClientAuthentication = .none,
-                            session: URLSessionProtocol? = nil)
+                            session: (any URLSessionProtocol)? = nil)
     {
         self.init(Configuration(issuerURL: issuerURL,
                                 clientId: clientId,
@@ -87,7 +100,7 @@ public final class OAuth2Client {
     /// - Parameters:
     ///   - configuration: The pre-formed configuration for this client.
     ///   - session: Optional URLSession to use for network requests.
-    public init(_ configuration: Configuration, session: URLSessionProtocol? = nil) {
+    public init(_ configuration: Configuration, session: (any URLSessionProtocol)? = nil) {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
@@ -96,8 +109,11 @@ public final class OAuth2Client {
         
         self.configuration = configuration
         self.session = session ?? URLSession(configuration: .ephemeral)
-        
-        NotificationCenter.default.post(name: .oauth2ClientCreated, object: self)
+        self.refreshQueue = DispatchQueue(label: "com.okta.refreshQueue.\(configuration.issuerURL.host ?? "unknown")",
+                                          qos: .userInitiated,
+                                          attributes: .concurrent)
+
+        TaskData.notificationCenter.post(name: .oauth2ClientCreated, object: self)
 
         // Ensure the Credential Coordinator can monitor this client for token refresh changes.
         Credential.coordinator.observe(oauth2: self)
@@ -140,12 +156,12 @@ public final class OAuth2Client {
             let newToken: Token?
             switch result {
             case .success(let token):
-                NotificationCenter.default.post(name: .tokenRefreshed, object: token)
+                TaskData.notificationCenter.post(name: .tokenRefreshed, object: token)
                 newToken = token
             case .failure(let error):
-                NotificationCenter.default.post(name: .tokenRefreshFailed,
-                                                object: token,
-                                                userInfo: ["error": error])
+                TaskData.notificationCenter.post(name: .tokenRefreshFailed,
+                                                 object: token,
+                                                 userInfo: ["error": error])
                 newToken = nil
             }
 
@@ -263,12 +279,11 @@ public final class OAuth2Client {
     }
 
     // MARK: Private properties / methods
-    private let delegates = DelegateCollection<OAuth2ClientDelegate>()
-    private(set) lazy var refreshQueue: DispatchQueue = {
-        DispatchQueue(label: "com.okta.refreshQueue.\(baseURL.host ?? "unknown")",
-                      qos: .userInitiated,
-                      attributes: .concurrent)
-    }()
+    private let lock = Lock()
+    nonisolated(unsafe) private var _additionalHttpHeaders: [String: String]?
+
+    nonisolated public let delegateCollection = DelegateCollection<any OAuth2ClientDelegate>()
+    let refreshQueue: DispatchQueue
 
     let openIdConfigurationAction = CoalescedResult<OpenIdConfiguration>(taskName: "OpenIdConfiguration")
     let jwksAction = CoalescedResult<JWKS>(taskName: "OpenIdConfiguration")
@@ -281,7 +296,7 @@ extension OAuth2Client {
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Returns: The OpenID configuration for the org identified by the client's base URL.
     /// - Parameter completion: Completion block invoked with the result.
-    public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
+    public func openIdConfiguration(completion: @Sendable @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await openIdConfiguration()))
@@ -296,7 +311,7 @@ extension OAuth2Client {
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Returns: The ``JWKS`` configuration for the org identified by the client's base URL.
     /// - Parameter completion: Completion block invoked with the result.
-    public func jwks(completion: @escaping (Result<JWKS, OAuth2Error>) -> Void) {
+    public func jwks(completion: @Sendable @escaping (Result<JWKS, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await jwks()))
@@ -312,7 +327,7 @@ extension OAuth2Client {
     /// - Parameters:
     ///   - token: Token to refresh.
     ///   - completion: Completion bock invoked with the result.
-    public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    public func refresh(_ token: Token, completion: @Sendable @escaping (Result<Token, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await refresh(token)))
@@ -330,7 +345,7 @@ extension OAuth2Client {
     ///   - token: Token object.
     ///   - type: Type of token to revoke.
     ///   - completion: Completion block to invoke once complete.
-    public func revoke(_ token: Token, type: Token.RevokeType, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
+    public func revoke(_ token: Token, type: Token.RevokeType, completion: @Sendable @escaping (Result<Void, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await revoke(token, type: type)))
@@ -345,7 +360,7 @@ extension OAuth2Client {
     ///   - token: Token to introspect
     ///   - type: The type of value to introspect.
     ///   - completion: Completion block to invoke once complete.
-    public func introspect(token: Token, type: Token.Kind, completion: @escaping (Result<TokenInfo, OAuth2Error>) -> Void) {
+    public func introspect(token: Token, type: Token.Kind, completion: @Sendable @escaping (Result<TokenInfo, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await introspect(token: token, type: type)))
@@ -359,7 +374,7 @@ extension OAuth2Client {
     /// - Parameters:
     ///   - token: Token to retrieve user information for.
     ///   - completion: Completion block invoked with the result.
-    public func userInfo(token: Token, completion: @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
+    public func userInfo(token: Token, completion: @Sendable @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await userInfo(token: token)))
@@ -377,7 +392,7 @@ extension OAuth2Client: APIClient {
     /// Transforms HTTP response data into the appropriate error type, when requests are unsuccessful.
     /// - Parameter data: HTTP response body data for a failed URL request.
     /// - Returns: ``OktaAPIError`` or ``OAuth2ServerError``, depending on the type of error.
-    public func error(from data: Data) -> Error? {
+    public func error(from data: Data) -> (any Error)? {
         if let error = try? decode(OktaAPIError.self, from: data) {
             return error
         }
@@ -390,7 +405,7 @@ extension OAuth2Client: APIClient {
     }
 
     @_documentation(visibility: private)
-    public func decode<T>(_ type: T.Type, from data: Data, parsing context: APIParsingContext? = nil) throws -> T where T: Decodable {
+    public func decode<T>(_ type: T.Type, from data: Data, parsing context: (any APIParsingContext)? = nil) throws -> T where T: Decodable {
         var info: [CodingUserInfoKey: Any] = context?.codingUserInfo ?? [:]
         
         if let tokenRequest = context as? any OAuth2TokenRequest,
@@ -408,7 +423,7 @@ extension OAuth2Client: APIClient {
         }
         
         let jsonDecoder: JSONDecoder
-        if let jsonType = type as? JSONDecodable.Type {
+        if let jsonType = type as? any JSONDecodable.Type {
             jsonDecoder = jsonType.jsonDecoder
         } else {
             jsonDecoder = defaultJSONDecoder
@@ -442,14 +457,6 @@ extension OAuth2Client: APIClient {
     @_documentation(visibility: private)
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) where T: Decodable {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
-    }
-}
-
-extension OAuth2Client: UsesDelegateCollection {
-    public typealias Delegate = OAuth2ClientDelegate
-
-    public var delegateCollection: DelegateCollection<OAuth2ClientDelegate> {
-        delegates
     }
 }
 

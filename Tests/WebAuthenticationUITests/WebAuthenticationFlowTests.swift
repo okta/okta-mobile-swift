@@ -10,8 +10,6 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if canImport(UIKit) || canImport(AppKit)
-
 import XCTest
 import AuthenticationServices
 @testable import AuthFoundation
@@ -25,9 +23,11 @@ class WebAuthenticationFlowTests: XCTestCase {
     private let logoutRedirectUri = URL(string: "com.example:/logout")!
     private let urlSession = URLSessionMock()
     private var client: OAuth2Client!
-    
-    override func setUpWithError() throws {
-        WebAuthentication.providerFactory = WebAuthenticationProviderFactoryMock.self
+
+    override func setUp() async throws {
+        await MainActor.run {
+            WebAuthentication.providerFactory = WebAuthenticationProviderFactoryMock.self
+        }
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
         Token.accessTokenValidator = MockTokenHashValidator()
@@ -49,24 +49,28 @@ class WebAuthenticationFlowTests: XCTestCase {
                           contentType: "application/json")
     }
     
-    override func tearDownWithError() throws {
-        WebAuthentication.resetToDefault()
+    override func tearDown() async throws {
+        await MainActor.run {
+            WebAuthentication.resetToDefault()
+        }
         JWK.resetToDefault()
         Token.resetToDefault()
     }
-    
+
+    @MainActor
     func testStart() async throws {
         let webAuth = try WebAuthentication(client: client,
                                             additionalParameters: ["testName": name])
 
-        try WebAuthenticationProviderFactoryMock.register(
+        try await WebAuthenticationProviderFactoryMock.register(
             result: .success(URL(string: "com.example:/callback?state=qwe&code=the_auth_code")!),
             for: webAuth)
 
         let token = try await webAuth.signIn(from: nil, context: .init(state: "qwe"))
         XCTAssertEqual(token.refreshToken, "therefreshtoken")
 
-        let provider = try XCTUnwrap(WebAuthenticationProviderFactoryMock.provider(for: webAuth))
+        let optionalProvider = await WebAuthenticationProviderFactoryMock.provider(for: webAuth)
+        let provider = try XCTUnwrap(optionalProvider)
         guard case let .opened(authorizeUrl: authorizeUrl, redirectUri: redirectUri) = provider.state
         else {
             XCTFail()
@@ -80,19 +84,21 @@ class WebAuthenticationFlowTests: XCTestCase {
         XCTAssertEqual(authorizeQueryItems?["state"], "qwe")
         XCTAssertEqual(redirectUri.absoluteString, "com.example:/callback")
     }
-    
+
+    @MainActor
     func testLogout() async throws {
         let webAuth = try WebAuthentication(client: client,
                                             additionalParameters: ["testName": name])
 
-        try WebAuthenticationProviderFactoryMock.register(
+        try await WebAuthenticationProviderFactoryMock.register(
             result: .success(URL(string: "com.example:/logout?state=qwe")!),
             for: webAuth)
 
         let result = try await webAuth.signOut(from: nil, context: .init(idToken: "idToken", state: "qwe"))
         XCTAssertEqual(result.absoluteString, "com.example:/logout?state=qwe")
 
-        let provider = try XCTUnwrap(WebAuthenticationProviderFactoryMock.provider(for: webAuth))
+        let optionalProvider = await WebAuthenticationProviderFactoryMock.provider(for: webAuth)
+        let provider = try XCTUnwrap(optionalProvider)
         guard case let .opened(authorizeUrl: authorizeUrl, redirectUri: redirectUri) = provider.state
         else {
             XCTFail()
@@ -108,10 +114,11 @@ class WebAuthenticationFlowTests: XCTestCase {
     }
     
     func testCancel() async throws {
-        let webAuth = try WebAuthentication(client: client,
-                                            additionalParameters: ["testName": name])
+        let webAuth = try await WebAuthentication(
+            client: client,
+            additionalParameters: ["testName": name])
 
-        try WebAuthenticationProviderFactoryMock.register(
+        try await WebAuthenticationProviderFactoryMock.register(
             result: .failure(NSError(domain: ASWebAuthenticationSessionErrorDomain,
                                      code: ASWebAuthenticationSessionError.canceledLogin.rawValue,
                                      userInfo: nil)),
@@ -120,7 +127,8 @@ class WebAuthenticationFlowTests: XCTestCase {
         let error = try await XCTAssertThrowsErrorAsync(await webAuth.signIn(from: nil, context: .init(state: "qwe")))
         XCTAssertEqual(error as? WebAuthenticationError, .userCancelledLogin)
 
-        let provider = try XCTUnwrap(WebAuthenticationProviderFactoryMock.provider(for: webAuth))
+        let optionalProvider = await WebAuthenticationProviderFactoryMock.provider(for: webAuth)
+        let provider = try XCTUnwrap(optionalProvider)
         guard case .cancelled = provider.state
         else {
             XCTFail()
@@ -128,5 +136,3 @@ class WebAuthenticationFlowTests: XCTestCase {
         }
     }
 }
-
-#endif

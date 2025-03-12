@@ -15,9 +15,13 @@ import Foundation
 extension SessionLogoutFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(client:additionalParameters:)")
-    public convenience init(logoutRedirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil,
-                            client: OAuth2Client) {
-        fatalError()
+    public init(logoutRedirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]? = nil,
+                client: OAuth2Client)
+    {
+        var configuration = client.configuration
+        configuration.logoutRedirectUri = logoutRedirectUri
+        self.init(client: OAuth2Client(configuration, session: client.session),
+                  additionalParameters: additionalParameters)
     }
 }

@@ -16,7 +16,7 @@ extension OAuth2Client {
     public enum PropertyListConfigurationError: Error {
         case defaultPropertyListNotFound
         case invalidPropertyList(url: URL)
-        case cannotParsePropertyList(_ error: Error?)
+        case cannotParsePropertyList(_ error: (any Error)?)
         case missingConfigurationValues
         case invalidConfiguration(name: String, value: String?)
     }
@@ -46,7 +46,7 @@ extension OAuth2Client {
         public var authentication: OAuth2Client.ClientAuthentication
         
         /// Additional parameters defined by the developer within the property list.
-        public var additionalParameters: [String: APIRequestArgument]?
+        public var additionalParameters: [String: any APIRequestArgument]?
         
         /// Default initializer that reads the `Okta.plist` file from the application's main bundle.
         public init() throws {

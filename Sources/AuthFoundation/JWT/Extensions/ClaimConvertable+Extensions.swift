@@ -34,7 +34,7 @@ extension JWTClaim: ClaimConvertable {}
 extension GrantType: ClaimConvertable {}
 
 @_documentation(visibility: private)
-extension NSString: ClaimConvertable {}
+extension NSString: @unchecked @retroactive Sendable, ClaimConvertable {}
 
 @_documentation(visibility: private)
 extension NSNumber: ClaimConvertable {}
@@ -82,3 +82,5 @@ extension ClaimConvertable where Self: RawRepresentable {
         return nil
     }
 }
+
+extension ClaimConvertable where Self: APIRequestArgument {}

@@ -75,7 +75,7 @@ extension ChallengeRequest: APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var category: AuthFoundation.OAuth2APIRequestCategory { .other }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         var result = clientConfiguration.parameters(for: category) ?? [:]
         result.merge(context.parameters(for: category))
         result.merge([

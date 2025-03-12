@@ -19,12 +19,17 @@ class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
     private(set) var removed: [Credential] = []
     private(set) var callCount = 0
 
-    func credential(dataSource: CredentialDataSource, created credential: Credential) {
+    // Explicitly mark init() as nonisolated since Swift 5.10 is not able
+    // to properly infer this behavior when a non-actor type conforms to
+    // a global-actor protocol.
+    nonisolated init() {}
+
+    func credential(dataSource: any CredentialDataSource, created credential: Credential) {
         created.append(credential)
         callCount += 1
     }
     
-    func credential(dataSource: CredentialDataSource, removed credential: Credential) {
+    func credential(dataSource: any CredentialDataSource, removed credential: Credential) {
         removed.append(credential)
         callCount += 1
     }
@@ -45,22 +50,29 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
                                                    clientId: "clientid",
                                                    scope: "openid")
     
+    override func setUp() async throws {
+        let mockCoordinator = await MockCredentialCoordinator()
+        let mockDelegate = CredentialDataSourceDelegateRecorder()
+        let mockDataSource = await DefaultCredentialDataSource()
 
-    override func setUpWithError() throws {
-        coordinator = MockCredentialCoordinator()
-        delegate = CredentialDataSourceDelegateRecorder()
-        dataSource = DefaultCredentialDataSource()
-        dataSource.delegate = delegate
-        coordinator.credentialDataSource = dataSource
+        await CredentialActor.run {
+            mockDataSource.delegate = mockDelegate
+            mockCoordinator.credentialDataSource = mockDataSource
+        }
+
+        coordinator = mockCoordinator
+        delegate = mockDelegate
+        dataSource = mockDataSource
     }
-    
-    override func tearDownWithError() throws {
+
+    override func tearDown() async throws {
         coordinator = nil
         delegate = nil
         dataSource = nil
     }
     
-    func testCredentials() throws {
+    @CredentialActor
+    func testCredentials() async throws {
         XCTAssertEqual(dataSource.credentialCount, 0)
         
         let token = try! Token(id: "TokenId",

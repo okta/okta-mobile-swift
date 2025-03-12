@@ -14,7 +14,7 @@ import Foundation
 
 extension TokenExchangeFlow {
     /// A model representing the context and current state for an authorization session.
-    public struct Context: AuthenticationContext {
+    public struct Context: Sendable, AuthenticationContext {
         /// Server audience.
         public var audience: Audience
 

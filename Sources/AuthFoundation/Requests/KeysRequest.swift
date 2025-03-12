@@ -30,7 +30,7 @@ extension OAuth2Client.KeysRequest: OAuth2APIRequest {
     var httpMethod: APIRequestMethod { .get }
     var url: URL { openIdConfiguration.jwksUri }
     var acceptsType: APIContentType? { .json }
-    var query: [String: APIRequestArgument?]? {
+    var query: [String: (any APIRequestArgument)?]? {
         [ "client_id": clientId ]
     }
     var cachePolicy: URLRequest.CachePolicy { .returnCacheDataElseLoad }

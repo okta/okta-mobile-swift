@@ -12,7 +12,7 @@
 
 extension OAuth2Error {
     @_documentation(visibility: internal)
-    public init(_ error: Error) {
+    public init(_ error: any Error) {
         if let error = error as? OAuth2Error {
             self = error
         } else if let error = error as? APIClientError {

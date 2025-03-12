@@ -14,7 +14,7 @@ import Foundation
 
 extension SessionLogoutFlow {
     /// A model representing the context and current state for a logout session.
-    public struct Context: Equatable {
+    public struct Context: Sendable, Equatable {
         /// The state string to use when creating an logout URL.
         public let state: String
         

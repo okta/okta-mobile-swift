@@ -19,20 +19,34 @@ import FoundationNetworking
 
 @testable import AuthFoundation
 
-class URLSessionMock: URLSessionProtocol {
+class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
     var configuration: URLSessionConfiguration = .ephemeral
     let queue = DispatchQueue(label: "URLSessionMock")
-    
+    private let lock = Lock()
+
     struct Call {
         let url: String
         let data: Data?
         let response: HTTPURLResponse?
-        let error: Error?
+        let error: (any Error)?
     }
     
     var requestDelay: TimeInterval?
 
-    private(set) var requests: [URLRequest] = []
+    private var _requests: [URLRequest] = []
+    private(set) var requests: [URLRequest] {
+        get {
+            lock.withLock {
+                _requests
+            }
+        }
+        set {
+            lock.withLock {
+                _requests = newValue
+            }
+        }
+    }
+
     func resetRequests() {
         requests.removeAll()
     }
@@ -57,7 +71,7 @@ class URLSessionMock: URLSessionProtocol {
                 statusCode: Int = 200,
                 contentType: String = "application/x-www-form-urlencoded",
                 headerFields: [String : String]? = nil,
-                error: Error? = nil)
+                error: (any Error)? = nil)
     {
         let headerFields = ["Content-Type": contentType].merging(headerFields ?? [:]){ (_, new) in new }
         let response = HTTPURLResponse(url: URL(string: url)!,
@@ -91,7 +105,7 @@ class URLSessionMock: URLSessionProtocol {
         return try await withCheckedThrowingContinuation { continuation in
             Task {
                 if let delay = requestDelay {
-                    try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+                    try await Task.sleep(nanoseconds: UInt64(delay * _APIClientRetryDelayTimeIntervalToNanoseconds.wrappedValue))
                 }
                 
                 guard let data = call?.data,

@@ -15,16 +15,10 @@
 import Foundation
 import OktaOAuth2
 
-#if canImport(UIKit) || canImport(AppKit)
-
 #if canImport(UIKit)
 import UIKit
 #elseif canImport(AppKit)
 import AppKit
-#endif
-
-#if os(Linux)
-import FoundationNetworking
 #endif
 
 public enum WebAuthenticationError: Error {
@@ -32,14 +26,14 @@ public enum WebAuthenticationError: Error {
     case noSignOutFlowProvided
     case cannotStartBrowserSession
     case cannotComposeAuthenticationURL
-    case authenticationProvider(error: Error)
+    case authenticationProvider(error: any Error)
     case noAuthenticatorProviderResonse
     case serverError(_ error: OAuth2ServerError)
     case invalidRedirectScheme(_ scheme: String?)
     case userCancelledLogin
     case missingIdToken
     case oauth2(error: OAuth2Error)
-    case generic(error: Error)
+    case generic(error: any Error)
     case genericError(message: String)
 }
 
@@ -56,6 +50,7 @@ public enum WebAuthenticationError: Error {
 /// To customize the authentication flow, please read more about the underlying OAuth2 client within the OktaOAuth2 library, and how that relates to the ``signInFlow`` or ``signOutFlow`` properties.
 ///
 ///  > Important: If your application targets iOS 9.x-10.x, you should add the redirect URI for your client configuration to your app's supported URL schemes.  This is because users on devices older than iOS 11 will be prompted to sign in using `SFSafariViewController`, which does not allow your application to detect the final token redirect.
+@MainActor
 public final class WebAuthentication {
     #if os(macOS)
     public typealias WindowAnchor = NSWindow
@@ -106,15 +101,16 @@ public final class WebAuthentication {
             cancel()
         }
         
-        guard let redirectUri = signInFlow.client.configuration.redirectUri
+        guard let redirectUri = await signInFlow.client.configuration.redirectUri
         else {
             throw OAuth2Error.missingRedirectUri
         }
 
         async let authorizeUrl = signInFlow.start(with: context)
-        guard let provider = try Self.providerFactory.createWebAuthenticationProvider(for: self,
-                                                                                      from: window,
-                                                                                      usesEphemeralSession: ephemeralSession)
+        guard let provider = try await Self.providerFactory.createWebAuthenticationProvider(
+            for: self,
+            from: window,
+            usesEphemeralSession: ephemeralSession)
         else {
             throw WebAuthenticationError.noCompatibleAuthenticationProviders
         }
@@ -169,7 +165,7 @@ public final class WebAuthentication {
                               context: SessionLogoutFlow.Context = .init()) async throws -> URL
     {
         guard let signOutFlow,
-            let redirectUri = signOutFlow.client.configuration.logoutRedirectUri
+              let redirectUri = await signOutFlow.client.configuration.logoutRedirectUri
         else {
             throw WebAuthenticationError.noSignOutFlowProvided
         }
@@ -179,9 +175,10 @@ public final class WebAuthentication {
         }
 
         async let authorizeUrl = signOutFlow.start(with: context)
-        guard let provider = try Self.providerFactory.createWebAuthenticationProvider(for: self,
-                                                                                      from: window,
-                                                                                      usesEphemeralSession: ephemeralSession)
+        guard let provider = try await Self.providerFactory.createWebAuthenticationProvider(
+            for: self,
+            from: window,
+            usesEphemeralSession: ephemeralSession)
         else {
             throw WebAuthenticationError.noCompatibleAuthenticationProviders
         }
@@ -195,8 +192,10 @@ public final class WebAuthentication {
     
     /// Cancels the authentication session.
     public final func cancel() {
-        signInFlow.reset()
-        signOutFlow?.reset()
+        withIsolationSync {
+            await self.signInFlow.reset()
+            await self.signOutFlow?.reset()
+        }
         provider?.cancel()
         provider = nil
     }
@@ -225,7 +224,7 @@ public final class WebAuthentication {
                             scope: ClaimCollection<[String]>,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
-                            additionalParameters: [String: APIRequestArgument]? = nil) throws
+                            additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         let client = OAuth2Client(issuerURL: issuerURL,
                                   clientId: clientId,
@@ -241,7 +240,7 @@ public final class WebAuthentication {
                             scope: some WhitespaceSeparated,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
-                            additionalParameters: [String: APIRequestArgument]? = nil) throws
+                            additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         let client = OAuth2Client(issuerURL: issuerURL,
                                   clientId: clientId,
@@ -256,7 +255,7 @@ public final class WebAuthentication {
                       additionalParameters: config.additionalParameters)
     }
     
-    convenience init(client: OAuth2Client, additionalParameters: [String: APIRequestArgument]?) throws {
+    convenience init(client: OAuth2Client, additionalParameters: [String: any APIRequestArgument]?) throws {
         let loginFlow = try AuthorizationCodeFlow(client: client,
                                                   additionalParameters: additionalParameters)
         let logoutFlow: SessionLogoutFlow?
@@ -294,13 +293,14 @@ public final class WebAuthentication {
         providerFactory = WebAuthentication.self
     }
     
-    var provider: WebAuthenticationProvider?
+    var provider: (any WebAuthenticationProvider)?
 }
 
 extension WebAuthentication: WebAuthenticationProviderFactory {
-    static func createWebAuthenticationProvider(for webAuth: WebAuthentication,
-                                                from window: WebAuthentication.WindowAnchor?,
-                                                usesEphemeralSession: Bool = false) throws -> WebAuthenticationProvider?
+    nonisolated static func createWebAuthenticationProvider(
+        for webAuth: WebAuthentication,
+        from window: WebAuthentication.WindowAnchor?,
+        usesEphemeralSession: Bool = false) throws -> (any WebAuthenticationProvider)?
     {
         try AuthenticationServicesProvider(from: window, usesEphemeralSession: usesEphemeralSession)
     }
@@ -382,4 +382,3 @@ extension WebAuthentication {
         }
     }
 }
-#endif

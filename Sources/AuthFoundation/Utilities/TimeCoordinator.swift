@@ -21,7 +21,7 @@ import FoundationNetworking
 /// This can be used to customize the behavior of how dates and times are calculated, when used on devices that may have skewed or incorrect clocks.
 ///
 /// To use a custom ``TimeCoordinator``, you construct an instance of your class conforming to this protocol, and assign it to the `Date.coordinator` property.
-public protocol TimeCoordinator {
+public protocol TimeCoordinator: Sendable {
     /// Return the current coordinated date.
     var now: Date { get }
     
@@ -32,9 +32,9 @@ public protocol TimeCoordinator {
 
 extension Date {
     /// Allows a custom ``TimeCoordinator`` to be used to adjust dates and times for devices with incorrect times.
-    public static var coordinator: TimeCoordinator {
-        get { SharedTimeCoordinator }
-        set { SharedTimeCoordinator = newValue }
+    public static var coordinator: any TimeCoordinator {
+        get { sharedTimeCoordinator.wrappedValue }
+        set { sharedTimeCoordinator.wrappedValue = newValue }
     }
     
     /// Returns the current coordinated date, adjusting the system clock to correct for clock skew.
@@ -48,30 +48,28 @@ extension Date {
     }
 }
 
-// swiftlint:disable identifier_name
-private var SharedTimeCoordinator: TimeCoordinator = DefaultTimeCoordinator()
-// swiftlint:enable identifier_name
+private let sharedTimeCoordinator = LockedValue<any TimeCoordinator>(DefaultTimeCoordinator())
 
-class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
+final class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
     static func resetToDefault() {
         Date.coordinator = DefaultTimeCoordinator()
     }
     
     private let lock = Lock()
-    private var _offset: TimeInterval
+    nonisolated(unsafe) private var _offset: TimeInterval
     private(set) var offset: TimeInterval {
         get { lock.withLock { _offset } }
         set { lock.withLock { _offset = newValue } }
     }
     
-    private var observer: NSObjectProtocol?
+    nonisolated(unsafe) private var observer: (any NSObjectProtocol)?
 
     init() {
         self._offset = 0
-        self.observer = NotificationCenter.default.addObserver(forName: .oauth2ClientCreated,
-                                                               object: nil,
-                                                               queue: nil,
-                                                               using: { [weak self] notification in
+        self.observer = TaskData.notificationCenter.addObserver(forName: .oauth2ClientCreated,
+                                                                object: nil,
+                                                                queue: nil,
+                                                                using: { [weak self] notification in
             guard let self = self,
                   let client = notification.object as? OAuth2Client
             else {
@@ -84,7 +82,7 @@ class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
     
     deinit {
         if let observer = observer {
-            NotificationCenter.default.removeObserver(observer)
+            TaskData.notificationCenter.removeObserver(observer)
         }
     }
     
@@ -96,7 +94,7 @@ class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
         Date(timeInterval: offset, since: date)
     }
     
-    func api(client: APIClient, didSend request: URLRequest, received response: HTTPURLResponse) {
+    func api(client: any APIClient, didSend request: URLRequest, received response: HTTPURLResponse) {
         guard request.cachePolicy == .reloadIgnoringLocalAndRemoteCacheData,
               let dateString = response.allHeaderFields["Date"] as? String,
               let date = httpDateFormatter.date(from: dateString)
