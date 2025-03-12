@@ -13,14 +13,16 @@
 import Foundation
 import AuthFoundation
 
-class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
+final class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     let flow: DirectAuthenticationFlow
     let openIdConfiguration: OpenIdConfiguration
     let context: DirectAuthenticationFlow.Context
     let loginHint: String?
     let channel: DirectAuthenticationFlow.OOBChannel
     let factor: Factor
-    private var taskHandle: Task<DirectAuthenticationFlow.Status, Error>?
+
+    private let lock = Lock()
+    nonisolated(unsafe) private var _taskHandle: Task<DirectAuthenticationFlow.Status, any Error>?
 
     init(flow: DirectAuthenticationFlow,
          openIdConfiguration: OpenIdConfiguration,
@@ -122,18 +124,21 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                                    factor: factor,
                                    parameters: response,
                                    grantTypesSupported: flow.supportedGrantTypes)
-        
+
         let taskHandle = Task {
             let poll = try APIRequestPollingHandler<TokenRequest, DirectAuthenticationFlow.Status>(
                 interval: interval,
                 expiresIn: response.expiresIn) { _, request in
                     let response = try await client.exchange(token: request)
                     return .success(.success(response.result))
-            }
+                }
             return try await poll.start(with: request)
         }
-        self.taskHandle = taskHandle
-        
+
+        lock.withLock {
+            _taskHandle = taskHandle
+        }
+
         return try await taskHandle.value
     }
 }

@@ -33,7 +33,7 @@ public struct OktaAPIError: Decodable, Error, LocalizedError, Equatable {
     public var errorDescription: String? { summary }
     
     @_documentation(visibility: internal)
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         code = try container.decode(String.self, forKey: .code)
         summary = try container.decode(String.self, forKey: .summary)

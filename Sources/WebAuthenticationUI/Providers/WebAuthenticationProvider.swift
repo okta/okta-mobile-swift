@@ -14,11 +14,7 @@ import Foundation
 import AuthFoundation
 import OktaOAuth2
 
-#if canImport(UIKit) || canImport(AppKit)
-
-protocol WebAuthenticationProvider {
+protocol WebAuthenticationProvider: Sendable {
     func open(authorizeUrl: URL, redirectUri: URL) async throws -> URL
     func cancel()
 }
-
-#endif

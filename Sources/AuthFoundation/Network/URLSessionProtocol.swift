@@ -18,7 +18,7 @@ import FoundationNetworking
 
 /// Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.
 @_documentation(visibility: internal)
-public protocol URLSessionProtocol {
+public protocol URLSessionProtocol: Sendable {
     func data(for request: URLRequest) async throws -> (Data, URLResponse)
     var configuration: URLSessionConfiguration { get }
 }

@@ -17,7 +17,7 @@ import FoundationNetworking
 #endif
 
 extension URLRequest {
-    static func oktaURLFormEncodedString(for params: [String: APIRequestArgument]) -> String? {
+    static func oktaURLFormEncodedString(for params: [String: any APIRequestArgument]) -> String? {
         func escape(_ str: String) -> String {
             // swiftlint:disable force_unwrapping
             return str.replacingOccurrences(of: "\n", with: "\r\n")

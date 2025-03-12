@@ -48,13 +48,13 @@ final class FactorStepHandlerTests: XCTestCase {
     // MARK: - Password Steps
     func assertPasswordStepHandler(factor: some AuthenticationFactor,
                                    loginHint: String?,
-                                   bodyParams: [String: String]) throws
+                                   bodyParams: [String: String]) async throws
     {
         let context = DirectAuthenticationFlow.Context()
-        flow.context = context
-        let handler = try factor.stepHandler(flow: flow,
-                                             openIdConfiguration: openIdConfiguration,
-                                             loginHint: loginHint)
+        await flow.setContext(context)
+        let handler = try await factor.stepHandler(flow: flow,
+                                                   openIdConfiguration: openIdConfiguration,
+                                                   loginHint: loginHint)
         let tokenStepHandler = try XCTUnwrap(handler as? TokenStepHandler)
         let request = try XCTUnwrap(tokenStepHandler.request as? TokenRequest)
         XCTAssertEqual(request.clientConfiguration.clientId, client.configuration.clientId)
@@ -69,8 +69,8 @@ final class FactorStepHandlerTests: XCTestCase {
         XCTAssertEqual(request.bodyParameters?.stringComponents, bodyParams)
     }
     
-    func testPrimaryPasswordStepHandler() throws {
-        try assertPasswordStepHandler(
+    func testPrimaryPasswordStepHandler() async throws {
+        try await assertPasswordStepHandler(
             factor: PrimaryFactor.password("foo"),
             loginHint: "jane.doe@example.com",
             bodyParams: [
@@ -83,8 +83,8 @@ final class FactorStepHandlerTests: XCTestCase {
             ])
     }
     
-    func testPrimaryOTPStepHandler() throws {
-        try assertPasswordStepHandler(
+    func testPrimaryOTPStepHandler() async throws {
+        try await assertPasswordStepHandler(
             factor: PrimaryFactor.otp(code: "123456"),
             loginHint: "jane.doe@example.com",
             bodyParams: [
@@ -97,8 +97,8 @@ final class FactorStepHandlerTests: XCTestCase {
             ])
     }
     
-    func testSecondaryStepHandler() throws {
-        try assertPasswordStepHandler(
+    func testSecondaryStepHandler() async throws {
+        try await assertPasswordStepHandler(
             factor: SecondaryFactor.otp(code: "123456"),
             loginHint: nil,
             bodyParams: [
@@ -112,12 +112,12 @@ final class FactorStepHandlerTests: XCTestCase {
     
     // MARK: OOB Steps
     func assertOOBStepHandler<T: AuthenticationFactor>(factor: T,
-                                                       loginHint: String?) throws
+                                                       loginHint: String?) async throws
     {
-        flow.context = .init()
-        let handler = try factor.stepHandler(flow: flow,
-                                             openIdConfiguration: openIdConfiguration,
-                                             loginHint: loginHint)
+        await flow.setContext(.init())
+        let handler = try await factor.stepHandler(flow: flow,
+                                                   openIdConfiguration: openIdConfiguration,
+                                                   loginHint: loginHint)
         let tokenStepHandler = try XCTUnwrap(handler as? OOBStepHandler<T>)
         if let loginHint = loginHint {
             XCTAssertEqual(tokenStepHandler.loginHint, loginHint)
@@ -126,16 +126,18 @@ final class FactorStepHandlerTests: XCTestCase {
         }
     }
     
-    func testPrimaryOOBStepHandler() throws {
-        try assertOOBStepHandler(factor: PrimaryFactor.oob(channel: .push),
-                                 loginHint: "jane.doe@example.com")
+    func testPrimaryOOBStepHandler() async throws {
+        try await assertOOBStepHandler(
+            factor: PrimaryFactor.oob(channel: .push),
+            loginHint: "jane.doe@example.com")
     }
-    
-    func testSecondaryOOBStepHandler() throws {
-        try assertOOBStepHandler(factor: PrimaryFactor.oob(channel: .push),
-                                 loginHint: nil)
+
+    func testSecondaryOOBStepHandler() async throws {
+        try await assertOOBStepHandler(
+            factor: PrimaryFactor.oob(channel: .push),
+            loginHint: nil)
     }
-    
+
     // MARK: - Token Process Flow
     func testPrimaryTokenSuccess() async throws {
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
@@ -148,10 +150,11 @@ final class FactorStepHandlerTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
         let factor = PrimaryFactor.password("SuperSecret")
-        flow.context = .init()
-        let handler = try factor.stepHandler(flow: flow,
-                                             openIdConfiguration: openIdConfiguration,
-                                             loginHint: "jane.doe@example.com")
+        await flow.setContext(.init())
+        let handler = try await factor.stepHandler(
+            flow: flow,
+            openIdConfiguration: openIdConfiguration,
+            loginHint: "jane.doe@example.com")
         
         let status = try await flow.process(stepHandler: handler)
         switch status {
@@ -173,10 +176,11 @@ final class FactorStepHandlerTests: XCTestCase {
                           statusCode: 400)
         
         let factor = PrimaryFactor.password("SuperSecret")
-        flow.context = .init()
-        let handler = try factor.stepHandler(flow: flow,
-                                             openIdConfiguration: openIdConfiguration,
-                                             loginHint: "jane.doe@example.com")
+        await flow.setContext(.init())
+        let handler = try await factor.stepHandler(
+            flow: flow,
+            openIdConfiguration: openIdConfiguration,
+            loginHint: "jane.doe@example.com")
         
         let status = try await flow.process(stepHandler: handler)
         switch status {
@@ -202,10 +206,11 @@ final class FactorStepHandlerTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
         let factor = PrimaryFactor.oob(channel: .push)
-        flow.context = .init()
-        let handler = try factor.stepHandler(flow: flow,
-                                             openIdConfiguration: openIdConfiguration,
-                                             loginHint: "jane.doe@example.com")
+        await flow.setContext(.init())
+        let handler = try await factor.stepHandler(
+            flow: flow,
+            openIdConfiguration: openIdConfiguration,
+            loginHint: "jane.doe@example.com")
         
         let status = try await flow.process(stepHandler: handler)
         switch status {
@@ -228,10 +233,11 @@ final class FactorStepHandlerTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"))
 
         let factor = PrimaryFactor.oob(channel: .push)
-        flow.context = .init()
-        let handler = try factor.stepHandler(flow: flow,
-                                             openIdConfiguration: openIdConfiguration,
-                                             loginHint: "jane.doe@example.com")
+        await flow.setContext(.init())
+        let handler = try await factor.stepHandler(
+            flow: flow,
+            openIdConfiguration: openIdConfiguration,
+            loginHint: "jane.doe@example.com")
         
         let status = try await flow.process(stepHandler: handler)
         guard case let .continuation(continuation) = status
@@ -251,8 +257,9 @@ final class FactorStepHandlerTests: XCTestCase {
         XCTAssertEqual(code, "12")
 
         let resumeFactor = SecondaryFactor.oob(channel: .push)
-        let resumeHandler = try resumeFactor.stepHandler(flow: flow,
-                                                         openIdConfiguration: openIdConfiguration)
+        let resumeHandler = try await resumeFactor.stepHandler(
+            flow: flow,
+            openIdConfiguration: openIdConfiguration)
         let resumeStatus = try await flow.process(stepHandler: resumeHandler)
 
         guard case .success(_) = resumeStatus else {
@@ -282,10 +289,11 @@ final class FactorStepHandlerTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"))
 
         let factor = PrimaryFactor.oob(channel: .push)
-        flow.context = .init()
-        let handler = try factor.stepHandler(flow: flow,
-                                             openIdConfiguration: openIdConfiguration,
-                                             loginHint: "jane.doe@example.com")
+        await flow.setContext(.init())
+        let handler = try await factor.stepHandler(
+            flow: flow,
+            openIdConfiguration: openIdConfiguration,
+            loginHint: "jane.doe@example.com")
         
         let error = await XCTAssertThrowsErrorAsync(try await flow.process(stepHandler: handler))
         XCTAssertEqual(error as? DirectAuthenticationFlowError, .bindingCodeMissing)
@@ -305,10 +313,11 @@ final class FactorStepHandlerTests: XCTestCase {
                           statusCode: 400)
         
         let factor = PrimaryFactor.oob(channel: .push)
-        flow.context = .init()
-        let handler = try factor.stepHandler(flow: flow,
-                                             openIdConfiguration: openIdConfiguration,
-                                             loginHint: "jane.doe@example.com")
+        await flow.setContext(.init())
+        let handler = try await factor.stepHandler(
+            flow: flow,
+            openIdConfiguration: openIdConfiguration,
+            loginHint: "jane.doe@example.com")
         
         let status = try await flow.process(stepHandler: handler)
         guard case let .mfaRequired(context) = status
@@ -337,10 +346,11 @@ final class FactorStepHandlerTests: XCTestCase {
         var context = DirectAuthenticationFlow.Context()
         context.currentStatus = .mfaRequired(.init(supportedChallengeTypes: nil,
                                                    mfaToken: "abcd1234"))
-        flow.context = context
-        
-        let handler = try factor.stepHandler(flow: flow,
-                                             openIdConfiguration: openIdConfiguration)
+        await flow.setContext(context)
+
+        let handler = try await factor.stepHandler(
+            flow: flow,
+            openIdConfiguration: openIdConfiguration)
 
         let status = try await flow.process(stepHandler: handler)
         guard case .success(_) = status else {
@@ -365,10 +375,11 @@ final class FactorStepHandlerTests: XCTestCase {
         var context = DirectAuthenticationFlow.Context()
         context.currentStatus = .mfaRequired(.init(supportedChallengeTypes: nil,
                                                    mfaToken: "abcd1234"))
-        flow.context = context
-        
-        let handler = try factor.stepHandler(flow: flow,
-                                             openIdConfiguration: openIdConfiguration)
+        await flow.setContext(context)
+
+        let handler = try await factor.stepHandler(
+            flow: flow,
+            openIdConfiguration: openIdConfiguration)
 
         let status = try await flow.process(stepHandler: handler)
         guard case let .continuation(continuation) = status
@@ -386,8 +397,9 @@ final class FactorStepHandlerTests: XCTestCase {
         }
         XCTAssertEqual(code, "12")
 
-        let resumeHandler = try factor.stepHandler(flow: self.flow,
-                                                   openIdConfiguration: self.openIdConfiguration)
+        let resumeHandler = try await factor.stepHandler(
+            flow: self.flow,
+            openIdConfiguration: self.openIdConfiguration)
         let resumeStatus = try await flow.process(stepHandler: resumeHandler)
         guard case .success(_) = resumeStatus else {
             XCTFail("Did not receive a success response")
@@ -411,10 +423,11 @@ final class FactorStepHandlerTests: XCTestCase {
         var context = DirectAuthenticationFlow.Context()
         context.currentStatus = .mfaRequired(.init(supportedChallengeTypes: nil,
                                                    mfaToken: "abcd1234"))
-        flow.context = context
-        
-        let handler = try factor.stepHandler(flow: flow,
-                                             openIdConfiguration: openIdConfiguration)
+        await flow.setContext(context)
+
+        let handler = try await factor.stepHandler(
+            flow: flow,
+            openIdConfiguration: openIdConfiguration)
 
         let error = await XCTAssertThrowsErrorAsync(try await flow.process(stepHandler: handler))
         XCTAssertEqual(error as? DirectAuthenticationFlowError, .bindingCodeMissing)

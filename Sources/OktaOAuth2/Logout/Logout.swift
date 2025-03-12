@@ -19,7 +19,7 @@ public protocol LogoutFlowDelegate: AnyObject {
 }
 
 /// A protocol defining a type of logout flow.
-public protocol LogoutFlow: AnyObject, UsesDelegateCollection {
+public protocol LogoutFlow: Actor, UsesDelegateCollection {
     /// Indicates if this flow is currently in progress.
     var inProgress: Bool { get }
     

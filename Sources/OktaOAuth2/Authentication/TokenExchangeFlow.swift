@@ -14,9 +14,9 @@ import AuthFoundation
 import Foundation
 
 /// An authentication flow class that implements the Token Exchange Flow.
-public class TokenExchangeFlow: AuthenticationFlow {
+public actor TokenExchangeFlow: AuthenticationFlow {
     /// Identifies the audience of the authorization server.
-    public enum Audience: APIRequestArgument {
+    public enum Audience: Sendable, APIRequestArgument {
         case `default`
         case custom(String)
         
@@ -42,29 +42,21 @@ public class TokenExchangeFlow: AuthenticationFlow {
     public let client: OAuth2Client
     
     /// The context that stores the state for the current authentication session.
-    public private(set) var context: Context?
+    nonisolated public var context: Context? {
+        withIsolationSync { await self._context }
+    }
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: APIRequestArgument]?
+    public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    public private(set) var isAuthenticating: Bool = false {
-        didSet {
-            guard oldValue != isAuthenticating else {
-                return
-            }
-            
-            if isAuthenticating {
-                delegateCollection.invoke { $0.authenticationStarted(flow: self) }
-            } else {
-                delegateCollection.invoke { $0.authenticationFinished(flow: self) }
-            }
-        }
+    nonisolated public var isAuthenticating: Bool {
+        withIsolationSync { await self._isAuthenticating } ?? false
     }
 
     /// Collection of the `AuthenticationDelegate` objects.
-    public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
-    
+    nonisolated public let delegateCollection = DelegateCollection<any AuthenticationDelegate>()
+
     /// Convenience initializer to construct a flow from variables.
     /// - Parameters:
     ///   - issuerURL: The issuer URL.
@@ -72,10 +64,10 @@ public class TokenExchangeFlow: AuthenticationFlow {
     ///   - scope: The scopes to request.
     ///   - audience: The audience of the authorization server.
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: ClaimCollection<[String]>,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: ClaimCollection<[String]>,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
@@ -85,10 +77,10 @@ public class TokenExchangeFlow: AuthenticationFlow {
 
     @_documentation(visibility: private)
     @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: some WhitespaceSeparated,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: some WhitespaceSeparated,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
@@ -100,8 +92,8 @@ public class TokenExchangeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - audience: The audience of the authorization server.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public required init(client: OAuth2Client,
-                         additionalParameters: [String: APIRequestArgument]? = nil)
+    public init(client: OAuth2Client,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
@@ -120,13 +112,15 @@ public class TokenExchangeFlow: AuthenticationFlow {
     {
         try await withExpression {
             guard !tokens.isEmpty else {
-                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error.cannotComposeUrl) }
+                await MainActor.run {
+                    delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error.cannotComposeUrl) }
+                }
                 finished()
                 throw OAuth2Error.cannotComposeUrl
             }
             
-            isAuthenticating = true
-            self.context = context
+            _isAuthenticating = true
+            _context = context
             
             let request = TokenRequest(openIdConfiguration: try await client.openIdConfiguration(),
                                        clientConfiguration: client.configuration,
@@ -135,9 +129,13 @@ public class TokenExchangeFlow: AuthenticationFlow {
                                        tokens: tokens)
             return try await client.exchange(token: request).result
         } success: { result in
-            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            }
         } failure: { error in
-            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            }
         } finally: {
             finished()
         }
@@ -145,11 +143,30 @@ public class TokenExchangeFlow: AuthenticationFlow {
 
     public func reset() {
         finished()
-        context = nil
+        _context = nil
     }
     
     func finished() {
-        isAuthenticating = false
+        _isAuthenticating = false
+    }
+
+    // MARK: Private properties / methods
+    private var _context: Context?
+    private var _isAuthenticating: Bool = false {
+        didSet {
+            guard _isAuthenticating != oldValue else {
+                return
+            }
+
+            let flowStarted = _isAuthenticating
+            Task { @MainActor in
+                if flowStarted {
+                    delegateCollection.invoke { $0.authenticationStarted(flow: self) }
+                } else {
+                    delegateCollection.invoke { $0.authenticationFinished(flow: self) }
+                }
+            }
+        }
     }
 }
 
@@ -164,9 +181,9 @@ extension TokenExchangeFlow {
     /// - Parameters:
     ///   - tokens: Tokens to exchange.
     ///   - completion: Completion block for receiving the response.
-    public func start(with tokens: [TokenType],
-                      context: Context = .init(),
-                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+    nonisolated public func start(with tokens: [TokenType],
+                                  context: Context = .init(),
+                                  completion: @escaping @Sendable (Result<Token, OAuth2Error>) -> Void)
     {
         Task {
             do {

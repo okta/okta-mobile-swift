@@ -17,7 +17,7 @@ import Foundation
 /// Instances of this protocol may be assigned to ``Token/accessTokenValidator`` or ``Token/deviceSecretValidator`` to override the mechanisms used to validate tokens.
 ///
 /// > Note: A default implementation will automatically be used if this value is not changed.
-public protocol TokenHashValidator {
+public protocol TokenHashValidator: Sendable {
     /// Validates the given access token, using the `at_hash` value from the supplied ID token, if it is present.
     func validate(_ string: String, idToken: JWT) throws
 }

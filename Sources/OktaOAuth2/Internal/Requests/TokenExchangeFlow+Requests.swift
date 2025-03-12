@@ -15,9 +15,9 @@ import Foundation
 
 extension TokenExchangeFlow {
     /// Types specify token's identity.
-    public enum TokenType {
+    public enum TokenType: Sendable {
         /// Describes specific token used by ``TokenExchangeFlow/TokenType``.
-        public enum Kind: String {
+        public enum Kind: String, Sendable {
             case idToken = "id_token"
             case accessToken = "access_token"
             case deviceSecret = "device-secret"
@@ -67,7 +67,7 @@ extension TokenExchangeFlow {
         
         let openIdConfiguration: OpenIdConfiguration
         let clientConfiguration: OAuth2Client.Configuration
-        let additionalParameters: [String: APIRequestArgument]?
+        let additionalParameters: [String: any APIRequestArgument]?
         let context: Flow.Context
         let tokens: [TokenType]
     }
@@ -80,7 +80,7 @@ extension TokenExchangeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, 
     var acceptsType: APIContentType? { .json }
     var category: OAuth2APIRequestCategory { .token }
     var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         var result = additionalParameters ?? [:]
         result.merge(clientConfiguration.parameters(for: category))
         result.merge(context.parameters(for: category))

@@ -1,4 +1,4 @@
-// swift-tools-version:6.0
+// swift-tools-version:5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -8,6 +8,7 @@ extension Array<SwiftSetting> {
     static var common: Self {
         [
             .enableUpcomingFeature("ExistentialAny"),
+            .enableUpcomingFeature("ForwardTrailingClosures"),
         ]
     }
 
@@ -15,6 +16,11 @@ extension Array<SwiftSetting> {
         if strictConcurrencyEnabled {
             return common + [
                 .enableExperimentalFeature("StrictConcurrency=complete"),
+                .enableUpcomingFeature("InferSendableFromCaptures"),
+                .enableUpcomingFeature("IsolatedDefaultValues"),
+                .enableUpcomingFeature("DisableOutwardActorInference"),
+                .enableUpcomingFeature("GlobalConcurrency"),
+                .enableUpcomingFeature("RegionBasedIsolation"),
             ]
         } else {
             return common
@@ -83,7 +89,7 @@ var package = Package(
                     resources: [ .copy("MockResponses") ],
                     swiftSettings: .testTarget),
     ],
-    swiftLanguageModes: [.v6]
+    swiftLanguageVersions: [.v5]
 )
 
 #if canImport(UIKit) || canImport(AppKit)

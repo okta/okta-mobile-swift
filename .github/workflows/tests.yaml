@@ -21,7 +21,6 @@ on:
       - 'Tests/**/*.swift'
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_15.4.app/Contents/Developer
   NSUnbufferedIO: YES 
 
 jobs:
@@ -30,7 +29,12 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest-large, ubuntu-latest]
-        swift_version: ["5.10"]
+        swift_version: ["5.10", "6.0"]
+        exclude:
+          - os: ubuntu-latest
+            swift_version: "5.10"
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
@@ -47,7 +51,7 @@ jobs:
 
   Cocoapods:
     name: CocoaPods Build
-    runs-on: macos-latest-xlarge # Running on xlarge to use arm64 chipset
+    runs-on: macos-15-xlarge # Running on xlarge to use arm64 chipset
     timeout-minutes: 10
     needs:
       - SwiftBuild
@@ -65,29 +69,35 @@ jobs:
 
   XcodeBuild:
     name: Xcode Unit Tests
-    runs-on: macos-latest-xlarge
     strategy:
       matrix:
-        destination:
-        - "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
-        - "platform=iOS Simulator,OS=17.5,name=iPhone 15 Pro Max"
-        - "platform=tvOS Simulator,OS=17.5,name=Apple TV"
-        - "platform=visionOS Simulator,OS=1.2,name=Apple Vision Pro"
-        - "platform=watchOS Simulator,OS=10.5,name=Apple Watch Series 7 (45mm)"
-        - "platform=macOS,name=My Mac"
+        include:
+        - destination: "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
+          xcode_version: "15.4"
+          os: macos-14-large
+        - destination: "platform=iOS Simulator,OS=18.1,name=iPhone 16 Pro Max"
+          xcode_version: "16.0"
+          os: macos-15-large
+        - destination: "platform=tvOS Simulator,OS=18.1,name=Apple TV"
+          xcode_version: "16.0"
+          os: macos-15-large
+        - destination: "platform=visionOS Simulator,OS=1.2,name=Apple Vision Pro"
+          xcode_version: "15.4"
+          os: macos-14-xlarge
+        - destination: "platform=visionOS Simulator,OS=2.0,name=Apple Vision Pro"
+          xcode_version: "16.0"
+          os: macos-15-xlarge
+        - destination: "platform=watchOS Simulator,OS=11.1,name=Apple Watch Series 10 (46mm)"
+          xcode_version: "16.0"
+          os: macos-15-large
+        - destination: "platform=macOS,name=My Mac"
+          xcode_version: "16.0"
+          os: macos-15-large
+    runs-on: ${{ matrix.os }}
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app/Contents/Developer
     timeout-minutes: 25
     steps:
-    - name: Set test variables
-      run: |
-        echo "DESTINATION=${{matrix.destination}}" >> "$GITHUB_ENV"
-
-        destination="${{matrix.destination}}"
-        if [[ $destination =~ "tvOS" ]] || [[ $destination =~ "watchOS" ]]; then
-          echo "SKIP_WEBAUTHENTICATIONUI=true" >> "$GITHUB_ENV"
-          echo "WebAuthenticationUI is unsupported on this platform"
-        else
-          echo "SKIP_WEBAUTHENTICATIONUI=false" >> "$GITHUB_ENV"
-        fi
     - uses: actions/checkout@master
     - name: Build AuthFoundation
       run: |
@@ -133,7 +143,7 @@ jobs:
           -scheme OktaOAuth2 \
           -destination "$DESTINATION" 2>&1
     - name: Build WebAuthenticationUI
-      if: env.SKIP_WEBAUTHENTICATIONUI != 'true'
+      if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
         set -o pipefail && xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
@@ -141,7 +151,7 @@ jobs:
           -scheme WebAuthenticationUI \
           -destination "$DESTINATION" 2>&1
     - name: Test WebAuthenticationUI
-      if: env.SKIP_WEBAUTHENTICATIONUI != 'true'
+      if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \

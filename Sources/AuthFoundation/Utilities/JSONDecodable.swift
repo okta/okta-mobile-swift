@@ -18,5 +18,7 @@ public protocol JSONDecodable {
 
 extension JSONDecodable {
     @_documentation(visibility: internal)
-    public static var jsonDecoder: JSONDecoder { JSONDecoder() }
+    public static var jsonDecoder: JSONDecoder { defaultJsonDecoder }
 }
+
+fileprivate let defaultJsonDecoder = JSONDecoder()

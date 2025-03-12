@@ -37,25 +37,33 @@ final class UserCoordinatorTests: XCTestCase {
                                                                        scope: "openid"),
                                                   clientSettings: nil))
 
-    override func setUpWithError() throws {
+    override func setUp() async throws {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
+        storage = await UserDefaultsTokenStorage(userDefaults: userDefaults)
 
-        storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
-        Credential.tokenStorage = storage
+        let mockStorage = storage
+        await CredentialActor.run {
+            Credential.tokenStorage = mockStorage!
+        }
 
-        XCTAssertEqual(storage.allIDs.count, 0)
+        let tokenCount = await storage.allIDs.count
+        XCTAssertEqual(tokenCount, 0)
     }
     
-    override func tearDownWithError() throws {
+    override func tearDown() async throws {
         userDefaults.removePersistentDomain(forName: name)
         userDefaults = nil
         storage = nil
-        Credential.resetToDefault()
+
+        await CredentialActor.run {
+            Credential.resetToDefault()
+        }
     }
     
-    func testDefaultCredentialViaToken() throws {
-        try storage.add(token: token, metadata: nil, security: [])
+    @CredentialActor
+    func testDefaultCredentialViaToken() async throws {
+        _ = try Credential.coordinator.store(token: token, tags: [:], security: [])
 
         XCTAssertEqual(storage.allIDs.count, 1)
         
@@ -71,7 +79,8 @@ final class UserCoordinatorTests: XCTestCase {
         XCTAssertEqual(try Credential.coordinator.with(id: token.id, prompt: nil, authenticationContext: nil), credential)
     }
     
-    func testImplicitCredentialForToken() throws {
+    @CredentialActor
+    func testImplicitCredentialForToken() async throws {
         let credential = try Credential.coordinator.store(token: token, tags: [:], security: [])
 
         XCTAssertEqual(storage.allIDs, [token.id])
@@ -79,19 +88,31 @@ final class UserCoordinatorTests: XCTestCase {
         XCTAssertEqual(Credential.coordinator.default, credential)
     }
     
-    func testNotifications() throws {
-        let oldCredential = Credential.coordinator.default
+    @CredentialActor
+    func testNotifications() async throws {
+        let notificationCenter = NotificationCenter()
+        try await TaskData.$notificationCenter.withValue(notificationCenter) {
+            let oldCredential = Credential.coordinator.default
 
-        let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])
-        
-        let credential = try Credential.coordinator.store(token: token, tags: [:], security: [])
-        XCTAssertEqual(recorder.notifications.count, 1)
-        XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
-        XCTAssertNotEqual(oldCredential, credential)
-        
-        recorder.reset()
-        Credential.coordinator.default = nil
-        XCTAssertEqual(recorder.notifications.count, 1)
-        XCTAssertNil(recorder.notifications.first?.object)
+            let recorder = NotificationRecorder(center: notificationCenter,
+                                                observing: [.defaultCredentialChanged])
+
+            let credential = try Credential.coordinator.store(token: token, tags: [:], security: [])
+            usleep(useconds_t(2000))
+            await MainActor.run {
+                XCTAssertEqual(recorder.notifications.count, 1)
+                XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
+                XCTAssertNotEqual(oldCredential, credential)
+                recorder.reset()
+            }
+
+            Credential.coordinator.default = nil
+            usleep(useconds_t(2000))
+            await MainActor.run {
+                XCTAssertEqual(recorder.notifications.count, 1)
+                XCTAssertNil(recorder.notifications.first?.object)
+                recorder.reset()
+            }
+        }
     }
 }

@@ -47,7 +47,7 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var category: AuthFoundation.OAuth2APIRequestCategory { .other }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         var result = clientConfiguration.parameters(for: category) ?? [:]
         
         // Only supply context parameters (e.g. intent, max_age, nonce, etc) on the initial request
@@ -76,7 +76,7 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
 }
 
 extension WebAuthn.AuthenticatorAssertionResponse: HasTokenParameters {
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: any APIRequestArgument] {
         var result = [
             "clientDataJSON": clientDataJSON,
             "authenticatorData": authenticatorData,

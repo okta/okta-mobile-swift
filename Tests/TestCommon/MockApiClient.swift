@@ -17,19 +17,19 @@ import Foundation
 import FoundationNetworking
 #endif
 
-class MockApiClient: APIClient {
+class MockApiClient: APIClient, @unchecked Sendable {
     var baseURL: URL
-    var session: URLSessionProtocol
-    let configuration: APIClientConfiguration
+    var session: any URLSessionProtocol
+    let configuration: any APIClientConfiguration
     let shouldRetry: APIRetry?
     var allRequests: [URLRequest] = []
     var request: URLRequest? {
         allRequests.last
     }
-    var delegate: APIClientDelegate?
+    var delegate: (any APIClientDelegate)?
     
-    init(configuration: APIClientConfiguration,
-         session: URLSessionProtocol,
+    init(configuration: any APIClientConfiguration,
+         session: any URLSessionProtocol,
          baseURL: URL,
          shouldRetry: APIRetry? = nil) {
         self.configuration = configuration
@@ -45,7 +45,7 @@ class MockApiClient: APIClient {
         }
         
         let jsonDecoder: JSONDecoder
-        if let jsonType = type as? JSONDecodable.Type {
+        if let jsonType = type as? any JSONDecodable.Type {
             jsonDecoder = jsonType.jsonDecoder
         } else {
             jsonDecoder = defaultJSONDecoder

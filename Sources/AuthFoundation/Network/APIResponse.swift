@@ -13,9 +13,9 @@
 import Foundation
 
 /// Describes a response from an Okta request, which includes the supplied result, and other associated response metadata.
-public struct APIResponse<T: Decodable>: Decodable {
+public struct APIResponse<T: Decodable & Sendable>: Sendable, Decodable {
     /// Links between response resources.
-    public enum Link: String, Codable {
+    public enum Link: String, Sendable, Codable {
         case current = "self", next, previous
     }
     
@@ -39,4 +39,4 @@ public struct APIResponse<T: Decodable>: Decodable {
 }
 
 /// Describes an empty server response when a ``APIResponse`` is received without a response body.
-public struct Empty: Decodable {}
+public struct Empty: Decodable & Sendable {}

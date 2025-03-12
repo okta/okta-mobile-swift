@@ -27,8 +27,6 @@ public protocol KeychainAuthenticationContext {}
 ///
 /// > Note: At this time, only Generic Password items are supported by this struct.
 public struct Keychain {
-    static var implementation: KeychainProtocol = KeychainImpl()
-    
     /// Defines an individual keychain item. This may be created using the designated initializer for the purposes of saving a new keychain item, or may be created as the result of getting a preexisting item from the keychain.
     public struct Item: Equatable {
         /// The account (also known as the key, or account ID) for this keychain item.
@@ -68,7 +66,7 @@ public struct Keychain {
         /// - Parameter authenticationContext: Optional `LAContext` to use when saving the credential, for platforms that support it.
         /// - Returns: A ``Keychain/Item`` representing the new saved item.
         @discardableResult
-        public func save(authenticationContext: KeychainAuthenticationContext? = nil) throws -> Item {
+        public func save(authenticationContext: (any KeychainAuthenticationContext)? = nil) throws -> Item {
             var cfDictionary = query
             cfDictionary[kSecReturnAttributes as String] = kCFBooleanTrue
             cfDictionary[kSecReturnData as String] = kCFBooleanTrue
@@ -83,10 +81,11 @@ public struct Keychain {
                 cfDictionary.removeValue(forKey: kSecAttrAccessible as String)
             }
 
-            Keychain.implementation.deleteItem(cfDictionary as CFDictionary)
-            
+            let implementation = Keychain.implementation.wrappedValue
+            implementation.deleteItem(cfDictionary as CFDictionary)
+
             var ref: AnyObject?
-            let status = Keychain.implementation.addItem(cfDictionary as CFDictionary, &ref)
+            let status = implementation.addItem(cfDictionary as CFDictionary, &ref)
             if status != noErr {
                 throw KeychainError.cannotSave(code: status)
             }
@@ -102,7 +101,7 @@ public struct Keychain {
         /// - Parameters:
         ///   - item: Item whose values should replace the receiver's keychain item.
         ///   - authenticationContext: Optional `LAContext` to use when updating the item, on platforms that support it.
-        public func update(_ item: Keychain.Item, authenticationContext: KeychainAuthenticationContext? = nil) throws {
+        public func update(_ item: Keychain.Item, authenticationContext: (any KeychainAuthenticationContext)? = nil) throws {
             try performUpdate(item, authenticationContext: authenticationContext)
         }
         
@@ -187,7 +186,7 @@ public struct Keychain {
     /// Defines the accessibility level for keychain items.
     ///
     /// This is a convenience wrapper around the iOS `kSecAttrAccessible*` Core Foundation strings.
-    public enum Accessibility {
+    public enum Accessibility: Sendable {
         /// Requires the device to be actively unlocked.
         case unlocked
         
@@ -263,7 +262,7 @@ public struct Keychain {
         ///   - prompt: Optional message to show to the user when prompting the user for biometric/Face ID.
         ///   - authenticationContext: Optional `LAContext` to use when updating the item, on platforms that support it.
         /// - Returns: The keychain item defined by this search query.
-        public func get(prompt: String? = nil, authenticationContext: KeychainAuthenticationContext? = nil) throws -> Item {
+        public func get(prompt: String? = nil, authenticationContext: (any KeychainAuthenticationContext)? = nil) throws -> Item {
             try performGet(prompt: prompt,
                            authenticationContext: authenticationContext)
         }
@@ -363,7 +362,7 @@ public struct Keychain {
             ///   - prompt: Optional message to show to the user when prompting the user for biometric/Face ID.
             ///   - authenticationContext: Optional `LAContext` to use when updating the item, on platforms that support it.
             /// - Returns: ``Keychain/Item`` represented by this search result.
-            public func get(prompt: String? = nil, authenticationContext: KeychainAuthenticationContext? = nil) throws -> Item {
+            public func get(prompt: String? = nil, authenticationContext: (any KeychainAuthenticationContext)? = nil) throws -> Item {
                 try performGet(prompt: prompt,
                                authenticationContext: authenticationContext)
             }
@@ -372,7 +371,7 @@ public struct Keychain {
             /// - Parameters:
             ///   - item: Item whose values should replace the receiver's keychain item.
             ///   - authenticationContext: Optional `LAContext` to use when updating the item, on platforms that support it.
-            public func update(_ item: Keychain.Item, authenticationContext: KeychainAuthenticationContext? = nil) throws {
+            public func update(_ item: Keychain.Item, authenticationContext: (any KeychainAuthenticationContext)? = nil) throws {
                 try performUpdate(item, authenticationContext: authenticationContext)
             }
 
@@ -381,6 +380,11 @@ public struct Keychain {
                 try performDelete()
             }
         }
+    }
+
+    static let implementation = LockedValue<any KeychainProtocol>(KeychainImpl())
+    static func resetToDefault() {
+        implementation.wrappedValue = KeychainImpl()
     }
 }
 
