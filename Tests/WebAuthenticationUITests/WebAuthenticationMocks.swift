@@ -17,6 +17,7 @@ import XCTest
 @testable import OktaOAuth2
 @testable import WebAuthenticationUI
 
+@MainActor
 struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
     private static var results: [String: Result<URL, Error>?] = [:]
     private static var providers: [String: WebAuthenticationProviderMock] = [:]
@@ -25,8 +26,8 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
         case invalidTestName
     }
     
-    static func register(result: Result<URL, Error>?, for webAuth: WebAuthentication) throws {
-        guard let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
+    static func register(result: Result<URL, Error>?, for webAuth: WebAuthentication) async throws {
+        guard let testName = await webAuth.signInFlow.additionalParameters?["testName"] as? String
         else {
             throw TestError.invalidTestName
         }
@@ -34,8 +35,8 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
         results[testName] = result
     }
     
-    static func provider(for webAuth: WebAuthentication) -> WebAuthenticationProviderMock? {
-        guard let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
+    static func provider(for webAuth: WebAuthentication) async -> WebAuthenticationProviderMock? {
+        guard let testName = await webAuth.signInFlow.additionalParameters?["testName"] as? String
         else {
             return nil
         }
@@ -45,9 +46,9 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
     
     static func createWebAuthenticationProvider(for webAuth: WebAuthentication,
                                                 from window: WebAuthentication.WindowAnchor?,
-                                                usesEphemeralSession: Bool) -> WebAuthenticationProvider?
+                                                usesEphemeralSession: Bool) async -> WebAuthenticationProvider?
     {
-        let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
+        let testName = await webAuth.signInFlow.additionalParameters?["testName"] as? String
 
         var result: Result<URL, Error>?
         if let testName,

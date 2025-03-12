@@ -18,7 +18,7 @@ import XCTest
 import FoundationNetworking
 #endif
 
-class APIRetryDelegateRecorder: APIClientDelegate {
+class APIRetryDelegateRecorder: APIClientDelegate, @unchecked Sendable {
     var response: APIRetry?
     private(set) var requests: [URLRequest] = []
 

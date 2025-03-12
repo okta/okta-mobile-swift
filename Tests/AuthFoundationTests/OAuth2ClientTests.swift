@@ -29,9 +29,11 @@ final class OAuth2ClientTests: XCTestCase {
                                                    scope: "openid")
     var token: Token!
 
-    override func setUpWithError() throws {
-        Credential.tokenStorage = MockTokenStorage()
-        Credential.credentialDataSource = MockCredentialDataSource()
+    override func setUp() async throws {
+        await CredentialActor.run {
+            Credential.tokenStorage = MockTokenStorage()
+            Credential.credentialDataSource = MockCredentialDataSource()
+        }
 
         urlSession = URLSessionMock()
         client = OAuth2Client(configuration, session: urlSession)
@@ -57,9 +59,12 @@ final class OAuth2ClientTests: XCTestCase {
 
         urlSession.requestDelay = 0.1
     }
-    
-    override func tearDownWithError() throws {
-        Credential.coordinator.resetToDefault()
+
+    override func tearDown() async throws {
+        await CredentialActor.run {
+            Credential.coordinator.resetToDefault()
+        }
+        
         urlSession = nil
         client = nil
     }

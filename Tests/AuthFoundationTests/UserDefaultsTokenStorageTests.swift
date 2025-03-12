@@ -15,6 +15,7 @@ import XCTest
 @testable import AuthFoundation
 import TestCommon
 
+@CredentialActor
 final class UserDefaultTokenStorageTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: UserDefaultsTokenStorage!

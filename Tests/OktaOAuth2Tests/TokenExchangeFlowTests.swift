@@ -77,24 +77,17 @@ final class TokenExchangeFlowTests: XCTestCase {
         Token.resetToDefault()
     }
 
-    func testWithDelegate() throws {
+    func testWithDelegate() async throws {
         let delegate = TokenExchangeFlowDelegateRecorder()
         flow.add(delegate: delegate)
         
-        XCTAssertFalse(flow.isAuthenticating)
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
         XCTAssertFalse(delegate.started)
         
         // Exchange code
-        let expect = expectation(description: "Expected `resume` succeeded")
-        flow.start(with: tokens) { result in
-            expect.fulfill()
-        }
-        
-        waitForExpectations(timeout: 5) { error in
-            XCTAssertNil(error)
-        }
-        
-        XCTAssertFalse(flow.isAuthenticating)
+        let _ = try await flow.start(with: tokens)
+
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertTrue(delegate.finished)
         
@@ -107,31 +100,24 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
     }
-    
-    func testAuthenticationSucceeded() throws {
-        let authorizeExpectation = expectation(description: "Expected `resume` succeeded")
-        
-        XCTAssertFalse(flow.isAuthenticating)
-        
+
+    func testAuthenticationSucceeded() async throws {
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
+
         let expect = expectation(description: "resume")
         flow.start(with: tokens) { result in
-            switch result {
-            case .success:
-                authorizeExpectation.fulfill()
-            case .failure(let error):
+            if case let .failure(error) = result {
                 XCTFail(error.localizedDescription)
             }
-            
+
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
-            XCTAssertNil(error)
-        }
+        await fulfillment(of: [expect], timeout: 1)
 
-        XCTAssertFalse(flow.isAuthenticating)
-        
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
+
         XCTAssertEqual(urlSession.requests.count, 3)
-        
+
         let request = try XCTUnwrap(urlSession.requests.first(where: { request in
             request.url?.lastPathComponent == "token"
         }))
@@ -139,14 +125,14 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
     }
-    
+
     func testAsyncAuthenticationSucceeded() async throws {
-        XCTAssertFalse(flow.isAuthenticating)
-        
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
+
         let _ = try await flow.start(with: tokens)
         
-        XCTAssertFalse(flow.isAuthenticating)
-        
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
+
         XCTAssertEqual(urlSession.requests.count, 3)
         
         let request = try XCTUnwrap(urlSession.requests.first(where: { request in

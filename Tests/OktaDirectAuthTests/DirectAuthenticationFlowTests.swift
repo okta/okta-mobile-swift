@@ -49,7 +49,7 @@ struct TestFactor: AuthenticationFactor {
     
     func stepHandler(flow: OktaDirectAuth.DirectAuthenticationFlow,
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
-                     loginHint: String?) throws -> OktaDirectAuth.StepHandler
+                     loginHint: String?) async throws -> OktaDirectAuth.StepHandler
     {
         if let exception = exception {
             throw exception
@@ -58,9 +58,15 @@ struct TestFactor: AuthenticationFactor {
         return TestStepHandler(flow: flow,
                                openIdConfiguration: openIdConfiguration,
                                loginHint: loginHint,
-                               context: flow.context!,
+                               context: await flow.context!,
                                factor: self,
                                result: result)
+    }
+}
+
+extension DirectAuthenticationFlow {
+    func setContext(_ context: Context?) async {
+        self.context = context
     }
 }
 
@@ -98,7 +104,7 @@ final class DirectAuthenticationFlowTests: XCTestCase {
         
         let token = Token.mockToken()
         let factor = TestFactor(result: .success(.success(token)), exception: nil)
-        flow.context = .init()
+        await flow.setContext(.init())
 
         let result = try await flow.runStep(with: factor)
         XCTAssertEqual(result, .success(token))
@@ -110,7 +116,7 @@ final class DirectAuthenticationFlowTests: XCTestCase {
                           contentType: "application/json")
 
         let factor = TestFactor(result: .failure(.pollingTimeoutExceeded), exception: nil)
-        flow.context = .init()
+        await flow.setContext(.init())
         let error = await XCTAssertThrowsErrorAsync(try await flow.runStep(with: factor))
         XCTAssertEqual(error as? DirectAuthenticationFlowError, .pollingTimeoutExceeded)
     }
@@ -121,7 +127,7 @@ final class DirectAuthenticationFlowTests: XCTestCase {
                           contentType: "application/json")
 
         let factor = TestFactor(result: nil, exception: APIClientError.invalidRequestData)
-        flow.context = .init()
+        await flow.setContext(.init())
         let error = await XCTAssertThrowsErrorAsync(try await flow.runStep(with: factor))
         XCTAssertEqual(error as? APIClientError, .invalidRequestData)
     }

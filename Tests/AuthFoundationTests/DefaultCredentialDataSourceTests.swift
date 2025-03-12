@@ -36,6 +36,7 @@ class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
     }
 }
 
+@CredentialActor
 final class DefaultCredentialDataSourceTests: XCTestCase {
     var coordinator: MockCredentialCoordinator!
     var dataSource: DefaultCredentialDataSource!

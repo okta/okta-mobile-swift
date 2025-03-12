@@ -19,6 +19,7 @@ import FoundationNetworking
 @testable import TestCommon
 @testable import AuthFoundation
 
+@CredentialActor
 final class UserCoordinatorTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: UserDefaultsTokenStorage!
@@ -55,7 +56,7 @@ final class UserCoordinatorTests: XCTestCase {
     }
     
     func testDefaultCredentialViaToken() throws {
-        try storage.add(token: token, metadata: nil, security: [])
+        _ = try Credential.coordinator.store(token: token, tags: [:], security: [])
 
         XCTAssertEqual(storage.allIDs.count, 1)
         
@@ -79,19 +80,30 @@ final class UserCoordinatorTests: XCTestCase {
         XCTAssertEqual(Credential.coordinator.default, credential)
     }
     
-    func testNotifications() throws {
-        let oldCredential = Credential.coordinator.default
+    func testNotifications() async throws {
+        let notificationCenter = NotificationCenter()
+        try await TaskData.$notificationCenter.withValue(notificationCenter) {
+            let oldCredential = Credential.coordinator.default
 
-        let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])
-        
-        let credential = try Credential.coordinator.store(token: token, tags: [:], security: [])
-        XCTAssertEqual(recorder.notifications.count, 1)
-        XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
-        XCTAssertNotEqual(oldCredential, credential)
-        
-        recorder.reset()
-        Credential.coordinator.default = nil
-        XCTAssertEqual(recorder.notifications.count, 1)
-        XCTAssertNil(recorder.notifications.first?.object)
+            let recorder = NotificationRecorder(center: notificationCenter,
+                                                observing: [.defaultCredentialChanged])
+
+            let credential = try Credential.coordinator.store(token: token, tags: [:], security: [])
+            usleep(useconds_t(2000))
+            await MainActor.run {
+                XCTAssertEqual(recorder.notifications.count, 1)
+                XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
+                XCTAssertNotEqual(oldCredential, credential)
+                recorder.reset()
+            }
+
+            Credential.coordinator.default = nil
+            usleep(useconds_t(2000))
+            await MainActor.run {
+                XCTAssertEqual(recorder.notifications.count, 1)
+                XCTAssertNil(recorder.notifications.first?.object)
+                recorder.reset()
+            }
+        }
     }
 }

@@ -40,41 +40,34 @@ class SessionLogoutFlowFailureTests: XCTestCase {
         flow = client.sessionLogoutFlow()
     }
 
-    func testDelegate() throws {
+    func testDelegate() async throws {
         let delegate = SessionLogoutFlowDelegateRecorder()
         flow.add(delegate: delegate)
         
-        XCTAssertNil(flow.context)
-        XCTAssertFalse(flow.inProgress)
+        await XCTAssertNilAsync(await flow.context)
+        await XCTAssertFalseAsync(await flow.inProgress)
         XCTAssertNil(delegate.url)
         XCTAssertNil(delegate.error)
         
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
-        let resumeExpection = expectation(description: "Expect success")
-        
-        flow.start(with: context) { result in
-            XCTAssertTrue(self.flow.inProgress)
-            resumeExpection.fulfill()
-        }
-        
-        wait(for: [resumeExpection], timeout: 1)
-        
-        XCTAssertFalse(flow.inProgress)
-        XCTAssertNotNil(flow.context)
-        XCTAssertEqual(flow.context, context)
-        XCTAssertNil(flow.context?.logoutURL)
-        
+        let error = await XCTAssertThrowsErrorAsync(try await flow.start(with: context))
+
+        await XCTAssertFalseAsync(await flow.inProgress)
+        await XCTAssertNotNilAsync(await flow.context)
+        try await XCTAssertEqualAsync(await flow.context, context)
+        await XCTAssertNilAsync(await flow.context?.logoutURL)
+
         XCTAssertNil(delegate.url)
+        XCTAssertEqual(error as? OAuth2Error, OAuth2Error.cannotComposeUrl)
         XCTAssertNotNil(delegate.error)
     }
-    
-    func testWithBlocks() throws {
-        XCTAssertNil(flow.context)
-        XCTAssertFalse(flow.inProgress)
-        
+
+    func testWithBlocks() async throws {
+        await XCTAssertNilAsync(await flow.context)
+        await XCTAssertFalseAsync(await flow.inProgress)
+
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
-        let resumeExpection = expectation(description: "Expect success")
-        
+        let expectation = expectation(description: "Expect success")
         flow.start(with: context) { result in
             switch result {
             case .success:
@@ -82,16 +75,13 @@ class SessionLogoutFlowFailureTests: XCTestCase {
             case .failure(let error):
                 XCTAssertNotNil(error)
             }
-            
-            XCTAssertTrue(self.flow.inProgress)
-            resumeExpection.fulfill()
+            expectation.fulfill()
         }
-        
-        wait(for: [resumeExpection], timeout: 1)
+        await fulfillment(of: [expectation], timeout: 1)
 
-        XCTAssertFalse(flow.inProgress)
-        XCTAssertNotNil(flow.context)
-        XCTAssertEqual(flow.context, context)
-        XCTAssertNil(flow.context?.logoutURL)
+        await XCTAssertFalseAsync(await flow.inProgress)
+        await XCTAssertNotNilAsync(await flow.context)
+        try await XCTAssertEqualAsync(await flow.context, context)
+        await XCTAssertNilAsync(await flow.context?.logoutURL)
     }
 }

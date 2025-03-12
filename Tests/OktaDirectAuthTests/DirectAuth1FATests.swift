@@ -44,13 +44,13 @@ final class DirectAuth1FATests: XCTestCase {
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testUserAndPassword() async throws {
         // Ensure the initial state
-        XCTAssertFalse(flow.isAuthenticating)
-        
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
+
         // Begin
         let state = try await flow.start("jane.doe@example.com",
                                          with: .password("SuperSecret"))
         
-        XCTAssertFalse(flow.isAuthenticating)
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
         switch state {
         case .success(let token):
             XCTAssertNotNil(token.refreshToken)
@@ -64,13 +64,13 @@ final class DirectAuth1FATests: XCTestCase {
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testUserAndOTP() async throws {
         // Ensure the initial state
-        XCTAssertFalse(flow.isAuthenticating)
-        
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
+
         // Begin
         let state = try await flow.start("jane.doe@example.com",
                                          with: .otp(code: "123456"))
-        
-        XCTAssertFalse(flow.isAuthenticating)
+
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
         switch state {
         case .success(let token):
             XCTAssertNotNil(token.refreshToken)
@@ -84,13 +84,13 @@ final class DirectAuth1FATests: XCTestCase {
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testUserAndOOBPush() async throws {
         // Ensure the initial state
-        XCTAssertFalse(flow.isAuthenticating)
-        
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
+
         // Begin
         let state = try await flow.start("jane.doe@example.com",
                                          with: .oob(channel: .push))
         
-        XCTAssertFalse(flow.isAuthenticating)
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
         switch state {
         case .success(let token):
             XCTAssertNotNil(token.refreshToken)

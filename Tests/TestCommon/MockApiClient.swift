@@ -17,7 +17,7 @@ import Foundation
 import FoundationNetworking
 #endif
 
-class MockApiClient: APIClient {
+class MockApiClient: APIClient, @unchecked Sendable {
     var baseURL: URL
     var session: URLSessionProtocol
     let configuration: APIClientConfiguration

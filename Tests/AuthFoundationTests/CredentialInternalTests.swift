@@ -14,6 +14,7 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
+@CredentialActor
 final class CredentialInternalTests: XCTestCase {
     var coordinator: MockCredentialCoordinator!
 

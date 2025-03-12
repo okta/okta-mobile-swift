@@ -19,10 +19,11 @@ import FoundationNetworking
 
 @testable import AuthFoundation
 
-class URLSessionMock: URLSessionProtocol {
+class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
     var configuration: URLSessionConfiguration = .ephemeral
     let queue = DispatchQueue(label: "URLSessionMock")
-    
+    private let lock = Lock()
+
     struct Call {
         let url: String
         let data: Data?
@@ -32,7 +33,20 @@ class URLSessionMock: URLSessionProtocol {
     
     var requestDelay: TimeInterval?
 
-    private(set) var requests: [URLRequest] = []
+    private var _requests: [URLRequest] = []
+    private(set) var requests: [URLRequest] {
+        get {
+            lock.withLock {
+                _requests
+            }
+        }
+        set {
+            lock.withLock {
+                _requests = newValue
+            }
+        }
+    }
+
     func resetRequests() {
         requests.removeAll()
     }

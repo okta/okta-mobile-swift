@@ -18,7 +18,7 @@ import XCTest
 import FoundationNetworking
 #endif
 
-class CredentialRefreshDelegate: OAuth2ClientDelegate {
+class CredentialRefreshDelegate: OAuth2ClientDelegate, @unchecked Sendable {
     private(set) var refreshCount = 0
     
     func reset() {
@@ -35,9 +35,8 @@ class CredentialRefreshDelegate: OAuth2ClientDelegate {
     }
 }
 
-final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
+final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked Sendable {
     var delegate: CredentialRefreshDelegate!
-    var notification: NotificationRecorder!
 
     enum APICalls {
         case none
@@ -89,18 +88,20 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         
         return credential
     }
-    
-    override func setUpWithError() throws {
-        Credential.tokenStorage = MockTokenStorage()
-        Credential.credentialDataSource = MockCredentialDataSource()
+
+    override func setUp() async throws {
+        await CredentialActor.run {
+            Credential.tokenStorage = MockTokenStorage()
+            Credential.credentialDataSource = MockCredentialDataSource()
+        }
         delegate = CredentialRefreshDelegate()
-        notification = NotificationRecorder(observing: [.credentialRefreshFailed, .tokenRefreshFailed])
     }
-    
-    override func tearDownWithError() throws {
-        Credential.coordinator.resetToDefault()
+
+    override func tearDown() async throws {
+        await CredentialActor.run {
+            Credential.resetToDefault()
+        }
         delegate = nil
-        notification = nil
     }
     
     func testRefresh() throws {
@@ -126,34 +127,39 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     }
 
     func testRefreshFailed() throws {
-        let credential = try credential(for: Token.simpleMockToken, expectAPICalls: .error)
+        let notificationCenter = NotificationCenter()
+        try TaskData.$notificationCenter.withValue(notificationCenter) {
+            let notification = NotificationRecorder(center: notificationCenter,
+                                                    observing: [.credentialRefreshFailed, .tokenRefreshFailed])
+            let credential = try credential(for: Token.simpleMockToken, expectAPICalls: .error)
 
-        let expect = expectation(description: "refresh")
-        credential.refresh { result in
-            switch result {
-            case .success(_):
-                XCTFail("Did not expect a success response")
-            case .failure(let error):
-                XCTAssertNotNil(error)
+            let expect = expectation(description: "refresh")
+            credential.refresh { result in
+                switch result {
+                case .success(_):
+                    XCTFail("Did not expect a success response")
+                case .failure(let error):
+                    XCTAssertNotNil(error)
+                }
+                expect.fulfill()
             }
-            expect.fulfill()
+
+            waitForExpectations(timeout: 3.0) { error in
+                XCTAssertNil(error)
+            }
+
+            // Need to wait for the async notification dispatch
+            usleep(useconds_t(2000))
+
+            XCTAssertEqual(notification.notifications.count, 2)
+            let tokenNotification = try XCTUnwrap(notification.notifications(for: .tokenRefreshFailed).first)
+            XCTAssertEqual(tokenNotification.object as? Token, credential.token)
+            XCTAssertNotNil(tokenNotification.userInfo?["error"])
+
+            let credentialNotification = try XCTUnwrap(notification.notifications(for: .credentialRefreshFailed).first)
+            XCTAssertEqual(credentialNotification.object as? Credential, credential)
+            XCTAssertNotNil(credentialNotification.userInfo?["error"])
         }
-        
-        waitForExpectations(timeout: 3.0) { error in
-            XCTAssertNil(error)
-        }
-        
-        // Need to wait for the async notification dispatch
-        usleep(useconds_t(2000))
-        
-        XCTAssertEqual(notification.notifications.count, 2)
-        let tokenNotification = try XCTUnwrap(notification.notifications(for: .tokenRefreshFailed).first)
-        XCTAssertEqual(tokenNotification.object as? Token, credential.token)
-        XCTAssertNotNil(tokenNotification.userInfo?["error"])
-        
-        let credentialNotification = try XCTUnwrap(notification.notifications(for: .credentialRefreshFailed).first)
-        XCTAssertEqual(credentialNotification.object as? Credential, credential)
-        XCTAssertNotNil(credentialNotification.userInfo?["error"])
     }
     
     func testRefreshWithoutRefreshToken() throws {

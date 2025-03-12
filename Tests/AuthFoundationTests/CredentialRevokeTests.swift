@@ -18,6 +18,7 @@ import XCTest
 import FoundationNetworking
 #endif
 
+@CredentialActor
 final class CredentialTests: XCTestCase {
     var coordinator: MockCredentialCoordinator!
     var credential: Credential!
@@ -68,19 +69,17 @@ final class CredentialTests: XCTestCase {
         XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
         XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
 
-        let expect = expectation(description: "network request")
+        let semaphore = DispatchSemaphore(value: 0)
         credential.revoke(type: .all) { result in
             switch result {
             case .success(): break
             case .failure(let error):
                 XCTAssertNil(error)
             }
-            expect.fulfill()
+            semaphore.signal()
         }
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
-        
+        XCTAssertEqual(semaphore.wait(timeout: .now() + 1.0), .success)
+
         let requests: [String: URLRequest] = urlSession.requests.reduce(into: [:]) { partialResult, request in
             guard let url = request.url,
                   url.absoluteString.starts(with: "https://example.com/oauth2/v1/revoke"),
@@ -113,18 +112,16 @@ final class CredentialTests: XCTestCase {
         XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
         XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
 
-        let expect = expectation(description: "network request")
+        let semaphore = DispatchSemaphore(value: 0)
         credential.revoke(type: .accessToken) { result in
             switch result {
             case .success(): break
             case .failure(let error):
                 XCTAssertNil(error)
             }
-            expect.fulfill()
+            semaphore.signal()
         }
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        XCTAssertEqual(semaphore.wait(timeout: .now() + 1.0), .success)
 
         XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
         XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
@@ -141,8 +138,9 @@ final class CredentialTests: XCTestCase {
                           statusCode: 400,
                           contentType: "application/json")
         
-        let expect = expectation(description: "network request")
+        let semaphore = DispatchSemaphore(value: 0)
         credential.revoke(type: .accessToken) { result in
+            defer { semaphore.signal() }
             switch result {
             case .success():
                 XCTFail()
@@ -156,11 +154,8 @@ final class CredentialTests: XCTestCase {
 
                 XCTAssertEqual(oauth2Error.code, .invalidToken)
             }
-            expect.fulfill()
         }
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        XCTAssertEqual(semaphore.wait(timeout: .now() + 1.0), .success)
     }
 
     func testRevokeAll() throws {
@@ -174,19 +169,17 @@ final class CredentialTests: XCTestCase {
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
         
-        let expect = expectation(description: "network request")
+        let semaphore = DispatchSemaphore(value: 0)
         credential.revoke(type: .all) { result in
             switch result {
             case .success(): break
             case .failure(let error):
                 XCTAssertNil(error)
             }
-            expect.fulfill()
+            semaphore.signal()
         }
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
-        
+        XCTAssertEqual(semaphore.wait(timeout: .now() + 1.0), .success)
+
         let accessTokenRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
             request.bodyString?.contains("abcd123") ?? false
         }))
@@ -218,18 +211,16 @@ final class CredentialTests: XCTestCase {
         let storage = try XCTUnwrap(coordinator.tokenStorage as? MockTokenStorage)
         storage.error = CredentialError.metadataConsistency
         
-        let expect = expectation(description: "network request")
+        let semaphore = DispatchSemaphore(value: 0)
         credential.revoke(type: .accessToken) { result in
             switch result {
             case .success(): break
             case .failure(let error):
                 XCTAssertNil(error)
             }
-            expect.fulfill()
+            semaphore.signal()
         }
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        XCTAssertEqual(semaphore.wait(timeout: .now() + 1.0), .success)
 
         XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
         XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))

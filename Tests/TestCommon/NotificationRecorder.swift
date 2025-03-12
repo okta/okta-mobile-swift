@@ -14,23 +14,23 @@ import Foundation
 
 public final class NotificationRecorder {
     private(set) public var notifications: [Notification] = []
+    public let center: NotificationCenter
     private var observers = [NSObjectProtocol]()
     
-    public init(observing: [Notification.Name]? = nil) {
+    public init(center: NotificationCenter = .default, observing: [Notification.Name]? = nil) {
+        self.center = center
         observing?.forEach {
             observe($0)
         }
     }
     
     deinit {
-        let center = NotificationCenter.default
         observers.forEach { observer in
             center.removeObserver(observer)
         }
     }
     
     public func observe(_ name: Notification.Name, object: AnyObject? = nil) {
-        let center = NotificationCenter.default
         observers.append(center.addObserver(forName: name, object: object, queue: nil, using: { [weak self] notification in
             self?.received(notification)
         }))

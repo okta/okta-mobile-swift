@@ -38,97 +38,122 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
         Token.resetToDefault()
         DeviceAuthorizationFlow.resetToDefault()
     }
-    
-    func testSlowDown() throws {
-        urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/device/authorize",
-                          data: try data(from: .module, for: "device-authorize", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token-slow_down", in: "MockResponses"),
-                          statusCode: 400,
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
-                          contentType: "application/json")
 
-        try performAuthenticationFlow()
+    private enum MockRequestExpectations {
+        case slowDown, authorizationPending
     }
 
-    func testAuthorizationPending() throws {
-        urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/device/authorize",
-                          data: try data(from: .module, for: "device-authorize", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token-authorization_pending", in: "MockResponses"),
-                          statusCode: 400,
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
-                          contentType: "application/json")
+    private func prepareRequests(mock type: MockRequestExpectations) throws {
+        switch type {
+        case .slowDown:
+            urlSession.expect("https://example.com/.well-known/openid-configuration",
+                              data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                              contentType: "application/json")
+            urlSession.expect("https://example.okta.com/oauth2/v1/device/authorize",
+                              data: try data(from: .module, for: "device-authorize", in: "MockResponses"),
+                              contentType: "application/json")
+            urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                              data: try data(from: .module, for: "token-slow_down", in: "MockResponses"),
+                              statusCode: 400,
+                              contentType: "application/json")
+            urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                              data: try data(from: .module, for: "token", in: "MockResponses"),
+                              contentType: "application/json")
+            urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
+                              data: try data(from: .module, for: "keys", in: "MockResponses"),
+                              contentType: "application/json")
 
-        try performAuthenticationFlow()
+        case .authorizationPending:
+            urlSession.expect("https://example.com/.well-known/openid-configuration",
+                              data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                              contentType: "application/json")
+            urlSession.expect("https://example.okta.com/oauth2/v1/device/authorize",
+                              data: try data(from: .module, for: "device-authorize", in: "MockResponses"),
+                              contentType: "application/json")
+            urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                              data: try data(from: .module, for: "token-authorization_pending", in: "MockResponses"),
+                              statusCode: 400,
+                              contentType: "application/json")
+            urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                              data: try data(from: .module, for: "token", in: "MockResponses"),
+                              contentType: "application/json")
+            urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
+                              data: try data(from: .module, for: "keys", in: "MockResponses"),
+                              contentType: "application/json")
+        }
     }
 
-    func performAuthenticationFlow() throws {
+    func testSlowDown() async throws {
+        try prepareRequests(mock: .slowDown)
+        try await performAuthenticationFlow(isAsync: false)
+    }
+
+    func testAuthorizationPending() async throws {
+        try prepareRequests(mock: .authorizationPending)
+        try await performAuthenticationFlow(isAsync: false)
+    }
+
+    func testSlowDownAsync() async throws {
+        try prepareRequests(mock: .slowDown)
+        try await performAuthenticationFlow(isAsync: true)
+    }
+
+    func testAuthorizationPendingAsync() async throws {
+        try prepareRequests(mock: .authorizationPending)
+        try await performAuthenticationFlow(isAsync: true)
+    }
+
+    func performAuthenticationFlow(isAsync: Bool) async throws {
         // Ensure the initial state
-        XCTAssertNil(flow.context)
-        XCTAssertFalse(flow.isAuthenticating)
+        await XCTAssertNilAsync(await flow.context)
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
 
         // Begin
-        var wait = expectation(description: "resume")
-        var verification: DeviceAuthorizationFlow.Verification?
-        flow.start { result in
-            switch result {
-            case .success(let response):
-                verification = response
-            case .failure(let error):
-                XCTAssertNil(error)
+        nonisolated(unsafe) var verification: DeviceAuthorizationFlow.Verification?
+        if isAsync {
+            verification = try await flow.start()
+        } else {
+            let startWait = expectation(description: "start")
+            flow.start { result in
+                switch result {
+                case .success(let response):
+                    verification = response
+                case .failure(let error):
+                    XCTAssertNil(error)
+                }
+                startWait.fulfill()
             }
-            wait.fulfill()
+            await fulfillment(of: [startWait], timeout: 2)
         }
-        waitForExpectations(timeout: 1) { error in
-            XCTAssertNil(error)
-        }
-        
+
         verification = try XCTUnwrap(verification)
-        XCTAssertEqual(flow.context?.verification?.deviceCode, verification?.deviceCode)
-        XCTAssertTrue(flow.isAuthenticating)
-        XCTAssertNotNil(flow.context?.verification?.verificationUri)
-        XCTAssertEqual(verification, flow.context?.verification)
-        XCTAssertEqual(flow.context?.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
-        XCTAssertEqual(flow.context?.verification?.interval, 1)
+        try await XCTAssertEqualAsync(await flow.context?.verification?.deviceCode, verification?.deviceCode)
+        await XCTAssertTrueAsync(await flow.isAuthenticating)
+        await XCTAssertNotNilAsync(await flow.context?.verification?.verificationUri)
+        try await XCTAssertEqualAsync(verification, await flow.context?.verification)
+        try await XCTAssertEqualAsync(await flow.context?.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
+        try await XCTAssertEqualAsync(await flow.context?.verification?.interval, 1)
 
         // Exchange code
-        var token: Token?
-        wait = expectation(description: "resume")
-        flow.resume { result in
-            switch result {
-            case .success(let resultToken):
-                token = resultToken
-            case .failure(let error):
-                XCTAssertNil(error)
+        nonisolated(unsafe) var token: Token?
+        if isAsync {
+            token = try await flow.resume()
+        } else {
+            let resumeWait = expectation(description: "resume")
+            flow.resume { result in
+                switch result {
+                case .success(let resultToken):
+                    token = resultToken
+                case .failure(let error):
+                    XCTAssertNil(error)
+                }
+                resumeWait.fulfill()
             }
-            wait.fulfill()
-        }
-        waitForExpectations(timeout: 5) { error in
-            XCTAssertNil(error)
+            await fulfillment(of: [resumeWait], timeout: 2)
         }
 
-        XCTAssertNotNil(flow.context)
-        XCTAssertFalse(flow.isAuthenticating)
+        await XCTAssertNotNilAsync(await flow.context)
+        await XCTAssertFalseAsync(await flow.isAuthenticating)
         XCTAssertNotNil(token)
     }
-
 }
