@@ -45,6 +45,7 @@ extension Screen {
 
     @discardableResult
     func tapKeyboardNextOrGo() -> Bool {
+        #if !os(tvOS)
         if let submitButton = app.keyboardSubmitButton {
             submitButton.tap()
             return true
@@ -52,6 +53,7 @@ extension Screen {
             nextButton.tap()
             return true
         }
+        #endif
         return false
     }
     
