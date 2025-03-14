@@ -14,7 +14,7 @@ import Foundation
 
 /// Property wrapper representing a weak value.
 @propertyWrapper
-public struct Weak<Object: AnyObject & Sendable>: Sendable {
+public struct Weak<Object: AnyObject> {
     public weak var wrappedValue: Object?
     
     public init?(_ object: Object?) {

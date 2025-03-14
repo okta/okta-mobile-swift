@@ -17,11 +17,11 @@ import XCTest
 
 class MockSessionTokenFlowURLExchange: SessionTokenFlowURLExchange {
     let scheme: String
-    static var resultUrl: URL?
-    static var error: OAuth2Error?
+    static let resultUrl = LockedValue<URL?>(wrappedValue: nil)
+    static let error: LockedValue<OAuth2Error?> = nil
     static func reset() {
-        resultUrl = nil
-        error = nil
+        resultUrl.wrappedValue = nil
+        error.wrappedValue = nil
     }
 
     required init(scheme: String) {
@@ -29,9 +29,9 @@ class MockSessionTokenFlowURLExchange: SessionTokenFlowURLExchange {
     }
 
     func follow(url: URL) async throws -> URL {
-        if let resultUrl = type(of: self).resultUrl {
+        if let resultUrl = type(of: self).resultUrl.wrappedValue {
             return resultUrl
-        } else if let error = type(of: self).error {
+        } else if let error = type(of: self).error.wrappedValue {
             throw error
         }
         throw OAuth2Error.invalidUrl
@@ -84,7 +84,7 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
         await XCTAssertFalseAsync(await flow.isAuthenticating)
         XCTAssertFalse(delegate.started)
 
-        MockSessionTokenFlowURLExchange.resultUrl = URL(string: "com.example:/callback?code=abc123&state=state")
+        MockSessionTokenFlowURLExchange.resultUrl.wrappedValue = URL(string: "com.example:/callback?code=abc123&state=state")
 
         // Authenticate
         let token = try await flow.start(with: "theSessionToken", context: .init(state: "state"))
@@ -100,7 +100,7 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
         // Ensure the initial state
         await XCTAssertFalseAsync(await flow.isAuthenticating)
 
-        MockSessionTokenFlowURLExchange.resultUrl = URL(string: "com.example:/callback?code=abc123&state=state")
+        MockSessionTokenFlowURLExchange.resultUrl.wrappedValue = URL(string: "com.example:/callback?code=abc123&state=state")
 
         // Authenticate
         let token = try await flow.start(with: "theSessionToken", context: .init(state: "state"))

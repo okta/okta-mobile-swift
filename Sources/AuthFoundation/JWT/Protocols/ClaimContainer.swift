@@ -18,12 +18,12 @@ import Foundation
 public protocol JSONClaimContainer: HasClaims, JSONDecodable {}
 
 extension JSONClaimContainer {
-    static func decodePayload(from decoder: Decoder) throws -> [String: Any] {
+    static func decodePayload(from decoder: any Decoder) throws -> [String: any Sendable] {
         let container = try decoder.container(keyedBy: JSONCodingKeys.self)
-        return try container.decode([String: Any].self)
+        return try container.decode([String: any Sendable].self)
     }
 
-    static func encodePayload(_ object: any HasClaims & Codable, to encoder: Encoder) throws {
+    static func encodePayload(_ object: any HasClaims & Codable, to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: JSONCodingKeys.self)
         try object.payload
             .compactMap { (key: String, value: Any) in
@@ -48,7 +48,7 @@ extension JSONClaimContainer {
 
 @_documentation(visibility: private)
 extension JSONClaimContainer where Self: Codable {
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         try Self.encodePayload(self, to: encoder)
     }
 }

@@ -128,7 +128,7 @@ final class OAuth2ClientTests: XCTestCase {
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         
-        var configResults = [OpenIdConfiguration]()
+        nonisolated(unsafe) var configResults = [OpenIdConfiguration]()
         var expectations = [XCTestExpectation]()
         let lock = Lock()
 
@@ -169,7 +169,7 @@ final class OAuth2ClientTests: XCTestCase {
         }
     }
     
-    func testJWKS() throws {
+    func testJWKS() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -177,7 +177,7 @@ final class OAuth2ClientTests: XCTestCase {
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
         
-        var jwksResults = [JWKS]()
+        nonisolated(unsafe) var jwksResults = [JWKS]()
         var expectations = [XCTestExpectation]()
         let lock = Lock()
 
@@ -197,15 +197,15 @@ final class OAuth2ClientTests: XCTestCase {
             expectations.append(expect)
         }
         
-        wait(for: expectations, timeout: 1.5)
-        
+        await fulfillment(of: expectations, timeout: 1.5)
+
         XCTAssertEqual(jwksResults.count, 4)
         let jwks = try XCTUnwrap(jwksResults.first)
         XCTAssertEqual(jwks.first?.id,
                        "k6HN2DKok-kExjJGBLqgzByMCnN1RvzEOA-1ukTjexA")
     }
 
-    func testUserInfo() throws {
+    func testUserInfo() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -230,7 +230,7 @@ final class OAuth2ClientTests: XCTestCase {
                           """),
                           contentType: "application/json")
 
-        var userInfo: UserInfo?
+        nonisolated(unsafe) var userInfo: UserInfo?
         let expect = expectation(description: "network request")
         client.userInfo(token: token) { result in
             switch result {
@@ -241,11 +241,8 @@ final class OAuth2ClientTests: XCTestCase {
             }
             expect.fulfill()
         }
-        
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
-        
+        await fulfillment(of: [expect], timeout: 1.0)
+
         XCTAssertEqual(userInfo?.subject, "00uid4BxXw6I6TV4m0g3")
     }
 
@@ -277,7 +274,7 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertEqual(request.bodyParameters?["token_type_hint"]?.stringValue, "access_token")
     }
     
-    func testIntrospectActiveAccessToken() throws {
+    func testIntrospectActiveAccessToken() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -296,7 +293,7 @@ final class OAuth2ClientTests: XCTestCase {
                           """),
                           contentType: "application/json")
 
-        var tokenInfo: TokenInfo?
+        nonisolated(unsafe) var tokenInfo: TokenInfo?
         let expect = expectation(description: "network request")
         client.introspect(token: token, type: .accessToken) { result in
             switch result {
@@ -308,15 +305,13 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        await fulfillment(of: [expect], timeout: 1.0)
         
         XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
         XCTAssertEqual(tokenInfo?.active, true)
     }
     
-    func testIntrospectInactiveAccessToken() throws {
+    func testIntrospectInactiveAccessToken() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -327,7 +322,7 @@ final class OAuth2ClientTests: XCTestCase {
                             }
                           """),
                           contentType: "application/json")
-        var tokenInfo: TokenInfo?
+        nonisolated(unsafe) var tokenInfo: TokenInfo?
         let expect = expectation(description: "network request")
         client.introspect(token: token, type: .accessToken) { result in
             switch result {
@@ -339,14 +334,12 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        await fulfillment(of: [expect], timeout: 1.0)
         
         XCTAssertEqual(tokenInfo?.active, false)
     }
     
-    func testIntrospectActiveRefreshToken() throws {
+    func testIntrospectActiveRefreshToken() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -365,7 +358,7 @@ final class OAuth2ClientTests: XCTestCase {
                           """),
                           contentType: "application/json")
 
-        var tokenInfo: TokenInfo?
+        nonisolated(unsafe) var tokenInfo: TokenInfo?
         let expect = expectation(description: "network request")
         client.introspect(token: token, type: .refreshToken) { result in
             switch result {
@@ -377,15 +370,13 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        await fulfillment(of: [expect], timeout: 1.0)
         
         XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
         XCTAssertEqual(tokenInfo?.active, true)
     }
     
-    func testIntrospectActiveIdToken() throws {
+    func testIntrospectActiveIdToken() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -404,7 +395,7 @@ final class OAuth2ClientTests: XCTestCase {
                           """),
                           contentType: "application/json")
 
-        var tokenInfo: TokenInfo?
+        nonisolated(unsafe) var tokenInfo: TokenInfo?
         let expect = expectation(description: "network request")
         client.introspect(token: token, type: .idToken) { result in
             switch result {
@@ -416,15 +407,13 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        await fulfillment(of: [expect], timeout: 1.0)
         
         XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
         XCTAssertEqual(tokenInfo?.active, true)
     }
     
-    func testIntrospectActiveDeviceSecret() throws {
+    func testIntrospectActiveDeviceSecret() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -443,7 +432,7 @@ final class OAuth2ClientTests: XCTestCase {
                           """),
                           contentType: "application/json")
 
-        var tokenInfo: TokenInfo?
+        nonisolated(unsafe) var tokenInfo: TokenInfo?
         let expect = expectation(description: "network request")
         client.introspect(token: token, type: .deviceSecret) { result in
             switch result {
@@ -455,15 +444,13 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        await fulfillment(of: [expect], timeout: 1.0)
         
         XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
         XCTAssertEqual(tokenInfo?.active, true)
     }
     
-    func testIntrospectFailed() throws {
+    func testIntrospectFailed() async throws {
         let token = try! Token(id: "TokenId",
                                issuedAt: Date(),
                                tokenType: "Bearer",
@@ -492,12 +479,10 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        await fulfillment(of: [expect], timeout: 1.0)
     }
  
-    func testRevoke() throws {
+    func testRevoke() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -513,9 +498,7 @@ final class OAuth2ClientTests: XCTestCase {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        await fulfillment(of: [expect], timeout: 1.0)
     }
     
     func testRevokeRequestClientAuthentication() throws {
@@ -532,14 +515,14 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertEqual(parameters["client_secret"], "supersecret")
     }
 
-    func testRefresh() throws {
+    func testRefresh() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
-        var newTokens = [Token]()
+        nonisolated(unsafe) var newTokens = [Token]()
         var expectations = [XCTestExpectation]()
         let lock = Lock()
 
@@ -559,7 +542,7 @@ final class OAuth2ClientTests: XCTestCase {
             expectations.append(expect)
         }
 
-        wait(for: expectations, timeout: 1.5)
+        await fulfillment(of: expectations, timeout: 1.5)
 
         XCTAssertEqual(newTokens.count, 4)
     }

@@ -10,8 +10,6 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if canImport(UIKit) || canImport(AppKit)
-
 import XCTest
 @testable import AuthFoundation
 @testable import OktaOAuth2
@@ -19,14 +17,14 @@ import XCTest
 
 @MainActor
 struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
-    private static var results: [String: Result<URL, Error>?] = [:]
+    private static var results: [String: Result<URL, any Error>?] = [:]
     private static var providers: [String: WebAuthenticationProviderMock] = [:]
     
     enum TestError: Error {
         case invalidTestName
     }
     
-    static func register(result: Result<URL, Error>?, for webAuth: WebAuthentication) async throws {
+    static func register(result: Result<URL, any Error>?, for webAuth: WebAuthentication) async throws {
         guard let testName = await webAuth.signInFlow.additionalParameters?["testName"] as? String
         else {
             throw TestError.invalidTestName
@@ -46,11 +44,11 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
     
     static func createWebAuthenticationProvider(for webAuth: WebAuthentication,
                                                 from window: WebAuthentication.WindowAnchor?,
-                                                usesEphemeralSession: Bool) async -> WebAuthenticationProvider?
+                                                usesEphemeralSession: Bool) async -> (any WebAuthenticationProvider)?
     {
         let testName = await webAuth.signInFlow.additionalParameters?["testName"] as? String
 
-        var result: Result<URL, Error>?
+        var result: Result<URL, any Error>?
         if let testName,
            let testResult = results[testName]
         {
@@ -68,7 +66,7 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
     }
 }
 
-class WebAuthenticationProviderMock: WebAuthenticationProvider {
+class WebAuthenticationProviderMock: @unchecked Sendable, WebAuthenticationProvider {
     let anchor: WebAuthentication.WindowAnchor?
     let usesEphemeralSession: Bool
     
@@ -79,9 +77,9 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
     }
     
     var state: State = .initialized
-    let result: Result<URL, Error>?
+    let result: Result<URL, any Error>?
     
-    init(from anchor: WebAuthentication.WindowAnchor?, usesEphemeralSession: Bool, result: Result<URL, Error>? = nil) {
+    init(from anchor: WebAuthentication.WindowAnchor?, usesEphemeralSession: Bool, result: Result<URL, any Error>? = nil) {
         self.anchor = anchor
         self.usesEphemeralSession = usesEphemeralSession
         self.result = result
@@ -108,5 +106,3 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
         state = .cancelled
     }
 }
-
-#endif

@@ -87,28 +87,31 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         await XCTAssertNilAsync(await flow.context)
         await XCTAssertFalseAsync(await flow.inProgress)
 
+        let expectedLogoutIDToken = logoutIDToken
+        let expectedLogoutRedirectUri = logoutRedirectUri
+        let expectedState = state
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         let resumeExpection = expectation(description: "Expect success")
-        
+
+        let flow = flow!
         flow.start(with: context) { result in
             Task {
                 switch result {
                 case .success(let url):
-                    let logoutURL = await self.flow.context?.logoutURL
+                    let logoutURL = flow.context?.logoutURL
                     XCTAssertEqual(url, logoutURL)
                 case .failure:
                     XCTFail()
                 }
 
-                let newContext = await self.flow.context
-                XCTAssertEqual(newContext?.state, context.state)
-                XCTAssertNotNil(newContext?.logoutURL)
-                XCTAssertEqual(newContext?.logoutURL?.absoluteString, """
+                XCTAssertEqual(flow.context?.state, context.state)
+                XCTAssertNotNil(flow.context?.logoutURL)
+                XCTAssertEqual(flow.context?.logoutURL?.absoluteString, """
                                 https://example.okta.com/oauth2/v1/logout\
                                 ?client_id=clientId\
-                                &id_token_hint=\(self.logoutIDToken)\
-                                &post_logout_redirect_uri=\(self.logoutRedirectUri.absoluteString)\
-                                &state=\(self.state)
+                                &id_token_hint=\(expectedLogoutIDToken)\
+                                &post_logout_redirect_uri=\(expectedLogoutRedirectUri.absoluteString)\
+                                &state=\(expectedState)
                                 """)
                 resumeExpection.fulfill()
             }

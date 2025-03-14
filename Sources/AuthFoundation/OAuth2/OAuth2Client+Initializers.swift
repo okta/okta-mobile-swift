@@ -44,7 +44,7 @@ extension OAuth2Client {
                             redirectUri: URL? = nil,
                             logoutRedirectUri: URL? = nil,
                             authentication: ClientAuthentication = .none,
-                            session: URLSessionProtocol? = nil)
+                            session: (any URLSessionProtocol)? = nil)
     {
         self.init(Configuration(issuerURL: issuerURL,
                                 discoveryURL: discoveryURL,

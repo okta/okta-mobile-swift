@@ -68,7 +68,7 @@ public actor DeviceAuthorizationFlow: AuthenticationFlow {
     public let client: OAuth2Client
     
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: APIRequestArgument]?
+    public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
@@ -218,13 +218,40 @@ public actor DeviceAuthorizationFlow: AuthenticationFlow {
     }
 
     // MARK: Private properties / methods
-    static var slowDownInterval: TimeInterval = 5
+    static let lock = Lock()
+    private static var _slowDownInterval: TimeInterval = 5
+    nonisolated(unsafe) static var slowDownInterval: TimeInterval {
+        get {
+            lock.withLock { _slowDownInterval }
+        }
+        set {
+            lock.withLock { _slowDownInterval = newValue }
+        }
+    }
     static func resetToDefault() {
         slowDownInterval = 5.0
     }
 
-    private var taskHandle: Task<Token, Error>?
-    nonisolated public let delegateCollection = DelegateCollection<DeviceAuthorizationFlowDelegate>()
+    private var taskHandle: Task<Token, any Error>?
+    nonisolated public let delegateCollection = DelegateCollection<any DeviceAuthorizationFlowDelegate>()
+
+    private var _context: Context?
+    private var _isAuthenticating: Bool = false {
+        didSet {
+            guard _isAuthenticating != oldValue else {
+                return
+            }
+
+            let flowStarted = _isAuthenticating
+            Task { @MainActor in
+                if flowStarted {
+                    delegateCollection.invoke { $0.authenticationStarted(flow: self) }
+                } else {
+                    delegateCollection.invoke { $0.authenticationFinished(flow: self) }
+                }
+            }
+        }
+    }
 }
 
 extension DeviceAuthorizationFlow {

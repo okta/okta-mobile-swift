@@ -15,7 +15,8 @@ import XCTest
 @testable import AuthFoundation
 import TestCommon
 
-@CredentialActor
+extension UserDefaults: @unchecked @retroactive Sendable {}
+
 final class UserDefaultTokenStorageTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: UserDefaultsTokenStorage!
@@ -51,9 +52,10 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     override func setUpWithError() throws {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
+        storage = await UserDefaultsTokenStorage(userDefaults: userDefaults)
 
-        storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
-        XCTAssertEqual(storage.allIDs.count, 0)
+        let tokenCount = await storage.allIDs.count
+        XCTAssertEqual(tokenCount, 0)
     }
     
     override func tearDownWithError() throws {

@@ -33,9 +33,9 @@ extension UsesDelegateCollection {
     public func remove(delegate: Delegate) { delegateCollection.remove(delegate) }
 }
 
-public final class DelegateCollection<D> {
-    @WeakCollection private var delegates: [AnyObject?]
-    
+public final class DelegateCollection<D>: @unchecked Sendable {
+    @WeakCollection private var delegates: [(any AnyObject)?]
+
     public init() {
         delegates = []
     }

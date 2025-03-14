@@ -18,11 +18,11 @@ import XCTest
 final class CredentialInternalTests: XCTestCase {
     var coordinator: MockCredentialCoordinator!
 
-    override func setUpWithError() throws {
-        coordinator = MockCredentialCoordinator()
+    override func setUp() async throws {
+        coordinator = await MockCredentialCoordinator()
     }
-    
-    override func tearDownWithError() throws {
+
+    override func tearDown() async throws {
         coordinator = nil
     }
 

@@ -55,7 +55,7 @@ public enum DirectAuthenticationFlowError: Error {
     case server(error: OAuth2ServerError)
     
     /// Some other unknown error has been returned.
-    case other(error: Error)
+    case other(error: any Error)
 }
 
 /// An authentication flow that implements the Okta Direct Authentication API.
@@ -312,7 +312,7 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     public internal(set) var context: Context?
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: APIRequestArgument]?
+    public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
@@ -518,7 +518,34 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     // MARK: Private properties / methods
-    nonisolated public let delegateCollection = DelegateCollection<DirectAuthenticationFlowDelegate>()
+    nonisolated public let delegateCollection = DelegateCollection<any DirectAuthenticationFlowDelegate>()
+
+    private var _isAuthenticating: Bool = false {
+        didSet {
+            guard _isAuthenticating != oldValue else {
+                return
+            }
+
+            let flowStarted = _isAuthenticating
+            Task { @MainActor in
+                if flowStarted {
+                    delegateCollection.invoke { $0.authenticationStarted(flow: self) }
+                } else {
+                    delegateCollection.invoke { $0.authenticationFinished(flow: self) }
+                }
+            }
+        }
+    }
+
+    private(set) var _context: Context?
+}
+
+#if canImport(XCTest)
+// Only used for testing
+extension DirectAuthenticationFlow {
+    func setContext(_ context: Context?) async {
+        _context = context
+    }
 }
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
@@ -532,7 +559,7 @@ extension DirectAuthenticationFlow {
     public func start(_ loginHint: String,
                       with factor: PrimaryFactor,
                       context: Context = .init(),
-                      completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+                      completion: @Sendable @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         Task {
             do {
@@ -550,7 +577,7 @@ extension DirectAuthenticationFlow {
     ///   - factor: The secondary factor to use when authenticating the user.
     ///   - completion: Completion block called when the operation completes.
     public func resume(with factor: SecondaryFactor,
-                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+                       completion: @Sendable @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         Task {
             do {
@@ -568,7 +595,7 @@ extension DirectAuthenticationFlow {
     ///   - factor: The continuation factor to use when authenticating the user.
     ///   - completion: Completion block called when the operation completes.
     public func resume(with factor: ContinuationFactor,
-                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+                       completion: @Sendable @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         Task {
             do {

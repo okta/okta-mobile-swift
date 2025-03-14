@@ -16,7 +16,7 @@ import Foundation
 class MockCredentialDataSource: CredentialDataSource {
     private(set) var credentials: [Credential] = []
 
-    weak var delegate: CredentialDataSourceDelegate?
+    weak var delegate: (any CredentialDataSourceDelegate)?
 
     var credentialCount: Int { credentials.count }
     
@@ -24,11 +24,11 @@ class MockCredentialDataSource: CredentialDataSource {
         !credentials.filter({ $0.token == token }).isEmpty
     }
 
-    public func urlSession(for token: Token) -> URLSessionProtocol {
+    public func urlSession(for token: Token) -> any URLSessionProtocol {
         URLSessionMock()
     }
 
-    func credential(for token: Token, coordinator: CredentialCoordinator) -> Credential {
+    func credential(for token: Token, coordinator: any CredentialCoordinator) -> Credential {
         if let credential = credentials.first(where: { $0.token == token }) {
             return credential
         } else {

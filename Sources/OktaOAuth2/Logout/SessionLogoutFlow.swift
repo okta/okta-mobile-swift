@@ -61,7 +61,7 @@ public actor SessionLogoutFlow: LogoutFlow {
     public let client: OAuth2Client
     
     /// Any additional query string parameters you would like to supply to the authorization server.
-    public let additionalParameters: [String: APIRequestArgument]?
+    public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates if this flow is currently in progress.
     public private(set) var inProgress: Bool = false
@@ -161,7 +161,21 @@ public actor SessionLogoutFlow: LogoutFlow {
         inProgress = false
     }
 
-    nonisolated public let delegateCollection = DelegateCollection<SessionLogoutFlowDelegate>()
+    nonisolated public let delegateCollection = DelegateCollection<any SessionLogoutFlowDelegate>()
+
+    // MARK: Private properties / methods
+    private var _inProgress: Bool = false
+    private var _context: Context? {
+        didSet {
+            guard let url = _context?.logoutURL else {
+                return
+            }
+
+            Task { @MainActor in
+                delegateCollection.invoke { $0.logout(flow: self, shouldLogoutUsing: url) }
+            }
+        }
+    }
 }
 
 extension SessionLogoutFlow {
@@ -244,7 +258,7 @@ extension OAuth2Client {
     /// Creates a new session logout flow for this redirect URI.
     /// - Parameter additionalParameters: Optional additional parameters you would like to supply to the authorization server
     /// - Returns: ``SessionLogoutFlow`` to log out of this client.
-    public func sessionLogoutFlow(additionalParameters: [String: APIRequestArgument]? = nil) -> SessionLogoutFlow
+    public func sessionLogoutFlow(additionalParameters: [String: any APIRequestArgument]? = nil) -> SessionLogoutFlow
     {
         SessionLogoutFlow(client: self,
                           additionalParameters: additionalParameters)

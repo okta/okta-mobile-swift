@@ -41,18 +41,25 @@ final class UserCoordinatorTests: XCTestCase {
     override func setUpWithError() throws {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
+        storage = await UserDefaultsTokenStorage(userDefaults: userDefaults)
 
-        storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
-        Credential.tokenStorage = storage
+        let mockStorage = storage
+        await CredentialActor.run {
+            Credential.tokenStorage = mockStorage!
+        }
 
-        XCTAssertEqual(storage.allIDs.count, 0)
+        let tokenCount = await storage.allIDs.count
+        XCTAssertEqual(tokenCount, 0)
     }
     
     override func tearDownWithError() throws {
         userDefaults.removePersistentDomain(forName: name)
         userDefaults = nil
         storage = nil
-        Credential.resetToDefault()
+
+        await CredentialActor.run {
+            Credential.resetToDefault()
+        }
     }
     
     func testDefaultCredentialViaToken() throws {

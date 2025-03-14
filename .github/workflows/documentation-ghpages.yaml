@@ -35,21 +35,29 @@ jobs:
         set -e
         export DOCC_JSON_PRETTYPRINT=YES
 
+        TARGET_LIST=""
+
         for TARGET in $(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g'); do
-            echo "Building $TARGET"
+            echo "Configuring $TARGET"
             NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
-            mkdir -p docs/$VERSION/$NAME
-            swift package \
-                --allow-writing-to-directory docs \
-                generate-documentation \
-                --target $TARGET \
-                --disable-indexing \
-                --transform-for-static-hosting \
-                --hosting-base-path okta-mobile-swift/$VERSION/$NAME \
-                --output-path docs/$VERSION/$NAME
-            sed -I -e "s#<head>#<head><meta http-equiv='refresh' content='0;url=./documentation/$NAME/'>#" \
-                docs/$VERSION/$NAME/index.html
+            TARGET_LIST="$TARGET_LIST --target $TARGET"
+
+            echo "Create redirection file from the old doc path"
+            mkdir -p "docs/okta-mobile-swift/$VERSION/$NAME"
+            echo "<html><head><meta http-equiv='refresh' content='0;url=/okta-mobile-swift/$VERSION/documentation/$NAME/'></head></html>" > "docs/okta-mobile-swift/$VERSION/$NAME/index.html"
         done
+
+        echo "Generating combined documentation"
+        swift package --allow-writing-to-directory docs generate-documentation \
+            --disable-indexing \
+            --transform-for-static-hosting \
+            --hosting-base-path "okta-mobile-swift/$VERSION" \
+            --output-path "docs/okta-mobile-swift/$VERSION" \
+            --include-extended-types \
+            --enable-experimental-combined-documentation \
+            --enable-experimental-mentioned-in \
+            --enable-experimental-external-link-support \
+            $TARGET_LIST
     - name: Deploy documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3
       with:

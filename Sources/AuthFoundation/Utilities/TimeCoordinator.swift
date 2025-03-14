@@ -21,7 +21,7 @@ import FoundationNetworking
 /// This can be used to customize the behavior of how dates and times are calculated, when used on devices that may have skewed or incorrect clocks.
 ///
 /// To use a custom ``TimeCoordinator``, you construct an instance of your class conforming to this protocol, and assign it to the `Date.coordinator` property.
-public protocol TimeCoordinator {
+public protocol TimeCoordinator: Sendable {
     /// Return the current coordinated date.
     var now: Date { get }
     
@@ -32,9 +32,9 @@ public protocol TimeCoordinator {
 
 extension Date {
     /// Allows a custom ``TimeCoordinator`` to be used to adjust dates and times for devices with incorrect times.
-    public static var coordinator: TimeCoordinator {
-        get { SharedTimeCoordinator }
-        set { SharedTimeCoordinator = newValue }
+    public static var coordinator: any TimeCoordinator {
+        get { sharedTimeCoordinator.wrappedValue }
+        set { sharedTimeCoordinator.wrappedValue = newValue }
     }
     
     /// Returns the current coordinated date, adjusting the system clock to correct for clock skew.
@@ -48,9 +48,7 @@ extension Date {
     }
 }
 
-// swiftlint:disable identifier_name
-private var SharedTimeCoordinator: TimeCoordinator = DefaultTimeCoordinator()
-// swiftlint:enable identifier_name
+private let sharedTimeCoordinator = LockedValue<any TimeCoordinator>(DefaultTimeCoordinator())
 
 final class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
     static func resetToDefault() {
@@ -64,7 +62,7 @@ final class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
         set { lock.withLock { _offset = newValue } }
     }
     
-    nonisolated(unsafe) private var observer: NSObjectProtocol?
+    nonisolated(unsafe) private var observer: (any NSObjectProtocol)?
 
     init() {
         self._offset = 0
@@ -96,7 +94,7 @@ final class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
         Date(timeInterval: offset, since: date)
     }
     
-    func api(client: APIClient, didSend request: URLRequest, received response: HTTPURLResponse) {
+    func api(client: any APIClient, didSend request: URLRequest, received response: HTTPURLResponse) {
         guard request.cachePolicy == .reloadIgnoringLocalAndRemoteCacheData,
               let dateString = response.allHeaderFields["Date"] as? String,
               let date = httpDateFormatter.date(from: dateString)

@@ -24,7 +24,7 @@ public actor JWTAuthorizationFlow: AuthenticationFlow {
     public private(set) var context: Context?
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: APIRequestArgument]?
+    public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     /// ``JWTAuthorizationFlow/init(issuerURL:clientId:scope:additionalParameters:)``
@@ -126,7 +126,25 @@ public actor JWTAuthorizationFlow: AuthenticationFlow {
     }
 
     // MARK: Private properties / methods
-    nonisolated public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
+    nonisolated public let delegateCollection = DelegateCollection<any AuthenticationDelegate>()
+
+    private var _context: Context?
+    private var _isAuthenticating: Bool = false {
+        didSet {
+            guard _isAuthenticating != oldValue else {
+                return
+            }
+
+            let flowStarted = _isAuthenticating
+            Task { @MainActor in
+                if flowStarted {
+                    delegateCollection.invoke { $0.authenticationStarted(flow: self) }
+                } else {
+                    delegateCollection.invoke { $0.authenticationFinished(flow: self) }
+                }
+            }
+        }
+    }
 }
 
 extension JWTAuthorizationFlow {

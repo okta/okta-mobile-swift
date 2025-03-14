@@ -38,13 +38,14 @@ final class CredentialTests: XCTestCase {
                                                                        scope: "openid"),
                                                   clientSettings: ["client_id": "clientid"]))
 
-    override func setUpWithError() throws {
-        coordinator = MockCredentialCoordinator()
-        credential = coordinator.credentialDataSource.credential(for: token, coordinator: coordinator)
+    override func setUp() async throws {
+        coordinator = await MockCredentialCoordinator()
+        credential = await coordinator.credentialDataSource.credential(for: token, coordinator: coordinator)
+
         urlSession = credential.oauth2.session as? URLSessionMock
     }
-    
-    override func tearDownWithError() throws {
+
+    override func tearDown() async throws {
         coordinator = nil
         credential = nil
         urlSession = nil
@@ -52,7 +53,9 @@ final class CredentialTests: XCTestCase {
 
     func testRemove() throws {
         XCTAssertNoThrow(try credential.remove())
-        XCTAssertFalse(coordinator.credentialDataSource.hasCredential(for: token))
+
+        let hasCredential = await coordinator.credentialDataSource.hasCredential(for: token)
+        XCTAssertFalse(hasCredential)
     }
     
     func testRevoke() throws {
@@ -65,9 +68,13 @@ final class CredentialTests: XCTestCase {
                           data: Data())
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
-        
-        XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
-        XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
+
+        let coordinator = coordinator!
+        let token = token
+        await CredentialActor.run {
+            XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
+            XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
+        }
 
         let semaphore = DispatchSemaphore(value: 0)
         credential.revoke(type: .all) { result in
@@ -112,7 +119,14 @@ final class CredentialTests: XCTestCase {
         XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
         XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
 
-        let semaphore = DispatchSemaphore(value: 0)
+        let coordinator = coordinator!
+        let token = token
+        await CredentialActor.run {
+            XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
+            XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
+        }
+
+        let expect = expectation(description: "network request")
         credential.revoke(type: .accessToken) { result in
             switch result {
             case .success(): break
@@ -205,8 +219,17 @@ final class CredentialTests: XCTestCase {
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
         
-        XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
-        XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
+        let coordinator = coordinator!
+        let token = token
+        await CredentialActor.run {
+            XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
+            XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
+        }
+
+        try await CredentialActor.run {
+            let storage = try XCTUnwrap(coordinator.tokenStorage as? MockTokenStorage)
+            storage.error = CredentialError.metadataConsistency
+        }
 
         let storage = try XCTUnwrap(coordinator.tokenStorage as? MockTokenStorage)
         storage.error = CredentialError.metadataConsistency
@@ -264,8 +287,15 @@ final class CredentialTests: XCTestCase {
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
 
-        XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
-        XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
+        let coordinator = coordinator!
+        let token = token
+        try await CredentialActor.run {
+            XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
+            XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
+
+            let storage = try XCTUnwrap(coordinator.tokenStorage as? MockTokenStorage)
+            storage.error = OAuth2Error.invalidUrl
+        }
 
         let storage = try XCTUnwrap(coordinator.tokenStorage as? MockTokenStorage)
         storage.error = OAuth2Error.invalidUrl

@@ -13,7 +13,7 @@
 import Foundation
 
 public enum JSONError: Error {
-    case cannotDecode(value: Any?)
+    case cannotDecode(value: (any Sendable)?)
     case invalidContentEncoding
 }
 
@@ -152,25 +152,29 @@ public enum JSON: Sendable, Equatable {
     
     /// Initializes a JSON object from a variety of supported types.
     /// - Parameter value: Value to represent as a JSON stru ture.
-    public init(_ value: Any?) throws {
+    public init(_ value: (any Sendable)?) throws {
         guard let value = value
         else {
             self = .null
             return
         }
-        
+
+        try self.init(value)
+    }
+
+    public init(_ value: Any) throws {
         if let value = value as? String {
             self = .string(value)
         } else if let value = value as? NSNumber {
             self = .number(value)
         } else if let value = value as? Bool {
             self = .bool(value)
-        } else if let value = value as? [String: Any] {
+        } else if let value = value as? [String: any Sendable] {
             self = .object(try value.mapValues({ try JSON($0) }))
-        } else if let value = value as? [Any] {
+        } else if let value = value as? [any Sendable] {
             self = .array(try value.map({ try JSON($0) }))
         } else {
-            throw JSONError.cannotDecode(value: value as Any)
+            throw JSONError.cannotDecode(value: nil)
         }
     }
     
@@ -186,7 +190,7 @@ public enum JSON: Sendable, Equatable {
     /// Initializes a JSON object from its data representation.
     /// - Parameter value: The data value for a JSON object.
     public init(_ value: Data) throws {
-        try self.init(JSONSerialization.jsonObject(with: value))
+        try self.init(try JSONSerialization.jsonObject(with: value))
     }
     
     /// Returns the value as an instance of `Any`.
@@ -248,7 +252,7 @@ public enum JSON: Sendable, Equatable {
 
 extension JSON: Codable {
     @_documentation(visibility: internal)
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let value = try? container.decode(String.self) {
             self = .string(value)
@@ -271,7 +275,7 @@ extension JSON: Codable {
     }
     
     @_documentation(visibility: internal)
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case let .string(value):

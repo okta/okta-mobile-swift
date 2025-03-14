@@ -40,7 +40,7 @@ public protocol AuthenticationFlow: Actor, UsesDelegateCollection, IDTokenValida
     var isAuthenticating: Bool { get }
     
     /// Optional request parameters to be added to requests made from this flow.
-    var additionalParameters: [String: APIRequestArgument]? { get }
+    var additionalParameters: [String: any APIRequestArgument]? { get }
 
     /// Resets the authentication session.
     func reset()
@@ -56,7 +56,7 @@ public protocol AuthenticationFlow: Actor, UsesDelegateCollection, IDTokenValida
 extension AuthenticationFlow {
     @_documentation(visibility: private)
     nonisolated public var nonce: String? {
-        guard let validatorContext = withAsyncGroup({ await self.context }) as? IDTokenValidatorContext
+        guard let validatorContext = withIsolationSync({ await self.context }) as? any IDTokenValidatorContext
         else {
             return nil
         }
@@ -66,7 +66,7 @@ extension AuthenticationFlow {
 
     @_documentation(visibility: private)
     nonisolated public var maxAge: TimeInterval? {
-        guard let validatorContext = withAsyncGroup({ await self.context }) as? IDTokenValidatorContext
+        guard let validatorContext = withIsolationSync({ await self.context }) as? any IDTokenValidatorContext
         else {
             return nil
         }
@@ -94,7 +94,7 @@ extension AuthenticationFlow {
 /// Common protocol that all ``AuthenticationFlow`` ``AuthenticationFlow/Context`` type aliases must conform to.
 ///
 /// While instances of a particular ``AuthenticationFlow`` is configured for a particular OAuth2 client, the context supplied to the flow's `start` function represents the specific settings to customize an individual sign-in using that flow.
-public protocol AuthenticationContext: ProvidesOAuth2Parameters {
+public protocol AuthenticationContext: Sendable, ProvidesOAuth2Parameters {
     /// The ACR values, if any, which should be requested by the client.
     var acrValues: [String]? { get }
     

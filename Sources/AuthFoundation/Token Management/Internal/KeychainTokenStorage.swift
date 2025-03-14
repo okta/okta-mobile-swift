@@ -24,7 +24,7 @@ final class KeychainTokenStorage: TokenStorage {
     nonisolated static let metadataName = "com.okta.authfoundation.keychain.metadata"
     nonisolated static let defaultTokenName = "com.okta.authfoundation.keychain.default"
 
-    weak var delegate: TokenStorageDelegate?
+    weak var delegate: (any TokenStorageDelegate)?
     
     private(set) lazy var defaultTokenID: String? = {
         guard let defaultResult = try? Keychain
@@ -113,7 +113,7 @@ final class KeychainTokenStorage: TokenStorage {
                                          synchronizable: accessibility.isSynchronizable,
                                          value: try encoder.encode(metadata))
 
-        var context: KeychainAuthenticationContext?
+        var context: (any KeychainAuthenticationContext)?
         #if canImport(LocalAuthentication) && !os(tvOS)
         context = security.context
         #endif
@@ -158,7 +158,7 @@ final class KeychainTokenStorage: TokenStorage {
                                     description: nil,
                                     value: data)
         
-        var context: KeychainAuthenticationContext?
+        var context: (any KeychainAuthenticationContext)?
         #if canImport(LocalAuthentication) && !os(tvOS)
         context = security?.context
         #endif
@@ -186,12 +186,12 @@ final class KeychainTokenStorage: TokenStorage {
         }
     }
     
-    func get(token id: String, prompt: String? = nil, authenticationContext: TokenAuthenticationContext? = nil) throws -> Token {
+    func get(token id: String, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> Token {
         try token(with: try Keychain
                     .Search(account: id,
                             service: KeychainTokenStorage.serviceName)
                     .get(prompt: prompt,
-                         authenticationContext: authenticationContext as? KeychainAuthenticationContext))
+                         authenticationContext: authenticationContext as? (any KeychainAuthenticationContext)))
     }
     
     func setMetadata(_ metadata: Token.Metadata) throws {

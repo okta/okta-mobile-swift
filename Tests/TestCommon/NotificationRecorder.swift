@@ -12,10 +12,10 @@
 
 import Foundation
 
-public final class NotificationRecorder {
+public final class NotificationRecorder: @unchecked Sendable {
     private(set) public var notifications: [Notification] = []
     public let center: NotificationCenter
-    private var observers = [NSObjectProtocol]()
+    private var observers = [any NSObjectProtocol]()
     
     public init(center: NotificationCenter = .default, observing: [Notification.Name]? = nil) {
         self.center = center

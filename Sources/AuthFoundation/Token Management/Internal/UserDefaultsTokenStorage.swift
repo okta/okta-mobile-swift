@@ -28,7 +28,7 @@ private struct UserDefaultsKeys {
 final class UserDefaultsTokenStorage: TokenStorage {
     private let userDefaults: UserDefaults
     
-    weak var delegate: TokenStorageDelegate?
+    weak var delegate: (any TokenStorageDelegate)?
     
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
@@ -76,7 +76,7 @@ final class UserDefaultsTokenStorage: TokenStorage {
         Array(allTokens.keys)
     }
     
-    func get(token id: String, prompt: String? = nil, authenticationContext: TokenAuthenticationContext? = nil) throws -> Token {
+    func get(token id: String, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> Token {
         guard let token = allTokens[id] else {
             throw TokenError.tokenNotFound(id: id)
         }

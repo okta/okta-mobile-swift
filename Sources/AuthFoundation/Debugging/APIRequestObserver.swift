@@ -48,19 +48,19 @@ import OSLog
 /// ```
 public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
     /// Shared convenience instance to use.
-    public static var shared: DebugAPIRequestObserver = {
-        DebugAPIRequestObserver()
-    }()
+    public static var shared: DebugAPIRequestObserver {
+        _shared
+    }
     
     /// Indicates if HTTP request and response headers should be logged.
     public var showHeaders: Bool {
         get {
-            lock.withLock {
+            Self.lock.withLock {
                 _showHeaders
             }
         }
         set {
-            lock.withLock {
+            Self.lock.withLock {
                 _showHeaders = newValue
             }
         }
@@ -69,12 +69,12 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
     /// Convenience flag that automatically binds newly-created ``OAuth2Client`` instances to the debug observer.
     nonisolated(unsafe) public var observeAllOAuth2Clients: Bool {
         get {
-            lock.withLock {
+            Self.lock.withLock {
                 _observeAllOAuth2Clients
             }
         }
         set {
-            lock.withLock {
+            Self.lock.withLock {
                 _observeAllOAuth2Clients = newValue
 
                 if _observeAllOAuth2Clients {
@@ -157,11 +157,18 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
         os_log(.debug, log: Self.log, "Response:\n\n%s", result)
     }
 
-    private static var log = OSLog(subsystem: "com.okta.client.network", category: "Debugging")
-    private let lock = Lock()
+    private static let log = OSLog(subsystem: "com.okta.client.network", category: "Debugging")
+    private static let lock = Lock()
+
+    nonisolated(unsafe) private static var _shared: DebugAPIRequestObserver = {
+        lock.withLock {
+            DebugAPIRequestObserver()
+        }
+    }()
+
     nonisolated(unsafe) private var _showHeaders = false
     nonisolated(unsafe) private var _observeAllOAuth2Clients = false
-    nonisolated(unsafe) private var oauth2Observer: NSObjectProtocol? {
+    nonisolated(unsafe) private var oauth2Observer: (any NSObjectProtocol)? {
         didSet {
             if let oldValue = oldValue,
                oauth2Observer == nil

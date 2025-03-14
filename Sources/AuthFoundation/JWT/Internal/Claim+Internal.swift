@@ -14,23 +14,23 @@ import Foundation
 
 /// Internal convenience extensions for mapping values directly from a payload
 extension IsClaim {
-    static func optionalValue<T: ClaimConvertable>(_ claim: Self, in payload: [String: Any]) -> T? {
+    static func optionalValue<T: ClaimConvertable>(_ claim: Self, in payload: [String: any Sendable]) -> T? {
         T.convert(from: payload[claim.rawValue])
     }
 
-    static func optionalValue<T: ClaimConvertable>(_ claim: Self, in payload: [String: Any]) -> [T]? {
+    static func optionalValue<T: ClaimConvertable>(_ claim: Self, in payload: [String: any Sendable]) -> [T]? {
         let value = payload[claim.rawValue] as? [any ClaimConvertable]
         return value?.compactMap { T.convert(from: $0) }
     }
 
-    static func value<T: ClaimConvertable>(_ claim: Self, in payload: [String: Any]) throws -> T {
+    static func value<T: ClaimConvertable>(_ claim: Self, in payload: [String: any Sendable]) throws -> T {
         guard let value = T.convert(from: payload[claim.rawValue]) else {
             throw ClaimError.missingRequiredValue(key: claim.rawValue)
         }
         return value
     }
 
-    static func value<T: ClaimConvertable>(_ claim: Self, in payload: [String: Any]) throws -> [T] {
+    static func value<T: ClaimConvertable>(_ claim: Self, in payload: [String: any Sendable]) throws -> [T] {
         guard let value = payload[claim.rawValue] as? [any ClaimConvertable] else {
             throw ClaimError.missingRequiredValue(key: claim.rawValue)
         }

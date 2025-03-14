@@ -42,7 +42,7 @@ extension Credential {
     /// Attempt to refresh the token.
     /// - Parameters:
     ///   - completion: Completion block invoked when a result is returned.
-    public func refresh(completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
+    public func refresh(completion: @Sendable @escaping (Result<Void, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await refresh()))
@@ -57,7 +57,7 @@ extension Credential {
     ///   - graceInterval: The grace interval before a token is due to expire before it should be refreshed.
     ///   - completion: Completion block invoked to indicate the status of the token, if the refresh was successful or if an error occurred.
     public func refreshIfNeeded(graceInterval: TimeInterval = Credential.refreshGraceInterval,
-                                completion: @escaping (Result<Void, OAuth2Error>) -> Void)
+                                completion: @Sendable @escaping (Result<Void, OAuth2Error>) -> Void)
     {
         Task {
             do {
@@ -93,7 +93,7 @@ extension Credential {
     /// - Parameters:
     ///   - type: The token type to revoke, defaulting to `.all`.
     ///   - completion: Completion block called when the operation completes.
-    public func revoke(type: Token.RevokeType = .all, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
+    public func revoke(type: Token.RevokeType = .all, completion: @Sendable @escaping (Result<Void, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await revoke(type: type)))
@@ -108,7 +108,7 @@ extension Credential {
     /// In addition to passing the result to the provided completion block, a successful request will result in the ``UserInfo`` property being set with the new value for later use.
     /// - Returns: The user info for this user.
     /// - Parameter completion: Optional completion block to be invoked when a result is returned.
-    public func userInfo(completion: @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
+    public func userInfo(completion: @Sendable @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await userInfo()))
@@ -122,7 +122,7 @@ extension Credential {
     /// - Parameters:
     ///   - type: Type of token to introspect.
     ///   - completion: Completion block invoked when a result is returned.
-    public func introspect(_ type: Token.Kind, completion: @escaping (Result<TokenInfo, OAuth2Error>) -> Void) {
+    public func introspect(_ type: Token.Kind, completion: @Sendable @escaping (Result<TokenInfo, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await introspect(type)))

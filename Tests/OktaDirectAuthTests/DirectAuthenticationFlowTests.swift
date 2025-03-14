@@ -43,13 +43,13 @@ struct TestFactor: AuthenticationFactor {
         .implicit
     }
     
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: any APIRequestArgument] {
         [:]
     }
     
     func stepHandler(flow: OktaDirectAuth.DirectAuthenticationFlow,
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
-                     loginHint: String?) async throws -> OktaDirectAuth.StepHandler
+                     loginHint: String?) async throws -> any OktaDirectAuth.StepHandler
     {
         if let exception = exception {
             throw exception

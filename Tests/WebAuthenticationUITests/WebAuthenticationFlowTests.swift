@@ -10,8 +10,6 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if canImport(UIKit) || canImport(AppKit)
-
 import XCTest
 import AuthenticationServices
 @testable import AuthFoundation
@@ -111,8 +109,9 @@ class WebAuthenticationFlowTests: XCTestCase {
     }
     
     func testCancel() async throws {
-        let webAuth = try WebAuthentication(client: client,
-                                            additionalParameters: ["testName": name])
+        let webAuth = try await WebAuthentication(
+            client: client,
+            additionalParameters: ["testName": name])
 
         try await WebAuthenticationProviderFactoryMock.register(
             result: .failure(NSError(domain: ASWebAuthenticationSessionErrorDomain,
@@ -132,5 +131,3 @@ class WebAuthenticationFlowTests: XCTestCase {
         }
     }
 }
-
-#endif

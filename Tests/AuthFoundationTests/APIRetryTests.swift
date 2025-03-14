@@ -22,7 +22,7 @@ class APIRetryDelegateRecorder: APIClientDelegate, @unchecked Sendable {
     var response: APIRetry?
     private(set) var requests: [URLRequest] = []
 
-    func api(client: APIClient, shouldRetry request: URLRequest) -> APIRetry {
+    func api(client: any APIClient, shouldRetry request: URLRequest) -> APIRetry {
         requests.append(request)
         return response ?? .default
     }
@@ -50,11 +50,11 @@ class APIRetryTests: XCTestCase {
                                baseURL: issuerURL)
         apiRequest = MockApiRequest(url: URL(string: "\(issuerURL.absoluteString)/oauth2/v1/token")!)
         
-        _APIClientRetryDelayTimeIntervalToNanoseconds = 1_000
+        _APIClientRetryDelayTimeIntervalToNanoseconds.wrappedValue = 1_000
     }
 
     override func tearDownWithError() throws {
-        _APIClientRetryDelayTimeIntervalToNanoseconds = 1_000_000_000
+        _APIClientRetryDelayTimeIntervalToNanoseconds.wrappedValue = 1_000_000_000
     }
     
     func testShouldNotRetry() async throws {

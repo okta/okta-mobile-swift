@@ -16,7 +16,7 @@ import XCTest
 
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
 final class OIDCLegacyMigratorTests: XCTestCase {
-    typealias LegacyOIDC = SDKVersion.Migration.LegacyOIDC
+    typealias LegacyOIDC = Migration.LegacyOIDC
     
     var keychain: MockKeychain!
     let issuer = URL(string: "https://example.com")!
@@ -24,8 +24,8 @@ final class OIDCLegacyMigratorTests: XCTestCase {
 
     override func setUp() async throws {
         keychain = MockKeychain()
-        Keychain.implementation = keychain
-        
+        Keychain.implementation.wrappedValue = keychain
+
         await CredentialActor.run {
             Credential.tokenStorage = MockTokenStorage()
             Credential.credentialDataSource = MockCredentialDataSource()
@@ -33,11 +33,11 @@ final class OIDCLegacyMigratorTests: XCTestCase {
     }
 
     override func tearDown() async throws {
-        Keychain.implementation = KeychainImpl()
+        Keychain.resetToDefault()
         keychain = nil
 
-        SDKVersion.Migration.resetMigrators()
-        
+        Migration.shared.resetMigrators()
+
         await CredentialActor.run {
             Credential.coordinator.resetToDefault()
         }
@@ -46,7 +46,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
     func testRegister() throws {
         LegacyOIDC.register(clientId: "clientId")
         
-        let migrator = try XCTUnwrap(SDKVersion.Migration.registeredMigrators.first(where: {
+        let migrator = try XCTUnwrap(Migration.shared.registeredMigrators.first(where: {
             $0 is LegacyOIDC
         }) as? LegacyOIDC)
         

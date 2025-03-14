@@ -11,9 +11,10 @@
 //
 
 import Foundation
+@preconcurrency import Security
 
 #if canImport(LocalAuthentication) && !os(tvOS)
-import LocalAuthentication
+@preconcurrency import LocalAuthentication
 #endif
 
 extension Credential {
@@ -22,7 +23,7 @@ extension Credential {
     /// When storing credentials, you can supply a list of customizations you would like to use to indicate the security accessibility settings of that item. For example, you can indicate biometric or user presence for items.
     ///
     /// On Apple platforms, this controls the Keychain security settings for the underlying token's keychain item.
-    public enum Security {
+    public enum Security: Sendable {
         #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
 
         /// Defines the accessibility level for a credential.
@@ -45,10 +46,29 @@ extension Credential {
         /// The standard set of security settings to use when creating or getting credentials.
         ///
         /// If you wish to change the default security threshold for Keychain items, you can assign a new value here. Additionally, if a ``context(_:)`` value is assigned to the ``standard`` property, that context will be used when fetching credentials unless otherwise specified.
-        public static var standard: [Security] = [.accessibility(.afterFirstUnlockThisDeviceOnly)]
-        
+        public static var standard: [Security] {
+            get {
+                lock.withLock { _standard }
+            }
+            set {
+                lock.withLock { _standard = newValue }
+            }
+        }
+
         /// Determines whether or not the ``Credential/default`` setting is synchronized across a user's devices using iCloud Keychain.
-        public static var isDefaultSynchronizable: Bool = false
+        public static var isDefaultSynchronizable: Bool {
+            get {
+                lock.withLock { _isDefaultSynchronizable }
+            }
+            set {
+                lock.withLock { _isDefaultSynchronizable = newValue }
+            }
+        }
+
+        // MARK: Private properties / methods
+        private static let lock = Lock()
+        nonisolated(unsafe) private static var _standard: [Security] = [.accessibility(.afterFirstUnlockThisDeviceOnly)]
+        nonisolated(unsafe) private static var _isDefaultSynchronizable: Bool = false
         #else
         public static var standard: [Security] = []
         #endif

@@ -19,7 +19,7 @@ extension ResourceOwnerFlow {
                 clientId: String,
                 scopes: String,
                 redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil)
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(issuerURL: issuer, clientId: clientId, scope: scopes, additionalParameters: additionalParameters)
     }
@@ -27,7 +27,7 @@ extension ResourceOwnerFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(client:additionalParameters:)")
     public init(redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil,
+                additionalParameters: [String: any APIRequestArgument]? = nil,
                 client: OAuth2Client)
     {
         var configuration = client.configuration

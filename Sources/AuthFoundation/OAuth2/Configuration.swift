@@ -104,7 +104,7 @@ fileprivate extension OAuth2Client.Configuration {
 
 extension OAuth2Client.Configuration {
     @_documentation(visibility: private)
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         if let container = try? decoder.container(keyedBy: CodingKeysV1.self),
            container.allKeys.contains(.baseURL)
         {

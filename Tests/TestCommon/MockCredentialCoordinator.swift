@@ -14,18 +14,17 @@ import Foundation
 @testable import AuthFoundation
 
 class MockCredentialCoordinator: CredentialCoordinator {
-    var credentialDataSource: CredentialDataSource = MockCredentialDataSource()
-    var tokenStorage: TokenStorage = MockTokenStorage()
+    var credentialDataSource: any CredentialDataSource = MockCredentialDataSource()
+    var tokenStorage: any TokenStorage = MockTokenStorage()
 
     func remove(credential: Credential) throws {
         credentialDataSource.remove(credential: credential)
         try tokenStorage.remove(id: credential.token.id)
     }
-    
+
     func observe(oauth2 client: OAuth2Client) {
     }
-    
-    
+
     func credential(with options: [Token.MockOptions] = []) -> Credential {
         credentialDataSource.credential(for: Token.token(with: options), coordinator: self)
     }

@@ -30,7 +30,7 @@ public actor SessionTokenFlow: AuthenticationFlow {
     public private(set) var context: Context?
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: APIRequestArgument]?
+    public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
@@ -58,7 +58,7 @@ public actor SessionTokenFlow: AuthenticationFlow {
                 clientId: String,
                 scope: ClaimCollection<[String]>,
                 redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil) throws
+                additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         try self.init(client: OAuth2Client(issuerURL: issuerURL,
                                            clientId: clientId,
@@ -73,7 +73,7 @@ public actor SessionTokenFlow: AuthenticationFlow {
                 clientId: String,
                 scope: some WhitespaceSeparated,
                 redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil) throws
+                additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         try self.init(client: OAuth2Client(issuerURL: issuerURL,
                                            clientId: clientId,
@@ -87,7 +87,7 @@ public actor SessionTokenFlow: AuthenticationFlow {
     ///   - client: ``OAuth2Client`` client instance to authenticate with.
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
     public init(client: OAuth2Client,
-                additionalParameters: [String: APIRequestArgument]? = nil) throws
+                additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         guard client.configuration.redirectUri != nil else {
             throw OAuth2Error.missingRedirectUri
@@ -140,9 +140,18 @@ public actor SessionTokenFlow: AuthenticationFlow {
     }
 
     // MARK: Private properties / methods
-    nonisolated public let delegateCollection = DelegateCollection<Delegate>()
-    static var urlExchangeClass: SessionTokenFlowURLExchange.Type = SessionTokenFlowExchange.self
-    
+    private static let lock = Lock()
+    nonisolated public let delegateCollection = DelegateCollection<any Delegate>()
+    nonisolated(unsafe) private static var _urlExchangeClass: any SessionTokenFlowURLExchange.Type = SessionTokenFlowExchange.self
+    static var urlExchangeClass: any SessionTokenFlowURLExchange.Type {
+        get {
+            lock.withLock { _urlExchangeClass }
+        }
+        set {
+            lock.withLock { _urlExchangeClass = newValue }
+        }
+    }
+
     static func reset() {
         urlExchangeClass = SessionTokenFlowExchange.self
     }
@@ -183,53 +192,48 @@ protocol SessionTokenFlowURLExchange {
     func follow(url: URL) async throws -> URL
 }
 
-final class SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URLSessionTaskDelegate {
+actor SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URLSessionTaskDelegate {
     let scheme: String
 
     private let lock = Lock()
     private var continuation: (CheckedContinuation<URL, any Error>)?
-    private lazy var session: URLSessionProtocol = {
+    private lazy var session: any URLSessionProtocol = {
         URLSession(configuration: .ephemeral,
                    delegate: self,
                    delegateQueue: nil)
     }()
     
-    required init(scheme: String) {
+    init(scheme: String) {
         self.scheme = scheme
     }
 
     func follow(url: URL) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
-            lock.withLock {
-                self.continuation = continuation
-                
-                Task {
-                    do {
-                        let request = URLRequest(url: url)
-                        let (_, _) = try await session.data(for: request)
-                        self.finish(with: OAuth2Error.invalidUrl)
-                    } catch {
-                        self.finish(with: error)
-                    }
+            self.continuation = continuation
+
+            Task {
+                do {
+                    let request = URLRequest(url: url)
+                    let (_, _) = try await session.data(for: request)
+                    self.finish(with: OAuth2Error.invalidUrl)
+                } catch {
+                    self.finish(with: error)
                 }
             }
         }
     }
     
     private func finish(with error: any Error) {
-        lock.withLock {
-            continuation?.resume(throwing: error)
-            continuation = nil
-        }
+        continuation?.resume(throwing: error)
+        continuation = nil
     }
     
     private func finish(with url: URL) {
-        lock.withLock {
-            continuation?.resume(returning: url)
-            continuation = nil
-        }
+        continuation?.resume(returning: url)
+        continuation = nil
     }
     
+    nonisolated
     func urlSession(_ session: URLSession,
                     task: URLSessionTask,
                     willPerformHTTPRedirection response: HTTPURLResponse,
@@ -244,8 +248,10 @@ final class SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URL
         }
         
         completionHandler(nil)
-        
-        finish(with: url)
+
+        Task {
+            await finish(with: url)
+        }
     }
 }
 

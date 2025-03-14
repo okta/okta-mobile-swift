@@ -28,7 +28,7 @@ public actor ResourceOwnerFlow: AuthenticationFlow {
     public private(set) var context: Context?
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: APIRequestArgument]?
+    public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
@@ -55,7 +55,7 @@ public actor ResourceOwnerFlow: AuthenticationFlow {
     public init(issuerURL: URL,
                 clientId: String,
                 scope: ClaimCollection<[String]>,
-                additionalParameters: [String: APIRequestArgument]? = nil)
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
@@ -68,7 +68,7 @@ public actor ResourceOwnerFlow: AuthenticationFlow {
     public init(issuerURL: URL,
                 clientId: String,
                 scope: some WhitespaceSeparated,
-                additionalParameters: [String: APIRequestArgument]? = nil)
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
@@ -81,7 +81,7 @@ public actor ResourceOwnerFlow: AuthenticationFlow {
     ///   - client: ``OAuth2Client`` client instance to authenticate with.
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
     public init(client: OAuth2Client,
-                additionalParameters: [String: APIRequestArgument]? = nil)
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
@@ -131,7 +131,25 @@ public actor ResourceOwnerFlow: AuthenticationFlow {
     }
 
     // MARK: Private properties / methods
-    nonisolated public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
+    nonisolated public let delegateCollection = DelegateCollection<any AuthenticationDelegate>()
+
+    private var _context: Context?
+    private var _isAuthenticating: Bool = false {
+        didSet {
+            guard _isAuthenticating != oldValue else {
+                return
+            }
+
+            let flowStarted = _isAuthenticating
+            Task { @MainActor in
+                if flowStarted {
+                    delegateCollection.invoke { $0.authenticationStarted(flow: self) }
+                } else {
+                    delegateCollection.invoke { $0.authenticationFinished(flow: self) }
+                }
+            }
+        }
+    }
 }
 
 extension ResourceOwnerFlow {

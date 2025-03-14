@@ -11,12 +11,10 @@
 //
 
 import Foundation
-
-#if canImport(UIKit) || canImport(AppKit)
 import AuthenticationServices
 
 extension WebAuthenticationError: LocalizedError {
-    init(_ error: Error) {
+    init(_ error: any Error) {
         let nsError = error as NSError
         if nsError.domain == ASWebAuthenticationSessionErrorDomain,
            nsError.code == ASWebAuthenticationSessionError.canceledLogin.rawValue
@@ -46,7 +44,7 @@ extension WebAuthenticationError: LocalizedError {
                                      comment: "")
             
         case .authenticationProvider(error: let error):
-            if let error = error as? LocalizedError {
+            if let error = error as? (any LocalizedError) {
                 return error.localizedDescription
             }
             
@@ -85,7 +83,7 @@ extension WebAuthenticationError: LocalizedError {
             return error.errorDescription
             
         case .generic(error: let error):
-            if let error = error as? LocalizedError {
+            if let error = error as? (any LocalizedError) {
                 return error.localizedDescription
             }
             let errorString = String(describing: error)
@@ -139,5 +137,3 @@ extension WebAuthenticationError: Equatable {
         }
     }
 }
-
-#endif

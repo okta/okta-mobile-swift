@@ -28,7 +28,7 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
         let url: String
         let data: Data?
         let response: HTTPURLResponse?
-        let error: Error?
+        let error: (any Error)?
     }
     
     var requestDelay: TimeInterval?
@@ -71,7 +71,7 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
                 statusCode: Int = 200,
                 contentType: String = "application/x-www-form-urlencoded",
                 headerFields: [String : String]? = nil,
-                error: Error? = nil)
+                error: (any Error)? = nil)
     {
         let headerFields = ["Content-Type": contentType].merging(headerFields ?? [:]){ (_, new) in new }
         let response = HTTPURLResponse(url: URL(string: url)!,
@@ -105,7 +105,7 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
         return try await withCheckedThrowingContinuation { continuation in
             Task {
                 if let delay = requestDelay {
-                    try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+                    try await Task.sleep(nanoseconds: UInt64(delay * _APIClientRetryDelayTimeIntervalToNanoseconds.wrappedValue))
                 }
                 
                 guard let data = call?.data,

@@ -16,7 +16,7 @@ extension SessionLogoutFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(client:additionalParameters:)")
     public init(logoutRedirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil,
+                additionalParameters: [String: any APIRequestArgument]? = nil,
                 client: OAuth2Client)
     {
         var configuration = client.configuration

@@ -46,16 +46,23 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     /// The default grace interval used when refreshing tokens using ``Credential/refreshIfNeeded(graceInterval:completion:)`` or ``Credential/refreshIfNeeded(graceInterval:)``.
     ///
     /// This value may still be overridden by supplying an explicit `graceInterval` argument to the above methods.
-    public static var refreshGraceInterval: TimeInterval = 300
-    
+    public static var refreshGraceInterval: TimeInterval {
+        get {
+            lock.withLock { _refreshGraceInterval }
+        }
+        set {
+            lock.withLock { _refreshGraceInterval = newValue }
+        }
+    }
+
     /// Returns the ``Credential`` that matches the given ID.
     /// - Parameters:
     ///   - id: ID for the credential to return.
     ///   - prompt: Optional prompt to show to the user when requesting biometric/Face ID user prompts.
     ///   - authenticationContext: Optional `LAContext` to use when retrieving credentials, on systems that support it.
     /// - Returns: Credential matching the ID.
-    public static func with(id: String, prompt: String? = nil, authenticationContext: TokenAuthenticationContext? = nil) throws -> Credential? {
-        try withAsyncThrowingGroup { @CredentialActor in
+    public static func with(id: String, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> Credential? {
+        try withIsolationSyncThrowing { @CredentialActor in
             try coordinator.with(id: id,
                                  prompt: prompt,
                                  authenticationContext: authenticationContext)
@@ -80,8 +87,8 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     ///   - prompt: Optional prompt to show to the user when requesting biometric/Face ID user prompts.
     ///   - authenticationContext: Optional `LAContext` to use when retrieving credentials, on systems that support it.
     /// - Returns: Collection of credentials that matches the given expression.
-    public static func find(where expression: @escaping @Sendable (Token.Metadata) -> Bool, prompt: String? = nil, authenticationContext: TokenAuthenticationContext? = nil) throws -> [Credential] {
-        try withAsyncThrowingGroup { @CredentialActor in
+    public static func find(where expression: @Sendable @escaping (Token.Metadata) -> Bool, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> [Credential] {
+        try withIsolationSyncThrowing { @CredentialActor in
             try coordinator.find(where: expression,
                                  prompt: prompt,
                                  authenticationContext: authenticationContext)
@@ -113,14 +120,14 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
 
     /// Data source used for creating and managing the creation and caching of ``Credential`` instances.
     @CredentialActor
-    public static var credentialDataSource: CredentialDataSource {
+    public static var credentialDataSource: any CredentialDataSource {
         get { coordinator.credentialDataSource }
         set { coordinator.credentialDataSource = newValue }
     }
     
     /// Storage instance used to abstract the secure offline storage and retrieval of ``Token`` instances.
     @CredentialActor
-    public static var tokenStorage: TokenStorage {
+    public static var tokenStorage: any TokenStorage {
         get { coordinator.tokenStorage }
         set { coordinator.tokenStorage = newValue }
     }
@@ -310,7 +317,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
                   coordinator: Credential.coordinator)
     }
     
-    init(token: Token, oauth2 client: OAuth2Client, coordinator: CredentialCoordinator) {
+    init(token: Token, oauth2 client: OAuth2Client, coordinator: any CredentialCoordinator) {
         self._token = token
         self.oauth2 = client
         self.coordinator = coordinator
@@ -337,17 +344,20 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     
     // MARK: Private properties
     static let coordinator = CredentialCoordinatorImpl()
-    nonisolated(unsafe) weak var coordinator: CredentialCoordinator?
+    nonisolated(unsafe) weak var coordinator: (any CredentialCoordinator)?
 
     @CredentialActor
     static func resetToDefault() {
         coordinator.resetToDefault()
-        _CredentialAutomaticRefreshTimeIntervalToNanoseconds = 1_000_000_000
+        _CredentialAutomaticRefreshTimeIntervalToNanoseconds.wrappedValue = 1_000_000_000
     }
 
     nonisolated(unsafe) private var _token: Token
     let userInfoAction = CoalescedResult<UserInfo>(taskName: "UserInfo")
     let lock = Lock()
+
+    private static let lock = Lock()
+    nonisolated(unsafe) private static var _refreshGraceInterval: TimeInterval = 300
 
     nonisolated(unsafe) private var _metadata: Token.Metadata?
     var metadata: Token.Metadata {
@@ -382,7 +392,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     }
 
     nonisolated(unsafe) private var _automaticRefresh: Bool = false
-    nonisolated(unsafe) private(set) var _automaticRefreshTimer: DispatchSourceTimer?
+    nonisolated(unsafe) private(set) var _automaticRefreshTimer: (any DispatchSourceTimer)?
     nonisolated(unsafe) private var _automaticRefreshTask: Task<Void, Never>?
 
     private func startAutomaticRefresh() {
@@ -397,7 +407,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
         _automaticRefreshTask = Task(priority: .medium) {
             if timeOffset > 0 {
                 do {
-                    try await Task.sleep(nanoseconds: UInt64(timeOffset) * _CredentialAutomaticRefreshTimeIntervalToNanoseconds)
+                    try await Task.sleep(nanoseconds: UInt64(timeOffset * _CredentialAutomaticRefreshTimeIntervalToNanoseconds.wrappedValue))
                 } catch is CancellationError {
                     lock.withLock {
                         _automaticRefreshTask = nil
@@ -411,7 +421,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
             repeat {
                 do {
                     try await refreshIfNeeded()
-                    try await Task.sleep(nanoseconds: UInt64(repeatInterval) * _CredentialAutomaticRefreshTimeIntervalToNanoseconds)
+                    try await Task.sleep(nanoseconds: UInt64(repeatInterval * _CredentialAutomaticRefreshTimeIntervalToNanoseconds.wrappedValue))
                 } catch is CancellationError {
                     lock.withLock {
                         _automaticRefreshTask = nil
@@ -428,7 +438,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
         _automaticRefreshTask = nil
     }
 
-    nonisolated(unsafe) private var _tokenObserver: NSObjectProtocol?
+    nonisolated(unsafe) private var _tokenObserver: (any NSObjectProtocol)?
     private func observeToken(_ token: Token) {
         lock.withLock {
             if let tokenObserver = _tokenObserver {
@@ -460,4 +470,4 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     }
 }
 
-var _CredentialAutomaticRefreshTimeIntervalToNanoseconds: UInt64 = 1_000_000_000
+let _CredentialAutomaticRefreshTimeIntervalToNanoseconds: LockedValue<Double> = 1_000_000_000
