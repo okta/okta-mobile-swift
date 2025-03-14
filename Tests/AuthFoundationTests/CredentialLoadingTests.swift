@@ -25,8 +25,9 @@ final class CredentialLoadingTests: XCTestCase {
         userDefaults.removePersistentDomain(forName: name)
 
         let storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
-        coordinator = CredentialCoordinatorImpl(tokenStorage: storage)
-        
+        coordinator = CredentialCoordinatorImpl()
+        coordinator.tokenStorage = storage
+
         XCTAssertEqual(storage.allIDs.count, 0)
         self.storage = storage
     }

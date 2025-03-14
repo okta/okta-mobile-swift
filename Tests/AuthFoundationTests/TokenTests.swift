@@ -256,7 +256,6 @@ final class TokenTests: XCTestCase {
         XCTAssertEqual(token[.accessToken], "the_access_token")
     }
     
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testTokenFromRefreshTokenAsync() async throws {
         let client = try mockClient()
         let token = try await Token.from(refreshToken: "the_refresh_token", using: client)

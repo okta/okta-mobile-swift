@@ -29,12 +29,14 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
         Token.accessTokenValidator = MockTokenHashValidator()
+        DeviceAuthorizationFlow.slowDownInterval = 0.25
         flow = client.deviceAuthorizationFlow()
     }
     
     override func tearDownWithError() throws {
         JWK.resetToDefault()
         Token.resetToDefault()
+        DeviceAuthorizationFlow.resetToDefault()
     }
     
     func testSlowDown() throws {
@@ -54,7 +56,6 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
-        DeviceAuthorizationFlow.slowDownInterval = 1
 
         try performAuthenticationFlow()
     }
@@ -76,7 +77,6 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
-        DeviceAuthorizationFlow.slowDownInterval = 1
 
         try performAuthenticationFlow()
     }
