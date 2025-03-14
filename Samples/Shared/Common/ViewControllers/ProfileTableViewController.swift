@@ -170,7 +170,7 @@ class ProfileTableViewController: UITableViewController {
         #if !os(tvOS) && canImport(WebAuthenticationUI) && !WEB_AUTH_DISABLED
         if let token = Credential.default?.token {
             alert.addAction(.init(title: "End a session", style: .destructive) { _ in
-                WebAuthentication.shared?.signOut(token: token) { result in
+                WebAuthentication.shared?.signOut(from: nil, token: token) { result in
                     switch result {
                     case .success:
                         try? Keychain.deleteTokens()

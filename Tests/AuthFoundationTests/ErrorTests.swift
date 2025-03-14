@@ -50,16 +50,16 @@ final class ErrorTests: XCTestCase {
         XCTAssertNotEqual(APIClientError.unsupportedContentType(.json).errorDescription,
                           "unsupported_content_type_description")
         
-        XCTAssertNotEqual(APIClientError.serverError(TestUnlocalizedError.nestedError).errorDescription,
-                          "server_error_description")
-        XCTAssertEqual(APIClientError.serverError(TestLocalizedError.nestedError).errorDescription,
+        XCTAssertNotEqual(APIClientError.httpError(TestUnlocalizedError.nestedError).errorDescription,
+                          "http_error_description")
+        XCTAssertEqual(APIClientError.httpError(TestLocalizedError.nestedError).errorDescription,
                        "Nested Error")
 
         XCTAssertNotEqual(APIClientError.statusCode(404).errorDescription,
                           "status_code_description")
         
         XCTAssertNotEqual(APIClientError.validation(error: TestUnlocalizedError.nestedError).errorDescription,
-                          "server_error_description")
+                          "http_error_description")
         XCTAssertEqual(APIClientError.validation(error: TestLocalizedError.nestedError).errorDescription,
                        "Nested Error")
     }
@@ -74,7 +74,7 @@ final class ErrorTests: XCTestCase {
         XCTAssertNotEqual(OAuth2Error.signatureInvalid.errorDescription,
                           "signature_invalid_description")
         
-        XCTAssertEqual(OAuth2Error.network(error: APIClientError.serverError(TestLocalizedError.nestedError)).errorDescription,
+        XCTAssertEqual(OAuth2Error.network(error: APIClientError.httpError(TestLocalizedError.nestedError)).errorDescription,
                           "Nested Error")
 
         XCTAssertTrue(OAuth2Error.server(error: .init(code: "123", description: "AuthError")).errorDescription?.contains("AuthError") ?? false)

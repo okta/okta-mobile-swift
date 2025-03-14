@@ -28,12 +28,13 @@ class MockSessionTokenFlowURLExchange: SessionTokenFlowURLExchange {
         self.scheme = scheme
     }
 
-    func follow(url: URL, completion: @escaping (Result<URL, OAuth2Error>) -> Void) {
+    func follow(url: URL) async throws -> URL {
         if let resultUrl = type(of: self).resultUrl {
-            completion(.success(resultUrl))
+            return resultUrl
         } else if let error = type(of: self).error {
-            completion(.failure(error))
+            throw error
         }
+        throw OAuth2Error.invalidUrl
     }
 }
 
@@ -126,7 +127,6 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(token)
     }
 
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testWithAsync() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)

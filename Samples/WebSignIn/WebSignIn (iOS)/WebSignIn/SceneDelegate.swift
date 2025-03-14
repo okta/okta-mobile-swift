@@ -76,13 +76,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidEnterBackground(_ scene: UIScene) {
     }
-
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        print(URLContexts)
-        do {
-            try WebAuthentication.shared?.resume(with: URLContexts)
-        } catch {
-            print(error)
-        }
-    }
 }
