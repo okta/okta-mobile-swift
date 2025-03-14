@@ -7,8 +7,8 @@ var package = Package(
     name: "AuthFoundation",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v12),
-        .tvOS(.v12),
+        .iOS(.v13),
+        .tvOS(.v13),
         .watchOS(.v7),
         .visionOS(.v1),
         .macOS(.v10_15),

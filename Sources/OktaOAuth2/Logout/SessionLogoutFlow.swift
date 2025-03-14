@@ -173,7 +173,6 @@ public class SessionLogoutFlow: LogoutFlow {
     public let delegateCollection = DelegateCollection<SessionLogoutFlowDelegate>()
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension SessionLogoutFlow {
     /// Initiates an logout flow, with a required ``Context-swift.struct`` object.
     ///

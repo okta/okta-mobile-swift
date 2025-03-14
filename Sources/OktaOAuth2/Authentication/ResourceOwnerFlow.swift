@@ -97,45 +97,26 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     ///   - username: Username
     ///   - password: Password
     ///   - context: Context object used to customize the flow.
-    ///   - completion: Completion invoked when a response is received.
-    public func start(username: String,
-                      password: String,
-                      context: Context = .init(),
-                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+    /// - Returns: The token once the responce is received.
+    public func start(username: String, password: String, context: Context = .init()) async throws -> Token
     {
         isAuthenticating = true
         self.context = context
 
-        let clientConfiguration = client.configuration
-        let additionalParameters = additionalParameters
-
-        client.openIdConfiguration { result in
-            switch result {
-            case .success(let openIdConfiguration):
-                let request = TokenRequest(openIdConfiguration: openIdConfiguration,
-                                           clientConfiguration: clientConfiguration,
-                                           additionalParameters: additionalParameters,
-                                           context: context,
-                                           username: username,
-                                           password: password)
-                self.client.exchange(token: request) { result in
-                    switch result {
-                    case .failure(let error):
-                        self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                        completion(.failure(.network(error: error)))
-                    case .success(let response):
-                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                        completion(.success(response.result))
-                    }
-
-                    self.finished()
-                }
-
-            case .failure(let error):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-                completion(.failure(error))
-                self.finished()
-            }
+        return try await withExpression {
+            let request = TokenRequest(openIdConfiguration: try await client.openIdConfiguration(),
+                                       clientConfiguration: client.configuration,
+                                       additionalParameters: additionalParameters,
+                                       context: context,
+                                       username: username,
+                                       password: password)
+            return try await client.exchange(token: request).result
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+        } failure: { error in
+            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+        } finally: {
+            finished()
         }
     }
     
@@ -153,18 +134,23 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension ResourceOwnerFlow {
-    /// Asynchronously authenticates with the Resource Owner flow.
-    /// 
+    /// Authenticates using the supplied username and password.
     /// - Parameters:
     ///   - username: Username
     ///   - password: Password
-    /// - Returns: The token once the responce is received.
-    public func start(username: String, password: String) async throws -> Token {
-        try await withCheckedThrowingContinuation { continuation in
-            start(username: username, password: password) { result in
-                continuation.resume(with: result)
+    ///   - context: Context object used to customize the flow.
+    ///   - completion: Completion invoked when a response is received.
+    public func start(username: String,
+                      password: String,
+                      context: Context = .init(),
+                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await start(username: username, password: password, context: context)))
+            } catch {
+                completion(.failure(OAuth2Error(error)))
             }
         }
     }

@@ -24,6 +24,10 @@ class MockCredentialDataSource: CredentialDataSource {
         !credentials.filter({ $0.token == token }).isEmpty
     }
 
+    public func urlSession(for token: Token) -> URLSessionProtocol {
+        URLSessionMock()
+    }
+
     func credential(for token: Token, coordinator: CredentialCoordinator) -> Credential {
         if let credential = credentials.first(where: { $0.token == token }) {
             return credential

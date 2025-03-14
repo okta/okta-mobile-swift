@@ -49,15 +49,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, shouldAllowExtensionPointIdentifier extensionPointIdentifier: UIApplication.ExtensionPointIdentifier) -> Bool {
         return extensionPointIdentifier != .keyboard
     }
-
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        print(url)
-        do {
-            try WebAuthentication.shared?.resume(with: url)
-        } catch {
-            print(error)
-        }
-        return true
-    }
-
 }

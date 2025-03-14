@@ -64,7 +64,7 @@ public protocol APIClient {
     func didSend<T>(request: URLRequest, received response: APIResponse<T>)
     
     /// Send the given URLRequest.
-    func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
+    func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?) async throws -> APIResponse<T>
     
     /// Provides the ``APIRetry`` configurations from the delegate in response to a retry request.
     func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry
@@ -163,42 +163,34 @@ extension APIClient {
     
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) {}
     
-    public func send<T>(_ request: URLRequest, parsing context: APIParsingContext? = nil, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
-        send(request, parsing: context, state: nil, completion: completion)
-    }
-    
     public func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry { .default }
     
     // swiftlint:disable closure_body_length
-    private func send<T>(_ request: URLRequest,
-                         parsing context: APIParsingContext? = nil,
-                         state: APIRetry.State?,
-                         completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
+    public func send<T>(_ request: URLRequest,
+                        parsing context: APIParsingContext? = nil) async throws -> APIResponse<T>
+    {
+        var retryState: APIRetry.State?
+        var rateInfo: APIRateLimit?
+        var requestId: String?
         var urlRequest = request
         willSend(request: &urlRequest)
-        session.dataTaskWithRequest(urlRequest) { data, response, httpError in
-            guard let data = data,
-                  let response = response
-            else {
-                let apiError: APIClientError
-                if let error = httpError {
-                    apiError = .serverError(error)
-                } else {
-                    apiError = .missingResponse
+
+        do {
+            repeat {
+                if let retryState = retryState {
+                    urlRequest = addRetryHeadersToRequest(state: retryState)
                 }
                 
-                completion(.failure(apiError))
-                return
-            }
-            
-            var rateInfo: APIRateLimit?
-            var requestId: String?
-            do {
+                if let delay = rateInfo?.delay {
+                    try await Task.sleep(nanoseconds: UInt64(delay * _APIClientRetryDelayTimeIntervalToNanoseconds))
+                }
+
+                let (data, response) = try await session.data(for: urlRequest)
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw APIClientError.invalidResponse
                 }
                 
-                self.didSend(request: request, received: httpResponse)
+                didSend(request: urlRequest, received: httpResponse)
                 
                 rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
                 let responseType = context?.resultType(from: httpResponse) ?? APIResponseResult(statusCode: httpResponse.statusCode)
@@ -208,60 +200,53 @@ extension APIClient {
 
                 switch responseType {
                 case .success:
-                    let response: APIResponse<T> = try self.validate(data: data,
-                                                                     response: httpResponse,
-                                                                     rateInfo: rateInfo,
-                                                                     parsing: context)
-                    self.didSend(request: request, received: response)
-                    completion(.success(response))
+                    let response: APIResponse<T> = try validate(data: data,
+                                                                response: httpResponse,
+                                                                rateInfo: rateInfo,
+                                                                parsing: context)
+                    didSend(request: request, received: response)
+                    return response
+
                 case .retry:
                     guard let rateInfo = rateInfo else {
                         fallthrough
                     }
-                    let retry = state?.type ?? self.shouldRetry(request: request, rateLimit: rateInfo)
-                    
+
+                    let retry = retryState?.type ?? shouldRetry(request: request,
+                                                                rateLimit: rateInfo)
+
                     switch retry {
                     case .doNotRetry: break
                     case .retry(let maximumCount):
-                        let retryState: APIRetry.State
-                        if let state = state {
-                            retryState = state.nextState()
-                        } else {
-                            retryState = APIRetry.State(type: retry,
-                                                        requestId: requestId,
-                                                        originalRequest: request,
-                                                        retryCount: 1)
-                        }
+                        let newRetryState = retryState?.nextState() ?? .init(type: retry,
+                                                                             requestId: requestId,
+                                                                             originalRequest: request,
+                                                                             retryCount: 1)
                         
-                        // Fall-through to the default case if the maximum retry attempt has been reached and if the delay is not calculated.
-                        guard retryState.retryCount <= maximumCount, let delay = rateInfo.delay else {
-                            break
+                        if newRetryState.retryCount <= maximumCount {
+                            retryState = newRetryState
+                            continue
                         }
-                        
-                        let urlRequest = addRetryHeadersToRequest(state: retryState)
-                        
-                        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
-                            self.send(urlRequest, parsing: context, state: retryState, completion: completion)
-                        }
-                        return
                     }
+
+                    // Fall-through to the error case if the maximum retry attempt has been reached and if the delay is not calculated.
                     fallthrough
+
                 case .error:
                     if let error = error(from: data) ?? context?.error(from: data) {
-                        throw APIClientError.serverError(error)
+                        throw APIClientError.httpError(error)
                     } else {
                         throw APIClientError.statusCode(httpResponse.statusCode)
                     }
                 }
-            } catch let error as APIClientError {
-                self.didSend(request: request, received: error, requestId: requestId, rateLimit: rateInfo)
-                completion(.failure(error))
-            } catch {
-                let apiError = APIClientError.cannotParseResponse(error: error)
-                self.didSend(request: request, received: apiError, requestId: requestId, rateLimit: rateInfo)
-                completion(.failure(apiError))
-            }
-        }.resume()
+            } while retryState != nil
+            
+            // This condition should not be encountered
+            throw APIClientError.unknown
+        } catch {
+            didSend(request: request, received: APIClientError(error), requestId: requestId, rateLimit: rateInfo)
+            throw error
+        }
     }
     // swiftlint:enable closure_body_length
 
@@ -361,3 +346,5 @@ let defaultJSONDecoder: JSONDecoder = {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     return decoder
 }()
+
+var _APIClientRetryDelayTimeIntervalToNanoseconds: Double = 1_000_000_000

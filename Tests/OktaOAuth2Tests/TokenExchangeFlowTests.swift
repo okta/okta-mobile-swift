@@ -117,8 +117,6 @@ final class TokenExchangeFlowTests: XCTestCase {
         flow.start(with: tokens) { result in
             switch result {
             case .success:
-                XCTAssertTrue(self.flow.isAuthenticating)
-                
                 authorizeExpectation.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -142,8 +140,6 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
     }
     
-#if !os(Linux)
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testAsyncAuthenticationSucceeded() async throws {
         XCTAssertFalse(flow.isAuthenticating)
         
@@ -160,5 +156,4 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
     }
-#endif
 }

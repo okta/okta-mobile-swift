@@ -399,15 +399,22 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - loginHint: The login hint, or username, to authenticate.
     ///   - factor: The primary factor to use when authenticating the user.
     ///   - context: Context information used to customize the sign-in flow.
-    ///   - completion: Completion block called when the operation completes.
+    /// - Returns: Status returned when the operation completes.
     public func start(_ loginHint: String,
                       with factor: PrimaryFactor,
-                      context: Context = .init(),
-                      completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+                      context: Context = .init()) async throws -> DirectAuthenticationFlow.Status
     {
         reset()
         self.context = context
-        runStep(loginHint: loginHint, with: factor, completion: completion)
+
+        return try await withExpression {
+            try await runStep(loginHint: loginHint, with: factor)
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+        } failure: { error in
+            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            finished()
+        }
     }
     
     /// Resumes authentication when an additional (secondary) factor is required to verify the user.
@@ -415,18 +422,25 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// This function should be used when ``Status/mfaRequired(_:)`` is received.
     /// - Parameters:
     ///   - factor: The secondary factor to use when authenticating the user.
-    ///   - completion: Completion block called when the operation completes.
-    public func resume(with factor: SecondaryFactor,
-                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
-    {
-        guard isAuthenticating,
-              context != nil
-        else {
-            completion(.failure(.flowNotStarted))
-            return
+    /// - Returns: Status returned when the operation completes.
+    public func resume(with factor: SecondaryFactor) async throws -> DirectAuthenticationFlow.Status {
+        return try await withExpression {
+            guard isAuthenticating,
+                  context != nil
+            else {
+                throw DirectAuthenticationFlowError.flowNotStarted
+            }
+
+            return try await runStep(with: factor)
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+
+            if case .success(_) = result {
+                finished()
+            }
+        } failure: { error in
+            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
         }
-        
-        runStep(with: factor, completion: completion)
     }
 
     /// Continues authentication of a current factor (either primary or secondary) when an additional step is required.
@@ -434,67 +448,62 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// This function should be used when ``Status/continuation(_:)`` is received.
     /// - Parameters:
     ///   - factor: The continuation factor to use when authenticating the user.
-    ///   - completion: Completion block called when the operation completes.
-    public func resume(with factor: ContinuationFactor,
-                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
-    {
-        guard context != nil else {
-            completion(.failure(.flowNotStarted))
-            return
+    /// - Returns: Status returned when the operation completes.
+    public func resume(with factor: ContinuationFactor) async throws -> DirectAuthenticationFlow.Status {
+        return try await withExpression {
+            guard context != nil else {
+                throw DirectAuthenticationFlowError.flowNotStarted
+            }
+            
+            return try await runStep(with: factor)
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+
+            if case .success(_) = result {
+                finished()
+            }
+        } failure: { error in
+            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
         }
-        
-        runStep(with: factor, completion: completion)
     }
     
     func runStep<Factor: AuthenticationFactor>(loginHint: String? = nil,
-                                               with factor: Factor,
-                                               completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)
+                                               with factor: Factor) async throws -> DirectAuthenticationFlow.Status
     {
         isAuthenticating = true
         
-        client.openIdConfiguration { result in
-            switch result {
-            case .success(let configuration):
-                let stepHandler: any StepHandler
-                do {
-                    stepHandler = try factor.stepHandler(flow: self,
-                                                         openIdConfiguration: configuration,
-                                                         loginHint: loginHint,
-                                                         factor: factor)
-                } catch {
-                    self.send(error: error, completion: completion)
-                    return
-                }
+        let stepHandler = try factor.stepHandler(flow: self,
+                                                 openIdConfiguration: try await client.openIdConfiguration(),
+                                                 loginHint: loginHint)
 
-                self.process(stepHandler, completion: completion)
-
-            case .failure(let error):
-                self.send(error: error, completion: completion)
-            }
-        }
+        return try await process(stepHandler: stepHandler)
     }
-    
-    func process(_ stepHandler: any StepHandler, completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
+
+    func process(stepHandler: any StepHandler) async throws -> Status {
         guard let oldContext = context else {
-            completion(.failure(.inconsistentContextState))
-            return
+            throw DirectAuthenticationFlowError.inconsistentContextState
         }
-        
-        stepHandler.process { result in
-            guard self.context == oldContext else {
-                self.send(error: DirectAuthenticationFlowError.inconsistentContextState,
-                          completion: completion)
-                return
+
+        let status: Status
+        do {
+            status = try await stepHandler.process()
+        } catch {
+            if let errorStatus = try Status(error) {
+                status = errorStatus
+            } else {
+                throw error
             }
-            
-            if case let .success(newStatus) = result {
-                var newContext = oldContext
-                newContext.currentStatus = newStatus
-                self.context = newContext
-            }
-            
-            completion(result)
         }
+
+        guard context == oldContext else {
+            throw DirectAuthenticationFlowError.inconsistentContextState
+        }
+
+        var newContext = oldContext
+        newContext.currentStatus = status
+        context = newContext
+
+        return status
     }
     
     /// Resets the authentication session.
@@ -518,14 +527,17 @@ extension DirectAuthenticationFlow {
     ///   - loginHint: The login hint, or username, to authenticate.
     ///   - factor: The primary factor to use when authenticating the user.
     ///   - context: Context information used to customize the sign-in flow.
-    /// - Returns: Status returned when the operation completes.
+    ///   - completion: Completion block called when the operation completes.
     public func start(_ loginHint: String,
                       with factor: PrimaryFactor,
-                      context: Context = .init()) async throws -> DirectAuthenticationFlow.Status
+                      context: Context = .init(),
+                      completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
-        try await withCheckedThrowingContinuation { continuation in
-            start(loginHint, with: factor, context: context) { result in
-                continuation.resume(with: result)
+        Task {
+            do {
+                completion(.success(try await start(loginHint, with: factor, context: context)))
+            } catch {
+                completion(.failure(.init(error)))
             }
         }
     }
@@ -535,11 +547,15 @@ extension DirectAuthenticationFlow {
     /// This function should be used when ``Status/mfaRequired(_:)`` is received.
     /// - Parameters:
     ///   - factor: The secondary factor to use when authenticating the user.
-    /// - Returns: Status returned when the operation completes.
-    public func resume(with factor: SecondaryFactor) async throws -> DirectAuthenticationFlow.Status {
-        try await withCheckedThrowingContinuation { continuation in
-            resume(with: factor) { result in
-                continuation.resume(with: result)
+    ///   - completion: Completion block called when the operation completes.
+    public func resume(with factor: SecondaryFactor,
+                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await resume(with: factor)))
+            } catch {
+                completion(.failure(.init(error)))
             }
         }
     }
@@ -549,11 +565,15 @@ extension DirectAuthenticationFlow {
     /// This function should be used when ``Status/continuation(_:)`` is received.
     /// - Parameters:
     ///   - factor: The continuation factor to use when authenticating the user.
-    /// - Returns: Status returned when the operation completes.
-    public func resume(with factor: ContinuationFactor) async throws -> DirectAuthenticationFlow.Status {
-        try await withCheckedThrowingContinuation { continuation in
-            resume(with: factor) { result in
-                continuation.resume(with: result)
+    ///   - completion: Completion block called when the operation completes.
+    public func resume(with factor: ContinuationFactor,
+                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await resume(with: factor)))
+            } catch {
+                completion(.failure(.init(error)))
             }
         }
     }

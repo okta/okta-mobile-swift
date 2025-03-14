@@ -74,7 +74,10 @@ class MockTokenStorage: TokenStorage {
             throw error
         }
         
-        let item = allTokens[id]!
+        guard let item = allTokens[id] else {
+            throw TokenError.cannotReplaceToken
+        }
+
         allTokens[id] = (token, item.1)
     }
     
@@ -98,6 +101,6 @@ class MockTokenStorage: TokenStorage {
         }
         return item.0
     }
-    
+
     var delegate: TokenStorageDelegate?
 }

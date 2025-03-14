@@ -150,7 +150,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// The ``UserInfo`` describing this user.
     ///
     /// This value may be nil if the ``userInfo()`` or ``userInfo(completion:)`` methods haven't yet been called.
-    public private(set) var userInfo: UserInfo?
+    public var userInfo: UserInfo? {
+        userInfoAction.value
+    }
     
     /// Indicates this credential's token should automatically be refreshed prior to its expiration.
     ///
@@ -182,32 +184,21 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     }
     
     /// Attempt to refresh the token.
-    /// - Parameter completion: Completion block invoked when a result is returned.
-    public func refresh(completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
-        oauth2.refresh(token) { result in
-            switch result {
-            case .success(let token):
-                self.token = token
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+    public func refresh() async throws {
+        let token = try await oauth2.refresh(token)
+        lock.withLock {
+            self.token = token
         }
     }
     
     /// Attempt to refresh the token if it either has expired, or is about to expire.
     /// - Parameters:
     ///   - graceInterval: The grace interval before a token is due to expire before it should be refreshed.
-    ///   - completion: Completion block invoked to indicate the status of the token, if the refresh was successful or if an error occurred.
-    public func refreshIfNeeded(graceInterval: TimeInterval = Credential.refreshGraceInterval,
-                                completion: @escaping (Result<Void, OAuth2Error>) -> Void)
-    {
+    public func refreshIfNeeded(graceInterval: TimeInterval = Credential.refreshGraceInterval) async throws {
         if let expiresAt = token.expiresAt,
             expiresAt.timeIntervalSinceNow <= graceInterval
         {
-            refresh(completion: completion)
-        } else {
-            completion(.success(()))
+            try await refresh()
         }
     }
     
@@ -226,51 +217,31 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// 1. Does not have a refresh token and the ``Token/RevokeType/accessToken`` type is supplied.
     /// - Parameters:
     ///   - type: The token type to revoke, defaulting to `.all`.
-    ///   - completion: Completion block called when the operation completes.
-    public func revoke(type: Token.RevokeType = .all, completion: ((Result<Void, OAuth2Error>) -> Void)?) {
-        let shouldRemove = shouldRemove(for: type)
+    public func revoke(type: Token.RevokeType = .all) async throws {
+        try await oauth2.revoke(token, type: type)
         
-        oauth2.revoke(token, type: type) { result in
-            // Remove the credential from storage if the access token was revoked
-            if case .success = result,
-               shouldRemove
-            {
-                do {
-                    try self.coordinator?.remove(credential: self)
-                } catch let error as OAuth2Error {
-                    completion?(.failure(error))
-                    return
-                } catch {
-                    completion?(.failure(OAuth2Error.error(error)))
-                    return
-                }
-            }
-            
-            completion?(result)
+        // Remove the credential from storage if the access token was revoked
+        if let coordinator = coordinator,
+            shouldRemove(for: type)
+        {
+            try coordinator.remove(credential: self)
         }
     }
     
     /// Introspect the token to check it for validity, and read the additional information associated with it.
     /// - Parameters:
     ///   - type: The token type to introspect.
-    ///   - completion: Completion block invoked when a result is returned.
-    public func introspect(_ type: Token.Kind, completion: @escaping (Result<TokenInfo, OAuth2Error>) -> Void) {
-        oauth2.introspect(token: token, type: type) { result in
-            completion(result)
-        }
+    public func introspect(_ type: Token.Kind) async throws -> TokenInfo {
+        try await oauth2.introspect(token: token, type: type)
     }
 
     /// Fetches the user info for this credential.
     ///
     /// In addition to passing the result to the provided completion block, a successful request will result in the ``Credential/userInfo`` property being set with the new value for later use.
     /// - Parameter completion: Optional completion block to be invoked when a result is returned.
-    public func userInfo(completion: @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
-        oauth2.userInfo(token: token) { result in
-            defer { completion(result) }
-            
-            if case let .success(userInfo) = result {
-                self.userInfo = userInfo
-            }
+    public func userInfo() async throws -> UserInfo {
+        try await userInfoAction.perform {
+            try await oauth2.userInfo(token: token)
         }
     }
 
@@ -331,6 +302,13 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     // MARK: Private properties
     static let coordinator = CredentialCoordinatorImpl()
     weak var coordinator: CredentialCoordinator?
+
+    static func resetToDefault() {
+        coordinator.resetToDefault()
+    }
+
+    let userInfoAction = CoalescedResult<UserInfo>(taskName: "UserInfo")
+    let lock = Lock()
 
     private lazy var _metadata: Token.Metadata = {
         if let metadata = try? coordinator?.tokenStorage.metadata(for: token.id) {

@@ -14,7 +14,7 @@ import Foundation
 
 public extension Token {
     /// The possible token types that can be revoked.
-    enum RevokeType {
+    enum RevokeType: CaseIterable {
         /// Indicates the access token should be revoked.
         case accessToken
         

@@ -17,46 +17,89 @@ import XCTest
 @testable import OktaOAuth2
 @testable import WebAuthenticationUI
 
-class WebAuthenticationMock: WebAuthentication {
-    override func createWebAuthenticationProvider(loginFlow: AuthorizationCodeFlow,
-                                                  logoutFlow: SessionLogoutFlow?,
-                                                  from window: WebAuthentication.WindowAnchor?,
-                                                  delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider? {
-        return WebAuthenticationProviderMock(loginFlow: loginFlow, logoutFlow: logoutFlow, delegate: delegate)
+struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
+    private static var results: [String: Result<URL, Error>?] = [:]
+    private static var providers: [String: WebAuthenticationProviderMock] = [:]
+    
+    enum TestError: Error {
+        case invalidTestName
+    }
+    
+    static func register(result: Result<URL, Error>?, for webAuth: WebAuthentication) throws {
+        guard let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
+        else {
+            throw TestError.invalidTestName
+        }
+        
+        results[testName] = result
+    }
+    
+    static func provider(for webAuth: WebAuthentication) -> WebAuthenticationProviderMock? {
+        guard let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
+        else {
+            return nil
+        }
+        
+        return providers[testName]
+    }
+    
+    static func createWebAuthenticationProvider(for webAuth: WebAuthentication,
+                                                from window: WebAuthentication.WindowAnchor?,
+                                                usesEphemeralSession: Bool) -> WebAuthenticationProvider?
+    {
+        let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
+
+        var result: Result<URL, Error>?
+        if let testName,
+           let testResult = results[testName]
+        {
+            result = testResult
+        }
+
+        let provider = WebAuthenticationProviderMock(from: window,
+                                                     usesEphemeralSession: usesEphemeralSession,
+                                                     result: result)
+        if let testName {
+            providers[testName] = provider
+        }
+        
+        return provider
     }
 }
 
-
 class WebAuthenticationProviderMock: WebAuthenticationProvider {
-    var loginFlow: AuthorizationCodeFlow
-    var logoutFlow: SessionLogoutFlow?
-    var delegate: WebAuthenticationProviderDelegate?
+    let anchor: WebAuthentication.WindowAnchor?
+    let usesEphemeralSession: Bool
     
     enum State {
-        case initialized, started, cancelled, logout
+        case initialized
+        case opened(authorizeUrl: URL, redirectUri: URL)
+        case cancelled
     }
     
     var state: State = .initialized
+    let result: Result<URL, Error>?
     
-    init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, delegate: WebAuthenticationProviderDelegate) {
-        self.loginFlow = loginFlow
-        self.logoutFlow = logoutFlow
-        self.delegate = delegate
+    init(from anchor: WebAuthentication.WindowAnchor?, usesEphemeralSession: Bool, result: Result<URL, Error>? = nil) {
+        self.anchor = anchor
+        self.usesEphemeralSession = usesEphemeralSession
+        self.result = result
     }
     
-    func start(context: AuthorizationCodeFlow.Context) {
-        state = .started
+    func open(authorizeUrl: URL, redirectUri: URL) async throws -> URL {
+        state = .opened(authorizeUrl: authorizeUrl, redirectUri: redirectUri)
         
-        loginFlow.start(with: context) { result in
-            
-        }
-    }
-    
-    func logout(context: SessionLogoutFlow.Context) {
-        state = .started
-        
-        logoutFlow?.start(with: context) { result in
-            
+        switch result {
+        case .success(let url):
+            return url
+        case .failure(let error):
+            let error = WebAuthenticationError(error)
+            if error == .userCancelledLogin {
+                state = .cancelled
+            }
+            throw error
+        case nil:
+            throw WebAuthenticationError.noAuthenticatorProviderResonse
         }
     }
     

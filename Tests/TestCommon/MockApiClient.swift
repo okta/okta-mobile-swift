@@ -22,7 +22,10 @@ class MockApiClient: APIClient {
     var session: URLSessionProtocol
     let configuration: APIClientConfiguration
     let shouldRetry: APIRetry?
-    var request: URLRequest?
+    var allRequests: [URLRequest] = []
+    var request: URLRequest? {
+        allRequests.last
+    }
     var delegate: APIClientDelegate?
     
     init(configuration: APIClientConfiguration,
@@ -54,12 +57,11 @@ class MockApiClient: APIClient {
     }
     
     func didSend(request: URLRequest, received error: AuthFoundation.APIClientError, requestId: String?, rateLimit: AuthFoundation.APIRateLimit?) {
-        self.request = request
+        allRequests.append(request)
         delegate?.api(client: self, didSend: request, received: error, requestId: nil, rateLimit: nil)
     }
     
     func willSend(request: inout URLRequest) {
-        self.request = request
         delegate?.api(client: self, willSend: &request)
     }
     
