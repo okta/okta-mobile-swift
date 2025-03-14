@@ -27,7 +27,7 @@ extension OAuth2Error {
     @_documentation(visibility: internal)
     public init(_ error: APIClientError) {
         switch error {
-        case .serverError(let error):
+        case .httpError(let error):
             self.init(error)
         default:
             self = .network(error: error)

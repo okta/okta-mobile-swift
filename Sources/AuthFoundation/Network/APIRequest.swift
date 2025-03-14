@@ -56,19 +56,11 @@ public protocol APIRequest {
     /// - Returns: URLRequest instance for this API request.
     func request(for client: APIClient) throws -> URLRequest
     
-    /// Sends the request to the given ``APIClient``.
-    /// - Parameters:
-    ///   - client: ``APIClient`` the request is being sent to.
-    ///   - context: Optional context to use when parsing the response.
-    ///   - completion: Completion block invoked with the result.
-    func send(to client: APIClient, parsing context: APIParsingContext?, completion: @escaping(Result<APIResponse<ResponseType>, APIClientError>) -> Void)
-
     /// Asynchronously sends the request to the given ``APIClient``.
     /// - Parameters:
     ///   - client: ``APIClient`` the request is being sent to.
     ///   - context: Optional context to use when parsing the response.
     /// - Returns: ``APIResponse`` result of the request.
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func send(to client: APIClient, parsing context: APIParsingContext?) async throws -> APIResponse<ResponseType>
 }
 
@@ -244,24 +236,9 @@ extension APIRequest {
         return request
     }
     
-    public func send(to client: APIClient, parsing context: APIParsingContext? = nil, completion: @escaping(Result<APIResponse<ResponseType>, APIClientError>) -> Void) {
-        do {
-            let urlRequest = try request(for: client)
-            client.send(urlRequest,
-                        parsing: context ?? self as? APIParsingContext,
-                        completion: completion)
-        } catch {
-            completion(.failure(.serverError(error)))
-        }
-    }
-    
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     public func send(to client: APIClient, parsing context: APIParsingContext? = nil) async throws -> APIResponse<ResponseType> {
-        try await withCheckedThrowingContinuation { continuation in
-            send(to: client, parsing: context) { result in
-                continuation.resume(with: result)
-            }
-        }
+        try await client.send(try request(for: client),
+                              parsing: context ?? self as? APIParsingContext)
     }
 }
 

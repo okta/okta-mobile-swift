@@ -36,7 +36,7 @@ public enum APIClientError: Error {
     case unsupportedContentType(_ type: APIContentType)
     
     /// Received the given HTTP error from the server.
-    case serverError(_ error: Error)
+    case httpError(_ error: Error)
     
     /// Received the given HTTP response status code.
     case statusCode(_ statusCode: Int)
@@ -46,6 +46,17 @@ public enum APIClientError: Error {
     
     /// An unknown HTTP error was encountered.
     case unknown
+}
+
+extension APIClientError {
+    @_documentation(visibility: internal)
+    public init(_ error: Error) {
+        if let error = error as? APIClientError {
+            self = error
+        } else {
+            self = .httpError(error)
+        }
+    }
 }
 
 extension APIClientError: LocalizedError {
@@ -104,14 +115,14 @@ extension APIClientError: LocalizedError {
                                   comment: "Invalid URL"),
                 type.rawValue)
             
-        case .serverError(let error):
+        case .httpError(let error):
             if let error = error as? LocalizedError {
                 return error.localizedDescription
             }
             let errorString = String(describing: error)
 
             return String.localizedStringWithFormat(
-                NSLocalizedString("server_error_description",
+                NSLocalizedString("http_error_description",
                                   tableName: "AuthFoundation",
                                   bundle: .authFoundation,
                                   comment: "Invalid URL"),
@@ -167,7 +178,7 @@ extension APIClientError: Equatable {
         case (.cannotParseResponse(error: let lhsError), .cannotParseResponse(error: let rhsError)):
             return compare(lhs: lhsError as NSError, rhs: rhsError as NSError)
             
-        case (.serverError(let lhsError), .serverError(let rhsError)):
+        case (.httpError(let lhsError), .httpError(let rhsError)):
             return compare(lhs: lhsError as NSError, rhs: rhsError as NSError)
 
         case (.validation(error: let lhsError), .validation(error: let rhsError)):
