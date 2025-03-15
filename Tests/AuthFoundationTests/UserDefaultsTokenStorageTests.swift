@@ -65,7 +65,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     }
 
     @CredentialActor
-    func testDefaultToken() throws {
+    func testDefaultToken() async throws {
         try storage.add(token: token, metadata: nil, security: [])
         XCTAssertEqual(storage.allIDs.count, 1)
         XCTAssertEqual(storage.defaultTokenID, token.id)
@@ -88,7 +88,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     }
 
     @CredentialActor
-    func testImplicitDefaultToken() throws {
+    func testImplicitDefaultToken() async throws {
         XCTAssertNil(storage.defaultTokenID)
         
         XCTAssertNoThrow(try storage.add(token: token, metadata: nil, security: []))
@@ -98,7 +98,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     }
 
     @CredentialActor
-    func testRemoveDefaultToken() throws {
+    func testRemoveDefaultToken() async throws {
         try storage.add(token: token, metadata: nil, security: [])
         try storage.setDefaultTokenID(token.id)
         XCTAssertEqual(storage.allIDs.count, 1)

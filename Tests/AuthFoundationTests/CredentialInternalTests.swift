@@ -26,7 +26,7 @@ final class CredentialInternalTests: XCTestCase {
     }
 
     @CredentialActor
-    func testShouldRemoveWithOnlyAccessToken() throws {
+    func testShouldRemoveWithOnlyAccessToken() async throws {
         let credential = coordinator.credential(with: [])
         XCTAssertTrue(credential.shouldRemove(for: .all))
         XCTAssertTrue(credential.shouldRemove(for: .accessToken))
@@ -35,7 +35,7 @@ final class CredentialInternalTests: XCTestCase {
     }
 
     @CredentialActor
-    func testShouldRemoveWithAccessAndRefreshToken() throws {
+    func testShouldRemoveWithAccessAndRefreshToken() async throws {
         let credential = coordinator.credential(with: [.refreshToken])
         XCTAssertTrue(credential.shouldRemove(for: .all))
         XCTAssertFalse(credential.shouldRemove(for: .accessToken))
@@ -44,7 +44,7 @@ final class CredentialInternalTests: XCTestCase {
     }
 
     @CredentialActor
-    func testShouldRemoveWithAccessAndDeviceToken() throws {
+    func testShouldRemoveWithAccessAndDeviceToken() async throws {
         let credential = coordinator.credential(with: [.deviceSecret])
         XCTAssertTrue(credential.shouldRemove(for: .all))
         XCTAssertTrue(credential.shouldRemove(for: .accessToken))
@@ -53,7 +53,7 @@ final class CredentialInternalTests: XCTestCase {
     }
 
     @CredentialActor
-    func testShouldRemoveWithAccessRefreshAndDeviceToken() throws {
+    func testShouldRemoveWithAccessRefreshAndDeviceToken() async throws {
         let credential = coordinator.credential(with: [.refreshToken, .deviceSecret])
         XCTAssertTrue(credential.shouldRemove(for: .all))
         XCTAssertFalse(credential.shouldRemove(for: .accessToken))

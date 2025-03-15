@@ -11,7 +11,10 @@
 //
 
 import Foundation
+
+#if canImport(Security)
 @preconcurrency import Security
+#endif
 
 #if canImport(LocalAuthentication) && !os(tvOS)
 @preconcurrency import LocalAuthentication
@@ -24,8 +27,7 @@ extension Credential {
     ///
     /// On Apple platforms, this controls the Keychain security settings for the underlying token's keychain item.
     public enum Security: Sendable {
-        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
-
+        #if canImport(Darwin)
         /// Defines the accessibility level for a credential.
         case accessibility(_ option: Keychain.Accessibility)
         
@@ -42,7 +44,8 @@ extension Credential {
         /// Defines a custom LocalAuthentication context for interactions with this credential, for systems that support it.
         case context(_ obj: LAContext)
         #endif
-        
+        #endif
+
         /// The standard set of security settings to use when creating or getting credentials.
         ///
         /// If you wish to change the default security threshold for Keychain items, you can assign a new value here. Additionally, if a ``context(_:)`` value is assigned to the ``standard`` property, that context will be used when fetching credentials unless otherwise specified.
@@ -67,10 +70,14 @@ extension Credential {
 
         // MARK: Private properties / methods
         private static let lock = Lock()
-        nonisolated(unsafe) private static var _standard: [Security] = [.accessibility(.afterFirstUnlockThisDeviceOnly)]
         nonisolated(unsafe) private static var _isDefaultSynchronizable: Bool = false
+
+        #if canImport(Darwin)
+        nonisolated(unsafe) private static var _standard: [Security] = [
+            .accessibility(.afterFirstUnlockThisDeviceOnly)
+        ]
         #else
-        public static var standard: [Security] = []
+        nonisolated(unsafe) private static var _standard: [Security] = []
         #endif
     }
 }

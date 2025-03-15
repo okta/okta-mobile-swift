@@ -19,6 +19,11 @@ class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
     private(set) var removed: [Credential] = []
     private(set) var callCount = 0
 
+    // Explicitly mark init() as nonisolated since Swift 5.10 is not able
+    // to properly infer this behavior when a non-actor type conforms to
+    // a global-actor protocol.
+    nonisolated init() {}
+
     func credential(dataSource: any CredentialDataSource, created credential: Credential) {
         created.append(credential)
         callCount += 1

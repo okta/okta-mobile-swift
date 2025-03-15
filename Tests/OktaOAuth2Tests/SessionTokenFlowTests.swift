@@ -10,6 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
+#if canImport(UIKit) || canImport(AppKit)
 import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
@@ -110,3 +111,4 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(token)
     }
 }
+#endif

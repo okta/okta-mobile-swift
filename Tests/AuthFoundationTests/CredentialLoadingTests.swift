@@ -45,7 +45,7 @@ final class CredentialLoadingTests: XCTestCase {
     }
 
     @CredentialActor
-    func testFetchingTokens() throws {
+    func testFetchingTokens() async throws {
         let tokenA = Token.mockToken(id: "TokenA")
         let tokenB = Token.mockToken(id: "TokenB")
         let tokenC = Token.mockToken(id: "TokenC")

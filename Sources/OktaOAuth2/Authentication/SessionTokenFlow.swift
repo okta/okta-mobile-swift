@@ -10,12 +10,9 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
+#if canImport(UIKit) || canImport(AppKit)
 import Foundation
 import AuthFoundation
-
-#if os(Linux)
-import FoundationNetworking
-#endif
 
 /// An authentication flow class that exchanges a Session Token for access tokens.
 ///
@@ -289,3 +286,4 @@ extension OAuth2Client {
                              additionalParameters: additionalParameters)
     }
 }
+#endif

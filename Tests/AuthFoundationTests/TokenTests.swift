@@ -172,7 +172,7 @@ final class TokenTests: XCTestCase {
         XCTAssertNotEqual(token1, token2)
     }
 
-    @MainActor func testTokenFromRefreshToken() throws {
+    func testTokenFromRefreshToken() async throws {
         let client = try mockClient()
         
         nonisolated(unsafe) var tokenResult: Token?
@@ -186,8 +186,8 @@ final class TokenTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1)
-        
+        await fulfillment(of: [wait], timeout: 1)
+
         let token = try XCTUnwrap(tokenResult)
         
         XCTAssertEqual(token.token(of: .accessToken), String.mockAccessToken)
