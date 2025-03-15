@@ -14,7 +14,6 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
-@CredentialActor
 final class CredentialInternalTests: XCTestCase {
     var coordinator: MockCredentialCoordinator!
 
@@ -26,6 +25,7 @@ final class CredentialInternalTests: XCTestCase {
         coordinator = nil
     }
 
+    @CredentialActor
     func testShouldRemoveWithOnlyAccessToken() throws {
         let credential = coordinator.credential(with: [])
         XCTAssertTrue(credential.shouldRemove(for: .all))
@@ -34,6 +34,7 @@ final class CredentialInternalTests: XCTestCase {
         XCTAssertFalse(credential.shouldRemove(for: .deviceSecret))
     }
 
+    @CredentialActor
     func testShouldRemoveWithAccessAndRefreshToken() throws {
         let credential = coordinator.credential(with: [.refreshToken])
         XCTAssertTrue(credential.shouldRemove(for: .all))
@@ -42,6 +43,7 @@ final class CredentialInternalTests: XCTestCase {
         XCTAssertFalse(credential.shouldRemove(for: .deviceSecret))
     }
 
+    @CredentialActor
     func testShouldRemoveWithAccessAndDeviceToken() throws {
         let credential = coordinator.credential(with: [.deviceSecret])
         XCTAssertTrue(credential.shouldRemove(for: .all))
@@ -50,6 +52,7 @@ final class CredentialInternalTests: XCTestCase {
         XCTAssertFalse(credential.shouldRemove(for: .deviceSecret))
     }
 
+    @CredentialActor
     func testShouldRemoveWithAccessRefreshAndDeviceToken() throws {
         let credential = coordinator.credential(with: [.refreshToken, .deviceSecret])
         XCTAssertTrue(credential.shouldRemove(for: .all))

@@ -36,7 +36,6 @@ class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
     }
 }
 
-@CredentialActor
 final class DefaultCredentialDataSourceTests: XCTestCase {
     var coordinator: MockCredentialCoordinator!
     var dataSource: DefaultCredentialDataSource!
@@ -48,7 +47,7 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
     
     override func setUp() async throws {
         let mockCoordinator = await MockCredentialCoordinator()
-        let mockDelegate = await CredentialDataSourceDelegateRecorder()
+        let mockDelegate = CredentialDataSourceDelegateRecorder()
         let mockDataSource = await DefaultCredentialDataSource()
 
         await CredentialActor.run {
@@ -67,7 +66,8 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
         dataSource = nil
     }
     
-    func testCredentials() throws {
+    @CredentialActor
+    func testCredentials() async throws {
         XCTAssertEqual(dataSource.credentialCount, 0)
         
         let token = try! Token(id: "TokenId",

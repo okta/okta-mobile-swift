@@ -55,23 +55,27 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         flow.add(delegate: delegate)
 
         // Ensure the initial state
-        await XCTAssertNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertFalse(delegate.started)
         
         // Begin
         let verification = try await flow.start()
+        await MainActor.yield()
+
         XCTAssertNotNil(delegate.verification)
         XCTAssertEqual(verification, delegate.verification)
-        try await XCTAssertEqualAsync(await flow.context?.verification, delegate.verification)
-        await XCTAssertTrueAsync(await flow.isAuthenticating)
+        XCTAssertEqual(flow.context?.verification, delegate.verification)
+        XCTAssertTrue(flow.isAuthenticating)
         XCTAssertEqual(delegate.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
         XCTAssertTrue(delegate.started)
         
         // Exchange code
         let token = try await flow.resume()
-        await XCTAssertNotNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        await MainActor.yield()
+
+        XCTAssertNotNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertEqual(token, delegate.token)
         XCTAssertTrue(delegate.finished)
@@ -79,22 +83,22 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
 
     func testWithAsync() async throws {
         // Ensure the initial state
-        await XCTAssertNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
         let verification = try await flow.start()
 
-        try await XCTAssertEqualAsync(await flow.context?.verification, verification)
-        await XCTAssertTrueAsync(await flow.isAuthenticating)
-        try await XCTAssertEqualAsync(verification, await flow.context?.verification)
-        try await XCTAssertEqualAsync(await flow.context?.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
+        XCTAssertEqual(flow.context?.verification, verification)
+        XCTAssertTrue(flow.isAuthenticating)
+        XCTAssertEqual(verification, flow.context?.verification)
+        XCTAssertEqual(flow.context?.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
 
         // Exchange code
         let token = try await flow.resume()
 
-        await XCTAssertNotNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertNotNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }
     

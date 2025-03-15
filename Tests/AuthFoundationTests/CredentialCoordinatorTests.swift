@@ -19,7 +19,6 @@ import FoundationNetworking
 @testable import TestCommon
 @testable import AuthFoundation
 
-@CredentialActor
 final class UserCoordinatorTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: UserDefaultsTokenStorage!
@@ -38,7 +37,7 @@ final class UserCoordinatorTests: XCTestCase {
                                                                        scope: "openid"),
                                                   clientSettings: nil))
 
-    override func setUpWithError() throws {
+    override func setUp() async throws {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
         storage = await UserDefaultsTokenStorage(userDefaults: userDefaults)
@@ -52,7 +51,7 @@ final class UserCoordinatorTests: XCTestCase {
         XCTAssertEqual(tokenCount, 0)
     }
     
-    override func tearDownWithError() throws {
+    override func tearDown() async throws {
         userDefaults.removePersistentDomain(forName: name)
         userDefaults = nil
         storage = nil
@@ -62,7 +61,8 @@ final class UserCoordinatorTests: XCTestCase {
         }
     }
     
-    func testDefaultCredentialViaToken() throws {
+    @CredentialActor
+    func testDefaultCredentialViaToken() async throws {
         _ = try Credential.coordinator.store(token: token, tags: [:], security: [])
 
         XCTAssertEqual(storage.allIDs.count, 1)
@@ -79,7 +79,8 @@ final class UserCoordinatorTests: XCTestCase {
         XCTAssertEqual(try Credential.coordinator.with(id: token.id, prompt: nil, authenticationContext: nil), credential)
     }
     
-    func testImplicitCredentialForToken() throws {
+    @CredentialActor
+    func testImplicitCredentialForToken() async throws {
         let credential = try Credential.coordinator.store(token: token, tags: [:], security: [])
 
         XCTAssertEqual(storage.allIDs, [token.id])
@@ -87,6 +88,7 @@ final class UserCoordinatorTests: XCTestCase {
         XCTAssertEqual(Credential.coordinator.default, credential)
     }
     
+    @CredentialActor
     func testNotifications() async throws {
         let notificationCenter = NotificationCenter()
         try await TaskData.$notificationCenter.withValue(notificationCenter) {

@@ -81,13 +81,14 @@ final class TokenExchangeFlowTests: XCTestCase {
         let delegate = TokenExchangeFlowDelegateRecorder()
         flow.add(delegate: delegate)
         
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertFalse(delegate.started)
         
         // Exchange code
         let _ = try await flow.start(with: tokens)
+        await MainActor.yield()
 
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertTrue(delegate.finished)
         
@@ -102,7 +103,7 @@ final class TokenExchangeFlowTests: XCTestCase {
     }
 
     func testAuthenticationSucceeded() async throws {
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
 
         let expect = expectation(description: "resume")
         flow.start(with: tokens) { result in
@@ -114,7 +115,7 @@ final class TokenExchangeFlowTests: XCTestCase {
         }
         await fulfillment(of: [expect], timeout: 1)
 
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
 
         XCTAssertEqual(urlSession.requests.count, 3)
 
@@ -127,11 +128,11 @@ final class TokenExchangeFlowTests: XCTestCase {
     }
 
     func testAsyncAuthenticationSucceeded() async throws {
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
 
         let _ = try await flow.start(with: tokens)
         
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
 
         XCTAssertEqual(urlSession.requests.count, 3)
         

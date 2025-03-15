@@ -204,7 +204,7 @@ extension CredentialCoordinatorImpl: OAuth2ClientDelegate {
             return
         }
 
-        withAsyncGroup {
+        withIsolationSync {
             do {
                 try await self.tokenStorage.replace(token: token.id,
                                                     with: newToken,

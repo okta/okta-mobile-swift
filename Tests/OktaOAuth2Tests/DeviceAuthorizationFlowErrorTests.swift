@@ -105,8 +105,8 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
 
     func performAuthenticationFlow(isAsync: Bool) async throws {
         // Ensure the initial state
-        await XCTAssertNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
         nonisolated(unsafe) var verification: DeviceAuthorizationFlow.Verification?
@@ -127,12 +127,12 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
         }
 
         verification = try XCTUnwrap(verification)
-        try await XCTAssertEqualAsync(await flow.context?.verification?.deviceCode, verification?.deviceCode)
-        await XCTAssertTrueAsync(await flow.isAuthenticating)
-        await XCTAssertNotNilAsync(await flow.context?.verification?.verificationUri)
-        try await XCTAssertEqualAsync(verification, await flow.context?.verification)
-        try await XCTAssertEqualAsync(await flow.context?.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
-        try await XCTAssertEqualAsync(await flow.context?.verification?.interval, 1)
+        XCTAssertEqual(flow.context?.verification?.deviceCode, verification?.deviceCode)
+        XCTAssertTrue(flow.isAuthenticating)
+        XCTAssertNotNil(flow.context?.verification?.verificationUri)
+        XCTAssertEqual(verification, flow.context?.verification)
+        XCTAssertEqual(flow.context?.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
+        XCTAssertEqual(flow.context?.verification?.interval, 1)
 
         // Exchange code
         nonisolated(unsafe) var token: Token?
@@ -152,8 +152,8 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
             await fulfillment(of: [resumeWait], timeout: 2)
         }
 
-        await XCTAssertNotNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertNotNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }
 }

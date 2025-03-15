@@ -83,12 +83,13 @@ final class JWTAuthorizationFlowTests: XCTestCase {
         let delegate = JWTAuthorizationFlowDelegateRecorder()
         flow.add(delegate: delegate)
         
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertFalse(delegate.started)
-        
+
         let token = try await flow.start(with: jwt)
-        
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        await MainActor.yield()
+
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertEqual(token, delegate.token)
         XCTAssertTrue(delegate.finished)
@@ -109,7 +110,7 @@ final class JWTAuthorizationFlowTests: XCTestCase {
     }
     
     func testAuthenticationSucceeded() async throws {
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
 
         let expect = expectation(description: "start")
         flow.start(with: jwt) { result in
@@ -121,7 +122,7 @@ final class JWTAuthorizationFlowTests: XCTestCase {
         }
         await fulfillment(of: [expect], timeout: 1)
 
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertEqual(urlSession.requests.count, 3)
 
         let request = try XCTUnwrap(urlSession.requests.first(where: { request in
@@ -133,11 +134,11 @@ final class JWTAuthorizationFlowTests: XCTestCase {
     }
     
     func testAsyncAuthenticationSucceeded() async throws {
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
 
         let _ = try await flow.start(with: jwt)
 
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertEqual(urlSession.requests.count, 3)
         
         let request = try XCTUnwrap(urlSession.requests.first(where: { request in

@@ -25,12 +25,12 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     /// This can be used as a convenience to store a user's token within storage, and to access the user in a safe way. If the user's token isn't stored, this will automatically store the token for later use.
     public static var `default`: Credential? {
         get {
-            withAsyncGroup { @CredentialActor in
+            withIsolationSync { @CredentialActor in
                 coordinator.default
             }
         }
         set {
-            withAsyncGroup { @CredentialActor in
+            withIsolationSync { @CredentialActor in
                 coordinator.default = newValue
             }
         }
@@ -38,7 +38,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     
     /// Lists all users currently stored within the user's application.
     public static var allIDs: [String] {
-        withAsyncGroup { @CredentialActor in
+        withIsolationSync { @CredentialActor in
             coordinator.allIDs
         } ?? []
     }
@@ -113,7 +113,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
                              tags: [String: String] = [:],
                              security options: [Security] = Security.standard
     ) throws -> Credential {
-        try withAsyncThrowingGroup { @CredentialActor in
+        try withIsolationSyncThrowing { @CredentialActor in
             try coordinator.store(token: token, tags: tags, security: options)
         }
     }
@@ -165,7 +165,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
             throw CredentialError.missingCoordinator
         }
      
-        metadata = try withAsyncThrowingGroup { @CredentialActor in
+        metadata = try withIsolationSyncThrowing { @CredentialActor in
             let metadata = Token.Metadata(token: self.token, tags: tags)
             try coordinator.tokenStorage.setMetadata(metadata)
             return metadata
@@ -223,7 +223,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
             throw CredentialError.missingCoordinator
         }
 
-        try withAsyncThrowingGroup { @CredentialActor in
+        try withIsolationSyncThrowing { @CredentialActor in
             try coordinator.remove(credential: self)
         }
     }
@@ -266,7 +266,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
         if let coordinator,
             shouldRemove(for: type)
         {
-            try withAsyncThrowingGroup { @CredentialActor in
+            try withIsolationSyncThrowing { @CredentialActor in
                 try coordinator.remove(credential: self)
             }
         }
@@ -371,7 +371,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
 
                 let id = id
                 if let coordinator,
-                   let metadata = withAsyncGroup({
+                   let metadata = withIsolationSync({
                        try? await coordinator.tokenStorage.metadata(for: id)
                    })
                 {

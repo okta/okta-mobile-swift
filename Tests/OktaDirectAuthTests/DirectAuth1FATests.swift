@@ -44,13 +44,13 @@ final class DirectAuth1FATests: XCTestCase {
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testUserAndPassword() async throws {
         // Ensure the initial state
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
         let state = try await flow.start("jane.doe@example.com",
                                          with: .password("SuperSecret"))
         
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         switch state {
         case .success(let token):
             XCTAssertNotNil(token.refreshToken)
@@ -64,13 +64,13 @@ final class DirectAuth1FATests: XCTestCase {
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testUserAndOTP() async throws {
         // Ensure the initial state
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
         let state = try await flow.start("jane.doe@example.com",
                                          with: .otp(code: "123456"))
 
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         switch state {
         case .success(let token):
             XCTAssertNotNil(token.refreshToken)
@@ -84,13 +84,13 @@ final class DirectAuth1FATests: XCTestCase {
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testUserAndOOBPush() async throws {
         // Ensure the initial state
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
         let state = try await flow.start("jane.doe@example.com",
                                          with: .oob(channel: .push))
         
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         switch state {
         case .success(let token):
             XCTAssertNotNil(token.refreshToken)

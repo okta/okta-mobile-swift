@@ -18,7 +18,7 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
                      loginHint: String? = nil) async throws -> any StepHandler
     {
-        guard let context = await flow.context else {
+        guard let context = await flow._context else {
             throw DirectAuthenticationFlowError.inconsistentContextState
         }
         

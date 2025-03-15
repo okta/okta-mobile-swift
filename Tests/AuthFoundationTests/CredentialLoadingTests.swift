@@ -15,13 +15,12 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
-@CredentialActor
 final class CredentialLoadingTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: UserDefaultsTokenStorage!
     var coordinator: CredentialCoordinatorImpl!
     
-    override func setUpWithError() throws {
+    override func setUp() async throws {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
 
@@ -37,14 +36,15 @@ final class CredentialLoadingTests: XCTestCase {
         let tokenCount = await storage.allIDs.count
         XCTAssertEqual(tokenCount, 0)
     }
-    
-    override func tearDownWithError() throws {
+
+    override func tearDown() async throws {
         userDefaults.removePersistentDomain(forName: name)
         userDefaults = nil
         storage = nil
         coordinator = nil
     }
-    
+
+    @CredentialActor
     func testFetchingTokens() throws {
         let tokenA = Token.mockToken(id: "TokenA")
         let tokenB = Token.mockToken(id: "TokenB")

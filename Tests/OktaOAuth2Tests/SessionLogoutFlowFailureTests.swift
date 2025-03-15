@@ -44,18 +44,18 @@ class SessionLogoutFlowFailureTests: XCTestCase {
         let delegate = SessionLogoutFlowDelegateRecorder()
         flow.add(delegate: delegate)
         
-        await XCTAssertNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.inProgress)
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.inProgress)
         XCTAssertNil(delegate.url)
         XCTAssertNil(delegate.error)
         
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         let error = await XCTAssertThrowsErrorAsync(try await flow.start(with: context))
 
-        await XCTAssertFalseAsync(await flow.inProgress)
-        await XCTAssertNotNilAsync(await flow.context)
-        try await XCTAssertEqualAsync(await flow.context, context)
-        await XCTAssertNilAsync(await flow.context?.logoutURL)
+        XCTAssertFalse(flow.inProgress)
+        XCTAssertNotNil(flow.context)
+        XCTAssertEqual(flow.context, context)
+        XCTAssertNil(flow.context?.logoutURL)
 
         XCTAssertNil(delegate.url)
         XCTAssertEqual(error as? OAuth2Error, OAuth2Error.cannotComposeUrl)
@@ -63,8 +63,8 @@ class SessionLogoutFlowFailureTests: XCTestCase {
     }
 
     func testWithBlocks() async throws {
-        await XCTAssertNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.inProgress)
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.inProgress)
 
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         let expectation = expectation(description: "Expect success")
@@ -79,9 +79,9 @@ class SessionLogoutFlowFailureTests: XCTestCase {
         }
         await fulfillment(of: [expectation], timeout: 1)
 
-        await XCTAssertFalseAsync(await flow.inProgress)
-        await XCTAssertNotNilAsync(await flow.context)
-        try await XCTAssertEqualAsync(await flow.context, context)
-        await XCTAssertNilAsync(await flow.context?.logoutURL)
+        XCTAssertFalse(flow.inProgress)
+        XCTAssertNotNil(flow.context)
+        XCTAssertEqual(flow.context, context)
+        XCTAssertNil(flow.context?.logoutURL)
     }
 }

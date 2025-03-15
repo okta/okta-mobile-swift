@@ -12,13 +12,8 @@
 
 import Foundation
 
-extension ResourceOwnerFlow {
-    @_documentation(visibility: private)
-    @available(*, deprecated, renamed: "init(issuerURL:clientId:scope:additionalParameters:)")
-    public init(issuer: URL,
-                clientId: String,
-                scopes: String)
-    {
-        self.init(issuerURL: issuer, clientId: clientId, scope: .init(rawValue: scopes))
+extension MainActor {
+    static func yield() async {
+        await MainActor.run { _ = () }
     }
 }

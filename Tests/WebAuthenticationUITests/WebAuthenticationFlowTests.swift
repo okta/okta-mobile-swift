@@ -17,16 +17,17 @@ import AuthenticationServices
 @testable import OktaOAuth2
 @testable import WebAuthenticationUI
 
-@MainActor
 class WebAuthenticationFlowTests: XCTestCase {
     private let issuer = URL(string: "https://example.okta.com")!
     private let redirectUri = URL(string: "com.example:/callback")!
     private let logoutRedirectUri = URL(string: "com.example:/logout")!
     private let urlSession = URLSessionMock()
     private var client: OAuth2Client!
-    
-    override func setUpWithError() throws {
-        WebAuthentication.providerFactory = WebAuthenticationProviderFactoryMock.self
+
+    override func setUp() async throws {
+        await MainActor.run {
+            WebAuthentication.providerFactory = WebAuthenticationProviderFactoryMock.self
+        }
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
         Token.accessTokenValidator = MockTokenHashValidator()
@@ -48,12 +49,15 @@ class WebAuthenticationFlowTests: XCTestCase {
                           contentType: "application/json")
     }
     
-    override func tearDownWithError() throws {
-        WebAuthentication.resetToDefault()
+    override func tearDown() async throws {
+        await MainActor.run {
+            WebAuthentication.resetToDefault()
+        }
         JWK.resetToDefault()
         Token.resetToDefault()
     }
-    
+
+    @MainActor
     func testStart() async throws {
         let webAuth = try WebAuthentication(client: client,
                                             additionalParameters: ["testName": name])
@@ -80,7 +84,8 @@ class WebAuthenticationFlowTests: XCTestCase {
         XCTAssertEqual(authorizeQueryItems?["state"], "qwe")
         XCTAssertEqual(redirectUri.absoluteString, "com.example:/callback")
     }
-    
+
+    @MainActor
     func testLogout() async throws {
         let webAuth = try WebAuthentication(client: client,
                                             additionalParameters: ["testName": name])

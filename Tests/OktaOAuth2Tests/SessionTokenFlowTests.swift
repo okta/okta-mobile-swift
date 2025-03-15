@@ -81,16 +81,17 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
         flow.add(delegate: delegate)
 
         // Ensure the initial state
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertFalse(delegate.started)
 
         MockSessionTokenFlowURLExchange.resultUrl.wrappedValue = URL(string: "com.example:/callback?code=abc123&state=state")
 
         // Authenticate
         let token = try await flow.start(with: "theSessionToken", context: .init(state: "state"))
+        await MainActor.yield()
 
         XCTAssertTrue(delegate.started)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertEqual(token, delegate.token)
         XCTAssertTrue(delegate.finished)
@@ -98,14 +99,14 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
 
     func testWithAsync() async throws {
         // Ensure the initial state
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
 
         MockSessionTokenFlowURLExchange.resultUrl.wrappedValue = URL(string: "com.example:/callback?code=abc123&state=state")
 
         // Authenticate
         let token = try await flow.start(with: "theSessionToken", context: .init(state: "state"))
 
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }
 }

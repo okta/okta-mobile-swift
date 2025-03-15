@@ -192,7 +192,7 @@ public final class WebAuthentication {
     
     /// Cancels the authentication session.
     public final func cancel() {
-        withAsyncGroup {
+        withIsolationSync {
             await self.signInFlow.reset()
             await self.signOutFlow?.reset()
         }

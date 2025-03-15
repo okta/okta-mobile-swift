@@ -79,7 +79,7 @@ public func withExpression<T: Sendable>(
     }
 }
 
-/// Executes a throwing asynchronous task within a synchronous context.
+/// Executes an isolated asynchronous throwing task within a synchronous context.
 ///
 /// This utilizes a dispatch group to perform an async operation while ensuring the value can be returned synchronously.
 /// - Parameters:
@@ -115,7 +115,7 @@ public func withIsolationSyncThrowing<T: Sendable>(priority: TaskPriority? = nil
     }
 }
 
-/// Executes an asynchronous task within a synchronous context.
+/// Executes an isolated asynchronous task within a synchronous context.
 ///
 /// This utilizes a dispatch group to perform an async operation while ensuring the value can be returned synchronously.
 ///

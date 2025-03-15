@@ -85,22 +85,14 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
     public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    public private(set) var isAuthenticating: Bool = false {
-        didSet {
-            guard oldValue != isAuthenticating else {
-                return
-            }
-            
-            if isAuthenticating {
-                delegateCollection.invoke { $0.authenticationStarted(flow: self) }
-            } else {
-                delegateCollection.invoke { $0.authenticationFinished(flow: self) }
-            }
-        }
+    nonisolated public var isAuthenticating: Bool {
+        withIsolationSync { await self._isAuthenticating } ?? false
     }
-    
+
     /// The context that stores the state for the current authentication session.
-    public private(set) var context: Context?
+    nonisolated public var context: Context? {
+        withIsolationSync { await self._context }
+    }
 
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
@@ -172,25 +164,29 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
     ///   - context: Optional context to provide when customizing the state parameter.
     /// - Returns: The URL a user should be presented with within a browser, to continue authorization.
     public func start(with context: Context = .init()) async throws -> URL {
-        self.context = context
-        isAuthenticating = true
+        _context = context
+        _isAuthenticating = true
 
         return try await withExpression {
             var context = context
             let url = try self.createAuthenticationURL(from: try await client.openIdConfiguration().authorizationEndpoint,
                                                        using: context)
             context.authenticationURL = url
-            self.context = context
+            _context = context
 
-            delegateCollection.invoke { delegate in
-                delegate.authentication(flow: self, shouldAuthenticateUsing: url)
+            await MainActor.run {
+                delegateCollection.invoke { $0.authentication(flow: self, shouldAuthenticateUsing: url) }
             }
 
             return url
         } success: { result in
-            delegateCollection.invoke { $0.authentication(flow: self, shouldAuthenticateUsing: result) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, shouldAuthenticateUsing: result) }
+            }
         } failure: { error in
-            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            }
             finished()
         }
     }
@@ -209,7 +205,7 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
                 throw OAuth2Error.missingRedirectUri
             }
 
-            guard let context = self.context else {
+            guard let context = _context else {
                 throw OAuth2Error.missingClientConfiguration
             }
 
@@ -220,13 +216,19 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
                                            context: context,
                                            authorizationCode: code)
             let response = try await client.exchange(token: request)
-            
-            delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+
+            await MainActor.run {
+                delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+            }
             return response.result
         } success: { result in
-            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            }
         } failure: { error in
-            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            }
         } finally: {
             finished()
         }
@@ -234,11 +236,11 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
     
     public func reset() {
         finished()
-        context = nil
+        _context = nil
     }
 
     func finished() {
-        isAuthenticating = false
+        _isAuthenticating = false
     }
 
     // MARK: Private properties / methods

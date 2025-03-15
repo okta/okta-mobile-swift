@@ -44,13 +44,13 @@ final class DirectAuth2FATests: XCTestCase {
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testUserPasswordAndOOB() async throws {
         // Ensure the initial state
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
         let state = try await flow.start("jane.doe@example.com",
                                          with: .password("SuperSecret"))
         
-        await XCTAssertTrueAsync(await flow.isAuthenticating)
+        XCTAssertTrue(flow.isAuthenticating)
         switch state {
         case .success(_):
             XCTFail("Not expecting a successful token response")
@@ -69,6 +69,6 @@ final class DirectAuth2FATests: XCTestCase {
         case .continuation(_):
             XCTFail("Not expecting continuation status")
         }
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
     }
 }

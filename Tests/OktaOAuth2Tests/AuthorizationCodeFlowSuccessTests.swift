@@ -87,10 +87,10 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         flow.add(delegate: delegate)
 
         // Ensure the initial state
-        await XCTAssertNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertFalse(delegate.started)
-        
+
         // Begin
         let context = AuthorizationCodeFlow.Context(pkce: nil,
                                                     nonce: "nonce_string",
@@ -99,21 +99,23 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
                                                     state: "ABC123",
                                                     additionalParameters: ["foo": "bar"])
         let url = try await flow.start(with: context)
+        await MainActor.yield()
 
-        try await XCTAssertEqualAsync(await flow.context?.state, context.state)
-        await XCTAssertTrueAsync(await flow.isAuthenticating)
-        await XCTAssertNotNilAsync(await flow.context?.authenticationURL)
-        try await XCTAssertEqualAsync(url, await flow.context?.authenticationURL)
+        XCTAssertEqual(flow.context?.state, context.state)
+        XCTAssertTrue(flow.isAuthenticating)
+        XCTAssertNotNil(flow.context?.authenticationURL)
+        XCTAssertEqual(url, flow.context?.authenticationURL)
         XCTAssertEqual(url.absoluteString,
                        "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&foo=bar&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123#customizedUrl")
         XCTAssertTrue(delegate.started)
-        try await XCTAssertEqualAsync(await flow.context?.authenticationURL, delegate.url)
+        XCTAssertEqual(flow.context?.authenticationURL, delegate.url)
 
         // Exchange code
         let token = try await flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!)
+        await MainActor.yield()
 
-        await XCTAssertNotNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertNotNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertEqual(token, delegate.token)
         XCTAssertTrue(delegate.finished)
@@ -121,8 +123,8 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
 
     func testWithBlocks() async throws {
         // Ensure the initial state
-        await XCTAssertNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
         let context = AuthorizationCodeFlow.Context(pkce: nil,
@@ -144,11 +146,11 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         }
         await fulfillment(of: [startWait], timeout: 1)
 
-        try await XCTAssertEqualAsync(await flow.context?.state, context.state)
-        await XCTAssertTrueAsync(await flow.isAuthenticating)
-        await XCTAssertNotNilAsync(await flow.context?.authenticationURL)
-        try await XCTAssertEqualAsync(url, await flow.context?.authenticationURL)
-        try await XCTAssertEqualAsync(await flow.context?.authenticationURL?.absoluteString,
+        XCTAssertEqual(flow.context?.state, context.state)
+        XCTAssertTrue(flow.isAuthenticating)
+        XCTAssertNotNil(flow.context?.authenticationURL)
+        XCTAssertEqual(url, flow.context?.authenticationURL)
+        XCTAssertEqual(flow.context?.authenticationURL?.absoluteString,
                        "https://example.okta.com/oauth2/v1/authorize?acr_values=some:acr:value&additional=param&client_id=clientId&foo=bar&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
 
         // Exchange code
@@ -165,8 +167,8 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         }
         await fulfillment(of: [resumeWait], timeout: 1)
 
-        await XCTAssertNotNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertNotNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
         
         XCTAssertEqual(token?.context.clientSettings, [
@@ -186,8 +188,8 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
 
     func testWithAsync() async throws {
         // Ensure the initial state
-        await XCTAssertNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
         let context = AuthorizationCodeFlow.Context(pkce: nil,
@@ -198,18 +200,18 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
                                                     additionalParameters: ["foo": "bar"])
         let url = try await flow.start(with: context)
         
-        try await XCTAssertEqualAsync(await flow.context?.state, context.state)
-        await XCTAssertTrueAsync(await flow.isAuthenticating)
-        await XCTAssertNotNilAsync(await flow.context?.authenticationURL)
-        try await XCTAssertEqualAsync(url, await flow.context?.authenticationURL)
-        try await XCTAssertEqualAsync(await flow.context?.authenticationURL?.absoluteString,
+        XCTAssertEqual(flow.context?.state, context.state)
+        XCTAssertTrue(flow.isAuthenticating)
+        XCTAssertNotNil(flow.context?.authenticationURL)
+        XCTAssertEqual(url, flow.context?.authenticationURL)
+        XCTAssertEqual(flow.context?.authenticationURL?.absoluteString,
                        "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&foo=bar&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
 
         // Exchange code
         let token = try await flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!)
-        
-        await XCTAssertNotNilAsync(await flow.context)
-        await XCTAssertFalseAsync(await flow.isAuthenticating)
+
+        XCTAssertNotNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }
     

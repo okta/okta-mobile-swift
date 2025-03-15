@@ -10,7 +10,6 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
 import XCTest
 @testable import AuthFoundation
 import TestCommon
@@ -49,7 +48,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
                                                                           scope: "openid"),
                                                      clientSettings: nil))
 
-    override func setUpWithError() throws {
+    override func setUp() async throws {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
         storage = await UserDefaultsTokenStorage(userDefaults: userDefaults)
@@ -58,13 +57,14 @@ final class UserDefaultTokenStorageTests: XCTestCase {
         XCTAssertEqual(tokenCount, 0)
     }
     
-    override func tearDownWithError() throws {
+    override func tearDown() async throws {
         userDefaults.removePersistentDomain(forName: name)
 
         userDefaults = nil
         storage = nil
     }
-    
+
+    @CredentialActor
     func testDefaultToken() throws {
         try storage.add(token: token, metadata: nil, security: [])
         XCTAssertEqual(storage.allIDs.count, 1)
@@ -87,6 +87,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
         XCTAssertEqual(storage.allIDs.count, 0)
     }
 
+    @CredentialActor
     func testImplicitDefaultToken() throws {
         XCTAssertNil(storage.defaultTokenID)
         
@@ -96,6 +97,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
         XCTAssertEqual(storage.defaultTokenID, token.id)
     }
 
+    @CredentialActor
     func testRemoveDefaultToken() throws {
         try storage.add(token: token, metadata: nil, security: [])
         try storage.setDefaultTokenID(token.id)
@@ -106,4 +108,3 @@ final class UserDefaultTokenStorageTests: XCTestCase {
         XCTAssertNil(storage.defaultTokenID)
     }
 }
-#endif

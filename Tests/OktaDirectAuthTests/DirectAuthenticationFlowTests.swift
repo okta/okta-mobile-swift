@@ -58,15 +58,9 @@ struct TestFactor: AuthenticationFactor {
         return TestStepHandler(flow: flow,
                                openIdConfiguration: openIdConfiguration,
                                loginHint: loginHint,
-                               context: await flow.context!,
+                               context: await flow._context!,
                                factor: self,
                                result: result)
-    }
-}
-
-extension DirectAuthenticationFlow {
-    func setContext(_ context: Context?) async {
-        self.context = context
     }
 }
 
