@@ -253,7 +253,6 @@ workflows:
             branches:
               only:
                 - master
-                - /^release\/.*/
       - general-platform-helpers/job-snyk-prepare:
           name: prepare-snyk
           requires:
