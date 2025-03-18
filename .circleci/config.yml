@@ -212,7 +212,12 @@ jobs:
 workflows:
   ui-tests:
     jobs:
-      - setup
+      - setup:
+          filters:
+            branches:
+              only:
+                - master
+                - /^release\/.*/
       - test-websignin-ios:
           requires:
             - setup
@@ -248,6 +253,7 @@ workflows:
             branches:
               only:
                 - master
+                - /^release\/.*/
       - general-platform-helpers/job-snyk-prepare:
           name: prepare-snyk
           requires:

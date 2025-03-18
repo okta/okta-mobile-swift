@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - release/**
     paths:
       - '.github/workflows/documentation.yml'
       - 'Sources/**/*.swift'
@@ -11,6 +12,7 @@ on:
   pull_request:
     branches:
       - master
+      - release/**
     paths:
       - '.github/workflows/documentation.yml'
       - 'Sources/**/*.swift'
