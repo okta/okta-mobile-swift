@@ -32,5 +32,5 @@ extension OAuth2Client.KeysRequest: OAuth2APIRequest {
     var query: [String: APIRequestArgument?]? {
         [ "client_id": clientId ]
     }
-    var cachePolicy: URLRequest.CachePolicy { .returnCacheDataElseLoad }
+    var cachePolicy: URLRequest.CachePolicy { .useProtocolCachePolicy }
 }
