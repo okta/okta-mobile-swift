@@ -1,0 +1,976 @@
+{
+  "abstract" : [
+    {
+      "text" : "An individual result within a keychain search.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation8KeychainV6SearchV6ResultV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Result"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Result"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "Keychain.Search.Result"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Result"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/accessControl",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/accessGroup",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/accessibility",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/account",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/creationDate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/description",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/generic",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/label",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/modificationDate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/server",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/service",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/synchronizable"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/delete()",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/get(prompt:authenticationContext:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/update(_:authenticationContext:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/keychain\/search\/result"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain": {
+  "abstract" : [
+    {
+      "text" : "Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Keychain"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Keychain"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Item": {
+  "abstract" : [
+    {
+      "text" : "Defines an individual keychain item. This may be created using the designated initializer for the purposes of saving a new keychain item, or may be created as the result of getting a preexisting item from the keychain.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Item"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Item"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Item",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/item"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search": {
+  "abstract" : [
+    {
+      "text" : "Defines a search for keychain items.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Search"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Search"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Search",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result": {
+  "abstract" : [
+    {
+      "text" : "An individual result within a keychain search.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Result"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Result"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Search.Result",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/accessControl": {
+  "abstract" : [
+    {
+      "text" : "The access control settings for this item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "accessControl"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@SecAccessControlRef",
+      "text" : "SecAccessControl"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/accessControl",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "accessControl",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/accesscontrol"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/accessGroup": {
+  "abstract" : [
+    {
+      "text" : "The access group for this keychain item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "accessGroup"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/accessGroup",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "accessGroup",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/accessgroup"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/accessibility": {
+  "abstract" : [
+    {
+      "text" : "The accessibility level for this keychain item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "accessibility"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV13AccessibilityO",
+      "text" : "Accessibility"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/accessibility",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "accessibility",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/accessibility"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/account": {
+  "abstract" : [
+    {
+      "text" : "The account for this item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "account"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/account",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "account",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/account"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/creationDate": {
+  "abstract" : [
+    {
+      "text" : "The date this keychain item was created.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "creationDate"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/creationDate",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "creationDate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/creationdate"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/delete()": {
+  "abstract" : [
+    {
+      "text" : "Deletes an individual search result.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "delete"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/delete()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "delete()",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/delete()"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/description": {
+  "abstract" : [
+    {
+      "text" : "The description for this keychain item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/description",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "description",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/description"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/generic": {
+  "abstract" : [
+    {
+      "text" : "The generic, publicly-visible, data associated with this keychain item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "generic"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/generic",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "generic",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/generic"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/get(prompt:authenticationContext:)": {
+  "abstract" : [
+    {
+      "text" : "Fetches the complete ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " for this individual search result.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "get"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "prompt"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation29KeychainAuthenticationContextP",
+      "text" : "KeychainAuthenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV4ItemV",
+      "text" : "Item"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/get(prompt:authenticationContext:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "get(prompt:authenticationContext:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/get(prompt:authenticationcontext:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/label": {
+  "abstract" : [
+    {
+      "text" : "The label that summarizes this keychain item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "label"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/label",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "label",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/label"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/modificationDate": {
+  "abstract" : [
+    {
+      "text" : "The date this keychain item was modified.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "modificationDate"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/modificationDate",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "modificationDate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/modificationdate"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/server": {
+  "abstract" : [
+    {
+      "text" : "The server for this keychain item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "server"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/server",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "server",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/server"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/service": {
+  "abstract" : [
+    {
+      "text" : "The service name for this keychain item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "service"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/service",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "service",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/service"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/synchronizable": {
+  "abstract" : [
+    {
+      "text" : "Indicates whether or not this keychain item may be synchronized to iCloud Keychain.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "synchronizable"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/synchronizable",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "synchronizable",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/synchronizable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/update(_:authenticationContext:)": {
+  "abstract" : [
+    {
+      "text" : "Updates the keychain item with the values supplied in the included item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "update"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV4ItemV",
+      "text" : "Item"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation29KeychainAuthenticationContextP",
+      "text" : "KeychainAuthenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/update(_:authenticationContext:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "update(_:authenticationContext:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/update(_:authenticationcontext:)"
+}
+}
+}

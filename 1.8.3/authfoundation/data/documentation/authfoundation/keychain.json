@@ -1,0 +1,1199 @@
+{
+  "abstract" : [
+    {
+      "text" : "Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation8KeychainV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Keychain"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Keychain"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "Keychain"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Keychain"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This struct represents a collection of similar objects that can be used to represent keychain items, searches, and search results, with the goal of simplifying keychain operations in a more expressive way.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "At this time, only Generic Password items are supported by this struct.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        },
+        {
+          "anchor" : "Creating-Keychain-Items",
+          "level" : 2,
+          "text" : "Creating Keychain Items",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " struct represents individual items in the keychain. It can be used to create new items, and is returned as a result when getting an existing item.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let data = \"My Secret\".data(using: .utf8)",
+            "let item = Keychain.Item(account: \"userId\",",
+            "                         service: \"com.example.myService\",",
+            "                         accessibility: .afterFirstUnlockThisDeviceOnly,",
+            "                         value: data!)",
+            "let savedItem = try item.save()"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Getting-an-Individual-Keychain-Item",
+          "level" : 2,
+          "text" : "Getting an Individual Keychain Item",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When you know the exact account you would like to retrieve, you can perform a search to get an individual ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ". To do this, you use the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/get(prompt:authenticationContext:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " method.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let search = Keychain.Search(account: \"userId\",",
+            "                             service: \"com.example.myService\")",
+            "let item = try search.get()"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Searching-for-Keychain-Items",
+          "level" : 2,
+          "text" : "Searching for Keychain Items",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When you need to get a list of keychain items, you can use the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/list()",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " method to get a list of results. The items in this search do not request the secret data stored within the items, meaning it should be safe to perform without triggering biometric prompts or encountering other accessibility restrictions.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let search = Keychain.Search(account: \"userId\",",
+            "                             service: \"com.example.myService\")",
+            "for result in try search.list() {",
+            "    \/\/ Do something with the result",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " type represents individual results. This contains the public information for each item.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Deleting-Keychain-Items",
+          "level" : 2,
+          "text" : "Deleting Keychain Items",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You can delete individual keychain items from either a ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " instance.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For example, to delete an item:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let search = Keychain.Search(account: \"userId\",",
+            "                             service: \"com.example.myService\")",
+            "let item = try search.get()",
+            "try item.delete()"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Or when you have an individual search result, you can perform a deletion at that time.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let search = Keychain.Search(account: \"userId\",",
+            "                             service: \"com.example.myService\")",
+            "if let result = try search.list().first {",
+            "    try result.delete()",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "If you wish to delete multiple items, you can perform a delete on the Search itself. For example, to delete all items within a given service:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "try Keychain.Search(service: \"com.example.myService\").delete()"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Updating-Keychain-Items",
+          "level" : 2,
+          "text" : "Updating Keychain Items",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Several objects also support the ability to be updated, for example ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item\/update(_:authenticationContext:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/update(_:authenticationContext:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".  To do this, you supply a new ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " to be used when updating and replacing the old item.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let oldItem = Keychain.Search(account: \"userId\",",
+            "                              service: \"com.example.myService\").get()",
+            "let newItem = Keychain.Item(account: \"userId\",",
+            "                            service: \"com.example.myService\",",
+            "                            value: \"New Value\".data(using: .utf8)!)",
+            "try oldItem.update(newItem)"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Working-with-Keychain-Accessibility-and-Access-Control",
+          "level" : 2,
+          "text" : "Working with Keychain Accessibility and Access Control",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "One of the more complex parts of using the keychain is controlling keychain accessibility, defining access control, and working with Local Authentication contexts.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To simplify this process, the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " enum is provided to simplify how accessibility is defined.  This can be used when creating a new ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " as well as when updating a keychain item (for example, to change the keychain accessibility of an existing item).",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let data = \"My Secret\".data(using: .utf8)",
+            "let item = Keychain.Item(account: \"userId\",",
+            "                         accessibility: .afterFirstUnlockThisDeviceOnly,",
+            "                         value: data!)",
+            "let savedItem = try item.save()"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In a similar fashion, you can pass a ",
+              "type" : "text"
+            },
+            {
+              "code" : "SecAccessControl",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " instance when saving an item, to define custom access settings such as biometric, user presence, etc.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Biometric-Prompts-and-Authentication-Context",
+          "level" : 2,
+          "text" : "Biometric Prompts and Authentication Context",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Many operations, such as ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/get(prompt:authenticationContext:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/get(prompt:authenticationContext:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", or ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/update(_:authenticationContext:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", can accept either a user-facing message, and an authentication context, that can be used to help with prompting the user for biometric access.  The prompt is used when asking the user for FaceID or TouchID access, to explain to the user why they need to provide access.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The authentication context, from the LocalAuthentication framework, can additionally be supplied to further provide controls over how and when biometric propts are provided to the user.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainAuthenticationContext",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenAuthenticationContext"
+      ],
+      "title" : "Security"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search"
+      ],
+      "title" : "Structures"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility"
+      ],
+      "title" : "Enumerations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/keychain"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain": {
+  "abstract" : [
+    {
+      "text" : "Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Keychain"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Keychain"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility": {
+  "abstract" : [
+    {
+      "text" : "Defines the accessibility level for keychain items.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Accessibility"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Accessibility"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Accessibility",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/accessibility"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Item": {
+  "abstract" : [
+    {
+      "text" : "Defines an individual keychain item. This may be created using the designated initializer for the purposes of saving a new keychain item, or may be created as the result of getting a preexisting item from the keychain.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Item"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Item"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Item",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/item"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Item/update(_:authenticationContext:)": {
+  "abstract" : [
+    {
+      "text" : "Updates the keychain item with the values supplied in the included item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "update"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV4ItemV",
+      "text" : "Item"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation29KeychainAuthenticationContextP",
+      "text" : "KeychainAuthenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item\/update(_:authenticationContext:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "update(_:authenticationContext:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/item\/update(_:authenticationcontext:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search": {
+  "abstract" : [
+    {
+      "text" : "Defines a search for keychain items.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Search"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Search"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Search",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result": {
+  "abstract" : [
+    {
+      "text" : "An individual result within a keychain search.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Result"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Result"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Search.Result",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/get(prompt:authenticationContext:)": {
+  "abstract" : [
+    {
+      "text" : "Fetches the complete ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " for this individual search result.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "get"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "prompt"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation29KeychainAuthenticationContextP",
+      "text" : "KeychainAuthenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV4ItemV",
+      "text" : "Item"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/get(prompt:authenticationContext:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "get(prompt:authenticationContext:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/get(prompt:authenticationcontext:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/update(_:authenticationContext:)": {
+  "abstract" : [
+    {
+      "text" : "Updates the keychain item with the values supplied in the included item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "update"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV4ItemV",
+      "text" : "Item"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation29KeychainAuthenticationContextP",
+      "text" : "KeychainAuthenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/update(_:authenticationContext:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "update(_:authenticationContext:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/update(_:authenticationcontext:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/get(prompt:authenticationContext:)": {
+  "abstract" : [
+    {
+      "text" : "Gets the first item matching this search criteria.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "get"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "prompt"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation29KeychainAuthenticationContextP",
+      "text" : "KeychainAuthenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV4ItemV",
+      "text" : "Item"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/get(prompt:authenticationContext:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "get(prompt:authenticationContext:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/get(prompt:authenticationcontext:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/list()": {
+  "abstract" : [
+    {
+      "text" : "Returns the list of keychain items matching this search criteria.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "list"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV6SearchV",
+      "text" : "Search"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV6SearchV6ResultV",
+      "text" : "Result"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/list()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "list()",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/list()"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainAuthenticationContext": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "KeychainAuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainAuthenticationContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "KeychainAuthenticationContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "KeychainAuthenticationContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainauthenticationcontext"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/TokenAuthenticationContext": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenAuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenAuthenticationContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenAuthenticationContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenAuthenticationContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokenauthenticationcontext"
+}
+}
+}

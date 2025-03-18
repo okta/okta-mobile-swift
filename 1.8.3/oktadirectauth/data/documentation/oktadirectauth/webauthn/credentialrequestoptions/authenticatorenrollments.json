@@ -1,0 +1,340 @@
+{
+  "abstract" : [
+    {
+      "text" : "Defines additional authenticator enrollment information supplied by the server.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions\/authenticatorEnrollments"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14OktaDirectAuth8WebAuthnV24CredentialRequestOptionsV24authenticatorEnrollmentsSayAE23AuthenticatorEnrollmentVGSgvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "authenticatorEnrollments"
+      },
+      {
+        "kind" : "text",
+        "text" : ": ["
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV",
+        "text" : "WebAuthn"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV24CredentialRequestOptionsV",
+        "text" : "CredentialRequestOptions"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV24CredentialRequestOptionsV23AuthenticatorEnrollmentV",
+        "text" : "AuthenticatorEnrollment"
+      },
+      {
+        "kind" : "text",
+        "text" : "]?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaDirectAuth"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "authenticatorEnrollments"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "authenticatorEnrollments"
+            },
+            {
+              "kind" : "text",
+              "text" : ": ["
+            },
+            {
+              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV",
+              "text" : "WebAuthn"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV24CredentialRequestOptionsV",
+              "text" : "CredentialRequestOptions"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions\/AuthenticatorEnrollment",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV24CredentialRequestOptionsV23AuthenticatorEnrollmentV",
+              "text" : "AuthenticatorEnrollment"
+            },
+            {
+              "kind" : "text",
+              "text" : "]?"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollments"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaDirectAuth/documentation/OktaDirectAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using Okta’s Direct Authentication API, enabling native sign-in experiences supporting Multi-Factor Authentication (MFA).",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaDirectAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn": {
+  "abstract" : [
+    {
+      "text" : "Exposes the types and classes used to authenticate using WebAuthn.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthn"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthn"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthn",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/CredentialRequestOptions": {
+  "abstract" : [
+    {
+      "text" : "Represents the credential challenge returned from the server when a WebAuthn authentication is initiated.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "CredentialRequestOptions"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "CredentialRequestOptions"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthn.CredentialRequestOptions",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/CredentialRequestOptions/AuthenticatorEnrollment": {
+  "abstract" : [
+    {
+      "text" : "Defines additional authenticator enrollment information supplied by the server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticatorEnrollment"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions\/AuthenticatorEnrollment",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticatorEnrollment"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthn.CredentialRequestOptions.AuthenticatorEnrollment",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/CredentialRequestOptions/authenticatorEnrollments": {
+  "abstract" : [
+    {
+      "text" : "Defines additional authenticator enrollment information supplied by the server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticatorEnrollments"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV",
+      "text" : "WebAuthn"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV24CredentialRequestOptionsV",
+      "text" : "CredentialRequestOptions"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV24CredentialRequestOptionsV23AuthenticatorEnrollmentV",
+      "text" : "AuthenticatorEnrollment"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions\/authenticatorEnrollments",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticatorEnrollments",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollments"
+}
+}
+}

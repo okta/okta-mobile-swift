@@ -1,0 +1,222 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/AuthenticationDelegate"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/AuthenticationDelegate\/AuthenticationDelegate-Implementations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "OktaOAuth2"
+      }
+    ],
+    "role" : "collectionGroup",
+    "roleHeading" : "API Collection",
+    "title" : "AuthenticationDelegate Implementations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/AuthenticationDelegate\/authenticationFinished(flow:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/AuthenticationDelegate\/authenticationStarted(flow:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaoauth2\/authfoundation\/authenticationdelegate\/authenticationdelegate-implementations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
+  "abstract" : [
+    {
+      "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaOAuth2",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/AuthenticationDelegate": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:14AuthFoundation22AuthenticationDelegateP",
+      "text" : "AuthenticationDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/AuthenticationDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationdelegate"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/AuthenticationDelegate/authenticationFinished(flow:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationFinished"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/AuthenticationDelegate\/authenticationFinished(flow:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationFinished(flow:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationdelegate\/authenticationfinished(flow:)"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/AuthenticationDelegate/authenticationStarted(flow:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationStarted"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/AuthenticationDelegate\/authenticationStarted(flow:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationStarted(flow:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationdelegate\/authenticationstarted(flow:)"
+}
+}
+}
