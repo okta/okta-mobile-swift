@@ -10,9 +10,11 @@ on:
       - 'Tests/**/*.swift'
     branches:
       - master
+      - release/**
   pull_request:
     branches:
       - master
+      - release/**
     paths:
       - '.github/workflows/tests.yaml'
       - 'Package.swift'
