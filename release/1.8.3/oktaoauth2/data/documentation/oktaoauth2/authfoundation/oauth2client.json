@@ -1,0 +1,511 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:e:s:14AuthFoundation12OAuth2ClientC04OktaC0E16sessionTokenFlow11redirectUri20additionalParametersAD07SessiongH0C0B03URLV_SDyS2SGSgtF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "extension"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+        "text" : "OAuth2Client"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaOAuth2",
+        "relatedModules" : [
+          "AuthFoundation"
+        ]
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "OAuth2Client"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Extended Class",
+    "symbolKind" : "extension",
+    "title" : "OAuth2Client"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "extension"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+              "text" : "OAuth2Client"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/authorizationCodeFlow(redirectUri:additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/deviceAuthorizationFlow()",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/resourceOwnerFlow()",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionLogoutFlow(logoutRedirectUri:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionTokenFlow(redirectUri:additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/tokenExchangeFlow(audience:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaoauth2\/authfoundation\/oauth2client"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
+  "abstract" : [
+    {
+      "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaOAuth2",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/authorizationCodeFlow(redirectUri:additionalParameters:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authorizationCodeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "redirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/authorizationCodeFlow(redirectUri:additionalParameters:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authorizationCodeFlow(redirectUri:additionalParameters:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/authorizationcodeflow(redirecturi:additionalparameters:)"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/deviceAuthorizationFlow()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "deviceAuthorizationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC",
+      "text" : "DeviceAuthorizationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/deviceAuthorizationFlow()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "deviceAuthorizationFlow()",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/deviceauthorizationflow()"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/resourceOwnerFlow()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "resourceOwnerFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217ResourceOwnerFlowC",
+      "text" : "ResourceOwnerFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/resourceOwnerFlow()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "resourceOwnerFlow()",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/resourceownerflow()"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/sessionLogoutFlow(logoutRedirectUri:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a new session logout flow for this redirect URI.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "logoutRedirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionLogoutFlow(logoutRedirectUri:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "sessionLogoutFlow(logoutRedirectUri:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/sessionlogoutflow(logoutredirecturi:)"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/sessionTokenFlow(redirectUri:additionalParameters:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sessionTokenFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "redirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC",
+      "text" : "SessionTokenFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionTokenFlow(redirectUri:additionalParameters:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "sessionTokenFlow(redirectUri:additionalParameters:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/sessiontokenflow(redirecturi:additionalparameters:)"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/tokenExchangeFlow(audience:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "tokenExchangeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
+      "text" : "TokenExchangeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC8AudienceO",
+      "text" : "Audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
+      "text" : "TokenExchangeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/tokenExchangeFlow(audience:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "tokenExchangeFlow(audience:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/tokenexchangeflow(audience:)"
+}
+}
+}
