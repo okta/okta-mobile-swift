@@ -8,11 +8,7 @@ on:
       - 'Sources/**/*.swift'
       - 'Samples/**/*.swift'
       - 'Tests/**/*.swift'
-    branches:
-      - master
   pull_request:
-    branches:
-      - master
     paths:
       - '.github/workflows/tests.yaml'
       - 'Package.swift'
