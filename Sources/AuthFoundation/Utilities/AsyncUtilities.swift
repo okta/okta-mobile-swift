@@ -29,7 +29,7 @@ public enum UtilityError: Error {
 /// Shared actor used to coordinate multithreaded interactions within the Credential storage subsystem.
 @globalActor
 @_documentation(visibility: private)
-final public actor CredentialActor {
+public final actor CredentialActor {
     public static let shared = CredentialActor()
     
     /// Convenience for running a block within the context of the ``CredentialActor``.

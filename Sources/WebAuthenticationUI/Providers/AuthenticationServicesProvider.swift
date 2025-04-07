@@ -139,7 +139,7 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
     private let anchor: ASPresentationAnchor?
     private let usesEphemeralSession: Bool
 
-    nonisolated(unsafe) static private var _authenticationSessionClass: any AuthenticationServicesProviderSession.Type = ASWebAuthenticationSession.self
+    nonisolated(unsafe) private static var _authenticationSessionClass: any AuthenticationServicesProviderSession.Type = ASWebAuthenticationSession.self
     nonisolated(unsafe) private var _authenticationSession: (any AuthenticationServicesProviderSession)?
 }
 

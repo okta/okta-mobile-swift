@@ -131,7 +131,7 @@ final class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                 expiresIn: response.expiresIn) { _, request in
                     let response = try await client.exchange(token: request)
                     return .success(.success(response.result))
-                }
+            }
             return try await poll.start(with: request)
         }
 
