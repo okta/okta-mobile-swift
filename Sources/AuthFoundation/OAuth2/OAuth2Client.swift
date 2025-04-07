@@ -286,7 +286,7 @@ public final class OAuth2Client: Sendable, UsesDelegateCollection {
     let refreshQueue: DispatchQueue
 
     let openIdConfigurationAction = CoalescedResult<OpenIdConfiguration>(taskName: "OpenIdConfiguration")
-    let jwksAction = CoalescedResult<JWKS>(taskName: "OpenIdConfiguration")
+    let jwksAction = CoalescedResult<JWKS>(taskName: "JWKS")
 }
 // swiftlint:enable type_body_length
 
