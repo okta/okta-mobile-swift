@@ -113,7 +113,9 @@ public final class OAuth2Client: Sendable, UsesDelegateCollection {
                                           qos: .userInitiated,
                                           attributes: .concurrent)
 
-        TaskData.notificationCenter.post(name: .oauth2ClientCreated, object: self)
+        Task { @MainActor in
+            TaskData.notificationCenter.post(name: .oauth2ClientCreated, object: self)
+        }
 
         // Ensure the Credential Coordinator can monitor this client for token refresh changes.
         Credential.coordinator.observe(oauth2: self)
