@@ -34,7 +34,11 @@ protocol AuthenticationServicesProviderSession: NSObjectProtocol, Sendable {
     func cancel()
 }
 
+#if swift(<6.0)
+extension ASWebAuthenticationSession: @unchecked Sendable, AuthenticationServicesProviderSession {}
+#else
 extension ASWebAuthenticationSession: @retroactive @unchecked Sendable, AuthenticationServicesProviderSession {}
+#endif
 
 protocol WebAuthenticationProviderFactory {
     static func createWebAuthenticationProvider(for webAuth: WebAuthentication,

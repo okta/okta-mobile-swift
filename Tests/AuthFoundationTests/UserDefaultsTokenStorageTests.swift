@@ -14,7 +14,11 @@ import XCTest
 @testable import AuthFoundation
 import TestCommon
 
+#if swift(<6.0)
+extension UserDefaults: @unchecked Sendable {}
+#else
 extension UserDefaults: @unchecked @retroactive Sendable {}
+#endif
 
 final class UserDefaultTokenStorageTests: XCTestCase {
     var userDefaults: UserDefaults!

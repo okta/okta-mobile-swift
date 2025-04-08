@@ -54,6 +54,43 @@ public final actor CredentialActor {
 ///   - success: Closure invoked when the expression is successful
 ///   - failure: Closure invoked when the expression throws an error
 /// - Returns: The result when the expression is successful
+#if swift(<6.0)
+// Work around Swift 5.10 lack of @isolated(any) functions.
+// https://github.com/swiftlang/swift-evolution/blob/main/proposals/0431-isolated-any-functions.md
+@inlinable
+@_documentation(visibility: private)
+public func withExpression<T: Sendable>(
+    @_inheritActorContext @_implicitSelfCapture _ expression: @Sendable () async throws -> T,
+    @_inheritActorContext @_implicitSelfCapture success: @escaping @Sendable (T) -> Void = { _ in },
+    @_inheritActorContext @_implicitSelfCapture failure: @Sendable (any Error) throws -> Void = { _ in },
+    @_inheritActorContext @_implicitSelfCapture finally: @escaping @Sendable () -> Void = {}) async rethrows -> T
+{
+    do {
+        let result = try await expression()
+        let successTask = Task { success(result) }
+        await successTask.value
+
+        let finallyTask = Task { finally() }
+        await finallyTask.value
+
+        return result
+    } catch {
+        do {
+            try failure(error)
+        } catch {
+            let finallyTask = Task { finally() }
+            await finallyTask.value
+
+            throw error
+        }
+
+        let finallyTask = Task { finally() }
+        await finallyTask.value
+
+        throw error
+    }
+}
+#else
 @inlinable
 @_documentation(visibility: private)
 public func withExpression<T: Sendable>(
@@ -78,6 +115,7 @@ public func withExpression<T: Sendable>(
         throw error
     }
 }
+#endif
 
 /// Executes an isolated asynchronous throwing task within a synchronous context.
 ///
