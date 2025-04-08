@@ -102,42 +102,42 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1
+          -destination "$destination" 2>&1
     - name: Test AuthFoundation
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1
+          -destination "$destination" 2>&1
     - name: Build OktaDirectAuth
       run: |
         set -o pipefail && xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1
+          -destination "$destination" 2>&1
     - name: Test OktaDirectAuth
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1
+          -destination "$destination" 2>&1
     - name: Build OktaOAuth2
       run: |
         set -o pipefail && xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1
+          -destination "$destination" 2>&1
     - name: Test OktaOAuth2
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1
+          -destination "$destination" 2>&1
     - name: Build WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -145,7 +145,7 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1
+          -destination "$destination" 2>&1
     - name: Test WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -153,4 +153,4 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1
+          -destination "$destination" 2>&1
