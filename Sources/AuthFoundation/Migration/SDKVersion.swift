@@ -47,7 +47,7 @@ private let systemName: String = {
 
 private let systemVersion: String = {
     #if os(iOS) || os(tvOS) || os(visionOS)
-        return withIsolationSync {
+        return withIsolationSync { @MainActor in
             UIDevice.current.systemVersion
         } ?? ""
     #elseif os(watchOS)
