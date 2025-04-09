@@ -12,28 +12,47 @@
 
 import Foundation
 
-#if os(iOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
-import UIKit
+final class BackgroundTask: Sendable {
+    let name: String?
 
-final class BackgroundTask {
-    let task: UIBackgroundTaskIdentifier
-    
     init(named name: String? = nil) {
-        task = UIApplication.shared.beginBackgroundTask(withName: name)
+        self.name = name
+        setup()
     }
     
     deinit {
         finish()
     }
-    
-    func finish() {
-        UIApplication.shared.endBackgroundTask(task)
+
+    #if os(iOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
+    nonisolated(unsafe) private var task: UIBackgroundTaskIdentifier?
+    private let lock = Lock()
+    #endif
+}
+
+#if os(iOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
+import UIKit
+
+extension BackgroundTask {
+    nonisolated private func setup() {
+        Task { @MainActor in
+            lock.withLock {
+                task = UIApplication.shared.beginBackgroundTask(withName: name)
+            }
+        }
+    }
+
+    nonisolated func finish() {
+        guard let task = lock.withLock({ task }) else { return }
+
+        Task { @MainActor in
+            UIApplication.shared.endBackgroundTask(task)
+        }
     }
 }
 #else
-final class BackgroundTask {
-    init(named name: String? = nil) {}
-    
-    func finish() {}
+extension BackgroundTask {
+    nonisolated private func setup() {}
+    nonisolated func finish() {}
 }
 #endif
