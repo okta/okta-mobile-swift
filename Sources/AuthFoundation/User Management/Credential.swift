@@ -349,7 +349,6 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     @CredentialActor
     static func resetToDefault() {
         coordinator.resetToDefault()
-        _CredentialAutomaticRefreshTimeIntervalToNanoseconds.wrappedValue = 1_000_000_000
     }
 
     nonisolated(unsafe) private var _token: Token
@@ -407,7 +406,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
         _automaticRefreshTask = Task(priority: .medium) {
             if timeOffset > 0 {
                 do {
-                    try await Task.sleep(nanoseconds: UInt64(timeOffset * _CredentialAutomaticRefreshTimeIntervalToNanoseconds.wrappedValue))
+                    try await Task.sleep(delay: timeOffset)
                 } catch is CancellationError {
                     lock.withLock {
                         _automaticRefreshTask = nil
@@ -421,7 +420,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
             repeat {
                 do {
                     try await refreshIfNeeded()
-                    try await Task.sleep(nanoseconds: UInt64(repeatInterval * _CredentialAutomaticRefreshTimeIntervalToNanoseconds.wrappedValue))
+                    try await Task.sleep(delay: repeatInterval)
                 } catch is CancellationError {
                     lock.withLock {
                         _automaticRefreshTask = nil
@@ -469,5 +468,3 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
         }
     }
 }
-
-let _CredentialAutomaticRefreshTimeIntervalToNanoseconds: LockedValue<Double> = 1_000_000_000

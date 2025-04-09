@@ -19,6 +19,17 @@ import Foundation
 public enum TaskData {
     /// The NotificationCenter instance that should be used when posting or observing notifications.
     @TaskLocal public static var notificationCenter: NotificationCenter = .default
+
+    /// The factor used to convert a time interval to nanoseconds.
+    ///
+    /// > Important: This is only used for testing, and should not be used in production.
+    @TaskLocal static var timeIntervalToNanoseconds: Double = 1_000_000_000
+}
+
+extension Task where Success == Never, Failure == Never {
+    static func sleep(delay: TimeInterval) async throws {
+        try await Task.sleep(nanoseconds: UInt64(delay * TaskData.timeIntervalToNanoseconds))
+    }
 }
 
 @_documentation(visibility: private)

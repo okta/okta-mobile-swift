@@ -76,7 +76,7 @@ final class CoalescedResultTests: XCTestCase {
         DispatchQueue.concurrentPerform(iterations: parallelRequests) { iteration in
             Task.detached {
                 let result = try await coalescedResult.perform {
-                    try await Task.sleep(for: .milliseconds(1))
+                    try await Task.sleep(delay: 0.001)
                     return true
                 }
                 XCTAssertTrue(result, "Returned value should be now be true")

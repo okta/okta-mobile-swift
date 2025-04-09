@@ -82,7 +82,7 @@ public actor APIRequestPollingHandler<RequestType: Sendable, ResultType: Sendabl
         var delay = delay ?? 0.0
         pollLoop: while isActive {
             if delay > 0 {
-                try await Task.sleep(nanoseconds: UInt64(delay * _APIClientRetryDelayTimeIntervalToNanoseconds.wrappedValue))
+                try await Task.sleep(delay: delay)
             } else {
                 delay = interval
             }

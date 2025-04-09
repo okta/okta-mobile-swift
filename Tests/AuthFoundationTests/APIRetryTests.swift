@@ -49,12 +49,6 @@ class APIRetryTests: XCTestCase {
                                session: urlSession,
                                baseURL: issuerURL)
         apiRequest = MockApiRequest(url: URL(string: "\(issuerURL.absoluteString)/oauth2/v1/token")!)
-        
-        _APIClientRetryDelayTimeIntervalToNanoseconds.wrappedValue = 1_000
-    }
-
-    override func tearDownWithError() throws {
-        _APIClientRetryDelayTimeIntervalToNanoseconds.wrappedValue = 1_000_000_000
     }
     
     func testShouldNotRetry() async throws {
@@ -184,15 +178,17 @@ class APIRetryTests: XCTestCase {
                               headerFields: ["Date": "\(date)",
                                              "x-okta-request-id": requestId])
         }
-        
-        if isSuccess {
-            let response = try await apiRequest.send(to: client)
-            XCTAssertNotNil(response)
-            XCTAssertEqual(response.requestId, self.requestId)
-        } else {
-            await XCTAssertThrowsErrorAsync(try await apiRequest.send(to: client)) { error in
-                let error = error as? APIClientError
-                XCTAssertEqual(error?.errorDescription, APIClientError.statusCode(429).errorDescription)
+
+        try await TaskData.$timeIntervalToNanoseconds.withValue(1_000) {
+            if isSuccess {
+                let response = try await apiRequest.send(to: client)
+                XCTAssertNotNil(response)
+                XCTAssertEqual(response.requestId, self.requestId)
+            } else {
+                await XCTAssertThrowsErrorAsync(try await apiRequest.send(to: client)) { error in
+                    let error = error as? APIClientError
+                    XCTAssertEqual(error?.errorDescription, APIClientError.statusCode(429).errorDescription)
+                }
             }
         }
     }
