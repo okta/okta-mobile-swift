@@ -13,6 +13,8 @@ on:
       - '.swiftlint.yml'
       - 'Sources/**/*.swift'
       - 'Samples/**/*.swift'
+    branches:
+      - master
 
 jobs:
   SwiftLint:
