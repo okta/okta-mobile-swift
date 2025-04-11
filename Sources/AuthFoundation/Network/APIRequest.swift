@@ -122,7 +122,7 @@ public protocol APIRequestBody {
 }
 
 /// Provides contextual information when parsing and decoding ``APIRequest`` responses, or errors.
-public protocol APIParsingContext {
+public protocol APIParsingContext: Sendable {
     /// Optional coding user info to use when parsing ``APIRequest`` responses.
     var codingUserInfo: [CodingUserInfoKey: Any]? { get }
     

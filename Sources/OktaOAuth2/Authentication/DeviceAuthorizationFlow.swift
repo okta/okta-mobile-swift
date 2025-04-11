@@ -219,7 +219,7 @@ public actor DeviceAuthorizationFlow: AuthenticationFlow {
 
     // MARK: Private properties / methods
     static let lock = Lock()
-    private static var _slowDownInterval: TimeInterval = 5
+    nonisolated(unsafe) private static var _slowDownInterval: TimeInterval = 5
     nonisolated(unsafe) static var slowDownInterval: TimeInterval {
         get {
             lock.withLock { _slowDownInterval }

@@ -20,6 +20,10 @@
 import Foundation
 import OSLog
 
+#if compiler(<6.0)
+extension OSLog: @unchecked Sendable {}
+#endif
+
 /// Convenience class used for debugging SDK network operations.
 ///
 /// Developers can use this to assist in debugging interactions with the Client SDK, and any network operations that are performed on behalf of the user via this SDK.

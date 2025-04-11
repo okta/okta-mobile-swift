@@ -198,7 +198,7 @@ extension SessionTokenFlow {
     }
 }
 
-protocol SessionTokenFlowURLExchange {
+protocol SessionTokenFlowURLExchange: Sendable {
     init(scheme: String)
     func follow(url: URL) async throws -> URL
 }
