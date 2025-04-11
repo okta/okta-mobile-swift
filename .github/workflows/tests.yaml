@@ -24,13 +24,23 @@ jobs:
     name: Swift Unit Tests
     strategy:
       matrix:
-        os: [macos-latest-large, ubuntu-latest]
-        swift_version: ["5.10", "6.0"]
-        exclude:
-          - os: ubuntu-latest
-            swift_version: "5.10"
+        include:
+        - os: "macos-latest-large"
+          swift_version: "5.10"
+          xcode_version: "15.4"
+        - os: "macos-latest-large"
+          swift_version: "6.0"
+          xcode_version: "15.4"
+        - os: "macos-latest-large"
+          swift_version: "6.0"
+          xcode_version: "16.2"
+        # Temporarily disabled due to a bug in: https://github.com/swift-actions/setup-swift/issues/694
+        # - os: "ubuntu-latest"
+        #   swift_version: "6.0"
+        # os: [macos-latest-large, ubuntu-latest]
+        # swift_version: ["5.10", "6.0"]
     env:
-      DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app/Contents/Developer
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:

@@ -190,3 +190,15 @@ public func withIsolationSync<T: Sendable>(priority: TaskPriority? = nil,
     
     return result
 }
+
+extension MainActor {
+    static func nonisolatedUnsafe<T: Sendable>(_ block: @MainActor () -> T) -> T {
+        if Thread.isMainThread {
+            return MainActor.assumeIsolated { block() }
+        } else {
+            return DispatchQueue.main.sync {
+                block()
+            }
+        }
+    }
+}
