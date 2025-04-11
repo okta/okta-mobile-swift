@@ -197,7 +197,11 @@ extension MainActor {
             return MainActor.assumeIsolated { block() }
         } else {
             return DispatchQueue.main.sync {
+                #if swift(<6.0)
+                return MainActor.assumeIsolated { block() }
+                #else
                 block()
+                #endif
             }
         }
     }
