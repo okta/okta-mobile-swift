@@ -23,34 +23,25 @@ env:
 
 jobs:
   SwiftBuild:
-    name: Swift Unit Tests
+    name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        include:
-        - os: "macos-latest-large"
-          swift_version: "5.10"
-          xcode_version: "15.4"
-        - os: "macos-latest-large"
-          swift_version: "6.0"
-          xcode_version: "15.4"
-        - os: "macos-latest-large"
-          swift_version: "6.0"
-          xcode_version: "16.2"
-        # Temporarily disabled due to a bug in: https://github.com/swift-actions/setup-swift/issues/694
-        # - os: "ubuntu-latest"
-        #   swift_version: "6.0"
-        # os: [macos-latest-large, ubuntu-latest]
-        # swift_version: ["5.10", "6.0"]
-    env:
-      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app/Contents/Developer
-    runs-on: ${{ matrix.os }}
+        os: [macos-latest, ubuntu-latest]
+        swift_version: ["5.10", "6.0"]
+        exclude:
+          - os: ubuntu-latest
+            swift_version: "5.10"
     timeout-minutes: 10
     steps:
-    - uses: swift-actions/setup-swift@v2
+    - uses: SwiftyLab/setup-swift@latest
       with:
         swift-version: ${{ matrix.swift_version }}
     - name: Get swift version
       run: swift --version
+    - name: Get Xcode toolchain version
+      if: runner.os == 'macOS'
+      run: xcrun --toolchain ${{ env.TOOLCHAINS }} swift --version
     - uses: actions/checkout@master
     - name: Build
       run: swift build --build-tests
