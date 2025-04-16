@@ -79,10 +79,10 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
     }
     
     /// The OAuth2Client this authentication flow will use.
-    public let client: OAuth2Client
-    
+    nonisolated public let client: OAuth2Client
+
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: any APIRequestArgument]?
+    nonisolated public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     nonisolated public var isAuthenticating: Bool {

@@ -101,7 +101,7 @@ public final class WebAuthentication {
             cancel()
         }
         
-        guard let redirectUri = await signInFlow.client.configuration.redirectUri
+        guard let redirectUri = signInFlow.client.configuration.redirectUri
         else {
             throw OAuth2Error.missingRedirectUri
         }
@@ -165,7 +165,7 @@ public final class WebAuthentication {
                               context: SessionLogoutFlow.Context = .init()) async throws -> URL
     {
         guard let signOutFlow,
-              let redirectUri = await signOutFlow.client.configuration.logoutRedirectUri
+              let redirectUri = signOutFlow.client.configuration.logoutRedirectUri
         else {
             throw WebAuthenticationError.noSignOutFlowProvided
         }
