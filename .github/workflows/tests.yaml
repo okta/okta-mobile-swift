@@ -67,7 +67,6 @@ jobs:
     #  run: pod lib lint --allow-warnings OktaWebAuthenticationUI.podspec
 
   XcodeBuild:
-    name: Xcode Unit Tests
     name: Xcode ${{ matrix.xcode_version }} on ${{ matrix.destination }}
     strategy:
       matrix:
