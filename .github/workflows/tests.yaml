@@ -1,5 +1,9 @@
 name: Tests
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     paths:
@@ -24,6 +28,7 @@ env:
 jobs:
   SwiftBuild:
     name: Swift ${{ matrix.swift_version }} on ${{ matrix.os }}
+    if: ${{ !(github.event.pull_request.draft || false) }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -50,6 +55,7 @@ jobs:
 
   Cocoapods:
     name: CocoaPods Build
+    if: ${{ !(github.event.pull_request.draft || false) }}
     runs-on: macos-15-xlarge # Running on xlarge to use arm64 chipset
     timeout-minutes: 10
     needs:
@@ -68,6 +74,7 @@ jobs:
 
   XcodeBuild:
     name: Xcode ${{ matrix.xcode_version }} on ${{ matrix.destination }}
+    if: ${{ !(github.event.pull_request.draft || false) }}
     strategy:
       matrix:
         include:
@@ -101,47 +108,46 @@ jobs:
     - uses: actions/checkout@master
     - name: Build AuthFoundation
       run: |
-        set -o pipefail
-        xcodebuild build \
+        set -o pipefail && xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" | xcbeautify --renderer github-actions
     - name: Test AuthFoundation
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" | xcbeautify --renderer github-actions
     - name: Build OktaDirectAuth
       run: |
         set -o pipefail && xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" | xcbeautify --renderer github-actions
     - name: Test OktaDirectAuth
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" | xcbeautify --renderer github-actions
     - name: Build OktaOAuth2
       run: |
         set -o pipefail && xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" | xcbeautify --renderer github-actions
     - name: Test OktaOAuth2
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" | xcbeautify --renderer github-actions
     - name: Build WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -149,7 +155,7 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" | xcbeautify --renderer github-actions
     - name: Test WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -157,4 +163,4 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" | xcbeautify --renderer github-actions
