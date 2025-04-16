@@ -23,7 +23,7 @@ env:
 
 jobs:
   SwiftBuild:
-    name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
+    name: Swift ${{ matrix.swift_version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -68,6 +68,7 @@ jobs:
 
   XcodeBuild:
     name: Xcode Unit Tests
+    name: Xcode ${{ matrix.xcode_version }} on ${{ matrix.destination }}
     strategy:
       matrix:
         include:

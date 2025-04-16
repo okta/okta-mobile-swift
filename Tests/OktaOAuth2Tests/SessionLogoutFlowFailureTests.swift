@@ -21,7 +21,6 @@ class SessionLogoutFlowFailureTests: XCTestCase {
     let logoutRedirectUri = URL(string: "com.example:/logout")!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
-    var flow: SessionLogoutFlow!
     let logoutIDToken = "logoutIDToken"
     let state = "state"
     
@@ -36,14 +35,13 @@ class SessionLogoutFlowFailureTests: XCTestCase {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: nil,
                           error: OAuth2Error.cannotComposeUrl)
-        
-        flow = client.sessionLogoutFlow()
     }
 
     func testDelegate() async throws {
+        let flow = client.sessionLogoutFlow()
         let delegate = SessionLogoutFlowDelegateRecorder()
         flow.add(delegate: delegate)
-        
+
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.inProgress)
         XCTAssertNil(delegate.url)
@@ -63,6 +61,7 @@ class SessionLogoutFlowFailureTests: XCTestCase {
     }
 
     func testWithBlocks() async throws {
+        let flow = client.sessionLogoutFlow()
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.inProgress)
 
