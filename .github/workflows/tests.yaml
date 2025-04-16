@@ -49,9 +49,17 @@ jobs:
       run: xcrun --toolchain ${{ env.TOOLCHAINS }} swift --version
     - uses: actions/checkout@master
     - name: Build
-      run: set -o pipefail && swift build --build-tests 2>&1 | xcbeautify --renderer github-actions
+      run: |
+        if [[ "${{matrix.os}}" == ubuntu* ]]; then
+          alias xcbeautify="cat"
+        fi
+        set -o pipefail && swift build --build-tests 2>&1 | xcbeautify --renderer github-actions
     - name: Test
-      run: set -o pipefail && swift test --parallel 2>&1 | xcbeautify --renderer github-actions
+      run: |
+        if [[ "${{matrix.os}}" == ubuntu* ]]; then
+          alias xcbeautify="cat"
+        fi
+        set -o pipefail && swift test --parallel 2>&1 | xcbeautify --renderer github-actions
 
   Cocoapods:
     name: CocoaPods Build
