@@ -48,7 +48,7 @@ class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, 
         let result = Self.result.wrappedValue
 
         Task { @MainActor in
-            try? await Task.sleep(for: .seconds(0.5))
+            try? await Task.sleep(delay: 0.5)
 
             switch result {
             case .success(let url):
