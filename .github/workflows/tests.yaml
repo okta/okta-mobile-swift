@@ -56,6 +56,8 @@ jobs:
     - uses: actions/checkout@master
     - name: Build
       run: |
+        env
+        which xcbeautify
         set -o pipefail && swift build --build-tests 2>&1 | xcbeautify --renderer github-actions
     - name: Test
       run: |
