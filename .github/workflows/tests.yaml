@@ -50,16 +50,17 @@ jobs:
     - name: Install Linux build utilities
       if: runner.os == 'Linux'
       run: |
-        /home/linuxbrew/.linuxbrew/bin/brew shellenv >> $GITHUB_ENV
-        echo "Showing shell env"
-        /home/linuxbrew/.linuxbrew/bin/brew shellenv
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        if [[ -n "$HOMEBREW_PREFIX" ]]; then
+          echo "HOMEBREW_CELLAR=${HOMEBREW_CELLAR}" >> $GITHUB_ENV
+          echo "HOMEBREW_PREFIX=${HOMEBREW_PREFIX}" >> $GITHUB_ENV
+          echo "PATH=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin${PATH+:$PATH}" >> $GITHUB_ENV
+          echo "HOMEBREW_REPOSITORY=${HOMEBREW_PREFIX}/Homebrew" >> $GITHUB_ENV
+        fi
         brew install xcbeautify
     - uses: actions/checkout@master
     - name: Build
       run: |
-        env
-        which xcbeautify
         set -o pipefail && swift build --build-tests 2>&1 | xcbeautify --renderer github-actions
     - name: Test
       run: |
