@@ -50,6 +50,7 @@ jobs:
     - name: Install Linux utilities
       if: runner.os == 'Linux'
       run: |
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
         brew install xcbeautify
     - uses: actions/checkout@master
     - name: Build
