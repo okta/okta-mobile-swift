@@ -47,6 +47,10 @@ jobs:
     - name: Get Xcode toolchain version
       if: runner.os == 'macOS'
       run: xcrun --toolchain ${{ env.TOOLCHAINS }} swift --version
+    - name: Install Linux utilities
+      if: runner.os == 'Linux'
+      run: |
+        brew install xcbeautify
     - uses: actions/checkout@master
     - name: Build
       run: |
