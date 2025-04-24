@@ -66,7 +66,7 @@ extension XCUIApplication {
     var keyboardSubmitButton: XCUIElement? {
         #if os(macOS)
         return nil
-        #elseif (swift(>=6.0) && os(visionOS))
+        #elseif (swift(>=5.10) && os(visionOS))
         let keyboard = visionOSKeyboard
         #else
         let keyboard = keyboards.firstMatch

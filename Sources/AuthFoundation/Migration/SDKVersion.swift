@@ -30,14 +30,14 @@ private let deviceModel: String = {
 }()
 
 private let systemName: String = {
-    #if os(iOS)
+    #if (swift(>=5.10) && os(visionOS))
+        return "visionOS"
+    #elseif os(iOS)
         return "iOS"
     #elseif os(watchOS)
         return "watchOS"
     #elseif os(tvOS)
         return "tvOS"
-    #elseif (swift(>=6.0) && os(visionOS))
-        return "visionOS"
     #elseif os(macOS)
         return "macOS"
     #elseif os(Linux)
@@ -46,7 +46,7 @@ private let systemName: String = {
 }()
 
 private let systemVersion: String = {
-    #if os(iOS) || os(tvOS) || (swift(>=6.0) && os(visionOS))
+    #if os(iOS) || os(tvOS) || (swift(>=5.10) && os(visionOS))
     return MainActor.nonisolatedUnsafe {
         UIDevice.current.systemVersion
     }

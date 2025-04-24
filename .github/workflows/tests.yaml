@@ -100,7 +100,7 @@ jobs:
         - destination: "platform=tvOS Simulator,OS=18.1,name=Apple TV"
           xcode_version: "16.0"
           os: macos-15-large
-        - destination: "platform=visionOS Simulator,OS=1.2,name=Apple Vision Pro"
+        - destination: "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
           xcode_version: "15.4"
           os: macos-14-xlarge
         - destination: "platform=visionOS Simulator,OS=2.0,name=Apple Vision Pro"
