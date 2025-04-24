@@ -129,6 +129,7 @@ jobs:
     - name: Test AuthFoundation
       run: |
         set -o pipefail && xcodebuild test \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
@@ -143,6 +144,7 @@ jobs:
     - name: Test OktaDirectAuth
       run: |
         set -o pipefail && xcodebuild test \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
@@ -157,6 +159,7 @@ jobs:
     - name: Test OktaOAuth2
       run: |
         set -o pipefail && xcodebuild test \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
@@ -173,6 +176,7 @@ jobs:
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
         set -o pipefail && xcodebuild test \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
