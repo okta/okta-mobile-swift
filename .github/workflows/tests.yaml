@@ -120,11 +120,13 @@ jobs:
       DESTINATION: "${{ matrix.destination }}"
     timeout-minutes: 25
     steps:
+    - name: Reset simulators
+      run: xcrun simctl shutdown all
     - uses: actions/checkout@master
     - name: Build AuthFoundation
       run: |
         set -o pipefail
-        xcodebuild build \
+        xcrun xcodebuild build-for-testing \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
@@ -132,7 +134,7 @@ jobs:
     - name: Test AuthFoundation
       run: |
         set -o pipefail
-        xcodebuild test \
+        xcrun xcodebuild test-without-building \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
@@ -141,7 +143,7 @@ jobs:
     - name: Build OktaDirectAuth
       run: |
         set -o pipefail
-        xcodebuild build \
+        xcrun xcodebuild build-for-testing \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
@@ -149,7 +151,7 @@ jobs:
     - name: Test OktaDirectAuth
       run: |
         set -o pipefail
-        xcodebuild test \
+        xcrun xcodebuild test-without-building \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
@@ -158,7 +160,7 @@ jobs:
     - name: Build OktaOAuth2
       run: |
         set -o pipefail
-        xcodebuild build \
+        xcrun xcodebuild build-for-testing \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
@@ -166,7 +168,7 @@ jobs:
     - name: Test OktaOAuth2
       run: |
         set -o pipefail
-        xcodebuild test \
+        xcrun xcodebuild test-without-building \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
@@ -176,7 +178,7 @@ jobs:
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
         set -o pipefail
-        xcodebuild build \
+        xcrun xcodebuild build-for-testing \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
@@ -185,7 +187,7 @@ jobs:
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
         set -o pipefail
-        xcodebuild test \
+        xcrun xcodebuild test-without-building \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
