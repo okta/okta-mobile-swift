@@ -40,6 +40,8 @@ public final class Migration {
 
     init(migrators: [any SDKVersionMigrator]? = nil) {
         self.registeredMigrators = migrators ?? Self.defaultMigrators
+
+        SDKVersion.register(sdk: Version)
     }
 
     func register(migrator: any SDKVersionMigrator) {

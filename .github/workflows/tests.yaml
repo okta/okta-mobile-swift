@@ -130,7 +130,7 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/AuthFoundation.log #| xcbeautify --renderer github-actions
     - name: Test AuthFoundation
       run: |
         set -o pipefail
@@ -139,7 +139,7 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/AuthFoundation.log #| xcbeautify --renderer github-actions
     - name: Build OktaDirectAuth
       run: |
         set -o pipefail
@@ -147,7 +147,7 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/OktaDirectAuth.log #| xcbeautify --renderer github-actions
     - name: Test OktaDirectAuth
       run: |
         set -o pipefail
@@ -156,7 +156,7 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/OktaDirectAuth.log #| xcbeautify --renderer github-actions
     - name: Build OktaOAuth2
       run: |
         set -o pipefail
@@ -164,7 +164,7 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/OktaOAuth2.log #| xcbeautify --renderer github-actions
     - name: Test OktaOAuth2
       run: |
         set -o pipefail
@@ -173,7 +173,7 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/OktaOAuth2.log #| xcbeautify --renderer github-actions
     - name: Build WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -182,7 +182,7 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/WebAuthenticationUI.log #| xcbeautify --renderer github-actions
     - name: Test WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -192,4 +192,4 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/WebAuthenticationUI.log #| xcbeautify --renderer github-actions
