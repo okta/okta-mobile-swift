@@ -12,7 +12,7 @@
 
 import Foundation
 
-final class BackgroundTask: Sendable {
+final class BackgroundTask {
     let name: String?
 
     init(named name: String? = nil) {
@@ -30,8 +30,19 @@ final class BackgroundTask: Sendable {
     #endif
 }
 
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension BackgroundTask: @unchecked Sendable {}
+#else
+extension BackgroundTask: Sendable {}
+#endif
+
 #if canImport(UIKit) && (os(iOS) || os(tvOS) || targetEnvironment(macCatalyst) || (swift(>=5.10) && os(visionOS)))
 import UIKit
+
+#if swift(<6.0)
+extension UIBackgroundTaskIdentifier: @unchecked Sendable {}
+#endif
 
 extension BackgroundTask {
     nonisolated private func setup() {

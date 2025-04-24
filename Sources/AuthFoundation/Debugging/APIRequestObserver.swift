@@ -187,4 +187,11 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
         })?.value as? String ?? "<unknown>"
     }
 }
+
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension DebugAPIRequestObserver: @unchecked Sendable {}
+#else
+extension DebugAPIRequestObserver: Sendable {}
+#endif
 #endif

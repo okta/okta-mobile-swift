@@ -24,21 +24,24 @@ import Bionic
 #error("Unsupported platform")
 #endif
 
+#if swift(<6.0)
+extension UnsafeMutablePointer<Lock.LockType>: @unchecked Sendable {}
+#endif
+
 // **Note:** It would be preferable to use OSAllocatedUnfairLock for this, but this would mean dropping support for older OS versions. While this approach is safe, OSAllocatedUnfairLock provides more features we might need in the future.
 //
 // If the minimum supported version of this SDK is to increase in the future, this class should be removed and replaced with OSAllocatedUnfairLock.
 @_documentation(visibility: private)
 public final class Lock: NSLocking, Sendable {
     #if canImport(Darwin)
-    private typealias LockType = os_unfair_lock
+    fileprivate typealias LockType = os_unfair_lock
     #elseif canImport(Glibc) || canImport(Musl) || canImport(Bionic)
-    private typealias LockType = pthread_mutex_t
+    fileprivate typealias LockType = pthread_mutex_t
     #else
     #error("Unsupported platform")
     #endif
 
-    nonisolated(unsafe)
-    private let _lock: UnsafeMutablePointer<LockType> = {
+    nonisolated(unsafe) private let _lock: UnsafeMutablePointer<LockType> = {
         let result = UnsafeMutablePointer<LockType>.allocate(capacity: 1)
 
         #if canImport(Darwin)

@@ -19,7 +19,7 @@ import FoundationNetworking
 /// Convenience object that provides methods and properties for using a user's authentication tokens.
 ///
 /// Once a user is authenticated within an application, the tokens' lifecycle must be managed to ensure it is properly refreshed as needed, is stored in a secure manner, and can be used to perform requests on behalf of the user. This class provides capabilities to accomplish all these tasks, while ensuring a convenient developer experience.
-public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
+public final class Credential: Equatable, OAuth2ClientDelegate {
     /// The current or "default" credential.
     ///
     /// This can be used as a convenience to store a user's token within storage, and to access the user in a safe way. If the user's token isn't stored, this will automatically store the token for later use.
@@ -468,3 +468,10 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
         }
     }
 }
+
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension Credential: @unchecked Sendable {}
+#else
+extension Credential: Sendable {}
+#endif

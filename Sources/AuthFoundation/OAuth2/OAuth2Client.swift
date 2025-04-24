@@ -32,7 +32,7 @@ extension OAuth2ClientDelegate {
 
 // swiftlint:disable type_body_length
 /// An OAuth2 client, used to interact with a given authorization server.
-public final class OAuth2Client: Sendable, UsesDelegateCollection {
+public final class OAuth2Client: UsesDelegateCollection {
     public typealias Delegate = OAuth2ClientDelegate
 
     /// The URLSession used by this client for network requests.
@@ -291,6 +291,13 @@ public final class OAuth2Client: Sendable, UsesDelegateCollection {
     let jwksAction = CoalescedResult<JWKS>(taskName: "JWKS")
 }
 // swiftlint:enable type_body_length
+
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension OAuth2Client: @unchecked Sendable {}
+#else
+extension OAuth2Client: Sendable {}
+#endif
 
 extension OAuth2Client {
     /// Asynchronously retrieves the org's OpenID configuration.
