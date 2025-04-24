@@ -55,6 +55,7 @@ class SessionLogoutFlowFailureTests: XCTestCase {
         XCTAssertEqual(flow.context, context)
         XCTAssertNil(flow.context?.logoutURL)
 
+        await MainActor.yield()
         XCTAssertNil(delegate.url)
         XCTAssertEqual(error as? OAuth2Error, OAuth2Error.cannotComposeUrl)
         XCTAssertNotNil(delegate.error)
