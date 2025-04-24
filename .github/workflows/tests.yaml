@@ -33,7 +33,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest]
-        swift_version: ["5.10", "6.0", "6.1", "6.2"]
+        swift_version: ["5.10", "6.0", "6.1"]
         exclude:
           - os: ubuntu-latest
             swift_version: "5.10"
