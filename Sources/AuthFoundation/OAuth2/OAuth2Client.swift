@@ -118,7 +118,7 @@ public final class OAuth2Client: UsesDelegateCollection {
         }
 
         // Ensure the Credential Coordinator can monitor this client for token refresh changes.
-        Credential.coordinator.observe(oauth2: self)
+        TaskData.coordinator.observe(oauth2: self)
     }
     
     /// Retrieves the org's OpenID configuration.

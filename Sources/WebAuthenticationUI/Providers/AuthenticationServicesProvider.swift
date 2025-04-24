@@ -147,17 +147,26 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
     nonisolated(unsafe) private var _authenticationSession: (any AuthenticationServicesProviderSession)?
 }
 
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension AuthenticationServicesProvider: @unchecked Sendable {}
+#else
+extension AuthenticationServicesProvider: Sendable {}
+#endif
+
 extension AuthenticationServicesProvider: ASWebAuthenticationPresentationContextProviding {
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         if let anchor = anchor {
             return anchor
         }
         
-        #if os(macOS)
-        return NSWindow()
-        #else
-        return UIWindow()
-        #endif
+        return MainActor.assumeIsolated {
+            #if os(macOS)
+            return NSWindow()
+            #else
+            return UIWindow()
+            #endif
+        }
     }
 }
 #endif

@@ -26,12 +26,12 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     public static var `default`: Credential? {
         get {
             withIsolationSync { @CredentialActor in
-                coordinator.default
+                TaskData.coordinator.default
             }
         }
         set {
             withIsolationSync { @CredentialActor in
-                coordinator.default = newValue
+                TaskData.coordinator.default = newValue
             }
         }
     }
@@ -39,7 +39,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// Lists all users currently stored within the user's application.
     public static var allIDs: [String] {
         withIsolationSync { @CredentialActor in
-            coordinator.allIDs
+            TaskData.coordinator.allIDs
         } ?? []
     }
 
@@ -63,9 +63,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// - Returns: Credential matching the ID.
     public static func with(id: String, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> Credential? {
         try withIsolationSyncThrowing { @CredentialActor in
-            try coordinator.with(id: id,
-                                 prompt: prompt,
-                                 authenticationContext: authenticationContext)
+            try TaskData.coordinator.with(id: id,
+                                          prompt: prompt,
+                                          authenticationContext: authenticationContext)
         }
     }
     
@@ -89,9 +89,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// - Returns: Collection of credentials that matches the given expression.
     public static func find(where expression: @Sendable @escaping (Token.Metadata) -> Bool, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> [Credential] {
         try withIsolationSyncThrowing { @CredentialActor in
-            try coordinator.find(where: expression,
-                                 prompt: prompt,
-                                 authenticationContext: authenticationContext)
+            try TaskData.coordinator.find(where: expression,
+                                          prompt: prompt,
+                                          authenticationContext: authenticationContext)
         }
     }
     
@@ -114,22 +114,22 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
                              security options: [Security] = Security.standard
     ) throws -> Credential {
         try withIsolationSyncThrowing { @CredentialActor in
-            try coordinator.store(token: token, tags: tags, security: options)
+            try TaskData.coordinator.store(token: token, tags: tags, security: options)
         }
     }
 
     /// Data source used for creating and managing the creation and caching of ``Credential`` instances.
     @CredentialActor
     public static var credentialDataSource: any CredentialDataSource {
-        get { coordinator.credentialDataSource }
-        set { coordinator.credentialDataSource = newValue }
+        get { TaskData.coordinator.credentialDataSource }
+        set { TaskData.coordinator.credentialDataSource = newValue }
     }
     
     /// Storage instance used to abstract the secure offline storage and retrieval of ``Token`` instances.
     @CredentialActor
     public static var tokenStorage: any TokenStorage {
-        get { coordinator.tokenStorage }
-        set { coordinator.tokenStorage = newValue }
+        get { TaskData.coordinator.tokenStorage }
+        set { TaskData.coordinator.tokenStorage = newValue }
     }
 
     public static func == (lhs: Credential, rhs: Credential) -> Bool {
@@ -297,7 +297,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         self.init(token: token,
                   oauth2: OAuth2Client(token.context.configuration,
                                        session: urlSession),
-                  coordinator: Credential.coordinator)
+                  coordinator: TaskData.coordinator)
     }
     
     /// Initializer that creates a credential for a given token, using a custom OAuth2Client instance.
@@ -314,7 +314,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         
         self.init(token: token,
                   oauth2: client,
-                  coordinator: Credential.coordinator)
+                  coordinator: TaskData.coordinator)
     }
     
     init(token: Token, oauth2 client: OAuth2Client, coordinator: any CredentialCoordinator) {
@@ -343,12 +343,11 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     }
     
     // MARK: Private properties
-    static let coordinator = CredentialCoordinatorImpl()
     nonisolated(unsafe) weak var coordinator: (any CredentialCoordinator)?
 
     @CredentialActor
     static func resetToDefault() {
-        coordinator.resetToDefault()
+        TaskData.coordinator.resetToDefault()
     }
 
     nonisolated(unsafe) private var _token: Token

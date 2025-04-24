@@ -39,7 +39,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
         Migration.shared.resetMigrators()
 
         await CredentialActor.run {
-            Credential.coordinator.resetToDefault()
+            TaskData.coordinator.resetToDefault()
         }
     }
 
