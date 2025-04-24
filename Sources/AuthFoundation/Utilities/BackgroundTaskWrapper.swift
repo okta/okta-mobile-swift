@@ -24,13 +24,13 @@ final class BackgroundTask: Sendable {
         finish()
     }
 
-    #if os(iOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
+    #if os(iOS) || os(tvOS) || (swift(>=5.9) && os(visionOS)) || targetEnvironment(macCatalyst)
     nonisolated(unsafe) private var task: UIBackgroundTaskIdentifier?
     private let lock = Lock()
     #endif
 }
 
-#if os(iOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
+#if os(iOS) || os(tvOS) || (swift(>=5.9) && os(visionOS)) || targetEnvironment(macCatalyst)
 import UIKit
 
 extension BackgroundTask {
