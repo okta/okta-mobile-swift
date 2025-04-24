@@ -138,7 +138,13 @@ extension XCUIElementQuery {
     }
 }
 
-extension XCUIElementQuery: @retroactive Sequence {
+#if swift(<6.0)
+extension XCUIElementQuery: Sequence {}
+#else
+extension XCUIElementQuery: @retroactive Sequence {}
+#endif
+
+extension XCUIElementQuery {
     public typealias Iterator = AnyIterator<XCUIElement>
     public func makeIterator() -> Iterator {
         var index = UInt(0)

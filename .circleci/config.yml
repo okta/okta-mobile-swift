@@ -8,21 +8,21 @@ orbs:
 executors:
   apple-ci-arm-medium:
     macos:
-      xcode: 15.4.0
+      xcode: 16.2.0
     resource_class: macos.m1.medium.gen1
 
 commands:
   prepare-ios-simulator:
     steps:
       - macos/preboot-simulator:
-          version: "16.4"
+          version: "18.2"
           platform: "iOS"
-          device: "iPhone 14 Pro Max"
+          device: "iPhone 16 Pro Max"
 
   prepare-tvos-simulator:
     steps:
       - macos/preboot-simulator:
-          version: "16.4"
+          version: "18.2"
           platform: "tvOS"
           device: "Apple TV"
 
