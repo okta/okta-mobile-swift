@@ -30,6 +30,8 @@ final class OIDCLegacyMigratorTests: XCTestCase {
             Credential.tokenStorage = MockTokenStorage()
             Credential.credentialDataSource = MockCredentialDataSource()
         }
+
+        XCTAssertNotNil(SDKVersion.version(for: .authFoundation))
     }
 
     override func tearDown() async throws {

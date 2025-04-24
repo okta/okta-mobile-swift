@@ -47,7 +47,7 @@ private let systemName: String = {
 
 private let systemVersion: String = {
     #if os(iOS) || os(tvOS) || (swift(>=5.10) && os(visionOS))
-    return MainActor.assumeIsolated {
+    return MainActor.nonisolatedUnsafe {
         UIDevice.current.systemVersion
     }
     #elseif os(watchOS)
