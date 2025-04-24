@@ -17,7 +17,7 @@ import LocalAuthentication
 #endif
 
 extension Array where Element == Credential.Security {
-    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.9) && os(visionOS))
+    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=6.0) && os(visionOS))
     #if canImport(LocalAuthentication) && !os(tvOS)
     var context: LAContext? {
         for case let Credential.Security.context(value) in self {

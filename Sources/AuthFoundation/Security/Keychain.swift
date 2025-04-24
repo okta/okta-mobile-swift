@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.9) && os(visionOS))
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=6.0) && os(visionOS))
 
 #if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication

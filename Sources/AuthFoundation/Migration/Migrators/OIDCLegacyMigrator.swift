@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.9) && os(visionOS))
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=6.0) && os(visionOS))
 
 private let accountIdRegex = try? NSRegularExpression(pattern: "0oa[0-9a-zA-Z]{17}")
 

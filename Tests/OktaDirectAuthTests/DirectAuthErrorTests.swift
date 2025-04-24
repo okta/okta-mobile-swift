@@ -64,7 +64,7 @@ final class DirectAuthErrorTests: XCTestCase {
         XCTAssertEqual(DirectAuthenticationFlowError(APIClientError.httpError(serverError)),
                        .server(error: serverError))
 
-        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.9) && os(visionOS))
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=6.0) && os(visionOS))
         // Ensure a generic error embedded in OAuth2Error becomes the appropriate error type
         XCTAssertEqual(DirectAuthenticationFlowError(OAuth2Error.error(KeychainError.invalidFormat)),
                        .other(error: KeychainError.invalidFormat))
