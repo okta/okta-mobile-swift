@@ -61,10 +61,12 @@ jobs:
     - uses: actions/checkout@master
     - name: Build
       run: |
-        set -o pipefail && swift build --build-tests 2>&1 | xcbeautify --renderer github-actions
+        set -o pipefail
+        swift build --build-tests 2>&1 #| xcbeautify --renderer github-actions
     - name: Test
       run: |
-        set -o pipefail && swift test --parallel 2>&1 | xcbeautify --renderer github-actions
+        set -o pipefail
+        swift test --parallel 2>&1 #| xcbeautify --renderer github-actions
 
   Cocoapods:
     name: CocoaPods Build
@@ -121,63 +123,71 @@ jobs:
     - uses: actions/checkout@master
     - name: Build AuthFoundation
       run: |
-        set -o pipefail && xcodebuild build \
+        set -o pipefail
+        xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
     - name: Test AuthFoundation
       run: |
-        set -o pipefail && xcodebuild test \
+        set -o pipefail
+        xcodebuild test \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
     - name: Build OktaDirectAuth
       run: |
-        set -o pipefail && xcodebuild build \
+        set -o pipefail
+        xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
     - name: Test OktaDirectAuth
       run: |
-        set -o pipefail && xcodebuild test \
+        set -o pipefail
+        xcodebuild test \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
     - name: Build OktaOAuth2
       run: |
-        set -o pipefail && xcodebuild build \
+        set -o pipefail
+        xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1 | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
     - name: Test OktaOAuth2
       run: |
-        set -o pipefail && xcodebuild test \
+        set -o pipefail
+        xcodebuild test \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1 | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
     - name: Build WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
-        set -o pipefail && xcodebuild build \
+        set -o pipefail
+        xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1 | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
     - name: Test WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
-        set -o pipefail && xcodebuild test \
+        set -o pipefail
+        xcodebuild test \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1 | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 #| xcbeautify --renderer github-actions
