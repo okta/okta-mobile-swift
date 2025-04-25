@@ -37,6 +37,8 @@ jobs:
         exclude:
           - os: ubuntu-latest
             swift_version: "5.10"
+    env:
+      LOG_NAME: "${{github.job}}-${{ matrix.swift_version }}-${{ matrix.os }}"
     timeout-minutes: 10
     steps:
     - uses: SwiftyLab/setup-swift@latest
@@ -60,21 +62,19 @@ jobs:
           echo "HOMEBREW_REPOSITORY=${HOMEBREW_PREFIX}/Homebrew" >> $GITHUB_ENV
         fi
         brew install xcbeautify
-        mkdir -p .build/ci-logs
     - uses: actions/checkout@master
+    - name: Setup log environment
+      run: mkdir -p .build/ci-logs
     - name: Build
-      run: |
-        set -o pipefail && swift build --build-tests 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
+      run: set -o pipefail && swift build --build-tests 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Test
-      run: |
-        set -o pipefail && swift test --parallel 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
+      run: set -o pipefail && swift test --parallel 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Upload Logs
       if: failure()
       uses: actions/upload-artifact@v4
       with:
         name: Logs
-        path: |
-          .build/ci-logs/**
+        path: .build/ci-logs/**
 
   Cocoapods:
     name: CocoaPods Build
@@ -126,44 +126,21 @@ jobs:
     env:
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app/Contents/Developer
       DESTINATION: "${{ matrix.destination }}"
+      LOG_NAME: "${{github.job}}-${{ matrix.xcode_version }}-${{ matrix.destination }}"
     timeout-minutes: 25
     steps:
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
-    - name: Dump job context
-      env:
-        JOB_CONTEXT: ${{ toJson(job) }}
-      run: echo "$JOB_CONTEXT"
-    - name: Dump steps context
-      env:
-        STEPS_CONTEXT: ${{ toJson(steps) }}
-      run: echo "$STEPS_CONTEXT"
-    - name: Dump runner context
-      env:
-        RUNNER_CONTEXT: ${{ toJson(runner) }}
-      run: echo "$RUNNER_CONTEXT"
-    - name: Dump strategy context
-      env:
-        STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-      run: echo "$STRATEGY_CONTEXT"
-    - name: Dump matrix context
-      env:
-        MATRIX_CONTEXT: ${{ toJson(matrix) }}
-      run: echo "$MATRIX_CONTEXT"
     - uses: actions/checkout@master
     - name: Setup test environment
-      run: |
-        xcrun simctl shutdown all
-        mkdir -p .build/ci-logs
+      run: xcrun simctl shutdown all
+    - name: Setup log environment
+      run: mkdir -p .build/ci-logs
     - name: Build AuthFoundation
       run: |
         set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Test AuthFoundation
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
@@ -171,14 +148,14 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Build OktaDirectAuth
       run: |
         set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Test OktaDirectAuth
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
@@ -186,14 +163,14 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Build OktaOAuth2
       run: |
         set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Test OktaOAuth2
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
@@ -201,7 +178,7 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Build WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -209,7 +186,7 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Test WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -218,11 +195,10 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Upload Logs
       if: failure()
       uses: actions/upload-artifact@v4
       with:
         name: Logs
-        path: |
-          .build/ci-logs/**
+        path: .build/ci-logs/**
