@@ -58,15 +58,21 @@ jobs:
           echo "HOMEBREW_REPOSITORY=${HOMEBREW_PREFIX}/Homebrew" >> $GITHUB_ENV
         fi
         brew install xcbeautify
+        mkdir -p ../Build/Logs
     - uses: actions/checkout@master
     - name: Build
       run: |
-        set -o pipefail
-        swift build --build-tests 2>&1 #| xcbeautify --renderer github-actions
+        set -o pipefail && swift build --build-tests 2>&1 | tee -a ../Build/Logs/SwiftBuild.log | xcbeautify --renderer github-actions
     - name: Test
       run: |
-        set -o pipefail
-        swift test --parallel 2>&1 #| xcbeautify --renderer github-actions
+        set -o pipefail && swift test --parallel 2>&1 | tee -a ../Build/Logs/SwiftBuild.log | xcbeautify --renderer github-actions
+    - name: Upload Logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: Logs
+        path: |
+          ../Build/Logs/**
 
   Cocoapods:
     name: CocoaPods Build
@@ -120,76 +126,77 @@ jobs:
       DESTINATION: "${{ matrix.destination }}"
     timeout-minutes: 25
     steps:
-    - name: Reset simulators
-      run: xcrun simctl shutdown all
     - uses: actions/checkout@master
+    - name: Setup test environment
+      run: |
+        xcrun simctl shutdown all
+        mkdir -p ../Build/Logs
     - name: Build AuthFoundation
       run: |
-        set -o pipefail
-        xcrun xcodebuild build-for-testing \
+        set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 | tee -a ../Build/AuthFoundation.log #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/Logs/AuthFoundation.log | xcbeautify --renderer github-actions
     - name: Test AuthFoundation
       run: |
-        set -o pipefail
-        xcrun xcodebuild test-without-building \
+        set -o pipefail && xcrun xcodebuild test-without-building \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 | tee -a ../Build/AuthFoundation.log #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/Logs/AuthFoundation.log | xcbeautify --renderer github-actions
     - name: Build OktaDirectAuth
       run: |
-        set -o pipefail
-        xcrun xcodebuild build-for-testing \
+        set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 | tee -a ../Build/OktaDirectAuth.log #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/Logs/OktaDirectAuth.log | xcbeautify --renderer github-actions
     - name: Test OktaDirectAuth
       run: |
-        set -o pipefail
-        xcrun xcodebuild test-without-building \
+        set -o pipefail && xcrun xcodebuild test-without-building \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 | tee -a ../Build/OktaDirectAuth.log #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/Logs/OktaDirectAuth.log | xcbeautify --renderer github-actions
     - name: Build OktaOAuth2
       run: |
-        set -o pipefail
-        xcrun xcodebuild build-for-testing \
+        set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1 | tee -a ../Build/OktaOAuth2.log #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/Logs/OktaOAuth2.log | xcbeautify --renderer github-actions
     - name: Test OktaOAuth2
       run: |
-        set -o pipefail
-        xcrun xcodebuild test-without-building \
+        set -o pipefail && xcrun xcodebuild test-without-building \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1 | tee -a ../Build/OktaOAuth2.log #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/Logs/OktaOAuth2.log | xcbeautify --renderer github-actions
     - name: Build WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
-        set -o pipefail
-        xcrun xcodebuild build-for-testing \
+        set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1 | tee -a ../Build/WebAuthenticationUI.log #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/Logs/WebAuthenticationUI.log | xcbeautify --renderer github-actions
     - name: Test WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
-        set -o pipefail
-        xcrun xcodebuild test-without-building \
+        set -o pipefail && xcrun xcodebuild test-without-building \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1 | tee -a ../Build/WebAuthenticationUI.log #| xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ../Build/Logs/WebAuthenticationUI.log | xcbeautify --renderer github-actions
+    - name: Upload Logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: Logs
+        path: |
+          ../Build/Logs/**
