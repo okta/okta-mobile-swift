@@ -48,14 +48,16 @@ commands:
       - run:
           name: "Define destination"
           command: |
-            if [[ "<<parameters.platform>>" == "macOS" ]]; then
-                export DESTINATION="platform=<<parameters.platform>>,name=Any Mac"
-            elif [[ -n $MACOS_ORB_DEVICE_UDID ]]; then
-                export DESTINATION="platform=<<parameters.platform>>,id=$MACOS_ORB_DEVICE_UDID"
-            else
-                export DESTINATION="platform=<<parameters.platform>>"
+            if [[ "<<parameters.platform>>" != "macOS" ]]; then
+              if [[ -n $MACOS_ORB_DEVICE_UDID ]]; then
+                  export DESTINATION="platform=<<parameters.platform>>,id=$MACOS_ORB_DEVICE_UDID"
+              else
+                  export DESTINATION="platform=<<parameters.platform>>"
+              fi
+              export DESTINATION_ARG="-destination \"$DESTINATION\""
             fi
             echo "export DESTINATION=\"$DESTINATION\"" >> "$BASH_ENV"
+            echo "export DESTINATION_ARG=\"$DESTINATION_ARG\"" >> "$BASH_ENV"
             source "$BASH_ENV"
             echo "Running on $DESTINATION"
       - run:
@@ -69,7 +71,7 @@ commands:
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
-                -destination "$DESTINATION" \
+                $DESTINATION_ARG \
                 build-for-testing 2>&1
       - when:
           condition:
@@ -90,7 +92,7 @@ commands:
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
-                -destination "$DESTINATION" \
+                $DESTINATION_ARG \
                 test-without-building 2>&1
       - run:
           name: "Export test results"
