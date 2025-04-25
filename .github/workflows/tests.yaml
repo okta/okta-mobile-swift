@@ -49,6 +49,8 @@ jobs:
       run: xcrun --toolchain ${{ env.TOOLCHAINS }} swift --version
     - name: Install Linux build utilities
       if: runner.os == 'Linux'
+      env:
+        HOMEBREW_NO_ENV_HINTS: 1
       run: |
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
         if [[ -n "$HOMEBREW_PREFIX" ]]; then
@@ -62,10 +64,10 @@ jobs:
     - uses: actions/checkout@master
     - name: Build
       run: |
-        set -o pipefail && swift build --build-tests 2>&1 | tee -a ".build/ci-logs/${CIRCLE_JOB}.log" | xcbeautify --renderer github-actions
+        set -o pipefail && swift build --build-tests 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
     - name: Test
       run: |
-        set -o pipefail && swift test --parallel 2>&1 | tee -a ".build/ci-logs/${CIRCLE_JOB}.log" | xcbeautify --renderer github-actions
+        set -o pipefail && swift test --parallel 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
     - name: Upload Logs
       if: failure()
       uses: actions/upload-artifact@v4
@@ -126,6 +128,31 @@ jobs:
       DESTINATION: "${{ matrix.destination }}"
     timeout-minutes: 25
     steps:
+          - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+
     - uses: actions/checkout@master
     - name: Setup test environment
       run: |
@@ -137,7 +164,7 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${CIRCLE_JOB}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
     - name: Test AuthFoundation
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
@@ -145,14 +172,14 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${CIRCLE_JOB}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
     - name: Build OktaDirectAuth
       run: |
         set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${CIRCLE_JOB}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
     - name: Test OktaDirectAuth
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
@@ -160,14 +187,14 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${CIRCLE_JOB}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
     - name: Build OktaOAuth2
       run: |
         set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${CIRCLE_JOB}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
     - name: Test OktaOAuth2
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
@@ -175,7 +202,7 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${CIRCLE_JOB}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
     - name: Build WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -183,7 +210,7 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${CIRCLE_JOB}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
     - name: Test WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -192,7 +219,7 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${CIRCLE_JOB}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${{github.job}}.log" | xcbeautify --renderer github-actions
     - name: Upload Logs
       if: failure()
       uses: actions/upload-artifact@v4
