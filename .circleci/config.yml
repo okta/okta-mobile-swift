@@ -9,7 +9,7 @@ executors:
   apple-ci-arm-medium:
     macos:
       xcode: 16.2.0
-    resource_class: macos.m1.medium.gen1
+    resource_class: m2pro.medium
 
 commands:
   prepare-ios-simulator:
@@ -55,11 +55,11 @@ commands:
                   export DESTINATION="platform=<<parameters.platform>>"
               fi
               export DESTINATION_ARG="-destination \"$DESTINATION\""
+              echo "export DESTINATION=\"$DESTINATION\"" >> "$BASH_ENV"
+              echo "export DESTINATION_ARG=\"$DESTINATION_ARG\"" >> "$BASH_ENV"
+              echo "Running on $DESTINATION"
             fi
-            echo "export DESTINATION=\"$DESTINATION\"" >> "$BASH_ENV"
-            echo "export DESTINATION_ARG=\"$DESTINATION_ARG\"" >> "$BASH_ENV"
             source "$BASH_ENV"
-            echo "Running on $DESTINATION"
       - run:
           name: "Build <<parameters.scheme>>"
           environment:
