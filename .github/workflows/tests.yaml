@@ -104,23 +104,23 @@ jobs:
         - destination: "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
           xcode_version: "15.4"
           os: macos-14-large
-        - destination: "platform=iOS Simulator,OS=18.1,name=iPhone 16 Pro Max"
-          xcode_version: "16.0"
+        - destination: "platform=iOS Simulator,OS=18.2,name=iPhone 16 Pro Max"
+          xcode_version: "16.2"
           os: macos-15-large
-        - destination: "platform=tvOS Simulator,OS=18.1,name=Apple TV"
-          xcode_version: "16.0"
+        - destination: "platform=tvOS Simulator,OS=18.2,name=Apple TV"
+          xcode_version: "16.2"
           os: macos-15-large
         - destination: "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
           xcode_version: "15.4"
           os: macos-14-xlarge
-        - destination: "platform=visionOS Simulator,OS=2.0,name=Apple Vision Pro"
-          xcode_version: "16.0"
+        - destination: "platform=visionOS Simulator,OS=2.2,name=Apple Vision Pro"
+          xcode_version: "16.2"
           os: macos-15-xlarge
         - destination: "platform=watchOS Simulator,OS=11.1,name=Apple Watch Series 10 (46mm)"
-          xcode_version: "16.0"
+          xcode_version: "16.2"
           os: macos-15-large
         - destination: "platform=macOS,name=My Mac"
-          xcode_version: "16.0"
+          xcode_version: "16.2"
           os: macos-15-large
     runs-on: ${{ matrix.os }}
     env:
