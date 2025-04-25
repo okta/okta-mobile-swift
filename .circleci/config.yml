@@ -55,11 +55,8 @@ commands:
                   export DESTINATION="platform=<<parameters.platform>>"
               fi
               export DESTINATION_ARG="-destination \"$DESTINATION\""
-              echo "export DESTINATION=\"$DESTINATION\"" >> "$BASH_ENV"
-              echo "export DESTINATION_ARG=\"$DESTINATION_ARG\"" >> "$BASH_ENV"
               echo "Running on $DESTINATION"
             fi
-            source "$BASH_ENV"
       - run:
           name: "Build <<parameters.scheme>>"
           environment:
@@ -85,6 +82,9 @@ commands:
           environment:
             NSUnbufferedIO: YES
           command: |
+            if [[ -n "$DESTINATION" ]]; then
+              export DESTINATION_ARG="-destination \"$DESTINATION\""
+            fi
             set -o pipefail && xcodebuild \
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
