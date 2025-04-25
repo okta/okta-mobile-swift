@@ -201,4 +201,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Logs
-        path: .build/ci-logs/**
+        path: |
+          .build/ci-logs/**
+          .build/DerivedData/Logs/
