@@ -86,10 +86,11 @@ public struct SDKVersion: Sendable {
     /// Register a new SDK library component to be added to the ``userAgent`` value.
     /// > Note: SDK ``name`` values must be unique. If a duplicate SDK  version is already added, only the first registered SDK value will be applied.
     /// - Parameter sdk: SDK version to add.
-    public static func register(sdk: SDKVersion) {
+    @discardableResult
+    public static func register(sdk: SDKVersion) -> SDKVersion {
         lock.withLock {
             guard _sdkVersions.filter({ $0.name == sdk.name }).isEmpty else {
-                return
+                return sdk
             }
 
             _sdkVersions.append(sdk)
@@ -99,9 +100,27 @@ public struct SDKVersion: Sendable {
                 .map(\.displayName)
                 .joined(separator: " ")
             _userAgent = "\(sdkVersionString) \(systemName)/\(systemVersion) Device/\(deviceModel)"
+
+            return sdk
         }
     }
-    
+
+    /// Convenience function used to register an SDK
+    /// - Parameters:
+    ///   - name: SDK name.
+    ///   - versionString: SDK version.
+    /// - Returns: The resulting SDKVersion object.
+    @inlinable
+    @discardableResult
+    public static func register(_ name: Name, version versionString: String) -> SDKVersion? {
+        let sdk = version(for: name) ?? register(sdk: SDKVersion(sdk: name, version: versionString))
+        guard sdk.version == versionString
+        else {
+            return nil
+        }
+        return sdk
+    }
+
     /// Returns the version information for the given SDK.
     /// - Parameter sdkName: SDK name to search for.
     /// - Returns: Version information for the given SDK name.

@@ -275,9 +275,8 @@ public final class WebAuthentication {
     ///   - loginFlow: Authorization code flow instance for signing in to this client.
     ///   - logoutFlow: Session sign out flow to use when signing out from this client.
     public init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?) {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+        assert(SDKVersion.webAuthenticationUI != nil)
+
         self.signInFlow = loginFlow
         self.signOutFlow = logoutFlow
 

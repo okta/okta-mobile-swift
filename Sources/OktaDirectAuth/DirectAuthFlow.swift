@@ -365,9 +365,8 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
                 supportedGrants grantTypes: [GrantType] = .directAuth,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+        assert(SDKVersion.directAuth != nil)
+
         self.client = client
         self.supportedGrantTypes = grantTypes
         self.additionalParameters = additionalParameters
@@ -376,9 +375,8 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     public init(client: OAuth2Client, additionalParameters: [String: any APIRequestArgument]?) throws {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+        assert(SDKVersion.directAuth != nil)
+
         self.client = client
         self.supportedGrantTypes = .directAuth
         self.additionalParameters = additionalParameters
@@ -421,7 +419,7 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     /// - Returns: Status returned when the operation completes.
     public func resume(with factor: SecondaryFactor) async throws -> DirectAuthenticationFlow.Status {
         return try await withExpression {
-            guard isAuthenticating,
+            guard _isAuthenticating,
                   _context != nil
             else {
                 throw DirectAuthenticationFlowError.flowNotStarted
@@ -451,7 +449,9 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     /// - Returns: Status returned when the operation completes.
     public func resume(with factor: ContinuationFactor) async throws -> DirectAuthenticationFlow.Status {
         return try await withExpression {
-            guard _context != nil else {
+            guard _isAuthenticating,
+                  _context != nil
+            else {
                 throw DirectAuthenticationFlowError.flowNotStarted
             }
             

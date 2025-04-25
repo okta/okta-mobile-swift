@@ -100,8 +100,7 @@ public actor SessionLogoutFlow: LogoutFlow {
     public init(client: OAuth2Client,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
+        assert(SDKVersion.oauth2 != nil)
 
         self.client = client
         self.additionalParameters = additionalParameters

@@ -17,7 +17,9 @@ extension SDKVersion.Name {
     public static let directAuth = SDKVersion.Name("okta-directauth-swift")
 }
 
-// swiftlint:disable identifier_name
-@_documentation(visibility: private)
-public let Version = SDKVersion(sdk: .directAuth, version: "1.8.2")
-// swiftlint:enable identifier_name
+extension SDKVersion {
+    @_documentation(visibility: private)
+    public static let directAuth: SDKVersion? = {
+        register(.directAuth, version: "1.8.2")
+    }()
+}

@@ -25,11 +25,15 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// This can be used as a convenience to store a user's token within storage, and to access the user in a safe way. If the user's token isn't stored, this will automatically store the token for later use.
     public static var `default`: Credential? {
         get {
-            withIsolationSync { @CredentialActor in
+            assert(SDKVersion.authFoundation != nil)
+
+            return withIsolationSync { @CredentialActor in
                 TaskData.coordinator.default
             }
         }
         set {
+            assert(SDKVersion.authFoundation != nil)
+
             withIsolationSync { @CredentialActor in
                 TaskData.coordinator.default = newValue
             }
@@ -38,7 +42,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     
     /// Lists all users currently stored within the user's application.
     public static var allIDs: [String] {
-        withIsolationSync { @CredentialActor in
+        assert(SDKVersion.authFoundation != nil)
+
+        return withIsolationSync { @CredentialActor in
             TaskData.coordinator.allIDs
         } ?? []
     }
@@ -62,7 +68,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     ///   - authenticationContext: Optional `LAContext` to use when retrieving credentials, on systems that support it.
     /// - Returns: Credential matching the ID.
     public static func with(id: String, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> Credential? {
-        try withIsolationSyncThrowing { @CredentialActor in
+        assert(SDKVersion.authFoundation != nil)
+
+        return try withIsolationSyncThrowing { @CredentialActor in
             try TaskData.coordinator.with(id: id,
                                           prompt: prompt,
                                           authenticationContext: authenticationContext)
@@ -88,7 +96,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     ///   - authenticationContext: Optional `LAContext` to use when retrieving credentials, on systems that support it.
     /// - Returns: Collection of credentials that matches the given expression.
     public static func find(where expression: @Sendable @escaping (Token.Metadata) -> Bool, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> [Credential] {
-        try withIsolationSyncThrowing { @CredentialActor in
+        assert(SDKVersion.authFoundation != nil)
+
+        return try withIsolationSyncThrowing { @CredentialActor in
             try TaskData.coordinator.find(where: expression,
                                           prompt: prompt,
                                           authenticationContext: authenticationContext)
@@ -113,7 +123,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
                              tags: [String: String] = [:],
                              security options: [Security] = Security.standard
     ) throws -> Credential {
-        try withIsolationSyncThrowing { @CredentialActor in
+        assert(SDKVersion.authFoundation != nil)
+
+        return try withIsolationSyncThrowing { @CredentialActor in
             try TaskData.coordinator.store(token: token, tags: tags, security: options)
         }
     }

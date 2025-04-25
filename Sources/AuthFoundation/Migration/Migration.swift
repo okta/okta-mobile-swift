@@ -39,9 +39,8 @@ public final class Migration {
     nonisolated(unsafe) private(set) var registeredMigrators: [any SDKVersionMigrator]
 
     init(migrators: [any SDKVersionMigrator]? = nil) {
+        assert(SDKVersion.authFoundation != nil)
         self.registeredMigrators = migrators ?? Self.defaultMigrators
-
-        SDKVersion.register(sdk: Version)
     }
 
     func register(migrator: any SDKVersionMigrator) {
