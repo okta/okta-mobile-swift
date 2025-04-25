@@ -49,32 +49,11 @@ jobs:
     - name: Get Xcode toolchain version
       if: runner.os == 'macOS'
       run: xcrun --toolchain ${{ env.TOOLCHAINS }} swift --version
-    - name: Install Linux build utilities
-      if: runner.os == 'Linux'
-      env:
-        HOMEBREW_NO_ENV_HINTS: 1
-      run: |
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-        if [[ -n "$HOMEBREW_PREFIX" ]]; then
-          echo "HOMEBREW_CELLAR=${HOMEBREW_CELLAR}" >> $GITHUB_ENV
-          echo "HOMEBREW_PREFIX=${HOMEBREW_PREFIX}" >> $GITHUB_ENV
-          echo "PATH=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin${PATH+:$PATH}" >> $GITHUB_ENV
-          echo "HOMEBREW_REPOSITORY=${HOMEBREW_PREFIX}/Homebrew" >> $GITHUB_ENV
-        fi
-        brew install xcbeautify
     - uses: actions/checkout@master
-    - name: Setup log environment
-      run: mkdir -p .build/ci-logs
     - name: Build
-      run: set -o pipefail && swift build --build-tests 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+      run: set -o pipefail && swift build --build-tests
     - name: Test
-      run: set -o pipefail && swift test --parallel 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
-    - name: Upload Logs
-      if: failure()
-      uses: actions/upload-artifact@v4
-      with:
-        name: Logs
-        path: .build/ci-logs/**
+      run: set -o pipefail && swift test --parallel
 
   Cocoapods:
     name: CocoaPods Build
