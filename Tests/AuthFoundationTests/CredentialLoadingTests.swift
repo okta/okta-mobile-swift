@@ -16,36 +16,35 @@ import XCTest
 @testable import AuthFoundation
 
 final class CredentialLoadingTests: XCTestCase {
-    var userDefaults: UserDefaults!
-    var storage: UserDefaultsTokenStorage!
-    var coordinator: CredentialCoordinatorImpl!
-    
-    override func setUp() async throws {
-        userDefaults = UserDefaults(suiteName: name)
-        userDefaults.removePersistentDomain(forName: name)
+    @CredentialActor
+    final class StorageContext {
+        let name: String
+        let userDefaults: UserDefaults
+        let storage: UserDefaultsTokenStorage
+        let coordinator: CredentialCoordinatorImpl
 
-        let storage = await UserDefaultsTokenStorage(userDefaults: userDefaults)
-        let mockCoordinator = CredentialCoordinatorImpl()
-        await CredentialActor.run {
-            mockCoordinator.tokenStorage = storage
+        init(named storageName: String) {
+            name = storageName
+            userDefaults = UserDefaults(suiteName: storageName)!
+
+            storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
+            coordinator = CredentialCoordinatorImpl()
+            coordinator.tokenStorage = storage
+
+            userDefaults.removePersistentDomain(forName: storageName)
         }
 
-        coordinator = mockCoordinator
-        self.storage = storage
-
-        let tokenCount = await storage.allIDs.count
-        XCTAssertEqual(tokenCount, 0)
-    }
-
-    override func tearDown() async throws {
-        userDefaults.removePersistentDomain(forName: name)
-        userDefaults = nil
-        storage = nil
-        coordinator = nil
+        deinit {
+            userDefaults.removePersistentDomain(forName: name)
+        }
     }
 
     @CredentialActor
     func testFetchingTokens() async throws {
+        let context = StorageContext(named: name)
+        let coordinator = context.coordinator
+        let storage = context.storage
+
         let tokenA = Token.mockToken(id: "TokenA")
         let tokenB = Token.mockToken(id: "TokenB")
         let tokenC = Token.mockToken(id: "TokenC")
@@ -60,7 +59,7 @@ final class CredentialLoadingTests: XCTestCase {
         try storage.setMetadata(Token.Metadata(token: tokenB, tags: ["animal": "dog"]))
         try storage.setMetadata(Token.Metadata(token: tokenC, tags: ["animal": "pig"]))
         try storage.setMetadata(Token.Metadata(token: tokenD, tags: ["animal": "emu"]))
-        
+
         XCTAssertEqual(try coordinator.with(id: "TokenA", prompt: nil, authenticationContext: nil)?.token, tokenA)
         XCTAssertEqual(try coordinator.find(where: { meta in
             meta.tags["animal"] == "cat"

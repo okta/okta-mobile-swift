@@ -25,7 +25,7 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
     }
     
     static func register(result: Result<URL, any Error>?, for webAuth: WebAuthentication) async throws {
-        guard let testName = await webAuth.signInFlow.additionalParameters?["testName"] as? String
+        guard let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
         else {
             throw TestError.invalidTestName
         }
@@ -34,7 +34,7 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
     }
     
     static func provider(for webAuth: WebAuthentication) async -> WebAuthenticationProviderMock? {
-        guard let testName = await webAuth.signInFlow.additionalParameters?["testName"] as? String
+        guard let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
         else {
             return nil
         }
@@ -46,7 +46,7 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
                                                 from window: WebAuthentication.WindowAnchor?,
                                                 usesEphemeralSession: Bool) async -> (any WebAuthenticationProvider)?
     {
-        let testName = await webAuth.signInFlow.additionalParameters?["testName"] as? String
+        let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
 
         var result: Result<URL, any Error>?
         if let testName,

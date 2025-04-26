@@ -20,6 +20,10 @@
 import Foundation
 import OSLog
 
+#if compiler(<6.0)
+extension OSLog: @unchecked Sendable {}
+#endif
+
 /// Convenience class used for debugging SDK network operations.
 ///
 /// Developers can use this to assist in debugging interactions with the Client SDK, and any network operations that are performed on behalf of the user via this SDK.
@@ -183,4 +187,11 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
         })?.value as? String ?? "<unknown>"
     }
 }
+
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension DebugAPIRequestObserver: @unchecked Sendable {}
+#else
+extension DebugAPIRequestObserver: Sendable {}
+#endif
 #endif

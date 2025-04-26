@@ -101,7 +101,7 @@ public final class WebAuthentication {
             cancel()
         }
         
-        guard let redirectUri = await signInFlow.client.configuration.redirectUri
+        guard let redirectUri = signInFlow.client.configuration.redirectUri
         else {
             throw OAuth2Error.missingRedirectUri
         }
@@ -165,7 +165,7 @@ public final class WebAuthentication {
                               context: SessionLogoutFlow.Context = .init()) async throws -> URL
     {
         guard let signOutFlow,
-              let redirectUri = await signOutFlow.client.configuration.logoutRedirectUri
+              let redirectUri = signOutFlow.client.configuration.logoutRedirectUri
         else {
             throw WebAuthenticationError.noSignOutFlowProvided
         }
@@ -275,9 +275,8 @@ public final class WebAuthentication {
     ///   - loginFlow: Authorization code flow instance for signing in to this client.
     ///   - logoutFlow: Session sign out flow to use when signing out from this client.
     public init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?) {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+        assert(SDKVersion.webAuthenticationUI != nil)
+
         self.signInFlow = loginFlow
         self.signOutFlow = logoutFlow
 

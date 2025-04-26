@@ -131,7 +131,7 @@ final class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                 expiresIn: response.expiresIn) { _, request in
                     let response = try await client.exchange(token: request)
                     return .success(.success(response.result))
-                }
+            }
             return try await poll.start(with: request)
         }
 
@@ -142,3 +142,10 @@ final class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         return try await taskHandle.value
     }
 }
+
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension OOBStepHandler: @unchecked Sendable {}
+#else
+extension OOBStepHandler: Sendable {}
+#endif

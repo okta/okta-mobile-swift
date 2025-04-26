@@ -18,7 +18,9 @@ extension SDKVersion.Name {
     public static let webAuthenticationUI = SDKVersion.Name("okta-webauthenticationui-swift")
 }
 
-// swiftlint:disable identifier_name
-@_documentation(visibility: private)
-public let Version = SDKVersion(sdk: .webAuthenticationUI, version: "1.8.2")
-// swiftlint:enable identifier_name
+extension SDKVersion {
+    @_documentation(visibility: private)
+    public static let webAuthenticationUI: SDKVersion? = {
+        register(.webAuthenticationUI, version: "1.8.2")
+    }()
+}

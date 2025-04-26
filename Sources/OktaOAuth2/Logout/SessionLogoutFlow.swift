@@ -58,10 +58,10 @@ public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
 /// ```
 public actor SessionLogoutFlow: LogoutFlow {
     /// The OAuth2Client this logout flow will use.
-    public let client: OAuth2Client
+    nonisolated public let client: OAuth2Client
 
     /// Any additional query string parameters you would like to supply to the authorization server.
-    public let additionalParameters: [String: any APIRequestArgument]?
+    nonisolated public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates if this flow is currently in progress.
     nonisolated public var inProgress: Bool {
@@ -100,8 +100,7 @@ public actor SessionLogoutFlow: LogoutFlow {
     public init(client: OAuth2Client,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
+        assert(SDKVersion.oauth2 != nil)
 
         self.client = client
         self.additionalParameters = additionalParameters
