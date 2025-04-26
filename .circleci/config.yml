@@ -63,6 +63,7 @@ commands:
           environment:
             NSUnbufferedIO: YES
           command: |
+            echo "Building for $DESTINATION"
             set -o pipefail && \
               xcrun xcodebuild \
                 CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
@@ -87,6 +88,7 @@ commands:
           environment:
             NSUnbufferedIO: YES
           command: |
+            echo "Testing $DESTINATION"
             set -o pipefail && \
               xcrun xcodebuild \
                 CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \

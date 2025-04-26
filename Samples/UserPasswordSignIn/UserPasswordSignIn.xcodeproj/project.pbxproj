@@ -366,6 +366,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 96D66FC427EB874800AE89AD /* SampleCode.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				OTHER_SWIFT_FLAGS = "-parse-as-library";
@@ -379,6 +380,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 96D66FC427EB874800AE89AD /* SampleCode.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				OTHER_SWIFT_FLAGS = "-parse-as-library";
