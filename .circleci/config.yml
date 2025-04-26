@@ -63,7 +63,8 @@ commands:
             NSUnbufferedIO: YES
           command: |
             set -o pipefail && \
-              xcodebuild \
+              xcrun xcodebuild \
+                CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
                 -workspace OktaMobileSDK.xcworkspace \
@@ -86,7 +87,8 @@ commands:
             NSUnbufferedIO: YES
           command: |
             set -o pipefail && \
-              xcodebuild \
+              xcrun xcodebuild \
+                CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
                 -resultBundlePath "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" \
