@@ -43,7 +43,7 @@ commands:
             if ! which -s xcresulttool; then
               export HOMEBREW_NO_AUTO_UPDATE=1
               brew tap a7ex/homebrew-formulae
-              brew install xcresultparser
+              brew install xcresultparser xcbeautify
             fi
       - run:
           name: "Define destination"
@@ -62,14 +62,17 @@ commands:
           environment:
             NSUnbufferedIO: YES
           command: |
-            set -o pipefail && xcodebuild \
+            set -o pipefail && \
+              xcodebuild \
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
                 -destination "$DESTINATION" \
-                build-for-testing 2>&1
+                build-for-testing 2>&1 | \
+              tee -a "/tmp/TestResults/<<parameters.platform>>.log" | \
+              xcbeautify
       - when:
           condition:
             and:
@@ -82,7 +85,8 @@ commands:
           environment:
             NSUnbufferedIO: YES
           command: |
-            set -o pipefail && xcodebuild \
+            set -o pipefail && \
+              xcodebuild \
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
                 -resultBundlePath "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" \
@@ -90,7 +94,9 @@ commands:
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
                 -destination "$DESTINATION" \
-                test-without-building 2>&1
+                test-without-building 2>&1 | \
+              tee -a "/tmp/TestResults/<<parameters.platform>>.log" | \
+              xcbeautify
       - run:
           name: "Export test results"
           when: always
@@ -119,6 +125,7 @@ jobs:
           command: |
             printenv TEST_OKTA_PLIST | base64 -d -i - > ~/project/Samples/Shared/Okta.plist
             printenv TEST_CONFIGURATION | base64 -d -i - > ~/project/Samples/Shared/TestConfiguration.xcconfig
+            mkdir -p /tmp/TestResults
       - persist_to_workspace:
           root: ~/project
           paths:
