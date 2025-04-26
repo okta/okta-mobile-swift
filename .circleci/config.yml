@@ -49,7 +49,7 @@ commands:
           name: "Define destination"
           command: |
             if [[ "<<parameters.platform>>" == "macOS" ]]; then
-                export DESTINATION="platform=<<parameters.platform>>,name=Any Mac"
+                export DESTINATION="platform=<<parameters.platform>>,arch=arm64"
             elif [[ -n $MACOS_ORB_DEVICE_UDID ]]; then
                 export DESTINATION="platform=<<parameters.platform>>,id=$MACOS_ORB_DEVICE_UDID"
             else
