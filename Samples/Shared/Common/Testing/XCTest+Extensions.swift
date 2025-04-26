@@ -106,7 +106,7 @@ extension XCUIElement {
         let timeStart = Date().timeIntervalSince1970
         
         while Date().timeIntervalSince1970 <= (timeStart + timeout) {
-            if !exists {
+            if !waitForExistence(timeout: max(timeout / 4, 0.1)) {
                 return true
             }
         }
@@ -118,7 +118,7 @@ extension XCUIElement {
         let timeStart = Date().timeIntervalSince1970
         
         while Date().timeIntervalSince1970 <= (timeStart + timeout) {
-            if !exists {
+            if waitForExistence(timeout: max(timeout / 4, 0.1)) {
                 return true
             }
         }
@@ -138,11 +138,7 @@ extension XCUIElementQuery {
     }
 }
 
-#if swift(<6.0)
-extension XCUIElementQuery: Sequence {}
-#else
 extension XCUIElementQuery: @retroactive Sequence {}
-#endif
 
 extension XCUIElementQuery {
     public typealias Iterator = AnyIterator<XCUIElement>
