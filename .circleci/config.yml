@@ -9,7 +9,7 @@ executors:
   apple-ci-arm-medium:
     macos:
       xcode: 16.2.0
-    resource_class: m2pro.medium
+    resource_class: macos.m1.medium.gen1
 
 commands:
   prepare-ios-simulator:
@@ -48,28 +48,27 @@ commands:
       - run:
           name: "Define destination"
           command: |
-            if [[ "<<parameters.platform>>" != "macOS" ]]; then
-              if [[ -n $MACOS_ORB_DEVICE_UDID ]]; then
-                  export DESTINATION="platform=<<parameters.platform>>,id=$MACOS_ORB_DEVICE_UDID"
-              else
-                  export DESTINATION="platform=<<parameters.platform>>"
-              fi
-              echo "export DESTINATION_ARG='-destination \"$DESTINATION\"'" >> $BASH_ENV
-              echo "Running on $DESTINATION"
+            if [[ "<<parameters.platform>>" == "macOS" ]]; then
+                export DESTINATION="platform=<<parameters.platform>>,name=Any Mac"
+            elif [[ -n $MACOS_ORB_DEVICE_UDID ]]; then
+                export DESTINATION="platform=<<parameters.platform>>,id=$MACOS_ORB_DEVICE_UDID"
+            else
+                export DESTINATION="platform=<<parameters.platform>>"
             fi
+            echo "export DESTINATION=\"$DESTINATION\"" >> "$BASH_ENV"
+            echo "Running on $DESTINATION"
       - run:
           name: "Build <<parameters.scheme>>"
           environment:
             NSUnbufferedIO: YES
           command: |
-            echo $DESTINATION_ARG
             set -o pipefail && xcodebuild \
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
-                $DESTINATION_ARG \
+                -destination "$DESTINATION" \
                 build-for-testing 2>&1
       - when:
           condition:
@@ -90,7 +89,7 @@ commands:
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
-                $DESTINATION_ARG \
+                -destination "$DESTINATION" \
                 test-without-building 2>&1
       - run:
           name: "Export test results"
