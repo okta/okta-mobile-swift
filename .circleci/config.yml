@@ -45,6 +45,7 @@ commands:
               brew tap a7ex/homebrew-formulae
               brew install xcresultparser xcbeautify
             fi
+            mkdir -p /tmp/TestResults
       - run:
           name: "Define destination"
           command: |
@@ -72,7 +73,7 @@ commands:
                 -sdk <<parameters.sdk>> \
                 -destination "$DESTINATION" \
                 build-for-testing 2>&1 | \
-              tee -a "/tmp/TestResults/<<parameters.platform>>.log" | \
+              tee -a "/tmp/TestResults/<<parameters.scheme>>-<<parameters.platform>>.log" | \
               xcbeautify
       - when:
           condition:
@@ -97,7 +98,7 @@ commands:
                 -sdk <<parameters.sdk>> \
                 -destination "$DESTINATION" \
                 test-without-building 2>&1 | \
-              tee -a "/tmp/TestResults/<<parameters.platform>>.log" | \
+              tee -a "/tmp/TestResults/<<parameters.scheme>>-<<parameters.platform>>.log" | \
               xcbeautify
       - run:
           name: "Export test results"
@@ -127,7 +128,6 @@ jobs:
           command: |
             printenv TEST_OKTA_PLIST | base64 -d -i - > ~/project/Samples/Shared/Okta.plist
             printenv TEST_CONFIGURATION | base64 -d -i - > ~/project/Samples/Shared/TestConfiguration.xcconfig
-            mkdir -p /tmp/TestResults
       - persist_to_workspace:
           root: ~/project
           paths:
