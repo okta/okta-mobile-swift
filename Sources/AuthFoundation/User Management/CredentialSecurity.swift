@@ -13,11 +13,21 @@
 import Foundation
 
 #if canImport(Security)
+#if compiler(<6.0)
+import Security
+#else
 @preconcurrency import Security
+#endif
 #endif
 
 #if canImport(LocalAuthentication) && !os(tvOS)
+#if compiler(<6.0)
+import LocalAuthentication
+
+extension SecAccessControl: @unchecked Sendable {}
+#else
 @preconcurrency import LocalAuthentication
+#endif
 #endif
 
 extension Credential {

@@ -16,7 +16,7 @@ import XCTest
 @testable import AuthFoundation
 @testable import OktaOAuth2
 
-class MockSessionTokenFlowURLExchange: SessionTokenFlowURLExchange {
+final class MockSessionTokenFlowURLExchange: SessionTokenFlowURLExchange {
     let scheme: String
     static let resultUrl = LockedValue<URL?>(wrappedValue: nil)
     static let error: LockedValue<OAuth2Error?> = nil

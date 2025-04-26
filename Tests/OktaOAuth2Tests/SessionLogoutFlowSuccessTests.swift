@@ -79,6 +79,8 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
                             &state=\(state)\
                             #\(delegate.fragment)
                             """)
+
+        await MainActor.yield()
         XCTAssertEqual(delegate.url, url)
         XCTAssertNil(delegate.error)
         

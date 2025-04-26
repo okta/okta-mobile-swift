@@ -16,6 +16,7 @@ extension Array<SwiftSetting> {
         if strictConcurrencyEnabled {
             return common + [
                 .enableExperimentalFeature("StrictConcurrency=complete"),
+                .enableExperimentalFeature("IsolatedAny"),
                 .enableUpcomingFeature("InferSendableFromCaptures"),
                 .enableUpcomingFeature("IsolatedDefaultValues"),
                 .enableUpcomingFeature("DisableOutwardActorInference"),

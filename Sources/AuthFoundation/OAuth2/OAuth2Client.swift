@@ -32,7 +32,7 @@ extension OAuth2ClientDelegate {
 
 // swiftlint:disable type_body_length
 /// An OAuth2 client, used to interact with a given authorization server.
-public final class OAuth2Client: Sendable, UsesDelegateCollection {
+public final class OAuth2Client: UsesDelegateCollection {
     public typealias Delegate = OAuth2ClientDelegate
 
     /// The URLSession used by this client for network requests.
@@ -101,9 +101,8 @@ public final class OAuth2Client: Sendable, UsesDelegateCollection {
     ///   - configuration: The pre-formed configuration for this client.
     ///   - session: Optional URLSession to use for network requests.
     public init(_ configuration: Configuration, session: (any URLSessionProtocol)? = nil) {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+        assert(SDKVersion.authFoundation != nil)
+
         // Ensure the time coordinator is properly initialized
         _ = Date.coordinator
         
@@ -113,10 +112,12 @@ public final class OAuth2Client: Sendable, UsesDelegateCollection {
                                           qos: .userInitiated,
                                           attributes: .concurrent)
 
-        TaskData.notificationCenter.post(name: .oauth2ClientCreated, object: self)
+        Task { @MainActor in
+            TaskData.notificationCenter.post(name: .oauth2ClientCreated, object: self)
+        }
 
         // Ensure the Credential Coordinator can monitor this client for token refresh changes.
-        Credential.coordinator.observe(oauth2: self)
+        TaskData.coordinator.observe(oauth2: self)
     }
     
     /// Retrieves the org's OpenID configuration.
@@ -286,9 +287,16 @@ public final class OAuth2Client: Sendable, UsesDelegateCollection {
     let refreshQueue: DispatchQueue
 
     let openIdConfigurationAction = CoalescedResult<OpenIdConfiguration>(taskName: "OpenIdConfiguration")
-    let jwksAction = CoalescedResult<JWKS>(taskName: "OpenIdConfiguration")
+    let jwksAction = CoalescedResult<JWKS>(taskName: "JWKS")
 }
 // swiftlint:enable type_body_length
+
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension OAuth2Client: @unchecked Sendable {}
+#else
+extension OAuth2Client: Sendable {}
+#endif
 
 extension OAuth2Client {
     /// Asynchronously retrieves the org's OpenID configuration.
