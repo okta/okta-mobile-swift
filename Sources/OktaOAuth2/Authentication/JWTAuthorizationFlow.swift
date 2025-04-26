@@ -18,15 +18,15 @@ public actor JWTAuthorizationFlow: AuthenticationFlow {
     public typealias Context = StandardAuthenticationContext
     
     /// The OAuth2Client this authentication flow will use.
-    public let client: OAuth2Client
-    
+    nonisolated public let client: OAuth2Client
+
     /// The context that stores the state for the current authentication session.
     nonisolated public var context: Context? {
         withIsolationSync { await self._context }
     }
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: any APIRequestArgument]?
+    nonisolated public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     /// ``JWTAuthorizationFlow/init(issuerURL:clientId:scope:additionalParameters:)``
@@ -72,9 +72,8 @@ public actor JWTAuthorizationFlow: AuthenticationFlow {
     public init(client: OAuth2Client,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+        assert(SDKVersion.oauth2 != nil)
+
         self.client = client
         self.additionalParameters = additionalParameters
         

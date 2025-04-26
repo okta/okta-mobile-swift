@@ -12,9 +12,11 @@
 
 import Foundation
 
-/// A threadsafe wrapper that coalesces multiple concurrent requests for the same asynchronous result, ensuring that only a single activec operation is performed, while allowing each caller to receive the result.
+/// A threadsafe wrapper that coalesces multiple concurrent requests for the same asynchronous result, ensuring that only a single active operation is performed, while allowing each caller to receive the result.
 ///
 /// This is commonly used to limit unnecessary duplication of network operations for common resources.
+///
+/// > Important: The order in which responses from the `perform` function are returned is undefined. No implicit order is enforced, and the underlying implementation is subject to change.
 @_documentation(visibility: private)
 public actor CoalescedResult<T: Sendable>: Sendable {
     private let taskName: String?
@@ -42,7 +44,7 @@ public actor CoalescedResult<T: Sendable>: Sendable {
     nonisolated public var isActive: Bool {
         let semaphore = DispatchSemaphore(value: 0)
         nonisolated(unsafe) var result: Bool = false
-        Task {
+        Task.detached {
             result = await self._isActive
             semaphore.signal()
         }
@@ -54,7 +56,7 @@ public actor CoalescedResult<T: Sendable>: Sendable {
     nonisolated public var value: T? {
         let semaphore = DispatchSemaphore(value: 0)
         nonisolated(unsafe) var result: T?
-        Task {
+        Task.detached {
             result = await self._value
             semaphore.signal()
         }

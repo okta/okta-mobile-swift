@@ -105,7 +105,7 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
         return try await withCheckedThrowingContinuation { continuation in
             Task {
                 if let delay = requestDelay {
-                    try await Task.sleep(nanoseconds: UInt64(delay * _APIClientRetryDelayTimeIntervalToNanoseconds.wrappedValue))
+                    try await Task.sleep(delay: delay)
                 }
                 
                 guard let data = call?.data,

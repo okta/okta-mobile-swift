@@ -7,8 +7,6 @@ on:
       - '.swiftlint.yml'
       - 'Sources/**/*.swift'
       - 'Samples/**/*.swift'
-    branches: 
-      - master
   push:
     paths:
       - '.github/workflows/lint.yml'

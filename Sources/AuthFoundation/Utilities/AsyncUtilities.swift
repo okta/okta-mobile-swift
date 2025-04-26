@@ -17,8 +17,22 @@ import Foundation
 /// This is primarily used by unit tests to ensure the consistent passage of shared framework objects to isolate tests.
 @_documentation(visibility: internal)
 public enum TaskData {
+    /// The shared Credential Coordinator implementation.
+    @TaskLocal static var coordinator: CredentialCoordinatorImpl = CredentialCoordinatorImpl()
+
     /// The NotificationCenter instance that should be used when posting or observing notifications.
     @TaskLocal public static var notificationCenter: NotificationCenter = .default
+
+    /// The factor used to convert a time interval to nanoseconds.
+    ///
+    /// > Important: This is only used for testing, and should not be used in production.
+    @TaskLocal static var timeIntervalToNanoseconds: Double = 1_000_000_000
+}
+
+extension Task where Success == Never, Failure == Never {
+    static func sleep(delay: TimeInterval) async throws {
+        try await Task.sleep(nanoseconds: UInt64(delay * TaskData.timeIntervalToNanoseconds))
+    }
 }
 
 @_documentation(visibility: private)
@@ -29,7 +43,7 @@ public enum UtilityError: Error {
 /// Shared actor used to coordinate multithreaded interactions within the Credential storage subsystem.
 @globalActor
 @_documentation(visibility: private)
-final public actor CredentialActor {
+public final actor CredentialActor {
     public static let shared = CredentialActor()
     
     /// Convenience for running a block within the context of the ``CredentialActor``.
@@ -54,6 +68,43 @@ final public actor CredentialActor {
 ///   - success: Closure invoked when the expression is successful
 ///   - failure: Closure invoked when the expression throws an error
 /// - Returns: The result when the expression is successful
+#if swift(<6.0)
+// Work around Swift 5.10 lack of @isolated(any) functions.
+// https://github.com/swiftlang/swift-evolution/blob/main/proposals/0431-isolated-any-functions.md
+@inlinable
+@_documentation(visibility: private)
+public func withExpression<T: Sendable>(
+    @_inheritActorContext @_implicitSelfCapture _ expression: @Sendable () async throws -> T,
+    @_inheritActorContext @_implicitSelfCapture success: @escaping @Sendable (T) -> Void = { _ in },
+    @_inheritActorContext @_implicitSelfCapture failure: @Sendable (any Error) throws -> Void = { _ in },
+    @_inheritActorContext @_implicitSelfCapture finally: @escaping @Sendable () -> Void = {}) async rethrows -> T
+{
+    do {
+        let result = try await expression()
+        let successTask = Task { success(result) }
+        await successTask.value
+
+        let finallyTask = Task { finally() }
+        await finallyTask.value
+
+        return result
+    } catch {
+        do {
+            try failure(error)
+        } catch {
+            let finallyTask = Task { finally() }
+            await finallyTask.value
+
+            throw error
+        }
+
+        let finallyTask = Task { finally() }
+        await finallyTask.value
+
+        throw error
+    }
+}
+#else
 @inlinable
 @_documentation(visibility: private)
 public func withExpression<T: Sendable>(
@@ -78,6 +129,7 @@ public func withExpression<T: Sendable>(
         throw error
     }
 }
+#endif
 
 /// Executes an isolated asynchronous throwing task within a synchronous context.
 ///
@@ -140,4 +192,20 @@ public func withIsolationSync<T: Sendable>(priority: TaskPriority? = nil,
     group.wait()
     
     return result
+}
+
+extension MainActor {
+    static func nonisolatedUnsafe<T: Sendable>(_ block: @MainActor () -> T) -> T {
+        if Thread.isMainThread {
+            return MainActor.assumeIsolated { block() }
+        } else {
+            return DispatchQueue.main.sync {
+                #if swift(<6.0)
+                return MainActor.assumeIsolated { block() }
+                #else
+                block()
+                #endif
+            }
+        }
+    }
 }

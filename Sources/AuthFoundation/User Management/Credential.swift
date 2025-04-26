@@ -19,27 +19,33 @@ import FoundationNetworking
 /// Convenience object that provides methods and properties for using a user's authentication tokens.
 ///
 /// Once a user is authenticated within an application, the tokens' lifecycle must be managed to ensure it is properly refreshed as needed, is stored in a secure manner, and can be used to perform requests on behalf of the user. This class provides capabilities to accomplish all these tasks, while ensuring a convenient developer experience.
-public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
+public final class Credential: Equatable, OAuth2ClientDelegate {
     /// The current or "default" credential.
     ///
     /// This can be used as a convenience to store a user's token within storage, and to access the user in a safe way. If the user's token isn't stored, this will automatically store the token for later use.
     public static var `default`: Credential? {
         get {
-            withIsolationSync { @CredentialActor in
-                coordinator.default
+            assert(SDKVersion.authFoundation != nil)
+
+            return withIsolationSync { @CredentialActor in
+                TaskData.coordinator.default
             }
         }
         set {
+            assert(SDKVersion.authFoundation != nil)
+
             withIsolationSync { @CredentialActor in
-                coordinator.default = newValue
+                TaskData.coordinator.default = newValue
             }
         }
     }
     
     /// Lists all users currently stored within the user's application.
     public static var allIDs: [String] {
-        withIsolationSync { @CredentialActor in
-            coordinator.allIDs
+        assert(SDKVersion.authFoundation != nil)
+
+        return withIsolationSync { @CredentialActor in
+            TaskData.coordinator.allIDs
         } ?? []
     }
 
@@ -62,10 +68,12 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     ///   - authenticationContext: Optional `LAContext` to use when retrieving credentials, on systems that support it.
     /// - Returns: Credential matching the ID.
     public static func with(id: String, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> Credential? {
-        try withIsolationSyncThrowing { @CredentialActor in
-            try coordinator.with(id: id,
-                                 prompt: prompt,
-                                 authenticationContext: authenticationContext)
+        assert(SDKVersion.authFoundation != nil)
+
+        return try withIsolationSyncThrowing { @CredentialActor in
+            try TaskData.coordinator.with(id: id,
+                                          prompt: prompt,
+                                          authenticationContext: authenticationContext)
         }
     }
     
@@ -88,10 +96,12 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     ///   - authenticationContext: Optional `LAContext` to use when retrieving credentials, on systems that support it.
     /// - Returns: Collection of credentials that matches the given expression.
     public static func find(where expression: @Sendable @escaping (Token.Metadata) -> Bool, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> [Credential] {
-        try withIsolationSyncThrowing { @CredentialActor in
-            try coordinator.find(where: expression,
-                                 prompt: prompt,
-                                 authenticationContext: authenticationContext)
+        assert(SDKVersion.authFoundation != nil)
+
+        return try withIsolationSyncThrowing { @CredentialActor in
+            try TaskData.coordinator.find(where: expression,
+                                          prompt: prompt,
+                                          authenticationContext: authenticationContext)
         }
     }
     
@@ -113,23 +123,25 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
                              tags: [String: String] = [:],
                              security options: [Security] = Security.standard
     ) throws -> Credential {
-        try withIsolationSyncThrowing { @CredentialActor in
-            try coordinator.store(token: token, tags: tags, security: options)
+        assert(SDKVersion.authFoundation != nil)
+
+        return try withIsolationSyncThrowing { @CredentialActor in
+            try TaskData.coordinator.store(token: token, tags: tags, security: options)
         }
     }
 
     /// Data source used for creating and managing the creation and caching of ``Credential`` instances.
     @CredentialActor
     public static var credentialDataSource: any CredentialDataSource {
-        get { coordinator.credentialDataSource }
-        set { coordinator.credentialDataSource = newValue }
+        get { TaskData.coordinator.credentialDataSource }
+        set { TaskData.coordinator.credentialDataSource = newValue }
     }
     
     /// Storage instance used to abstract the secure offline storage and retrieval of ``Token`` instances.
     @CredentialActor
     public static var tokenStorage: any TokenStorage {
-        get { coordinator.tokenStorage }
-        set { coordinator.tokenStorage = newValue }
+        get { TaskData.coordinator.tokenStorage }
+        set { TaskData.coordinator.tokenStorage = newValue }
     }
 
     public static func == (lhs: Credential, rhs: Credential) -> Bool {
@@ -297,7 +309,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
         self.init(token: token,
                   oauth2: OAuth2Client(token.context.configuration,
                                        session: urlSession),
-                  coordinator: Credential.coordinator)
+                  coordinator: TaskData.coordinator)
     }
     
     /// Initializer that creates a credential for a given token, using a custom OAuth2Client instance.
@@ -314,7 +326,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
         
         self.init(token: token,
                   oauth2: client,
-                  coordinator: Credential.coordinator)
+                  coordinator: TaskData.coordinator)
     }
     
     init(token: Token, oauth2 client: OAuth2Client, coordinator: any CredentialCoordinator) {
@@ -343,13 +355,11 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     }
     
     // MARK: Private properties
-    static let coordinator = CredentialCoordinatorImpl()
     nonisolated(unsafe) weak var coordinator: (any CredentialCoordinator)?
 
     @CredentialActor
     static func resetToDefault() {
-        coordinator.resetToDefault()
-        _CredentialAutomaticRefreshTimeIntervalToNanoseconds.wrappedValue = 1_000_000_000
+        TaskData.coordinator.resetToDefault()
     }
 
     nonisolated(unsafe) private var _token: Token
@@ -407,7 +417,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
         _automaticRefreshTask = Task(priority: .medium) {
             if timeOffset > 0 {
                 do {
-                    try await Task.sleep(nanoseconds: UInt64(timeOffset * _CredentialAutomaticRefreshTimeIntervalToNanoseconds.wrappedValue))
+                    try await Task.sleep(delay: timeOffset)
                 } catch is CancellationError {
                     lock.withLock {
                         _automaticRefreshTask = nil
@@ -421,7 +431,7 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
             repeat {
                 do {
                     try await refreshIfNeeded()
-                    try await Task.sleep(nanoseconds: UInt64(repeatInterval * _CredentialAutomaticRefreshTimeIntervalToNanoseconds.wrappedValue))
+                    try await Task.sleep(delay: repeatInterval)
                 } catch is CancellationError {
                     lock.withLock {
                         _automaticRefreshTask = nil
@@ -470,4 +480,9 @@ public final class Credential: Sendable, Equatable, OAuth2ClientDelegate {
     }
 }
 
-let _CredentialAutomaticRefreshTimeIntervalToNanoseconds: LockedValue<Double> = 1_000_000_000
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension Credential: @unchecked Sendable {}
+#else
+extension Credential: Sendable {}
+#endif

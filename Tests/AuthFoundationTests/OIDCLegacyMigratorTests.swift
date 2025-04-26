@@ -14,7 +14,7 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
 final class OIDCLegacyMigratorTests: XCTestCase {
     typealias LegacyOIDC = Migration.LegacyOIDC
     
@@ -30,6 +30,10 @@ final class OIDCLegacyMigratorTests: XCTestCase {
             Credential.tokenStorage = MockTokenStorage()
             Credential.credentialDataSource = MockCredentialDataSource()
         }
+
+        await MainActor.run {
+            XCTAssertEqual(Migration.shared.registeredMigrators.count, 0)
+        }
     }
 
     override func tearDown() async throws {
@@ -39,7 +43,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
         Migration.shared.resetMigrators()
 
         await CredentialActor.run {
-            Credential.coordinator.resetToDefault()
+            TaskData.coordinator.resetToDefault()
         }
     }
 

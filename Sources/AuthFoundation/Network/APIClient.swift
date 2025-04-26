@@ -182,7 +182,7 @@ extension APIClient {
                 }
                 
                 if let delay = rateInfo?.delay {
-                    try await Task.sleep(nanoseconds: UInt64(delay * _APIClientRetryDelayTimeIntervalToNanoseconds.wrappedValue))
+                    try await Task.sleep(delay: delay)
                 }
 
                 let (data, response) = try await session.data(for: urlRequest)
@@ -346,5 +346,3 @@ let defaultJSONDecoder: JSONDecoder = {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     return decoder
 }()
-
-let _APIClientRetryDelayTimeIntervalToNanoseconds: LockedValue<Double> = 1_000_000_000
