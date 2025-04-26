@@ -107,7 +107,7 @@ extension WebLogin where Self: Screen {
     func send(password: String? = nil) {
         guard let password else { return }
         
-        if app.webViews.staticTexts["Select Password."].waitToBeHittable(timeout: .standard) {
+        if app.webViews.links["Select Password."].waitToBeHittable(timeout: .standard) {
             select(authenticator: "Password")
         }
         
