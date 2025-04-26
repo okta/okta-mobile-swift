@@ -32,7 +32,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest-large, ubuntu-latest]
+        os: 
+          - macos-latest-large
+          # Disabling Linux tests until GPG issue is resolved
+          # - ubuntu-latest
         swift_version: ["5.10", "6.0"]
         exclude:
           - os: ubuntu-latest

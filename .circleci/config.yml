@@ -8,7 +8,7 @@ orbs:
 executors:
   apple-ci-arm-medium:
     macos:
-      xcode: 16.2.0
+      xcode: "16.2.0"
     resource_class: macos.m1.medium.gen1
 
 commands:
@@ -36,7 +36,11 @@ commands:
       platform:
         type: string
         default: "iOS Simulator"
+      xcode-options:
+        type: string
+        default: ""
     steps:
+      - run: xcodebuild -version
       - run:
           name: "Install test utilities"
           command: |
@@ -63,15 +67,16 @@ commands:
           environment:
             NSUnbufferedIO: YES
           command: |
+            echo "Building for $DESTINATION"
             set -o pipefail && \
               xcrun xcodebuild \
-                CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
                 -destination "$DESTINATION" \
+                <<parameters.xcode-options>> \
                 build-for-testing 2>&1 | \
               tee -a "/tmp/TestResults/<<parameters.scheme>>-<<parameters.platform>>.log" | \
               xcbeautify
@@ -87,9 +92,9 @@ commands:
           environment:
             NSUnbufferedIO: YES
           command: |
+            echo "Testing $DESTINATION"
             set -o pipefail && \
               xcrun xcodebuild \
-                CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
                 -resultBundlePath "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" \
@@ -97,6 +102,7 @@ commands:
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
                 -destination "$DESTINATION" \
+                <<parameters.xcode-options>> \
                 test-without-building 2>&1 | \
               tee -a "/tmp/TestResults/<<parameters.scheme>>-<<parameters.platform>>.log" | \
               xcbeautify
@@ -105,7 +111,9 @@ commands:
           when: always
           command: |
             mkdir -p /tmp/junit-results
-            xcresultparser -o junit "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" > "/tmp/junit-results/<<parameters.scheme>>.xml"
+            if [[ -d "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" ]]; then
+              xcresultparser -o junit "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" > "/tmp/junit-results/<<parameters.scheme>>.xml"
+            fi
       - run:
           name: "Compress test results"
           when: always
@@ -190,6 +198,7 @@ jobs:
           scheme: "UserPasswordSignIn (macOS)"
           sdk: macosx
           platform: "macOS"
+          xcode-options: 'CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO'
       - store_artifacts:
           path: "/tmp/TestResults"
 
