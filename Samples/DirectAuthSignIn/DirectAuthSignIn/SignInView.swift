@@ -80,7 +80,7 @@ struct SignInView: View {
             }
             .onAppear {
                 Task {
-                    clientId = await flow?.client.configuration.clientId
+                    clientId = flow?.client.configuration.clientId
                 }
             }
         }
