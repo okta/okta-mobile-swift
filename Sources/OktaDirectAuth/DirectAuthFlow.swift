@@ -303,10 +303,10 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     /// The OAuth2Client this authentication flow will use.
-    public let client: OAuth2Client
-    
+    nonisolated public let client: OAuth2Client
+
     /// The list of grant types the application supports.
-    public let supportedGrantTypes: [GrantType]
+    nonisolated public let supportedGrantTypes: [GrantType]
 
     /// The context that stores the state for the current authentication session.
     nonisolated public var context: Context? {
@@ -314,7 +314,7 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     }
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: any APIRequestArgument]?
+    nonisolated public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     nonisolated public var isAuthenticating: Bool {
@@ -365,9 +365,8 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
                 supportedGrants grantTypes: [GrantType] = .directAuth,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+        assert(SDKVersion.directAuth != nil)
+
         self.client = client
         self.supportedGrantTypes = grantTypes
         self.additionalParameters = additionalParameters
@@ -376,9 +375,8 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     public init(client: OAuth2Client, additionalParameters: [String: any APIRequestArgument]?) throws {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+        assert(SDKVersion.directAuth != nil)
+
         self.client = client
         self.supportedGrantTypes = .directAuth
         self.additionalParameters = additionalParameters
@@ -421,7 +419,7 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     /// - Returns: Status returned when the operation completes.
     public func resume(with factor: SecondaryFactor) async throws -> DirectAuthenticationFlow.Status {
         return try await withExpression {
-            guard isAuthenticating,
+            guard _isAuthenticating,
                   _context != nil
             else {
                 throw DirectAuthenticationFlowError.flowNotStarted
@@ -451,7 +449,9 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     /// - Returns: Status returned when the operation completes.
     public func resume(with factor: ContinuationFactor) async throws -> DirectAuthenticationFlow.Status {
         return try await withExpression {
-            guard _context != nil else {
+            guard _isAuthenticating,
+                  _context != nil
+            else {
                 throw DirectAuthenticationFlowError.flowNotStarted
             }
             

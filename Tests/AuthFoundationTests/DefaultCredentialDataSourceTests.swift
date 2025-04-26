@@ -42,8 +42,6 @@ class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
 }
 
 final class DefaultCredentialDataSourceTests: XCTestCase {
-    var coordinator: MockCredentialCoordinator!
-    var dataSource: DefaultCredentialDataSource!
     var delegate: CredentialDataSourceDelegateRecorder!
 
     let configuration = OAuth2Client.Configuration(issuerURL: URL(string: "https://example.com")!,
@@ -51,28 +49,34 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
                                                    scope: "openid")
     
     override func setUp() async throws {
-        let mockCoordinator = await MockCredentialCoordinator()
-        let mockDelegate = CredentialDataSourceDelegateRecorder()
-        let mockDataSource = await DefaultCredentialDataSource()
-
-        await CredentialActor.run {
-            mockDataSource.delegate = mockDelegate
-            mockCoordinator.credentialDataSource = mockDataSource
-        }
-
-        coordinator = mockCoordinator
-        delegate = mockDelegate
-        dataSource = mockDataSource
+        delegate = CredentialDataSourceDelegateRecorder()
     }
 
     override func tearDown() async throws {
-        coordinator = nil
         delegate = nil
-        dataSource = nil
     }
-    
+
+    @CredentialActor
+    final class StorageContext {
+        let coordinator: MockCredentialCoordinator
+        let dataSource: DefaultCredentialDataSource
+
+        init(delegate: any CredentialDataSourceDelegate) {
+            coordinator = MockCredentialCoordinator()
+            dataSource = DefaultCredentialDataSource()
+            
+            coordinator.credentialDataSource = dataSource
+            dataSource.delegate = delegate
+        }
+    }
+
     @CredentialActor
     func testCredentials() async throws {
+        let context = StorageContext(delegate: delegate)
+        let dataSource = context.dataSource
+        let coordinator = context.coordinator
+
+
         XCTAssertEqual(dataSource.credentialCount, 0)
         
         let token = try! Token(id: "TokenId",

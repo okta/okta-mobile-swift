@@ -35,6 +35,7 @@ extension UsesDelegateCollection {
 
 public final class DelegateCollection<D>: @unchecked Sendable {
     @WeakCollection private var delegates: [(any AnyObject)?]
+    private let lock = Lock()
 
     public init() {
         delegates = []
@@ -45,22 +46,27 @@ extension DelegateCollection {
     /// Adds the given argument as a delegate.
     /// - Parameter delegate: Delegate to add to the collection.
     public func add(_ delegate: D) {
-        delegates.append(delegate as AnyObject)
+        lock.withLock {
+            delegates.append(delegate as AnyObject)
+        }
     }
     
     /// Removes the given argument from the collection of delegates.
     /// - Parameter delegate: Delegate to remove from the collection.
     public func remove(_ delegate: D) {
         let delegateObject = delegate as AnyObject
-        delegates.removeAll { object in
-            object === delegateObject
+        lock.withLock {
+            delegates.removeAll { object in
+                object === delegateObject
+            }
         }
     }
     
     /// Performs the given block against each delegate within the collection.
     /// - Parameter block: Block to invoke for each delegate instance.
     public func invoke(_ block: (D) -> Void) {
-        delegates.forEach {
+        let allDelegates = lock.withLock { _delegates.wrappedValue.compactMap({ $0 }) }
+        allDelegates.forEach {
             guard let delegate = $0 as? D else { return }
             block(delegate)
         }
@@ -70,9 +76,10 @@ extension DelegateCollection {
     /// - Parameter block: Block to invoke for each delegate in the collection.
     /// - Returns: Resulting array of returned values from the delegates in the collection.
     public func call<T>(_ block: (D) -> T) -> [T] {
-          delegates.compactMap {
-              guard let delegate = $0 as? D else { return nil }
-              return block(delegate)
-          }
-      }
+        let allDelegates = lock.withLock { _delegates.wrappedValue.compactMap({ $0 }) }
+        return allDelegates.compactMap {
+            guard let delegate = $0 as? D else { return nil }
+            return block(delegate)
+        }
+    }
 }

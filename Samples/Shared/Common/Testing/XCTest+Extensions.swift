@@ -66,7 +66,7 @@ extension XCUIApplication {
     var keyboardSubmitButton: XCUIElement? {
         #if os(macOS)
         return nil
-        #elseif os(visionOS)
+        #elseif (swift(>=5.10) && os(visionOS))
         let keyboard = visionOSKeyboard
         #else
         let keyboard = keyboards.firstMatch
@@ -138,7 +138,13 @@ extension XCUIElementQuery {
     }
 }
 
-extension XCUIElementQuery: Sequence {
+#if swift(<6.0)
+extension XCUIElementQuery: Sequence {}
+#else
+extension XCUIElementQuery: @retroactive Sequence {}
+#endif
+
+extension XCUIElementQuery {
     public typealias Iterator = AnyIterator<XCUIElement>
     public func makeIterator() -> Iterator {
         var index = UInt(0)

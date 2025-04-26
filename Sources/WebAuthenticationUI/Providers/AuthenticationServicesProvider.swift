@@ -34,7 +34,11 @@ protocol AuthenticationServicesProviderSession: NSObjectProtocol, Sendable {
     func cancel()
 }
 
+#if swift(<6.0)
+extension ASWebAuthenticationSession: @unchecked Sendable, AuthenticationServicesProviderSession {}
+#else
 extension ASWebAuthenticationSession: @retroactive @unchecked Sendable, AuthenticationServicesProviderSession {}
+#endif
 
 protocol WebAuthenticationProviderFactory {
     static func createWebAuthenticationProvider(for webAuth: WebAuthentication,
@@ -139,9 +143,16 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
     private let anchor: ASPresentationAnchor?
     private let usesEphemeralSession: Bool
 
-    nonisolated(unsafe) static private var _authenticationSessionClass: any AuthenticationServicesProviderSession.Type = ASWebAuthenticationSession.self
+    nonisolated(unsafe) private static var _authenticationSessionClass: any AuthenticationServicesProviderSession.Type = ASWebAuthenticationSession.self
     nonisolated(unsafe) private var _authenticationSession: (any AuthenticationServicesProviderSession)?
 }
+
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension AuthenticationServicesProvider: @unchecked Sendable {}
+#else
+extension AuthenticationServicesProvider: Sendable {}
+#endif
 
 extension AuthenticationServicesProvider: ASWebAuthenticationPresentationContextProviding {
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
@@ -149,11 +160,13 @@ extension AuthenticationServicesProvider: ASWebAuthenticationPresentationContext
             return anchor
         }
         
-        #if os(macOS)
-        return NSWindow()
-        #else
-        return UIWindow()
-        #endif
+        return MainActor.assumeIsolated {
+            #if os(macOS)
+            return NSWindow()
+            #else
+            return UIWindow()
+            #endif
+        }
     }
 }
 #endif

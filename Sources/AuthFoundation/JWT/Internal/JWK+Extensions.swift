@@ -28,20 +28,7 @@ extension JWK.Algorithm {
             return nil
         }
     }
-    
-    var secPadding: SecPadding? {
-        switch self {
-        case .rs256:
-            return .PKCS1SHA256
-        case .rs384:
-            return .PKCS1SHA384
-        case .rs512:
-            return .PKCS1SHA512
-        default:
-            return nil
-        }
-    }
-    
+
     func digest(data: Data) -> Data? {
         switch self {
         case .rs256:

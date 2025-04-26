@@ -65,10 +65,10 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
 /// ```
 public actor DeviceAuthorizationFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
-    public let client: OAuth2Client
+    nonisolated public let client: OAuth2Client
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: any APIRequestArgument]?
+    nonisolated public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     nonisolated public var isAuthenticating: Bool {
@@ -117,8 +117,7 @@ public actor DeviceAuthorizationFlow: AuthenticationFlow {
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
     public init(client: OAuth2Client,
                 additionalParameters: [String: any APIRequestArgument]? = nil) {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
+        assert(SDKVersion.oauth2 != nil)
 
         self.client = client
         self.additionalParameters = additionalParameters
@@ -219,7 +218,7 @@ public actor DeviceAuthorizationFlow: AuthenticationFlow {
 
     // MARK: Private properties / methods
     static let lock = Lock()
-    private static var _slowDownInterval: TimeInterval = 5
+    nonisolated(unsafe) private static var _slowDownInterval: TimeInterval = 5
     nonisolated(unsafe) static var slowDownInterval: TimeInterval {
         get {
             lock.withLock { _slowDownInterval }
