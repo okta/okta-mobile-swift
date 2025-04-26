@@ -15,7 +15,11 @@ import Foundation
 #if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication
 
+#if swift(<6.0)
+extension LAContext: @unchecked Sendable, TokenAuthenticationContext {}
+#else
 extension LAContext: @unchecked @retroactive Sendable, TokenAuthenticationContext {}
+#endif
 #endif
 
 public protocol TokenAuthenticationContext: Sendable {}

@@ -18,6 +18,10 @@ import LocalAuthentication
 typealias LAContext = Void
 #endif
 
+#if swift(<6.0)
+extension UserDefaults: @unchecked Sendable {}
+#endif
+
 private struct UserDefaultsKeys {
     static let defaultTokenKey = "com.okta.authfoundation.defaultToken"
     static let metadataKey = "com.okta.authfoundation.tokenMetadata"

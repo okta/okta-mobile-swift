@@ -20,7 +20,7 @@ public enum JSONError: Error {
 /// Efficiently represents ``JSON`` values, and exchanges between its String or Data representations.
 ///
 /// JSON data may be imported from multiple sources, be it Data, a String, or an alread-parsed JSON object. Transforming data between these states, and dealing with error conditions every time, can be cumbersome. AnyJSON is a convenience wrapper class that allows underlying JSON to be lazily mapped between types as needed.
-public final class AnyJSON: Sendable {
+public final class AnyJSON {
     private enum Value: Sendable {
         case json(JSON)
         case string(String)
@@ -129,6 +129,13 @@ public final class AnyJSON: Sendable {
         value = .json(json)
     }
 }
+
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension AnyJSON: @unchecked Sendable {}
+#else
+extension AnyJSON: Sendable {}
+#endif
 
 /// Represent mixed JSON values as instances of `Any`. This is used to expose API response values to Swift native types where Swift enums are not supported.
 public enum JSON: Sendable, Equatable {

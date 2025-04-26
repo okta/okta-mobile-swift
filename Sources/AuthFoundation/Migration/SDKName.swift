@@ -11,7 +11,7 @@
 //
 
 extension SDKVersion {
-    public struct Name: Sendable, Hashable, Equatable, RawRepresentable {
+    public struct Name: Sendable, Hashable, Equatable, RawRepresentable, CustomStringConvertible {
         public let rawValue: String
 
         public init(_ rawValue: String) {
@@ -21,5 +21,7 @@ extension SDKVersion {
         public init(rawValue: String) {
             self.rawValue = rawValue
         }
+
+        public var description: String { rawValue }
     }
 }

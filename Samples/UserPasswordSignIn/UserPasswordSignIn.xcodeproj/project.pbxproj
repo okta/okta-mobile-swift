@@ -367,6 +367,7 @@
 			baseConfigurationReference = 96D66FC427EB874800AE89AD /* SampleCode.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				OTHER_SWIFT_FLAGS = "-parse-as-library";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignIn${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = UserPasswordSignIn;
@@ -379,6 +380,7 @@
 			baseConfigurationReference = 96D66FC427EB874800AE89AD /* SampleCode.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				OTHER_SWIFT_FLAGS = "-parse-as-library";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignIn${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = UserPasswordSignIn;
@@ -393,7 +395,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.UserPasswordSignIn-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -409,7 +411,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.UserPasswordSignIn-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

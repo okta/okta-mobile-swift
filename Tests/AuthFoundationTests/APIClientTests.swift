@@ -18,7 +18,7 @@ import XCTest
 import FoundationNetworking
 #endif
 
-struct MockApiParsingContext: APIParsingContext {
+struct MockApiParsingContext: @unchecked Sendable, APIParsingContext {
     var codingUserInfo: [CodingUserInfoKey : Any]?
     
     let result: APIResponseResult?
