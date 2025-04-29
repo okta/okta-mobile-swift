@@ -34,8 +34,7 @@ jobs:
       matrix:
         os: 
           - macos-latest-large
-          # Disabling Linux tests until GPG issue is resolved
-          # - ubuntu-latest
+          - ubuntu-latest
         swift_version: ["5.10", "6.0"]
         exclude:
           - os: ubuntu-latest

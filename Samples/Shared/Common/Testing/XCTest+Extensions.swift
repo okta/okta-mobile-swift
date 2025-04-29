@@ -136,6 +136,22 @@ extension XCUIElementQuery {
         }
         return nil
     }
+
+    @discardableResult
+    func waitForExistence(timeout: TimeInterval) -> XCUIElement? {
+        let startTime = Date()
+
+        let pollInterval = Swift.max(timeout / 10, 0.1)
+        while Date().timeIntervalSince(startTime) < timeout {
+            for element in allElementsBoundByIndex {
+                if element.waitForExistence(timeout: pollInterval) {
+                    return element
+                }
+            }
+        }
+
+        return nil
+    }
 }
 
 extension XCUIElementQuery: @retroactive Sequence {}

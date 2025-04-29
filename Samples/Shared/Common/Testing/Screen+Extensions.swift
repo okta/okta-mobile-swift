@@ -56,8 +56,14 @@ extension WebLogin where Self: Screen {
     
     func send(username: String? = nil) {
         guard let username else { return }
-        
-        if app.webViews.textFields.firstMatch.waitForExistence(timeout: .veryLong) {
+
+        let pageTransitionElement = app
+            .webViews
+            .staticTexts
+            .matching(NSPredicate(format: "label IN %@", ["Keep me signed in", "Username", "Sign In"]))
+            .waitForExistence(timeout: .veryLong)
+
+        if app.webViews.textFields.firstMatch.waitForExistence(timeout: .standard) {
             let field = app.webViews.textFields.element(boundBy: 0)
             let fieldValue = field.value as? String ?? ""
             if fieldValue != username {
@@ -73,8 +79,14 @@ extension WebLogin where Self: Screen {
                 
                 field.typeText(username)
             }
-            
+
             tapKeyboardNextOrGo()
+
+            if let pageTransitionElement,
+               !pageTransitionElement.waitForNonExistence(timeout: .standard)
+            {
+                print("Error: Failed to transition to next page after entering username")
+            }
         }
     }
 
@@ -106,11 +118,23 @@ extension WebLogin where Self: Screen {
     
     func send(password: String? = nil) {
         guard let password else { return }
-        
-        if app.webViews.links["Select Password."].waitToBeHittable(timeout: .standard) {
+
+        if app.webViews
+            .staticTexts
+            .matching(NSPredicate(format: "label IN %@", ["Verify it's you with a security method",
+                                                          "Select from the following options",
+                                                          "Select Password."]))
+            .waitForExistence(timeout: .short) != nil
+        {
             select(authenticator: "Password")
         }
         
+        let pageTransitionElement = app
+            .webViews
+            .staticTexts
+            .matching(NSPredicate(format: "label IN %@", ["Verify with your password", "Forgot password?"]))
+            .waitForExistence(timeout: .long)
+
         if app.webViews.secureTextFields.firstMatch.waitForExistence(timeout: 5) {
             let field = app.webViews.secureTextFields.element(boundBy: 0)
             field.tap()
@@ -127,6 +151,12 @@ extension WebLogin where Self: Screen {
             field.typeText(password)
 
             tapKeyboardNextOrGo()
+
+            if let pageTransitionElement,
+               !pageTransitionElement.waitForNonExistence(timeout: .standard)
+            {
+                print("Error: Failed to transition to next page after entering password")
+            }
         }
     }
     
