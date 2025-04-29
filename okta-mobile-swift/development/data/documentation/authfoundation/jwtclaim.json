@@ -1,0 +1,2984 @@
+{
+  "abstract" : [
+    {
+      "text" : "List of registered and public claims.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation8JWTClaimO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "JWTClaim"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "JWTClaim"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "JWTClaim"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "JWTClaim"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
+        "doc:\/\/AuthFoundation\/s8CopyableP",
+        "doc:\/\/AuthFoundation\/Se",
+        "doc:\/\/AuthFoundation\/SE",
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SY",
+        "doc:\/\/AuthFoundation\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "JWT-and-Token-Verification",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
+      ],
+      "title" : "JWT and Token Verification"
+    }
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Enumeration-Cases",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/accessTokenHash",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/aceProfile",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/actor",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/address",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/attestationLevel",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/audience",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authContextClassReference",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authMethodsReference",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authTime",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authorizedActor",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authorizedParty",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/birthdate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/clientId",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/clientNonce",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/codeHash",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/confirmation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/custom(_:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/destinationIdentity",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/divertedTarget",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/email",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/emailVerified",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/entitlements",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/events",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/expirationTime",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/expiresIn",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/familyName",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/gender",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/givenName",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/groups",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/identityProvider",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/isPrivateEmail",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/issuedAt",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/issuer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/jcardData",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/jwtId",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/locale",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/maxAPIRequestCount",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/mediaKeyFingerprint",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/middleName",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/name",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/nickname",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/nonce",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/nonceSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/notBefore",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/originalPassport",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/originatingId",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/originatingIdentity",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/phoneNumber",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/phoneNumberVerified",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/picture",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/preferredUsername",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/profile",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/realUserStatus",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/resourcePriorityHeader",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/roles",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/scope",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sessionId",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipCSeqNum",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipCallId",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipDate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipFromTag",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipPriorityHeader",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipViaBranch",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/subject",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/subjectPublicKey",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/timeOfEvent",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/tokenIntrospection",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/transactionId",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/transferSubject",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/updatedAt",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/userId",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/vectorOfTrust",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/vectorOfTrustMark",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/verifiableCredential",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/verifiablePresentation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/version",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/website",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/zoneinfo"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/Equatable-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/RawRepresentable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwtclaim"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/SE": {
+  "identifier" : "doc:\/\/AuthFoundation\/SE",
+  "title" : "Swift.Encodable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/SY": {
+  "identifier" : "doc:\/\/AuthFoundation\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/Se": {
+  "identifier" : "doc:\/\/AuthFoundation\/Se",
+  "title" : "Swift.Decodable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AnyJSON": {
+  "abstract" : [
+    {
+      "text" : "Efficiently represents ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " values, and exchanges between its String or Data representations.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AnyJSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AnyJSON"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AnyJSON",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/anyjson"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection": {
+  "abstract" : [
+    {
+      "text" : "Indicates a special type of claim whose value is interchangable between a whitespace-separated value, or an array of values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimCollection"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimCollection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ClaimCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable": {
+  "abstract" : [
+    {
+      "text" : "Indicates a type can be consumed from a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object and converted to the indicated type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimConvertable"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimConvertable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ClaimConvertable",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimconvertable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Expires": {
+  "abstract" : [
+    {
+      "text" : "Protocol that indicates an object is capable of expiring.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Expires"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Expires"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Expires",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/expires"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
+  "abstract" : [
+    {
+      "text" : "Used by classes that contains OAuth2 claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "HasClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/ClaimType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation7IsClaimP",
+      "text" : "IsClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "ClaimType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/claimtype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IsClaim": {
+  "abstract" : [
+    {
+      "text" : "Indicates a type that can be used as an enum value for the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " associated type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "IsClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "IsClaim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "IsClaim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/isclaim"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSON": {
+  "abstract" : [
+    {
+      "text" : "Represent mixed JSON values as instances of ",
+      "type" : "text"
+    },
+    {
+      "code" : "Any",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/json"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to define shared behavior when an object can contain claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONClaimContainer"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONClaimContainer"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONClaimContainer",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonclaimcontainer"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
+  "abstract" : [
+    {
+      "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWK",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
+  "abstract" : [
+    {
+      "text" : "Describes the collection of keys associated with an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWKS",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWT": {
+  "abstract" : [
+    {
+      "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim": {
+  "abstract" : [
+    {
+      "text" : "List of registered and public claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWTClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWTClaim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWTClaim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/equatable-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/rawrepresentable-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/accessTokenHash": {
+  "abstract" : [
+    {
+      "text" : "Access Token hash value",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "accessTokenHash"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/accessTokenHash",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.accessTokenHash",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/accesstokenhash"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/aceProfile": {
+  "abstract" : [
+    {
+      "text" : "“The ACE profile a token is supposed to be used with.”",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "aceProfile"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/aceProfile",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.aceProfile",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/aceprofile"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/actor": {
+  "abstract" : [
+    {
+      "text" : "Actor",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "actor"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/actor",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.actor",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/actor"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/address": {
+  "abstract" : [
+    {
+      "text" : "Preferred postal address",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "address"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/address",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.address",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/address"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/attestationLevel": {
+  "abstract" : [
+    {
+      "text" : "Attestation level as defined in SHAKEN framework",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "attestationLevel"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/attestationLevel",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.attestationLevel",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/attestationlevel"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/audience": {
+  "abstract" : [
+    {
+      "text" : "Audience",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "audience"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/audience",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.audience",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/audience"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/authContextClassReference": {
+  "abstract" : [
+    {
+      "text" : "Authentication Context Class Reference",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authContextClassReference"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authContextClassReference",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.authContextClassReference",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/authcontextclassreference"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/authMethodsReference": {
+  "abstract" : [
+    {
+      "text" : "Authentication Methods References",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authMethodsReference"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authMethodsReference",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.authMethodsReference",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/authmethodsreference"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/authTime": {
+  "abstract" : [
+    {
+      "text" : "Time when the authentication occurred",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authTime"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authTime",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.authTime",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/authtime"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/authorizedActor": {
+  "abstract" : [
+    {
+      "text" : "“Authorized Actor - the party that is authorized to become the actor”",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authorizedActor"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authorizedActor",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.authorizedActor",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/authorizedactor"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/authorizedParty": {
+  "abstract" : [
+    {
+      "text" : "Authorized party - the party to which the ID Token was issued",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authorizedParty"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authorizedParty",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.authorizedParty",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/authorizedparty"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/birthdate": {
+  "abstract" : [
+    {
+      "text" : "Birthday",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "birthdate"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/birthdate",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.birthdate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/birthdate"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/clientId": {
+  "abstract" : [
+    {
+      "text" : "Client Identifier",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "clientId"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/clientId",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.clientId",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/clientid"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/clientNonce": {
+  "abstract" : [
+    {
+      "text" : "A nonce previously provided to the AS by the RS via the client.  Used to verify token freshness when the RS cannot synchronize its clock with the AS.”",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "clientNonce"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/clientNonce",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.clientNonce",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/clientnonce"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/codeHash": {
+  "abstract" : [
+    {
+      "text" : "Code hash value",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "codeHash"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/codeHash",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.codeHash",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/codehash"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/confirmation": {
+  "abstract" : [
+    {
+      "text" : "Confirmation",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "confirmation"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/confirmation",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.confirmation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/confirmation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/custom(_:)": {
+  "abstract" : [
+    {
+      "text" : "Custom claim with the given name",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "custom"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/custom(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.custom(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/custom(_:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/destinationIdentity": {
+  "abstract" : [
+    {
+      "text" : "Destination Identity String",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "destinationIdentity"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/destinationIdentity",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.destinationIdentity",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/destinationidentity"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/divertedTarget": {
+  "abstract" : [
+    {
+      "text" : "Diverted Target of a Call",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "divertedTarget"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/divertedTarget",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.divertedTarget",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/divertedtarget"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/email": {
+  "abstract" : [
+    {
+      "text" : "Preferred e-mail address",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "email"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/email",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.email",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/email"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/emailVerified": {
+  "abstract" : [
+    {
+      "text" : "True if the e-mail address has been verified; otherwise false",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "emailVerified"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/emailVerified",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.emailVerified",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/emailverified"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/entitlements": {
+  "abstract" : [
+    {
+      "text" : "Entitlements",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "entitlements"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/entitlements",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.entitlements",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/entitlements"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/events": {
+  "abstract" : [
+    {
+      "text" : "Security Events",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "events"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/events",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.events",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/events"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/expirationTime": {
+  "abstract" : [
+    {
+      "text" : "Expiration Time",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expirationTime"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/expirationTime",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.expirationTime",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/expirationtime"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/expiresIn": {
+  "abstract" : [
+    {
+      "text" : "“Expires in.  Lifetime of the token in seconds from the time the RS first sees it.  Used to implement a weaker from of token expiration for devices that cannot synchronize their internal clocks.”",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expiresIn"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/expiresIn",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.expiresIn",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/expiresin"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/familyName": {
+  "abstract" : [
+    {
+      "text" : "Surname(s) or last name(s)",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "familyName"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/familyName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.familyName",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/familyname"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/gender": {
+  "abstract" : [
+    {
+      "text" : "Gender",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "gender"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/gender",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.gender",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/gender"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/givenName": {
+  "abstract" : [
+    {
+      "text" : "Given name(s) or first name(s)",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "givenName"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/givenName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.givenName",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/givenname"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/groups": {
+  "abstract" : [
+    {
+      "text" : "Groups",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "groups"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/groups",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.groups",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/groups"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/identityProvider": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "identityProvider"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/identityProvider",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.identityProvider",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/identityprovider"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/isPrivateEmail": {
+  "abstract" : [
+    {
+      "text" : "Indicates if the email address provided is a proxied address. Used predominantly by Sign In With Apple.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isPrivateEmail"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/isPrivateEmail",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.isPrivateEmail",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/isprivateemail"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/issuedAt": {
+  "abstract" : [
+    {
+      "text" : "Issued At",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "issuedAt"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/issuedAt",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.issuedAt",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/issuedat"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/issuer": {
+  "abstract" : [
+    {
+      "text" : "Issuer",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "issuer"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/issuer",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.issuer",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/issuer"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/jcardData": {
+  "abstract" : [
+    {
+      "text" : "jCard data",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "jcardData"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/jcardData",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.jcardData",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/jcarddata"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/jwtId": {
+  "abstract" : [
+    {
+      "text" : "JWT ID",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "jwtId"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/jwtId",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.jwtId",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/jwtid"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/locale": {
+  "abstract" : [
+    {
+      "text" : "Locale",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "locale"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/locale",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.locale",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/locale"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/maxAPIRequestCount": {
+  "abstract" : [
+    {
+      "text" : "Number of API requests for which the access token can be used",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "maxAPIRequestCount"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/maxAPIRequestCount",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.maxAPIRequestCount",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/maxapirequestcount"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/mediaKeyFingerprint": {
+  "abstract" : [
+    {
+      "text" : "Media Key Fingerprint String",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "mediaKeyFingerprint"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/mediaKeyFingerprint",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.mediaKeyFingerprint",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/mediakeyfingerprint"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/middleName": {
+  "abstract" : [
+    {
+      "text" : "Middle name(s)",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "middleName"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/middleName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.middleName",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/middlename"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/name": {
+  "abstract" : [
+    {
+      "text" : "Full name",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "name"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/name",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.name",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/name"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/nickname": {
+  "abstract" : [
+    {
+      "text" : "Casual name",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nickname"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/nickname",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.nickname",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/nickname"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/nonce": {
+  "abstract" : [
+    {
+      "text" : "Value used to associate a Client session with an ID Token",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nonce"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/nonce",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.nonce",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/nonce"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/nonceSupported": {
+  "abstract" : [
+    {
+      "text" : "Indicates whether the transaction is on a nonce-supported platform. If you sent a nonce in the authorization request but do not see the nonce claim in the ID token, check this claim to determine how to proceed. Used predominantly by Sign In With Apple.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nonceSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/nonceSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.nonceSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/noncesupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/notBefore": {
+  "abstract" : [
+    {
+      "text" : "Not Before",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "notBefore"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/notBefore",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.notBefore",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/notbefore"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/originalPassport": {
+  "abstract" : [
+    {
+      "text" : "Original PASSporT (in Full Form)",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "originalPassport"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/originalPassport",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.originalPassport",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/originalpassport"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/originatingId": {
+  "abstract" : [
+    {
+      "text" : "Originating Identifier as defined in SHAKEN framework",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "originatingId"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/originatingId",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.originatingId",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/originatingid"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/originatingIdentity": {
+  "abstract" : [
+    {
+      "text" : "Originating Identity String",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "originatingIdentity"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/originatingIdentity",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.originatingIdentity",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/originatingidentity"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/phoneNumber": {
+  "abstract" : [
+    {
+      "text" : "Preferred telephone number",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "phoneNumber"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/phoneNumber",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.phoneNumber",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/phonenumber"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/phoneNumberVerified": {
+  "abstract" : [
+    {
+      "text" : "True if the phone number has been verified; otherwise false",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "phoneNumberVerified"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/phoneNumberVerified",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.phoneNumberVerified",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/phonenumberverified"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/picture": {
+  "abstract" : [
+    {
+      "text" : "Profile picture URL",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "picture"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/picture",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.picture",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/picture"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/preferredUsername": {
+  "abstract" : [
+    {
+      "text" : "Shorthand name by which the End-User wishes to be referred to",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "preferredUsername"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/preferredUsername",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.preferredUsername",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/preferredusername"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/profile": {
+  "abstract" : [
+    {
+      "text" : "Profile page URL",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "profile"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/profile",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.profile",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/profile"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/realUserStatus": {
+  "abstract" : [
+    {
+      "text" : "Indicates the liklihood of whether or not this appears to be a real user. Used predominantly by Sign In With Apple.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "realUserStatus"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/realUserStatus",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.realUserStatus",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/realuserstatus"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/resourcePriorityHeader": {
+  "abstract" : [
+    {
+      "text" : "Resource Priority Header Authorization",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "resourcePriorityHeader"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/resourcePriorityHeader",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.resourcePriorityHeader",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/resourcepriorityheader"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/roles": {
+  "abstract" : [
+    {
+      "text" : "Roles",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "roles"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/roles",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.roles",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/roles"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/scope": {
+  "abstract" : [
+    {
+      "text" : "Scope Values",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "scope"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/scope",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.scope",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/scope"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/sessionId": {
+  "abstract" : [
+    {
+      "text" : "Session ID",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sessionId"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sessionId",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.sessionId",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/sessionid"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/sipCSeqNum": {
+  "abstract" : [
+    {
+      "text" : "SIP CSeq numeric header field parameter value",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sipCSeqNum"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipCSeqNum",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.sipCSeqNum",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/sipcseqnum"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/sipCallId": {
+  "abstract" : [
+    {
+      "text" : "SIP Call-Id header field value",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sipCallId"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipCallId",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.sipCallId",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/sipcallid"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/sipDate": {
+  "abstract" : [
+    {
+      "text" : "SIP Date header field value",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sipDate"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipDate",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.sipDate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/sipdate"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/sipFromTag": {
+  "abstract" : [
+    {
+      "text" : "SIP From tag header field parameter value",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sipFromTag"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipFromTag",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.sipFromTag",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/sipfromtag"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/sipPriorityHeader": {
+  "abstract" : [
+    {
+      "text" : "SIP Priority header field",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sipPriorityHeader"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipPriorityHeader",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.sipPriorityHeader",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/sippriorityheader"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/sipViaBranch": {
+  "abstract" : [
+    {
+      "text" : "SIP Via branch header field parameter value",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sipViaBranch"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/sipViaBranch",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.sipViaBranch",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/sipviabranch"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/subject": {
+  "abstract" : [
+    {
+      "text" : "Subject",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "subject"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/subject",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.subject",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/subject"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/subjectPublicKey": {
+  "abstract" : [
+    {
+      "text" : "Public key used to check the signature of an ID Token",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "subjectPublicKey"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/subjectPublicKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.subjectPublicKey",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/subjectpublickey"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/timeOfEvent": {
+  "abstract" : [
+    {
+      "text" : "Time of Event",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "timeOfEvent"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/timeOfEvent",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.timeOfEvent",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/timeofevent"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/tokenIntrospection": {
+  "abstract" : [
+    {
+      "text" : "Token introspection response",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "tokenIntrospection"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/tokenIntrospection",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.tokenIntrospection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/tokenintrospection"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/transactionId": {
+  "abstract" : [
+    {
+      "text" : "Transaction Identifier",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "transactionId"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/transactionId",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.transactionId",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/transactionid"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/transferSubject": {
+  "abstract" : [
+    {
+      "text" : "Identifier used when transfering subjects. Used predominantly by Sign In With Apple.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "transferSubject"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/transferSubject",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.transferSubject",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/transfersubject"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/updatedAt": {
+  "abstract" : [
+    {
+      "text" : "Time the information was last updated",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "updatedAt"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/updatedAt",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.updatedAt",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/updatedat"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/userId": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userId"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/userId",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.userId",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/userid"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/vectorOfTrust": {
+  "abstract" : [
+    {
+      "text" : "Vector of Trust value",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "vectorOfTrust"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/vectorOfTrust",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.vectorOfTrust",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/vectoroftrust"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/vectorOfTrustMark": {
+  "abstract" : [
+    {
+      "text" : "Vector of Trust trustmark URL",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "vectorOfTrustMark"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/vectorOfTrustMark",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.vectorOfTrustMark",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/vectoroftrustmark"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/verifiableCredential": {
+  "abstract" : [
+    {
+      "text" : "Verifiable Credential as specified in the W3C Recommendation",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "verifiableCredential"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/verifiableCredential",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.verifiableCredential",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/verifiablecredential"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/verifiablePresentation": {
+  "abstract" : [
+    {
+      "text" : "Verifiable Presentation as specified in the W3C Recommendation",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "verifiablePresentation"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/verifiablePresentation",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.verifiablePresentation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/verifiablepresentation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/version": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "version"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/version",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.version",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/version"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/website": {
+  "abstract" : [
+    {
+      "text" : "Web page or blog URL",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "website"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/website",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.website",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/website"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/zoneinfo": {
+  "abstract" : [
+    {
+      "text" : "Time zone",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "zoneinfo"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/zoneinfo",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.zoneinfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/zoneinfo"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/WorkingWithClaims": {
+  "abstract" : [
+    {
+      "text" : "Using Claims on the various types included in OIDC and AuthFoundation.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Working with Claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/workingwithclaims"
+},
+"doc://AuthFoundation/s8CopyableP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s8CopyableP",
+  "title" : "Swift.Copyable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s8SendableP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}
