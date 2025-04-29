@@ -16,22 +16,22 @@ import Foundation
 import FoundationNetworking
 #endif
 
-public protocol APIClientConfiguration {
+public protocol APIClientConfiguration: Sendable {
     var baseURL: URL { get }
 }
 
 /// Protocol defining the interfaces and capabilities that API clients can conform to.
 ///
 /// This provides a common pattern for network operations to be performed, and to centralize boilerplate handling of URL requests, provide customization extensions, and normalize response processing and argument handling.
-public protocol APIClient {
+public protocol APIClient: Sendable {
     /// The base URL requests are performed against.
     ///
     /// This is used when request types may define their path as relative, and can inherit the URL they should be sent to through the client.
     var baseURL: URL { get }
     
     /// The URLSession requests are sent through.
-    var session: URLSessionProtocol { get }
-    
+    var session: any URLSessionProtocol { get }
+
     /// Any additional headers that should be added to all requests sent through this client.
     var additionalHttpHeaders: [String: String]? { get }
     
@@ -45,11 +45,11 @@ public protocol APIClient {
     ///
     /// The userInfo property may be included, which can include contextual information that can help decoders formulate objects.
     /// - Returns: Decoded object.
-    func decode<T: Decodable>(_ type: T.Type, from data: Data, parsing context: APIParsingContext?) throws -> T
+    func decode<T: Decodable>(_ type: T.Type, from data: Data, parsing context: (any APIParsingContext)?) throws -> T
     
     /// Parses HTTP response body data when a request fails.
     /// - Returns: Error instance, if any, described within the data.
-    func error(from data: Data) -> Error?
+    func error(from data: Data) -> (any Error)?
     
     /// Invoked immediately prior to a URLRequest being converted to a DataTask.
     func willSend(request: inout URLRequest)
@@ -64,42 +64,42 @@ public protocol APIClient {
     func didSend<T>(request: URLRequest, received response: APIResponse<T>)
     
     /// Send the given URLRequest.
-    func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
+    func send<T: Decodable>(_ request: URLRequest, parsing context: (any APIParsingContext)?) async throws -> APIResponse<T>
     
     /// Provides the ``APIRetry`` configurations from the delegate in response to a retry request.
     func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry
 }
 
 /// Protocol that delegates of APIClient instances can conform to.
-public protocol APIClientDelegate: AnyObject {
+public protocol APIClientDelegate: AnyObject, Sendable {
     /// Invoked immediately prior to a URLRequest being converted to a DataTask.
-    func api(client: APIClient, willSend request: inout URLRequest)
+    func api(client: any APIClient, willSend request: inout URLRequest)
     
     /// Invoked when a request fails.
-    func api(client: APIClient, didSend request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?)
+    func api(client: any APIClient, didSend request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?)
     
     /// Invoked when a request returns a successful response.
-    func api(client: APIClient, didSend request: URLRequest, received response: HTTPURLResponse)
+    func api(client: any APIClient, didSend request: URLRequest, received response: HTTPURLResponse)
 
     /// Invoked when a request returns a successful response.
-    func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>)
+    func api<T>(client: any APIClient, didSend request: URLRequest, received response: APIResponse<T>)
     
     /// Provides the APIRetry configurations from the delegate in responds to a retry request.
-    func api(client: APIClient, shouldRetry request: URLRequest) -> APIRetry
+    func api(client: any APIClient, shouldRetry request: URLRequest) -> APIRetry
 }
 
 extension APIClientDelegate {
-    public func api(client: APIClient, willSend request: inout URLRequest) {}
-    public func api(client: APIClient, didSend request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?) {}
-    public func api(client: APIClient, didSend request: URLRequest, received response: HTTPURLResponse) {}
-    public func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>) {}
-    public func api(client: APIClient, shouldRetry request: URLRequest) -> APIRetry {
+    public func api(client: any APIClient, willSend request: inout URLRequest) {}
+    public func api(client: any APIClient, didSend request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?) {}
+    public func api(client: any APIClient, didSend request: URLRequest, received response: HTTPURLResponse) {}
+    public func api<T>(client: any APIClient, didSend request: URLRequest, received response: APIResponse<T>) {}
+    public func api(client: any APIClient, shouldRetry request: URLRequest) -> APIRetry {
         return .default
     }
 }
 
 /// List of retry options
-public enum APIRetry {
+public enum APIRetry: Sendable {
     /// Indicates the APIRequest should not be retried.
     case doNotRetry
     
@@ -109,7 +109,7 @@ public enum APIRetry {
     /// The default retry option.
     public static let `default` = APIRetry.retry(maximumCount: 3)
     
-    struct State {
+    struct State: Sendable {
         let type: APIRetry
         let requestId: String?
         let originalRequest: URLRequest
@@ -125,7 +125,7 @@ public enum APIRetry {
 }
 
 /// Defines the possible results for an API request.
-public enum APIResponseResult {
+public enum APIResponseResult: Sendable {
     /// Indicates the request was successful.
     case success
     /// The server is indicating the request should be retried.
@@ -150,7 +150,7 @@ extension APIClient {
     public var requestIdHeader: String? { "x-okta-request-id" }
     public var userAgent: String { SDKVersion.userAgent }
     
-    public func error(from data: Data) -> Error? {
+    public func error(from data: Data) -> (any Error)? {
         defaultJSONDecoder.userInfo = [:]
         return try? defaultJSONDecoder.decode(OktaAPIError.self, from: data)
     }
@@ -163,42 +163,34 @@ extension APIClient {
     
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) {}
     
-    public func send<T>(_ request: URLRequest, parsing context: APIParsingContext? = nil, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
-        send(request, parsing: context, state: nil, completion: completion)
-    }
-    
     public func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry { .default }
     
     // swiftlint:disable closure_body_length
-    private func send<T>(_ request: URLRequest,
-                         parsing context: APIParsingContext? = nil,
-                         state: APIRetry.State?,
-                         completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
+    public func send<T>(_ request: URLRequest,
+                        parsing context: (any APIParsingContext)? = nil) async throws -> APIResponse<T>
+    {
+        var retryState: APIRetry.State?
+        var rateInfo: APIRateLimit?
+        var requestId: String?
         var urlRequest = request
         willSend(request: &urlRequest)
-        session.dataTaskWithRequest(urlRequest) { data, response, httpError in
-            guard let data = data,
-                  let response = response
-            else {
-                let apiError: APIClientError
-                if let error = httpError {
-                    apiError = .serverError(error)
-                } else {
-                    apiError = .missingResponse
+
+        do {
+            repeat {
+                if let retryState = retryState {
+                    urlRequest = addRetryHeadersToRequest(state: retryState)
                 }
                 
-                completion(.failure(apiError))
-                return
-            }
-            
-            var rateInfo: APIRateLimit?
-            var requestId: String?
-            do {
+                if let delay = rateInfo?.delay {
+                    try await Task.sleep(delay: delay)
+                }
+
+                let (data, response) = try await session.data(for: urlRequest)
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw APIClientError.invalidResponse
                 }
                 
-                self.didSend(request: request, received: httpResponse)
+                didSend(request: urlRequest, received: httpResponse)
                 
                 rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
                 let responseType = context?.resultType(from: httpResponse) ?? APIResponseResult(statusCode: httpResponse.statusCode)
@@ -208,60 +200,53 @@ extension APIClient {
 
                 switch responseType {
                 case .success:
-                    let response: APIResponse<T> = try self.validate(data: data,
-                                                                     response: httpResponse,
-                                                                     rateInfo: rateInfo,
-                                                                     parsing: context)
-                    self.didSend(request: request, received: response)
-                    completion(.success(response))
+                    let response: APIResponse<T> = try validate(data: data,
+                                                                response: httpResponse,
+                                                                rateInfo: rateInfo,
+                                                                parsing: context)
+                    didSend(request: request, received: response)
+                    return response
+
                 case .retry:
                     guard let rateInfo = rateInfo else {
                         fallthrough
                     }
-                    let retry = state?.type ?? self.shouldRetry(request: request, rateLimit: rateInfo)
-                    
+
+                    let retry = retryState?.type ?? shouldRetry(request: request,
+                                                                rateLimit: rateInfo)
+
                     switch retry {
                     case .doNotRetry: break
                     case .retry(let maximumCount):
-                        let retryState: APIRetry.State
-                        if let state = state {
-                            retryState = state.nextState()
-                        } else {
-                            retryState = APIRetry.State(type: retry,
-                                                        requestId: requestId,
-                                                        originalRequest: request,
-                                                        retryCount: 1)
-                        }
+                        let newRetryState = retryState?.nextState() ?? .init(type: retry,
+                                                                             requestId: requestId,
+                                                                             originalRequest: request,
+                                                                             retryCount: 1)
                         
-                        // Fall-through to the default case if the maximum retry attempt has been reached and if the delay is not calculated.
-                        guard retryState.retryCount <= maximumCount, let delay = rateInfo.delay else {
-                            break
+                        if newRetryState.retryCount <= maximumCount {
+                            retryState = newRetryState
+                            continue
                         }
-                        
-                        let urlRequest = addRetryHeadersToRequest(state: retryState)
-                        
-                        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
-                            self.send(urlRequest, parsing: context, state: retryState, completion: completion)
-                        }
-                        return
                     }
+
+                    // Fall-through to the error case if the maximum retry attempt has been reached and if the delay is not calculated.
                     fallthrough
+
                 case .error:
                     if let error = error(from: data) ?? context?.error(from: data) {
-                        throw APIClientError.serverError(error)
+                        throw APIClientError.httpError(error)
                     } else {
                         throw APIClientError.statusCode(httpResponse.statusCode)
                     }
                 }
-            } catch let error as APIClientError {
-                self.didSend(request: request, received: error, requestId: requestId, rateLimit: rateInfo)
-                completion(.failure(error))
-            } catch {
-                let apiError = APIClientError.cannotParseResponse(error: error)
-                self.didSend(request: request, received: apiError, requestId: requestId, rateLimit: rateInfo)
-                completion(.failure(apiError))
-            }
-        }.resume()
+            } while retryState != nil
+            
+            // This condition should not be encountered
+            throw APIClientError.unknown
+        } catch {
+            didSend(request: request, received: APIClientError(error), requestId: requestId, rateLimit: rateInfo)
+            throw error
+        }
     }
     // swiftlint:enable closure_body_length
 
@@ -299,7 +284,7 @@ extension APIClient {
         return links
     }
     
-    private func validate<T>(data: Data, response: HTTPURLResponse, rateInfo: APIRateLimit?, parsing context: APIParsingContext? = nil) throws -> APIResponse<T> {
+    private func validate<T>(data: Data, response: HTTPURLResponse, rateInfo: APIRateLimit?, parsing context: (any APIParsingContext)? = nil) throws -> APIResponse<T> {
         var requestId: String?
         if let requestIdHeader = requestIdHeader {
             requestId = response.allHeaderFields[requestIdHeader] as? String

@@ -20,10 +20,6 @@ import FoundationNetworking
 @testable import AuthFoundation
 
 final class UserCoordinatorTests: XCTestCase {
-    var userDefaults: UserDefaults!
-    var storage: UserDefaultsTokenStorage!
-    var coordinator: CredentialCoordinatorImpl!
-    
     let token = try! Token(id: "TokenId",
                            issuedAt: Date(),
                            tokenType: "Bearer",
@@ -37,63 +33,96 @@ final class UserCoordinatorTests: XCTestCase {
                                                                        clientId: "clientid",
                                                                        scope: "openid"),
                                                   clientSettings: nil))
-
-    override func setUpWithError() throws {
-        userDefaults = UserDefaults(suiteName: name)
-        userDefaults.removePersistentDomain(forName: name)
-
-        storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
-        coordinator = CredentialCoordinatorImpl(tokenStorage: storage)
-        
-        XCTAssertEqual(storage.allIDs.count, 0)
-    }
     
-    override func tearDownWithError() throws {
-        userDefaults.removePersistentDomain(forName: name)
-
-        userDefaults = nil
-        storage = nil
-        coordinator = nil
+    override func tearDown() async throws {
+        await CredentialActor.run {
+            Credential.resetToDefault()
+        }
     }
-    
-    func testDefaultCredentialViaToken() throws {
-        try storage.add(token: token, metadata: nil, security: [])
+
+    @CredentialActor
+    final class TestContext {
+        let name: String
+        let userDefaults: UserDefaults
+        let storage: UserDefaultsTokenStorage
+
+        init(named storageName: String) {
+            name = storageName
+            userDefaults = UserDefaults(suiteName: storageName)!
+            storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
+
+            userDefaults.removePersistentDomain(forName: storageName)
+        }
+
+        deinit {
+            userDefaults.removePersistentDomain(forName: name)
+        }
+    }
+
+    @CredentialActor
+    func testDefaultCredentialViaToken() async throws {
+        let context = TestContext(named: name)
+        let storage = context.storage
+        Credential.tokenStorage = storage
+
+        _ = try TaskData.coordinator.store(token: token, tags: [:], security: [])
 
         XCTAssertEqual(storage.allIDs.count, 1)
         
-        let credential = try XCTUnwrap(coordinator.default)
+        let credential = try XCTUnwrap(TaskData.coordinator.default)
         XCTAssertEqual(credential.token, token)
         
-        coordinator.default = nil
-        XCTAssertNil(coordinator.default)
+        TaskData.coordinator.default = nil
+        XCTAssertNil(TaskData.coordinator.default)
         XCTAssertNil(storage.defaultTokenID)
         XCTAssertEqual(storage.allIDs.count, 1)
         
-        XCTAssertEqual(coordinator.allIDs, [token.id])
-        XCTAssertEqual(try coordinator.with(id: token.id, prompt: nil, authenticationContext: nil), credential)
+        XCTAssertEqual(TaskData.coordinator.allIDs, [token.id])
+        XCTAssertEqual(try TaskData.coordinator.with(id: token.id, prompt: nil, authenticationContext: nil), credential)
     }
     
-    func testImplicitCredentialForToken() throws {
-        let credential = try coordinator.store(token: token, tags: [:], security: [])
-        
+    @CredentialActor
+    func testImplicitCredentialForToken() async throws {
+        let context = TestContext(named: name)
+        let storage = context.storage
+        Credential.tokenStorage = storage
+
+        let credential = try TaskData.coordinator.store(token: token, tags: [:], security: [])
+
         XCTAssertEqual(storage.allIDs, [token.id])
         XCTAssertEqual(storage.defaultTokenID, token.id)
-        XCTAssertEqual(coordinator.default, credential)
+        XCTAssertEqual(TaskData.coordinator.default, credential)
     }
     
-    func testNotifications() throws {
-        let oldCredential = coordinator.default
-        
-        let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])
-        
-        let credential = try coordinator.store(token: token, tags: [:], security: [])
-        XCTAssertEqual(recorder.notifications.count, 1)
-        XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
-        XCTAssertNotEqual(oldCredential, credential)
-        
-        recorder.reset()
-        coordinator.default = nil
-        XCTAssertEqual(recorder.notifications.count, 1)
-        XCTAssertNil(recorder.notifications.first?.object)
+    @CredentialActor
+    func testNotifications() async throws {
+        let context = TestContext(named: name)
+        let storage = context.storage
+        Credential.tokenStorage = storage
+
+        let notificationCenter = NotificationCenter()
+        try await TaskData.$notificationCenter.withValue(notificationCenter) {
+            let oldCredential = TaskData.coordinator.default
+
+            let recorder = NotificationRecorder(center: notificationCenter,
+                                                observing: [.defaultCredentialChanged])
+
+            let credential = try TaskData.coordinator.store(token: token, tags: [:], security: [])
+            usleep(useconds_t(2000))
+            await MainActor.run {
+                XCTAssertEqual(recorder.notifications.count, 1)
+                XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
+                XCTAssertNotEqual(oldCredential, credential)
+                recorder.reset()
+            }
+
+            TaskData.coordinator.default = nil
+            usleep(useconds_t(2000))
+            await MainActor.run {
+                XCTAssertEqual(recorder.notifications.count, 1)
+                XCTAssertNil(recorder.notifications.first?.object)
+                recorder.reset()
+            }
+        }
     }
 }

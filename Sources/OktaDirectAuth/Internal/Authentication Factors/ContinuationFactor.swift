@@ -16,10 +16,9 @@ import AuthFoundation
 extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
-                     loginHint: String? = nil,
-                     factor: Self) throws -> StepHandler
+                     loginHint: String? = nil) async throws -> any StepHandler
     {
-        guard let context = flow.context else {
+        guard let context = await flow._context else {
             throw DirectAuthenticationFlowError.inconsistentContextState
         }
         
@@ -37,7 +36,7 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
                                       context: context,
                                       loginHint: loginHint,
                                       channel: bindingContext.oobResponse.channel,
-                                      factor: factor)
+                                      factor: self)
 
         case .prompt(code: _):
             guard let bindingContext = bindingContext
@@ -48,7 +47,7 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
                                        clientConfiguration: flow.client.configuration,
                                        context: context,
-                                       factor: factor,
+                                       factor: self,
                                        parameters: bindingContext.oobResponse,
                                        grantTypesSupported: flow.supportedGrantTypes)
             return TokenStepHandler(flow: flow, request: request)
@@ -58,7 +57,7 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
                                        clientConfiguration: flow.client.configuration,
                                        context: context,
                                        loginHint: loginHint,
-                                       factor: factor,
+                                       factor: self,
                                        parameters: response,
                                        grantTypesSupported: flow.supportedGrantTypes)
             return TokenStepHandler(flow: flow, request: request)
@@ -86,8 +85,8 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
 }
 
 extension DirectAuthenticationFlow.ContinuationFactor: HasTokenParameters {
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
-        var result: [String: APIRequestArgument] = [
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: any APIRequestArgument] {
+        var result: [String: any APIRequestArgument] = [
             "grant_type": grantType(currentStatus: currentStatus),
         ]
         

@@ -13,7 +13,8 @@
 import Foundation
 
 extension DirectAuthenticationFlowError {
-    init(_ error: Error) {
+    @usableFromInline
+    init(_ error: any Error) {
         if let error = error as? DirectAuthenticationFlowError {
             self = error
         } else if let error = error as? OAuth2Error {
@@ -27,15 +28,17 @@ extension DirectAuthenticationFlowError {
         }
     }
 
+    @usableFromInline
     init(_ error: APIClientError) {
         switch error {
-        case .serverError(let error):
+        case .httpError(let error):
             self = DirectAuthenticationFlowError(error)
         default:
             self = .network(error: error)
         }
     }
     
+    @usableFromInline
     init(_ error: OAuth2Error) {
         switch error {
         case .network(error: let error):

@@ -12,7 +12,14 @@
 
 @_exported import AuthFoundation
 
-// swiftlint:disable identifier_name
-@_documentation(visibility: private)
-public let Version = SDKVersion(sdk: "okta-directauth-swift", version: "1.8.2")
-// swiftlint:enable identifier_name
+extension SDKVersion.Name {
+    @_documentation(visibility: internal)
+    public static let directAuth = SDKVersion.Name("okta-directauth-swift")
+}
+
+extension SDKVersion {
+    @_documentation(visibility: private)
+    public static let directAuth: SDKVersion? = {
+        register(.directAuth, version: "1.8.2")
+    }()
+}

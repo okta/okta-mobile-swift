@@ -33,8 +33,7 @@ extension URL {
         // swiftlint:enable force_unwrapping
     }
     
-    @inlinable
-    var appendingDiscoveryURL: URL {
+    @inlinable var appendingDiscoveryURL: URL {
         var relativeURL = self
         
         // Ensure the base URL contains a trailing slash in its path, so request paths can be safely appended.

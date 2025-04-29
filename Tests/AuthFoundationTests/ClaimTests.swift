@@ -24,7 +24,7 @@ struct TestClaims: HasClaims {
     }
 
     typealias ClaimType = TestClaim
-    let payload: [String: Any]
+    let payload: [String: any Sendable]
 }
 
 extension Date {

@@ -14,7 +14,7 @@ import Foundation
 
 public extension Token {
     /// The possible token types that can be revoked.
-    enum RevokeType {
+    enum RevokeType: Sendable, CaseIterable {
         /// Indicates the access token should be revoked.
         case accessToken
         
@@ -29,7 +29,7 @@ public extension Token {
     }
     
     /// The kind of access token an operation should be used with.
-    enum Kind: String {
+    enum Kind: String, Sendable {
         /// Indicates the access token.
         case accessToken = "access_token"
         

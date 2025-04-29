@@ -17,16 +17,19 @@ import Foundation
 import FoundationNetworking
 #endif
 
-class MockApiClient: APIClient {
+class MockApiClient: APIClient, @unchecked Sendable {
     var baseURL: URL
-    var session: URLSessionProtocol
-    let configuration: APIClientConfiguration
+    var session: any URLSessionProtocol
+    let configuration: any APIClientConfiguration
     let shouldRetry: APIRetry?
-    var request: URLRequest?
-    var delegate: APIClientDelegate?
+    var allRequests: [URLRequest] = []
+    var request: URLRequest? {
+        allRequests.last
+    }
+    var delegate: (any APIClientDelegate)?
     
-    init(configuration: APIClientConfiguration,
-         session: URLSessionProtocol,
+    init(configuration: any APIClientConfiguration,
+         session: any URLSessionProtocol,
          baseURL: URL,
          shouldRetry: APIRetry? = nil) {
         self.configuration = configuration
@@ -42,7 +45,7 @@ class MockApiClient: APIClient {
         }
         
         let jsonDecoder: JSONDecoder
-        if let jsonType = type as? JSONDecodable.Type {
+        if let jsonType = type as? any JSONDecodable.Type {
             jsonDecoder = jsonType.jsonDecoder
         } else {
             jsonDecoder = defaultJSONDecoder
@@ -54,12 +57,11 @@ class MockApiClient: APIClient {
     }
     
     func didSend(request: URLRequest, received error: AuthFoundation.APIClientError, requestId: String?, rateLimit: AuthFoundation.APIRateLimit?) {
-        self.request = request
+        allRequests.append(request)
         delegate?.api(client: self, didSend: request, received: error, requestId: nil, rateLimit: nil)
     }
     
     func willSend(request: inout URLRequest) {
-        self.request = request
         delegate?.api(client: self, willSend: &request)
     }
     

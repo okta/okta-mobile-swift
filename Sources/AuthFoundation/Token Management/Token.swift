@@ -13,26 +13,54 @@
 import Foundation
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
-public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expires {
+public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer, Expires {
     public typealias ClaimType = TokenClaim
 
     /// The object used to ensure ID tokens are valid.
-    public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()
-    
+    public static var idTokenValidator: any IDTokenValidator {
+        get {
+            lock.withLock { _idTokenValidator }
+        }
+        set {
+            lock.withLock { _idTokenValidator = newValue }
+        }
+    }
+
     /// The object used to ensure access tokens can be validated against its associated ID token.
-    public static var accessTokenValidator: TokenHashValidator = DefaultTokenHashValidator(hashKey: .accessToken)
-    
+    public static var accessTokenValidator: any TokenHashValidator  {
+        get {
+            lock.withLock { _accessTokenValidator }
+        }
+        set {
+            lock.withLock { _accessTokenValidator = newValue }
+        }
+    }
+
     /// The object used to ensure device secrets are validated against its associated ID token.
-    public static var deviceSecretValidator: TokenHashValidator = DefaultTokenHashValidator(hashKey: .deviceSecret)
-    
+    public static var deviceSecretValidator: any TokenHashValidator  {
+        get {
+            lock.withLock { _deviceSecretValidator }
+        }
+        set {
+            lock.withLock { _deviceSecretValidator = newValue }
+        }
+    }
+
     /// Coordinates important operations during token exchange.
     ///
     /// > Note: This property and interface is currently marked as internal, but may be exposed publicly in the future.
-    static var exchangeCoordinator: TokenExchangeCoordinator = DefaultTokenExchangeCoordinator()
-    
+    static var exchangeCoordinator: any TokenExchangeCoordinator  {
+        get {
+            lock.withLock { _exchangeCoordinator }
+        }
+        set {
+            lock.withLock { _exchangeCoordinator = newValue }
+        }
+    }
+
     /// The unique identifier for this token.
-    public internal(set) var id: String
-    
+    public let id: String
+
     /// The date this token was issued at.
     public let issuedAt: Date?
     
@@ -66,15 +94,15 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     public var issuedTokenType: String? { self[.issuedTokenType] }
     
     /// The claim payload container for this token
-    public var payload: [String: Any] { jsonPayload.jsonValue.anyValue as? [String: Any] ?? [:] }
-    
+    public var payload: [String: any Sendable] { jsonPayload.jsonValue.anyValue as? [String: any Sendable] ?? [:] }
+
     /// Indicates whether or not the token is being refreshed.
     public var isRefreshing: Bool {
-        refreshAction != nil
+        refreshAction.isActive
     }
     
     let jsonPayload: AnyJSON
-    internal var refreshAction: CoalescedResult<Result<Token, OAuth2Error>>?
+    internal let refreshAction: CoalescedResult<Token>
 
     /// Return the relevant token string for the given type.
     /// - Parameter kind: Type of token string to return
@@ -96,15 +124,12 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     /// - Parameters:
     ///   - client: Client to validate the token's claims against.
     ///   - context: Optional ``IDTokenValidatorContext`` to use when validating the token.
-    public func validate(using client: OAuth2Client, with context: IDTokenValidatorContext) throws {
+    public func validate(using client: OAuth2Client, with context: any IDTokenValidatorContext) async throws {
         guard let idToken = idToken else {
             return
         }
         
-        guard let issuer = client.openIdConfiguration?.issuer else {
-            throw TokenError.invalidConfiguration
-        }
-
+        let issuer = try await client.openIdConfiguration().issuer
         try Token.idTokenValidator.validate(token: idToken,
                                             issuer: issuer,
                                             clientId: client.configuration.clientId,
@@ -119,31 +144,20 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     /// Creates a new Token from a refresh token.
     /// - Parameters:
     ///   - refreshToken: Refresh token string.
+    ///   - scope: Optional array of scopes to request.
     ///   - client: ``OAuth2Client`` instance that corresponds to the client configuration initially used to create the refresh token.
-    ///   - completion: Completion block invoked when a result is returned.
-    public static func from(refreshToken: String, using client: OAuth2Client, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
-        client.openIdConfiguration { result in
-            switch result {
-            case .success(let configuration):
-                let request = Token.RefreshRequest(openIdConfiguration: configuration,
-                                                   clientConfiguration: client.configuration,
-                                                   refreshToken: refreshToken,
-                                                   scope: nil,
-                                                   id: Token.RefreshRequest.placeholderId)
-                client.exchange(token: request) { result in
-                    switch result {
-                    case .success(let response):
-                        NotificationCenter.default.post(name: .tokenRefreshed, object: response.result)
-                        completion(.success(response.result))
-
-                    case .failure(let error):
-                        completion(.failure(.network(error: error)))
-                    }
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    public static func from(refreshToken: String,
+                            scope: [String]? = nil,
+                            using client: OAuth2Client) async throws -> Token
+    {
+        let request = Token.RefreshRequest(openIdConfiguration: try await client.openIdConfiguration(),
+                                           clientConfiguration: client.configuration,
+                                           refreshToken: refreshToken,
+                                           scope: scope?.joined(separator: " "),
+                                           id: Token.RefreshRequest.placeholderId)
+        let response = try await client.exchange(token: request)
+        TaskData.notificationCenter.post(name: .tokenRefreshed, object: response.result)
+        return response.result
     }
     
     @_documentation(visibility: private)
@@ -175,8 +189,9 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
         self.issuedAt = issuedAt
         self.context = context
         self.jsonPayload = json
+        self.refreshAction = .init(taskName: "Refresh Token \(id)")
         
-        let payload = json.jsonValue.anyValue as? [String: Any] ?? [:]
+        let payload = json.jsonValue.anyValue as? [String: any Sendable] ?? [:]
         if let value = payload[TokenClaim.idToken.rawValue] as? String {
             idToken = try JWT(value)
         } else {
@@ -212,19 +227,34 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
         try container.encode(context, forKey: .context)
         try container.encode(jsonPayload.stringValue, forKey: .rawValue)
     }
+
+    // MARK: Private properties / methods
+    private static let lock = Lock()
+    nonisolated(unsafe) private static var _idTokenValidator: any IDTokenValidator = DefaultIDTokenValidator()
+    nonisolated(unsafe) private static var _accessTokenValidator: any TokenHashValidator = DefaultTokenHashValidator(hashKey: .accessToken)
+    nonisolated(unsafe) private static var _deviceSecretValidator: any TokenHashValidator = DefaultTokenHashValidator(hashKey: .deviceSecret)
+    nonisolated(unsafe) private static var _exchangeCoordinator: any TokenExchangeCoordinator = DefaultTokenExchangeCoordinator()
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension Token {
     /// Creates a new Token from a refresh token.
     /// - Parameters:
     ///   - refreshToken: Refresh token string.
+    ///   - scope: Optional array of scopes to request.
     ///   - client: ``OAuth2Client`` instance that corresponds to the client configuration initially used to create the refresh token.
-    /// - Returns: Token created using the refresh token.
-    public static func from(refreshToken: String, using client: OAuth2Client) async throws -> Token {
-        try await withCheckedThrowingContinuation { continuation in
-            from(refreshToken: refreshToken, using: client) { result in
-                continuation.resume(with: result)
+    ///   - completion: Completion block invoked when a result is returned.
+    public static func from(refreshToken: String,
+                            scope: [String]? = nil,
+                            using client: OAuth2Client,
+                            completion: @Sendable @escaping (Result<Token, OAuth2Error>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await from(refreshToken: refreshToken,
+                                                   scope: scope,
+                                                   using: client)))
+            } catch {
+                completion(.failure(OAuth2Error(error)))
             }
         }
     }

@@ -1,5 +1,9 @@
 name: Tests
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     paths:
@@ -11,8 +15,6 @@ on:
     branches:
       - master
   pull_request:
-    branches:
-      - master
     paths:
       - '.github/workflows/tests.yaml'
       - 'Package.swift'
@@ -21,33 +23,44 @@ on:
       - 'Tests/**/*.swift'
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_15.4.app/Contents/Developer
   NSUnbufferedIO: YES 
 
 jobs:
   SwiftBuild:
-    name: Swift Unit Tests
+    name: Swift ${{ matrix.swift_version }} on ${{ matrix.os }}
+    if: ${{ !(github.event.pull_request.draft || false) }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest-large, ubuntu-latest]
-        swift_version: ["5.10"]
-    runs-on: ${{ matrix.os }}
+        os: 
+          - macos-latest-large
+          - ubuntu-latest
+        swift_version: ["5.10", "6.0"]
+        exclude:
+          - os: ubuntu-latest
+            swift_version: "5.10"
+    env:
+      LOG_NAME: "${{github.job}}-${{ matrix.swift_version }}-${{ matrix.os }}"
     timeout-minutes: 10
     steps:
-    - uses: swift-actions/setup-swift@v2
+    - uses: SwiftyLab/setup-swift@latest
       with:
         swift-version: ${{ matrix.swift_version }}
     - name: Get swift version
       run: swift --version
+    - name: Get Xcode toolchain version
+      if: runner.os == 'macOS'
+      run: xcrun --toolchain ${{ env.TOOLCHAINS }} swift --version
     - uses: actions/checkout@master
     - name: Build
-      run: swift build --build-tests
+      run: set -o pipefail && swift build --build-tests
     - name: Test
-      run: swift test --parallel
+      run: set -o pipefail && swift test --parallel
 
   Cocoapods:
     name: CocoaPods Build
-    runs-on: macos-latest-xlarge # Running on xlarge to use arm64 chipset
+    if: ${{ !(github.event.pull_request.draft || false) }}
+    runs-on: macos-15-xlarge # Running on xlarge to use arm64 chipset
     timeout-minutes: 10
     needs:
       - SwiftBuild
@@ -64,87 +77,111 @@ jobs:
     #  run: pod lib lint --allow-warnings OktaWebAuthenticationUI.podspec
 
   XcodeBuild:
-    name: Xcode Unit Tests
-    runs-on: macos-latest-xlarge
+    name: Xcode ${{ matrix.xcode_version }} on ${{ matrix.destination }}
+    if: ${{ !(github.event.pull_request.draft || false) }}
     strategy:
       matrix:
-        destination:
-        - "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
-        - "platform=iOS Simulator,OS=17.5,name=iPhone 15 Pro Max"
-        - "platform=tvOS Simulator,OS=17.5,name=Apple TV"
-        - "platform=visionOS Simulator,OS=1.2,name=Apple Vision Pro"
-        - "platform=watchOS Simulator,OS=10.5,name=Apple Watch Series 7 (45mm)"
-        - "platform=macOS,name=My Mac"
+        include:
+        - destination: "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
+          xcode_version: "15.4"
+          os: macos-14-large
+        - destination: "platform=iOS Simulator,OS=18.2,name=iPhone 16 Pro Max"
+          xcode_version: "16.2"
+          os: macos-15-large
+        - destination: "platform=tvOS Simulator,OS=18.2,name=Apple TV"
+          xcode_version: "16.2"
+          os: macos-15-large
+        - destination: "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
+          xcode_version: "15.4"
+          os: macos-14-xlarge
+        - destination: "platform=visionOS Simulator,OS=2.2,name=Apple Vision Pro"
+          xcode_version: "16.2"
+          os: macos-15-xlarge
+        - destination: "platform=watchOS Simulator,OS=11.1,name=Apple Watch Series 10 (46mm)"
+          xcode_version: "16.2"
+          os: macos-15-large
+        - destination: "platform=macOS,name=My Mac"
+          xcode_version: "16.2"
+          os: macos-15-large
+    runs-on: ${{ matrix.os }}
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app/Contents/Developer
+      DESTINATION: "${{ matrix.destination }}"
+      LOG_NAME: "${{github.job}}-${{ matrix.xcode_version }}-${{ matrix.destination }}"
     timeout-minutes: 25
     steps:
-    - name: Set test variables
-      run: |
-        echo "DESTINATION=${{matrix.destination}}" >> "$GITHUB_ENV"
-
-        destination="${{matrix.destination}}"
-        if [[ $destination =~ "tvOS" ]] || [[ $destination =~ "watchOS" ]]; then
-          echo "SKIP_WEBAUTHENTICATIONUI=true" >> "$GITHUB_ENV"
-          echo "WebAuthenticationUI is unsupported on this platform"
-        else
-          echo "SKIP_WEBAUTHENTICATIONUI=false" >> "$GITHUB_ENV"
-        fi
     - uses: actions/checkout@master
+    - name: Setup test environment
+      run: xcrun simctl shutdown all
+    - name: Setup log environment
+      run: mkdir -p .build/ci-logs
     - name: Build AuthFoundation
       run: |
-        set -o pipefail
-        xcodebuild build \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+        set -o pipefail && xcrun xcodebuild build-for-testing \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Test AuthFoundation
       run: |
-        set -o pipefail && xcodebuild test \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+        set -o pipefail && xcrun xcodebuild test-without-building \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Build OktaDirectAuth
       run: |
-        set -o pipefail && xcodebuild build \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+        set -o pipefail && xcrun xcodebuild build-for-testing \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Test OktaDirectAuth
       run: |
-        set -o pipefail && xcodebuild test \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+        set -o pipefail && xcrun xcodebuild test-without-building \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Build OktaOAuth2
       run: |
-        set -o pipefail && xcodebuild build \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+        set -o pipefail && xcrun xcodebuild build-for-testing \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Test OktaOAuth2
       run: |
-        set -o pipefail && xcodebuild test \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+        set -o pipefail && xcrun xcodebuild test-without-building \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Build WebAuthenticationUI
-      if: env.SKIP_WEBAUTHENTICATIONUI != 'true'
+      if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
-        set -o pipefail && xcodebuild build \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+        set -o pipefail && xcrun xcodebuild build-for-testing \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Test WebAuthenticationUI
-      if: env.SKIP_WEBAUTHENTICATIONUI != 'true'
+      if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
-        set -o pipefail && xcodebuild test \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+        set -o pipefail && xcrun xcodebuild test-without-building \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "$DESTINATION" 2>&1
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+    - name: Upload Logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: Logs
+        path: |
+          .build/ci-logs/**
+          .build/DerivedData/Logs/

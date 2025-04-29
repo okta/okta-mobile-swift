@@ -24,19 +24,24 @@ import Bionic
 #error("Unsupported platform")
 #endif
 
+#if swift(<6.0)
+extension UnsafeMutablePointer<Lock.LockType>: @unchecked Sendable {}
+#endif
+
 // **Note:** It would be preferable to use OSAllocatedUnfairLock for this, but this would mean dropping support for older OS versions. While this approach is safe, OSAllocatedUnfairLock provides more features we might need in the future.
 //
 // If the minimum supported version of this SDK is to increase in the future, this class should be removed and replaced with OSAllocatedUnfairLock.
-final class Lock: NSLocking {
+@_documentation(visibility: private)
+public final class Lock: NSLocking, Sendable {
     #if canImport(Darwin)
-    private typealias LockType = os_unfair_lock
+    fileprivate typealias LockType = os_unfair_lock
     #elseif canImport(Glibc) || canImport(Musl) || canImport(Bionic)
-    private typealias LockType = pthread_mutex_t
+    fileprivate typealias LockType = pthread_mutex_t
     #else
     #error("Unsupported platform")
     #endif
 
-    private let _lock: UnsafeMutablePointer<LockType> = {
+    nonisolated(unsafe) private let _lock: UnsafeMutablePointer<LockType> = {
         let result = UnsafeMutablePointer<LockType>.allocate(capacity: 1)
 
         #if canImport(Darwin)
@@ -51,6 +56,8 @@ final class Lock: NSLocking {
         return result
     }()
     
+    public init() {}
+
     deinit {
         #if canImport(Glibc) || canImport(Musl) || canImport(Bionic)
         let status = pthread_mutex_destroy(_lock)
@@ -60,7 +67,7 @@ final class Lock: NSLocking {
         _lock.deallocate()
     }
     
-    func lock() {
+    public func lock() {
         #if canImport(Darwin)
         os_unfair_lock_lock(_lock)
         #elseif canImport(Glibc) || canImport(Musl) || canImport(Bionic)
@@ -71,7 +78,7 @@ final class Lock: NSLocking {
         #endif
     }
 
-    func tryLock() -> Bool {
+    public func tryLock() -> Bool {
         #if canImport(Darwin)
         return os_unfair_lock_trylock(_lock)
         #elseif canImport(Glibc) || canImport(Musl) || canImport(Bionic)
@@ -81,7 +88,7 @@ final class Lock: NSLocking {
         #endif
     }
 
-    func unlock() {
+    public func unlock() {
         #if canImport(Darwin)
         os_unfair_lock_unlock(_lock)
         #elseif canImport(Glibc) || canImport(Musl) || canImport(Bionic)
@@ -93,7 +100,7 @@ final class Lock: NSLocking {
     }
 
     #if !canImport(Darwin)
-    func withLock<T>(_ body: () throws -> T) rethrows -> T {
+    public func withLock<T>(_ body: () throws -> T) rethrows -> T {
         self.lock()
         defer {
             self.unlock()

@@ -11,12 +11,16 @@
 //
 
 import Foundation
-
-#if canImport(UIKit) || canImport(AppKit)
+import AuthenticationServices
 
 extension WebAuthenticationError: LocalizedError {
-    init(_ error: Error) {
-        if let error = error as? OAuth2Error {
+    init(_ error: any Error) {
+        let nsError = error as NSError
+        if nsError.domain == ASWebAuthenticationSessionErrorDomain,
+           nsError.code == ASWebAuthenticationSessionError.canceledLogin.rawValue
+        {
+            self = .userCancelledLogin
+        } else if let error = error as? OAuth2Error {
             self = .oauth2(error: error)
         } else if let error = error as? OAuth2ServerError {
             self = .serverError(error)
@@ -39,8 +43,8 @@ extension WebAuthenticationError: LocalizedError {
                                      bundle: .webAuthenticationUI,
                                      comment: "")
             
-        case .authenticationProviderError(let error):
-            if let error = error as? LocalizedError {
+        case .authenticationProvider(error: let error):
+            if let error = error as? (any LocalizedError) {
                 return error.localizedDescription
             }
             
@@ -79,7 +83,7 @@ extension WebAuthenticationError: LocalizedError {
             return error.errorDescription
             
         case .generic(error: let error):
-            if let error = error as? LocalizedError {
+            if let error = error as? (any LocalizedError) {
                 return error.localizedDescription
             }
             let errorString = String(describing: error)
@@ -91,10 +95,45 @@ extension WebAuthenticationError: LocalizedError {
                                   comment: ""),
                 errorString)
 
+        case .noAuthenticatorProviderResonse:
+            return NSLocalizedString("no_authenticator_provider_response",
+                                     tableName: "WebAuthenticationUI",
+                                     bundle: .webAuthenticationUI,
+                                     comment: "No authenticator provider response")
         case .genericError(message: let message):
             return message
+        case .noSignOutFlowProvided:
+            return "FOO"
+        case .cannotStartBrowserSession:
+            return "FOO"
         }
     }
 }
 
-#endif
+extension WebAuthenticationError: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.noCompatibleAuthenticationProviders, .noCompatibleAuthenticationProviders): return true
+        case (.noSignOutFlowProvided, .noSignOutFlowProvided): return true
+        case (.cannotStartBrowserSession, .cannotStartBrowserSession): return true
+        case (.cannotComposeAuthenticationURL, .cannotComposeAuthenticationURL): return true
+        case (.userCancelledLogin, .userCancelledLogin): return true
+        case (.noAuthenticatorProviderResonse, .noAuthenticatorProviderResonse): return true
+        case (.missingIdToken, .missingIdToken): return true
+        case (.authenticationProvider(error: let lhsValue), .authenticationProvider(error: let rhsValue)):
+            return lhsValue as NSError == rhsValue as NSError
+        case (.serverError(let lhsValue), .serverError(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.invalidRedirectScheme(let lhsValue), .invalidRedirectScheme(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.oauth2(error: let lhsValue), .oauth2(error: let rhsValue)):
+            return lhsValue == rhsValue
+        case (.generic(error: let lhsValue), .generic(error: let rhsValue)):
+            return lhsValue as NSError == rhsValue as NSError
+        case (.genericError(message: let lhsValue), .genericError(message: let rhsValue)):
+            return lhsValue == rhsValue
+        default:
+            return false
+        }
+    }
+}

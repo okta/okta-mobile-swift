@@ -53,7 +53,9 @@ final class SingleSignOnViewController: UIViewController {
         signIn(silent: true)
         
         signInButton.isEnabled = flow != nil
-        clientIdLabel.text = flow?.client.configuration.clientId
+        Task { @MainActor in
+            clientIdLabel.text = await flow?.client.configuration.clientId
+        }
     }
     
     @IBAction private func signIn() {
@@ -61,6 +63,8 @@ final class SingleSignOnViewController: UIViewController {
     }
     
     private func signIn(silent: Bool) {
+        guard let flow = flow else { return }
+
         startAnimating()
         guard let deviceToken = deviceToken,
               let idToken = idToken
@@ -89,21 +93,17 @@ final class SingleSignOnViewController: UIViewController {
             .actor(type: .deviceSecret, value: deviceToken),
             .subject(type: .idToken, value: idToken)
         ]
-        
-        flow?.start(with: tokens) { result in
-            DispatchQueue.main.async {
-                self.stopAnimating()
-                
-                switch result {
-                case .failure(let error):
-                    let alert = UIAlertController(title: "Cannot sign in", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(.init(title: "OK", style: .default))
-                    
-                    self.present(alert, animated: true)
-                    
-                case .success(let token):
-                    Credential.default = try? Credential.store(token)
-                }
+
+        Task { @MainActor in
+            defer { self.stopAnimating() }
+            do {
+                let token = try await flow.start(with: tokens)
+                Credential.default = try Credential.store(token)
+            } catch {
+                let alert = UIAlertController(title: "Cannot sign in", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(.init(title: "OK", style: .default))
+
+                self.present(alert, animated: true)
             }
         }
     }

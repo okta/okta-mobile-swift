@@ -13,8 +13,8 @@
 import Foundation
 import AuthFoundation
 
-protocol StepHandler {
+protocol StepHandler: Sendable {
     var flow: DirectAuthenticationFlow { get }
     
-    func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)
+    func process() async throws -> DirectAuthenticationFlow.Status
 }

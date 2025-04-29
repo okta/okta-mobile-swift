@@ -50,6 +50,53 @@ extension XCTestCase: TestExtensions {
     
 }
 
+extension XCUIApplication {
+    private enum SubmitButtonLabels: String, CaseIterable {
+        case `continue` = "continue"
+        case done = "Done"
+        case go = "Go"
+        case join = "Join:"
+        case next = "Next:"
+        case `return` = "Return"
+        case route = "Route"
+        case search = "Search"
+        case send = "Send"
+    }
+
+    var keyboardSubmitButton: XCUIElement? {
+        #if os(macOS)
+        return nil
+        #elseif (swift(>=5.10) && os(visionOS))
+        let keyboard = visionOSKeyboard
+        #else
+        let keyboard = keyboards.firstMatch
+        #endif
+
+        guard keyboard.exists else {
+            return nil
+        }
+
+        for submitButton in SubmitButtonLabels.allCases
+            .map({ keyboard.buttons[$0.rawValue] })
+        {
+            guard submitButton.exists, submitButton.isHittable
+            else {
+                continue
+            }
+
+            return submitButton
+        }
+
+        if let returnKey = keyboard.buttons.allElementsBoundByIndex.last,
+           returnKey.isHittable
+        {
+            return returnKey
+        }
+
+        return nil
+    }
+}
+
 extension XCUIElement {
     var isOn: Bool? {
         return (self.value as? String).map { $0 == "1" }
@@ -59,7 +106,7 @@ extension XCUIElement {
         let timeStart = Date().timeIntervalSince1970
         
         while Date().timeIntervalSince1970 <= (timeStart + timeout) {
-            if !exists {
+            if !waitForExistence(timeout: max(timeout / 4, 0.1)) {
                 return true
             }
         }
@@ -71,7 +118,7 @@ extension XCUIElement {
         let timeStart = Date().timeIntervalSince1970
         
         while Date().timeIntervalSince1970 <= (timeStart + timeout) {
-            if !exists {
+            if waitForExistence(timeout: max(timeout / 4, 0.1)) {
                 return true
             }
         }
@@ -89,9 +136,27 @@ extension XCUIElementQuery {
         }
         return nil
     }
+
+    @discardableResult
+    func waitForExistence(timeout: TimeInterval) -> XCUIElement? {
+        let startTime = Date()
+
+        let pollInterval = Swift.max(timeout / 10, 0.1)
+        while Date().timeIntervalSince(startTime) < timeout {
+            for element in allElementsBoundByIndex {
+                if element.waitForExistence(timeout: pollInterval) {
+                    return element
+                }
+            }
+        }
+
+        return nil
+    }
 }
 
-extension XCUIElementQuery: Sequence {
+extension XCUIElementQuery: @retroactive Sequence {}
+
+extension XCUIElementQuery {
     public typealias Iterator = AnyIterator<XCUIElement>
     public func makeIterator() -> Iterator {
         var index = UInt(0)

@@ -14,7 +14,7 @@ import Foundation
 
 extension DeviceAuthorizationFlow {
     /// A model representing the context and current state for an authorization session.
-    public struct Context: AuthenticationContext {
+    public struct Context: Sendable, AuthenticationContext {
         /// Verification information used to
         public internal(set) var verification: Verification?
         

@@ -10,8 +10,6 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if canImport(UIKit) || canImport(AppKit)
-
 import XCTest
 @testable import AuthFoundation
 @testable import TestCommon
@@ -22,20 +20,22 @@ class WebAuthenticationInitializerTests: XCTestCase {
     private let issuer = URL(string: "https://example.com")!
     private let redirectUri = URL(string: "com.example:/callback")!
     private let logoutRedirectUri = URL(string: "com.example:/logout")!
-    
-    func testInitializer() throws {
-        let auth = try WebAuthentication(issuerURL: issuer,
-                                         clientId: "client_id",
-                                         scope: "openid profile",
-                                         redirectUri: redirectUri,
-                                         logoutRedirectUri: logoutRedirectUri,
-                                         additionalParameters: ["foo": "bar"])
-        XCTAssertEqual(auth.signInFlow.client.configuration.clientId, "client_id")
-        XCTAssertEqual(auth.signInFlow.client.configuration.scope, ["openid", "profile"])
-        XCTAssertTrue(auth.signInFlow.client === auth.signOutFlow?.client)
-        XCTAssertEqual(auth.signInFlow.additionalParameters?.stringComponents, ["foo": "bar"])
-        XCTAssertEqual(auth.signOutFlow?.additionalParameters?.stringComponents, ["foo": "bar"])
+
+    func testInitializer() async throws {
+        let auth = try await WebAuthentication(
+            issuerURL: issuer,
+            clientId: "client_id",
+            scope: "openid profile",
+            redirectUri: redirectUri,
+            logoutRedirectUri: logoutRedirectUri,
+            additionalParameters: ["foo": "bar"])
+
+        let signInFlowClient = await auth.signInFlow.client
+        let signOutFlowClient = await auth.signOutFlow?.client
+        XCTAssertEqual(signInFlowClient.configuration.clientId, "client_id")
+        XCTAssertEqual(signInFlowClient.configuration.scope, ["openid", "profile"])
+        XCTAssertTrue(signInFlowClient === signOutFlowClient)
+        try await XCTAssertEqualAsync(await auth.signInFlow.additionalParameters?.stringComponents, ["foo": "bar"])
+        try await XCTAssertEqualAsync(await auth.signOutFlow?.additionalParameters?.stringComponents, ["foo": "bar"])
     }
 }
-
-#endif

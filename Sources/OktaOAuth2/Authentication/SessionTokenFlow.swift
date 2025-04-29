@@ -10,43 +10,32 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
+#if canImport(UIKit) || canImport(AppKit)
 import Foundation
 import AuthFoundation
-
-#if os(Linux)
-import FoundationNetworking
-#endif
 
 /// An authentication flow class that exchanges a Session Token for access tokens.
 ///
 /// This flow is typically used in conjunction with the [classic Okta native authentication library](https://github.com/okta/okta-auth-swift). For native authentication using the Okta Identity Engine (OIE), please use the [Okta IDX library](https://github.com/okta/okta-idx-swift).
-public class SessionTokenFlow: AuthenticationFlow {
+public actor SessionTokenFlow: AuthenticationFlow {
     public typealias Context = AuthorizationCodeFlow.Context
     
     /// The OAuth2Client this authentication flow will use.
-    public let client: OAuth2Client
-    
+    nonisolated public let client: OAuth2Client
+
     /// The context that stores the state for the current authentication session.
-    public private(set) var context: Context?
+    nonisolated public var context: Context? {
+        withIsolationSync { await self._context }
+    }
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: APIRequestArgument]?
+    nonisolated public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    public private(set) var isAuthenticating: Bool = false {
-        didSet {
-            guard oldValue != isAuthenticating else {
-                return
-            }
-            
-            if isAuthenticating {
-                delegateCollection.invoke { $0.authenticationStarted(flow: self) }
-            } else {
-                delegateCollection.invoke { $0.authenticationFinished(flow: self) }
-            }
-        }
+    nonisolated public var isAuthenticating: Bool {
+        withIsolationSync { await self._isAuthenticating } ?? false
     }
-    
+
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuerURL: The issuer URL.
@@ -54,11 +43,11 @@ public class SessionTokenFlow: AuthenticationFlow {
     ///   - scope: The scopes to request
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
     @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: ClaimCollection<[String]>,
-                            redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil) throws
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: ClaimCollection<[String]>,
+                redirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         try self.init(client: OAuth2Client(issuerURL: issuerURL,
                                            clientId: clientId,
@@ -69,11 +58,11 @@ public class SessionTokenFlow: AuthenticationFlow {
 
     @_documentation(visibility: private)
     @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: some WhitespaceSeparated,
-                            redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil) throws
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: some WhitespaceSeparated,
+                redirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         try self.init(client: OAuth2Client(issuerURL: issuerURL,
                                            clientId: clientId,
@@ -86,16 +75,15 @@ public class SessionTokenFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - client: ``OAuth2Client`` client instance to authenticate with.
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
-    public required init(client: OAuth2Client,
-                         additionalParameters: [String: APIRequestArgument]? = nil) throws
+    public init(client: OAuth2Client,
+                additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         guard client.configuration.redirectUri != nil else {
             throw OAuth2Error.missingRedirectUri
         }
         
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+        assert(SDKVersion.oauth2 != nil)
+
         self.client = client
         self.additionalParameters = additionalParameters
         
@@ -106,158 +94,163 @@ public class SessionTokenFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - sessionToken: Session token to exchange.
     ///   - context: Optional context to provide when customizing the state parameter.
-    ///   - completion: Completion invoked when a response is received.
+    /// - Returns: The token once the responce is received.
     public func start(with sessionToken: String,
-                      context: Context = .init(),
-                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+                      context: Context = .init()) async throws -> Token
     {
-        isAuthenticating = true
-
-        self.context = context
+        _isAuthenticating = true
+        _context = context
 
         var parameters = additionalParameters ?? [:]
         parameters["sessionToken"] = sessionToken
         
-        let flow: AuthorizationCodeFlow
-        do {
-            flow = try AuthorizationCodeFlow(client: client, additionalParameters: parameters)
-        } catch {
-            completion(.failure(OAuth2Error(error)))
-            return
-        }
-        
-        flow.start(with: context) { result in
-            switch result {
-            case .failure(let error):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-                completion(.failure(error))
-            case .success(let response):
-                self.complete(using: flow, url: response) { result in
-                    switch result {
-                    case .failure(let error):
-                        self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-                        completion(.failure(error))
-                    case .success(let response):
-                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response) }
-                        completion(.success(response))
-                    }
-                    self.finished()
-                }
+        return try await withExpression {
+            let flow = try AuthorizationCodeFlow(client: client, additionalParameters: parameters)
+            let url = try await flow.start(with: context)
+            return try await complete(using: flow, url: url)
+        } success: { result in
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: result) }
             }
+        } failure: { error in
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            }
+        } finally: {
+            finished()
         }
     }
     
     /// Resets the flow for later reuse.
     public func reset() {
         finished()
-        context = nil
+        _context = nil
     }
     
     func finished() {
-        isAuthenticating = false
+        _isAuthenticating = false
     }
 
     // MARK: Private properties / methods
-    public let delegateCollection = DelegateCollection<Delegate>()
-    static var urlExchangeClass: SessionTokenFlowURLExchange.Type = SessionTokenFlowExchange.self
-    
+    private static let lock = Lock()
+    nonisolated public let delegateCollection = DelegateCollection<any Delegate>()
+    nonisolated(unsafe) private static var _urlExchangeClass: any SessionTokenFlowURLExchange.Type = SessionTokenFlowExchange.self
+    static var urlExchangeClass: any SessionTokenFlowURLExchange.Type {
+        get {
+            lock.withLock { _urlExchangeClass }
+        }
+        set {
+            lock.withLock { _urlExchangeClass = newValue }
+        }
+    }
+
     static func reset() {
         urlExchangeClass = SessionTokenFlowExchange.self
     }
     
-    private func complete(using flow: AuthorizationCodeFlow, url: URL, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    private func complete(using flow: AuthorizationCodeFlow, url: URL) async throws -> Token {
         guard let scheme = client.configuration.redirectUri?.scheme else {
-            completion(.failure(.invalidUrl))
-            return
+            throw OAuth2Error.invalidUrl
         }
         
         let follow = SessionTokenFlow.urlExchangeClass.init(scheme: scheme)
-        follow.follow(url: url) { result in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(let url):
-                do {
-                    try flow.resume(with: url, completion: completion)
-                } catch let error as OAuth2Error {
-                    completion(.failure(error))
-                } catch let error as APIClientError {
-                    completion(.failure(.network(error: error)))
-                } catch {
-                    completion(.failure(.error(error)))
+        let url = try await follow.follow(url: url)
+        return try await flow.resume(with: url)
+    }
+
+    private var _context: Context?
+    private var _isAuthenticating: Bool = false {
+        didSet {
+            guard _isAuthenticating != oldValue else {
+                return
+            }
+
+            let flowStarted = _isAuthenticating
+            Task { @MainActor in
+                if flowStarted {
+                    delegateCollection.invoke { $0.authenticationStarted(flow: self) }
+                } else {
+                    delegateCollection.invoke { $0.authenticationFinished(flow: self) }
                 }
             }
         }
     }
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension SessionTokenFlow {
-    /// Asynchronously authenticates with the given session token.
-    public func start(with sessionToken: String,
-                      context: Context = .init()) async throws -> Token
+    /// Authenticates using the supplied session token.
+    /// - Parameters:
+    ///   - sessionToken: Session token to exchange.
+    ///   - context: Optional context to provide when customizing the state parameter.
+    ///   - completion: Completion invoked when a response is received.
+    nonisolated public func start(with sessionToken: String,
+                                  context: Context = .init(),
+                                  completion: @escaping @Sendable (Result<Token, OAuth2Error>) -> Void)
     {
-        try await withCheckedThrowingContinuation { continuation in
-            start(with: sessionToken, context: context) { result in
-                continuation.resume(with: result)
+        Task {
+            do {
+                completion(.success(try await start(with: sessionToken, context: context)))
+            } catch {
+                completion(.failure(OAuth2Error(error)))
             }
         }
     }
 }
 
-protocol SessionTokenFlowURLExchange {
+protocol SessionTokenFlowURLExchange: Sendable {
     init(scheme: String)
-    func follow(url: URL, completion: @escaping (Result<URL, OAuth2Error>) -> Void)
+    func follow(url: URL) async throws -> URL
 }
 
-final class SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URLSessionTaskDelegate {
+actor SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URLSessionTaskDelegate {
     let scheme: String
 
-    private var activeTask: URLSessionTask?
-    private var completion: ((Result<URL, OAuth2Error>) -> Void)?
-    private lazy var session: URLSession = {
+    private let lock = Lock()
+    private var continuation: (CheckedContinuation<URL, any Error>)?
+    private lazy var session: any URLSessionProtocol = {
         URLSession(configuration: .ephemeral,
                    delegate: self,
                    delegateQueue: nil)
     }()
     
-    required init(scheme: String) {
+    init(scheme: String) {
         self.scheme = scheme
     }
 
-    func follow(url: URL, completion: @escaping (Result<URL, OAuth2Error>) -> Void) {
-        self.completion = completion
+    func follow(url: URL) async throws -> URL {
+        try await withCheckedThrowingContinuation { continuation in
+            self.continuation = continuation
 
-        activeTask = session.dataTask(with: URLRequest(url: url)) { [weak self] _, _, error in
-            if let error = error {
-                self?.finish(with: .error(error))
-            } else {
-                self?.finish(with: .invalidUrl)
+            Task {
+                do {
+                    let request = URLRequest(url: url)
+                    let (_, _) = try await session.data(for: request)
+                    self.finish(with: OAuth2Error.invalidUrl)
+                } catch {
+                    self.finish(with: error)
+                }
             }
         }
-        activeTask?.resume()
     }
     
-    private func finish(with error: OAuth2Error) {
-        completion?(.failure(error))
-        completion = nil
-        activeTask = nil
+    private func finish(with error: any Error) {
+        continuation?.resume(throwing: error)
+        continuation = nil
     }
     
     private func finish(with url: URL) {
-        completion?(.success(url))
-        completion = nil
-        activeTask = nil
+        continuation?.resume(returning: url)
+        continuation = nil
     }
     
+    nonisolated
     func urlSession(_ session: URLSession,
                     task: URLSessionTask,
                     willPerformHTTPRedirection response: HTTPURLResponse,
                     newRequest request: URLRequest,
                     completionHandler: @escaping (URLRequest?) -> Void)
     {
-        guard task == activeTask,
-              let url = request.url,
+        guard let url = request.url,
               url.scheme == scheme
         else {
             completionHandler(request)
@@ -265,8 +258,10 @@ final class SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URL
         }
         
         completionHandler(nil)
-        
-        finish(with: url)
+
+        Task {
+            await finish(with: url)
+        }
     }
 }
 
@@ -290,3 +285,4 @@ extension OAuth2Client {
                              additionalParameters: additionalParameters)
     }
 }
+#endif

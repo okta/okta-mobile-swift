@@ -20,6 +20,10 @@
 import Foundation
 import OSLog
 
+#if compiler(<6.0)
+extension OSLog: @unchecked Sendable {}
+#endif
+
 /// Convenience class used for debugging SDK network operations.
 ///
 /// Developers can use this to assist in debugging interactions with the Client SDK, and any network operations that are performed on behalf of the user via this SDK.
@@ -48,31 +52,51 @@ import OSLog
 /// ```
 public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
     /// Shared convenience instance to use.
-    public static var shared: DebugAPIRequestObserver = {
-        DebugAPIRequestObserver()
-    }()
+    public static var shared: DebugAPIRequestObserver {
+        _shared
+    }
     
     /// Indicates if HTTP request and response headers should be logged.
-    public var showHeaders = false
-    
+    public var showHeaders: Bool {
+        get {
+            Self.lock.withLock {
+                _showHeaders
+            }
+        }
+        set {
+            Self.lock.withLock {
+                _showHeaders = newValue
+            }
+        }
+    }
+
     /// Convenience flag that automatically binds newly-created ``OAuth2Client`` instances to the debug observer.
-    public var observeAllOAuth2Clients: Bool = false {
-        didSet {
-            if observeAllOAuth2Clients {
-                oauth2Observer = NotificationCenter.default.addObserver(
-                    forName: .oauth2ClientCreated,
-                    object: nil,
-                    queue: nil,
-                    using: { [weak self] notification in
-                        guard let self = self,
-                              let client = notification.object as? OAuth2Client
-                        else {
-                            return
-                        }
-                        client.add(delegate: self)
-                    })
-            } else {
-                oauth2Observer = nil
+    nonisolated(unsafe) public var observeAllOAuth2Clients: Bool {
+        get {
+            Self.lock.withLock {
+                _observeAllOAuth2Clients
+            }
+        }
+        set {
+            Self.lock.withLock {
+                _observeAllOAuth2Clients = newValue
+
+                if _observeAllOAuth2Clients {
+                    oauth2Observer = TaskData.notificationCenter.addObserver(
+                        forName: .oauth2ClientCreated,
+                        object: nil,
+                        queue: nil,
+                        using: { [weak self] notification in
+                            guard let self = self,
+                                  let client = notification.object as? OAuth2Client
+                            else {
+                                return
+                            }
+                            client.add(delegate: self)
+                        })
+                } else {
+                    oauth2Observer = nil
+                }
             }
         }
     }
@@ -136,14 +160,24 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
         
         os_log(.debug, log: Self.log, "Response:\n\n%s", result)
     }
-    
-    private static var log = OSLog(subsystem: "com.okta.client.network", category: "Debugging")
-    private var oauth2Observer: NSObjectProtocol? {
+
+    private static let log = OSLog(subsystem: "com.okta.client.network", category: "Debugging")
+    private static let lock = Lock()
+
+    nonisolated(unsafe) private static var _shared: DebugAPIRequestObserver = {
+        lock.withLock {
+            DebugAPIRequestObserver()
+        }
+    }()
+
+    nonisolated(unsafe) private var _showHeaders = false
+    nonisolated(unsafe) private var _observeAllOAuth2Clients = false
+    nonisolated(unsafe) private var oauth2Observer: (any NSObjectProtocol)? {
         didSet {
             if let oldValue = oldValue,
                oauth2Observer == nil
             {
-                NotificationCenter.default.removeObserver(oldValue)
+                TaskData.notificationCenter.removeObserver(oldValue)
             }
         }
     }
@@ -153,4 +187,11 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
         })?.value as? String ?? "<unknown>"
     }
 }
+
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension DebugAPIRequestObserver: @unchecked Sendable {}
+#else
+extension DebugAPIRequestObserver: Sendable {}
+#endif
 #endif

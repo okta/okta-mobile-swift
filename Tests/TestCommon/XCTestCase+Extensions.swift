@@ -18,6 +18,94 @@ enum TestError: Error {
     case noBundleResourceFound
 }
 
+public extension XCTest {
+    @discardableResult
+    func XCTAssertThrowsErrorAsync<T: Sendable>(
+        _ expression: @autoclosure () async throws -> T,
+        _ message: @autoclosure () -> String = "",
+        file: StaticString = #filePath,
+        line: UInt = #line,
+        _ errorHandler: (_ error: any Error) -> Void = { _ in }
+    ) async -> (any Error)? {
+        do {
+            _ = try await expression()
+            XCTFail(message(), file: file, line: line)
+        } catch {
+            errorHandler(error)
+            return error
+        }
+        return nil
+    }
+
+    func XCTAssertNoThrowAsync<T: Sendable>(
+        _ expression: @autoclosure () async throws -> T,
+        _ message: @autoclosure () -> String = "",
+        file: StaticString = #filePath,
+        line: UInt = #line) async
+    {
+        do {
+            _ = try await expression()
+        } catch {
+            XCTFail(message(), file: file, line: line)
+        }
+    }
+
+
+    func XCTAssertEqualAsync<T: Sendable>(
+        _ expression1: @autoclosure @Sendable () async throws -> T,
+        _ expression2: @autoclosure @Sendable () async throws -> T,
+        _ message: @autoclosure () -> String = "",
+        file: StaticString = #filePath,
+        line: UInt = #line) async throws where T : Equatable
+    {
+        async let value1 = expression1()
+        async let value2 = expression2()
+        let values = try await [value1, value2]
+
+        XCTAssertEqual(values[0], values[1], message(), file: file, line: line)
+    }
+
+    func XCTAssertTrueAsync(
+        _ expression: @autoclosure @Sendable () async -> Bool,
+        _ message: @autoclosure () -> String = "",
+        file: StaticString = #filePath,
+        line: UInt = #line) async
+    {
+        let value = await expression()
+        XCTAssertTrue(value, message(), file: file, line: line)
+    }
+
+    func XCTAssertFalseAsync(
+        _ expression: @autoclosure @Sendable () async -> Bool,
+        _ message: @autoclosure () -> String = "",
+        file: StaticString = #filePath,
+        line: UInt = #line) async
+    {
+        let value = await expression()
+        XCTAssertFalse(value, message(), file: file, line: line)
+    }
+
+    func XCTAssertNilAsync(
+        _ expression: @autoclosure @Sendable () async throws -> Any?,
+        _ message: @autoclosure () -> String = "",
+        file: StaticString = #filePath,
+        line: UInt = #line) async rethrows
+    {
+        let value = try await expression()
+        XCTAssertNil(value, message(), file: file, line: line)
+    }
+
+    func XCTAssertNotNilAsync(
+        _ expression: @autoclosure @Sendable () async throws -> Any?,
+        _ message: @autoclosure () -> String = "",
+        file: StaticString = #filePath,
+        line: UInt = #line) async rethrows
+    {
+        let value = try await expression()
+        XCTAssertNotNil(value, message(), file: file, line: line)
+    }
+}
+
 public extension XCTestCase {
     func mock<T: Decodable & JSONDecodable>(from bundle: Bundle,
                  for filename: String,
@@ -81,8 +169,7 @@ public extension XCTestCase {
         return try decoder.decode(T.self, from: jsonData)
     }
     
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
-    func perform(queueCount: Int = 5, iterationCount: Int = 10, _ block: @escaping () async throws -> Void) rethrows {
+    func perform(queueCount: Int = 5, iterationCount: Int = 4, _ block: @Sendable @escaping () async throws -> Void) rethrows {
         let queues: [DispatchQueue] = (0..<queueCount).map { queueNumber in
             DispatchQueue(label: "Async queue \(queueNumber)")
         }

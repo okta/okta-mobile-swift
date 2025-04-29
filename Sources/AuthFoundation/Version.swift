@@ -12,7 +12,14 @@
 
 import Foundation
 
-// swiftlint:disable identifier_name
-@_documentation(visibility: private)
-public let Version = SDKVersion(sdk: "okta-authfoundation-swift", version: "1.8.2")
-// swiftlint:enable identifier_name
+extension SDKVersion.Name {
+    @_documentation(visibility: internal)
+    public static let authFoundation = SDKVersion.Name("okta-authfoundation-swift")
+}
+
+extension SDKVersion {
+    @_documentation(visibility: private)
+    public static let authFoundation: SDKVersion? = {
+        register(.authFoundation, version: "1.8.2")
+    }()
+}

@@ -77,7 +77,7 @@ final class TokenExchangeFlowTests: XCTestCase {
         Token.resetToDefault()
     }
 
-    func testWithDelegate() throws {
+    func testWithDelegate() async throws {
         let delegate = TokenExchangeFlowDelegateRecorder()
         flow.add(delegate: delegate)
         
@@ -85,15 +85,9 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertFalse(delegate.started)
         
         // Exchange code
-        let expect = expectation(description: "Expected `resume` succeeded")
-        flow.start(with: tokens) { result in
-            expect.fulfill()
-        }
-        
-        waitForExpectations(timeout: 5) { error in
-            XCTAssertNil(error)
-        }
-        
+        let _ = try await flow.start(with: tokens)
+        await MainActor.yield()
+
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertTrue(delegate.finished)
@@ -107,33 +101,24 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
     }
-    
-    func testAuthenticationSucceeded() throws {
-        let authorizeExpectation = expectation(description: "Expected `resume` succeeded")
-        
+
+    func testAuthenticationSucceeded() async throws {
         XCTAssertFalse(flow.isAuthenticating)
-        
+
         let expect = expectation(description: "resume")
         flow.start(with: tokens) { result in
-            switch result {
-            case .success:
-                XCTAssertTrue(self.flow.isAuthenticating)
-                
-                authorizeExpectation.fulfill()
-            case .failure(let error):
+            if case let .failure(error) = result {
                 XCTFail(error.localizedDescription)
             }
-            
+
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
-            XCTAssertNil(error)
-        }
+        await fulfillment(of: [expect], timeout: 1)
 
         XCTAssertFalse(flow.isAuthenticating)
-        
+
         XCTAssertEqual(urlSession.requests.count, 3)
-        
+
         let request = try XCTUnwrap(urlSession.requests.first(where: { request in
             request.url?.lastPathComponent == "token"
         }))
@@ -141,16 +126,14 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
     }
-    
-#if !os(Linux)
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
+
     func testAsyncAuthenticationSucceeded() async throws {
         XCTAssertFalse(flow.isAuthenticating)
-        
+
         let _ = try await flow.start(with: tokens)
         
         XCTAssertFalse(flow.isAuthenticating)
-        
+
         XCTAssertEqual(urlSession.requests.count, 3)
         
         let request = try XCTUnwrap(urlSession.requests.first(where: { request in
@@ -160,5 +143,4 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
     }
-#endif
 }

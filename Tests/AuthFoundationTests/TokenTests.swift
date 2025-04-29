@@ -23,7 +23,7 @@ fileprivate struct MockTokenRequest: OAuth2TokenRequest, IDTokenValidatorContext
     let url: URL
     let category = OAuth2APIRequestCategory.token
     var tokenValidatorContext: any IDTokenValidatorContext { self }
-    var bodyParameters: [String: APIRequestArgument]?
+    var bodyParameters: [String: any APIRequestArgument]?
 }
 
 final class TokenTests: XCTestCase {
@@ -172,10 +172,10 @@ final class TokenTests: XCTestCase {
         XCTAssertNotEqual(token1, token2)
     }
 
-    func testTokenFromRefreshToken() throws {
+    func testTokenFromRefreshToken() async throws {
         let client = try mockClient()
         
-        var tokenResult: Token?
+        nonisolated(unsafe) var tokenResult: Token?
         let wait = expectation(description: "Token exchange")
         Token.from(refreshToken: "the_refresh_token", using: client) { result in
             switch result {
@@ -186,8 +186,8 @@ final class TokenTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1)
-        
+        await fulfillment(of: [wait], timeout: 1)
+
         let token = try XCTUnwrap(tokenResult)
         
         XCTAssertEqual(token.token(of: .accessToken), String.mockAccessToken)
@@ -256,7 +256,6 @@ final class TokenTests: XCTestCase {
         XCTAssertEqual(token[.accessToken], "the_access_token")
     }
     
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testTokenFromRefreshTokenAsync() async throws {
         let client = try mockClient()
         let token = try await Token.from(refreshToken: "the_refresh_token", using: client)

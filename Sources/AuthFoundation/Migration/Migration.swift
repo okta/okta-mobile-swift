@@ -12,67 +12,75 @@
 
 import Foundation
 
-extension SDKVersion {
+/// Namespace used for a variety of version migration agents.
+public final class Migration {
     /// Determines whether or not some user data needs to be migrated.
     ///
     /// This may be if a user has upgraded to a newer version of the SDK.
     public static var isMigrationNeeded: Bool {
-        Migration.shared.needsMigration
+        shared.isMigrationNeeded
     }
-    
+
     /// Migrates user data, if necessary.
     public static func migrateIfNeeded() throws {
-        guard isMigrationNeeded else {
-            return
-        }
-        
-        try Migration.shared.migrate()
+        try shared.migrateIfNeeded()
     }
-    
+
     /// Registers an SDK version migrator for use within a migration process.
     ///
     /// Version migrators are utilized to migrate user data on an as-needed basis.
     /// - Parameter migrator: Migrator to register.
-    public static func register(migrator: SDKVersionMigrator) {
-        Migration.registeredMigrators.append(migrator)
+    public static func register(migrator: any SDKVersionMigrator) {
+        shared.register(migrator: migrator)
     }
-    
-    /// Namespace used for a variety of version migration agents.
-    public final class Migration {
-        static var shared: Migration = {
-            Migration()
-        }()
-        
-        fileprivate(set) static var registeredMigrators: [SDKVersionMigrator] = defaultMigrators()
 
-        static func resetMigrators() {
-            registeredMigrators = defaultMigrators()
+    // MARK: Internal properties / methods
+    nonisolated(unsafe) static let shared = Migration()
+    nonisolated(unsafe) private(set) var registeredMigrators: [any SDKVersionMigrator]
+
+    init(migrators: [any SDKVersionMigrator]? = nil) {
+        assert(SDKVersion.authFoundation != nil)
+        self.registeredMigrators = migrators ?? Self.defaultMigrators
+    }
+
+    func register(migrator: any SDKVersionMigrator) {
+        lock.withLock {
+            guard !registeredMigrators.contains(where: { $0 === migrator })
+            else {
+                return
+            }
+
+            registeredMigrators.append(migrator)
         }
-        
-        static func defaultMigrators() -> [SDKVersionMigrator] {
-            []
-        }
-        
-        let migrators: [SDKVersionMigrator]
-        
-        init(migrators: [SDKVersionMigrator]) {
-            self.migrators = migrators
-        }
-        
-        convenience init() {
-            self.init(migrators: Migration.registeredMigrators)
-        }
-        
-        var needsMigration: Bool {
-            !migrators.filter(\.needsMigration).isEmpty
-        }
-        
-        func migrate() throws {
-            try migrators
+    }
+
+    func migrateIfNeeded() throws {
+        try lock.withLock {
+            try registeredMigrators
                 .filter(\.needsMigration)
                 .forEach { migrator in
                     try migrator.migrate()
                 }
         }
     }
+
+    var isMigrationNeeded: Bool {
+        lock.withLock {
+            !registeredMigrators
+                .filter(\.needsMigration)
+                .isEmpty
+        }
+    }
+
+    func resetMigrators() {
+        lock.withLock {
+            registeredMigrators = Self.defaultMigrators
+        }
+    }
+
+    // MARK: Private properties / methods
+    private let lock = Lock()
+    nonisolated(unsafe) private static let defaultMigrators: [any SDKVersionMigrator] = {
+        []
+    }()
 }

@@ -16,16 +16,10 @@ import AuthFoundation
 extension DeviceAuthorizationFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(issuerURL:clientId:scope:additionalParameters:)")
-    public convenience init(issuer: URL,
-                            clientId: String,
-                            scopes: String)
+    public init(issuer: URL,
+                clientId: String,
+                scopes: String)
     {
-        fatalError()
-    }
-
-    @_documentation(visibility: private)
-    @available(*, deprecated, renamed: "init(client:additionalParameters:)")
-    public convenience init(client: OAuth2Client) {
-        fatalError()
+        self.init(issuerURL: issuer, clientId: clientId, scope: scopes)
     }
 }

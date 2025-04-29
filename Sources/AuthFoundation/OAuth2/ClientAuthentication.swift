@@ -14,7 +14,7 @@ import Foundation
 
 extension OAuth2Client {
     /// Defines the types of authentication the client may use when interacting with the authorization server.
-    public enum ClientAuthentication: Codable, Equatable, Hashable, ProvidesOAuth2Parameters {
+    public enum ClientAuthentication: Sendable, Codable, Equatable, Hashable, ProvidesOAuth2Parameters {
         /// No client authentication will be made when interacting with the authorization server.
         case none
         

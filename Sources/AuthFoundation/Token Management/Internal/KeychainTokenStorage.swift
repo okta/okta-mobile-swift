@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
 
 import Foundation
 
@@ -18,12 +18,13 @@ import Foundation
 import LocalAuthentication
 #endif
 
+@CredentialActor
 final class KeychainTokenStorage: TokenStorage {
-    static let serviceName = "com.okta.authfoundation.keychain.storage"
-    static let metadataName = "com.okta.authfoundation.keychain.metadata"
-    static let defaultTokenName = "com.okta.authfoundation.keychain.default"
+    nonisolated static let serviceName = "com.okta.authfoundation.keychain.storage"
+    nonisolated static let metadataName = "com.okta.authfoundation.keychain.metadata"
+    nonisolated static let defaultTokenName = "com.okta.authfoundation.keychain.default"
 
-    weak var delegate: TokenStorageDelegate?
+    weak var delegate: (any TokenStorageDelegate)?
     
     private(set) lazy var defaultTokenID: String? = {
         guard let defaultResult = try? Keychain
@@ -112,7 +113,7 @@ final class KeychainTokenStorage: TokenStorage {
                                          synchronizable: accessibility.isSynchronizable,
                                          value: try encoder.encode(metadata))
 
-        var context: KeychainAuthenticationContext?
+        var context: (any KeychainAuthenticationContext)?
         #if canImport(LocalAuthentication) && !os(tvOS)
         context = security.context
         #endif
@@ -136,8 +137,11 @@ final class KeychainTokenStorage: TokenStorage {
         else {
             throw TokenError.cannotReplaceToken
         }
-        
-        token.id = id
+
+        let token = try Token(id: id,
+                              issuedAt: token.issuedAt ?? .nowCoordinated,
+                              context: token.context,
+                              json: token.jsonPayload)
         
         let data = try encoder.encode(token)
         let accessibility = security?.accessibility ?? oldResult.accessibility ?? .afterFirstUnlock
@@ -154,7 +158,7 @@ final class KeychainTokenStorage: TokenStorage {
                                     description: nil,
                                     value: data)
         
-        var context: KeychainAuthenticationContext?
+        var context: (any KeychainAuthenticationContext)?
         #if canImport(LocalAuthentication) && !os(tvOS)
         context = security?.context
         #endif
@@ -182,12 +186,12 @@ final class KeychainTokenStorage: TokenStorage {
         }
     }
     
-    func get(token id: String, prompt: String? = nil, authenticationContext: TokenAuthenticationContext? = nil) throws -> Token {
+    func get(token id: String, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> Token {
         try token(with: try Keychain
                     .Search(account: id,
                             service: KeychainTokenStorage.serviceName)
                     .get(prompt: prompt,
-                         authenticationContext: authenticationContext as? KeychainAuthenticationContext))
+                         authenticationContext: authenticationContext as? (any KeychainAuthenticationContext)))
     }
     
     func setMetadata(_ metadata: Token.Metadata) throws {

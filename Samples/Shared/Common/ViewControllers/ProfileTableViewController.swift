@@ -47,17 +47,11 @@ class ProfileTableViewController: UITableViewController {
         didSet {
             configure(credential?.userInfo)
             credential?.automaticRefresh = true
-            credential?.refreshIfNeeded { result in
-                switch result {
-                case .success:
-                    self.credential?.userInfo { result in
-                        guard case let .success(userInfo) = result else { return }
-                        DispatchQueue.main.async {
-                            self.configure(userInfo)
-                        }
-                    }
-                    
-                case .failure(let error):
+            Task { @MainActor in
+                do {
+                    try await self.credential?.refreshIfNeeded()
+                    self.configure(try await self.credential?.userInfo())
+                } catch {
                     self.show(error: error)
                 }
             }
@@ -170,7 +164,7 @@ class ProfileTableViewController: UITableViewController {
         #if !os(tvOS) && canImport(WebAuthenticationUI) && !WEB_AUTH_DISABLED
         if let token = Credential.default?.token {
             alert.addAction(.init(title: "End a session", style: .destructive) { _ in
-                WebAuthentication.shared?.signOut(token: token) { result in
+                WebAuthentication.shared?.signOut(from: nil, token: token) { result in
                     switch result {
                     case .success:
                         try? Keychain.deleteTokens()

@@ -19,17 +19,18 @@ import XCTest
 @testable import WebAuthenticationUI
 import AuthenticationServices
 
-@available(iOS 13.0, *)
-class MockAuthenticationServicesProviderSession: AuthenticationServicesProviderSession {
+class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, AuthenticationServicesProviderSession {
     let url: URL
     let callbackURLScheme: String?
     let completionHandler: ASWebAuthenticationSession.CompletionHandler
-    var startCalled = false
-    var startResult = true
-    var cancelCalled = false
+    var state: State = .initialized
     
-    static var redirectUri: URL?
-    static var redirectError: Error?
+    static let result: LockedValue<Result<URL, any Error>?> = nil
+    static let startResult: LockedValue<Bool> = true
+
+    enum State {
+        case initialized, started, cancelled
+    }
     
     required init(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) {
         self.url = url
@@ -37,150 +38,107 @@ class MockAuthenticationServicesProviderSession: AuthenticationServicesProviderS
         self.completionHandler = completionHandler
     }
     
-    var presentationContextProvider: ASWebAuthenticationPresentationContextProviding?
-    
+    var presentationContextProvider: (any ASWebAuthenticationPresentationContextProviding)?
     var prefersEphemeralWebBrowserSession = false
     
     var canStart: Bool = true
-    
+
     func start() -> Bool {
-        startCalled = true
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
-            self.completionHandler(
-                MockAuthenticationServicesProviderSession.redirectUri,
-                MockAuthenticationServicesProviderSession.redirectError)
+        state = .started
+        let result = Self.result.wrappedValue
+
+        Task { @MainActor in
+            try? await Task.sleep(delay: 0.5)
+
+            switch result {
+            case .success(let url):
+                self.completionHandler(url, nil)
+            case .failure(let error):
+                self.completionHandler(nil, error)
+            case nil:
+                self.completionHandler(nil, nil)
+            }
         }
-        return startResult
+
+        return Self.startResult.wrappedValue
     }
     
     func cancel() {
-        cancelCalled = true
+        state = .cancelled
     }
 }
 
 @available(iOS 13.0, *)
-class TestAuthenticationServicesProvider: AuthenticationServicesProvider {
-    override func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> AuthenticationServicesProviderSession {
-        MockAuthenticationServicesProviderSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
-    }
-}
-
-@available(iOS 13.0, *)
-class AuthenticationServicesProviderTests: ProviderTestBase {
+class AuthenticationServicesProviderTests: XCTestCase {
     var provider: AuthenticationServicesProvider!
-    
+    let authorizeUrl = URL(string: "https://example.okta.com/oauth2/v1/authorize?client_id=clientId&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
+    let redirectUri = URL(string: "com.example:/callback")
+    let successResponseUrl = URL(string: "com.example:/callback?code=abc123&state=state")
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        provider = try TestAuthenticationServicesProvider(loginFlow: loginFlow,
-                                                          logoutFlow: logoutFlow,
-                                                          from: nil,
-                                                          delegate: delegate)
+        AuthenticationServicesProvider.authenticationSessionClass = MockAuthenticationServicesProviderSession.self
+        provider = try AuthenticationServicesProvider(from: nil, usesEphemeralSession: true)
     }
     
     override func tearDownWithError() throws {
-        provider.authenticationSession?.cancel()
-        MockAuthenticationServicesProviderSession.redirectUri = nil
-        MockAuthenticationServicesProviderSession.redirectError = nil
+        AuthenticationServicesProvider.resetToDefault()
     }
     
-    func testSuccessfulAuthentication() throws {
-        provider.start(context: .init(state: "state"))
-        try waitFor(.authenticateUrl)
+    func testSuccessfulRedirection() async throws {
+        let authorizeUrl = try XCTUnwrap(authorizeUrl)
+        let redirectUri = try XCTUnwrap(redirectUri)
+        let responseUrl = try XCTUnwrap(successResponseUrl)
         
-        XCTAssertNotNil(provider.authenticationSession)
-        let session = try XCTUnwrap(provider.authenticationSession as? MockAuthenticationServicesProviderSession)
-        XCTAssertTrue(session.startCalled)
+        MockAuthenticationServicesProviderSession.result.wrappedValue = .success(responseUrl)
+        let response = try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri)
         
-        let redirectUrl = URL(string: "com.example:/callback?code=abc123&state=state")
-        provider.process(url: redirectUrl, error: nil)
-        try waitFor(.token)
-        
-        XCTAssertNotNil(delegate.token)
-        XCTAssertNil(delegate.error)
+        XCTAssertEqual(response, responseUrl)
         XCTAssertNil(provider.authenticationSession)
     }
 
-    func testErrorResponse() throws {
-        provider.start(context: .init(state: "state"))
-        try waitFor(.authenticateUrl)
-
-        XCTAssertNotNil(provider.authenticationSession)
-        let session = try XCTUnwrap(provider.authenticationSession as? MockAuthenticationServicesProviderSession)
-        XCTAssertTrue(session.startCalled)
-
-        let redirectUrl = URL(string: "com.example:/callback?state=state&error=errorname&error_description=This+Thing+Failed")
-        let error = NSError(domain: "SomeDomain", code: 1, userInfo: nil)
-        provider.process(url: redirectUrl, error: error)
-        XCTAssertNil(delegate.token)
-        XCTAssertNotNil(delegate.error)
-        XCTAssertNil(provider.authenticationSession)
+    func testErrorResponse() async throws {
+        let authorizeUrl = try XCTUnwrap(authorizeUrl)
+        let redirectUri = try XCTUnwrap(redirectUri)
+        let responseError = NSError(domain: "SomeDomain", code: 1, userInfo: nil)
         
-        let webAuthError = try XCTUnwrap(delegate.error as? WebAuthenticationError)
-        if case let .serverError(serverError) = webAuthError {
-            XCTAssertEqual(serverError.code, .other(code: "errorname"))
-            XCTAssertEqual(serverError.description, "This Thing Failed")
-        } else {
-            XCTFail("Did not get the appropriate error response type")
+        MockAuthenticationServicesProviderSession.result.wrappedValue = .failure(responseError)
+        let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
+        
+        guard let webAuthError = response as? WebAuthenticationError,
+              case let WebAuthenticationError.generic(error: error) = webAuthError
+        else {
+            XCTFail()
+            return
         }
+        
+        XCTAssertEqual(error as NSError, responseError)
+        XCTAssertNil(provider.authenticationSession)
     }
-
-    func testUserCancelled() throws {
-        provider.start(context: .init(state: "state"))
-        try waitFor(.authenticateUrl)
-
-        XCTAssertNotNil(provider.authenticationSession)
-        let session = try XCTUnwrap(provider.authenticationSession as? MockAuthenticationServicesProviderSession)
-        XCTAssertTrue(session.startCalled)
-
+    
+    func testUserCancelled() async throws {
+        let authorizeUrl = try XCTUnwrap(authorizeUrl)
+        let redirectUri = try XCTUnwrap(redirectUri)
         let error = NSError(domain: ASWebAuthenticationSessionErrorDomain,
                             code: ASWebAuthenticationSessionError.canceledLogin.rawValue,
                             userInfo: nil)
-        provider.process(url: nil, error: error)
-        XCTAssertNil(delegate.token)
-        XCTAssertNotNil(delegate.error)
+
+        MockAuthenticationServicesProviderSession.result.wrappedValue = .failure(error)
+        let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
+        
+        XCTAssertEqual(response as? WebAuthenticationError, .userCancelledLogin)
         XCTAssertNil(provider.authenticationSession)
     }
 
-    func testNoResponse() throws {
-        provider.start(context: .init(state: "state"))
-        try waitFor(.authenticateUrl)
+    func testNoResponse() async throws {
+        let authorizeUrl = try XCTUnwrap(authorizeUrl)
+        let redirectUri = try XCTUnwrap(redirectUri)
 
-        XCTAssertNotNil(provider.authenticationSession)
-        let session = try XCTUnwrap(provider.authenticationSession as? MockAuthenticationServicesProviderSession)
-        XCTAssertTrue(session.startCalled)
-
-        provider.process(url: nil, error: nil)
-        XCTAssertNil(delegate.token)
-        XCTAssertNotNil(delegate.error)
-        XCTAssertNil(provider.authenticationSession)
-    }
-    
-    func testLogout() throws {
-        MockAuthenticationServicesProviderSession.redirectUri = URL(string: "com.example:/logout?foo=bar")
-    
-        provider.logout(context: .init(idToken: "idToken", state: "state"))
-        try waitFor(.logoutUrl)
-
-        XCTAssertNotNil(provider.authenticationSession)
-        provider.processLogout(url: logoutRedirectUri, error: nil)
+        MockAuthenticationServicesProviderSession.result.wrappedValue = nil
+        let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
         
-        XCTAssertTrue(delegate.logoutFinished)
-        XCTAssertNil(delegate.logoutError)
-        XCTAssertNil(provider.authenticationSession)
-    }
-    
-    func testLogoutError() throws {
-        MockAuthenticationServicesProviderSession.redirectError = WebAuthenticationError.userCancelledLogin
-
-        provider.logout(context: .init(idToken: "idToken", state: "state"))
-        try waitFor(.logoutUrl)
-        
-        XCTAssertNotNil(provider.authenticationSession)
-        provider.processLogout(url: logoutRedirectUri, error: WebAuthenticationError.missingIdToken)
-        
-        XCTAssertFalse(delegate.logoutFinished)
-        XCTAssertNotNil(delegate.logoutError)
+        XCTAssertEqual(response as? WebAuthenticationError, .noAuthenticatorProviderResonse)
         XCTAssertNil(provider.authenticationSession)
     }
 }

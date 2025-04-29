@@ -17,7 +17,7 @@ import FoundationNetworking
 #endif
 
 /// Delegate protocol used by ``OAuth2Client`` to communicate important events.
-public protocol OAuth2ClientDelegate: APIClientDelegate {
+public protocol OAuth2ClientDelegate: AnyObject, APIClientDelegate {
     /// Sent before a token will begin to refresh.
     func oauth(client: OAuth2Client, willRefresh token: Token)
 
@@ -32,25 +32,42 @@ extension OAuth2ClientDelegate {
 
 // swiftlint:disable type_body_length
 /// An OAuth2 client, used to interact with a given authorization server.
-public final class OAuth2Client {
+public final class OAuth2Client: UsesDelegateCollection {
+    public typealias Delegate = OAuth2ClientDelegate
+
     /// The URLSession used by this client for network requests.
-    public let session: URLSessionProtocol
+    public let session: any URLSessionProtocol
     
     /// The configuration that identifies this OAuth2 client.
     public let configuration: Configuration
     
     /// Additional HTTP headers to include in outgoing network requests.
-    public var additionalHttpHeaders: [String: String]?
-    
+    nonisolated(unsafe) public var additionalHttpHeaders: [String: String]? {
+        get {
+            lock.withLock {
+                _additionalHttpHeaders
+            }
+        }
+        set {
+            lock.withLock {
+                _additionalHttpHeaders = newValue
+            }
+        }
+    }
+
     /// The OpenID configuration for this org.
     ///
     /// This value will be `nil` until the configuration has been retrieved through the ``openIdConfiguration(completion:)`` or ``openIdConfiguration()`` functions.
-    public private(set) var openIdConfiguration: OpenIdConfiguration?
+    public var openIdConfiguration: OpenIdConfiguration? {
+        openIdConfigurationAction.value
+    }
 
     /// The ``JWKS`` key set for this org.
     ///
     /// This value will be `nil` until the keys have been retrieved through the ``jwks(completion:)`` or ``jwks()`` functions.
-    public private(set) var jwks: JWKS?
+    public var jwks: JWKS? {
+        jwksAction.value
+    }
 
     /// Constructs an OAuth2Client for the given domain.
     /// - Parameters:
@@ -68,7 +85,7 @@ public final class OAuth2Client {
                             redirectUri: URL? = nil,
                             logoutRedirectUri: URL? = nil,
                             authentication: ClientAuthentication = .none,
-                            session: URLSessionProtocol? = nil)
+                            session: (any URLSessionProtocol)? = nil)
     {
         self.init(Configuration(issuerURL: issuerURL,
                                 clientId: clientId,
@@ -83,62 +100,231 @@ public final class OAuth2Client {
     /// - Parameters:
     ///   - configuration: The pre-formed configuration for this client.
     ///   - session: Optional URLSession to use for network requests.
-    public init(_ configuration: Configuration, session: URLSessionProtocol? = nil) {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+    public init(_ configuration: Configuration, session: (any URLSessionProtocol)? = nil) {
+        assert(SDKVersion.authFoundation != nil)
+
         // Ensure the time coordinator is properly initialized
         _ = Date.coordinator
         
         self.configuration = configuration
         self.session = session ?? URLSession(configuration: .ephemeral)
-        
-        NotificationCenter.default.post(name: .oauth2ClientCreated, object: self)
+        self.refreshQueue = DispatchQueue(label: "com.okta.refreshQueue.\(configuration.issuerURL.host ?? "unknown")",
+                                          qos: .userInitiated,
+                                          attributes: .concurrent)
+
+        Task { @MainActor in
+            TaskData.notificationCenter.post(name: .oauth2ClientCreated, object: self)
+        }
 
         // Ensure the Credential Coordinator can monitor this client for token refresh changes.
-        Credential.coordinator.observe(oauth2: self)
+        TaskData.coordinator.observe(oauth2: self)
     }
     
     /// Retrieves the org's OpenID configuration.
     ///
     /// If this value has recently been retrieved, the cached result is returned.
-    /// - Parameter completion: Completion block invoked with the result.
-    public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
-        configurationLock.withLock {
-            if let openIdConfiguration = openIdConfiguration {
-                configurationQueue.async {
-                    completion(.success(openIdConfiguration))
+    public func openIdConfiguration() async throws -> OpenIdConfiguration {
+        try await openIdConfigurationAction.perform {
+            try await OpenIdConfigurationRequest(url: configuration.discoveryURL)
+                .send(to: self)
+                .result
+        }
+    }
+    
+    /// Attempts to refresh the supplied token, using the ``Token/refreshToken`` if it is available.
+    ///
+    /// This method prevents multiple concurrent refresh requests to be performed for a given token, though all applicable results will be returned once the token refresh has completed.
+    /// - Parameters:
+    ///   - token: Token to refresh.
+    ///   - scope: Optional array of scopes to request.
+    public func refresh(_ token: Token, scope: [String]? = nil) async throws -> Token {
+        try await token.refreshAction.perform(reset: true) {
+            guard let refreshToken = token.refreshToken else {
+                throw OAuth2Error.missingToken(type: .refreshToken)
+            }
+            
+            let request = Token.RefreshRequest(openIdConfiguration: try await openIdConfiguration(),
+                                               clientConfiguration: configuration,
+                                               refreshToken: refreshToken,
+                                               scope: scope?.joined(separator: " "),
+                                               id: token.id)
+            async let response = try request.send(to: self)
+
+            return try await response.result.token(merging: token)
+        } willBegin: {
+            delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
+        } didEnd: { result in
+            let newToken: Token?
+            switch result {
+            case .success(let token):
+                TaskData.notificationCenter.post(name: .tokenRefreshed, object: token)
+                newToken = token
+            case .failure(let error):
+                TaskData.notificationCenter.post(name: .tokenRefreshFailed,
+                                                 object: token,
+                                                 userInfo: ["error": error])
+                newToken = nil
+            }
+
+            delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: newToken) }
+        }
+    }
+    
+    /// Attempts to revoke the given token.
+    ///
+    /// A ``Token`` object may represent multiple token types, such as ``Token/accessToken`` or ``Token/refreshToken``. These individual token types can be targeted to be revoked.
+    ///
+    /// - Parameters:
+    ///   - token: Token object.
+    ///   - type: Type of token to revoke, default: ``Token/RevokeType/all``
+    public func revoke(_ token: Token, type: Token.RevokeType = .all) async throws {
+        let revokeTypes: [Token.RevokeType]
+        if case .all = type {
+            revokeTypes = Token.RevokeType.allCases.filter { type in
+                guard let tokenType = type.tokenType else {
+                    return false
                 }
-            } else {
-                guard openIdConfigurationAction == nil else {
-                    openIdConfigurationAction?.add(completion)
-                    return
-                }
-                
-                let action: CoalescedResult<Result<OpenIdConfiguration, OAuth2Error>> = CoalescedResult()
-                action.add(completion)
-                
-                openIdConfigurationAction = action
-                
-                let request = OpenIdConfigurationRequest(url: configuration.discoveryURL)
-                request.send(to: self) { result in
-                    self.configurationQueue.sync(flags: .barrier) {
-                        self.openIdConfigurationAction = nil
-                        
-                        switch result {
-                        case .success(let response):
-                            self.openIdConfiguration = response.result
-                            
-                            self.configurationQueue.async {
-                                action.finish(.success(response.result))
-                            }
-                        case .failure(let error):
-                            self.configurationQueue.async {
-                                action.finish(.failure(.network(error: error)))
-                            }
-                        }
+
+                return token.token(of: tokenType) != nil
+            }
+
+            guard !revokeTypes.isEmpty else {
+                return
+            }
+        } else if let tokenType = type.tokenType {
+            guard token.token(of: tokenType) != nil else {
+                throw OAuth2Error.missingToken(type: tokenType)
+            }
+
+            revokeTypes = [type]
+        } else {
+            throw OAuth2Error.cannotRevoke(type: type)
+        }
+        
+        let openIdConfiguration = try await self.openIdConfiguration()
+        let clientConfiguration = self.configuration
+        
+        try await withThrowingTaskGroup(of: Void.self) { group in
+            for revokeType in revokeTypes {
+                group.addTask {
+                    guard let tokenType = revokeType.tokenType,
+                          let tokenString = token.token(of: tokenType)
+                    else {
+                        throw OAuth2Error.cannotRevoke(type: revokeType)
                     }
+                    
+                    let request = try Token.RevokeRequest(openIdConfiguration: openIdConfiguration,
+                                                          clientConfiguration: clientConfiguration,
+                                                          token: tokenString,
+                                                          hint: tokenType,
+                                                          configuration: [:])
+                    _ = try await request.send(to: self)
                 }
+            }
+            
+            try await group.waitForAll()
+        }
+    }
+    
+    /// Introspects the given token information.
+    /// - Parameters:
+    ///   - token: Token to introspect
+    ///   - type: The type of value to introspect.
+    public func introspect(token: Token, type: Token.Kind) async throws -> TokenInfo {
+        let request = try Token.IntrospectRequest(openIdConfiguration: try await openIdConfiguration(),
+                                                  clientConfiguration: configuration,
+                                                  token: token,
+                                                  type: type)
+        return try await request.send(to: self).result
+    }
+    
+    /// Fetches the ``UserInfo`` associated with the given token.
+    /// - Parameters:
+    ///   - token: Token to retrieve user information for.
+    ///   - completion: Completion block invoked with the result.
+    public func userInfo(token: Token) async throws -> UserInfo {
+        let request = try UserInfo.Request(openIdConfiguration: try await openIdConfiguration(),
+                                           token: token)
+        return try await request.send(to: self).result
+    }
+    
+    /// Retrieves the org's ``JWKS`` key configuration.
+    ///
+    /// If this value has recently been retrieved, the cached result is returned.
+    /// - Parameter completion: Completion block invoked with the result.
+    public func jwks() async throws -> JWKS {
+        try await jwksAction.perform {
+            try await KeysRequest(openIdConfiguration: try await openIdConfiguration(),
+                                  clientId: configuration.clientId)
+            .send(to: self)
+            .result
+        }
+    }
+    
+    /// Attempts to exchange, and verify, a token from the supplied request.
+    ///
+    /// This also ensures the ``JWKS`` keyset is retrieved in parallel (if it hasn't already been cached), and verifies the ID and Access tokens to ensure validity.
+    public func exchange<T: OAuth2TokenRequest>(token request: T) async throws -> APIResponse<Token> {
+        async let jwks = jwks()
+        let response = try await request.send(to: self)
+        let token = response.result
+        
+        try await token.validate(using: self, with: request.tokenValidatorContext)
+        if let idToken = token.idToken,
+           try idToken.validate(using: try await jwks) == false
+        {
+            throw JWTError.signatureInvalid
+        }
+
+        return response
+    }
+
+    // MARK: Private properties / methods
+    private let lock = Lock()
+    nonisolated(unsafe) private var _additionalHttpHeaders: [String: String]?
+
+    nonisolated public let delegateCollection = DelegateCollection<any OAuth2ClientDelegate>()
+    let refreshQueue: DispatchQueue
+
+    let openIdConfigurationAction = CoalescedResult<OpenIdConfiguration>(taskName: "OpenIdConfiguration")
+    let jwksAction = CoalescedResult<JWKS>(taskName: "JWKS")
+}
+// swiftlint:enable type_body_length
+
+// Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
+#if swift(<6.0)
+extension OAuth2Client: @unchecked Sendable {}
+#else
+extension OAuth2Client: Sendable {}
+#endif
+
+extension OAuth2Client {
+    /// Asynchronously retrieves the org's OpenID configuration.
+    ///
+    /// If this value has recently been retrieved, the cached result is returned.
+    /// - Returns: The OpenID configuration for the org identified by the client's base URL.
+    /// - Parameter completion: Completion block invoked with the result.
+    public func openIdConfiguration(completion: @Sendable @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
+        Task {
+            do {
+                completion(.success(try await openIdConfiguration()))
+            } catch {
+                completion(.failure(OAuth2Error(error)))
+            }
+        }
+    }
+    
+    /// Asynchronously retrieves the org's ``JWKS`` key configuration.
+    ///
+    /// If this value has recently been retrieved, the cached result is returned.
+    /// - Returns: The ``JWKS`` configuration for the org identified by the client's base URL.
+    /// - Parameter completion: Completion block invoked with the result.
+    public func jwks(completion: @Sendable @escaping (Result<JWKS, OAuth2Error>) -> Void) {
+        Task {
+            do {
+                completion(.success(try await jwks()))
+            } catch {
+                completion(.failure(OAuth2Error(error)))
             }
         }
     }
@@ -149,85 +335,12 @@ public final class OAuth2Client {
     /// - Parameters:
     ///   - token: Token to refresh.
     ///   - completion: Completion bock invoked with the result.
-    public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
-        refreshLock.withLock {
-            guard let clientSettings = token.context.clientSettings,
-                  token.refreshToken != nil
-            else {
-                completion(.failure(.missingToken(type: .refreshToken)))
-                return
-            }
-            
-            guard token.refreshAction == nil else {
-                token.refreshAction?.add(completion)
-                return
-            }
-            
-            token.refreshAction = CoalescedResult()
-            token.refreshAction?.add(completion)
-            performRefresh(token: token, clientSettings: clientSettings)
-        }
-    }
-    
-    private func performRefresh(token: Token, clientSettings: [String: String]) {
-        guard let action = token.refreshAction else { return }
-        
-        delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
-        guard let refreshToken = token.refreshToken else {
-            action.finish(.failure(.missingToken(type: .refreshToken)))
-            token.refreshAction = nil
-            return
-        }
-        
-        openIdConfiguration { result in
-            switch result {
-            case .success(let configuration):
-                let request = Token.RefreshRequest(openIdConfiguration: configuration,
-                                                   clientConfiguration: self.configuration,
-                                                   refreshToken: refreshToken,
-                                                   scope: nil,
-                                                   id: token.id)
-                let backgroundTask = BackgroundTask(named: "Refresh Token \(token.id)")
-                request.send(to: self) { result in
-                    self.refreshQueue.sync(flags: .barrier) {
-                        defer {
-                            backgroundTask.finish()
-                        }
-                        
-                        switch result {
-                        case .success(let response):
-                            do {
-                                let newToken = try response.result.token(merging: token)
-                                
-                                self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: newToken) }
-                                NotificationCenter.default.post(name: .tokenRefreshed, object: newToken)
-                                action.finish(.success(newToken))
-                            } catch {
-                                self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
-                                
-                                NotificationCenter.default.post(name: .tokenRefreshFailed,
-                                                                object: token,
-                                                                userInfo: ["error": error])
-
-                                action.finish(.failure(.error(error)))
-                            }
-                        case .failure(let error):
-                            self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
-                            
-                            NotificationCenter.default.post(name: .tokenRefreshFailed,
-                                                            object: token,
-                                                            userInfo: ["error": error])
-
-                            action.finish(.failure(.network(error: error)))
-                        }
-                        
-                        token.refreshAction = nil
-                    }
-                }
-            case .failure(let error):
-                action.finish(.failure(error))
-                self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
-                token.refreshAction = nil
+    public func refresh(_ token: Token, completion: @Sendable @escaping (Result<Token, OAuth2Error>) -> Void) {
+        Task {
+            do {
+                completion(.success(try await refresh(token)))
+            } catch {
+                completion(.failure(OAuth2Error(error)))
             }
         }
     }
@@ -240,370 +353,41 @@ public final class OAuth2Client {
     ///   - token: Token object.
     ///   - type: Type of token to revoke.
     ///   - completion: Completion block to invoke once complete.
-    public func revoke(_ token: Token, type: Token.RevokeType, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
-        guard type != .all else {
-            revokeAll(token, completion: completion)
-            return
-        }
-        
-        guard let tokenType = type.tokenType else {
-            completion(.failure(.cannotRevoke(type: type)))
-            return
-        }
-        
-        guard let tokenString = token.token(of: tokenType) else {
-            completion(.failure(.missingToken(type: tokenType)))
-            return
-        }
-        
-        guard let clientSettings = token.context.clientSettings else {
-            completion(.failure(.missingClientConfiguration))
-            return
-        }
-        
-        openIdConfiguration { result in
-            switch result {
-            case .success(let configuration):
-                do {
-                    let request = try Token.RevokeRequest(openIdConfiguration: configuration,
-                                                          clientConfiguration: self.configuration,
-                                                          token: tokenString,
-                                                          hint: tokenType,
-                                                          configuration: clientSettings)
-                    request.send(to: self) { result in
-                        switch result {
-                        case .success:
-                            completion(.success(()))
-                        case .failure(let error):
-                            completion(.failure(.network(error: error)))
-                        }
-                    }
-                } catch let error as OAuth2Error {
-                    completion(.failure(error))
-                    return
-                } catch {
-                    completion(.failure(.error(error)))
-                    return
-                }
-            case .failure(let error):
-                completion(.failure(error))
+    public func revoke(_ token: Token, type: Token.RevokeType, completion: @Sendable @escaping (Result<Void, OAuth2Error>) -> Void) {
+        Task {
+            do {
+                completion(.success(try await revoke(token, type: type)))
+            } catch {
+                completion(.failure(OAuth2Error(error)))
             }
         }
     }
-    
+
     /// Introspects the given token information.
     /// - Parameters:
     ///   - token: Token to introspect
     ///   - type: The type of value to introspect.
     ///   - completion: Completion block to invoke once complete.
-    public func introspect(token: Token, type: Token.Kind, completion: @escaping (Result<TokenInfo, OAuth2Error>) -> Void) {
-        openIdConfiguration { result in
-            switch result {
-            case .success(let configuration):
-                let request: Token.IntrospectRequest
-                do {
-                    request = try Token.IntrospectRequest(openIdConfiguration: configuration,
-                                                          clientConfiguration: self.configuration,
-                                                          token: token,
-                                                          type: type)
-                } catch let error as OAuth2Error {
-                    completion(.failure(error))
-                    return
-                } catch {
-                    completion(.failure(.error(error)))
-                    return
-                }
-                
-                request.send(to: self) { result in
-                    switch result {
-                    case .success(let response):
-                        completion(.success(response.result))
-                    case .failure(let error):
-                        completion(.failure(.network(error: error)))
-                    }
-                }
-            case .failure(let error):
-                completion(.failure(error))
+    public func introspect(token: Token, type: Token.Kind, completion: @Sendable @escaping (Result<TokenInfo, OAuth2Error>) -> Void) {
+        Task {
+            do {
+                completion(.success(try await introspect(token: token, type: type)))
+            } catch {
+                completion(.failure(OAuth2Error(error)))
             }
         }
     }
-    
+
     /// Fetches the ``UserInfo`` associated with the given token.
     /// - Parameters:
     ///   - token: Token to retrieve user information for.
     ///   - completion: Completion block invoked with the result.
-    public func userInfo(token: Token, completion: @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
-        openIdConfiguration { result in
-            switch result {
-            case .success(let configuration):
-                let request: UserInfo.Request
-                do {
-                    request = try UserInfo.Request(openIdConfiguration: configuration,
-                                                   token: token)
-                } catch let error as OAuth2Error {
-                    completion(.failure(error))
-                    return
-                } catch {
-                    completion(.failure(.error(error)))
-                    return
-                }
-                
-                request.send(to: self) { result in
-                    switch result {
-                    case .success(let response):
-                        completion(.success(response.result))
-                    case .failure(let error):
-                        completion(.failure(.network(error: error)))
-                    }
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    /// Retrieves the org's ``JWKS`` key configuration.
-    ///
-    /// If this value has recently been retrieved, the cached result is returned.
-    /// - Parameter completion: Completion block invoked with the result.
-    public func jwks(completion: @escaping (Result<JWKS, OAuth2Error>) -> Void) {
-        if let jwks = jwks {
-            completion(.success(jwks))
-        } else {
-            jwksQueue.sync {
-                guard jwksAction == nil else {
-                    jwksAction?.add(completion)
-                    return
-                }
-                
-                let action: CoalescedResult<Result<JWKS, OAuth2Error>> = CoalescedResult()
-                action.add(completion)
-                
-                jwksAction = action
-                openIdConfiguration { result in
-                    switch result {
-                    case .success(let configuration):
-                        let request = KeysRequest(openIdConfiguration: configuration,
-                                                  clientId: self.configuration.clientId)
-                        request.send(to: self) { result in
-                            self.jwksQueue.sync(flags: .barrier) {
-                                self.jwksAction = nil
-
-                                switch result {
-                                case .success(let response):
-                                    self.jwks = response.result
-                                    self.jwksQueue.async {
-                                        action.finish(.success(response.result))
-                                    }
-                                case .failure(let error):
-                                    self.jwksQueue.async {
-                                        action.finish(.failure(.network(error: error)))
-                                    }
-                                }
-                            }
-                        }
-                    case .failure(let error):
-                        self.jwksAction = nil
-                        self.jwksQueue.async {
-                            action.finish(.failure(error))
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    /// Attempts to exchange, and verify, a token from the supplied request.
-    ///
-    /// This also ensures the ``JWKS`` keyset is retrieved in parallel (if it hasn't already been cached), and verifies the ID and Access tokens to ensure validity.
-    public func exchange<T: OAuth2TokenRequest>(token request: T, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
-        // Fetch the JWKS keys in parallel if necessary
-        let group = DispatchGroup()
-        var keySet = jwks
-        if keySet == nil {
-            group.enter()
-            jwks { result in
-                defer { group.leave() }
-                if case let .success(response) = result {
-                    keySet = response
-                }
-            }
-        }
-        
-        // Exchange the token
-        request.send(to: self) { result in
-            // Wait for the JWKS keys, if necessary
-            group.notify(queue: DispatchQueue.global()) {
-                // Perform idToken/accessToken validation
-                self.validateToken(request: request,
-                                   keySet: keySet,
-                                   oauthTokenResponse: result,
-                                   completion: completion)
-            }
-        }
-    }
-    
-    private func revokeAll(_ token: Token, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
-        let types: [Token.RevokeType] = [.accessToken, .refreshToken, .deviceSecret]
-        
-        var errors = [OAuth2Error]()
-        let group = DispatchGroup()
-        for type in types {
-            guard let revokeType = type.tokenType,
-                  token.token(of: revokeType) != nil
-            else {
-                continue
-            }
-            
-            group.enter()
-            revoke(token, type: type) { result in
-                if case let .failure(error) = result {
-                    errors.append(error)
-                }
-                group.leave()
-            }
-        }
-        
-        group.notify(queue: DispatchQueue.global()) {
-            switch errors.count {
-            case 0:
-                completion(.success(()))
-            case 1:
-                if let error = errors.first {
-                    completion(.failure(error))
-                } else {
-                    fallthrough
-                }
-            default:
-                completion(.failure(.multiple(errors: errors)))
-            }
-        }
-    }
-
-    private func validateToken<T: OAuth2TokenRequest>(request: T,
-                                                      keySet: JWKS?,
-                                                      oauthTokenResponse: Result<APIResponse<Token>, APIClientError>,
-                                                      completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void)
-    {
-        guard case let .success(response) = oauthTokenResponse else {
-            completion(oauthTokenResponse)
-            return
-        }
-        
-        // Retrieves the org's OpenID configuration
-        self.openIdConfiguration { result in
-            switch result {
-            case .failure(let error):
-                completion(.failure(.serverError(error)))
-            case .success:
-                do {
-                    try response.result.validate(using: self, with: request.tokenValidatorContext)
-                } catch {
-                    completion(.failure(.validation(error: error)))
-                    return
-                }
-                
-                guard let idToken = response.result.idToken else {
-                    completion(oauthTokenResponse)
-                    return
-                }
-                
-                guard let keySet = keySet else {
-                    completion(.failure(.validation(error: JWTError.invalidKey)))
-                    return
-                }
-                
-                do {
-                    if try idToken.validate(using: keySet) == false {
-                        completion(.failure(.validation(error: JWTError.signatureInvalid)))
-                        return
-                    }
-                } catch {
-                    completion(.failure(.validation(error: error)))
-                    return
-                }
-                completion(oauthTokenResponse)
-            }
-        }
-    }
-
-    // MARK: Private properties / methods
-    private let delegates = DelegateCollection<OAuth2ClientDelegate>()
-
-    private let refreshLock = Lock()
-    private(set) lazy var refreshQueue: DispatchQueue = {
-        DispatchQueue(label: "com.okta.refreshQueue.\(baseURL.host ?? "unknown")",
-                      qos: .userInitiated,
-                      attributes: .concurrent)
-    }()
-
-    private let configurationLock = Lock()
-    private lazy var configurationQueue: DispatchQueue = {
-        DispatchQueue(label: "com.okta.configurationQueue.\(baseURL.host ?? "unknown")",
-                      qos: .userInitiated,
-                      attributes: .concurrent)
-    }()
-    internal var openIdConfigurationAction: CoalescedResult<Result<OpenIdConfiguration, OAuth2Error>>?
-
-    private lazy var jwksQueue: DispatchQueue = {
-        DispatchQueue(label: "com.okta.jwksQueue.\(baseURL.host ?? "unknown")",
-                      qos: .userInitiated,
-                      attributes: .concurrent)
-    }()
-    internal var jwksAction: CoalescedResult<Result<JWKS, OAuth2Error>>?
-}
-// swiftlint:enable type_body_length
-
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
-extension OAuth2Client {
-    /// Asynchronously retrieves the org's OpenID configuration.
-    ///
-    /// If this value has recently been retrieved, the cached result is returned.
-    /// - Returns: The OpenID configuration for the org identified by the client's base URL.
-    public func openIdConfiguration() async throws -> OpenIdConfiguration {
-        try await withCheckedThrowingContinuation { continuation in
-            openIdConfiguration { result in
-                continuation.resume(with: result)
-            }
-        }
-    }
-    
-    /// Asynchronously retrieves the org's ``JWKS`` key configuration.
-    ///
-    /// If this value has recently been retrieved, the cached result is returned.
-    /// - Returns: The ``JWKS`` configuration for the org identified by the client's base URL.
-    public func jwks() async throws -> JWKS {
-        try await withCheckedThrowingContinuation { continuation in
-            jwks { result in
-                continuation.resume(with: result)
-            }
-        }
-    }
-    
-    /// Attempts to refresh the supplied token, using the ``Token/refreshToken`` if it is available.
-    ///
-    /// This method prevents multiple concurrent refresh requests to be performed for a given token, though all applicable results will be returned once the token refresh has completed.
-    /// - Parameters:
-    ///   - token: Token to refresh.
-    public func refresh(_ token: Token) async throws -> Token {
-        try await withCheckedThrowingContinuation { continuation in
-            refresh(token) { result in
-                continuation.resume(with: result)
-            }
-        }
-    }
-    
-    /// Attempts to revoke the given token.
-    ///
-    /// A ``Token`` object may represent multiple token types, such as ``Token/accessToken`` or ``Token/refreshToken``. These individual token types can be targeted to be revoked.
-    ///
-    /// - Parameters:
-    ///   - token: Token object.
-    ///   - type: Type of token to revoke, default: ``Token/RevokeType/all``
-    public func revoke(_ token: Token, type: Token.RevokeType = .all) async throws {
-        try await withCheckedThrowingContinuation { continuation in
-            revoke(token, type: type) { result in
-                continuation.resume(with: result)
+    public func userInfo(token: Token, completion: @Sendable @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
+        Task {
+            do {
+                completion(.success(try await userInfo(token: token)))
+            } catch {
+                completion(.failure(OAuth2Error(error)))
             }
         }
     }
@@ -616,7 +400,7 @@ extension OAuth2Client: APIClient {
     /// Transforms HTTP response data into the appropriate error type, when requests are unsuccessful.
     /// - Parameter data: HTTP response body data for a failed URL request.
     /// - Returns: ``OktaAPIError`` or ``OAuth2ServerError``, depending on the type of error.
-    public func error(from data: Data) -> Error? {
+    public func error(from data: Data) -> (any Error)? {
         if let error = try? decode(OktaAPIError.self, from: data) {
             return error
         }
@@ -629,7 +413,7 @@ extension OAuth2Client: APIClient {
     }
 
     @_documentation(visibility: private)
-    public func decode<T>(_ type: T.Type, from data: Data, parsing context: APIParsingContext? = nil) throws -> T where T: Decodable {
+    public func decode<T>(_ type: T.Type, from data: Data, parsing context: (any APIParsingContext)? = nil) throws -> T where T: Decodable {
         var info: [CodingUserInfoKey: Any] = context?.codingUserInfo ?? [:]
         
         if let tokenRequest = context as? any OAuth2TokenRequest,
@@ -647,7 +431,7 @@ extension OAuth2Client: APIClient {
         }
         
         let jsonDecoder: JSONDecoder
-        if let jsonType = type as? JSONDecodable.Type {
+        if let jsonType = type as? any JSONDecodable.Type {
             jsonDecoder = jsonType.jsonDecoder
         } else {
             jsonDecoder = defaultJSONDecoder
@@ -681,14 +465,6 @@ extension OAuth2Client: APIClient {
     @_documentation(visibility: private)
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) where T: Decodable {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
-    }
-}
-
-extension OAuth2Client: UsesDelegateCollection {
-    public typealias Delegate = OAuth2ClientDelegate
-
-    public var delegateCollection: DelegateCollection<OAuth2ClientDelegate> {
-        delegates
     }
 }
 

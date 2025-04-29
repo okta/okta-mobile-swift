@@ -12,11 +12,11 @@
 
 import Foundation
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
 
 private let accountIdRegex = try? NSRegularExpression(pattern: "0oa[0-9a-zA-Z]{17}")
 
-extension SDKVersion.Migration {
+extension Migration {
     /// Migrator capable of importing credentials from the legacy `OktaOidc` SDK.
     ///
     /// If your application previously used the `OktaOidc` SDK, you can use this to register your client configuration to enable credentials already stored within your user's devices to be migrated to the new AuthFoundation SDK.
@@ -46,7 +46,7 @@ extension SDKVersion.Migration {
         /// - Parameters:
         ///   - clientId: Client ID for your application.
         public static func register(clientId: String? = nil) {
-            SDKVersion.register(migrator: LegacyOIDC(clientId: clientId))
+            Migration.register(migrator: LegacyOIDC(clientId: clientId))
         }
         
         private static func register(_ config: OAuth2Client.PropertyListConfiguration) throws {
@@ -205,7 +205,7 @@ extension SDKVersion.Migration {
                                                   security: security)
             try item.delete()
             
-            NotificationCenter.default.post(name: .credentialMigrated, object: credential)
+            TaskData.notificationCenter.post(name: .credentialMigrated, object: credential)
         }
         
         @objc(_OIDCLegacyStateManager)

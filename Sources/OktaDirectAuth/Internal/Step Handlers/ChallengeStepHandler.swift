@@ -13,33 +13,21 @@
 import Foundation
 import AuthFoundation
 
-class ChallengeStepHandler<Request: APIRequest>: StepHandler {
+final class ChallengeStepHandler<Request: APIRequest>: StepHandler {
     let flow: DirectAuthenticationFlow
     let request: Request
-    private let statusBlock: (_ response: Request.ResponseType) throws -> DirectAuthenticationFlow.Status
+    private let statusBlock: @Sendable (_ response: Request.ResponseType) throws -> DirectAuthenticationFlow.Status
 
     init(flow: DirectAuthenticationFlow,
          request: Request,
-         statusBlock: @escaping (_ response: Request.ResponseType) throws -> DirectAuthenticationFlow.Status)
+         statusBlock: @Sendable @escaping (_ response: Request.ResponseType) throws -> DirectAuthenticationFlow.Status)
     {
         self.flow = flow
         self.request = request
         self.statusBlock = statusBlock
     }
     
-    func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
-        request.send(to: flow.client) { result in
-            switch result {
-            case .failure(let error):
-                self.flow.process(error, completion: completion)
-            case .success(let response):
-                do {
-                    let status = try self.statusBlock(response.result)
-                    completion(.success(status))
-                } catch {
-                    completion(.failure(.init(error)))
-                }
-            }
-        }
+    func process() async throws -> DirectAuthenticationFlow.Status {
+        try statusBlock(try await request.send(to: flow.client).result)
     }
 }

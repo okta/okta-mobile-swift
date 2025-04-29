@@ -61,16 +61,16 @@ final class DirectAuthErrorTests: XCTestCase {
                 "errorDescription": "You do not have access"
             }
             """.data(using: .utf8)!)
-        XCTAssertEqual(DirectAuthenticationFlowError(APIClientError.serverError(serverError)),
+        XCTAssertEqual(DirectAuthenticationFlowError(APIClientError.httpError(serverError)),
                        .server(error: serverError))
 
-        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
         // Ensure a generic error embedded in OAuth2Error becomes the appropriate error type
         XCTAssertEqual(DirectAuthenticationFlowError(OAuth2Error.error(KeychainError.invalidFormat)),
                        .other(error: KeychainError.invalidFormat))
 
         // Ensure a generic error in APIClientError becomes the appropriate type
-        XCTAssertEqual(DirectAuthenticationFlowError(APIClientError.serverError(KeychainError.invalidFormat)),
+        XCTAssertEqual(DirectAuthenticationFlowError(APIClientError.httpError(KeychainError.invalidFormat)),
                        .other(error: KeychainError.invalidFormat))
         #endif
     }
