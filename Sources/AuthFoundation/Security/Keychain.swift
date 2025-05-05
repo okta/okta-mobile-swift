@@ -82,7 +82,7 @@ public struct Keychain {
             }
 
             let implementation = Keychain.implementation.wrappedValue
-            implementation.deleteItem(cfDictionary as CFDictionary)
+            implementation.deleteItem(deleteQuery as CFDictionary)
 
             var ref: AnyObject?
             let status = implementation.addItem(cfDictionary as CFDictionary, &ref)

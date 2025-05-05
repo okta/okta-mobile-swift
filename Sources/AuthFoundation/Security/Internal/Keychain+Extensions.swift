@@ -34,6 +34,19 @@ protocol KeychainDeletable: KeychainQuery {
     var deleteQuery: [String: Any] { get }
 }
 
+// According to Apple's documentation, calls to SecItemDelete cannot include return result keys,
+// since only a status result is supported.
+// https://developer.apple.com/documentation/security/secitemdelete(_:)#Discussion
+//
+// As such, these keys list the list of keys unsupported in delete requests:
+// https://developer.apple.com/documentation/security/item-return-result-keys
+fileprivate let _invalidDeleteQueryKeys = [
+    kSecReturnData,
+    kSecReturnAttributes,
+    kSecReturnRef,
+    kSecReturnPersistentRef,
+].map { $0 as String }
+
 extension KeychainGettable {
     var getQuery: [String: Any] {
         var result = self.query
@@ -148,12 +161,7 @@ extension KeychainUpdatable {
 
 extension KeychainDeletable {
     var deleteQuery: [String: Any] {
-        var cfQuery = self.query
-        cfQuery.removeValue(forKey: kSecMatchLimit as String)
-        cfQuery.removeValue(forKey: kSecReturnAttributes as String)
-        cfQuery.removeValue(forKey: kSecReturnRef as String)
-        
-        return cfQuery
+        query.filter { !_invalidDeleteQueryKeys.contains($0.key) }
     }
 
     func performDelete() throws {
@@ -176,27 +184,27 @@ extension Keychain.Item: KeychainUpdatable, KeychainDeletable {
         result[kSecClass as String] = kSecClassGenericPassword
         result[kSecAttrAccount as String] = account
         result[kSecValueData as String] = value
-        
+
         if let accessibility = accessibility {
             result[kSecAttrAccessible as String] = accessibility.rawValue
         }
-        
+
         if #available(iOS 13.0, macCatalyst 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *) {
             result[kSecUseDataProtectionKeychain as String] = kCFBooleanTrue
         }
-        
+
         if let service = service {
             result[kSecAttrService as String] = service
         }
-        
+
         if let server = server {
             result[kSecAttrServer as String] = server
         }
-        
+
         if let accessGroup = accessGroup {
             result[kSecAttrAccessGroup as String] = accessGroup
         }
-        
+
         if let synchronizable = synchronizable {
             result[kSecAttrSynchronizable as String] = synchronizable ? kCFBooleanTrue : kCFBooleanFalse
         }
@@ -204,15 +212,15 @@ extension Keychain.Item: KeychainUpdatable, KeychainDeletable {
         if let label = label {
             result[kSecAttrLabel as String] = label
         }
-        
+
         if let description = description {
             result[kSecAttrDescription as String] = description
         }
-        
+
         if let generic = generic {
             result[kSecAttrGeneric as String] = generic
         }
-        
+
         return result
     }
 }
