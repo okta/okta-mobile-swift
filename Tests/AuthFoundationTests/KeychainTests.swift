@@ -79,14 +79,8 @@ final class KeychainTests: XCTestCase {
         XCTAssertEqual(mock.operations[0], .init(action: .delete, query: [
             "acct": "testItemSave()",
             "class": "genp",
-            "desc": "Description",
-            "gena": genericData,
-            "labl": "Label",
-            "pdmn": "cku",
-            "nleg": 1,
             "sync": 1,
             "svce": "KeychainTests.swift",
-            "v_Data": value
         ], attributes: nil))
         XCTAssertEqual(mock.operations[1], .init(action: .add, query: query, attributes: nil))
 

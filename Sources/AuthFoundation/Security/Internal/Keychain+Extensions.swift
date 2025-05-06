@@ -47,6 +47,16 @@ fileprivate let _invalidDeleteQueryKeys = [
     kSecReturnPersistentRef,
 ].map { $0 as String }
 
+extension Keychain {
+    static let compositePrimaryKeyAttributes: [String] = [
+        kSecClass as String,
+        kSecAttrAccessGroup as String,
+        kSecAttrAccount as String,
+        kSecAttrService as String,
+        kSecAttrSynchronizable as String,
+    ]
+}
+
 extension KeychainGettable {
     var getQuery: [String: Any] {
         var result = self.query

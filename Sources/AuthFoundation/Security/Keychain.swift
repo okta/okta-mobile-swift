@@ -82,6 +82,8 @@ public struct Keychain {
             }
 
             let implementation = Keychain.implementation.wrappedValue
+
+            let deleteQuery = self.deleteQuery.filter { Keychain.compositePrimaryKeyAttributes.contains($0.key) }
             implementation.deleteItem(deleteQuery as CFDictionary)
 
             var ref: AnyObject?
