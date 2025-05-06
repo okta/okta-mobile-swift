@@ -75,8 +75,13 @@ final class KeychainTests: XCTestCase {
                                  generic: genericData,
                                  value: value)
         try item.save()
-        
-        XCTAssertEqual(mock.operations[0], .init(action: .delete, query: query, attributes: nil))
+
+        XCTAssertEqual(mock.operations[0], .init(action: .delete, query: [
+            "acct": "testItemSave()",
+            "class": "genp",
+            "sync": 1,
+            "svce": "KeychainTests.swift",
+        ], attributes: nil))
         XCTAssertEqual(mock.operations[1], .init(action: .add, query: query, attributes: nil))
 
         // Test failed save
@@ -151,15 +156,6 @@ final class KeychainTests: XCTestCase {
     }
     
     func testSearchList() throws {
-        let query = [
-            "acct": "testSearchList()",
-            "class": "genp",
-            "m_Limit": "m_LimitAll",
-            "r_Attributes": 1,
-            "r_Ref": 1,
-            "svce": "KeychainTests.swift"
-        ] as CFDictionary
-
         let result = [[
             "tomb": 0,
             "svce": "KeychainTests.swift",
@@ -175,14 +171,41 @@ final class KeychainTests: XCTestCase {
             "UUID": UUID().uuidString
         ]] as CFArray
         mock.expect(noErr, result: result)
+        mock.expect(noErr)
+        mock.expect(noErr)
 
         let search = Keychain.Search(account: #function,
-                                     service: serviceName,
                                      accessGroup: nil)
         let searchResults = try search.list()
-        
-        XCTAssertEqual(mock.operations[0], .init(action: .copy, query: query, attributes: nil))
+
+        // Delete an individual search result
+        try searchResults.first?.delete()
+
+        // Delete all items matching a search
+        try search.delete()
+
+        XCTAssertEqual(mock.operations[0], .init(action: .copy, query: [
+            "acct": "testSearchList()",
+            "class": "genp",
+            "m_Limit": "m_LimitAll",
+            "r_Attributes": 1,
+            "r_Ref": 1,
+        ], attributes: nil))
         XCTAssertEqual(searchResults.first?.account, "testSearchList()")
+
+        // Check search result delete
+        XCTAssertEqual(mock.operations[1], .init(action: .delete, query: [
+            "acct": "testSearchList()",
+            "class": "genp",
+            "svce": "KeychainTests.swift",
+            "agrp": "com.okta.sample.app",
+        ] as CFDictionary, attributes: nil))
+
+        // Check search delete
+        XCTAssertEqual(mock.operations[2], .init(action: .delete, query: [
+            "acct": "testSearchList()",
+            "class": "genp",
+        ] as CFDictionary, attributes: nil))
     }
     
     func testSearchGet() throws {
