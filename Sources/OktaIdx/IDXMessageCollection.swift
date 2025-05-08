@@ -31,8 +31,7 @@ extension Response.Message {
             return messages + nestedMessages.compactMap { $0 }
         }
         
-        @WeakCollection
-        var nestedMessages: [Response.Message?] = []
+        @WeakCollection var nestedMessages: [Response.Message?] = []
 
         let messages: [Response.Message]
         init(messages: [Response.Message]?, nestedMessages: [Response.Message]? = nil) {

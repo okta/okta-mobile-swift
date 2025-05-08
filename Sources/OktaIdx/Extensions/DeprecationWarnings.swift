@@ -12,11 +12,11 @@
 
 import Foundation
 
-@available (*, unavailable, renamed: "InteractionCodeFlow")
+@available(*, unavailable, renamed: "InteractionCodeFlow")
 public struct IDXClient {
-    @available (*, unavailable)
+    @available(*, unavailable)
     public struct Configuration {
-        @available (*, unavailable)
+        @available(*, unavailable)
         public init(issuer: String,
                     clientId: String,
                     clientSecret: String?,
@@ -24,23 +24,23 @@ public struct IDXClient {
                     redirectUri: String) {}
     }
     
-    @available (*, unavailable)
+    @available(*, unavailable)
     public enum Option: Hashable {}
     
-    @available (*, unavailable,
+    @available(*, unavailable,
                  renamed: "start(options:completion:)",
                  message: "IDXClient replaced with InteractionCodeFlow")
     public static func start(with configuration: Any,
                              options: [Option: String]? = nil,
                              completion: @escaping (Result<IDXClient, Error>) -> Void) {}
     
-    @available (*, unavailable,
+    @available(*, unavailable,
                  renamed: "start(options:completion:)",
                  message: "IDXClient replaced with InteractionCodeFlow")
     public static func start(with configuration: Configuration,
                              options: [String: String]? = nil,
                              completion: @escaping (_ client: IDXClient?, _ error: Error?) -> Void) {}
     
-    @available (*, unavailable)
+    @available(*, unavailable)
     public func resume(completion: ((Result<Response, Error>) -> Void)?) {}
 }

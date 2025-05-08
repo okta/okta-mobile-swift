@@ -4,7 +4,7 @@ only_rules:
   - closure_spacing
   - comma
   - colon
-
+ 
   # Whitespace (Xcode configuration)
   - leading_whitespace
   #- let_var_whitespace # Disabled due to https://github.com/realm/SwiftLint/issues/2980
@@ -12,35 +12,35 @@ only_rules:
   - operator_usage_whitespace
   - return_arrow_whitespace
   - trailing_whitespace
-
+ 
   # Empty
   - empty_collection_literal
   - empty_count
   - empty_string
-
+ 
   # Force
   - force_cast
   - force_try
   - force_unwrapping
-
+ 
   # Closures
   - closure_body_length
   - closure_end_indentation
   - closure_parameter_position
-
+ 
   # Style
   # - attributes - disabled due to rule issue. See: https://github.com/okta/okta-devices-swift/pull/93
   - collection_alignment
   - control_statement
   - file_header
-
+  - attributes
+ 
   # Order
   #- file_types_order - disabled due to the impracticality of private/fileprivate usages
   - modifier_order
   - protocol_property_accessors_order
-
+ 
   # Lint
-  - anyobject_protocol
   - class_delegate_protocol
   - cyclomatic_complexity
 
@@ -74,7 +74,7 @@ empty_string:
   severity: error
 
 closure_body_length:
-  warning: 50
+  warning: 70
   error: 100
 closure_end_indentation:
   severity: error
@@ -83,6 +83,10 @@ closure_parameter_position:
 
 attributes:
   severity: error
+  always_on_line_above:
+    - '@ClaimCollection'
+    - '@CredentialActor'
+
 collection_alignment:
   severity: error
 control_statement:
@@ -102,12 +106,11 @@ file_header:
                   \/\/ See the License for the specific language governing permissions and limitations under the License\.
                   \/\/
 
-anyobject_protocol:
-  severity: error
 class_delegate_protocol:
   severity: error
 cyclomatic_complexity:
-  severity: error
+  warning: 20
+  error: 30
 
 # Paths to ignore
 excluded:

@@ -1,0 +1,103 @@
+name: Unit Tests
+
+on:
+  workflow_run:
+    workflows: [Preflight]
+    types: [completed]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NSUnbufferedIO: YES
+
+jobs:
+  #VerifyUpstream:
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - name: Debug github event
+  #    run: echo "${{ toJson(github.event) }}"
+
+  SwiftBuild:
+    name: Swift ${{ matrix.swift_version }} Unit Tests on ${{ matrix.os }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.has_source_changes == 'true' }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: 
+          - macos-latest
+        swift_version: ["5.10"]
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-swift
+      with:
+        swift-version: "${{ matrix.swift_version }}"
+    - name: Build
+      run: set -o pipefail && swift build --build-tests
+    - name: Test
+      run: set -o pipefail && swift test --parallel
+
+  Cocoapods:
+    name: CocoaPods Build
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.has_source_changes == 'true' }}
+    runs-on: macos-latest
+    timeout-minutes: 10
+    needs:
+      - SwiftBuild
+    steps:
+    - uses: actions/checkout@master
+    - name: Lint CocoaPods
+      run: pod lib lint --allow-warnings OktaIdx.podspec
+
+  XcodeBuild:
+    name: Xcode ${{ matrix.xcode_version }} on ${{ matrix.destination }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.has_source_changes == 'true' }}
+    strategy:
+      matrix:
+        include:
+        - destination: "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
+          xcode_version: "15.4"
+          os: macos-14
+        - destination: "platform=iOS Simulator,OS=18.2,name=iPhone 16 Pro Max"
+          xcode_version: "16.2"
+          os: macos-15
+        - destination: "platform=macOS,name=My Mac"
+          xcode_version: "16.2"
+          os: macos-15
+    runs-on: ${{ matrix.os }}
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app/Contents/Developer
+      DESTINATION: "${{ matrix.destination }}"
+      LOG_NAME: "${{github.job}}-${{ matrix.xcode_version }}-${{ matrix.destination }}"
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup test environment
+      run: xcrun simctl shutdown all
+    - name: Setup log environment
+      run: mkdir -p .build/ci-logs
+    - name: Build OktaIdx
+      run: |
+        set -o pipefail && xcrun xcodebuild build-for-testing \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
+          -scheme OktaIdx \
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+    - name: Test OktaIdx
+      run: |
+        set -o pipefail && xcrun xcodebuild test-without-building \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
+          -scheme OktaIdx \
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+    - name: Upload Logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: Logs
+        path: |
+          .build/ci-logs/**
+          .build/DerivedData/Logs/

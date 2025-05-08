@@ -1,41 +1,30 @@
 name: Documentation
 
 on:
-  push:
-    branches:
-      - master
-      - dev-*
-      - release-*
-    paths:
-      - '.github/workflows/documentation.yml'
-      - 'Sources/**/*.swift'
-      - 'Sources/**/*.md'
-  pull_request:
-    branches:
-      - master
-      - dev-*
-      - release-*
-    paths:
-      - '.github/workflows/documentation.yml'
-      - 'Sources/**/*.swift'
-      - 'Sources/**/*.md'
+  workflow_run:
+    workflows: [Preflight]
+    types: [completed]
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_16.0.app/Contents/Developer
+  DOCC_JSON_PRETTYPRINT: YES
   NSUnbufferedIO: YES
 
 jobs:
   BuildDocumentation:
     name: Build Documentation Archives
-    runs-on: macos-12
+    runs-on: macos-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.has_documentation_changes == 'true' }}
     steps:
     - uses: actions/checkout@master
     - name: OktaIdx
       run: |
+        set -e
         set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild docbuild \
+
+        xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
-          -scheme OktaIdx | xcpretty
+          -scheme OktaIdx | xcbeautify --renderer github-actions
     - name: Compress DocC archive
       run: |
         for archive in $(find ~/Build/DerivedData/Build/Products -type d -name '*.doccarchive'); do
@@ -47,3 +36,51 @@ jobs:
       with:
         name: OktaIdx.doccarchive.zip
         path: ~/Build/OktaIdx.doccarchive.zip
+
+  # NOTE: The DocC `generate-documentation` plugin does not handle the 
+  #       hostingBasePath well. In particular, it doesn't properly handle
+  #       multiple child paths. Furthermore, the current 1.0.0 version of
+  #       the plugin doesn't handle updates to the index.html or *.js
+  #       files.
+  #
+  #       This workflow should be revisited once Xcode 14 GA is released
+  #       so the newer DocC utilities can be utilized.
+  PublishToGHPages:
+    name: Publish to Github Pages
+    runs-on: macos-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.is_master_or_tagged == 'true' }}
+    steps:
+    - uses: actions/checkout@master
+    - name: Define version information
+      run: |
+        set +ex
+        VERSION=${{ github.ref_name }}
+        if [[ "$VERSION" = "master" ]]; then
+            VERSION=development
+        fi
+        echo "VERSION=${VERSION}" >> $GITHUB_ENV
+    - name: Build Documentation
+      run: |
+        set -e
+
+        for TARGET in $(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g'); do
+            echo "Building $TARGET"
+            NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
+            mkdir -p docs/$VERSION/$NAME
+            swift package \
+                --allow-writing-to-directory docs \
+                generate-documentation \
+                --target $TARGET \
+                --disable-indexing \
+                --transform-for-static-hosting \
+                --hosting-base-path okta-idx-swift/$VERSION/$NAME \
+                --output-path docs/$VERSION/$NAME
+            sed -I -e "s#<head>#<head><meta http-equiv='refresh' content='0;url=./documentation/$NAME/'>#" \
+                docs/$VERSION/$NAME/index.html
+        done
+    - name: Deploy documentation to Github Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        keep_files: true
