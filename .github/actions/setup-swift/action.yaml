@@ -29,6 +29,6 @@ runs:
       if: steps.check_xcode_version.outputs.developer_dir == ''
       with:
         swift-version: ${{ inputs.swift-version }}
-
     - name: Get swift version
+      shell: bash
       run: swift --version
