@@ -24,6 +24,7 @@ jobs:
       changed_files: ${{ steps.list_changed_files.outputs.changed_files }}
       has_source_changes: ${{ steps.check_source_changes.outputs.has_source_changes }}
       has_documentation_changes: ${{ steps.check_documentation_changes.outputs.has_documentation_changes }}
+      has_secrets: ${{ steps.check_secrets.outputs.has_secrets }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -69,6 +70,15 @@ jobs:
             echo "has_documentation_changes=true" >> $GITHUB_OUTPUT
           else
             echo "has_documentation_changes=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Check for UI Test Secrets
+        id: check_secrets
+        run: |
+          if [[ -n "$TEST_CONFIGURATION" ]] && [[ -n "$TEST_OKTA_PLIST" ]]; then
+            echo "Has UI test secrets"
+            echo "has_secrets=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_secrets=false" >> $GITHUB_OUTPUT
           fi
 
   SwiftLint:
@@ -209,7 +219,7 @@ jobs:
     name: "UI: Embedded Auth (iOS)"
     runs-on: macos-latest
     timeout-minutes: 10
-    if: ${{ secrets.TEST_OKTA_PLIST && secrets.TEST_CONFIGURATION }}
+    if: ${{ needs.Preflight.outputs.has_secrets == 'true' }}
     needs:
       - XcodeBuild
       - SwiftBuild
