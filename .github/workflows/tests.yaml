@@ -111,12 +111,10 @@ jobs:
 
   Cocoapods:
     name: CocoaPods Build
-    needs: Preflight
+    needs: SwiftBuild
     if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
     runs-on: macos-latest
     timeout-minutes: 10
-    needs:
-      - SwiftBuild
     steps:
     - uses: actions/checkout@master
     - name: Lint CocoaPods
