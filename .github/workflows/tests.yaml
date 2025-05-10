@@ -32,11 +32,12 @@ jobs:
       - name: Check for Merge into Master or Release Tag
         id: check_master
         run: |
-          if [[ "${{ github.ref }}" == "refs/heads/master"; then
+          if [[ "${{ github.ref }}" == "refs/heads/master" ]]; then
             echo ":white_check_mark: Merged to \`master\`" >> $GITHUB_STEP_SUMMARY
             echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
-          elif [[ "${{ github.ref }}" == "refs/heads/master" || "${{ github.ref }}" == refs/tags/* ]]; then
-            echo ":white_check_mark: Tagged commit update" >> $GITHUB_STEP_SUMMARY
+          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            local github_ref="${{ github.ref }}"
+            echo ":white_check_mark: Tagged commit \`${github_ref#refs/tags/ }\` update" >> $GITHUB_STEP_SUMMARY
             echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
           else
             echo "is_master_or_tagged=false" >> $GITHUB_OUTPUT
