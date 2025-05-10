@@ -32,8 +32,11 @@ jobs:
       - name: Check for Merge into Master or Release Tag
         id: check_master
         run: |
-          if [[ "${{ github.ref }}" == "refs/heads/master" || "${{ github.ref }}" == refs/tags/* ]]; then
-            echo "Merging into master or a tag"
+          if [[ "${{ github.ref }}" == "refs/heads/master"; then
+            echo ":white_check_mark: Merged to \`master\`" >> $GITHUB_STEP_SUMMARY
+            echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/master" || "${{ github.ref }}" == refs/tags/* ]]; then
+            echo ":white_check_mark: Tagged commit update" >> $GITHUB_STEP_SUMMARY
             echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
           else
             echo "is_master_or_tagged=false" >> $GITHUB_OUTPUT
@@ -57,29 +60,33 @@ jobs:
         id: check_source_changes
         run: |
           if grep -qE '^(Sources/|Tests/|Package|.github/workflows/(preflight|tests).yaml)' changes; then
-            echo "Has source changes"
+            echo ":white_check_mark: Has source changes" >> $GITHUB_STEP_SUMMARY
             echo "has_source_changes=true" >> $GITHUB_OUTPUT
           else
+            echo ":x: Does not have source changes" >> $GITHUB_STEP_SUMMARY
             echo "has_source_changes=false" >> $GITHUB_OUTPUT
           fi
       - name: Check for Documentation Changes
         id: check_documentation_changes
         run: |
           if grep -qE '^(Sources/.*\.(md|swift)|.github/workflows/documentation.yaml)' changes; then
-            echo "Has documentation changes"
+            echo ":white_check_mark: Run documentation jobs" >> $GITHUB_STEP_SUMMARY
             echo "has_documentation_changes=true" >> $GITHUB_OUTPUT
           else
+            echo ":x: Skip documentation jobs" >> $GITHUB_STEP_SUMMARY
             echo "has_documentation_changes=false" >> $GITHUB_OUTPUT
           fi
       - name: Check for UI Test Secrets
         id: check_secrets
         run: |
           if [[ -n "$TEST_CONFIGURATION" ]] && [[ -n "$TEST_OKTA_PLIST" ]]; then
-            echo "Has UI test secrets"
+            echo ":white_check_mark: Has integration test secrets" >> $GITHUB_STEP_SUMMARY
             echo "has_secrets=true" >> $GITHUB_OUTPUT
           else
+            echo ":x: Skip integration tests" >> $GITHUB_STEP_SUMMARY
             echo "has_secrets=false" >> $GITHUB_OUTPUT
           fi
+
 
   SwiftLint:
     name: Lint Sources
