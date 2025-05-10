@@ -14,7 +14,7 @@ runs:
       if: runner.os == 'macOS'
       shell: bash
       run: |
-        for xcode_version in $(yq ".swift[] | select(.version == \"${{ inputs.swift-version }}\") | .xcode_versions[]" ./versions.yml); do
+        for xcode_version in $(yq ".swift[] | select(.version == \"${{ inputs.swift-version }}\") | .xcode_versions[]" ./versions.yaml); do
           developer_dir="/Applications/Xcode_${xcode_version}.app/Contents/Developer"
           if [[ -d "$developer_dir" ]]; then
             echo "Selected Xcode ${xcode_version} for use with Swift ${{ inputs.swift-version }}" >> $GITHUB_STEP_SUMMARY

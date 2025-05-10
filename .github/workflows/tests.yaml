@@ -60,7 +60,7 @@ jobs:
       - name: Check for Unit Test Changes
         id: check_source_changes
         run: |
-          if grep -qE '^(Sources/|Tests/|Package|.github/workflows/(preflight|tests).yaml)' changes; then
+          if grep -qE '^(Sources/|Tests/|Package)' changes; then
             echo ":white_check_mark: Has source changes" >> $GITHUB_STEP_SUMMARY
             echo "has_source_changes=true" >> $GITHUB_OUTPUT
           else
@@ -108,7 +108,7 @@ jobs:
 
   SwiftBuild:
     name: Swift ${{ matrix.swift_version }} Unit Tests on ${{ matrix.os }}
-    needs: Preflight
+    needs: SwiftLint
     if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -140,7 +140,7 @@ jobs:
 
   XcodeBuild:
     name: Xcode ${{ matrix.xcode_version }} on ${{ matrix.destination }}
-    needs: Preflight
+    needs: SwiftBuild
     if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
     strategy:
       matrix:
@@ -193,7 +193,7 @@ jobs:
 
   Documentation:
     name: Build Documentation Archives
-    needs: Preflight
+    needs: SwiftLint
     if: ${{ needs.Preflight.outputs.has_documentation_changes == 'true' }}
     runs-on: macos-latest
     env:
