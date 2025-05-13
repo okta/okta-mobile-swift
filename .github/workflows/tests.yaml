@@ -34,8 +34,8 @@ jobs:
         run: |
           echo "| Preflight Check | Enabled |" >> $GITHUB_STEP_SUMMARY
           echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
-          local github_ref="${{ github.ref }}"
-          local tag_name=${github_ref#refs/tags/}
+          github_ref="${{ github.ref }}"
+          tag_name=${github_ref#refs/tags/}
           if [[ "${{ github.ref }}" == "refs/heads/master" ]]; then
             echo "| Merged to \`master\` | :white_check_mark: |" >> $GITHUB_STEP_SUMMARY
             echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
