@@ -1,9 +1,11 @@
-name: Unit Tests
+name: Tests
 
 on:
-  workflow_run:
-    workflows: [Preflight]
-    types: [completed]
+  push:
+    branches:
+      - master
+      - release/*
+  pull_request:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -13,15 +15,123 @@ env:
   NSUnbufferedIO: YES
 
 jobs:
-  #VerifyUpstream:
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #  - name: Debug github event
-  #    run: echo "${{ toJson(github.event) }}"
+  Preflight:
+    name: Preflight Checks
+    if: ${{ !(github.event.pull_request.draft || false) }}
+    runs-on: ubuntu-latest
+    outputs:
+      is_master_or_tagged: ${{ steps.check_master.outputs.is_master_or_tagged }}
+      is_master: ${{ steps.check_master.outputs.is_master }}
+      tag_name: ${{ steps.check_master.outputs.tag_name }}
+      changed_files: ${{ steps.list_changed_files.outputs.changed_files }}
+      has_source_changes: ${{ steps.check_source_changes.outputs.has_source_changes }}
+      has_documentation_changes: ${{ steps.check_documentation_changes.outputs.has_documentation_changes }}
+      has_secrets: ${{ steps.check_secrets.outputs.has_secrets }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Check for Merge into Master or Release Tag
+        id: check_master
+        run: |
+          github_ref="${{ github.ref }}"
+          tag_name=${github_ref#refs/tags/}
+          if [[ "${{ github.ref }}" == "refs/heads/master" ]]; then
+            echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
+            echo "is_master=true" >> $GITHUB_OUTPUT
+          elif [[ "${github_ref}" == refs/tags/* ]]; then
+            echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
+            echo "tag_name=${tag_name}" >> $GITHUB_OUTPUT
+          else
+            echo "is_master_or_tagged=false" >> $GITHUB_OUTPUT
+          fi
+      - name: List Changed Files
+        id: list_changed_files
+        run: |
+          if [[ -z "${{ github.event.before }}" ]] || ! git cat-file -e ${{ github.event.before }} 2>/dev/null; then
+            echo "No valid 'before' commit found. Listing all changes."
+            git diff --name-only HEAD > changes
+          else
+            git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changes
+          fi
+
+          {
+            echo 'changed_files<<EOF'
+            cat changes
+            echo EOF
+          } >> $GITHUB_OUTPUT
+
+      - name: Check for Unit Test Changes
+        id: check_source_changes
+        run: |
+          if grep -qE '^(Sources/|Tests/|Package)' changes; then
+            echo "has_source_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_source_changes=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Check for Documentation Changes
+        id: check_documentation_changes
+        run: |
+          if grep -qE '^(Sources/.*\.(md|swift)|.github/workflows/documentation.yaml)' changes; then
+            echo "has_documentation_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_documentation_changes=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Check for UI Test Secrets
+        id: check_secrets
+        run: |
+          if [[ -n "$TEST_CONFIGURATION" ]] && [[ -n "$TEST_OKTA_PLIST" ]]; then
+            echo "has_secrets=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_secrets=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Report preflight check summary
+        env:
+          is_master: ${{ steps.check_master.is_master }}
+          tag_name: ${{ steps.check_master.tag_name }}
+          changed_files: ${{ steps.list_changed_files.changed_files }}
+          has_source_changes: ${{ steps.check_source_changes.has_source_changes }}
+          has_documentation_changes: ${{ steps.check_documentation_changes.has_documentation_changes }}
+          has_secrets: ${{ steps.check_secrets.has_secrets }}
+        run: |
+          [[ "$is_master" = "true" ]] && master_status=":white_check_mark:"
+          [[ -n "$tag_name" ]] && tag_status=":white_check_mark: \`$tag_name\`"
+          [[ "$has_source_changes" = "true" ]] && source_status=":white_check_mark:"
+          [[ "$has_documentation_changes" = "true" ]] && doc_status=":white_check_mark:"
+          [[ "$has_secrets" = "true" ]] && secrets_status=":white_check_mark:"
+
+          cat <<-__EOF__ >> $GITHUB_STEP_SUMMARY
+          | Preflight Check | Enabled |
+          | --- | --- |
+          | Merged to \`master\` | ${master_status} |
+          | Commit tagged | ${tag_status} |
+          | Changed files | \`$(wc -l changes)\` changed |
+          | Has source changes | ${source_status} |
+          | Documentation rebuild needed | ${doc_status} |
+          | Has integration test secrets | ${secrets_status} |
+          __EOF__
+
+  SwiftLint:
+    name: Lint Sources
+    needs: Preflight
+    if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Swift Lint
+        run: |
+          if ! which -s swiftlint; then
+            echo "Installing SwiftLint..."
+            brew install swiftlint
+          fi
+      - name: Lint code
+        run: |
+          swiftlint lint --reporter github-actions-logging Sources
 
   SwiftBuild:
     name: Swift ${{ matrix.swift_version }} Unit Tests on ${{ matrix.os }}
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.has_source_changes == 'true' }}
+    needs: SwiftLint
+    if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -30,7 +140,7 @@ jobs:
         swift_version: ["5.10"]
     timeout-minutes: 10
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
     - uses: ./.github/actions/setup-swift
       with:
         swift-version: "${{ matrix.swift_version }}"
@@ -41,11 +151,10 @@ jobs:
 
   Cocoapods:
     name: CocoaPods Build
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.has_source_changes == 'true' }}
+    needs: SwiftBuild
+    if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
     runs-on: macos-latest
     timeout-minutes: 10
-    needs:
-      - SwiftBuild
     steps:
     - uses: actions/checkout@master
     - name: Lint CocoaPods
@@ -53,7 +162,8 @@ jobs:
 
   XcodeBuild:
     name: Xcode ${{ matrix.xcode_version }} on ${{ matrix.destination }}
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.has_source_changes == 'true' }}
+    needs: SwiftBuild
+    if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
     strategy:
       matrix:
         include:
@@ -71,6 +181,7 @@ jobs:
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app/Contents/Developer
       DESTINATION: "${{ matrix.destination }}"
       LOG_NAME: "${{github.job}}-${{ matrix.xcode_version }}-${{ matrix.destination }}"
+      NSUnbufferedIO: YES
     timeout-minutes: 10
     steps:
     - uses: actions/checkout@master
@@ -101,3 +212,63 @@ jobs:
         path: |
           .build/ci-logs/**
           .build/DerivedData/Logs/
+
+  Documentation:
+    name: Build Documentation Archives
+    needs: SwiftLint
+    if: ${{ needs.Preflight.outputs.has_documentation_changes == 'true' }}
+    runs-on: macos-latest
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
+      DESTINATION: "${{ matrix.destination }}"
+      LOG_NAME: "${{github.job}}-${{ matrix.xcode_version }}-${{ matrix.destination }}"
+      NSUnbufferedIO: YES
+    steps:
+    - uses: actions/checkout@master
+    - name: OktaIdx
+      run: |
+        set -e
+        set -o pipefail
+
+        xcodebuild docbuild \
+          -derivedDataPath ~/Build/DerivedData \
+          -scheme OktaIdx | xcbeautify --renderer github-actions
+    - name: Compress DocC archive
+      run: |
+        for archive in $(find ~/Build/DerivedData/Build/Products -type d -name '*.doccarchive'); do
+          cd $(dirname "$archive")
+          zip -r ~/Build/$(basename "$archive").zip $(basename "$archive")
+        done
+    - name: Upload OktaIdx DocC Archive
+      uses: actions/upload-artifact@v2
+      with:
+        name: OktaIdx.doccarchive.zip
+        path: ~/Build/OktaIdx.doccarchive.zip
+
+  UITest-EmbeddedAuth:
+    name: "UI: Embedded Auth (iOS)"
+    runs-on: macos-latest
+    timeout-minutes: 10
+    if: ${{ needs.Preflight.outputs.has_secrets == 'true' }}
+    needs:
+      - XcodeBuild
+      - SwiftBuild
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
+      NSUnbufferedIO: YES
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test Embedded Auth
+      run: |
+        xcodebuild \
+            -derivedDataPath ~/Build/DerivedData \
+            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
+            -workspace OktaIdx.xcworkspace \
+            -scheme "EmbeddedAuth" \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            test
