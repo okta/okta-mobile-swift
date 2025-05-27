@@ -138,7 +138,7 @@ extension AnyJSON: Sendable {}
 #endif
 
 /// Represent mixed JSON values as instances of `Any`. This is used to expose API response values to Swift native types where Swift enums are not supported.
-public enum JSON: Sendable, Equatable {
+public enum JSON: Sendable, Hashable, Equatable {
     /// String JSON key value.
     case string(String)
 
@@ -169,22 +169,26 @@ public enum JSON: Sendable, Equatable {
         try self.init(value)
     }
 
+    @_documentation(visibility: internal)
+    @inlinable
     public init(_ value: Any) throws {
-        if let value = value as? String {
+        if let value = value as? any JSONRepresentable {
+            self = value.json
+        } else if let value = value as? String {
             self = .string(value)
         } else if let value = value as? NSNumber {
             self = .number(value)
         } else if let value = value as? Bool {
             self = .bool(value)
-        } else if let value = value as? [String: any Sendable] {
+        } else if let value = value as? [String: Any] {
             self = .object(try value.mapValues({ try JSON($0) }))
-        } else if let value = value as? [any Sendable] {
+        } else if let value = value as? [Any] {
             self = .array(try value.map({ try JSON($0) }))
         } else {
             throw JSONError.cannotDecode(value: nil)
         }
     }
-    
+
     /// Initializes a JSON object from its string representation.
     /// - Parameter value: The String value for a JSON object.
     public init(_ value: String) throws {
@@ -200,6 +204,12 @@ public enum JSON: Sendable, Equatable {
         try self.init(try JSONSerialization.jsonObject(with: value))
     }
     
+    /// Initializes a JSON object from an encodable object representation.
+    /// - Parameter value: The object conforming to `Encodable` to convert to JSON.
+    public init(_ value: some Encodable) throws {
+        try self.init(try JSONEncoder().encode(value))
+    }
+
     /// Returns the value as an instance of `Any`.
     public var anyValue: Any? {
         switch self {
@@ -219,16 +229,18 @@ public enum JSON: Sendable, Equatable {
             return nil
         }
     }
-    
-    public subscript(index: Int) -> Any? {
+
+    /// Returns the array value at the given index, or `nil` if the object is not an array.
+    public subscript(index: Int) -> JSON? {
         guard case let .array(array) = self else {
             return nil
         }
 
         return array[index]
     }
-    
-    public subscript(key: String) -> Any? {
+
+    /// Returns the object value with the given key, or `nil` if this is not an object.
+    public subscript(key: String) -> JSON? {
         guard case let .object(dictionary) = self else {
             return nil
         }
@@ -318,6 +330,7 @@ fileprivate extension NSNumber {
 }
 
 extension JSON: CustomDebugStringConvertible {
+    @_documentation(visibility: internal)
     public var debugDescription: String {
         switch self {
         case .string(let str):
@@ -337,5 +350,149 @@ extension JSON: CustomDebugStringConvertible {
             // swiftlint:enable force_try
             // swiftlint:enable force_unwrapping
         }
+    }
+}
+
+extension JSON: ExpressibleByStringLiteral {
+    @_documentation(visibility: internal)
+    @inlinable
+    public init(stringLiteral value: String) {
+        self = .string(value)
+    }
+}
+
+extension JSON: ExpressibleByExtendedGraphemeClusterLiteral {
+    @_documentation(visibility: internal)
+    @inlinable
+    public init(extendedGraphemeClusterLiteral value: String) {
+        self = .string(value)
+    }
+}
+
+extension JSON: ExpressibleByUnicodeScalarLiteral {
+    @_documentation(visibility: internal)
+    @inlinable
+    public init(unicodeScalarLiteral value: String) {
+        self = .string(value)
+    }
+}
+
+extension JSON: ExpressibleByNilLiteral {
+    @_documentation(visibility: internal)
+    @inlinable
+    public init(nilLiteral: ()) {
+        self = .null
+    }
+}
+
+extension JSON: ExpressibleByFloatLiteral {
+    @_documentation(visibility: internal)
+    @inlinable
+    public init(floatLiteral value: Double) {
+        self = .number(NSNumber(value: value))
+    }
+}
+
+extension JSON: ExpressibleByIntegerLiteral {
+    @_documentation(visibility: internal)
+    @inlinable
+    public init(integerLiteral value: IntegerLiteralType) {
+        self = .number(NSNumber(value: value))
+    }
+}
+
+extension JSON: ExpressibleByBooleanLiteral {
+    @_documentation(visibility: internal)
+    @inlinable
+    public init(booleanLiteral value: Bool) {
+        self = .bool(value)
+    }
+}
+
+/// Represents types that are interoperable or usable with JSON.
+public protocol JSONRepresentable: Sendable {
+    /// Returns the JSON representation for this object.
+    var json: JSON { get }
+}
+
+extension JSON: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        self
+    }
+}
+
+extension String: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        .string(self)
+    }
+}
+
+extension Int: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        .number(NSNumber(value: self))
+    }
+}
+
+extension Double: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        .number(NSNumber(value: self))
+    }
+}
+
+extension Float: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        .number(NSNumber(value: self))
+    }
+}
+
+extension Bool: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        .bool(self)
+    }
+}
+
+extension Array: JSONRepresentable where Element: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        .array(compactMap(\.json))
+    }
+}
+
+extension Dictionary: JSONRepresentable where Key == String, Value: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        .object(mapValues(\.json))
+    }
+}
+
+extension Optional: JSONRepresentable where Wrapped: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        switch self {
+        case .none:
+            return .null
+        case .some(let wrapped):
+            return wrapped.json
+        }
+    }
+}
+
+extension NSNull: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        .null
+    }
+}
+
+extension NSNumber: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        .number(self)
     }
 }

@@ -18,8 +18,8 @@ public enum APIClientError: Error {
     case invalidUrl
     
     /// No response received from the server.
-    case missingResponse
-    
+    case missingResponse(request: URLRequest? = nil)
+
     /// Did not receive an HTTP response.
     case invalidResponse
     
@@ -68,12 +68,21 @@ extension APIClientError: LocalizedError {
                                      bundle: .authFoundation,
                                      comment: "Invalid URL")
             
-        case .missingResponse:
-            return NSLocalizedString("missing_response_description",
-                                     tableName: "AuthFoundation",
-                                     bundle: .authFoundation,
-                                     comment: "Invalid URL")
-            
+        case .missingResponse(request: let request):
+            if let requestUrl = request?.url {
+                return String.localizedStringWithFormat(
+                    NSLocalizedString("missing_response_request_description",
+                                      tableName: "AuthFoundation",
+                                      bundle: .authFoundation,
+                                      comment: "Invalid URL"),
+                    requestUrl.absoluteString)
+            } else {
+                return NSLocalizedString("missing_response_description",
+                                         tableName: "AuthFoundation",
+                                         bundle: .authFoundation,
+                                         comment: "Invalid URL")
+            }
+
         case .invalidResponse:
             return NSLocalizedString("invalid_response_description",
                                      tableName: "AuthFoundation",

@@ -56,7 +56,7 @@ public actor CoalescedResult<T: Sendable>: Sendable {
     nonisolated public var value: T? {
         let semaphore = DispatchSemaphore(value: 0)
         nonisolated(unsafe) var result: T?
-        Task.detached {
+        Task.detached(priority: Task.currentPriority) {
             result = await self._value
             semaphore.signal()
         }

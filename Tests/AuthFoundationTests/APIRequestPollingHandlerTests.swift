@@ -52,7 +52,7 @@ final class APIRequestPollingHandlerTests: XCTestCase {
         let container = TestContainer()
 
         let startTimestamp = Date.timeIntervalSinceReferenceDate
-        let poll = try APIRequestPollingHandler<TestRequest, String>(interval: 0.1)
+        let poll = try APIRequestPollingHandler<TestRequest, String>(interval: 0.1, options: .delayFirstRequest)
         { pollingHandler, request in
             let currentTimestamp = Date.timeIntervalSinceReferenceDate
 
@@ -81,7 +81,7 @@ final class APIRequestPollingHandlerTests: XCTestCase {
         }
 
         let initialRequest = try TestRequest(name: "trillian")
-        let result = try await poll.start(with: initialRequest, delay: 0.5)
+        let result = try await poll.start(with: initialRequest)
 
         XCTAssertEqual(result, "done")
 

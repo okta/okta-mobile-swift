@@ -65,7 +65,7 @@ public protocol APIRequest: Sendable {
 }
 
 /// API HTTP request method.
-public enum APIRequestMethod: String, Sendable {
+public enum APIRequestMethod: String, Hashable, Equatable, Codable, Sendable {
     case get = "GET"
     case delete = "DELETE"
     case head = "HEAD"
@@ -75,7 +75,7 @@ public enum APIRequestMethod: String, Sendable {
 }
 
 /// Describes the ``APIRequest`` content type.
-public enum APIContentType: Sendable, Equatable, RawRepresentable {
+public enum APIContentType: Sendable, Hashable, Equatable, Codable, RawRepresentable {
     case json
     case formEncoded
     case other(_ type: String)

@@ -38,4 +38,43 @@ extension URL {
         
         self = result
     }
+
+    @_documentation(visibility: internal)
+    @inlinable
+    public func queryValues(matching redirectUri: URL? = nil) throws -> [String: String] {
+        guard let components = URLComponents(url: self,
+                                             resolvingAgainstBaseURL: false)
+        else {
+            throw OAuth2Error.redirectUri(self, reason: .invalid)
+        }
+
+        if let redirectUri {
+            guard components.scheme?.lowercased() == redirectUri.scheme?.lowercased()
+            else {
+                throw OAuth2Error.redirectUri(self, reason: .scheme(components.scheme))
+            }
+
+            guard components.host?.lowercased() == redirectUri.host?.lowercased(),
+                  components.path == redirectUri.path
+            else {
+                throw OAuth2Error.redirectUri(self, reason: .hostOrPath)
+            }
+        }
+
+        let queryItems = components.queryItems ?? []
+        var query = queryItems.reduce(into: [String: String]()) { partialResult, queryItem in
+            if let value = queryItem.value {
+                partialResult[queryItem.name] = value
+            }
+        }
+
+        if let description = query["error_description"]?
+            .removingPercentEncoding?
+            .replacingOccurrences(of: "+", with: " ")
+        {
+            query["error_description"] = description
+        }
+
+        return query
+    }
 }

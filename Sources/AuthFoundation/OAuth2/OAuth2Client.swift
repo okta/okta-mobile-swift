@@ -34,6 +34,16 @@ extension OAuth2ClientDelegate {
 /// An OAuth2 client, used to interact with a given authorization server.
 public final class OAuth2Client: UsesDelegateCollection {
     public typealias Delegate = OAuth2ClientDelegate
+    
+    /// Defines the default URLSession instance used when initializing a new ``OAuth2Client``.
+    ///
+    /// This is used by any class that needs to perform network operations and needs an instance of `URLSession` to be able to do so. If this value is `nil`, the behavior is to create a new instance as necessary. Assign a value to this property if you want to explicitly use your own session.
+    ///
+    /// > Important: This value only overrides the default session, and will not supercede any explicitly-assigned value supplied to the initializer, such as ``OAuth2Client/init(_:state:session:)``.
+    public static var defaultSession: (any URLSessionProtocol)? {
+        get { lock.withLock { _defaultSession } }
+        set { lock.withLock { _defaultSession = newValue } }
+    }
 
     /// The URLSession used by this client for network requests.
     public let session: any URLSessionProtocol
@@ -107,7 +117,7 @@ public final class OAuth2Client: UsesDelegateCollection {
         _ = Date.coordinator
         
         self.configuration = configuration
-        self.session = session ?? URLSession(configuration: .ephemeral)
+        self.session = session ?? Self.defaultSession ?? URLSession(configuration: .ephemeral)
         self.refreshQueue = DispatchQueue(label: "com.okta.refreshQueue.\(configuration.issuerURL.host ?? "unknown")",
                                           qos: .userInitiated,
                                           attributes: .concurrent)
@@ -279,7 +289,11 @@ public final class OAuth2Client: UsesDelegateCollection {
         return response
     }
 
-    // MARK: Private properties / methods
+    // MARK: Static Private properties / methods
+    private static let lock = Lock()
+    nonisolated(unsafe) private static var _defaultSession: (any URLSessionProtocol)?
+
+    // MARK: Instance Private properties / methods
     private let lock = Lock()
     nonisolated(unsafe) private var _additionalHttpHeaders: [String: String]?
 

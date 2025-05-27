@@ -13,16 +13,22 @@
 import Foundation
 
 /// Property wrapper representing a weak value.
+@_documentation(visibility: internal)
 @propertyWrapper
-public struct Weak<Object: AnyObject> {
-    public weak var wrappedValue: Object?
-    
+public struct Weak<Object: AnyObject>: Sendable {
+    public var wrappedValue: Object? {
+        get { lock.withLock { _wrappedValue } }
+        set { lock.withLock { _wrappedValue = newValue } }
+    }
+
+    nonisolated(unsafe) private weak var _wrappedValue: Object?
+    private let lock = Lock()
     public init?(_ object: Object?) {
         guard let object = object else {
             return nil
         }
 
-        wrappedValue = object
+        _wrappedValue = object
     }
 }
 
@@ -32,11 +38,16 @@ extension Weak: Hashable where Object: Hashable {
     }
 }
 
-extension Weak: Equatable where Object: Equatable {}
+extension Weak: Equatable where Object: Equatable {
+    public static func == (lhs: Weak<Object>, rhs: Weak<Object>) -> Bool {
+        lhs.wrappedValue == rhs.wrappedValue
+    }
+}
 
 /// Property wrapper representing a collection of weak values.
+@_documentation(visibility: internal)
 @propertyWrapper
-public struct WeakCollection<Collect, Element> where Collect: RangeReplaceableCollection, Collect.Element == Element?, Element: AnyObject {
+public struct WeakCollection<Collect, Element>: Sendable where Collect: RangeReplaceableCollection, Collect.Element == Element?, Element: AnyObject {
     private var weakObjects = [Weak<Element>]()
 
     public init(wrappedValue value: Collect) { save(collection: value) }
