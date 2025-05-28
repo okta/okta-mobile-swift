@@ -42,8 +42,6 @@ jobs:
         elif [[ "${github_ref}" == refs/tags/* ]]; then
           echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
           echo "tag_name=${tag_name}" >> $GITHUB_OUTPUT
-        else
-          echo "is_master_or_tagged=false" >> $GITHUB_OUTPUT
         fi
     - name: List Changed Files
       id: list_changed_files
@@ -63,29 +61,23 @@ jobs:
           cat changes
           echo EOF
         } >> $GITHUB_OUTPUT
-    - name: Check for Unit Test Changes
+    - name: Check for Source Changes
       id: check_source_changes
       run: |
         if grep -qE '^(Sources/|Tests/|Package)' changes; then
           echo "has_source_changes=true" >> $GITHUB_OUTPUT
-        else
-          echo "has_source_changes=false" >> $GITHUB_OUTPUT
         fi
     - name: Check for Documentation Changes
       id: check_documentation_changes
       run: |
         if grep -qE '^(Sources/.*\.(md|swift)|.github/workflows/documentation.yaml)' changes; then
           echo "has_documentation_changes=true" >> $GITHUB_OUTPUT
-        else
-          echo "has_documentation_changes=false" >> $GITHUB_OUTPUT
         fi
     - name: Check for UI Test Secrets
       id: check_secrets
       run: |
         if [[ -n "$TEST_CONFIGURATION" ]] && [[ -n "$TEST_OKTA_PLIST" ]]; then
           echo "has_secrets=true" >> $GITHUB_OUTPUT
-        else
-          echo "has_secrets=false" >> $GITHUB_OUTPUT
         fi
     - name: Report preflight check summary
       env:
@@ -96,11 +88,11 @@ jobs:
         has_documentation_changes: ${{ steps.check_documentation_changes.has_documentation_changes }}
         has_secrets: ${{ steps.check_secrets.has_secrets }}
       run: |
-        [[ "$is_master" = "true" ]] && master_status=":white_check_mark:"
-        [[ -n "$tag_name" ]] && tag_status=":white_check_mark: \`$tag_name\`"
-        [[ "$has_source_changes" = "true" ]] && source_status=":white_check_mark:"
-        [[ "$has_documentation_changes" = "true" ]] && doc_status=":white_check_mark:"
-        [[ "$has_secrets" = "true" ]] && secrets_status=":white_check_mark:"
+        [[ "$is_master" == "true" ]] && export master_status=":white_check_mark:"
+        [[ -n "$tag_name" ]] && export tag_status=":white_check_mark: \`$tag_name\`"
+        [[ "$has_source_changes" == "true" ]] && export source_status=":white_check_mark:"
+        [[ "$has_documentation_changes" == "true" ]] && export doc_status=":white_check_mark:"
+        [[ "$has_secrets" == "true" ]] && export secrets_status=":white_check_mark:"
 
         cat <<-__EOF__ >> $GITHUB_STEP_SUMMARY
         | Preflight Check | Enabled |
