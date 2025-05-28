@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 /// Errors that may occur at the API or network level.
 public enum APIClientError: Error {
     /// Could not create an invalid URL. This typically means the string passed to `URL` was malformed.
