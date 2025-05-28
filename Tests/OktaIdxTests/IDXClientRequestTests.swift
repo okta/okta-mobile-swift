@@ -73,7 +73,11 @@ class IDXClientRequestTests: XCTestCase {
         XCTAssertEqual(data["client_id"], "clientId")
         XCTAssertEqual(data["scope"], "openid+profile")
         XCTAssertEqual(data["code_challenge"], pkce.codeChallenge)
+        #if os(Linux)
+        XCTAssertEqual(data["code_challenge_method"], "plain")
+        #else
         XCTAssertEqual(data["code_challenge_method"], "S256")
+        #endif
         XCTAssertEqual(data["redirect_uri"], "redirect:/uri")
         XCTAssertEqual(data["state"], "state")
         XCTAssertEqual(data["recovery_token"], "RecoveryToken")
