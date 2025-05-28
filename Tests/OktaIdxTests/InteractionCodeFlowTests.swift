@@ -65,6 +65,7 @@ class InteractionCodeFlowTests: XCTestCase {
         XCTAssertNotNil(context.state)
         XCTAssertEqual(context.interactionHandle, "003Q14X7li")
 
+        await MainActor.yield()
         XCTAssertEqual(delegate.calls.count, 1)
         XCTAssertEqual(delegate.calls.first?.type, .response)
     }
