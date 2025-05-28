@@ -114,6 +114,11 @@ jobs:
           | Has integration test secrets | ${secrets_status} |
           __EOF__
 
+    - name: Upload Preflight Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: changes
+
   SwiftLint:
     name: Lint Sources
     needs: Preflight
