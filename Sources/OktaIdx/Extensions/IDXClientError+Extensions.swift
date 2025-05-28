@@ -26,9 +26,8 @@ extension InteractionCodeFlowError: Equatable {
             return lhsName == rhsName
         case (.missingRemediation(name: let lhsName), .missingRemediation(name: let rhsName)):
             return lhsName == rhsName
-        case (.responseValidationFailed(let lhsMessage, underlyingError: let lhsError),
-              .responseValidationFailed(let rhsMessage, underlyingError: let rhsError)):
-            return (lhsMessage == rhsMessage && lhsError as? NSError == rhsError as? NSError)
+        case (.responseValidationFailed(let lhsMessage), .responseValidationFailed(let rhsMessage)):
+            return lhsMessage == rhsMessage
         default:
             return false
         }
@@ -74,22 +73,13 @@ extension InteractionCodeFlowError: LocalizedError {
                                   comment: ""),
                 name)
 
-        case .responseValidationFailed(let message, let error):
-            if let error {
-                return String.localizedStringWithFormat(
-                    NSLocalizedString("response_validation_failed_underlying_error",
-                                      tableName: "OktaIdx",
-                                      bundle: .oktaIdx,
-                                      comment: ""),
-                    message, error.localizedDescription)
-            } else {
-                return String.localizedStringWithFormat(
-                    NSLocalizedString("response_validation_failed",
-                                      tableName: "OktaIdx",
-                                      bundle: .oktaIdx,
-                                      comment: ""),
-                    message)
-            }
+        case .responseValidationFailed(let message):
+            return String.localizedStringWithFormat(
+                NSLocalizedString("response_validation_failed",
+                                  tableName: "OktaIdx",
+                                  bundle: .oktaIdx,
+                                  comment: ""),
+                message)
         }
     }
 }

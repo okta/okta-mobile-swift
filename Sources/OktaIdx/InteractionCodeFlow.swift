@@ -486,5 +486,5 @@ public enum InteractionCodeFlowError: Error {
     case invalidParameter(name: String)
     case missingRequiredParameter(name: String)
     case missingRemediation(name: String)
-    case responseValidationFailed(_ message: String, underlyingError: (any Error)? = nil)
+    case responseValidationFailed(_ message: String)
 }

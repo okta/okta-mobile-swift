@@ -128,7 +128,7 @@ extension TestResponse where Self : Decodable {
             let fileUrl = Bundle.testResource(folderName: folder, fileName: name)
             return try data(from: .url(fileUrl))
         case .url(let url):
-            return try data(from: .json(try String(contentsOf: url)))
+            return try data(from: .json(try String(contentsOf: url, encoding: .utf8)))
         case .json(let json):
             let data = json.data(using: .utf8)!
             return try InteractionCodeFlow.IntrospectRequest.jsonDecoder.decode(Self.self, from: data)
