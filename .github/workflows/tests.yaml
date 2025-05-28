@@ -48,11 +48,14 @@ jobs:
       - name: List Changed Files
         id: list_changed_files
         run: |
-          if [[ -z "${{ github.event.before }}" ]] || ! git cat-file -e ${{ github.event.before }} 2>/dev/null; then
-            echo "No valid 'before' commit found. Listing all changes."
-            git diff --name-only HEAD > changes
-          else
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > changes
+          elif [[ "${{ github.event_name }}" == "push" && "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
             git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changes
+          elif [[ "${{ github.event_name }}" == "push" && "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            git ls-tree -r HEAD --name-only > changes
+          else
+            git ls-tree -r HEAD --name-only > changes
           fi
 
           {
