@@ -40,10 +40,8 @@ class IDXClientErrorTests: XCTestCase {
                        InteractionCodeFlowError.responseValidationFailed("message"))
         XCTAssertNotEqual(InteractionCodeFlowError.responseValidationFailed("first"),
                           InteractionCodeFlowError.responseValidationFailed("last"))
-        XCTAssertEqual(InteractionCodeFlowError.responseValidationFailed("message", underlyingError: APIClientError.invalidUrl),
-                       InteractionCodeFlowError.responseValidationFailed("message", underlyingError: APIClientError.invalidUrl))
-        XCTAssertNotEqual(InteractionCodeFlowError.responseValidationFailed("message", underlyingError: APIClientError.invalidUrl),
-                          InteractionCodeFlowError.responseValidationFailed("message", underlyingError: APIClientError.invalidResponse))
+        XCTAssertEqual(InteractionCodeFlowError.responseValidationFailed("message"),
+                       InteractionCodeFlowError.responseValidationFailed("message"))
     }
     
     func testDescription() {
@@ -59,7 +57,7 @@ class IDXClientErrorTests: XCTestCase {
                        "Remediation option \"cancel\" missing.")
         XCTAssertEqual(InteractionCodeFlowError.responseValidationFailed("Some authenticators have differing types").localizedDescription,
                        "Response validation failed: Some authenticators have differing types.")
-        XCTAssertEqual(InteractionCodeFlowError.responseValidationFailed("Invalid JSON value", underlyingError: APIClientError.invalidUrl).localizedDescription,
-                       "Response validation failed: Invalid JSON value (Could not create an invalid URL.).")
+        XCTAssertEqual(InteractionCodeFlowError.responseValidationFailed("Invalid JSON value").localizedDescription,
+                       "Response validation failed: Invalid JSON value.")
     }
 }
