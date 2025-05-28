@@ -285,13 +285,6 @@ extension AuthorizationCodeFlow {
             }
         }
     }
-
-    nonisolated public func reset(completion: @escaping @Sendable () -> Void) {
-        Task {
-            await reset()
-            completion()
-        }
-    }
 }
 
 extension AuthorizationCodeFlow: UsesDelegateCollection {
