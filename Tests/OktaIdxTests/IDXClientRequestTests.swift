@@ -17,6 +17,10 @@ import XCTest
 @testable import TestCommon
 #endif
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 class IDXClientRequestTests: XCTestCase {
     var issuer: URL!
     var redirectUri: URL!

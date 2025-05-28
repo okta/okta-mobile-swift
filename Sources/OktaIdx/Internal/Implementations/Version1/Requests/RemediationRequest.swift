@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 extension InteractionCodeFlow {
     struct RemediationRequest {
         let httpMethod: APIRequestMethod

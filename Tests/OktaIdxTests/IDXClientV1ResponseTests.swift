@@ -715,7 +715,10 @@ class IDXClientV1ResponseTests: XCTestCase {
         
         XCTAssertEqual(otp.sharedSecret, "64UBAAAM6GGG4AD")
         XCTAssertEqual(otp.mimeType, "image/png")
+
+        #if canImport(UIKit) || canImport(UIKit)
         XCTAssertNotNil(otp.image)
+        #endif
     }
     
     func testEnrollPollWithoutRelatedAuthenticators() throws {

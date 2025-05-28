@@ -81,12 +81,12 @@ jobs:
         fi
     - name: Report preflight check summary
       env:
-        is_master: ${{ steps.check_master.is_master }}
-        tag_name: ${{ steps.check_master.tag_name }}
-        changed_files: ${{ steps.list_changed_files.changed_files }}
-        has_source_changes: ${{ steps.check_source_changes.has_source_changes }}
-        has_documentation_changes: ${{ steps.check_documentation_changes.has_documentation_changes }}
-        has_secrets: ${{ steps.check_secrets.has_secrets }}
+        is_master: ${{ steps.check_master.outputs.is_master }}
+        tag_name: ${{ steps.check_master.outputs.tag_name }}
+        changed_files: ${{ steps.list_changed_files.outputs.changed_files }}
+        has_source_changes: ${{ steps.check_source_changes.outputs.has_source_changes }}
+        has_documentation_changes: ${{ steps.check_documentation_changes.outputs.has_documentation_changes }}
+        has_secrets: ${{ steps.check_secrets.outputs.has_secrets }}
       run: |
         if [[ "$is_master" == "true" ]]; then
           echo "Is committed to master"
