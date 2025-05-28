@@ -88,11 +88,26 @@ jobs:
         has_documentation_changes: ${{ steps.check_documentation_changes.has_documentation_changes }}
         has_secrets: ${{ steps.check_secrets.has_secrets }}
       run: |
-        [[ "$is_master" == "true" ]] && export master_status=":white_check_mark:"
-        [[ -n "$tag_name" ]] && export tag_status=":white_check_mark: \`$tag_name\`"
-        [[ "$has_source_changes" == "true" ]] && export source_status=":white_check_mark:"
-        [[ "$has_documentation_changes" == "true" ]] && export doc_status=":white_check_mark:"
-        [[ "$has_secrets" == "true" ]] && export secrets_status=":white_check_mark:"
+        if [[ "$is_master" == "true" ]]; then
+          echo "Is committed to master"
+          export master_status=":white_check_mark:"
+        fi
+        if [[ -n "$tag_name" ]]; then
+          echo "Pushed tag \`$tag_name\`"
+          export tag_status=":white_check_mark: \`$tag_name\`"
+        fi
+        if [[ "$has_source_changes" == "true" ]]; then
+          echo "Has source changes"
+          export source_status=":white_check_mark:"
+        fi
+        if [[ "$has_documentation_changes" == "true" ]]; then
+          echo "Has documentation changes"
+          export doc_status=":white_check_mark:"
+        fi
+        if [[ "$has_secrets" == "true" ]]; then
+          echo "Has secrets available"
+          export secrets_status=":white_check_mark:"
+        fi
 
         cat <<__EOF__ >> $GITHUB_STEP_SUMMARY
         | Preflight Check | Enabled |
@@ -136,7 +151,11 @@ jobs:
       matrix:
         os: 
           - macos-latest
+          - ubuntu-latest
         swift_version: ["5.10", "6.0"]
+        exclude:
+          - os: ubuntu-latest
+            swift_version: "5.10"
     timeout-minutes: 10
     steps:
     - uses: actions/checkout@v2
@@ -162,7 +181,9 @@ jobs:
 
   XcodeBuild:
     name: Xcode ${{ matrix.xcode_version }} on ${{ matrix.destination }}
-    needs: SwiftBuild
+    needs:
+    - SwiftBuild
+    - Documentation
     if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
     strategy:
       matrix:
