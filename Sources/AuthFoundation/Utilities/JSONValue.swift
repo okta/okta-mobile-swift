@@ -460,7 +460,7 @@ extension Bool: JSONRepresentable {
 extension Array: JSONRepresentable where Element: JSONRepresentable {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        .array(compactMap(\.json))
+        .array(compactMap({ $0.json }))
     }
 }
 
