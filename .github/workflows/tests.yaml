@@ -63,7 +63,6 @@ jobs:
           cat changes
           echo EOF
         } >> $GITHUB_OUTPUT
-
     - name: Check for Unit Test Changes
       id: check_source_changes
       run: |
@@ -113,11 +112,11 @@ jobs:
         | Documentation rebuild needed | ${doc_status} |
         | Has integration test secrets | ${secrets_status} |
         __EOF__
-
     - name: Upload Preflight Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: changes
+        path: changes
 
   SwiftLint:
     name: Lint Sources
@@ -248,7 +247,7 @@ jobs:
           zip -r ~/Build/$(basename "$archive").zip $(basename "$archive")
         done
     - name: Upload OktaIdx DocC Archive
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: OktaIdx.doccarchive.zip
         path: ~/Build/OktaIdx.doccarchive.zip
