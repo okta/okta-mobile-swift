@@ -159,4 +159,11 @@ final class ClaimCollectionTests: XCTestCase {
         let result = try JSONDecoder().decode(ClaimCollection<[String]?>.self, from: data)
         XCTAssertEqual(list, result)
     }
+
+    func testCodableNilOptionalCollection() throws {
+        let list = ClaimCollection<[String]?>(wrappedValue: nil)
+        let data = try JSONEncoder().encode(list)
+        let result = try JSONDecoder().decode(ClaimCollection<[String]?>.self, from: data)
+        XCTAssertEqual(list, result)
+    }
 }
