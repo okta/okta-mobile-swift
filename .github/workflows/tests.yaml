@@ -28,91 +28,91 @@ jobs:
       has_documentation_changes: ${{ steps.check_documentation_changes.outputs.has_documentation_changes }}
       has_secrets: ${{ steps.check_secrets.outputs.has_secrets }}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Check for Merge into Master or Release Tag
-        id: check_master
-        run: |
-          github_ref="${{ github.ref }}"
-          tag_name=${github_ref#refs/tags/}
-          if [[ "${{ github.ref }}" == "refs/heads/master" ]]; then
-            echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
-            echo "is_master=true" >> $GITHUB_OUTPUT
-          elif [[ "${github_ref}" == refs/tags/* ]]; then
-            echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
-            echo "tag_name=${tag_name}" >> $GITHUB_OUTPUT
-          else
-            echo "is_master_or_tagged=false" >> $GITHUB_OUTPUT
-          fi
-      - name: List Changed Files
-        id: list_changed_files
-        run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > changes
-          elif [[ "${{ github.event_name }}" == "push" && "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
-            git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changes
-          elif [[ "${{ github.event_name }}" == "push" && "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
-            git ls-tree -r HEAD --name-only > changes
-          else
-            git ls-tree -r HEAD --name-only > changes
-          fi
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Check for Merge into Master or Release Tag
+      id: check_master
+      run: |
+        github_ref="${{ github.ref }}"
+        tag_name=${github_ref#refs/tags/}
+        if [[ "${{ github.ref }}" == "refs/heads/master" ]]; then
+          echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
+          echo "is_master=true" >> $GITHUB_OUTPUT
+        elif [[ "${github_ref}" == refs/tags/* ]]; then
+          echo "is_master_or_tagged=true" >> $GITHUB_OUTPUT
+          echo "tag_name=${tag_name}" >> $GITHUB_OUTPUT
+        else
+          echo "is_master_or_tagged=false" >> $GITHUB_OUTPUT
+        fi
+    - name: List Changed Files
+      id: list_changed_files
+      run: |
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > changes
+        elif [[ "${{ github.event_name }}" == "push" && "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changes
+        elif [[ "${{ github.event_name }}" == "push" && "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+          git ls-tree -r HEAD --name-only > changes
+        else
+          git ls-tree -r HEAD --name-only > changes
+        fi
 
-          {
-            echo 'changed_files<<EOF'
-            cat changes
-            echo EOF
-          } >> $GITHUB_OUTPUT
+        {
+          echo 'changed_files<<EOF'
+          cat changes
+          echo EOF
+        } >> $GITHUB_OUTPUT
 
-      - name: Check for Unit Test Changes
-        id: check_source_changes
-        run: |
-          if grep -qE '^(Sources/|Tests/|Package)' changes; then
-            echo "has_source_changes=true" >> $GITHUB_OUTPUT
-          else
-            echo "has_source_changes=false" >> $GITHUB_OUTPUT
-          fi
-      - name: Check for Documentation Changes
-        id: check_documentation_changes
-        run: |
-          if grep -qE '^(Sources/.*\.(md|swift)|.github/workflows/documentation.yaml)' changes; then
-            echo "has_documentation_changes=true" >> $GITHUB_OUTPUT
-          else
-            echo "has_documentation_changes=false" >> $GITHUB_OUTPUT
-          fi
-      - name: Check for UI Test Secrets
-        id: check_secrets
-        run: |
-          if [[ -n "$TEST_CONFIGURATION" ]] && [[ -n "$TEST_OKTA_PLIST" ]]; then
-            echo "has_secrets=true" >> $GITHUB_OUTPUT
-          else
-            echo "has_secrets=false" >> $GITHUB_OUTPUT
-          fi
-      - name: Report preflight check summary
-        env:
-          is_master: ${{ steps.check_master.is_master }}
-          tag_name: ${{ steps.check_master.tag_name }}
-          changed_files: ${{ steps.list_changed_files.changed_files }}
-          has_source_changes: ${{ steps.check_source_changes.has_source_changes }}
-          has_documentation_changes: ${{ steps.check_documentation_changes.has_documentation_changes }}
-          has_secrets: ${{ steps.check_secrets.has_secrets }}
-        run: |
-          [[ "$is_master" = "true" ]] && master_status=":white_check_mark:"
-          [[ -n "$tag_name" ]] && tag_status=":white_check_mark: \`$tag_name\`"
-          [[ "$has_source_changes" = "true" ]] && source_status=":white_check_mark:"
-          [[ "$has_documentation_changes" = "true" ]] && doc_status=":white_check_mark:"
-          [[ "$has_secrets" = "true" ]] && secrets_status=":white_check_mark:"
+    - name: Check for Unit Test Changes
+      id: check_source_changes
+      run: |
+        if grep -qE '^(Sources/|Tests/|Package)' changes; then
+          echo "has_source_changes=true" >> $GITHUB_OUTPUT
+        else
+          echo "has_source_changes=false" >> $GITHUB_OUTPUT
+        fi
+    - name: Check for Documentation Changes
+      id: check_documentation_changes
+      run: |
+        if grep -qE '^(Sources/.*\.(md|swift)|.github/workflows/documentation.yaml)' changes; then
+          echo "has_documentation_changes=true" >> $GITHUB_OUTPUT
+        else
+          echo "has_documentation_changes=false" >> $GITHUB_OUTPUT
+        fi
+    - name: Check for UI Test Secrets
+      id: check_secrets
+      run: |
+        if [[ -n "$TEST_CONFIGURATION" ]] && [[ -n "$TEST_OKTA_PLIST" ]]; then
+          echo "has_secrets=true" >> $GITHUB_OUTPUT
+        else
+          echo "has_secrets=false" >> $GITHUB_OUTPUT
+        fi
+    - name: Report preflight check summary
+      env:
+        is_master: ${{ steps.check_master.is_master }}
+        tag_name: ${{ steps.check_master.tag_name }}
+        changed_files: ${{ steps.list_changed_files.changed_files }}
+        has_source_changes: ${{ steps.check_source_changes.has_source_changes }}
+        has_documentation_changes: ${{ steps.check_documentation_changes.has_documentation_changes }}
+        has_secrets: ${{ steps.check_secrets.has_secrets }}
+      run: |
+        [[ "$is_master" = "true" ]] && master_status=":white_check_mark:"
+        [[ -n "$tag_name" ]] && tag_status=":white_check_mark: \`$tag_name\`"
+        [[ "$has_source_changes" = "true" ]] && source_status=":white_check_mark:"
+        [[ "$has_documentation_changes" = "true" ]] && doc_status=":white_check_mark:"
+        [[ "$has_secrets" = "true" ]] && secrets_status=":white_check_mark:"
 
-          cat <<-__EOF__ >> $GITHUB_STEP_SUMMARY
-          | Preflight Check | Enabled |
-          | --- | --- |
-          | Merged to \`master\` | ${master_status} |
-          | Commit tagged | ${tag_status} |
-          | Changed files | \`$(wc -l changes)\` changed |
-          | Has source changes | ${source_status} |
-          | Documentation rebuild needed | ${doc_status} |
-          | Has integration test secrets | ${secrets_status} |
-          __EOF__
+        cat <<-__EOF__ >> $GITHUB_STEP_SUMMARY
+        | Preflight Check | Enabled |
+        | --- | --- |
+        | Merged to \`master\` | ${master_status} |
+        | Commit tagged | ${tag_status} |
+        | Changed files | \`$(wc -l changes)\` changed |
+        | Has source changes | ${source_status} |
+        | Documentation rebuild needed | ${doc_status} |
+        | Has integration test secrets | ${secrets_status} |
+        __EOF__
 
     - name: Upload Preflight Artifacts
       uses: actions/upload-artifact@v2
@@ -125,16 +125,16 @@ jobs:
     if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Swift Lint
-        run: |
-          if ! which -s swiftlint; then
-            echo "Installing SwiftLint..."
-            brew install swiftlint
-          fi
-      - name: Lint code
-        run: |
-          swiftlint lint --reporter github-actions-logging Sources
+    - uses: actions/checkout@v2
+    - name: Setup Swift Lint
+      run: |
+        if ! which -s swiftlint; then
+          echo "Installing SwiftLint..."
+          brew install swiftlint
+        fi
+    - name: Lint code
+      run: |
+        swiftlint lint --reporter github-actions-logging Sources
 
   SwiftBuild:
     name: Swift ${{ matrix.swift_version }} Unit Tests on ${{ matrix.os }}
