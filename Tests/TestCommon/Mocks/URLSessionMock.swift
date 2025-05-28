@@ -13,7 +13,7 @@
 import Foundation
 import XCTest
 
-import AuthFoundation
+@testable import AuthFoundation
 @testable import OktaIdx
 
 #if os(Linux)
@@ -21,46 +21,79 @@ import FoundationNetworking
 #endif
 
 extension Response {
-    class func response(flow: InteractionCodeFlowAPI,
+    class func response(flow: any InteractionCodeFlowAPI,
                         data: Data) throws -> Response
     {
-        let response = try InteractionCodeFlow.IntrospectRequest.jsonDecoder.decode(IonResponse.self, from: data)
-        return try Response(flow: flow, ion: response)
+        do {
+            let response = try InteractionCodeFlow.IntrospectRequest.jsonDecoder.decode(IonResponse.self, from: data)
+            return try Response(flow: flow, ion: response)
+        } catch {
+            print("Error decoding JSON: \(error)")
+            throw error
+        }
     }
 }
 
-class URLSessionMock: URLSessionProtocol {
+class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
+    var configuration: URLSessionConfiguration = .ephemeral
+    let queue = DispatchQueue(label: "URLSessionMock")
+    private let lock = Lock()
+
     struct Call {
         let url: String
         let data: Data?
         let response: HTTPURLResponse?
-        let error: Error?
+        let error: (any Error)?
     }
-    
-    var configuration: URLSessionConfiguration = .ephemeral
+
     var requestDelay: TimeInterval?
 
-    private(set) var requests: [URLRequest] = []
+    private var _requests: [URLRequest] = []
+    private(set) var requests: [URLRequest] {
+        get {
+            lock.withLock {
+                _requests
+            }
+        }
+        set {
+            lock.withLock {
+                _requests = newValue
+            }
+        }
+    }
+
     func resetRequests() {
         requests.removeAll()
     }
 
     private(set) var expectedCalls: [Call] = []
     func expect(call: Call) {
-        expectedCalls.append(call)
+        queue.sync {
+            expectedCalls.append(call)
+        }
     }
-    
+
+    func request(matching string: String) -> URLRequest? {
+        requests.first(where: { $0.url?.absoluteString.localizedCaseInsensitiveContains(string) ?? false })
+    }
+
+    func formDecodedBody(matching string: String) -> [String: String?]? {
+        request(matching: string)?.httpBody?.urlFormEncoded
+    }
+
     func expect(_ url: String,
                 data: Data?,
                 statusCode: Int = 200,
                 contentType: String = "application/x-www-form-urlencoded",
-                error: Error? = nil)
+                headerFields: [String: String]? = nil,
+                error: (any Error)? = nil)
     {
+        let headerFields = ["Content-Type": contentType].merging(headerFields ?? [:]){ (_, new) in new }
         let response = HTTPURLResponse(url: URL(string: url)!,
                                        statusCode: statusCode,
                                        httpVersion: "http/1.1",
-                                       headerFields: ["Content-Type": contentType])
-        
+                                       headerFields: headerFields)
+
         expect(call: Call(url: url,
                           data: data,
                           response: response,
@@ -68,91 +101,41 @@ class URLSessionMock: URLSessionProtocol {
     }
 
     func call(for url: String) -> Call? {
-        guard let index = expectedCalls.firstIndex(where: { call in
-            call.url == url
-        }) else {
-            XCTFail("Mock URL \(url) not found")
-            return nil
-        }
-        
-        return expectedCalls.remove(at: index)
-    }
-    
-    func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
-        let response = call(for: request.url!.absoluteString)
-        requests.append(request)
-        return URLSessionDataTaskMock(session: self,
-                                      data: response?.data,
-                                      response: response?.response,
-                                      error: response?.error,
-                                      completionHandler: completionHandler)
-    }
-
-    func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
-        let response = call(for: request.url!.absoluteString)
-        requests.append(request)
-        return URLSessionDataTaskMock(session: self,
-                                      data: response?.data,
-                                      response: response?.response,
-                                      error: response?.error,
-                                      completionHandler: completionHandler)
-    }
-    
-    #if swift(>=5.5.1)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
-    func data(for request: URLRequest, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse) {
-        requests.append(request)
-
-        let response = call(for: request.url!.absoluteString)
-        if let error = response?.error {
-            throw error
-        }
-        
-        else if let data = response?.data,
-                let response = response?.response
-        {
-            return (data, response)
-        }
-        
-        else {
-            throw APIClientError.unknown
-        }
-    }
-    #endif
-}
-
-class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
-    weak var session: URLSessionMock?
-    
-    let completionHandler: (Data?, HTTPURLResponse?, Error?) -> Void
-    let data: Data?
-    let response: HTTPURLResponse?
-    let error: Error?
-    
-    init(session: URLSessionMock,
-         data: Data?,
-         response: HTTPURLResponse?,
-         error: Error?,
-         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
-    {
-        self.session = session
-        self.completionHandler = completionHandler
-        self.data = data
-        self.response = response
-        self.error = error
-    }
-    
-    func resume() {
-        guard let delay = session?.requestDelay else {
-            DispatchQueue.global().async {
-                self.completionHandler(self.data, self.response, self.error)
+        queue.sync {
+            guard let index = expectedCalls.firstIndex(where: { call in
+                call.url == url
+            }) else {
+                XCTFail("Mock URL \(url) not found")
+                return nil
             }
-            return
+
+            return expectedCalls.remove(at: index)
         }
-        
-        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
-            self.completionHandler(self.data, self.response, self.error)
+    }
+
+    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        let call = call(for: request.url!.absoluteString)
+        requests.append(request)
+
+        return try await withCheckedThrowingContinuation { continuation in
+            Task {
+                if let delay = requestDelay {
+                    try await Task.sleep(delay: delay)
+                }
+
+                guard let data = call?.data,
+                      let response = call?.response
+                else {
+                    if let error = call?.error {
+                        continuation.resume(throwing: error)
+                    } else {
+                        continuation.resume(throwing: APIClientError.missingResponse(request: request))
+                    }
+                    return
+                }
+
+                continuation.resume(returning: (data, response))
+            }
         }
     }
 }
-

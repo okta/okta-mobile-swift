@@ -14,7 +14,7 @@ import Foundation
 
 extension Response {
     /// The intent of the authentication workflow, as returned from the server.
-    public enum Intent {
+    public enum Intent: Sendable {
         case enrollNewUser
         case login
         case credentialEnrollment

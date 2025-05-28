@@ -19,14 +19,14 @@ class IDXExtractFormValueTests: XCTestCase {
     func testPlainDefaultValues() throws {
         let form = try XCTUnwrap(Form(fields: [
             Form.Field(name: "stateHandle",
-                       value: "abcEasyAs123" as AnyObject,
+                       value: "abcEasyAs123",
                        visible: false,
                        mutable: false,
                        required: true,
                        secret: false)
         ]))
         let result = try form.formValues()
-        XCTAssertEqual(result as? [String:String], [
+        XCTAssertEqual(result, [
             "stateHandle": "abcEasyAs123"
         ])
     }
@@ -34,7 +34,7 @@ class IDXExtractFormValueTests: XCTestCase {
     func testPlainWithAdditiveValues() throws {
         let form = try XCTUnwrap(Form(fields: [
             Form.Field(name: "stateHandle",
-                      value: "abcEasyAs123" as AnyObject,
+                      value: "abcEasyAs123",
                       visible: false,
                       mutable: false,
                       required: true,
@@ -47,7 +47,7 @@ class IDXExtractFormValueTests: XCTestCase {
         ]))
         form["identifier"]?.value = "me@example.com"
         let result = try form.formValues()
-        XCTAssertEqual(result as? [String:String], [
+        XCTAssertEqual(result, [
             "stateHandle": "abcEasyAs123",
             "identifier": "me@example.com"
         ])
@@ -56,7 +56,7 @@ class IDXExtractFormValueTests: XCTestCase {
     func testNestedWithRootDefaults() throws {
         let form = try XCTUnwrap(Form(fields: [
             Form.Field(name: "stateHandle",
-                      value: "abcEasyAs123" as AnyObject,
+                      value: "abcEasyAs123",
                       visible: false,
                       mutable: false,
                       required: true,
@@ -79,8 +79,8 @@ class IDXExtractFormValueTests: XCTestCase {
         form["credentials.passcode"]?.value = "password"
         
         let result = try form.formValues()
-        XCTAssertEqual(result["stateHandle"] as? String, "abcEasyAs123")
-        XCTAssertEqual(result["credentials"] as? [String:String], [ "passcode": "password" ])
+        XCTAssertEqual(result["stateHandle"], "abcEasyAs123")
+        XCTAssertEqual(result["credentials"], .object(["passcode": "password"]))
     }
 
     func testNestedWithNestedDefaults() throws {
@@ -91,13 +91,13 @@ class IDXExtractFormValueTests: XCTestCase {
                                    secret: true,
                                    form: Form(fields: [
                                     Form.Field(name: "id",
-                                              value: "idvalue" as AnyObject,
+                                              value: "idvalue",
                                               visible: true,
                                               mutable: false,
                                               required: true,
                                               secret: false),
                                     Form.Field(name: "methodType",
-                                              value: "security_question" as AnyObject,
+                                              value: "security_question",
                                               visible: true,
                                               mutable: false,
                                               required: false,
@@ -105,7 +105,7 @@ class IDXExtractFormValueTests: XCTestCase {
                                    ]))
         let form = try XCTUnwrap(Form(fields: [
             Form.Field(name: "stateHandle",
-                      value: "abcEasyAs123" as AnyObject,
+                      value: "abcEasyAs123",
                       visible: false,
                       mutable: false,
                       required: true,
@@ -121,22 +121,22 @@ class IDXExtractFormValueTests: XCTestCase {
         form["authenticator"]?.selectedOption = nestedForm
         
         let result = try form.formValues()
-        XCTAssertEqual(result["stateHandle"] as? String, "abcEasyAs123")
-        XCTAssertEqual(result["authenticator"] as? [String:String], [
+        XCTAssertEqual(result["stateHandle"], "abcEasyAs123")
+        XCTAssertEqual(result["authenticator"], JSON.object([
             "id": "idvalue",
             "methodType": "security_question"
-        ])
+        ]))
     }
 
     func testNestedWithNestedDefaultsAndValues() throws {
         let smsOption = Form.Field(label: "SMS",
-                                   value: "sms" as AnyObject,
+                                   value: "sms",
                                    visible: true,
                                    mutable: true,
                                    required: false,
                                    secret: false)
         let voiceOption = Form.Field(label: "Voice call",
-                                     value: "voice" as AnyObject,
+                                     value: "voice",
                                      visible: true,
                                      mutable: true,
                                      required: false,
@@ -148,7 +148,7 @@ class IDXExtractFormValueTests: XCTestCase {
                                     secret: true,
                                     form: Form(fields: [
                                         Form.Field(name: "id",
-                                                   value: "idvalue" as AnyObject,
+                                                   value: "idvalue",
                                                    visible: true,
                                                    mutable: false,
                                                    required: true,
@@ -169,7 +169,7 @@ class IDXExtractFormValueTests: XCTestCase {
                                     ]))
         let form = try XCTUnwrap(Form(fields: [
             Form.Field(name: "stateHandle",
-                      value: "abcEasyAs123" as AnyObject,
+                      value: "abcEasyAs123",
                       visible: false,
                       mutable: false,
                       required: true,
@@ -187,11 +187,11 @@ class IDXExtractFormValueTests: XCTestCase {
         nestedForm.form?["phoneNumber"]?.value = "+1 123-555-1234"
         
         let result = try form.formValues()
-        XCTAssertEqual(result["stateHandle"] as? String, "abcEasyAs123")
-        XCTAssertEqual(result["authenticator"] as? [String:String], [
+        XCTAssertEqual(result["stateHandle"], "abcEasyAs123")
+        XCTAssertEqual(result["authenticator"], JSON.object([
             "id": "idvalue",
             "methodType": "sms",
             "phoneNumber": "+1 123-555-1234"
-        ])
+        ]))
     }
 }

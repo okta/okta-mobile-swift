@@ -12,35 +12,35 @@
 
 import Foundation
 
-@available(*, unavailable, renamed: "InteractionCodeFlow")
-public struct IDXClient {
-    @available(*, unavailable)
-    public struct Configuration {
-        @available(*, unavailable)
-        public init(issuer: String,
-                    clientId: String,
-                    clientSecret: String?,
-                    scopes: [String],
-                    redirectUri: String) {}
-    }
-    
-    @available(*, unavailable)
-    public enum Option: Hashable {}
-    
-    @available(*, unavailable,
-                 renamed: "start(options:completion:)",
-                 message: "IDXClient replaced with InteractionCodeFlow")
-    public static func start(with configuration: Any,
-                             options: [Option: String]? = nil,
-                             completion: @escaping (Result<IDXClient, Error>) -> Void) {}
-    
-    @available(*, unavailable,
-                 renamed: "start(options:completion:)",
-                 message: "IDXClient replaced with InteractionCodeFlow")
-    public static func start(with configuration: Configuration,
-                             options: [String: String]? = nil,
-                             completion: @escaping (_ client: IDXClient?, _ error: Error?) -> Void) {}
-    
-    @available(*, unavailable)
-    public func resume(completion: ((Result<Response, Error>) -> Void)?) {}
-}
+//@available(*, unavailable, renamed: "InteractionCodeFlow")
+//public struct IDXClient {
+//    @available(*, unavailable)
+//    public struct Configuration {
+//        @available(*, unavailable)
+//        public init(issuer: String,
+//                    clientId: String,
+//                    clientSecret: String?,
+//                    scopes: [String],
+//                    redirectUri: String) {}
+//    }
+//    
+//    @available(*, unavailable)
+//    public enum Option: Hashable {}
+//    
+//    @available(*, unavailable,
+//                 renamed: "start(options:completion:)",
+//                 message: "IDXClient replaced with InteractionCodeFlow")
+//    public static func start(with configuration: Any,
+//                             options: [Option: String]? = nil,
+//                             completion: @escaping (Result<IDXClient, Error>) -> Void) {}
+//    
+//    @available(*, unavailable,
+//                 renamed: "start(options:completion:)",
+//                 message: "IDXClient replaced with InteractionCodeFlow")
+//    public static func start(with configuration: Configuration,
+//                             options: [String: String]? = nil,
+//                             completion: @escaping (_ client: IDXClient?, _ error: Error?) -> Void) {}
+//    
+//    @available(*, unavailable)
+//    public func resume(completion: ((Result<Response, Error>) -> Void)?) {}
+//}

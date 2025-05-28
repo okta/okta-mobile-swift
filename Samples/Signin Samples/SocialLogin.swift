@@ -50,7 +50,7 @@ public class SocialLogin {
     /// - Parameters:
     ///   - service: Social service to authenticate against.
     ///   - presentationContext: Optional presentation context to present login from.
-    public func login(service: Capability.SocialIDP.Service,
+    public func login(service: SocialIDPCapability.Service,
                       from presentationContext: ASWebAuthenticationPresentationContextProviding? = nil) async throws -> Token
     {
         // Begin the authentication flow, returning the list of remediations.
@@ -83,7 +83,7 @@ public class SocialLogin {
 
     // Present a browser with the social IDP's redirect URL, returning
     // the callback it subsequently redirects to.
-    func socialRedirect(using capability: Capability.SocialIDP,
+    func socialRedirect(using capability: SocialIDPCapability,
                         from presentationContext: ASWebAuthenticationPresentationContextProviding?) async throws -> URL
     {
         // Retrieve the Redirect URL scheme from our configuration, to

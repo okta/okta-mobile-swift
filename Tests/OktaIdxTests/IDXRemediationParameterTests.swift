@@ -25,14 +25,11 @@ class IDXRemediationParameterTests: XCTestCase {
     override func setUpWithError() throws {
         let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
         let redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
                               session: urlSession)
-        
-        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
-        
-        flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
+        flowMock = InteractionCodeFlowMock(client: client, redirectUri: redirectUri)
     }
 
     func testFlatForm() throws {
@@ -55,9 +52,9 @@ class IDXRemediationParameterTests: XCTestCase {
         rememberMe.value = true
 
         let result = try remediationOption.form.formValues()
-        XCTAssertEqual(result["stateHandle"] as? String, "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
-        XCTAssertEqual(result["identifier"] as? String, "test@example.com")
-        XCTAssertEqual(result["rememberMe"] as? Bool, true)
+        XCTAssertEqual(result["stateHandle"], "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
+        XCTAssertEqual(result["identifier"], "test@example.com")
+        XCTAssertEqual(result["rememberMe"], true)
     }
     
     func testNestedForm() throws {
@@ -79,11 +76,9 @@ class IDXRemediationParameterTests: XCTestCase {
         passcode.value = "password"
 
         let result = try remediationOption.form.formValues()
-        XCTAssertEqual(result["stateHandle"] as? String, "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
-        
-        let credentialResult = result["credentials"] as? [String:Any]
-        XCTAssertNotNil(credentialResult)
-        XCTAssertEqual(credentialResult?["passcode"] as? String, "password")
+        XCTAssertEqual(result["stateHandle"], "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
+        XCTAssertEqual(result["credentials"]?["passcode"], "password")
+        XCTAssertEqual(result["credentials"], .object(["passcode": "password"]))
     }
 
     func testNestedFormWithUnnamedOption() throws {
@@ -105,12 +100,9 @@ class IDXRemediationParameterTests: XCTestCase {
         authenticator.selectedOption = emailOption
 
         let result = try remediationOption.form.formValues()
-        XCTAssertEqual(result["stateHandle"] as? String, "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
-        
-        let authenticatorResult = result["authenticator"] as? [String:Any]
-        XCTAssertNotNil(authenticatorResult)
-        XCTAssertEqual(authenticatorResult?["id"] as? String, "aut3jya5v1oIgaLuV0g7")
-        XCTAssertEqual(authenticatorResult?["methodType"] as? String, "email")
+        XCTAssertEqual(result["stateHandle"], "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
+        XCTAssertEqual(result["authenticator"]?["id"], "aut3jya5v1oIgaLuV0g7")
+        XCTAssertEqual(result["authenticator"]?["methodType"], "email")
     }
 
     func testNestedFormWithCustomizedOption() throws {
@@ -137,12 +129,9 @@ class IDXRemediationParameterTests: XCTestCase {
         phoneNumber.value = "5551234567"
 
         let result = try remediationOption.form.formValues()
-        XCTAssertEqual(result["stateHandle"] as? String, "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
-        
-        let authenticatorResult = result["authenticator"] as? [String:Any]
-        XCTAssertNotNil(authenticatorResult)
-        XCTAssertEqual(authenticatorResult?["id"] as? String, "aut3jya5v26pKeUb30g7")
-        XCTAssertEqual(authenticatorResult?["methodType"] as? String, "sms")
-        XCTAssertEqual(authenticatorResult?["phoneNumber"] as? String, "5551234567")
+        XCTAssertEqual(result["stateHandle"], "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
+        XCTAssertEqual(result["authenticator"]?["id"], "aut3jya5v26pKeUb30g7")
+        XCTAssertEqual(result["authenticator"]?["methodType"], "sms")
+        XCTAssertEqual(result["authenticator"]?["phoneNumber"], "5551234567")
     }
 }

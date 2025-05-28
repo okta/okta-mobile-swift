@@ -25,14 +25,12 @@ class IDXAuthenticatorCollectionTests: XCTestCase {
     override func setUpWithError() throws {
         let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
         let redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "all",
+                              scope: "openid profile",
                               session: urlSession)
-        
-        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
-        
-        flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
+
+        flowMock = InteractionCodeFlowMock(client: client, redirectUri: redirectUri)
     }
 
     func testCurrentAuthenticatorWithoutRelatesTo() throws {

@@ -18,29 +18,7 @@ import Foundation
 /// This permits a user to be authenticated using a dynamic and customizable workflow that is driven by server-side policy configuration. A user is given choices in how they authenticate, how they verify one or more authentication factors, and can enable self-service registration and authenticator enrollment.
 ///
 /// This class is used to communicate which application, defined within Okta, the user is being authenticated with. From this point a workflow is initiated, consisting of a series of authentication ``Remediation`` steps. At each step, your application can introspect the ``Response`` object to determine which UI should be presented to your user to guide them through to login.
-public final class InteractionCodeFlow: AuthenticationFlow {
-    /// Options to use when initiating a ``InteractionCodeFlow`` sign in flow.
-    ///
-    /// These options enable you to customize certain attributes used during the beginning of a session.
-    public enum Option: String {
-        /// Option used when a client needs to supply its own custom state value when initiating an authenticaiton flow.
-        case state
-        
-        /// Option used when a user is authenticating using a recovery token.
-        case recoveryToken = "recovery_token"
-
-        /// Option indicating whether or not a device identifier should be sent on API requests, which enables the device to be remembered.
-        ///
-        /// This option should be used when you _do not want_ the device to be remembered by Okta.
-        case omitDeviceToken
-    }
-    
-    /// The type used for the completion  handler result from any method that returns an ``Response``.
-    /// - Parameters:
-    ///   - response: The ``Response`` object that describes the next workflow steps.
-    ///   - error: Describes the error that occurred, or `nil` if the request was successful.
-    public typealias ResponseResult = (Result<Response, InteractionCodeFlowError>) -> Void
-
+public actor InteractionCodeFlow: AuthenticationFlow {
     /// The type used for the completion  handler result from any method that returns a `Token`.
     /// - Parameters:
     ///   - token: The `Token` object created when the token is successfully exchanged.
@@ -48,408 +26,425 @@ public final class InteractionCodeFlow: AuthenticationFlow {
     public typealias TokenResult = (Result<Token, InteractionCodeFlowError>) -> Void
 
     /// The OAuth2Client this authentication flow will use.
-    public let client: OAuth2Client
-    
-    /// The application's redirect URI.
-    public let redirectUri: URL
+    nonisolated public let client: OAuth2Client
 
-    /// The UUID to use to identify this device when using "Remeber This Device".
-    ///
-    /// If this value is not supplied to the initializer, a default may be automatically generated at runtime.
-    public let deviceIdentifier: UUID?
-
-    /// Any additional query string parameters you would like to supply to the authorization server.
-    public let additionalParameters: [String: String]?
+    /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
+    nonisolated public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    public private(set) var isAuthenticating: Bool = false {
-        didSet {
-            guard oldValue != isAuthenticating else {
-                return
-            }
-            
-            if isAuthenticating {
-                delegateCollection.invoke { $0.authenticationStarted(flow: self) }
-            } else {
-                delegateCollection.invoke { $0.authenticationFinished(flow: self) }
-            }
-        }
+    nonisolated public var isAuthenticating: Bool {
+        withIsolationSync { await self._isAuthenticating } ?? false
     }
 
-    /// The current context for the authentication session.
+    /// The context that stores the state for the current authentication session.
     ///
     /// This value is used when resuming authentication at a later date or after app launch, and to ensure the final token exchange can be completed.
-    public internal(set) var context: Context?
-    
-    /// The options used when starting an authentication flow.
-    ///
-    /// This is updated when the ``start(options:completion:)`` (or ``start(options:)``) method is invoked, and is cleared when ``reset()`` is called.
-    public internal(set) var options: [Option: Any]?
+    nonisolated public var context: Context? {
+        withIsolationSync { await self._context }
+    }
 
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
-    ///   - issuer: The issuer URL.
-    ///   - clientId: The client ID
-    ///   - scopes: The scopes to request
+    ///   - issuerURL: The issuer URL.
+    ///   - clientId: The client ID.
+    ///   - scope: The scopes to request.
     ///   - redirectUri: The redirect URI for the client.
-    ///   - additionalParameters: Optional parameters to include on the authorize URI.
-    ///   - deviceIdentifier: Optional UUID to use to identify this device when using "Remeber This Device".
-    public convenience init(issuer: URL,
-                            clientId: String,
-                            scopes: String,
-                            redirectUri: URL,
-                            additionalParameters: [String: String]? = nil,
-                            deviceIdentifier: UUID? = nil)
+    ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
+    @inlinable
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: ClaimCollection<[String]>,
+                redirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(redirectUri: redirectUri,
-                  additionalParameters: additionalParameters,
-                  deviceIdentifier: deviceIdentifier,
-                  client: OAuth2Client(baseURL: issuer,
-                                       clientId: clientId,
-                                       scopes: scopes))
+        self.init(verifiedClient: OAuth2Client(issuerURL: issuerURL,
+                                               clientId: clientId,
+                                               scope: scope,
+                                               redirectUri: redirectUri),
+                  additionalParameters: additionalParameters)
     }
-    
+
+    @inlinable
+    @_documentation(visibility: private)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: some WhitespaceSeparated,
+                redirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
+        self.init(verifiedClient: OAuth2Client(issuerURL: issuerURL,
+                                               clientId: clientId,
+                                               scope: .init(wrappedValue: scope.whitespaceSeparated),
+                                               redirectUri: redirectUri),
+                  additionalParameters: additionalParameters)
+    }
+
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
-    ///   - configuration: The configuration to use for this authentication flow.
-    ///   - additionalParameters: Optional parameters to include on the authorize URI.
-    ///   - deviceIdentifier: Optional UUID to use to identify this device when using "Remeber This Device".
     ///   - client: The `OAuth2Client` to use with this flow.
-    public init(redirectUri: URL,
-                additionalParameters: [String: String]? = nil,
-                deviceIdentifier: UUID? = nil,
-                client: OAuth2Client)
+    ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
+    public init(client: OAuth2Client,
+                additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
+        guard client.configuration.redirectUri != nil else {
+            throw OAuth2Error.redirectUriRequired
+        }
+
+        self.init(verifiedClient: client, additionalParameters: additionalParameters)
+    }
+
+    @usableFromInline
+    init(verifiedClient client: OAuth2Client,
+         additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
+        assert(SDKVersion.oktaIdx != nil)
 
         self.client = client
-        self.redirectUri = redirectUri
         self.additionalParameters = additionalParameters
-        self.deviceIdentifier = deviceIdentifier
-        client.add(delegate: self)
     }
-    
-    /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
-    public convenience init() throws {
-        try self.init(try .init())
-    }
-    
-    /// Initializer that uses the configuration defined within the given file URL.
-    /// - Parameter fileURL: File URL to a `plist` containing client configuration.
-    public convenience init(plist fileURL: URL) throws {
-        try self.init(try .init(plist: fileURL))
-    }
-    
-    private convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
-        guard let redirectUri = config.redirectUri else {
-            throw OAuth2Client.PropertyListConfigurationError.missingConfigurationValues
-        }
 
-        self.init(issuer: config.issuer,
-                  clientId: config.clientId,
-                  scopes: config.scopes,
-                  redirectUri: redirectUri,
-                  additionalParameters: config.additionalParameters)
-    }
-    
     /// Starts a new authentication session. If the client is able to successfully interact with Okta Identity Engine, a ``context-swift.property`` is assigned, and the initial ``Response`` is returned.
     /// - Parameters:
-    ///   - options: Options to include within the OAuth2 transaction.
-    ///   - completion: Completion block to be invoked when the session is started.
-    public func start(options: [Option: Any]? = nil,
-                      completion: @escaping ResponseResult)
-    {
-        if isAuthenticating {
-            cancel()
-        }
-        
-        // Ensure we have, at minimum, a state value
-        let state: String = options?[.state] as? String ?? UUID().uuidString
-        var options = options ?? [:]
-        options[.state] = state
-        
-        guard let pkce = PKCE() else {
-            completion(.failure(.platformUnsupported))
-            return
-        }
-        
-        preStartReset()
-        
-        self.isAuthenticating = true
-        self.options = options
+    ///   - context: Optional context to provide when customizing the state parameter.
+    /// - Returns: The URL a user should be presented with within a browser, to continue authorization.
+    public func start(with context: Context = .init()) async throws -> Response {
+        _context = context
+        _isAuthenticating = true
 
-        let request = InteractRequest(baseURL: client.baseURL,
-                                      clientId: client.configuration.clientId,
-                                      scope: client.configuration.scopes,
-                                      redirectUri: redirectUri,
-                                      options: options,
-                                      pkce: pkce)
-        request.send(to: client) { result in
-            switch result {
-            case .failure(let error):
-                self.cancel()
-                self.send(error: .apiError(error), completion: completion)
-            case .success(let response):
-                let context = Context(interactionHandle: response.result.interactionHandle,
-                                      state: state,
-                                      pkce: pkce)
-                self.context = context
-                self.resume(completion: completion)
+        return try await withExpression {
+            guard var context = _context else {
+                throw OAuth2Error.invalidContext
             }
+
+            let openIdConfiguration = try await client.openIdConfiguration()
+            let interact = try await InteractRequest(openIdConfiguration: openIdConfiguration,
+                                                     clientConfiguration: client.configuration,
+                                                     additionalParameters: additionalParameters,
+                                                     context: context)
+                .send(to: client)
+                .result
+            context.interactionHandle = interact.interactionHandle
+            _context = context
+
+            let introspect = try await IntrospectRequest(openIdConfiguration: openIdConfiguration,
+                                                         clientConfiguration: client.configuration,
+                                                         additionalParameters: additionalParameters,
+                                                         context: context)
+                .send(to: client)
+                .result
+
+            return try Response(flow: self, ion: introspect)
+        } success: { result in
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            }
+        } failure: { error in
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            }
+            finished()
         }
     }
-    
+
     /// Resumes the authentication state to identify the available remediation steps.
     ///
-    /// This method is usually performed after an ``InteractionCodeFlow`` is created in ``start(options:completion:)``, but can also be called at any time to identify what next remediation steps are available to the user.
-    /// - Important:
-    /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to process any response or error returned from this call.
-    /// - Parameters:
-    ///   - completion: Optional completion handler invoked when a response is received.
-    public func resume(completion: ResponseResult? = nil) {
-        guard let context = context else {
-            send(error: .invalidContext, completion: completion)
-            return
-        }
-        
-        let request: IntrospectRequest
-        do {
-            request = try IntrospectRequest(baseURL: client.baseURL,
-                                            interactionHandle: context.interactionHandle)
-        } catch let error as InteractionCodeFlowError {
-            send(error: error, completion: completion)
-            return
-        } catch {
-            send(error: .internalError(error), completion: completion)
-            return
-        }
-        
-        request.send(to: client) { result in
-            switch result {
-            case .failure(let error):
-                self.send(error: .apiError(error),
-                          completion: completion)
-            case .success(let response):
-                do {
-                    self.send(response: try Response(flow: self, ion: response.result),
-                              completion: completion)
-                } catch let error as APIClientError {
-                    self.send(error: .apiError(error), completion: completion)
-                    return
-                } catch {
-                    self.send(error: .internalError(error), completion: completion)
-                    return
-                }
+    /// This method is usually performed after an ``InteractionCodeFlow`` is created in ``start(with:)``, but can also be called at any time to identify what next remediation steps are available to the user.
+    public func resume() async throws -> Response {
+        return try await withExpression {
+            guard let context = _context else {
+                throw OAuth2Error.invalidContext
+            }
+
+            let introspect = try await IntrospectRequest(openIdConfiguration: try await client.openIdConfiguration(),
+                                                         clientConfiguration: client.configuration,
+                                                         additionalParameters: additionalParameters,
+                                                         context: context)
+                .send(to: client)
+                .result
+
+            return try Response(flow: self, ion: introspect)
+        } success: { result in
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            }
+        } failure: { error in
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
             }
         }
     }
-    
-    /// Evaluates the given redirect URL to determine what next steps can be performed. This is usually used when receiving a redirection from an IDP authentication flow.
-    /// - Parameters:
-    ///   - url: URL with the app’s custom scheme. The value must match one of the authorized redirect URIs, which are configured in Okta Admin Console.
-    /// - Returns: Result of parsing the given redirect URL.
-    public func redirectResult(for url: URL) -> RedirectResult {
-        guard let context = context else {
-            return .invalidContext
-        }
 
-        guard let redirect = Redirect(url: url),
-              let originalRedirect = Redirect(url: redirectUri) else
-        {
-            return .invalidRedirectUrl
-        }
-        
-        guard originalRedirect.scheme == redirect.scheme &&
-                originalRedirect.path == redirect.path else
-        {
-            return .invalidRedirectUrl
-        }
-        
-        if context.state != redirect.state {
-            return .invalidContext
-        }
-        
-        if redirect.interactionCode != nil {
-            return .authenticated
-        }
-        
-        if redirect.interactionRequired {
-            return .remediationRequired
-        }
-        
-        return .invalidContext
-    }
-    
-    /// Exchanges the redirect URL with a token.
+    /// Exchanges the successful response for a token.
     ///
-    /// Once the ``redirectResult(for:)`` method returns ``RedirectResult/authenticated``, the developer can exchange that redirect URL for a valid token by using this method.
-    /// - Parameters:
-    ///   - url: URL with the app’s custom scheme. The value must match one of the authorized redirect URIs, which are configured in Okta Admin Console.
-    ///   - completion: Optional completion handler invoked when a token, or error, is received.
-    public func exchangeCode(redirect url: URL,
-                             completion: TokenResult? = nil) {
-        guard let context = context else {
-            send(error: .invalidContext, completion: completion)
-            return
-        }
-        
-        guard let redirect = Redirect(url: url) else {
-            send(error: .internalMessage("Invalid redirect url"), completion: completion)
-            return
-        }
-        
-        guard let interactionCode = redirect.interactionCode else {
-            send(error: .internalMessage("Interaction code is missed"), completion: completion)
-            return
-        }
+    /// Once the ``Response/isLoginSuccessful`` property is `true`, the developer can exchange the response for a valid token by using this method.
+    public func resume(with successResponse: Response) async throws -> Token {
+        return try await withExpression {
+            guard let context = _context else {
+                throw OAuth2Error.invalidContext
+            }
 
-        client.openIdConfiguration { result in
-            switch result {
-            case .success(let configuration):
-                let request = RedirectURLTokenRequest(openIdConfiguration: configuration,
-                                                      clientId: self.client.configuration.clientId,
-                                                      scope: self.client.configuration.scopes,
-                                                      redirectUri: self.redirectUri.absoluteString,
-                                                      interactionCode: interactionCode,
-                                                      pkce: context.pkce)
-                self.client.exchange(token: request) { result in
-                    switch result {
-                    case .success(let token):
-                        self.send(response: token.result, completion: completion)
-                        self.reset()
-                    case .failure(let error):
-                        self.send(error: .apiError(error), completion: completion)
-                    }
-                }
-            case .failure(let error):
-                self.send(error: .internalError(error), completion: completion)
+            guard let remediation = successResponse.successRemediationOption,
+                  remediation.name == "issue"
+            else {
+                throw InteractionCodeFlowError.authenticationIncomplete
+            }
+
+            guard remediation.flow === self else {
+                throw InteractionCodeFlowError.invalidFlow
+            }
+
+            let openIdConfiguration = try await client.openIdConfiguration()
+            let request = try InteractionCodeFlow.SuccessResponseTokenRequest(
+                openIdConfiguration: openIdConfiguration,
+                clientConfiguration: client.configuration,
+                additionalParameters: additionalParameters,
+                context: context,
+                successRemediation: remediation)
+
+            return try await request
+                .send(to: client)
+                .result
+        } success: { result in
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            }
+        } failure: { error in
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            }
+        } finally: {
+            finished()
+        }
+    }
+
+    /// Executes the given remediation option and proceeds through the workflow using the supplied form parameters.
+    ///
+    /// This method is used to proceed through the authentication flow, using the data assigned to the nested fields' `value` to make selections.
+    public func resume(with remediation: Remediation) async throws -> Response {
+        return try await withExpression {
+            guard remediation.flow === self else {
+                throw InteractionCodeFlowError.invalidFlow
+            }
+
+            let request = try remediation.apiRequest()
+            let result = try await request.send(to: client).result
+            return try Response(flow: self, ion: result)
+        } success: { result in
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            }
+        } failure: { error in
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
             }
         }
     }
-    
-    /// Cancels the current authentication transaction.
-    public func cancel() {
-        reset()
+
+    /// Resumes the authentication flow when a redirect URI is received, typically in response to a ``SocialIDPCapability`` or other redirect-based authentication factor.
+    ///
+    /// There are three possible outcomes when a redirect URI is received:
+    ///
+    /// 1. Sign in is complete.
+    /// 2. The user needs to complete additional authentication steps.
+    /// 3. An error was received.
+    ///
+    /// These different states are determined using the ``RedirectResult`` type, which indicates if a token was returned, or if a ``Response`` was produced which should be used to proceed through the sign in workflow.
+    /// - Parameters:
+    ///   - redirectUri: URL with the app’s custom scheme. The value must match one of the authorized redirect URIs, which are configured in Okta Admin Console.
+    public func resume(with redirectUri: URL) async throws -> RedirectResult {
+        // Since this function encapsulates two different behaviors, both of which need to
+        // propagate error responses to the delegate collection, we are separating this workflow
+        // into three steps:
+        //
+        // 1. Identify the result of the redirect URI's interaction code response.
+        // 2. If we've received an interaction code, exchange it for tokens.
+        // 3. If we need additional user interaction, return the result of `resume()`.
+        //
+        // This first step is wrapped in `withExpression` to ensure errors are handled
+        // consistently.
+        let (context, interactionResult) = try await withExpression {
+            guard let clientRedirectUri = client.configuration.redirectUri else {
+                throw OAuth2Error.redirectUriRequired
+            }
+
+            guard let context = _context else {
+                throw OAuth2Error.invalidContext
+            }
+
+            let interactionResult = try redirectUri.interactionCode(redirectUri: clientRedirectUri,
+                                                                    state: context.state)
+            return (context, interactionResult)
+        } failure: { error in
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            }
+        }
+
+        switch interactionResult {
+        case .code(let interactionCode):
+            // 2. Perform a token request using `withExpression` to ensure error handling is consistent.
+            let token = try await withExpression {
+                let request = try TokenRequest(openIdConfiguration: try await client.openIdConfiguration(),
+                                               clientConfiguration: client.configuration,
+                                               additionalParameters: additionalParameters,
+                                               context: context,
+                                               interactionCode: interactionCode)
+                return try await request.send(to: client).result
+            } success: { result in
+                Task { @MainActor in
+                    delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+                }
+            } failure: { error in
+                Task { @MainActor in
+                    delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+                }
+            }
+            return .success(token)
+        case .interactionRequired:
+            // 3. Use `resume` to create the response, but do not use `withExpression` since the
+            //    `resume` function already utilizes the delegate collection properly.
+            return .interactionRequired(try await self.resume())
+        }
     }
     
     /// Resets the authentication flow to its original state.
     public func reset() {
-        context = nil
-        isAuthenticating = false
-        options = nil
+        finished()
+        _context = nil
+    }
+
+    func finished() {
+        _isAuthenticating = false
     }
 
     // MARK: Private properties / methods
-    private(set) lazy var deviceTokenCookie: HTTPCookie? = {
-        guard let deviceToken = deviceIdentifierString,
-              let host = client.baseURL.host
-        else {
-            return nil
+    @_documentation(visibility: internal)
+    nonisolated public let delegateCollection = DelegateCollection<any InteractionCodeFlowDelegate>()
+
+    private var _context: Context?
+    private var _isAuthenticating: Bool = false {
+        didSet {
+            guard _isAuthenticating != oldValue else {
+                return
+            }
+
+            let flowStarted = _isAuthenticating
+            Task { @MainActor in
+                if flowStarted {
+                    delegateCollection.invoke { $0.authenticationStarted(flow: self) }
+                } else {
+                    delegateCollection.invoke { $0.authenticationFinished(flow: self) }
+                }
+            }
         }
-        
-        return HTTPCookie(properties: [
-            .name: "DT",
-            .value: deviceToken,
-            .domain: host,
-            .path: "/",
-            .secure: "TRUE",
-            .expires: Date.distantFuture,
-        ])
-    }()
-    
-    public let delegateCollection = DelegateCollection<InteractionCodeFlowDelegate>()
-    
-    private func preStartReset() {
-        // Remove any previous `idx` cookies so it won't leak into other sessions.
-        let storage = client.session.configuration.httpCookieStorage ?? HTTPCookieStorage.shared
-        storage.cookies(for: client.baseURL)?
-            .filter({ $0.name == "idx" })
-            .forEach({ storage.deleteCookie($0) })
     }
 }
 
-#if swift(>=5.5.1) && !os(Linux)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
 extension InteractionCodeFlow {
-    /// Starts a new authentication session using the given configuration values. If the client is able to successfully interact with Okta Identity Engine, a new client instance is returned to the caller.
+    /// Starts a new authentication session. If the client is able to successfully interact with Okta Identity Engine, a ``context-swift.property`` is assigned, and the initial ``Response`` is returned.
     /// - Parameters:
-    ///   - configuration: Configuration describing the app settings to contact.
-    ///   - options: Options to include within the OAuth2 transaction.
+    ///   - context: Optional context to provide when customizing the state parameter.
+    ///   - completion: Completion handler invoked when a response is received.
     /// - Returns: A ``Response``.
-    public func start(options: [Option: Any]? = nil) async throws -> Response {
-        try await withCheckedThrowingContinuation { continuation in
-            start(options: options) { result in
-                continuation.resume(with: result)
+    nonisolated public func start(with context: Context = .init(),
+                                  completion: @escaping @Sendable (Result<Response, any Error>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await start(with: context)))
+            } catch {
+                completion(.failure(error))
             }
         }
     }
 
     /// Resumes the authentication state to identify the available remediation steps.
     ///
-    /// This method can be called at any time to identify what next remediation steps are available to the user.
-    /// - Returns: A response showing the user's next steps.
-    public func resume() async throws -> Response {
-        try await withCheckedThrowingContinuation { continuation in
-            resume() { result in
-                continuation.resume(with: result)
+    /// This method is usually performed after an ``InteractionCodeFlow`` is created in ``start(with:)``, but can also be called at any time to identify what next remediation steps are available to the user.
+    /// - Parameters:
+    ///   - completion: Completion handler invoked when a response is received.
+    nonisolated public func resume(completion: @escaping @Sendable (Result<Response, any Error>) -> Void) {
+        Task {
+            do {
+                completion(.success(try await resume()))
+            } catch {
+                completion(.failure(error))
             }
         }
     }
-    
-    /// Exchanges the redirect URL with a token.
+
+    /// Exchanges the successful response for a token.
     ///
-    /// Once the ``redirectResult(for:)`` method returns ``RedirectResult/authenticated``, the developer can exchange that redirect URL for a valid token by using this method.
+    /// Once the ``Response/isLoginSuccessful`` property is `true`, the developer can exchange the response for a valid token by using this method.
     /// - Parameters:
-    ///   - url: URL with the app’s custom scheme. The value must match one of the authorized redirect URIs, which are configured in Okta Admin Console.
-    public func exchangeCode(redirect url: URL) async throws -> Token {
-        try await withCheckedThrowingContinuation { continuation in
-            exchangeCode(redirect: url) { result in
-                continuation.resume(with: result)
+    ///   - completion: Completion handler invoked when a token, or error, is received.
+    nonisolated public func resume(with successResponse: Response,
+                                   completion: @escaping @Sendable (Result<Token, any Error>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await resume(with: successResponse)))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /// Executes the given remediation option and proceeds through the workflow using the supplied form parameters.
+    ///
+    /// This method is used to proceed through the authentication flow, using the data assigned to the nested fields' `value` to make selections.
+    /// - Parameters:
+    ///   - completion: Completion handler invoked when a response is received.
+    nonisolated public func resume(with remediation: Remediation,
+                                   completion: @escaping @Sendable (Result<Response, any Error>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await resume(with: remediation)))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /// Resumes the authentication flow when a redirect URI is received, typically in response to a ``SocialIDPCapability`` or other redirect-based authentication factor.
+    ///
+    /// There are three possible outcomes when a redirect URI is received:
+    ///
+    /// 1. Sign in is complete.
+    /// 2. The user needs to complete additional authentication steps.
+    /// 3. An error was received.
+    ///
+    /// These different states are determined using the ``RedirectResult`` type, which indicates if a token was returned, or if a ``Response`` was produced which should be used to proceed through the sign in workflow.
+    /// - Parameters:
+    ///   - redirectUri: URL with the app’s custom scheme. The value must match one of the authorized redirect URIs, which are configured in Okta Admin Console.
+    ///   - completion: Completion handler invoked when a response is received.
+    nonisolated public func resume(with redirectUri: URL,
+                                   completion: @escaping @Sendable (Result<RedirectResult, any Error>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await resume(with: redirectUri)))
+            } catch {
+                completion(.failure(error))
             }
         }
     }
 }
-#endif
 
 extension InteractionCodeFlow: UsesDelegateCollection {
     public typealias Delegate = InteractionCodeFlowDelegate
 }
 
-extension InteractionCodeFlow: OAuth2ClientDelegate {
-    public func api(client: APIClient, willSend request: inout URLRequest) {
-        guard options?[.omitDeviceToken] as? Bool ?? false == false,
-              let url = request.url,
-              let deviceTokenCookie = deviceTokenCookie
-        else {
-            return
-        }
-        
-        let storage = client.session.configuration.httpCookieStorage ?? HTTPCookieStorage.shared
-        var cookies = storage.cookies(for: url) ?? []
-        cookies.insert(deviceTokenCookie, at: 0)
-        
-        var headers = request.allHTTPHeaderFields ?? [:]
-        headers.merge(HTTPCookie.requestHeaderFields(with: cookies)) { old, new in
-            new
-        }
-        request.allHTTPHeaderFields = headers
-    }
-}
-
 extension OAuth2Client {
     /// Convenience that produces an ``InteractionCodeFlow`` from an existing OAuth2Client.
     /// - Parameters:
-    ///   - redirectUri: Redirect URI the client expects.
     ///   - additionalParameters: Additional parameters to supply to the authorize endpoint.
     /// - Returns: Initialized ``InteractionCodeFlow`` for this client.
-    public func interactionCodeFlow(
-        redirectUri: URL,
-        additionalParameters: [String: String]? = nil) -> InteractionCodeFlow
+    public func interactionCodeFlow(additionalParameters: [String: String]? = nil) throws -> InteractionCodeFlow
     {
-        InteractionCodeFlow(redirectUri: redirectUri,
-                              additionalParameters: additionalParameters,
-                              client: self)
+        try InteractionCodeFlow(client: self,
+                                additionalParameters: additionalParameters)
     }
 }
 
@@ -486,26 +481,10 @@ public protocol InteractionCodeFlowDelegate: AuthenticationDelegate {
 
 /// Errors reported from ``InteractionCodeFlow``.
 public enum InteractionCodeFlowError: Error {
-    case invalidContext
     case invalidFlow
-    case platformUnsupported
-    case invalidUrl
-    case cannotCreateRequest
-    case invalidHTTPResponse
-    case invalidResponseData
-    case invalidRequestData
-    case serverError(message: String, localizationKey: String, type: String)
-    case apiError(_: APIClientError)
-    case internalError(_: Error)
-    case internalMessage(_: String)
-    case oauthError(summary: String, code: String?, errorId: String?)
+    case authenticationIncomplete
     case invalidParameter(name: String)
-    case invalidParameterValue(name: String, type: String)
-    case parameterImmutable(name: String)
     case missingRequiredParameter(name: String)
-    case missingRemediationOption(name: String)
-    case unknownRemediationOption(name: String)
-    case successResponseMissing
-    case missingRefreshToken
-    case missingRelatedObject
+    case missingRemediation(name: String)
+    case responseValidationFailed(_ message: String, underlyingError: (any Error)? = nil)
 }

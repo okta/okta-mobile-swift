@@ -13,27 +13,33 @@
 import Foundation
 import AuthFoundation
 
-extension APIContentType {
-    static let ionJson = APIContentType.other("application/ion+json; okta-version=1.0.0")
-}
-
 extension InteractionCodeFlow {
     struct IntrospectRequest {
         let url: URL
+        let openIdConfiguration: OpenIdConfiguration
+        let clientConfiguration: OAuth2Client.Configuration
+        let additionalParameters: [String: any APIRequestArgument]?
+        let context: InteractionCodeFlow.Context
         let interactionHandle: String
 
-        init(baseURL: URL, interactionHandle: String) throws {
-            guard var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true) else {
-                throw InteractionCodeFlowError.invalidUrl
+        init(openIdConfiguration: OpenIdConfiguration,
+             clientConfiguration: OAuth2Client.Configuration,
+             additionalParameters: [String: any APIRequestArgument]?,
+             context: InteractionCodeFlow.Context) throws
+        {
+            guard let url = openIdConfiguration.introspectEndpoint else {
+                throw OAuth2Error.invalidUrl
             }
-            
-            components.path = "/idp/idx/introspect"
-            
-            guard let url = components.url else {
-                throw InteractionCodeFlowError.invalidUrl
+
+            guard let interactionHandle = context.interactionHandle else {
+                throw OAuth2Error.invalidContext
             }
-            
+
             self.url = url
+            self.openIdConfiguration = openIdConfiguration
+            self.clientConfiguration = clientConfiguration
+            self.additionalParameters = additionalParameters
+            self.context = context
             self.interactionHandle = interactionHandle
         }
     }
@@ -45,13 +51,14 @@ extension InteractionCodeFlow.IntrospectRequest: APIRequest, APIRequestBody, Rec
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .json }
     var acceptsType: APIContentType? { .ionJson }
-    var bodyParameters: [String: APIRequestArgument]? {
-        [
-            "interactionHandle": interactionHandle
-        ]
-    }
+    var category: AuthFoundation.OAuth2APIRequestCategory { .other }
 
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
-        nil
+    var bodyParameters: [String: any APIRequestArgument]? {
+        var result = clientConfiguration.parameters(for: category) ?? [:]
+        result.merge(context.parameters(for: category))
+        result.merge([
+            "interactionHandle": interactionHandle,
+        ])
+        return result
     }
 }

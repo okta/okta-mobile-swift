@@ -15,7 +15,7 @@ import Foundation
 /// Represents information describing the available authenticators and enrolled authenticators.
 ///
 /// Instances of this class are used to identify the type of authenticator, or factor, that is associated with a user. These may be associated with form fields (for example, when selecting an authenticator to verify or to enrol in), with a ``Remediation`` (when challenging an authenticator for a verification code), or with an overall ``Response`` to indicate which authenticators have been enrolled, are being enrolled.
-public class Authenticator: Equatable {
+public final class Authenticator: Sendable, Equatable, Hashable {
     /// Unique identifier for this enrollment
     public let id: String?
     
@@ -35,8 +35,9 @@ public class Authenticator: Equatable {
     public let methods: [Method]?
     
     /// Set of objects that describe the capabilities this authenticator may have.
-    public let capabilities: [AuthenticatorCapability]
+    public let capabilities: [CapabilityType]
 
+    @_documentation(visibility: internal)
     public static func == (lhs: Authenticator, rhs: Authenticator) -> Bool {
         lhs.id == rhs.id &&
         lhs.displayName == rhs.displayName &&
@@ -45,30 +46,40 @@ public class Authenticator: Equatable {
         lhs.state == rhs.state &&
         lhs.methods == rhs.methods
     }
-    
-    private weak var flow: InteractionCodeFlowAPI?
+
+    @_documentation(visibility: internal)
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(displayName)
+        hasher.combine(type)
+        hasher.combine(key)
+        hasher.combine(state)
+        hasher.combine(methods)
+        hasher.combine(capabilities)
+    }
+
+    nonisolated(unsafe) private weak var flow: (any InteractionCodeFlowAPI)?
     let jsonPaths: [String]
-    init(flow: InteractionCodeFlowAPI,
+    init(flow: any InteractionCodeFlowAPI,
          v1JsonPaths: [String],
          state: State,
          id: String?,
          displayName: String?,
-         type: String,
+         type: Authenticator.Kind,
          key: String?,
          methods: [[String: String]]?,
-         capabilities: [AuthenticatorCapability])
+         capabilities: [any Capability])
     {
         self.flow = flow
         self.jsonPaths = v1JsonPaths
         self.state = state
         self.id = id
         self.displayName = displayName
-        self.type = Kind(string: type)
+        self.type = type
         self.key = key
-        self.methods = methods?.compactMap {
-            guard let type = $0["type"] else { return nil }
-            return Method(string: type)
-        }
-        self.capabilities = capabilities
+        self.methods = methods?
+            .compactMap { $0["type"] }
+            .compactMap(Method.init(rawValue:))
+        self.capabilities = capabilities.compactMap { CapabilityType($0) }
     }
 }

@@ -139,14 +139,8 @@ public class Signin {
     
     /// Called by each view controller once their remediation step has been completed, allowing it to proceed to the next step of the workflow.
     /// - Parameter response: IDX response object received from the API.
+    @MainActor
     func proceed(to response: Response) {
-        if !Thread.isMainThread {
-            DispatchQueue.main.async {
-                self.proceed(to: response)
-            }
-            return
-        }
-        
         guard let navigationController = navigationController else {
             failure(with: SigninError.genericError(message: "Navigation controller undefined"))
             return
@@ -161,17 +155,13 @@ public class Signin {
                     self.failure(with: SigninError.genericError(message: "Cancelled login"))
                 }))
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                    if response.canCancel {
-                        response.cancel { result in
-                            switch result {
-                            case .failure(let error):
-                                self.failure(with: error)
-                                return
-                            case .success(let response):
-                                DispatchQueue.main.async {
-                                    self.proceed(to: response)
-                                }
-                            }
+                    guard response.canRestart else { return }
+
+                    Task { @MainActor in
+                        do {
+                            self.proceed(to: try await response.restart())
+                        } catch {
+                            self.failure(with: error)
                         }
                     }
                 }))
@@ -224,15 +214,9 @@ public class Signin {
     
     /// Called by the signin view controllers when the Future should fail.
     /// - Parameter error: The error to pass to the future.
+    @MainActor
     internal func failure(with error: Error) {
-        if !Thread.isMainThread {
-            DispatchQueue.main.async {
-                self.failure(with: error)
-            }
-            return
-        }
-        
-        self.navigationController?.dismiss(animated: true) {
+        navigationController?.dismiss(animated: true) {
             guard let completion = self.completion else { return }
             defer { self.completion = nil }
             completion(.failure(error))
@@ -241,6 +225,7 @@ public class Signin {
     
     /// Called by the signin view controllers when the Future should succeed.
     /// - Parameter token: The token produced at the end of the signin process.
+    @MainActor
     internal func success(with token: Token) {
         let credential: Credential
         do {
@@ -252,17 +237,15 @@ public class Signin {
 
         guard let completion = self.completion else { return }
         defer { self.completion = nil }
-        
-        credential.userInfo { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .failure(let error):
-                    self.failure(with: error)
-                case .success(_):
-                    self.navigationController?.dismiss(animated: true) {
-                        completion(.success(credential))
-                    }
+
+        Task { @MainActor in
+            do {
+                _ = try await credential.userInfo()
+                self.navigationController?.dismiss(animated: true) {
+                    completion(.success(credential))
                 }
+            } catch {
+                self.failure(with: error)
             }
         }
     }

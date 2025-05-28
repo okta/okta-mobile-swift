@@ -13,10 +13,16 @@
 import Foundation
 @testable import OktaIdx
 
-class MockBase {
-    struct RecordedCall {
+enum InteractionCodeFlowMockError: Error {
+    case noResult(function: String, response: OktaIdx.Response?)
+    case noResult(function: String, remediation: OktaIdx.Remediation?)
+    case invalidResultError(_ error: (any Error)?)
+}
+
+actor InteractionCodeFlowMock: InteractionCodeFlowAPI, @unchecked Sendable {
+    struct RecordedCall: Sendable {
         let function: String
-        let arguments: [String:Any]?
+        let arguments: [String: any Sendable]?
     }
 
     var recordedCalls: [RecordedCall] = []
@@ -33,58 +39,53 @@ class MockBase {
         return expectations.removeValue(forKey: name)
     }
     
-    func result<T>(for name: String) -> Result<T, InteractionCodeFlowError> {
+    func result<T>(for name: String) -> Result<T, any Error>? {
         let responseData = response(for: name)
-        if let result = responseData?["response"] as? T {
+        if let result = responseData?["object"] as? T {
             return .success(result)
         }
-        
-        let error = responseData?["error"] as? InteractionCodeFlowError ?? InteractionCodeFlowError.invalidFlow
-        return .failure(error)
-    }
-}
 
-class InteractionCodeFlowMock: MockBase, InteractionCodeFlowAPI {
+        if let error = responseData?["error"] as? (any Error) {
+            return .failure(error)
+        }
+        return nil
+    }
+
     let client: OAuth2Client
     let redirectUri: URL
     let context: InteractionCodeFlow.Context?
     
-    init(context: InteractionCodeFlow.Context, client: OAuth2Client, redirectUri: URL) {
+    init(context: InteractionCodeFlow.Context = .init(), client: OAuth2Client, redirectUri: URL) {
         self.context = context
         self.client = client
         self.redirectUri = redirectUri
     }
 
-    func send(response: Response, completion: InteractionCodeFlow.ResponseResult?) {
+    func resume(with response: OktaIdx.Response) async throws -> Token {
         recordedCalls.append(RecordedCall(function: #function,
-                                          arguments: ["response": response as Any]))
-        completion?(result(for: #function))
+                                          arguments: ["response": response]))
+        let result: Result<Token, any Error>? = self.result(for: #function)
+        switch result {
+        case .success(let token):
+            return token
+        case .failure(let error):
+            throw error
+        default:
+            throw InteractionCodeFlowMockError.noResult(function: #function, response: response)
+        }
     }
-    
-    func send(response: Token, completion: InteractionCodeFlow.TokenResult?) {
+
+    func resume(with remediation: OktaIdx.Remediation) async throws -> OktaIdx.Response {
         recordedCalls.append(RecordedCall(function: #function,
-                                          arguments: ["response": response as Any]))
-        completion?(result(for: #function))
-    }
-    
-    func send(error: InteractionCodeFlowError, completion: InteractionCodeFlow.ResponseResult?) {
-        recordedCalls.append(RecordedCall(function: #function,
-                                          arguments: ["error": error as Any]))
-        completion?(result(for: #function))
-    }
-    
-    func send(error: InteractionCodeFlowError, completion: InteractionCodeFlow.TokenResult?) {
-        recordedCalls.append(RecordedCall(function: #function,
-                                          arguments: ["error": error as Any]))
-        completion?(result(for: #function))
-    }
-    
-    func redirectResult(for url: URL) -> InteractionCodeFlow.RedirectResult {
-        recordedCalls.append(RecordedCall(function: #function,
-                                          arguments: [
-                                            "redirect": url as Any
-                                          ]))
-        
-        return .authenticated
+                                          arguments: ["remediation": remediation]))
+        let result: Result<OktaIdx.Response, any Error>? = self.result(for: #function)
+        switch result {
+        case .success(let token):
+            return token
+        case .failure(let error):
+            throw error
+        default:
+            throw InteractionCodeFlowMockError.noResult(function: #function, remediation: remediation)
+        }
     }
 }

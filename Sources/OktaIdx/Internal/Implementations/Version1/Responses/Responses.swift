@@ -13,7 +13,7 @@
 import Foundation
 import AuthFoundation
 
-enum IDXIONObjectType {
+enum IDXIONObjectType: Sendable {
     case Link
 }
 
@@ -25,7 +25,7 @@ protocol IDXIONRelatable {
     var relatableIdentifier: String? { get }
 }
 
-struct OAuth2Error: Codable, Error, LocalizedError {
+struct IDXOAuth2Error: Sendable, Codable, Error, LocalizedError {
     let errorSummary: String
     let errorCode: String?
     let errorUri: String?
@@ -37,14 +37,14 @@ struct OAuth2Error: Codable, Error, LocalizedError {
     }
 }
 
-struct IDXError: Codable {
+struct IDXError: Sendable, Codable {
     let error: String
     let errorDescription: String?
     let errorUri: String?
     let interactionHandle: String
 }
 
-final class IonResponse: Decodable, JSONDecodable {
+final class IonResponse: Sendable, Decodable, JSONDecodable {
     let stateHandle: String?
     let version: String
     let expiresAt: Date?
@@ -66,36 +66,36 @@ final class IonResponse: Decodable, JSONDecodable {
     }
 }
 
-struct IonObject<T>: Decodable where T: Decodable {
+struct IonObject<T: Sendable & Decodable>: Sendable, Decodable {
     let type: String?
     let value: T
 }
 
-struct IonCollection<T>: Decodable where T: Decodable {
+struct IonCollection<T: Sendable & Decodable>: Sendable, Decodable {
     let type: String?
     let value: [T]
 }
 
-struct IonUser: Decodable, ReceivesIDXResponse {
+struct IonUser: Sendable, Decodable, ReceivesIDXResponse {
     let id: String?
     let profile: [String: String?]?
     let identifier: String?
 }
 
-struct IonApp: Decodable, ReceivesIDXResponse {
+struct IonApp: Sendable, Decodable, ReceivesIDXResponse {
     let id: String
     let label: String
     let name: String
 }
 
-struct IonAuthenticator: Decodable, IDXIONRelatable, ReceivesIDXResponse {
+struct IonAuthenticator: Sendable, Decodable, IDXIONRelatable, ReceivesIDXResponse {
     let displayName: String?
     let id: String?
-    let type: String
+    let type: Authenticator.Kind
     let key: String?
     let methods: [[String: String]]?
-    let settings: [String: JSONValue]?
-    let contextualData: [String: JSONValue]?
+    let settings: [String: JSON]?
+    let contextualData: [String: JSON]?
     let profile: [String: String]?
     let send: IonForm?
     let resend: IonForm?
@@ -106,33 +106,38 @@ struct IonAuthenticator: Decodable, IDXIONRelatable, ReceivesIDXResponse {
     var jsonPath: String?
 }
 
-struct IonForm: Decodable, ReceivesIDXResponse {
+struct IonForm: Sendable, Decodable, ReceivesIDXResponse {
     let rel: [String]?
     let name: String
-    let method: String
+    let method: APIRequestMethod
     let href: URL
     let value: [IonFormValue]?
-    let accepts: String?
+    let accepts: APIContentType?
     let relatesTo: [String]?
     let refresh: Double?
     let type: String?
     let idp: [String: String]?
 }
 
-struct IonCompositeForm: Decodable, ReceivesIDXResponse {
+struct IonCompositeForm: Sendable, Decodable, ReceivesIDXResponse {
     let form: IonCompositeFormValue
 }
 
-struct IonCompositeFormValue: Decodable, ReceivesIDXResponse {
+struct IonCompositeFormValue: Sendable, Decodable, ReceivesIDXResponse {
     let value: [IonFormValue]
 }
 
-struct IonFormValue: Decodable, ReceivesIDXResponse {
+struct IonFormValue: Sendable, Decodable, ReceivesIDXResponse {
+    enum Value: Sendable {
+        case json(JSON)
+        case compositeForm(IonCompositeForm)
+    }
     let id: String?
     let name: String?
     let label: String?
     let type: String?
-    let value: JSONValue?
+    let value: JSON
+    let valueAsCompositeForm: IonCompositeForm?
     let required: Bool?
     let secret: Bool?
     let visible: Bool?
@@ -141,12 +146,12 @@ struct IonFormValue: Decodable, ReceivesIDXResponse {
     let options: [IonFormValue]?
     let relatesTo: String?
     let messages: IonCollection<IonMessage>?
-    
+
     private enum CodingKeys: String, CodingKey {
         case id, name, required, label, type, value, secret, visible, mutable, options, form, relatesTo, messages
     }
     
-    init(from decoder: Decoder) throws {
+    init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
         name = try container.decodeIfPresent(String.self, forKey: .name)
@@ -161,24 +166,18 @@ struct IonFormValue: Decodable, ReceivesIDXResponse {
         messages = try container.decodeIfPresent(IonCollection<IonMessage>.self, forKey: .messages)
         
         let formObj = try? container.decodeIfPresent(IonCompositeFormValue.self, forKey: .form)
-        let valueAsCompositeObj = try? container.decodeIfPresent(IonCompositeForm.self, forKey: .value)
-        let valueAsJsonObj = try? container.decodeIfPresent(JSONValue.self, forKey: .value)
+        valueAsCompositeForm = try? container.decodeIfPresent(IonCompositeForm.self, forKey: .value)
+        value = try container.decodeIfPresent(JSON.self, forKey: .value) ?? .null
         
-        if formObj == nil && valueAsCompositeObj != nil {
-            form = valueAsCompositeObj?.form
+        if formObj == nil && valueAsCompositeForm != nil {
+            form = valueAsCompositeForm?.form
         } else {
             form = formObj
-        }
-        
-        if let valueAsCompositeObj = valueAsCompositeObj {
-            value = .object(valueAsCompositeObj)
-        } else {
-            value = valueAsJsonObj
         }
     }
 }
 
-struct IonMessage: Codable, ReceivesIDXResponse {
+struct IonMessage: Sendable, Codable, ReceivesIDXResponse {
     let type: String
     let i18n: IonLocalization?
     let message: String
@@ -191,7 +190,7 @@ struct IonMessage: Codable, ReceivesIDXResponse {
         case type = "class", i18n, message
     }
     
-    init(from decoder: Decoder) throws {
+    init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decode(String.self, forKey: .type)
         i18n = try container.decodeIfPresent(IonLocalization.self, forKey: .i18n)
@@ -207,64 +206,4 @@ final class IonToken: NSObject, Decodable, ReceivesIDXResponse {
     let scope: String
     let refreshToken: String?
     let idToken: String?
-}
-
-struct Redirect {
-    enum Query {
-        enum Key {
-            static let interactionCode = "interaction_code"
-            static let state = "state"
-            static let error = "error"
-            static let errorDescription = "error_description"
-        }
-        
-        enum Value {
-            static let interactionRequired = "interaction_required"
-        }
-    }
-    
-    let url: URL
-    let scheme: String
-    let path: String
-    
-    let interactionCode: String?
-    let state: String?
-    let error: String?
-    let errorDescription: String?
-    
-    let interactionRequired: Bool
-    
-    init?(url: String) {
-        guard let url = URL(string: url) else {
-            return nil
-        }
-        
-        self.init(url: url)
-    }
-    
-    init?(url: URL) {
-        self.url = url
-        
-        guard let urlComponents = URLComponents(string: url.absoluteString),
-              let scheme = urlComponents.scheme else
-        {
-            return nil
-        }
-        
-        self.scheme = scheme
-        self.path = urlComponents.path
-        
-        let queryItems = urlComponents.queryItems
-        
-        let queryValue: (String) -> String? = { name in
-            queryItems?.first { $0.name == name }?.value?.removingPercentEncoding
-        }
-        
-        self.interactionCode = queryValue(Query.Key.interactionCode)
-        self.state = queryValue(Query.Key.state)
-        
-        self.error = queryValue(Query.Key.error)
-        self.errorDescription = queryValue(Query.Key.errorDescription)
-        self.interactionRequired = (self.error == Query.Value.interactionRequired)
-    }
 }

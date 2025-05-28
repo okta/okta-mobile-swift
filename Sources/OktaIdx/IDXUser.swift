@@ -14,7 +14,7 @@ import Foundation
 
 extension Response {
     /// Provides information about the user being authenticated.
-    public struct User {
+    public struct User: Sendable, Equatable, Hashable {
         /// Unique identifier for this user.
         public let id: String
         
@@ -32,7 +32,7 @@ extension Response {
 
 extension Response.User {
     /// Optional profile information that describes the user.
-    public struct Profile {
+    public struct Profile: Sendable, Equatable, Hashable {
         /// The user's first name.
         public let firstName: String?
         

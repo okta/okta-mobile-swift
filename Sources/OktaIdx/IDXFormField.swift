@@ -26,7 +26,7 @@ extension Remediation.Form {
     /// > ```swift
     /// > remediation["identifier"]
     /// > ```
-    public final class Field: NSObject {
+    public final class Field: Sendable, Equatable, Hashable {
         /// The programmatic name for this form value.
         public let name: String?
         
@@ -37,14 +37,23 @@ extension Remediation.Form {
         public let type: String?
         
         /// The value to send, if a default is provided from the Identity Engine.
-        public var value: APIRequestArgument? {
-            get { _value as? APIRequestArgument }
+        public var value: (any JSONRepresentable)? {
+            get {
+                lock.withLock {
+                    guard let value = _value.anyValue else {
+                        return nil
+                    }
+                    return value as? any JSONRepresentable
+                }
+            }
             set {
                 guard isMutable else { return }
-                _value = newValue as AnyObject
+                lock.withLock {
+                    _value = newValue?.json ?? .null
+                }
             }
         }
-        
+
         /// Indicates whether or not the form value is read-only.
         public let isMutable: Bool
         
@@ -61,18 +70,17 @@ extension Remediation.Form {
         public let options: [Remediation.Form.Field]?
         
         /// Indicates if this field is the selected option within a parent field's `options` array.
-        public internal(set) var isSelectedOption: Bool
-        
+        public internal(set) var isSelectedOption: Bool {
+            get { lock.withLock { _isSelectedOption } }
+            set { lock.withLock { _isSelectedOption = newValue } }
+        }
+
         /// Allows a developer to set the selected option for a field that contains multiple `options`.
         ///
         /// This will update the ``isSelectedOption`` on all relevant fields.
-        public weak var selectedOption: Remediation.Form.Field? {
-            didSet {
-                guard let options = options else { return }
-                for option in options {
-                    option.isSelectedOption = (option === selectedOption)
-                }
-            }
+        public var selectedOption: Remediation.Form.Field? {
+            get { lock.withLock { _selectedOption } }
+            set { lock.withLock { _selectedOption = newValue } }
         }
         
         /// The list of messages sent from the server.
@@ -81,17 +89,83 @@ extension Remediation.Form {
         public let messages: Response.Message.Collection
         
         /// Relates this field to an authenticator, when a field is used to represent an authenticator. For example, when a field is used within a series of ``options`` to identify which authenticator to select.
-        public internal(set) weak var authenticator: Authenticator?
+        public internal(set) var authenticator: Authenticator? {
+            get { lock.withLock { _authenticator } }
+            set { lock.withLock { _authenticator = newValue } }
+        }
 
         /// Returns the nested `form` field with the given name.
         public subscript(name: String) -> Field? {
             form?[name]
         }
-        
+
+        @_documentation(visibility: internal)
+        public static func == (lhs: Remediation.Form.Field, rhs: Remediation.Form.Field) -> Bool {
+            guard lhs.name == rhs.name,
+                  lhs.type == rhs.type,
+                  lhs.isVisible == rhs.isVisible,
+                  lhs.relatesTo == rhs.relatesTo,
+                  lhs.isMutable == rhs.isMutable,
+                  lhs.isRequired == rhs.isRequired,
+                  lhs.isSecret == rhs.isSecret,
+                  lhs.form == rhs.form
+            else {
+                return false
+            }
+
+            if !lhs.isMutable,
+               !rhs.isMutable
+            {
+                return (lhs.value ?? JSON.null).json == (rhs.value ?? JSON.null).json
+            }
+
+            return true
+        }
+
+        @_documentation(visibility: internal)
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(name)
+            hasher.combine(label)
+            hasher.combine(type)
+            hasher.combine(isMutable)
+            hasher.combine(isRequired)
+            hasher.combine(isSecret)
+            hasher.combine(form)
+            hasher.combine(options)
+            hasher.combine(messages)
+            hasher.combine(isVisible)
+            hasher.combine(relatesTo)
+        }
+
+        // MARK: - Internal
         let isVisible: Bool
         let relatesTo: String?
-        var _value: AnyObject?
-        lazy var hasVisibleFields: Bool = {
+        var hasVisibleFields: Bool {
+            lock.withLock {
+                if let result = _hasVisibleFields {
+                    return result
+                }
+                let result = _calculateHasVisibleFields()
+                _hasVisibleFields = result
+                return result
+            }
+        }
+
+        // MARK: - Private
+        nonisolated(unsafe) private var _value: JSON
+        nonisolated(unsafe) private var _hasVisibleFields: Bool?
+        nonisolated(unsafe) private var _isSelectedOption: Bool
+        nonisolated(unsafe) private weak var _authenticator: Authenticator?
+        nonisolated(unsafe) private weak var _selectedOption: Remediation.Form.Field? {
+            didSet {
+                guard let options = options else { return }
+                for option in options {
+                    option.isSelectedOption = (option === _selectedOption)
+                }
+            }
+        }
+
+        private func _calculateHasVisibleFields() -> Bool {
             if isVisible {
                 return true
             }
@@ -109,12 +183,13 @@ extension Remediation.Form {
             }
             
             return false
-        }()
+        }
 
+        private let lock = Lock()
         internal init(name: String? = nil,
                       label: String? = nil,
                       type: String? = nil,
-                      value: AnyObject? = nil,
+                      value: JSON = .null,
                       visible: Bool,
                       mutable: Bool,
                       required: Bool,
@@ -122,7 +197,7 @@ extension Remediation.Form {
                       relatesTo: String? = nil,
                       form: Remediation.Form? = nil,
                       options: [Remediation.Form.Field]? = nil,
-                      messages: Response.Message.Collection = .init(messages: nil))
+                      messages: Response.Message.Collection = .init())
         {
             self.name = name
             self.label = label
@@ -136,10 +211,7 @@ extension Remediation.Form {
             self.relatesTo = relatesTo
             self.options = options
             self.messages = messages
-            self.isSelectedOption = false
-            
-            super.init()
+            self._isSelectedOption = false
         }
     }
-    
 }

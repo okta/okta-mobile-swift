@@ -17,8 +17,13 @@ class IDXResponseCodableTests: XCTestCase {
     func testContextCodable() throws {
         let pkce = try XCTUnwrap(PKCE())
         let object = InteractionCodeFlow.Context(interactionHandle: "handle",
+                                                 recoveryToken: "recoveryToken",
                                                  state: "state",
-                                                 pkce: pkce)
+                                                 pkce: pkce,
+                                                 acrValues: "some:acr:value",
+                                                 maxAge: 300,
+                                                 nonce: "the_nonce",
+                                                 additionalParameters: ["foo": "bar"])
         let data = try JSONEncoder().encode(object)
         let result = try JSONDecoder().decode(InteractionCodeFlow.Context.self, from: data)
         XCTAssertEqual(object, result)

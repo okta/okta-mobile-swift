@@ -30,21 +30,27 @@ class IDXCapabilityTests: XCTestCase {
         let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
         redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
 
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
                               session: urlSession)
-        
-        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
-        
+
+        let context = InteractionCodeFlow.Context(interactionHandle: "handle",
+                                                  recoveryToken: nil,
+                                                  state: "state",
+                                                  pkce: nil,
+                                                  acrValues: nil,
+                                                  maxAge: nil,
+                                                  nonce: nil,
+                                                  additionalParameters: nil)
         flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
 
         let fields = try XCTUnwrap(Remediation.Form(fields: []))
         remediation = Remediation(flow: flowMock,
                                   name: "remediation",
-                                  method: "POST",
+                                  method: .post,
                                   href: URL(string: "https://example.com/idp/path")!,
-                                  accepts: "application/ion+json; okta-version=1.0.0",
+                                  accepts: .ionJson,
                                   form: fields,
                                   refresh: nil,
                                   relatesTo: nil,
@@ -57,79 +63,59 @@ class IDXCapabilityTests: XCTestCase {
     }
 
     func testProfileCapability() throws {
-        let capability = Capability.Profile(profile: ["email":"email@okta.com"])
+        let capability = ProfileCapability(profile: ["email":"email@okta.com"])
         XCTAssertEqual(capability["email"], "email@okta.com")
     }
 
-    func testRecoverableCapability() throws {
-        flowMock.expect(function: "send(response:completion:)",
-                        arguments: ["response": response as Any])
+    func testRecoverCapability() async throws {
+        await flowMock.expect(function: "resume(with:)",
+                        arguments: ["object": response as Any])
         urlSession.expect("https://example.com/idp/path", data: responseData)
         
-        let wait = expectation(description: "Recover")
-        let capability = Capability.Recoverable(remediation: remediation)
-        capability.recover { result in
-            defer { wait.fulfill() }
-            guard case Result.success(_) = result else { XCTFail()
-                return
-            }
-        }
-        waitForExpectations(timeout: 1.0)
-        
-        XCTAssertEqual(flowMock.recordedCalls.count, 1)
+        let capability = RecoverCapability(remediation: remediation)
+        _ = try await capability.recover()
+
+        let calls = await flowMock.recordedCalls
+        XCTAssertEqual(calls.count, 1)
     }
 
-    func testSendableCapability() throws {
-        flowMock.expect(function: "send(response:completion:)",
-                        arguments: ["response": response as Any])
+    func testSendCapability() async throws {
+        await flowMock.expect(function: "resume(with:)",
+                              arguments: ["object": response as Any])
         urlSession.expect("https://example.com/idp/path", data: responseData)
 
-        let wait = expectation(description: "Recover")
-        let capability = Capability.Sendable(remediation: remediation)
-        capability.send { result in
-            defer { wait.fulfill() }
-            guard case Result.success(_) = result else { XCTFail()
-                return
-            }
-        }
-        waitForExpectations(timeout: 1.0)
-        
-        XCTAssertEqual(flowMock.recordedCalls.count, 1)
+        let capability = SendCapability(remediation: remediation)
+        _ = try await capability.send()
+
+        let calls = await flowMock.recordedCalls
+        XCTAssertEqual(calls.count, 1)
     }
     
-    func testResendableCapability() throws {
-        flowMock.expect(function: "send(response:completion:)",
-                        arguments: ["response": response as Any])
+    func testResendCapability() async throws {
+        await flowMock.expect(function: "resume(with:)",
+                              arguments: ["object": response as Any])
         urlSession.expect("https://example.com/idp/path", data: responseData)
         
-        let wait = expectation(description: "Recover")
-        let capability = Capability.Resendable(remediation: remediation)
-        capability.resend { result in
-            defer { wait.fulfill() }
-            guard case Result.success(_) = result else { XCTFail()
-                return
-            }
-        }
-        waitForExpectations(timeout: 1.0)
-        
-        XCTAssertEqual(flowMock.recordedCalls.count, 1)
+        let capability = ResendCapability(remediation: remediation)
+        _ = try await capability.resend()
+
+        let calls = await flowMock.recordedCalls
+        XCTAssertEqual(calls.count, 1)
     }
     
-    func testDuoSignatureData() throws {
+    func testDuoSignatureData() async throws {
         let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
         redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
         
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
                               session: urlSession)
-        
-        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
-        
-        flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
+
+        flowMock = InteractionCodeFlowMock(client: client, redirectUri: redirectUri)
         
         let signatureField = Remediation.Form.Field(name: "signatureData", visible: false, mutable: true, required: false, secret: false)
-        let duo = Capability.Duo(host: "", signedToken: "", script: "")
+        let duo = DuoCapability(host: "", signedToken: "", script: "")
         let credentials = Remediation.Form.Field(name: "credentials",
                                                  label: "credentials",
                                                  visible: true,
@@ -138,33 +124,33 @@ class IDXCapabilityTests: XCTestCase {
                                                  secret: false,
                                                  form: .init(fields: [signatureField]))
         let form = try XCTUnwrap(Remediation.Form(fields: [ credentials ]))
-        remediation = Remediation(flow: flowMock,
-                                  name: "remediation",
-                                  method: "POST",
-                                  href: URL(string: "https://example.com/idp/path")!,
-                                  accepts: "application/ion+json; okta-version=1.0.0",
-                                  form: form,
-                                  refresh: nil,
-                                  relatesTo: nil,
-                                  capabilities: [])
         let authenticator =  Authenticator(flow: flowMock,
                                            v1JsonPaths: [], state: .authenticating,
                                            id: "duo",
                                            displayName: "",
-                                           type: "app",
+                                           type: .app,
                                            key: "app",
                                            methods: [["type":"duo"]],
                                            capabilities: [duo])
-        
-        remediation.authenticators = .init(authenticators: [authenticator])
+        remediation = Remediation(flow: flowMock,
+                                  name: "remediation",
+                                  method: .post,
+                                  href: URL(string: "https://example.com/idp/path")!,
+                                  accepts: .ionJson,
+                                  form: form,
+                                  refresh: nil,
+                                  relatesTo: nil,
+                                  capabilities: [],
+                                  authenticators: [authenticator])
+
         responseData = try data(from: .module,
                                 for: "introspect-response")
         duo.signatureData = "signature"
         duo.willProceed(to: remediation)
-        XCTAssertEqual(signatureField.value?.stringValue,"signature")
+        XCTAssertEqual(signatureField.value as? String, "signature")
     }
     
-    func testPollableCapability() throws {
+    func testPollCapability() async throws {
         responseData = try data(from: .module, for: "06-idx-challenge", in: "MFA-SOP")
         response = try Response.response(flow: flowMock, data: responseData)
         remediation = try XCTUnwrap(response.remediations[.challengeAuthenticator])
@@ -179,28 +165,22 @@ class IDXCapabilityTests: XCTestCase {
                           data: nil,
                           statusCode: 400,
                           error: error)
-        flowMock.expect(function: "send(error:completion:)",
-                        arguments: ["error": InteractionCodeFlowError.apiError(.serverError(error)) as Any])
+        await flowMock.expect(function: "resume(with:)",
+                              arguments: ["error": error])
 
         let successData = try data(from: .module,
                                     for: "success-response")
         let successResponse = try Response.response(flow: flowMock, data: successData)
         urlSession.expect("https://example.com/idp/idx/challenge/poll", data: successData)
-        flowMock.expect(function: "send(response:completion:)",
-                        arguments: ["response": successResponse as Any])
+        await flowMock.expect(function: "resume(with:)",
+                              arguments: ["object": successResponse])
 
-        let expectation = expectation(description: "First poll")
-        pollable.startPolling { result in
-            defer { expectation.fulfill() }
-            
-            guard case let Result.success(response) = result else {
-                XCTFail("Received a failure when a success was expected")
-                return
-            }
-            XCTAssertTrue(response.isLoginSuccessful)
-        }
-        wait(for: [expectation], timeout: 2)
-        
+        let response = try await pollable.proceed()
+        XCTAssertTrue(response.isLoginSuccessful)
+
+        let flowCalls = await flowMock.recordedCalls
+        XCTAssertEqual(flowCalls.count, 0)
+
         XCTAssertEqual(urlSession.requests.count, 2)
     }
 }

@@ -14,66 +14,21 @@ import XCTest
 @testable import OktaIdx
 
 class IDXRedirectTests: XCTestCase {
-    func testRedirectWithInvalidUrl() throws {
-        let redirectFromString = Redirect(url: "")
-        XCTAssertNil(redirectFromString)
+    var redirectUri: URL!
 
-        let redirectFromUrl = Redirect(url: try XCTUnwrap(URL(string: "callback")))
-        XCTAssertNil(redirectFromUrl)
+    override func setUpWithError() throws {
+        redirectUri = try URL(requiredString: "com.test:///login")
     }
 
     func testRedirectWithInteractionCode() throws {
         let url = try XCTUnwrap(URL(string: "com.test:///login?state=1234&interaction_code=qwerty#_=_"))
-        let redirect = try XCTUnwrap(Redirect(url: url))
-
-        XCTAssertEqual(redirect.url, url)
-        XCTAssertEqual(redirect.scheme, "com.test")
-        XCTAssertEqual(redirect.path, "/login")
-        XCTAssertEqual(redirect.state, "1234")
-        XCTAssertEqual(redirect.interactionCode, "qwerty")
-        XCTAssertNil(redirect.error)
-        XCTAssertNil(redirect.errorDescription)
+        let redirect = try XCTUnwrap(try url.interactionCode(redirectUri: redirectUri, state: "1234"))
+        XCTAssertEqual(redirect, .code("qwerty"))
     }
 
     func testRedirectWithInteractionError() throws {
-        let url = "com.test:///login?error=interaction_required&error_description=Interaction+required#_=_"
-        let redirect = try XCTUnwrap(Redirect(url: url))
-
-        XCTAssertEqual(redirect.url, try XCTUnwrap(URL(string: url)))
-        XCTAssertEqual(redirect.scheme, "com.test")
-        XCTAssertEqual(redirect.path, "/login")
-        XCTAssertEqual(redirect.state, nil)
-        XCTAssertEqual(redirect.interactionCode, nil)
-        XCTAssertEqual(redirect.error, "interaction_required")
-        // According to docs there's an issue with "+" character.
-        // https://developer.apple.com/documentation/foundation/nsurlcomponents/1407752-queryitems
-        XCTAssertEqual(redirect.errorDescription, "Interaction+required")
-        XCTAssertTrue(redirect.interactionRequired)
-    }
-
-    func testRedirectComparison() throws {
-        let firstUrl = "com.test:///login#_=_"
-        let secondUrl = "com.test:/login#_=_"
-        let firstRedirect = try XCTUnwrap(Redirect(url: firstUrl))
-        let secondRedirect = try XCTUnwrap(Redirect(url: secondUrl))
-
-        XCTAssertEqual(firstRedirect.path, "/login")
-        XCTAssertEqual(firstRedirect.scheme, "com.test")
-
-        XCTAssertEqual(firstRedirect.scheme, secondRedirect.scheme)
-        XCTAssertEqual(firstRedirect.path, secondRedirect.path)
-        XCTAssertNotEqual(firstRedirect.url, secondRedirect.url)
-
-        XCTAssertNil(firstRedirect.state)
-        XCTAssertFalse(firstRedirect.interactionRequired)
-        XCTAssertNil(firstRedirect.interactionCode)
-        XCTAssertNil(firstRedirect.error)
-        XCTAssertNil(firstRedirect.errorDescription)
-
-        XCTAssertEqual(firstRedirect.state, secondRedirect.state)
-        XCTAssertEqual(firstRedirect.interactionRequired, secondRedirect.interactionRequired)
-        XCTAssertEqual(firstRedirect.interactionCode, secondRedirect.interactionCode)
-        XCTAssertEqual(firstRedirect.error, secondRedirect.error)
-        XCTAssertEqual(firstRedirect.errorDescription, secondRedirect.errorDescription)
+        let url = try XCTUnwrap(URL(string: "com.test:///login?error=interaction_required&error_description=Interaction+required#_=_"))
+        let redirect = try XCTUnwrap(try url.interactionCode(redirectUri: redirectUri, state: "1234"))
+        XCTAssertEqual(redirect, .interactionRequired)
     }
 }

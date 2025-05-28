@@ -19,7 +19,7 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
     var signin: Signin?
 
     private var webAuthSession: ASWebAuthenticationSession?
-    private weak var poll: Capability.Pollable?
+    private weak var poll: PollCapability?
     
     private var dataSource: UITableViewDiffableDataSource<Signin.Section, Signin.Row>!
 
@@ -110,9 +110,9 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         //    button.isEnabled = false
         //}
         
-        poll?.stopPolling()
+        poll?.cancel()
         if let socialAuth = remediationOption?.socialIdp,
-           let scheme = signin.flow.redirectUri.scheme
+           let scheme = signin.flow.client.configuration.redirectUri?.scheme
         {
             let session = ASWebAuthenticationSession(url: socialAuth.redirectUrl,
                                                      callbackURLScheme: scheme)
@@ -124,34 +124,21 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
                                     recoverable: true)
                     return
                 }
-                
-                let result = signin.flow.redirectResult(for: callbackURL)
-                
-                switch result {
-                case .authenticated:
-                    signin.flow.exchangeCode(redirect: callbackURL) { result in
-                        switch result {
-                        case .failure(let error):
-                            signin.failure(with: error)
+
+                Task {
+                    do {
+                        switch try await signin.flow.resume(with: callbackURL) {
                         case .success(let token):
                             signin.success(with: token)
-                        }
-                    }
-                    
-                case .remediationRequired:
-                    signin.flow.resume { result in
-                        switch result {
-                        case .failure(let error):
-                            signin.failure(with: error)
-                        case .success(let response):
+                        case .interactionRequired(let response):
                             signin.proceed(to: response)
                         }
+                    } catch {
+                        signin.failure(with: error)
                     }
-                case .invalidContext, .invalidRedirectUrl:
-                    return
                 }
             }
-            
+
             session.presentationContextProvider = self
             session.prefersEphemeralWebBrowserSession = true
             session.start()
@@ -161,12 +148,12 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             return
         }
 
-        remediationOption?.proceed { [weak self] result in
-            switch result {
-            case .failure(let error):
-                self?.showError(error, recoverable: true)
-            case .success(let response):
-                signin.proceed(to: response)
+        guard let remediationOption else { return }
+        Task { @MainActor in
+            do {
+                signin.proceed(to: try await remediationOption.proceed())
+            } catch {
+                showError(error, recoverable: true)
             }
         }
     }
@@ -181,19 +168,17 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             button.isEnabled = false
         }
 
-        response?.cancel { [weak self] result in
-            switch result {
-            case .failure(let error):
-                self?.showError(error)
-
-                signin.failure(with: error)
-            case .success(let response):
-                signin.proceed(to: response)
+        guard let response else { return }
+        Task { @MainActor in
+            do {
+                signin.proceed(to: try await response.restart())
+            } catch {
+                showError(error)
             }
         }
     }
     
-    func beginPolling(using poll: Capability.Pollable) {
+    func beginPolling(using poll: PollCapability) {
         guard let signin = signin else {
             showError(SigninError.genericError(message: "Signin session deallocated"))
             return
@@ -204,17 +189,13 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         }
 
         self.poll = poll
-        poll.startPolling { result in
-            poll.stopPolling()
-            switch result {
-            case .success(let response):
-                signin.proceed(to: response)
-                
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self.showError(error, recoverable: true)
-                    self.pollActivityIndicator.stopAnimating()
-                }
+        Task { @MainActor in
+            do {
+                signin.proceed(to: try await poll.proceed())
+            } catch {
+                poll.cancel()
+                showError(error, recoverable: true)
+                pollActivityIndicator.stopAnimating()
             }
         }
     }
@@ -240,34 +221,31 @@ extension IDXRemediationTableViewController: SigninRowDelegate {
         switch action {
         case .send:
             if let sendable = response?.authenticators.current?.sendable {
-                sendable.send { result in
-                    switch result {
-                    case .failure(let error):
+                Task { @MainActor in
+                    do {
+                        signin.proceed(to: try await sendable.send())
+                    } catch {
                         signin.failure(with: error)
-                    case .success(let response):
-                        signin.proceed(to: response)
                     }
                 }
             }
         case .resend:
             if let resendable = response?.authenticators.current?.resendable {
-                resendable.resend { result in
-                    switch result {
-                    case .failure(let error):
+                Task { @MainActor in
+                    do {
+                        signin.proceed(to: try await resendable.resend())
+                    } catch {
                         signin.failure(with: error)
-                    case .success(let response):
-                        signin.proceed(to: response)
                     }
                 }
             }
         case .recover:
             if let recoverable = response?.authenticators.current?.recoverable {
-                recoverable.recover { result in
-                    switch result {
-                    case .failure(let error):
+                Task { @MainActor in
+                    do {
+                        signin.proceed(to: try await recoverable.recover())
+                    } catch {
                         signin.failure(with: error)
-                    case .success(let response):
-                        signin.proceed(to: response)
                     }
                 }
             }

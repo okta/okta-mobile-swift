@@ -25,14 +25,11 @@ class IDXClientV1ResponseTests: XCTestCase {
     override func setUpWithError() throws {
         let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
         let redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
                               session: urlSession)
-        
-        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
-        
-        flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
+        flowMock = InteractionCodeFlowMock(client: client, redirectUri: redirectUri)
     }
 
     var response: IonResponse {
@@ -77,9 +74,9 @@ class IDXClientV1ResponseTests: XCTestCase {
         XCTAssertEqual(obj.rel, ["create-form"])
         XCTAssertEqual(obj.name, "identify")
         XCTAssertEqual(obj.href, URL(string: "https://example.com/idp/idx/identify")!)
-        XCTAssertEqual(obj.method, "POST")
-        XCTAssertEqual(obj.accepts, "application/ion+json; okta-version=1.0.0")
-        
+        XCTAssertEqual(obj.method, .post)
+        XCTAssertEqual(obj.accepts, .ionJson)
+
         XCTAssertEqual(try XCTUnwrap(obj.value).count, 1)
     }
     
@@ -129,7 +126,7 @@ class IDXClientV1ResponseTests: XCTestCase {
         XCTAssertNil(obj.mutable)
         XCTAssertNil(obj.secret)
         XCTAssertNil(obj.visible)
-        XCTAssertNil(obj.value)
+        XCTAssertEqual(obj.value, .null)
     }
     
     func testFormValueWithNoLabel() throws {
@@ -182,11 +179,10 @@ class IDXClientV1ResponseTests: XCTestCase {
         
         XCTAssertNotNil(obj)
         XCTAssertEqual(obj.label, "Email")
-        
-        let form = obj.value?.toAnyObject() as? IonCompositeForm
-        XCTAssertNotNil(form)
-        XCTAssertEqual(form?.form.value.count, 2)
-        
+
+        XCTAssertNotNil(obj.valueAsCompositeForm)
+        XCTAssertEqual(obj.valueAsCompositeForm?.form.value.count, 2)
+
         XCTAssertNotNil(obj.form)
         XCTAssertEqual(obj.form?.value.count ?? 0, 2)
     }
@@ -643,7 +639,7 @@ class IDXClientV1ResponseTests: XCTestCase {
         
         XCTAssertNotNil(obj)
         XCTAssertNotNil(obj.href)
-        XCTAssertEqual(obj.method, "GET")
+        XCTAssertEqual(obj.method, .get)
         XCTAssertEqual(obj.name, "redirect-idp")
         XCTAssertEqual(obj.type, "FACEBOOK")
         

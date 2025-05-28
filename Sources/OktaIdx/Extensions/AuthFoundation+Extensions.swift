@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2022-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -13,13 +13,14 @@
 import Foundation
 import AuthFoundation
 
-protocol InteractionCodeFlowAPI: Actor {
-    var client: OAuth2Client { get }
-    var context: InteractionCodeFlow.Context? { get }
-
-    func resume(with successResponse: Response) async throws -> Token
-    func resume(with remediation: Remediation) async throws -> Response
-    func reset()
+extension GrantType {
+    public static let interactionCode = GrantType.other("interaction_code")
 }
 
-extension InteractionCodeFlow: InteractionCodeFlowAPI {}
+extension APIContentType {
+    public static let ionJson = APIContentType.other("application/ion+json; okta-version=1.0.0")
+}
+
+extension OAuth2ServerError.Code {
+    public static let interactionRequired = OAuth2ServerError.Code(rawValue: "interaction_required")
+}

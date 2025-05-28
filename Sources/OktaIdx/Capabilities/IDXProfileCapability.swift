@@ -12,21 +12,19 @@
 
 import Foundation
 
-extension Capability {
-    /// Capability when an authenticator or rememediation contains related profile information.
-    public struct Profile: AuthenticatorCapability {
-        /// Profile information describing the authenticator.
-        ///
-        /// This usually contains redacted information relevant to display to the user.
-        public let values: [String: String]
-        
-        /// Returns the nested `profile` field with the given name.
-        public subscript(name: String) -> String? {
-            values[name]
-        }
-
-        internal init(profile: [String: String]) {
-            self.values = profile
-        }
+/// Capability when an authenticator or rememediation contains related profile information.
+public struct ProfileCapability: Capability, Sendable, Equatable, Hashable {
+    /// Profile information describing the authenticator.
+    ///
+    /// This usually contains redacted information relevant to display to the user.
+    public let values: [String: String]
+    
+    /// Returns the nested `profile` field with the given name.
+    public subscript(name: String) -> String? {
+        values[name]
+    }
+    
+    internal init(profile: [String: String]) {
+        self.values = profile
     }
 }

@@ -14,9 +14,9 @@ import Foundation
 
 extension Remediation {
     /// Enumeration describing the possible remedation types. This is expanded from the possible option values that may be present in the `name` property.
-    public enum RemediationType {
-        case unknown
-        
+    public enum RemediationType: Sendable, Equatable, Hashable {
+        case unknown(_ name: String)
+
         /// Used to identify a user's username.
         case identify
         
@@ -79,16 +79,16 @@ extension Remediation {
         case requestActivationEmail
         case userCode
 
-        /// Underlying authenticator action used by the ``Capability.Pollable`` capability.
+        /// Underlying authenticator action used by the ``PollCapability`` capability.
         case poll
 
-        /// Underlying authenticator action used by the ``Capability.Recoverable`` capability.
+        /// Underlying authenticator action used by the ``RecoverCapability`` capability.
         case recover
 
-        /// Underlying authenticator action used by the ``Capability.Sendable`` capability.
+        /// Underlying authenticator action used by the ``SendCapability`` capability.
         case send
         
-        /// Underlying authenticator action used by the ``Capability.Resendable`` capability.
+        /// Underlying authenticator action used by the ``ResendCapability`` capability.
         case resend
     }
 }

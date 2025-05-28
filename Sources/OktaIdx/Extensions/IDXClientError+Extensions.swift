@@ -19,25 +19,16 @@ extension InteractionCodeFlowError: Equatable {
     {
         switch (lhs, rhs) {
         case (.invalidFlow, .invalidFlow): return true
-        case (.cannotCreateRequest, .cannotCreateRequest): return true
-        case (.invalidHTTPResponse, .invalidHTTPResponse): return true
-        case (.invalidResponseData, .invalidResponseData): return true
-        case (.invalidRequestData, .invalidRequestData): return true
-        case (.serverError(message: let lhsMessage, localizationKey: let lhsLocalizationKey, type: let lhsType),
-              .serverError(message: let rhsMessage, localizationKey: let rhsLocalizationKey, type: let rhsType)):
-            return (lhsMessage == rhsMessage && lhsLocalizationKey == rhsLocalizationKey && lhsType == rhsType)
+        case (.authenticationIncomplete, .authenticationIncomplete): return true
         case (.invalidParameter(name: let lhsName), .invalidParameter(name: let rhsName)):
-            return lhsName == rhsName
-        case (.invalidParameterValue(name: let lhsName), .invalidParameterValue(name: let rhsName)):
-            return lhsName == rhsName
-        case (.parameterImmutable(name: let lhsName), .parameterImmutable(name: let rhsName)):
             return lhsName == rhsName
         case (.missingRequiredParameter(name: let lhsName), .missingRequiredParameter(name: let rhsName)):
             return lhsName == rhsName
-        case (.unknownRemediationOption(name: let lhsName), .unknownRemediationOption(name: let rhsName)):
+        case (.missingRemediation(name: let lhsName), .missingRemediation(name: let rhsName)):
             return lhsName == rhsName
-        case (.successResponseMissing, .successResponseMissing): return true
-        case (.missingRefreshToken, .missingRefreshToken): return true
+        case (.responseValidationFailed(let lhsMessage, underlyingError: let lhsError),
+              .responseValidationFailed(let rhsMessage, underlyingError: let rhsError)):
+            return (lhsMessage == rhsMessage && lhsError as? NSError == rhsError as? NSError)
         default:
             return false
         }
@@ -48,74 +39,57 @@ extension InteractionCodeFlowError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidFlow:
-            return NSLocalizedString("InteractionCodeFlow instance is invalid.",
-                                     comment: "Error message thrown when an InteractionCodeFlow object is missing or becomes invalid.")
-        case .cannotCreateRequest:
-            return NSLocalizedString("Could not create a URL request for this action.",
-                                     comment: "Error message thrown when an error occurs while creating a URL request.")
-        case .invalidHTTPResponse:
-            return NSLocalizedString("Response received from a URL request is invalid.",
-                                     comment: "Error message thrown when a network response has an invalid type or status code.")
-        case .invalidResponseData:
-            return NSLocalizedString("Response data is invalid or could not be parsed.",
-                                     comment: "Error message thrown when response data is invalid.")
-        case .invalidRequestData:
-            return NSLocalizedString("Request data is invalid or could not be parsed.",
-                                     comment: "Error message thrown when request data is invalid.")
-        case .serverError(message: let message, localizationKey: let localizationKey, type: _):
-            let result = NSLocalizedString(localizationKey, comment: "Error message thrown from the server.")
-            guard result != localizationKey else {
-                return message
-            }
-            return result
-        case .internalMessage(let message):
-            return message
-        case .internalError(let error):
-            return error.localizedDescription
+            return NSLocalizedString("invalid_flow",
+                                     tableName: "OktaIdx",
+                                     bundle: .oktaIdx,
+                                     comment: "Invalid flow")
+
+        case .authenticationIncomplete:
+            return NSLocalizedString("authentication_incomplete",
+                                     tableName: "OktaIdx",
+                                     bundle: .oktaIdx,
+                                     comment: "Invalid flow")
+
         case .invalidParameter(name: let name):
-            return NSLocalizedString("Invalid parameter \"\(name)\" supplied to a remediation option.",
-                                     comment: "Error message thrown when an invalid parameter is supplied.")
-        case .invalidParameterValue(name: let name, type: let type):
-            return NSLocalizedString("Parameter \"\(name)\" was supplied a \(type) value which is unsupported.",
-                                     comment: "Error message thrown when an invalid parameter value is supplied.")
-        case .parameterImmutable(name: let name):
-            return NSLocalizedString("Cannot override immutable remediation parameter \"\(name)\".",
-                                     comment: "Error message thrown when a value is passed to an immutable parameter.")
+            return String.localizedStringWithFormat(
+                NSLocalizedString("invalid_parameter",
+                                  tableName: "OktaIdx",
+                                  bundle: .oktaIdx,
+                                  comment: ""),
+                name)
+
         case .missingRequiredParameter(name: let name):
-            return NSLocalizedString("Required parameter \"\(name)\" missing.",
-                                     comment: "Error message thrown when a required value is missing.")
-        case .unknownRemediationOption(name: let name):
-            return NSLocalizedString("Unknown remediation option \"\(name)\".",
-                                     comment: "Error message thrown when a remediation option is invoked that doesn't exist.")
-        case .successResponseMissing:
-            return NSLocalizedString("Success response is missing or unavailable.",
-                                     comment: "Error message thrown when a success response is not yet ready.")
-        case .missingRefreshToken:
-            return NSLocalizedString("Cannot perform a refresh when no refresh token is available.",
-                                     comment: "Cannot perform a refresh when no refresh token is available.")
-        case .missingRelatedObject:
-            return NSLocalizedString("Could not find an object within the response related from another object.",
-                                     comment: "Cannot find a related object in the response.")
-        case .missingRemediationOption(name: let name):
-            return NSLocalizedString("The remediation option \"\(name)\" was expected, but not found..",
-                                     comment: "Cannot find a required remediation option.")
-        case .oauthError(summary: let summary, code: let code, errorId: _):
-            return NSLocalizedString("\(summary). Error code \(code ?? "unknown").",
-                                     comment: "OAuth error reported from the server.")
-        case .invalidContext:
-            return NSLocalizedString("The Context for this flow is missing or is invalid.",
-                                     comment: "Error message thrown when an InteractionCodeFlow does not contain a Context.")
+            return String.localizedStringWithFormat(
+                NSLocalizedString("missing_required_parameter",
+                                  tableName: "OktaIdx",
+                                  bundle: .oktaIdx,
+                                  comment: ""),
+                name)
 
-        case .platformUnsupported:
-            return NSLocalizedString("The current platform is not yet supported.",
-                                     comment: "")
+        case .missingRemediation(name: let name):
+            return String.localizedStringWithFormat(
+                NSLocalizedString("missing_remediation",
+                                  tableName: "OktaIdx",
+                                  bundle: .oktaIdx,
+                                  comment: ""),
+                name)
 
-        case .invalidUrl:
-            return NSLocalizedString("The supplied URL is invalid.",
-                                     comment: "")
-
-        case .apiError(let error):
-            return error.localizedDescription
+        case .responseValidationFailed(let message, let error):
+            if let error {
+                return String.localizedStringWithFormat(
+                    NSLocalizedString("response_validation_failed_underlying_error",
+                                      tableName: "OktaIdx",
+                                      bundle: .oktaIdx,
+                                      comment: ""),
+                    message, error.localizedDescription)
+            } else {
+                return String.localizedStringWithFormat(
+                    NSLocalizedString("response_validation_failed",
+                                      tableName: "OktaIdx",
+                                      bundle: .oktaIdx,
+                                      comment: ""),
+                    message)
+            }
         }
     }
 }

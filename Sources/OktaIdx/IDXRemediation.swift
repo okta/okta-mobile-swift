@@ -14,7 +14,7 @@ import Foundation
 import AuthFoundation
 
 /// Describes choices the user can make to proceed through the authentication workflow.
-public class Remediation: Equatable, Hashable {
+public final class Remediation: Sendable, Equatable, Hashable {
     /// The type of this remediation, which is used for keyed subscripting from a `RemediationCollection`.
     public let type: RemediationType
     
@@ -25,9 +25,9 @@ public class Remediation: Equatable, Hashable {
     public let form: Form
     
     /// The set of authenticators associated with this remediation.
-    public internal(set) var authenticators: Authenticator.Collection = .init(authenticators: nil)
-    
-    public let capabilities: [RemediationCapability]
+    public let authenticators: Authenticator.Collection
+
+    public let capabilities: [CapabilityType]
     
     /// Returns the field within this remedation with the given name or key-path.
     ///
@@ -39,27 +39,39 @@ public class Remediation: Equatable, Hashable {
     }
     
     /// Collection of messages for all fields within this remedation.
-    public lazy var messages: Response.Message.Collection = {
-        Response.Message.Collection(messages: nil, nestedMessages: nestedMessages())
-    }()
+    public var messages: Response.Message.Collection {
+        get {
+            lock.withLock {
+                if let result = _messages {
+                    return result
+                }
+
+                let result = Response.Message.Collection(nestedMessages: nestedMessages())
+                _messages = result
+                return result
+            }
+        }
+    }
     
-    private weak var flow: InteractionCodeFlowAPI?
-    
-    let method: String
+    let method: APIRequestMethod
     let href: URL
-    let accepts: String?
+    let accepts: APIContentType?
     let refresh: TimeInterval?
     let relatesTo: [String]?
-    
-    internal required init?(flow: InteractionCodeFlowAPI,
+
+    nonisolated(unsafe) internal private(set) weak var flow: (any InteractionCodeFlowAPI)?
+    nonisolated(unsafe) private(set) var _messages: Response.Message.Collection?
+    private let lock = Lock()
+    internal required init?(flow: any InteractionCodeFlowAPI,
                             name: String,
-                            method: String,
+                            method: APIRequestMethod,
                             href: URL,
-                            accepts: String?,
+                            accepts: APIContentType?,
                             form: Form,
                             refresh: TimeInterval? = nil,
                             relatesTo: [String]? = nil,
-                            capabilities: [RemediationCapability])
+                            capabilities: [any Capability],
+                            authenticators: [Authenticator] = [])
     {
         self.flow = flow
         self.name = name
@@ -70,7 +82,8 @@ public class Remediation: Equatable, Hashable {
         self.form = form
         self.refresh = refresh
         self.relatesTo = relatesTo
-        self.capabilities = capabilities
+        self.capabilities = capabilities.compactMap { CapabilityType($0) }
+        self.authenticators = Authenticator.Collection(authenticators)
     }
     
     /// Executes the remediation option and proceeds through the workflow using the supplied form parameters.
@@ -80,51 +93,15 @@ public class Remediation: Equatable, Hashable {
     /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to process any response or error returned from this call.
     /// - Parameters:
     ///   - completion: Optional completion handler invoked when a response is received.
-    public func proceed(completion: InteractionCodeFlow.ResponseResult? = nil) {
+    public func proceed() async throws -> Response {
         guard let flow = flow else {
-            completion?(.failure(.invalidFlow))
-            return
-        }
-        
-        // Inform any capabilities associated with this remediation that it will proceed.
-        authenticators.compactMap({ $0.capabilities })
-            .flatMap({ $0 })
-            .forEach({ $0.willProceed(to: self) })
-        
-        let request: InteractionCodeFlow.RemediationRequest
-        do {
-            request = try InteractionCodeFlow.RemediationRequest(remediation: self)
-        } catch let error as InteractionCodeFlowError {
-            flow.send(error: error, completion: completion)
-            return
-        } catch let error as APIClientError {
-            flow.send(error: .apiError(error), completion: completion)
-            return
-        } catch {
-            flow.send(error: .internalError(error), completion: completion)
-            return
+            throw InteractionCodeFlowError.invalidFlow
         }
 
-        request.send(to: flow.client) { result in
-            switch result {
-            case .failure(let error):
-                flow.send(error: .apiError(error), completion: completion)
-            case .success(let response):
-                do {
-                    flow.send(response: try Response(flow: flow,
-                                                     ion: response.result),
-                              completion: completion)
-                } catch let error as APIClientError {
-                    flow.send(error: .apiError(error), completion: completion)
-                    return
-                } catch {
-                    flow.send(error: .internalError(error), completion: completion)
-                    return
-                }
-            }
-        }
+        return try await flow.resume(with: self)
     }
     
+    @_documentation(visibility: internal)
     public static func == (lhs: Remediation, rhs: Remediation) -> Bool {
         lhs.flow === rhs.flow &&
         lhs.type == rhs.type &&
@@ -136,6 +113,7 @@ public class Remediation: Equatable, Hashable {
         lhs.relatesTo == rhs.relatesTo
     }
     
+    @_documentation(visibility: internal)
     public func hash(into hasher: inout Hasher) {
         hasher.combine(type)
         hasher.combine(name)
@@ -148,18 +126,18 @@ public class Remediation: Equatable, Hashable {
     }
 }
 
-#if swift(>=5.5.1) && !os(Linux)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
 extension Remediation {
     /// Executes the remediation option and proceeds through the workflow using the supplied form parameters.
     ///
     /// This method is used to proceed through the authentication flow, using the data assigned to the nested fields' `value` to make selections.
-    public func proceed() async throws -> Response {
-        try await withCheckedThrowingContinuation { continuation in
-            proceed() { result in
-                continuation.resume(with: result)
+    public func proceed(completion: @escaping @Sendable (Result<Response, any Error>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await proceed()))
+            } catch {
+                completion(.failure(error))
             }
         }
     }
 }
-#endif

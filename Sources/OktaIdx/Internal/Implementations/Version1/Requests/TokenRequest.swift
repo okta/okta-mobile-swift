@@ -14,103 +14,104 @@ import Foundation
 import AuthFoundation
 
 extension InteractionCodeFlow {
-    struct SuccessResponseTokenRequest {
+    struct TokenRequest: AuthenticationFlowRequest {
+        typealias Flow = InteractionCodeFlow
+
         let openIdConfiguration: OpenIdConfiguration
+        let clientConfiguration: OAuth2Client.Configuration
+        let additionalParameters: [String: any APIRequestArgument]?
+        let context: Flow.Context
+        let interactionCode: String
+
+        init(openIdConfiguration: OpenIdConfiguration, clientConfiguration: OAuth2Client.Configuration, additionalParameters: [String: any APIRequestArgument]?, context: Flow.Context, interactionCode: String) throws {
+            guard clientConfiguration.redirectUri != nil else {
+                throw OAuth2Error.redirectUriRequired
+            }
+
+            self.openIdConfiguration = openIdConfiguration
+            self.clientConfiguration = clientConfiguration
+            self.additionalParameters = additionalParameters
+            self.context = context
+            self.interactionCode = interactionCode
+        }
+    }
+
+    struct SuccessResponseTokenRequest: AuthenticationFlowRequest {
+        typealias Flow = InteractionCodeFlow
+
         let httpMethod: APIRequestMethod
         let url: URL
         let contentType: APIContentType?
-        let bodyParameters: [String: APIRequestArgument]?
-        let clientId: String
-        let scope: String
-        let redirectUri: String
+
+        let openIdConfiguration: OpenIdConfiguration
+        let clientConfiguration: OAuth2Client.Configuration
+        let additionalParameters: [String: any APIRequestArgument]?
+        let context: Flow.Context
+        let formParameters: [String: any JSONRepresentable]
+
         init(openIdConfiguration: OpenIdConfiguration,
-             successResponse option: Remediation,
-             clientId: String,
-             scope: String,
-             redirectUri: String,
-             context: InteractionCodeFlow.Context) throws
+             clientConfiguration: OAuth2Client.Configuration,
+             additionalParameters: [String: any APIRequestArgument]?,
+             context: Flow.Context,
+             successRemediation option: Remediation) throws
         {
-            guard let method = APIRequestMethod(rawValue: option.method),
-                  let accepts = option.accepts
-            else {
-                throw InteractionCodeFlowError.cannotCreateRequest
+            guard clientConfiguration.redirectUri != nil else {
+                throw OAuth2Error.redirectUriRequired
             }
-            
-            let parameters: [String: APIRequestArgument] = try option.form.allFields.reduce(into: [:]) { partialResult, field in
-                guard let name = field.name else { return }
-                switch name {
-                case "code_verifier":
-                    partialResult[name] = context.pkce.codeVerifier
-                    
-                case "client_id":
-                    guard clientId == field.value as? String else {
-                        throw InteractionCodeFlowError.invalidParameter(name: name)
-                    }
-                    fallthrough
-                    
-                default:
-                    guard let value = field.value else { return }
+
+            self.openIdConfiguration = openIdConfiguration
+            self.clientConfiguration = clientConfiguration
+            self.additionalParameters = additionalParameters
+            self.context = context
+            self.url = option.href
+            self.httpMethod = option.method
+            self.contentType = option.accepts
+            self.formParameters = option.form.allFields.reduce(into: [:]) { partialResult, field in
+                if let name = field.name,
+                   let value = field.value,
+                   value.json != .null
+                {
                     partialResult[name] = value
                 }
             }
 
-            self.openIdConfiguration = openIdConfiguration
-            self.httpMethod = method
-            self.url = option.href
-            self.clientId = clientId
-            self.scope = scope
-            self.redirectUri = redirectUri
-            self.contentType = .other(accepts)
-            self.bodyParameters = parameters
-        }
-        
-        var acceptsType: APIContentType? { .other("application/json") }
-
-        var codingUserInfo: [CodingUserInfoKey: Any]? {
-            [
-                .clientSettings: [
-                    "client_id": clientId,
-                    "redirect_uri": redirectUri,
-                    "scope": scope
-                ]
-            ]
+            if let clientId = formParameters["client_id"] as? String,
+               clientId != clientConfiguration.clientId
+            {
+                throw InteractionCodeFlowError.invalidParameter(name: "client_id")
+            }
         }
     }
+}
 
-    struct RedirectURLTokenRequest {
-        let openIdConfiguration: OpenIdConfiguration
-        let clientId: String
-        let scope: String
-        let redirectUri: String
-        let interactionCode: String
-        let pkce: PKCE
+extension InteractionCodeFlow.TokenRequest: OAuth2TokenRequest, APIRequestBody, APIParsingContext {
+    var category: AuthFoundation.OAuth2APIRequestCategory { .token }
+    var tokenValidatorContext: any IDTokenValidatorContext { context }
+
+    var bodyParameters: [String: any APIRequestArgument]? {
+        let grantType = GrantType.interactionCode
+        var result = additionalParameters ?? [:]
+        result.merge(clientConfiguration.parameters(for: category))
+        result.merge(context.parameters(for: category))
+        result.merge([
+            "grant_type": grantType.rawValue,
+            grantType.rawValue: interactionCode,
+        ])
+
+        return result
     }
 }
 
 extension InteractionCodeFlow.SuccessResponseTokenRequest: OAuth2TokenRequest, APIRequestBody, APIParsingContext {
-}
+    var acceptsType: APIContentType? { .other("application/json") }
+    var category: AuthFoundation.OAuth2APIRequestCategory { .token }
+    var tokenValidatorContext: any IDTokenValidatorContext { context }
 
-extension InteractionCodeFlow.RedirectURLTokenRequest: OAuth2TokenRequest, APIRequestBody, APIParsingContext {
-    var httpMethod: APIRequestMethod { .post }
-    var url: URL { openIdConfiguration.tokenEndpoint }
-    var contentType: APIContentType? { .formEncoded }
-    var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: APIRequestArgument]? {
-        [
-            "client_id": clientId,
-            "grant_type": "interaction_code",
-            "interaction_code": interactionCode,
-            "code_verifier": pkce.codeVerifier
-        ]
-    }
-
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
-        [
-            .clientSettings: [
-                "client_id": clientId,
-                "redirect_uri": redirectUri,
-                "scope": scope
-            ]
-        ]
+    var bodyParameters: [String: any APIRequestArgument]? {
+        var result = additionalParameters ?? [:]
+        result.merge(clientConfiguration.parameters(for: category))
+        result.merge(context.parameters(for: category))
+        result.merge(formParameters.compactMapValues({ $0.json.anyValue as? (any APIRequestArgument) }))
+        return result
     }
 }

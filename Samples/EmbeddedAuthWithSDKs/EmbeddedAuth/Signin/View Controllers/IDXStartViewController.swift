@@ -26,20 +26,17 @@ class IDXStartViewController: UIViewController, IDXSigninController {
             showError(SigninError.genericError(message: "Signin session deallocated"))
             return
         }
-        
-        var options = [InteractionCodeFlow.Option:String]()
-        if let recoveryToken = ClientConfiguration.active?.recoveryToken {
-            options[.recoveryToken] = recoveryToken
-        }
-        
-        signin.flow.start(options: options) { result in
-            switch result {
-            case .success(let response):
-                signin.proceed(to: response)
 
-            case .failure(let error):
-                self.showError(error)
-                
+        var context = InteractionCodeFlow.Context()
+        if let recoveryToken = ClientConfiguration.active?.recoveryToken {
+            context.recoveryToken = recoveryToken
+        }
+
+        Task { @MainActor in
+            do {
+                signin.proceed(to: try await signin.flow.start(with: context))
+            } catch {
+                showError(error)
                 signin.failure(with: error)
             }
         }

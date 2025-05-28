@@ -12,32 +12,30 @@
 
 import Foundation
 
-extension Capability {
-    /// Capability to recover an account.
-    public struct Recoverable: AuthenticatorCapability {
-        /// Requests that the recovery code is sent.
-        /// - Parameter completion: Completion handler when the response is returned with the result of the operation.
-        public func recover(completion: InteractionCodeFlow.ResponseResult? = nil) {
-            remediation.proceed(completion: completion)
-        }
-        
-        internal let remediation: Remediation
-        internal init(remediation: Remediation) {
-            self.remediation = remediation
-        }
+/// Capability to recover an account.
+public struct RecoverCapability: Capability, Sendable, Equatable, Hashable {
+    /// Requests that the recovery code is sent.
+    public func recover() async throws -> Response {
+        try await remediation.proceed()
+    }
+
+    internal let remediation: Remediation
+    internal init(remediation: Remediation) {
+        self.remediation = remediation
     }
 }
 
-#if swift(>=5.5.1) && !os(Linux)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
-extension Capability.Recoverable {
+extension RecoverCapability {
     /// Requests that the recovery code is sent.
-    public func recover() async throws -> Response {
-        try await withCheckedThrowingContinuation { continuation in
-            recover() { result in
-                continuation.resume(with: result)
+    /// - Parameter completion: Completion handler when the response is returned with the result of the operation.
+    public func recover(completion: @escaping @Sendable (Result<Response, any Error>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await recover()))
+            } catch {
+                completion(.failure(error))
             }
         }
     }
 }
-#endif

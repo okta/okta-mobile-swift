@@ -15,7 +15,7 @@ import XCTest
 @testable import OktaIdx
 
 extension Data {
-    func urlFormEncoded() -> [String:String?]? {
+    var urlFormEncoded: [String:String?]? {
         guard let string = String(data: self, encoding: .utf8),
               let url = URL(string: "?\(string)"),
               let components = URLComponents(url: url, resolvingAgainstBaseURL: false),

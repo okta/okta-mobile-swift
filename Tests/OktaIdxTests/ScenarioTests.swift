@@ -17,13 +17,13 @@ import XCTest
 @testable import TestCommon
 #endif
 
-class MockAccessTokenValidator: TokenHashValidator {
+final class MockAccessTokenValidator: TokenHashValidator, Sendable {
     func validate(_ accessToken: String, idToken: JWT) throws {}
 }
 
-struct MockIDTokenValidator: IDTokenValidator {
+struct MockIDTokenValidator: IDTokenValidator, Sendable {
     var issuedAtGraceInterval: TimeInterval = 300
-    func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws {}
+    func validate(token: JWT, issuer: URL, clientId: String, context: (any IDTokenValidatorContext)?) throws {}
 }
 
 struct MockJWKValidator: JWKValidator {
@@ -44,14 +44,14 @@ class ScenarioTests: XCTestCase {
         Token.accessTokenValidator = MockAccessTokenValidator()
 
         issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
-
-        client = OAuth2Client(baseURL: issuer,
-                              clientId: "0ZczewGCFPlxNYYcLq5i",
-                              scopes: "openid profile",
-                              session: urlSession)
         let redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
-        
-        flow = InteractionCodeFlow(redirectUri: redirectUri, client: client)
+        client = OAuth2Client(issuerURL: issuer,
+                              clientId: "0ZczewGCFPlxNYYcLq5i",
+                              scope: "openid profile",
+                              redirectUri: redirectUri,
+                              session: urlSession)
+
+        flow = try InteractionCodeFlow(client: client)
     }
     
     override func tearDownWithError() throws {
@@ -131,7 +131,7 @@ class ScenarioTests: XCTestCase {
                     
                     XCTAssertTrue(response.isLoginSuccessful)
 
-                    response.exchangeCode { result in
+                    response.finish { result in
                         guard case let Result.success(token) = result else {
                             XCTFail("Received a failure when a success was expected")
                             return
@@ -148,8 +148,6 @@ class ScenarioTests: XCTestCase {
         wait(for: [completion], timeout: 1)
     }
 
-    #if swift(>=5.5.1) && !os(Linux)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
     func testScenario1Async() async throws {
         urlSession.expect("https://example.com/oauth2/default/v1/interact",
                           data: try data(from: .module,
@@ -194,16 +192,18 @@ class ScenarioTests: XCTestCase {
         
         XCTAssertTrue(response.isLoginSuccessful)
                         
-        let token = try await response.exchangeCode()
+        let token = try await response.finish()
 
         XCTAssertEqual(token.tokenType, "Bearer")
         XCTAssertEqual(token.expiresIn, 3600)
         XCTAssertEqual(token.refreshToken, "CCY4M4fR3")
     }
-    #endif
 
     func testScenario2() throws {
         let completion = expectation(description: "Start")
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module,
+                                         for: "openid-configuration"))
         urlSession.expect("https://example.com/oauth2/default/v1/interact",
                           data: try data(from: .module,
                                          for: "01-interact-response",
@@ -224,6 +224,7 @@ class ScenarioTests: XCTestCase {
         flow.start { result in
             guard case let Result.success(response) = result else {
                 XCTFail("Received a failure when a success was expected")
+                completion.fulfill()
                 return
             }
             
@@ -313,6 +314,9 @@ class ScenarioTests: XCTestCase {
     func testScenario4() throws {
         let completion = expectation(description: "Start")
 
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module,
+                                         for: "openid-configuration"))
         urlSession.expect("https://example.com/oauth2/default/v1/interact",
                           data: try data(from: .module,
                                          for: "01-interact-response",
@@ -341,10 +345,11 @@ class ScenarioTests: XCTestCase {
         flow.start { result in
             guard case let Result.success(response) = result else {
                 XCTFail("Received a failure when a success was expected")
+                completion.fulfill()
                 return
             }
 
-            XCTAssertTrue(response.canCancel)
+            XCTAssertTrue(response.canRestart)
 
             let remediation = response.remediations.first
             XCTAssertEqual(remediation?.name, "identify")
@@ -357,7 +362,7 @@ class ScenarioTests: XCTestCase {
                     return
                 }
 
-                XCTAssertTrue(response.canCancel)
+                XCTAssertTrue(response.canRestart)
 
                 let remediation = response.remediations.first
                 XCTAssertEqual(remediation?.name, "select-authenticator-authenticate")
@@ -376,7 +381,7 @@ class ScenarioTests: XCTestCase {
                         return
                     }
 
-                    XCTAssertTrue(response.canCancel)
+                    XCTAssertTrue(response.canRestart)
 
                     let remediation = response.remediations.first
                     XCTAssertEqual(remediation?.name, "challenge-authenticator")
@@ -393,7 +398,7 @@ class ScenarioTests: XCTestCase {
                             return
                         }
 
-                        XCTAssertTrue(response.canCancel)
+                        XCTAssertTrue(response.canRestart)
 
                         let remediation = response.remediations.first
                         XCTAssertEqual(remediation?.name, "select-authenticator-authenticate")
@@ -408,13 +413,13 @@ class ScenarioTests: XCTestCase {
                         let related = emailOption?.authenticator
                         XCTAssertEqual(related, authenticator)
 
-                        response.cancel() { result in
+                        response.restart { result in
                             guard case let Result.success(response) = result else {
                                 XCTFail("Received a failure when a success was expected")
                                 return
                             }
 
-                            XCTAssertTrue(response.canCancel)
+                            XCTAssertTrue(response.canRestart)
 
                             let remediation = response.remediations.first
                             XCTAssertEqual(remediation?.name, "identify")
@@ -441,7 +446,7 @@ class ScenarioTests: XCTestCase {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module,
                                          for: "openid-configuration"))
-        urlSession.expect("https://example.com/oauth2/v1/token",
+        urlSession.expect("https://example.com/oauth2/default/v1/token",
                           data: try data(from: .module,
                                          for: "03-token-response",
                                          in: "IdP"))
@@ -449,33 +454,39 @@ class ScenarioTests: XCTestCase {
                           data: try data(from: .module, for: "keys"),
                           contentType: "application/json")
 
+        let flow = try XCTUnwrap(flow)
         flow.start { result in
             guard case let Result.success(response) = result else {
                 XCTFail("Received a failure when a success was expected")
+                completion.fulfill()
                 return
             }
             
             let redirectUrl = URL(string: """
                         redirect:///uri?\
                         interaction_code=qwe4xJaJF897EbEKL0LLbNUI-QwXZa8YOkY8QkWUlpXxU&\
-                        state=\(self.flow.context?.state ?? "Missing")#_=_
+                        state=\(flow.context?.state ?? "Missing")#_=_
                         """)!
             
-            XCTAssertTrue(response.canCancel)
+            XCTAssertTrue(response.canRestart)
             XCTAssertNotNil(response.remediations[.redirectIdp])
             XCTAssertNotNil(response.remediations[.redirectIdp]?.href)
             XCTAssertFalse(response.isLoginSuccessful)
-            XCTAssertEqual(self.flow.redirectResult(for: redirectUrl), .authenticated)
-            
-            self.flow.exchangeCode(redirect: redirectUrl) { result in
-                guard case let Result.success(token) = result else {
-                    XCTFail("Received a failure when a success was expected")
-                    return
+
+            flow.resume(with: redirectUrl) { result in
+                switch result {
+                case .success(let status):
+                    switch status {
+                    case .success(let token):
+                        XCTAssertNotNil(token.idToken)
+                        XCTAssertNotNil(token.refreshToken)
+                    case .interactionRequired(_):
+                        XCTFail("Interaction required")
+                    }
+                case .failure(let error):
+                    XCTFail("Resume should not have failed: \(error)")
                 }
-                
-                XCTAssertNotNil(token.idToken)
-                XCTAssertNotNil(token.refreshToken)
-                
+
                 completion.fulfill()
             }
         }
@@ -485,6 +496,9 @@ class ScenarioTests: XCTestCase {
     
     func testScenario6() throws {
         let completion = expectation(description: "Start")
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module,
+                                         for: "openid-configuration"))
         urlSession.expect("https://example.com/oauth2/default/v1/interact",
                           data: try data(from: .module,
                                          for: "01-interact-response",
@@ -493,27 +507,44 @@ class ScenarioTests: XCTestCase {
                           data: try data(from: .module,
                                          for: "02-introspect-response",
                                          in: "IdP"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "multiple-select-authenticator-authenticate"))
 
+        let flow = try XCTUnwrap(flow)
         flow.start { result in
             guard case let Result.success(response) = result else {
                 XCTFail("Received a failure when a success was expected")
+                completion.fulfill()
                 return
             }
             
             let redirectUrl = URL(string: """
                     redirect:///uri?\
-                    state=\(self.flow.context?.state ?? "Missing")&\
+                    state=\(flow.context?.state ?? "Missing")&\
                     error=interaction_required&\
                     error_description=Your+client+is+configured+to+use+the+interaction+code+flow+and+user+interaction+is+required+to+complete+the+request.#_=_
                     """)!
             
-            XCTAssertTrue(response.canCancel)
+            XCTAssertTrue(response.canRestart)
             XCTAssertNotNil(response.remediations[.redirectIdp])
             XCTAssertNotNil(response.remediations[.redirectIdp]?.href)
             XCTAssertFalse(response.isLoginSuccessful)
-            XCTAssertEqual(self.flow.redirectResult(for: redirectUrl), .remediationRequired)
-            
-            completion.fulfill()
+            flow.resume(with: redirectUrl) { result in
+                switch result {
+                case .success(let status):
+                    switch status {
+                    case .success(_):
+                        XCTFail("Expected failure, got success")
+                    case .interactionRequired(let response):
+                        XCTAssertNotNil(response.remediations[.selectAuthenticatorAuthenticate])
+                    }
+                case .failure(let error):
+                    XCTFail("Resume should not have failed: \(error)")
+                }
+
+                completion.fulfill()
+            }
         }
         
         wait(for: [completion], timeout: 2)

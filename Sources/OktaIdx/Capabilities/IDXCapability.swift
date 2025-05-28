@@ -13,91 +13,113 @@
 import Foundation
 
 /// A generic protocol used to identify objects that describe a capability.
-public protocol IDXCapability {
+public protocol Capability: Sendable, Equatable, Hashable {
     /// Message sent to capabilities when the response it's contained within will proceed through a remediation.
     /// - Parameter remediation: Remediation being invoked.
+    @_documentation(visibility: internal)
     func willProceed(to remediation: Remediation)
 }
 
-/// Defines type conformance for capabilities that can be used with Authenticators.
-public protocol AuthenticatorCapability: IDXCapability {}
+/// Represents the enumeration type expected within a ``CapabilityCollection``.
+public protocol IsCapabilityType {
+    /// Returns the current capability's underlying value if it matches the given type.
+    /// - Parameter type: The capability type requested.
+    /// - Returns: The capability's value, or `nil` if it doesn't match the requested type.
+    @_documentation(visibility: internal)
+    func capability<T: Capability>(of type: T.Type) -> T?
+    
+    /// Returns this capability as a``Capability`` erased type.
+    @_documentation(visibility: internal)
+    var capabilityValue: any Capability { get }
 
-/// Defines type conformance for capabilities that can be used with Remediations.
-public protocol RemediationCapability: IDXCapability {}
-
-public struct Capability {}
+    @_documentation(visibility: internal)
+    init?(_ capability: any Capability)
+}
 
 /// A collection of capabilities that can be associated with some parent object, such as an ``Authenticator`` or ``Remediation``.
 public protocol CapabilityCollection: AnyObject {
-    associatedtype CapabilityType
+    @_documentation(visibility: internal)
+    associatedtype CapabilityType: IsCapabilityType
 
-    /// The collection of capabilities associated with the parent object.
+    /// The collection of all capabilities associated with the parent object.
     var capabilities: [CapabilityType] { get }
     
-    /// Returns the capability defined by the given type, if available in this collection.
+    /// Returns the capabilities defined by the given type, if available in this collection.
     /// - Parameter type: The type of the capability to return.
-    func capability<T: IDXCapability>(_ type: T.Type) -> T?
-}
-
-public extension CapabilityCollection {
-    func capability<T: IDXCapability>(_ type: T.Type) -> T? {
-        capabilities.first { $0 is T } as? T
-    }
+    func capabilities<T: Capability>(of type: T.Type) -> [T]
 }
 
 extension Authenticator: CapabilityCollection {
-    public typealias CapabilityType = AuthenticatorCapability
-    
+    public enum CapabilityType: IsCapabilityType, Sendable, Equatable, Hashable {
+        case sendable(_ capability: SendCapability)
+        case resendable(_ capability: ResendCapability)
+        case recoverable(_ capability: RecoverCapability)
+        case passwordSettings(_ capability: PasswordSettingsCapability)
+        case pollable(_ capability: PollCapability)
+        case profile(_ capability: ProfileCapability)
+        case otp(_ capability: OTPCapability)
+        case duo(_ capability: DuoCapability)
+        case numberChallenge(_ capability: NumberChallengeCapability)
+    }
+
     /// Exposes the authenticator's capability to send a code.
     ///
     /// If this authenticator is incapable of sending a code, this value will be `nil`.
-    public var sendable: Capability.Sendable? { capability(Capability.Sendable.self) }
-    
+    public var sendable: SendCapability? { capabilities(of: SendCapability.self).first }
+
     /// Exposes the authenticator's capability to resend a code.
     ///
     /// If this authenticator is incapable of performing this action, this value will be `nil`.
-    public var resendable: Capability.Resendable? { capability(Capability.Resendable.self) }
-    
+    public var resendable: ResendCapability? { capabilities(of: ResendCapability.self).first }
+
     /// Exposes the authenticator's capability to recover this authenticator.
     ///
     /// If this authenticator is incapable of performing this action, this value will be `nil`.
-    public var recoverable: Capability.Recoverable? { capability(Capability.Recoverable.self) }
-    
+    public var recoverable: RecoverCapability? { capabilities(of: RecoverCapability.self).first }
+
     /// Exposes this authenticator's password settings, if available.
     ///
     /// If this authenticator does not have password settings, or those settings are unavailable at this time, this value will be `nil`.
-    public var passwordSettings: Capability.PasswordSettings? { capability(Capability.PasswordSettings.self) }
-    
+    public var passwordSettings: PasswordSettingsCapability? { capabilities(of: PasswordSettingsCapability.self).first }
+
     /// Exposes the authenticator's ability to poll for an out-of-band result.
     ///
     /// If this authenticator is incapable of performing this action, this value will be `nil`.
-    public var pollable: Capability.Pollable? { capability(Capability.Pollable.self) }
-    
+    public var pollable: PollCapability? { capabilities(of: PollCapability.self).first }
+
     /// Exposes profile information that may be associated with the user account, or this authenticator.
     ///
     /// If no profile information is associated with this authenticator, or is unavailable at this time, the value will be `nil`.
-    public var profile: Capability.Profile? { capability(Capability.Profile.self) }
-    
+    public var profile: ProfileCapability? { capabilities(of: ProfileCapability.self).first }
+
     /// Exposes data assocated with one-time-password authenticator enrollment handling.
-    public var otp: Capability.OTP? { capability(Capability.OTP.self) }
-    
+    public var otp: OTPCapability? { capabilities(of: OTPCapability.self).first }
+
     /// Exposes data assocated with duo authenticator challenge.
-    public var duo: Capability.Duo? { capability(Capability.Duo.self) }
+    public var duo: DuoCapability? { capabilities(of: DuoCapability.self).first }
 
     /// Exposes information related to multiple-choice number challenges.
-    public var numberChallenge: Capability.NumberChallenge? { capability(Capability.NumberChallenge.self) }
+    public var numberChallenge: NumberChallengeCapability? { capabilities(of: NumberChallengeCapability.self).first }
 }
 
 extension Remediation: CapabilityCollection {
-    public typealias CapabilityType = RemediationCapability
-    
+    public enum CapabilityType: IsCapabilityType, Sendable, Equatable, Hashable {
+        case pollable(_ capability: PollCapability)
+        case socialIdp(_ capability: SocialIDPCapability)
+    }
+
     /// Exposes the remediation's ability to poll for an out-of-band result.
     ///
     /// If this remediation is incapable of performing this action, this value will be `nil`.
-    public var pollable: Capability.Pollable? { capability(Capability.Pollable.self) }
+    public var pollable: PollCapability? { capabilities(of: PollCapability.self).first }
 
     /// For Social IDP remediation options, this value will describe information related to the social provider, and the resources needed to proceed through this remediation step.
     ///
     /// This value will only be present for social IDP remediation options, and will otherwise be `nil`.
-    public var socialIdp: Capability.SocialIDP? { capability(Capability.SocialIDP.self) }
+    public var socialIdp: SocialIDPCapability? { allSocialIdps.first }
+
+    /// For Social IDP remediation options, this value will describe information related to the social provider, and the resources needed to proceed through this remediation step.
+    ///
+    /// This value will only be present for social IDP remediation options, and will otherwise be `nil`.
+    public var allSocialIdps: [SocialIDPCapability] { capabilities(of: SocialIDPCapability.self) }
 }

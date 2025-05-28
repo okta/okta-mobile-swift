@@ -14,7 +14,7 @@ import Foundation
 
 extension Remediation {
     /// Object that represents a form of fields associated with a remediation.
-    public class Form: NSObject {
+    public final class Form: Sendable, Hashable, Equatable {
         public subscript(index: Int) -> Field? {
             fields[index]
         }
@@ -35,11 +35,20 @@ extension Remediation {
         public let fields: [Field]
         let allFields: [Field]
 
+        @_documentation(visibility: internal)
+        public static func == (lhs: Remediation.Form, rhs: Remediation.Form) -> Bool {
+            lhs.allFields == rhs.allFields
+        }
+
+        @_documentation(visibility: internal)
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(allFields)
+        }
+
         init?(fields: [Field]?) {
             guard let fields = fields else { return nil }
             self.allFields = fields
             self.fields = self.allFields.filter { $0.hasVisibleFields }
-            super.init()
         }
     }
 }

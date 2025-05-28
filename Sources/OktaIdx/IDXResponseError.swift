@@ -24,12 +24,13 @@ public struct IDXServerError: Error, LocalizedError {
     /// The severity of the error.
     public let severity: Response.Message.Severity
     
+    @_documentation(visibility: internal)
     public var errorDescription: String? { message }
 }
 
 protocol ReturnsIDXError: APIParsingContext {}
 extension ReturnsIDXError {
-    func error(from data: Data) -> Error? {
+    func error(from data: Data) -> (any Error)? {
         guard let response = try? idxResponseDecoder.decode(IonResponse.self, from: data),
               let message = response.messages?.value.first
         else {

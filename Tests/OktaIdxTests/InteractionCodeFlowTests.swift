@@ -23,7 +23,6 @@ class InteractionCodeFlowTests: XCTestCase {
     var urlSession: URLSessionMock!
     var redirectUri: URL!
     var flow: InteractionCodeFlow!
-    var context: InteractionCodeFlow.Context!
     var delegate: DelegateRecorder!
 
     override func setUpWithError() throws {
@@ -31,20 +30,23 @@ class InteractionCodeFlowTests: XCTestCase {
         issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
         redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
         
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
+                              redirectUri: redirectUri,
                               session: urlSession)
-        flow = InteractionCodeFlow(redirectUri: redirectUri, client: client)
-        context = try InteractionCodeFlow.Context(interactionHandle: "interactionHandle", state: "state")
+        flow = try InteractionCodeFlow(client: client)
 
         delegate = DelegateRecorder()
         flow.add(delegate: delegate)
+
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module,
+                                         for: "openid-configuration"))
     }
     
-    func testStartSuccess() throws {
+    func testStartSuccess() async throws {
         XCTAssertNotNil(flow)
-        XCTAssertEqual(flow.redirectUri, redirectUri)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNil(flow.context)
         
@@ -55,19 +57,8 @@ class InteractionCodeFlowTests: XCTestCase {
                           data: try data(from: .module,
                                          for: "introspect-response"))
         
-        let wait = expectation(description: "start")
-        flow.start { result in
-            defer { wait.fulfill() }
-            
-            guard case let Result.success(response) = result else {
-                XCTFail("Received a failure when a success was expected")
-                return
-            }
-            
-            XCTAssertNotNil(response.remediations[.identify])
-        }
-        waitForExpectations(timeout: 1.0)
-        
+        let response = try await flow.start()
+        XCTAssertNotNil(response.remediations[.identify])
         XCTAssertTrue(flow.isAuthenticating)
 
         let context = try XCTUnwrap(flow.context)
@@ -76,15 +67,9 @@ class InteractionCodeFlowTests: XCTestCase {
 
         XCTAssertEqual(delegate.calls.count, 1)
         XCTAssertEqual(delegate.calls.first?.type, .response)
-        
-        if flow.deviceIdentifierString != nil {
-            let deviceToken = try XCTUnwrap(flow.deviceTokenCookie?.value)
-            XCTAssertEqual(urlSession.requests.first?.allHTTPHeaderFields?["Cookie"],
-                           "DT=\(deviceToken)")
-        }
     }
     
-    func testStartWithOptions() throws {
+    func testStartWithOptions() async throws {
         urlSession.expect("https://example.com/oauth2/default/v1/interact",
                           data: try data(from: .module,
                                          for: "interact-response"))
@@ -92,29 +77,13 @@ class InteractionCodeFlowTests: XCTestCase {
                           data: try data(from: .module,
                                          for: "introspect-response"))
         
-        let wait = expectation(description: "start")
-        flow.start(options: [
-            .omitDeviceToken: true,
-            .state: "CustomState"
-        ]) { result in
-            defer { wait.fulfill() }
-            
-            guard case let Result.success(response) = result else {
-                XCTFail("Received a failure when a success was expected")
-                return
-            }
-            
-            XCTAssertNotNil(response.remediations[.identify])
-        }
-        waitForExpectations(timeout: 1.0)
-        
-        XCTAssertNil(urlSession.requests.first?.allHTTPHeaderFields?["Cookie"])
+        let response = try await flow.start(with: .init(state: "CustomState"))
+        XCTAssertNotNil(response.remediations[.identify])
         XCTAssertEqual(flow.context?.state, "CustomState")
     }
 
-    func testStartFailedInteract() throws {
+    func testStartFailedInteract() async throws {
         XCTAssertNotNil(flow)
-        XCTAssertEqual(flow.redirectUri, redirectUri)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNil(flow.context)
         
@@ -122,126 +91,145 @@ class InteractionCodeFlowTests: XCTestCase {
                           data: try data(from: .module,
                                          for: "interact-error-response"),
                           statusCode: 400)
-        
-        let wait = expectation(description: "start")
-        flow.start { result in
-            defer { wait.fulfill() }
-            
-            guard case let Result.failure(error) = result,
-                  case let InteractionCodeFlowError.apiError(apiError) = error,
-                  case let APIClientError.serverError(oauthError) = apiError,
-                  let oauthError = oauthError as? OAuth2ServerError
-            else {
-                XCTFail("Received a success when a failure was expected")
-                return
-            }
-            
-            XCTAssertEqual(oauthError.code, .invalidRequest)
-            XCTAssertEqual(oauthError.description,
-                           "PKCE code challenge is required when the token endpoint authentication method is \'NONE\'.")
+
+        let error = await XCTAssertThrowsErrorAsync(try await flow.start())
+        let apiError = try XCTUnwrap(error as? APIClientError)
+        guard case let .httpError(httpError) = apiError
+        else {
+            XCTFail("Received an unexpected error type: \(String(describing: error))")
+            return
         }
-        waitForExpectations(timeout: 1.0)
-        
+
+        let oauthError = try XCTUnwrap(httpError as? OAuth2ServerError)
+        XCTAssertEqual(oauthError.code, .invalidRequest)
+        XCTAssertEqual(oauthError.description,
+                       "PKCE code challenge is required when the token endpoint authentication method is \'NONE\'.")
         XCTAssertFalse(flow.isAuthenticating)
 
+        await MainActor.yield()
         XCTAssertEqual(delegate.calls.count, 1)
         XCTAssertEqual(delegate.calls.first?.type, .error)
     }
 
-    func testStartCookieReset() throws {
-        XCTAssertNotNil(flow)
-        XCTAssertEqual(flow.redirectUri, redirectUri)
-        XCTAssertFalse(flow.isAuthenticating)
-        XCTAssertNil(flow.context)
-        
-        let idxCookie = try XCTUnwrap(HTTPCookie(properties: [
-            HTTPCookiePropertyKey.name: "idx",
-            HTTPCookiePropertyKey.domain: "example.com",
-            HTTPCookiePropertyKey.path: "/",
-            HTTPCookiePropertyKey.secure: "TRUE",
-            HTTPCookiePropertyKey.value: "TheCookieValue",
-            HTTPCookiePropertyKey.expires: Date(timeIntervalSinceNow: 300),
-        ]))
+    func testRedirectResultWithoutContext() async throws {
+        let redirectUrl = try XCTUnwrap(URL(string: """
+                redirect:///uri?\
+                interaction_code=qwe4xJasF897EbEKL0LLbNUI-QwXZa8YOkY8QkWUlpXxU&\
+                state=state#_=_
+                """))
 
-        let cookieStorage = HTTPCookieStorage.shared
-        cookieStorage.setCookie(idxCookie)
+        let error = await XCTAssertThrowsErrorAsync(try await flow.resume(with: redirectUrl))
+        let oauth2Error = try XCTUnwrap(error as? OAuth2Error)
+        XCTAssertEqual(oauth2Error, .invalidContext)
+    }
 
-        let configuration = URLSessionConfiguration.default
-        configuration.httpCookieStorage = cookieStorage
-        
-        urlSession.configuration = configuration
-        
+    func testRedirectResultAuthenticated() async throws {
         urlSession.expect("https://example.com/oauth2/default/v1/interact",
                           data: try data(from: .module,
                                          for: "interact-response"))
         urlSession.expect("https://example.com/idp/idx/introspect",
                           data: try data(from: .module,
                                          for: "introspect-response"))
-        
-        XCTAssertEqual(cookieStorage.cookies(for: flow.client.baseURL), [idxCookie])
+        urlSession.expect("https://example.com/oauth2/default/v1/token",
+                          data: try data(from: .module,
+                                         for: "token-response"))
+        let redirectUrl = try XCTUnwrap(URL(string: """
+                redirect:/uri?\
+                interaction_code=qwe4xJasF897EbEKL0LLbNUI-QwXZa8YOkY8QkWUlpXxU&\
+                state=state#_=_
+                """))
 
-        let wait = expectation(description: "start")
-        flow.start { _ in
-            wait.fulfill()
+        _ = try await flow.start(with: .init(state: "state"))
+        let redirectResult = try await flow.resume(with: redirectUrl)
+        switch redirectResult {
+        case .success(let token):
+            XCTAssertEqual(token.refreshToken, "CCY4M4fR3")
+        case .interactionRequired(_):
+            XCTFail("Should have received a token")
         }
-        waitForExpectations(timeout: 1.0)
-        
-        XCTAssertEqual(cookieStorage.cookies(for: flow.client.baseURL), [])
-    }
-    
-    func testRedirectResultWithoutContext() throws {
-        let redirectUrl = try XCTUnwrap(URL(string: """
-                redirect:///uri?\
-                interaction_code=qwe4xJasF897EbEKL0LLbNUI-QwXZa8YOkY8QkWUlpXxU&\
-                state=state#_=_
-                """))
-
-        XCTAssertEqual(flow.redirectResult(for: redirectUrl), .invalidContext)
     }
 
-    func testRedirectResultAuthenticated() throws {
-        let redirectUrl = try XCTUnwrap(URL(string: """
-                redirect:///uri?\
-                interaction_code=qwe4xJasF897EbEKL0LLbNUI-QwXZa8YOkY8QkWUlpXxU&\
-                state=state#_=_
-                """))
-
-        flow.context = context
-        XCTAssertEqual(flow.redirectResult(for: redirectUrl), .authenticated)
-    }
-
-    func testRedirectResultWithInvalidUrl() throws {
+    func testRedirectResultWithInvalidUrl() async throws {
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "interact-response"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "introspect-response"))
         let redirectUrl = try XCTUnwrap(URL(string: "redirect///uri"))
 
-        flow.context = context
-        XCTAssertEqual(flow.redirectResult(for: redirectUrl), .invalidRedirectUrl)
+        _ = try await flow.start(with: .init(state: "state"))
+        do {
+            _ = try await flow.resume(with: redirectUrl)
+            XCTFail("Should have received an error")
+        } catch let error as OAuth2Error {
+            XCTAssertEqual(error, .redirectUri(redirectUrl, reason: .scheme(nil)))
+        } catch {
+            XCTFail("Received an unexpected error result \(error)")
+        }
     }
 
-    func testRedirectResultWithInvalidScheme() throws {
+    func testRedirectResultWithInvalidScheme() async throws {
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "interact-response"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "introspect-response"))
         let redirectUrl = try XCTUnwrap(URL(string: "redirect.com:///uri"))
 
-        flow.context = context
-        XCTAssertEqual(flow.redirectResult(for: redirectUrl), .invalidRedirectUrl)
+        _ = try await flow.start(with: .init(state: "state"))
+        do {
+            _ = try await flow.resume(with: redirectUrl)
+            XCTFail("Should have received an error")
+        } catch let error as OAuth2Error {
+            XCTAssertEqual(error, .redirectUri(redirectUrl, reason: .scheme("redirect.com")))
+        } catch {
+            XCTFail("Received an unexpected error result \(error)")
+        }
     }
 
-    func testRedirectResultWithInvalidState() throws {
-        let redirectUrl = try XCTUnwrap(URL(string: "redirect:///uri?state=state1"))
+    func testRedirectResultWithInvalidState() async throws {
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "interact-response"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "introspect-response"))
+        let redirectUrl = try XCTUnwrap(URL(string: "redirect:/uri?state=state1"))
 
-        flow.context = context
-        XCTAssertEqual(flow.redirectResult(for: redirectUrl), .invalidContext)
+        _ = try await flow.start(with: .init(state: "state"))
+        do {
+            _ = try await flow.resume(with: redirectUrl)
+            XCTFail("Should have received an error")
+        } catch let error as OAuth2Error {
+            XCTAssertEqual(error, .redirectUri(redirectUrl, reason: .state("state1")))
+        } catch {
+            XCTFail("Received an unexpected error result \(error)")
+        }
     }
 
-    func testRedirectResultWithRemediationError() throws {
-        let redirectUrl = try XCTUnwrap(URL(string: "redirect:///uri?state=state&error=interaction_required"))
+    func testRedirectResultWithRemediationRequired() async throws {
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "interact-response"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "introspect-response"))
 
-        flow.context = context
-        XCTAssertEqual(flow.redirectResult(for: redirectUrl), .remediationRequired)
-    }
+        _ = try await flow.start(with: .init(state: "state"))
 
-    func testRedirectResultWithEmptyResponse() throws {
-        let redirectUrl = try XCTUnwrap(URL(string: "redirect:///uri?state=state"))
+        let redirectUrl = try XCTUnwrap(URL(string: "redirect:/uri?state=state&error=interaction_required"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "introspect-response"))
 
-        flow.context = context
-        XCTAssertEqual(flow.redirectResult(for: redirectUrl), .invalidContext)
+        let redirectResult = try await flow.resume(with: redirectUrl)
+        switch redirectResult {
+        case .success(_):
+            XCTFail("Should have received a interaction response")
+        case .interactionRequired(let response):
+            XCTAssertNotNil(response)
+        }
     }
 }

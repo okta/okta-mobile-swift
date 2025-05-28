@@ -14,14 +14,11 @@ import Foundation
 
 extension InteractionCodeFlow {
     /// Result of parsing a redirect URL.
-    public enum RedirectResult {
-        /// Redirect URL contains Authorization Code.
-        case authenticated
-        /// Remediation required to proceed authorization.
-        case remediationRequired
-        /// State mismatch or missing context.
-        case invalidContext
-        /// Invalid path or scheme, or URL.
-        case invalidRedirectUrl
+    public enum RedirectResult: Sendable {
+        /// Authentication was successful.
+        case success(_ token: Token)
+
+        /// Additional user interaction is required.
+        case interactionRequired(_ response: Response)
     }
 }

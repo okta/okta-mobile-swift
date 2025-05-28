@@ -33,6 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        // Use the shared URLSession, to ensure features which rely
+        // on cookies (e.g. "Keep me Signed In", etc) function across
+        // sign-ins / application launches.
+        OAuth2Client.defaultSession = URLSession.shared
+        
         return true
     }
     

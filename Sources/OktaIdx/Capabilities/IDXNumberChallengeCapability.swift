@@ -12,11 +12,9 @@
 
 import Foundation
 
-extension Capability {
-    /// Capability to recover an account.
-    public struct NumberChallenge: AuthenticatorCapability {
-        /// The challenge the user is prompted to select.
-        public let correctAnswer: String
-    }
+/// Capability to recover an account.
+public struct NumberChallengeCapability: Capability, Sendable, Hashable, Equatable {
+    /// The challenge the user is prompted to select.
+    public let correctAnswer: String
 }
 

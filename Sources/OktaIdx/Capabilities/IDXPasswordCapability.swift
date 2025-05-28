@@ -12,50 +12,48 @@
 
 import Foundation
 
-extension Capability {
-    /// Describes the password complexity settings.
-    public struct PasswordSettings: AuthenticatorCapability {
-        /// The number of days before a password will expire.
-        public let daysToExpiry: Int
-        
-        /// The minimum password length.
-        public let minLength: Int
-        
-        /// The minimum number of lower-case characters.
-        public let minLowerCase: Int
-        
-        /// The minimum  number of upper-case characters.
-        public let minUpperCase: Int
-        
-        /// The minimum number of numeric characters.
-        public let minNumber: Int
-        
-        /// The minimum number of symbols (e.g. non-alpha-numeric characters).
-        public let minSymbol: Int
-        
-        /// Indicates the user's username cannot be used in the password.
-        public let excludeUsername: Bool
-        
-        /// Indicates the user's attributes that cannot be used within the password.
-        public let excludeAttributes: [String]
-        
-        init(daysToExpiry: Int,
-             minLength: Int,
-             minLowerCase: Int,
-             minUpperCase: Int,
-             minNumber: Int,
-             minSymbol: Int,
-             excludeUsername: Bool,
-             excludeAttributes: [String])
-        {
-            self.daysToExpiry = daysToExpiry
-            self.minLength = minLength
-            self.minLowerCase = minLowerCase
-            self.minUpperCase = minUpperCase
-            self.minNumber = minNumber
-            self.minSymbol = minSymbol
-            self.excludeUsername = excludeUsername
-            self.excludeAttributes = excludeAttributes
-        }
+/// Describes the password complexity settings.
+public struct PasswordSettingsCapability: Capability, Sendable, Hashable, Equatable {
+    /// The number of days before a password will expire.
+    public let daysToExpiry: Int
+
+    /// The minimum password length.
+    public let minLength: Int
+
+    /// The minimum number of lower-case characters.
+    public let minLowerCase: Int
+
+    /// The minimum  number of upper-case characters.
+    public let minUpperCase: Int
+
+    /// The minimum number of numeric characters.
+    public let minNumber: Int
+
+    /// The minimum number of symbols (e.g. non-alpha-numeric characters).
+    public let minSymbol: Int
+
+    /// Indicates the user's username cannot be used in the password.
+    public let excludeUsername: Bool
+
+    /// Indicates the user's attributes that cannot be used within the password.
+    public let excludeAttributes: [String]
+
+    init(daysToExpiry: Int,
+         minLength: Int,
+         minLowerCase: Int,
+         minUpperCase: Int,
+         minNumber: Int,
+         minSymbol: Int,
+         excludeUsername: Bool,
+         excludeAttributes: [String])
+    {
+        self.daysToExpiry = daysToExpiry
+        self.minLength = minLength
+        self.minLowerCase = minLowerCase
+        self.minUpperCase = minUpperCase
+        self.minNumber = minNumber
+        self.minSymbol = minSymbol
+        self.excludeUsername = excludeUsername
+        self.excludeAttributes = excludeAttributes
     }
 }

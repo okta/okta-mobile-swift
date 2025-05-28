@@ -13,8 +13,8 @@
 import Foundation
 
 // swiftlint:disable cyclomatic_complexity
-extension Authenticator.Kind {
-    internal init(string value: String) {
+extension Authenticator.Kind: RawRepresentable {
+    public init(rawValue value: String) {
         switch value {
         case "app":               self = .app
         case "email":             self = .email
@@ -24,13 +24,27 @@ extension Authenticator.Kind {
         case "device":            self = .device
         case "security_key":      self = .securityKey
         case "federated":         self = .federated
-        default:                  self = .unknown
+        default:                  self = .other(type: value)
+        }
+    }
+
+    public var rawValue: String {
+        switch self {
+        case .app:              return "app"
+        case .email:            return "email"
+        case .phone:            return "phone"
+        case .password:         return "password"
+        case .securityQuestion: return "security_question"
+        case .device:           return "device"
+        case .securityKey:      return "security_key"
+        case .federated:        return "federated"
+        case .other(let type):  return type
         }
     }
 }
 
-extension Authenticator.Method {
-    internal init(string value: String) {
+extension Authenticator.Method: RawRepresentable {
+    public init(rawValue value: String) {
         switch value {
         case "sms":               self = .sms
         case "voice":             self = .voice
@@ -45,12 +59,80 @@ extension Authenticator.Method {
         case "idp":               self = .idp
         case "duo":               self = .duo
         case "federated":         self = .federated // TODO: This is shown as deprecated; should we care about it?
-        default:                  self = .unknown
+        default:                  self = .other(type: value)
+        }
+    }
+
+    public var rawValue: String {
+        switch self {
+        case .sms:              return "sms"
+        case .voice:            return "voice"
+        case .email:            return "email"
+        case .push:             return "push"
+        case .signedNonce:      return "signedNonce"
+        case .totp:             return "totp"
+        case .otp:              return "otp"
+        case .password:         return "password"
+        case .webAuthN:         return "webauthn"
+        case .securityQuestion: return "security_question"
+        case .idp:              return "idp"
+        case .duo:              return "duo"
+        case .federated:        return "federated"
+        case .other(let type):  return type
         }
     }
 }
 
 extension Remediation.RemediationType {
+    public static func == (lhs: Remediation.RemediationType, rhs: Remediation.RemediationType) -> Bool {
+        switch (lhs, rhs) {
+        case (.identify, .identify),
+            (.identifyRecovery, .identifyRecovery),
+            (.selectIdentify, .selectIdentify),
+            (.selectEnrollProfile, .selectEnrollProfile),
+            (.cancel, .cancel),
+            (.sendChallenge, .sendChallenge),
+            (.resendChallenge, .resendChallenge),
+            (.send, .send),
+            (.resend, .resend),
+            (.selectAuthenticatorAuthenticate, .selectAuthenticatorAuthenticate),
+            (.selectAuthenticatorUnlockAccount, .selectAuthenticatorUnlockAccount),
+            (.selectAuthenticatorEnroll, .selectAuthenticatorEnroll),
+            (.selectEnrollmentChannel, .selectEnrollmentChannel),
+            (.authenticatorVerificationData, .authenticatorVerificationData),
+            (.authenticatorEnrollmentData, .authenticatorEnrollmentData),
+            (.enrollmentChannelData, .enrollmentChannelData),
+            (.challengeAuthenticator, .challengeAuthenticator),
+            (.poll, .poll),
+            (.enrollPoll, .enrollPoll),
+            (.recover, .recover),
+            (.enrollAuthenticator, .enrollAuthenticator),
+            (.reenrollAuthenticator, .reenrollAuthenticator),
+            (.reenrollAuthenticatorWarning, .reenrollAuthenticatorWarning),
+            (.resetAuthenticator, .resetAuthenticator),
+            (.enrollProfile, .enrollProfile),
+            (.unlockAccount, .unlockAccount),
+            (.deviceChallengePoll, .deviceChallengePoll),
+            (.cancelPolling, .cancelPolling),
+            (.deviceAppleSsoExtension, .deviceAppleSsoExtension),
+            (.launchAuthenticator, .launchAuthenticator),
+            (.redirectIdp, .redirectIdp),
+            (.cancelTransaction, .cancelTransaction),
+            (.skip, .skip),
+            (.challengePoll, .challengePoll),
+            (.consent, .consent),
+            (.adminConsent, .adminConsent),
+            (.emailChallengeConsent, .emailChallengeConsent),
+            (.requestActivationEmail, .requestActivationEmail),
+            (.userCode, .userCode):
+            return true
+        case (.unknown(let lhs), .unknown(let rhs)):
+            return lhs == rhs
+        default:
+            return false
+        }
+    }
+
     internal init(string value: String) {
         switch value {
         case "identify":                            self = .identify
@@ -92,7 +174,7 @@ extension Remediation.RemediationType {
         case "email-challenge-consent":             self = .emailChallengeConsent
         case "request-activation-email":            self = .requestActivationEmail
         case "user-code":                           self = .userCode
-        default:                                    self = .unknown
+        default:                                    self = .unknown(value)
         }
     }
 }
@@ -118,22 +200,46 @@ extension Response.Intent {
     }
 }
 
-extension Capability.SocialIDP.Service {
+extension SocialIDPCapability.Service: RawRepresentable {
+    public typealias RawValue = String
+
     public init(string: String) {
         switch string {
-        case "SAML2":        self = .saml
-        case "GOOGLE":       self = .google
-        case "FACEBOOK":     self = .facebook
-        case "LINKEDIN":     self = .linkedin
-        case "MICROSOFT":    self = .microsoft
-        case "OIDC":         self = .oidc
-        case "OKTA":         self = .okta
-        case "IWA":          self = .iwa
+        case "SAML2":         self = .saml
+        case "GOOGLE":        self = .google
+        case "FACEBOOK":      self = .facebook
+        case "LINKEDIN":      self = .linkedin
+        case "MICROSOFT":     self = .microsoft
+        case "OIDC":          self = .oidc
+        case "OKTA":          self = .okta
+        case "IWA":           self = .iwa
         case "AgentlessDSSO": self = .agentlessIwa
-        case "X509":         self = .x509
-        case "APPLE":        self = .apple
-        case "OIN_SOCIAL":   self = .oinSocial
-        default:             self = .other
+        case "X509":          self = .x509
+        case "APPLE":         self = .apple
+        case "OIN_SOCIAL":    self = .oinSocial
+        default:              self = .other(string)
+        }
+    }
+
+    public init?(rawValue: String) {
+        self.init(string: rawValue)
+    }
+
+    public var rawValue: String {
+        switch self {
+        case .saml:               return "SAML2"
+        case .google:             return "GOOGLE"
+        case .facebook:           return "FACEBOOK"
+        case .linkedin:           return "LINKEDIN"
+        case .microsoft:          return "MICROSOFT"
+        case .oidc:               return "OIDC"
+        case .okta:               return "OKTA"
+        case .iwa:                return "IWA"
+        case .agentlessIwa:       return "AgentlessDSSO"
+        case .x509:               return "X509"
+        case .apple:              return "APPLE"
+        case .oinSocial:          return "OIN_SOCIAL"
+        case .other(let service): return service
         }
     }
 }
@@ -167,8 +273,8 @@ extension Authenticator.Method {
             return "duo"
         case .federated:
             return "federated"
-        case .unknown:
-            return nil
+        case .other(type: let type):
+            return type
         }
     }
 }

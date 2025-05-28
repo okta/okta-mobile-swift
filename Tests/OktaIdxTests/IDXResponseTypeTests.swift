@@ -56,6 +56,6 @@ class IDXResponseTypeTests: XCTestCase {
         XCTAssertEqual(RemediationType(string: "resend"), .resend)
         XCTAssertEqual(RemediationType(string: "cancel-polling"), .cancelPolling)
 
-        XCTAssertEqual(RemediationType(string: "something invalid"), .unknown)
+        XCTAssertEqual(RemediationType(string: "something-invalid"), .unknown("something-invalid"))
     }
 }

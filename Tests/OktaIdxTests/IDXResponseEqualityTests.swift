@@ -15,31 +15,38 @@ import AuthFoundation
 @testable import OktaIdx
 
 class IDXResponseEqualityTests: XCTestCase {
+    typealias Context = InteractionCodeFlow.Context
     func testContextEquality() throws {
         let pkce = try XCTUnwrap(PKCE())
-        let compare = InteractionCodeFlow.Context(interactionHandle: "handle",
-                                                  state: "state",
-                                                  pkce: pkce)
-        
-        var object = InteractionCodeFlow.Context(interactionHandle: "handle2",
-                                                 state: "state",
-                                                 pkce: pkce)
-        XCTAssertNotEqual(compare, object)
-        
-        object = InteractionCodeFlow.Context(interactionHandle: "handle",
-                                             state: "state",
-                                             pkce: pkce)
+        let compare = Context(recoveryToken: nil,
+                              state: "state",
+                              pkce: pkce,
+                              acrValues: "some_acr_value",
+                              maxAge: 150,
+                              nonce: "abcd123",
+                              additionalParameters: [
+                                "some": "value"
+                              ])
+        var object = compare
         XCTAssertEqual(compare, object)
-        
-        
-        object = InteractionCodeFlow.Context(interactionHandle: "handle",
-                                             state: "state2",
-                                             pkce: pkce)
+
+        object.state = "state2"
         XCTAssertNotEqual(compare, object)
-        
-        object = InteractionCodeFlow.Context(interactionHandle: "handle",
-                                             state: "state",
-                                             pkce: pkce)
-        XCTAssertEqual(compare, object)
+
+        object = compare
+        object.interactionHandle = "handle2"
+        XCTAssertNotEqual(compare, object)
+
+        object = compare
+        object.acrValues = nil
+        XCTAssertNotEqual(compare, object)
+
+        object = compare
+        object.maxAge = nil
+        XCTAssertNotEqual(compare, object)
+
+        object = compare
+        object.additionalParameters = ["some": "value2"]
+        XCTAssertNotEqual(compare, object)
     }
 }

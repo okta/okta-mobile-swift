@@ -15,10 +15,10 @@ import AuthFoundation
 
 extension Response.Message {
     /// Represents a collection of messages.
-    public class Collection: Equatable, Hashable {
+    public final class Collection: Sendable, Equatable, Hashable {
         /// Convenience to return the message associated with the given field.
         public func message(for field: Remediation.Form.Field) -> Response.Message? {
-            return allMessages.first(where: { $0.field == field })
+            return allMessages.first(where: { $0.field === field })
         }
         
         /// Convenience method to return the message for a field with the given name.
@@ -28,15 +28,18 @@ extension Response.Message {
         
         /// All messages within this collection, and all nested messages.
         public var allMessages: [Response.Message] {
-            return messages + nestedMessages.compactMap { $0 }
+            var result = messages
+            if let nestedMessages {
+                result.append(contentsOf: nestedMessages.compactMap { $0.wrappedValue })
+            }
+            return result
         }
         
-        @WeakCollection var nestedMessages: [Response.Message?] = []
-
+        let nestedMessages: [Weak<Response.Message>]?
         let messages: [Response.Message]
-        init(messages: [Response.Message]?, nestedMessages: [Response.Message]? = nil) {
+        init(_ messages: [Response.Message]? = nil, nestedMessages: [Response.Message]? = nil) {
             self.messages = messages ?? []
-            self.nestedMessages = nestedMessages ?? []
+            self.nestedMessages = nestedMessages?.compactMap(Weak.init)
         }
         
         public static func == (lhs: Collection, rhs: Collection) -> Bool {

@@ -60,14 +60,22 @@ class LandingViewController: UIViewController {
         actionsheet.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
 
         #if targetEnvironment(simulator) && DEBUG
-        actionsheet.addAction(.init(title: "Print request log to console", style: .default, handler: { _ in
-            print(URLSessionAudit.shared)
-        }))
-        actionsheet.addAction(.init(title: "Reset request log", style: .destructive, handler: { _ in
-            URLSessionAudit.shared.reset()
-        }))
-        actionsheet.addAction(.init(title: "Toggle automatic logging to console", style: .default, handler: { _ in
-            URLSessionAudit.shared.logToConsole = !URLSessionAudit.shared.logToConsole
+        let observer = DebugAPIRequestObserver.shared
+        var title: String
+        if observer.observeAllOAuth2Clients {
+            title = "Stop logging to console"
+        } else {
+            title = "Start logging to console"
+        }
+        actionsheet.addAction(.init(title: title, style: .default, handler: { _ in
+            observer.observeAllOAuth2Clients = !observer.observeAllOAuth2Clients
+            guard let client = self.signin?.flow.client else { return }
+
+            if observer.observeAllOAuth2Clients {
+                observer.startObserving(client: client)
+            } else {
+                observer.stopObserving(client: client)
+            }
         }))
         #endif
 
@@ -84,7 +92,7 @@ class LandingViewController: UIViewController {
         signin.signin(from: self) { result in
             switch result {
             case .failure(let error):
-                print("Could not sign in: \(error)")
+                print("Could not sign in: \(error.localizedDescription)")
             case .success(let credential):
                 Credential.default = credential
             }

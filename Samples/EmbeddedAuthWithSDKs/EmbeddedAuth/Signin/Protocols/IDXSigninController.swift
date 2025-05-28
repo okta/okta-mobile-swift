@@ -37,7 +37,9 @@ extension IDXSigninController where Self: UIViewController {
         } else {
             dismiss(animated: true) {
                 parentController?.present(alert, animated: true) {
-                    self.signin?.failure(with: error)
+                    Task { @MainActor in
+                        self.signin?.failure(with: error)
+                    }
                 }
             }
         }

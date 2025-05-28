@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2024-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -11,15 +11,9 @@
 //
 
 import Foundation
-import AuthFoundation
 
-protocol InteractionCodeFlowAPI: Actor {
-    var client: OAuth2Client { get }
-    var context: InteractionCodeFlow.Context? { get }
-
-    func resume(with successResponse: Response) async throws -> Token
-    func resume(with remediation: Remediation) async throws -> Response
-    func reset()
+extension MainActor {
+    static func yield() async {
+        await MainActor.run { _ = () }
+    }
 }
-
-extension InteractionCodeFlow: InteractionCodeFlowAPI {}

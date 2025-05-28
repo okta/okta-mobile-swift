@@ -11,22 +11,37 @@
 //
 
 import Foundation
+import AuthFoundation
+
+extension Remediation {
+    func apiRequest() throws -> InteractionCodeFlow.RemediationRequest {
+        // Inform any capabilities associated with this remediation that it will proceed.
+        authenticators
+            .allAuthenticators
+            .compactMap { $0.capabilities }
+            .flatMap { $0 }
+            .forEach { $0.willProceed(to: self) }
+
+        return try InteractionCodeFlow.RemediationRequest(remediation: self)
+    }
+}
 
 extension Remediation.Form {
-    func formValues() throws -> [String: Any] {
+    func formValues() throws -> [String: JSON] {
         return try allFields.reduce(into: [:]) { (result, field) in
-            guard let nestedResult = try field.formValues() else {
+            let nestedResult = try field.formValues()
+            guard nestedResult.json != .null else {
                 return
             }
 
-            if let nestedObject = nestedResult as? [String: Any] {
+            if case let .object(nestedObject) = nestedResult.json {
                 result.merge(nestedObject, uniquingKeysWith: { (old, new) in
                     return new
                 })
             } else if let name = field.name {
-                result[name] = nestedResult
+                result[name] = nestedResult.json
             } else {
-                throw InteractionCodeFlowError.invalidRequestData
+                throw APIClientError.invalidRequestData
             }
         }
     }
@@ -34,18 +49,18 @@ extension Remediation.Form {
 
 extension Remediation.Form.Field {
     // swiftlint:disable cyclomatic_complexity
-    func formValues() throws -> Any? {
+    func formValues() throws -> any JSONRepresentable {
         // Unnamed FormValues, which may contain nested options
         guard let name = name else {
             if let form = self.form,
                !form.allFields.isEmpty
             {
-                let result: [String: Any] = try form.allFields.reduce(into: [:]) { (result, formValue) in
+                let result: [String: any JSONRepresentable] = try form.allFields.reduce(into: [:]) { (result, formValue) in
                     let nestedObject = try formValue.formValues()
 
                     if let name = formValue.name {
                         result[name] = nestedObject
-                    } else if let nestedObject = nestedObject as? [String: Any] {
+                    } else if case let .object(nestedObject) = nestedObject.json {
                         result.merge(nestedObject, uniquingKeysWith: { (old, new) in
                             return new
                         })
@@ -53,50 +68,53 @@ extension Remediation.Form.Field {
                         throw InteractionCodeFlowError.invalidParameter(name: formValue.name ?? "")
                     }
                 }
-                return result
+                return try JSON(result)
             } else {
-                return value
+                return value ?? JSON.null
             }
         }
 
-        var result: Any? = nil
+        var result: any JSONRepresentable = JSON.null
         // Named FormValues with nested forms
         if let form = self.form,
            !form.allFields.isEmpty
         {
-            let childValues: [String: Any] = try form.allFields.reduce(into: [:]) { (result, formValue) in
-                guard let nestedResult = try formValue.formValues() else { return }
+            let childValues: [String: any JSONRepresentable] = try form.allFields.reduce(into: [:]) { (result, formValue) in
+                let nestedResult = try formValue.formValues()
+                guard nestedResult.json != .null else {
+                    return
+                }
 
                 if let name = formValue.name {
                     result[name] = nestedResult
-                } else if let nestedObject = nestedResult as? [String: Any] {
+                } else if let nestedObject = nestedResult as? [String: any JSONRepresentable] {
                     result.merge(nestedObject, uniquingKeysWith: { (old, new) in
                         return new
                     })
                 } else {
-                    throw InteractionCodeFlowError.invalidRequestData
+                    throw APIClientError.invalidRequestData
                 }
             }
-            result = [name: childValues]
+            result = try JSON([name: childValues])
         }
 
         // Named form values that consist of multiple child options
         else if let selectedOption = selectedOption {
             if type == "object" {
                 let nestedResult = try selectedOption.formValues()
-                result = [name: nestedResult]
+                result = try JSON([name: nestedResult])
             } else {
-                result = selectedOption.value
+                result = selectedOption.value ?? JSON.null
             }
         }
 
         // Other..
         else {
             // lots 'o stuff here
-            result = value
+            result = value ?? JSON.null
         }
 
-        if isRequired && result == nil {
+        if isRequired && result.json == .null {
             throw InteractionCodeFlowError.missingRequiredParameter(name: name)
         }
         

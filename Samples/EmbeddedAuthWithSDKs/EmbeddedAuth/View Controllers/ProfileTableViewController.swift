@@ -39,20 +39,14 @@ class ProfileTableViewController: UITableViewController {
     var credential: Credential? {
         didSet {
             if let credential = credential {
-                DispatchQueue.main.async {
+                Task { @MainActor in
                     self.configure(credential)
-                }
 
-                credential.refreshIfNeeded { result in
-                    switch result {
-                    case .success():
-                        credential.userInfo { _ in
-                            DispatchQueue.main.async {
-                                self.configure(credential)
-                            }
-                        }
-
-                    case .failure(let error):
+                    do {
+                        try await credential.refreshIfNeeded()
+                        _ = try await credential.userInfo()
+                        self.configure(credential)
+                    } catch {
                         self.show(error: error)
                     }
                 }
@@ -130,7 +124,7 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func show(error: Error) {
-        DispatchQueue.main.async {
+        Task { @MainActor in
             let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(.init(title: "OK", style: .default))
             self.present(alert, animated: true)
@@ -147,17 +141,15 @@ class ProfileTableViewController: UITableViewController {
             }
         }))
         alert.addAction(.init(title: "Revoke tokens", style: .destructive, handler: { _ in
-            Credential.default?.revoke(type: .refreshToken, completion: { result in
-                switch result {
-                case .failure(let error):
-                    DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Sign out failed", message: error.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(.init(title: "OK", style: .default))
-                        self.present(alert, animated: true)
-                    }
-                case .success(): break
+            Task { @MainActor in
+                do {
+                    try await Credential.default?.revoke()
+                } catch {
+                    let alert = UIAlertController(title: "Sign out failed", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(.init(title: "OK", style: .default))
+                    self.present(alert, animated: true)
                 }
-            })
+            }
         }))
         alert.addAction(.init(title: "Cancel", style: .cancel))
         alert.popoverPresentationController?.sourceView = sender
@@ -167,8 +159,10 @@ class ProfileTableViewController: UITableViewController {
 
     func refresh() {
         guard let credential = Credential.default else { return }
-        credential.refresh { result in
-            if case let .failure(error) = result {
+        Task { @MainActor in
+            do {
+                try await credential.refresh()
+            } catch {
                 self.show(error: error)
             }
         }

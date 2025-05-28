@@ -14,31 +14,28 @@ import Foundation
 import AuthFoundation
 
 extension InteractionCodeFlow {
-    struct InteractRequest {
-        let url: URL
-        let clientId: String
-        let scope: String
-        let redirectUri: URL
-        let options: [InteractionCodeFlow.Option: Any]?
-        let pkce: PKCE
+    struct InteractRequest: AuthenticationFlowRequest {
+        typealias Flow = InteractionCodeFlow
 
-        init(baseURL: URL,
-             clientId: String,
-             scope: String,
-             redirectUri: URL,
-             options: [InteractionCodeFlow.Option: Any]?,
-             pkce: PKCE)
+        let url: URL
+        let openIdConfiguration: OpenIdConfiguration
+        let clientConfiguration: OAuth2Client.Configuration
+        let additionalParameters: [String: any APIRequestArgument]?
+        let context: Flow.Context
+
+        init(openIdConfiguration: OpenIdConfiguration,
+             clientConfiguration: OAuth2Client.Configuration,
+             additionalParameters: [String: any APIRequestArgument]?,
+             context: Flow.Context) throws
         {
-            if baseURL.path.hasPrefix("/oauth2") {
-                url = baseURL.appendingPathComponent("v1/interact")
-            } else {
-                url = baseURL.appendingPathComponent("oauth2/v1/interact")
+            guard let url = openIdConfiguration.interactEndpoint else {
+                throw OAuth2Error.invalidUrl
             }
-            self.clientId = clientId
-            self.scope = scope
-            self.redirectUri = redirectUri
-            self.options = options
-            self.pkce = pkce
+            self.url = url
+            self.openIdConfiguration = openIdConfiguration
+            self.clientConfiguration = clientConfiguration
+            self.additionalParameters = additionalParameters
+            self.context = context
         }
 
         struct Response: Codable, ReceivesIDXResponse {
@@ -47,28 +44,17 @@ extension InteractionCodeFlow {
     }
 }
 
-extension InteractionCodeFlow.InteractRequest: APIRequest, APIRequestBody {
+extension InteractionCodeFlow.InteractRequest: OAuth2APIRequest, APIRequestBody {
     typealias ResponseType = Response
     
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    
-    var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = [
-            "client_id": clientId,
-            "scope": scope,
-            "redirect_uri": redirectUri.absoluteString,
-            "code_challenge": pkce.codeChallenge,
-            "code_challenge_method": pkce.method.rawValue
-        ]
-        
-        options?.filter { $0.key.includeInInteractRequest }
-            .compactMapValues { $0 as? String }
-            .forEach { (key: InteractionCodeFlow.Option, value: String) in
-                result[key.rawValue] = value
-            }
+    var category: AuthFoundation.OAuth2APIRequestCategory { .authorization }
 
+    var bodyParameters: [String: any APIRequestArgument]? {
+        var result = clientConfiguration.parameters(for: category) ?? [:]
+        result.merge(context.parameters(for: category))
         return result
     }
 }

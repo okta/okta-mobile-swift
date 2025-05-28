@@ -21,25 +21,38 @@ class IDXClientRequestTests: XCTestCase {
     var issuer: URL!
     var redirectUri: URL!
     var client: OAuth2Client!
+    var openIdConfiguration: OpenIdConfiguration!
+    var pkce: PKCE!
+    var context: InteractionCodeFlow.Context!
     let urlSession = URLSessionMock()
 
     override func setUpWithError() throws {
         issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
         redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
+                              redirectUri: redirectUri,
                               session: urlSession)
+        openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
+            OpenIdConfiguration.self,
+            from: try data(from: .module,
+                           for: "openid-configuration"))
+        pkce = try XCTUnwrap(PKCE())
+        context = InteractionCodeFlow.Context(recoveryToken: "RecoveryToken",
+                                              state: "state",
+                                              pkce: pkce,
+                                              acrValues: nil,
+                                              maxAge: nil,
+                                              nonce: nil,
+                                              additionalParameters: nil)
     }
 
     func testInteractRequest() throws {
-        let pkce = try XCTUnwrap(PKCE())
-        let request = InteractionCodeFlow.InteractRequest(baseURL: issuer,
-                                                          clientId: "clientId",
-                                                          scope: "all",
-                                                          redirectUri: redirectUri,
-                                                          options: [.state: "state", .recoveryToken: "RecoveryToken"],
-                                                          pkce: pkce)
+        let request = try InteractionCodeFlow.InteractRequest(openIdConfiguration: openIdConfiguration,
+                                                              clientConfiguration: client.configuration,
+                                                              additionalParameters: nil,
+                                                              context: context)
 
         let urlRequest = try request.request(for: client)
         XCTAssertEqual(urlRequest.httpMethod, "POST")
@@ -51,10 +64,10 @@ class IDXClientRequestTests: XCTestCase {
         XCTAssertEqual(urlRequest.allHTTPHeaderFields?["Accept"], "application/json; charset=UTF-8")
         XCTAssertNotNil(urlRequest.allHTTPHeaderFields?["User-Agent"])
         
-        let data = try XCTUnwrap(urlRequest.httpBody?.urlFormEncoded())
-        XCTAssertEqual(data.keys.sorted(), ["client_id", "code_challenge", "code_challenge_method", "recovery_token", "redirect_uri", "scope", "state"])
+        let data = try XCTUnwrap(urlRequest.httpBody?.urlFormEncoded)
+        XCTAssertEqual(data.keys.sorted(), ["client_id", "code_challenge", "code_challenge_method", "recovery_token", "redirect_uri", "response_type", "scope", "state"])
         XCTAssertEqual(data["client_id"], "clientId")
-        XCTAssertEqual(data["scope"], "all")
+        XCTAssertEqual(data["scope"], "openid+profile")
         XCTAssertEqual(data["code_challenge"], pkce.codeChallenge)
         XCTAssertEqual(data["code_challenge_method"], "S256")
         XCTAssertEqual(data["redirect_uri"], "redirect:/uri")
@@ -63,30 +76,29 @@ class IDXClientRequestTests: XCTestCase {
     }
 
     func testInteractRequestWithOrgAuthServer() throws {
-        let pkce = try XCTUnwrap(PKCE())
         let issuer = try XCTUnwrap(URL(string: "https://example.com"))
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
                               session: urlSession)
-
-        let request = InteractionCodeFlow.InteractRequest(baseURL: issuer,
-                                                          clientId: "clientId",
-                                                          scope: "all",
-                                                          redirectUri: redirectUri,
-                                                          options: [.state: "state", .recoveryToken: "RecoveryToken"],
-                                                          pkce: pkce)
+        let request = try InteractionCodeFlow.InteractRequest(openIdConfiguration: openIdConfiguration,
+                                                              clientConfiguration: client.configuration,
+                                                              additionalParameters: nil,
+                                                              context: context)
 
         let urlRequest = try request.request(for: client)
         XCTAssertEqual(urlRequest.httpMethod, "POST")
         
         let url = urlRequest.url?.absoluteString
-        XCTAssertEqual(url, "https://example.com/oauth2/v1/interact")
+        XCTAssertEqual(url, "https://example.com/oauth2/default/v1/interact")
     }
 
     func testIntrospectRequest() throws {
-        let request = try InteractionCodeFlow.IntrospectRequest(baseURL: issuer,
-                                                                interactionHandle: "handle")
+        context.interactionHandle = "handle"
+        let request = try InteractionCodeFlow.IntrospectRequest(openIdConfiguration: openIdConfiguration,
+                                                                clientConfiguration: client.configuration,
+                                                                additionalParameters: nil,
+                                                                context: context)
         let urlRequest = try request.request(for: client)
         XCTAssertEqual(urlRequest.httpMethod, "POST")
         
@@ -102,8 +114,7 @@ class IDXClientRequestTests: XCTestCase {
     }
     
     func testRemediationRequest() throws {
-        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
-        let flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
+        let flowMock = InteractionCodeFlowMock(client: client, redirectUri: redirectUri)
         let response = try XCTUnwrap(Response.response(
             flow: flowMock,
             data: data(from: .module,
@@ -132,8 +143,7 @@ class IDXClientRequestTests: XCTestCase {
     }
     
     func testRemediationRequestResponseResult() throws {
-        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
-        let flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
+        let flowMock = InteractionCodeFlowMock(client: client, redirectUri: redirectUri)
         let response = try XCTUnwrap(Response.response(
             flow: flowMock,
             data: data(from: .module,
@@ -180,34 +190,31 @@ class IDXClientRequestTests: XCTestCase {
             OpenIdConfiguration.self,
             from: try data(from: .module,
                            for: "openid-configuration"))
-        let pkce = try XCTUnwrap(PKCE())
-        
-        let request = InteractionCodeFlow.RedirectURLTokenRequest(openIdConfiguration: openIdConfiguration,
-                                                                  clientId: "clientId",
-                                                                  scope: "all",
-                                                                  redirectUri: "redirect:/uri",
-                                                                  interactionCode: "interaction_code",
-                                                                  pkce: pkce)
+        let request = try InteractionCodeFlow.TokenRequest(openIdConfiguration: openIdConfiguration,
+                                                           clientConfiguration: client.configuration,
+                                                           additionalParameters: nil,
+                                                           context: context,
+                                                           interactionCode: "interaction_code")
         
         let urlRequest = try request.request(for: client)
         XCTAssertEqual(urlRequest.httpMethod, "POST")
         
         let url = urlRequest.url?.absoluteString
-        XCTAssertEqual(url, "https://example.com/oauth2/v1/token")
-        
+        XCTAssertEqual(url, "https://example.com/oauth2/default/v1/token")
+
         XCTAssertEqual(urlRequest.allHTTPHeaderFields?["Content-Type"], "application/x-www-form-urlencoded; charset=UTF-8")
         XCTAssertEqual(urlRequest.allHTTPHeaderFields?["Accept"], "application/json; charset=UTF-8")
         
-        let data = try XCTUnwrap(urlRequest.httpBody?.urlFormEncoded())
-        XCTAssertEqual(data.keys.sorted(), ["client_id", "code_verifier", "grant_type", "interaction_code"])
+        let data = try XCTUnwrap(urlRequest.httpBody?.urlFormEncoded)
+        XCTAssertEqual(data.keys.sorted(), ["client_id", "code_verifier", "grant_type", "interaction_code", "redirect_uri", "scope"])
         XCTAssertEqual(data["client_id"], "clientId")
         XCTAssertEqual(data["interaction_code"], "interaction_code")
-        XCTAssertEqual(data["code_verifier"], pkce.codeVerifier)
+        XCTAssertEqual(data["code_verifier"], context.pkce?.codeVerifier)
         XCTAssertEqual(data["grant_type"], "interaction_code")
     }
     
     func testSuccessResponseTokenRequest() throws {
-        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
+        let context = InteractionCodeFlow.Context(state: "state")
         let flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
 
         let ion = try IonResponse.jsonDecoder.decode(
@@ -251,23 +258,22 @@ class IDXClientRequestTests: XCTestCase {
                            for: "openid-configuration"))
 
         let request = try InteractionCodeFlow.SuccessResponseTokenRequest(openIdConfiguration: openIdConfiguration,
-                                                                          successResponse: remediation,
-                                                                          clientId: "clientId",
-                                                                          scope: "all",
-                                                                          redirectUri: "redirect:/uri",
-                                                                          context: context)
-        
+                                                                          clientConfiguration: client.configuration,
+                                                                          additionalParameters: nil,
+                                                                          context: context,
+                                                                          successRemediation: remediation)
+
         let urlRequest = try request.request(for: client)
         XCTAssertEqual(urlRequest.httpMethod, "POST")
 
         let url = urlRequest.url?.absoluteString
         XCTAssertEqual(url, "https://example.com/oauth2/v1/token")
 
-        XCTAssertEqual(urlRequest.allHTTPHeaderFields?["Content-Type"], "application/x-www-form-urlencoded")
+        XCTAssertEqual(urlRequest.allHTTPHeaderFields?["Content-Type"], "application/x-www-form-urlencoded; charset=UTF-8")
         XCTAssertEqual(urlRequest.allHTTPHeaderFields?["Accept"], "application/json")
 
-        let data = try XCTUnwrap(urlRequest.httpBody?.urlFormEncoded())
-        XCTAssertEqual(data.keys.sorted(), ["client_id", "grant_type", "interaction_code"])
+        let data = try XCTUnwrap(urlRequest.httpBody?.urlFormEncoded)
+        XCTAssertEqual(data.keys.sorted(), ["client_id", "code_verifier", "grant_type", "interaction_code", "redirect_uri", "scope"])
         XCTAssertEqual(data["client_id"], "clientId")
         XCTAssertEqual(data["interaction_code"], "the_interaction_code")
         XCTAssertEqual(data["grant_type"], "interaction_code")

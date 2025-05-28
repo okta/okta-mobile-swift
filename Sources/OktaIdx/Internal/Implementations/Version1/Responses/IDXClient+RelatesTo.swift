@@ -15,7 +15,7 @@ import Foundation
 /// Indicates that an object can contain nested objects, some of which may be related to one another.
 protocol IDXContainsRelatableObjects {
     /// Return the array of related objects at this level, and below. It is expected to recurse through its children.
-    func nestedRelatableObjects() -> [IDXHasRelatedObjects]
+    func nestedRelatableObjects() -> [any IDXHasRelatedObjects]
 }
 
 /// Represents the root of a relatable object tree.
@@ -31,14 +31,14 @@ protocol IDXHasRelatedObjects: IDXContainsRelatableObjects {
     
     /// Asks this object to find, and assign, objects given the accumulated JSON keypath mapping
     /// - Parameter jsonMapping: JSON key path mapping table, relating JSON keys to their associated objects.
-    func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) throws
+    func findRelatedObjects(using jsonMapping: [String: any IDXHasRelatedObjects]) throws
 }
 
 extension IDXRelatedObjectRoot {
     func loadRelatedObjects() throws {
         let nestedObjects = nestedRelatableObjects()
-        let jsonMapping: [String: IDXHasRelatedObjects] = nestedObjects
-            .reduce(into: [String: IDXHasRelatedObjects]()) { (result, object) in
+        let jsonMapping: [String: any IDXHasRelatedObjects] = nestedObjects
+            .reduce(into: [String: any IDXHasRelatedObjects]()) { (result, object) in
                 for path in object.jsonPaths {
                     result[path] = object
                 }
@@ -51,36 +51,36 @@ extension IDXRelatedObjectRoot {
 }
 
 extension Response: IDXRelatedObjectRoot {
-    func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
+    func nestedRelatableObjects() -> [any IDXHasRelatedObjects] {
         return [remediations.nestedRelatableObjects(),
                 authenticators.nestedRelatableObjects()].flatMap { $0 }
     }
 }
 
 extension Authenticator.Collection: IDXContainsRelatableObjects {
-    func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
+    func nestedRelatableObjects() -> [any IDXHasRelatedObjects] {
         return authenticators.flatMap { $0.nestedRelatableObjects() }
     }
 }
 
 extension Remediation.Collection: IDXContainsRelatableObjects {
-    func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
+    func nestedRelatableObjects() -> [any IDXHasRelatedObjects] {
         return remediations.flatMap { $0.nestedRelatableObjects() }
     }
 }
 
 extension Authenticator: IDXHasRelatedObjects {
-    func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) throws {
+    func findRelatedObjects(using jsonMapping: [String: any IDXHasRelatedObjects]) throws {
         return
     }
     
-    func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
+    func nestedRelatableObjects() -> [any IDXHasRelatedObjects] {
         return [self]
     }
 }
 
 extension Remediation: IDXHasRelatedObjects {
-    func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
+    func nestedRelatableObjects() -> [any IDXHasRelatedObjects] {
         var result = form.flatMap { $0.nestedRelatableObjects() }
         result.append(self)
         return result
@@ -88,7 +88,7 @@ extension Remediation: IDXHasRelatedObjects {
 
     var jsonPaths: [String] { [] }
     
-    func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) throws {
+    func findRelatedObjects(using jsonMapping: [String: any IDXHasRelatedObjects]) throws {
         // Work around defects where some remediations don't
         // properly relate to their corresponding authenticator.
         var calculatedRelatesTo = relatesTo
@@ -121,19 +121,19 @@ extension Remediation: IDXHasRelatedObjects {
         
         guard !authenticatorObjects.isEmpty else { return }
         
-        authenticators = Authenticator.WeakCollection(authenticators: authenticatorObjects)
+        authenticators.relatedAuthenticators = authenticatorObjects
     }
 }
 
 extension Remediation.Form: IDXContainsRelatableObjects {
-    func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
+    func nestedRelatableObjects() -> [any IDXHasRelatedObjects] {
         return fields.flatMap { $0.nestedRelatableObjects() }
     }
 }
 
 extension Remediation.Form.Field: IDXHasRelatedObjects {
-    func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
-        var result: [IDXHasRelatedObjects] = [self]
+    func nestedRelatableObjects() -> [any IDXHasRelatedObjects] {
+        var result: [any IDXHasRelatedObjects] = [self]
         result.append(contentsOf: form?.nestedRelatableObjects() ?? [])
         result.append(contentsOf: options?.flatMap { $0.nestedRelatableObjects() } ?? [])
         return result
@@ -141,7 +141,7 @@ extension Remediation.Form.Field: IDXHasRelatedObjects {
 
     var jsonPaths: [String] { [] }
     
-    func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) throws {
+    func findRelatedObjects(using jsonMapping: [String: any IDXHasRelatedObjects]) throws {
         guard let relatesTo = relatesTo else { return }
         guard let mappedAuthenticator = jsonMapping[relatesTo] as? Authenticator else {
             #if DEBUG_RELATES_TO

@@ -14,7 +14,7 @@ import Foundation
 
 extension Response {
     /// Provides information about the client application being authenticated against.
-    public struct Application {
+    public struct Application: Sendable, Equatable, Hashable {
         /// Unique identifier for this application.
         public let id: String
         

@@ -11,33 +11,55 @@
 //
 
 import Foundation
+import AuthFoundation
 
-extension Capability {
-    /// Capability to access data related to Duo
-    public class Duo: AuthenticatorCapability {
-        public let host: String
-        public let signedToken: String
-        public let script: String
-        public var signatureData: String?
-        
-        public func willProceed(to remediation: Remediation) {
-            guard remediation.authenticators.contains(where: {
-                $0.type == .app && $0.methods?.contains(.duo) ?? false
-            }),
-                  let credentialsField = remediation.form["credentials"],
-                  let signatureField = credentialsField.form?.allFields.first(where: { $0.name == "signatureData" })
-            else {
-                return
-            }
-            
-            signatureField.value = signatureData
+/// Capability to access data related to Duo
+public final class DuoCapability: Capability, Sendable, Equatable, Hashable {
+    public let host: String
+    public let signedToken: String
+    public let script: String
+    public var signatureData: String? {
+        get { _signatureData.wrappedValue }
+        set { _signatureData.wrappedValue = newValue }
+    }
+
+    @_documentation(visibility: internal)
+    public func willProceed(to remediation: Remediation) {
+        guard remediation.authenticators.contains(where: {
+            $0.type == .app && $0.methods?.contains(.duo) ?? false
+        }),
+              let credentialsField = remediation.form["credentials"],
+              let signatureField = credentialsField.form?.allFields.first(where: { $0.name == "signatureData" })
+        else {
+            return
         }
-        
-        init(host: String, signedToken: String, script: String, signatureData: String? = nil) {
-            self.host = host
-            self.signedToken = signedToken
-            self.script = script
-            self.signatureData = signatureData
+
+        signatureField.value = signatureData
+    }
+
+    @_documentation(visibility: internal)
+    public static func == (lhs: DuoCapability, rhs: DuoCapability) -> Bool {
+        lhs.host == rhs.host &&
+        lhs.signedToken == rhs.signedToken &&
+        lhs.script == rhs.script &&
+        lhs._signatureData.wrappedValue == rhs._signatureData.wrappedValue
+    }
+
+    @_documentation(visibility: internal)
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(host)
+        hasher.combine(signedToken)
+        hasher.combine(script)
+        hasher.combine(_signatureData.wrappedValue)
+    }
+
+    private let _signatureData = LockedValue<String?>(nil)
+    init(host: String, signedToken: String, script: String, signatureData: String? = nil) {
+        self.host = host
+        self.signedToken = signedToken
+        self.script = script
+        if let signatureData {
+            self._signatureData.wrappedValue = signatureData
         }
     }
 }

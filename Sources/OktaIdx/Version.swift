@@ -12,4 +12,16 @@
 
 import Foundation
 
-public let Version = SDKVersion(sdk: "okta-idx-swift", version: "3.2.4")
+@_exported import AuthFoundation
+
+extension SDKVersion.Name {
+    @_documentation(visibility: internal)
+    public static let oktaIdx = SDKVersion.Name("okta-idx-swift")
+}
+
+extension SDKVersion {
+    @_documentation(visibility: private)
+    public static let oktaIdx: SDKVersion? = {
+        register(.oktaIdx, version: "3.2.4")
+    }()
+}

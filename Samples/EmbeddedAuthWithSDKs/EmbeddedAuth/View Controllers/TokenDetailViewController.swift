@@ -48,7 +48,7 @@ class TokenDetailViewController: UIViewController {
         }
         
         addString(to: string, title: "Expires in", value: "\(token.expiresIn) seconds")
-        addString(to: string, title: "Scope", value: token.scope ?? "N/A")
+        addString(to: string, title: "Scope", value: token.scope?.stringValue ?? "N/A")
         addString(to: string, title: "Token type", value: token.tokenType)
         
         if let idToken = token.idToken {

@@ -18,7 +18,7 @@ extension InteractionCodeFlow {
         let httpMethod: APIRequestMethod
         let url: URL
         let contentType: APIContentType?
-        let bodyParameters: [String: Any]?
+        let bodyParameters: [String: any Sendable]?
     }
 }
 
@@ -26,17 +26,10 @@ extension InteractionCodeFlow.RemediationRequest: APIRequest, ReceivesIDXRespons
     typealias ResponseType = IonResponse
     
     init(remediation option: Remediation) throws {
-        guard let acceptsString = option.accepts,
-              let accepts = APIContentType(rawValue: acceptsString),
-              let method = APIRequestMethod(rawValue: option.method)
-        else {
-            throw InteractionCodeFlowError.invalidRequestData
-        }
-        
         self.url = option.href
-        self.httpMethod = method
-        self.contentType = accepts
-        self.bodyParameters = try option.form.formValues()
+        self.httpMethod = option.method
+        self.contentType = option.accepts
+        self.bodyParameters = try option.form.formValues().json.anyValue as? [String: any Sendable]
     }
     
     var acceptsType: APIContentType? { .ionJson }

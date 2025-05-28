@@ -16,7 +16,7 @@ import AuthFoundation
 /// Describes the response from an Okta Identity Engine workflow stage.
 ///
 /// This is used to determine the current state of the workflow, the set of available ``Remediation`` steps to that can be used to proceed through the workflow, actions that can be performed, and other information relevant to the authentication of a user.
-public class Response: NSObject {
+public final class Response: Sendable, Hashable, Equatable {
     /// The date at which this stage of the workflow expires, after which the authentication process should be restarted.
     public let expiresAt: Date?
     
@@ -44,98 +44,62 @@ public class Response: NSObject {
     public let isLoginSuccessful: Bool
     
     /// Indicates whether or not the response can be cancelled.
-    public let canCancel: Bool
-    
-    /// Cancels the current workflow, and restarts the session.
+    public let canRestart: Bool
+
+    /// Cancels and restarts the current session.
     ///
     /// - Important:
     /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to process any response or error returned from this call.
     /// - Parameters:
     ///   - completion: Optional completion handler invoked when the operation is cancelled.
-    public func cancel(completion: InteractionCodeFlow.ResponseResult? = nil) {
+    public func restart() async throws -> Response {
         guard let cancelOption = remediations[.cancel] else {
-            flow.send(error: .unknownRemediationOption(name: "cancel"), completion: completion)
-            return
+            throw InteractionCodeFlowError.missingRemediation(name: "cancel")
         }
-        
-        cancelOption.proceed(completion: completion)
+
+        return try await flow.resume(with: cancelOption)
     }
     
-    /// Exchanges the successful response with a token.
+    /// Finishes sign-in, exchanging the successful response with a token.
     ///
     /// Once the ``isLoginSuccessful`` property is `true`, the developer can exchange the response for a valid token by using this method.
     /// - Important:
     /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to receive the token or to handle any errors.
     /// - Parameters:
     ///   - completion: Optional completion handler invoked when a token, or error, is received.
-    public func exchangeCode(completion: InteractionCodeFlow.TokenResult? = nil) {
-        guard let remediation = successRemediationOption else {
-            completion?(.failure(.successResponseMissing))
-            return
-        }
-        
-        guard let context = flow.context else {
-            flow.send(error: .invalidContext, completion: completion)
-            return
-        }
-        
-        guard remediation.name == "issue" else {
-            flow.send(error: .successResponseMissing, completion: completion)
-            return
-        }
-        
-        flow.client.openIdConfiguration { result in
-            switch result {
-            case .success(let configuration):
-                self.exchangeCode(remediation: remediation,
-                                  context: context,
-                                  openIdConfiguration: configuration,
-                                  completion: completion)
-            case .failure(let error):
-                self.flow.send(error: .internalError(error), completion: completion)
-            }
-        }
+    public func finish() async throws -> Token {
+        try await flow.resume(with: self)
     }
     
-    private func exchangeCode(remediation: Remediation,
-                              context: InteractionCodeFlow.Context,
-                              openIdConfiguration: OpenIdConfiguration,
-                              completion: InteractionCodeFlow.TokenResult? = nil)
-    {
-        do {
-            let tokenRequest = try InteractionCodeFlow.SuccessResponseTokenRequest(
-                openIdConfiguration: openIdConfiguration,
-                successResponse: remediation,
-                clientId: flow.client.configuration.clientId,
-                scope: flow.client.configuration.scopes,
-                redirectUri: flow.redirectUri.absoluteString,
-                context: context)
-            flow.client.exchange(token: tokenRequest) { result in
-                self.flow.reset()
-                
-                switch result {
-                case .success(let token):
-                    self.flow.send(response: token.result, completion: completion)
-                    self.flow.reset()
-                case .failure(let error):
-                    self.flow.send(error: .apiError(error), completion: completion)
-                }
-            }
-        } catch let error as InteractionCodeFlowError {
-            flow.send(error: error, completion: completion)
-            return
-        } catch let error as APIClientError {
-            flow.send(error: .apiError(error), completion: completion)
-            return
-        } catch {
-            flow.send(error: .internalError(error), completion: completion)
-            return
-        }
+    @_documentation(visibility: internal)
+    public static func == (lhs: Response, rhs: Response) -> Bool {
+        lhs.expiresAt == rhs.expiresAt &&
+        lhs.intent == rhs.intent &&
+        lhs.remediations == rhs.remediations &&
+        lhs.authenticators == rhs.authenticators &&
+        lhs.app == rhs.app &&
+        lhs.user == rhs.user &&
+        lhs.isLoginSuccessful == rhs.isLoginSuccessful &&
+        lhs.successRemediationOption == rhs.successRemediationOption &&
+        lhs.messages == rhs.messages
     }
-    
-    private let flow: InteractionCodeFlowAPI
+
+    @_documentation(visibility: internal)
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(expiresAt)
+        hasher.combine(intent)
+        hasher.combine(remediations)
+        hasher.combine(authenticators)
+        hasher.combine(app)
+        hasher.combine(user)
+        hasher.combine(isLoginSuccessful)
+        hasher.combine(successRemediationOption)
+        hasher.combine(messages)
+    }
+
+    private let flow: any InteractionCodeFlowAPI
     let successRemediationOption: Remediation?
-    internal init(flow: InteractionCodeFlowAPI,
+    internal init(flow: any InteractionCodeFlowAPI,
                   expiresAt: Date?,
                   intent: Intent,
                   authenticators: Authenticator.Collection,
@@ -155,33 +119,43 @@ public class Response: NSObject {
         self.messages = messages
         self.app = app
         self.user = user
-        self.canCancel = (remediations[.cancel] != nil)
-        
-        super.init()
+        self.canRestart = (remediations[.cancel] != nil)
     }
 }
 
-#if swift(>=5.5.1) && !os(Linux)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
 extension Response {
-    /// Cancels the current workflow, and restarts the session.
-    public func cancel() async throws -> Response {
-        try await withCheckedThrowingContinuation { continuation in
-            cancel() { result in
-                continuation.resume(with: result)
+    /// Cancels and restarts the current session.
+    ///
+    /// - Important:
+    /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to process any response or error returned from this call.
+    /// - Parameters:
+    ///   - completion: Optional completion handler invoked when the operation is cancelled.
+    nonisolated public func restart(completion: @escaping @Sendable (Result<Response, any Error>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await restart()))
+            } catch {
+                completion(.failure(error))
             }
         }
     }
 
-    /// Exchanges the successful response with a token.
+    /// Finishes sign-in, exchanging the successful response with a token.
     ///
     /// Once the ``isLoginSuccessful`` property is `true`, the developer can exchange the response for a valid token by using this method.
-    public func exchangeCode() async throws -> Token {
-        try await withCheckedThrowingContinuation { continuation in
-            exchangeCode() { result in
-                continuation.resume(with: result)
+    /// - Important:
+    /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to receive the token or to handle any errors.
+    /// - Parameters:
+    ///   - completion: Optional completion handler invoked when a token, or error, is received.
+    nonisolated public func finish(completion: @escaping @Sendable (Result<Token, any Error>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await finish()))
+            } catch {
+                completion(.failure(error))
             }
         }
     }
 }
-#endif

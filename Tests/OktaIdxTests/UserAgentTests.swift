@@ -19,17 +19,23 @@ class UserAgentTests: XCTestCase {
     var issuer: URL!
     var redirectUri: URL!
     var client: OAuth2Client!
+    var openIdConfiguration: OpenIdConfiguration!
     var flow: InteractionCodeFlow!
     let urlSession = URLSessionMock()
 
     override func setUpWithError() throws {
         issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
         redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
+                              redirectUri: redirectUri,
                               session: urlSession)
-        flow = InteractionCodeFlow(redirectUri: redirectUri, client: client)
+        openIdConfiguration = try OpenIdConfiguration.jsonDecoder
+            .decode(OpenIdConfiguration.self,
+                    from: try data(from: .module,
+                                   for: "openid-configuration"))
+        flow = try InteractionCodeFlow(client: client)
 
         let pattern = "okta-authfoundation-swift/[\\d\\.]+ okta-idx-swift/[\\d\\.]+ (iOS|watchOS|tvOS|macOS|linux)/[\\d\\.]+ Device/\\S+"
         regex = try NSRegularExpression(pattern: pattern, options: [])
@@ -43,12 +49,11 @@ class UserAgentTests: XCTestCase {
     }
     
     func testInteractRequest() throws {
-        let request = InteractionCodeFlow.InteractRequest(baseURL: issuer,
-                                                          clientId: "ClientId",
-                                                          scope: "all",
-                                                          redirectUri: redirectUri,
-                                                          options: nil,
-                                                          pkce: PKCE()!)
+        let request = try InteractionCodeFlow.InteractRequest(
+            openIdConfiguration: openIdConfiguration,
+            clientConfiguration: client.configuration,
+            additionalParameters: nil,
+            context: .init())
         let urlRequest = try request.request(for: client)
         let userAgent = urlRequest.allHTTPHeaderFields?["User-Agent"]
         XCTAssertNotNil(userAgent)
@@ -58,8 +63,13 @@ class UserAgentTests: XCTestCase {
     }
 
     func testIntrospectRequest() throws {
-        let request = try InteractionCodeFlow.IntrospectRequest(baseURL: issuer,
-                                                                interactionHandle: "abc123")
+        var context = InteractionCodeFlow.Context()
+        context.interactionHandle = "abc123"
+        let request = try InteractionCodeFlow.IntrospectRequest(
+            openIdConfiguration: openIdConfiguration,
+            clientConfiguration: client.configuration,
+            additionalParameters: nil,
+            context: context)
         let urlRequest = try request.request(for: client)
         let userAgent = urlRequest.allHTTPHeaderFields?["User-Agent"]
         XCTAssertNotNil(userAgent)

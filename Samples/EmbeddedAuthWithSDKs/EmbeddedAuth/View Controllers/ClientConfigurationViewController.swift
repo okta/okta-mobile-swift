@@ -16,9 +16,9 @@ import OktaIdx
 
 extension ClientConfiguration {
     var flow: InteractionCodeFlow {
-        InteractionCodeFlow(issuer: issuer,
+        InteractionCodeFlow(issuerURL: issuer,
                             clientId: clientId,
-                            scopes: scopes,
+                            scope: scopes,
                             redirectUri: redirectUri)
     }
 }

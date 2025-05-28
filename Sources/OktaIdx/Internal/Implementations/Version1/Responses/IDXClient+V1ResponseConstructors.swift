@@ -14,11 +14,11 @@ import Foundation
 import AuthFoundation
 
 extension Response {
-    internal convenience init(flow: InteractionCodeFlowAPI, ion response: IonResponse) throws {
+    internal convenience init(flow: any InteractionCodeFlowAPI, ion response: IonResponse) throws {
         let authenticators = try Authenticator.Collection(flow: flow, ion: response)
         let remediations = Remediation.Collection(flow: flow, ion: response)
         let successRemediationOption = Remediation(flow: flow, ion: response.successWithInteractionCode)
-        let messages = Response.Message.Collection(messages: response.messages?.value.compactMap { Response.Message(flow: flow, ion: $0) },
+        let messages = Response.Message.Collection(response.messages?.value.compactMap { Response.Message(flow: flow, ion: $0) },
                                                    nestedMessages: remediations.nestedMessages())
         
         self.init(flow: flow,
@@ -36,7 +36,7 @@ extension Response {
 }
 
 extension Response.Message {
-    internal convenience init?(flow: InteractionCodeFlowAPI, ion object: IonMessage?) {
+    internal convenience init?(flow: any InteractionCodeFlowAPI, ion object: IonMessage?) {
         guard let object = object else { return nil }
         self.init(type: object.type,
                   localizationKey: object.i18n?.key,
@@ -160,13 +160,18 @@ extension IonResponse {
     }
 }
 
-extension Capability.PasswordSettings {
-    init?(with settings: [String: JSONValue]?) {
+extension PasswordSettingsCapability {
+    init?(with settings: [String: JSON]?) {
         guard let settings = settings,
-              let complexity = settings["complexity"]?.toAnyObject() as? [String: Any]
+              let complexity = settings["complexity"]?.anyValue as? [String: Any]
         else { return nil }
-        
-        self.init(daysToExpiry: settings["daysToExpiry"]?.numberValue() as? Int ?? 0,
+
+        var daysToExpiry: Int?
+        if case let .number(daysToExpiryValue) = settings["daysToExpiry"] {
+            daysToExpiry = daysToExpiryValue.intValue
+        }
+
+        self.init(daysToExpiry: daysToExpiry ?? 0,
                   minLength: complexity["minLength"] as? Int ?? 0,
                   minLowerCase: complexity["minLowerCase"] as? Int ?? 0,
                   minUpperCase: complexity["minUpperCase"] as? Int ?? 0,
@@ -178,7 +183,7 @@ extension Capability.PasswordSettings {
 }
 
 extension Authenticator.Collection {
-    convenience init(flow: InteractionCodeFlowAPI, ion object: IonResponse) throws {
+    convenience init(flow: any InteractionCodeFlowAPI, ion object: IonResponse) throws {
         let authenticatorMapping: [String: [IonResponse.AuthenticatorMapping]]
         authenticatorMapping = object
             .allAuthenticators()
@@ -198,12 +203,12 @@ extension Authenticator.Collection {
                                                            in: object)
             })
         
-        self.init(authenticators: authenticators)
+        self.init(authenticators)
     }
 }
 
 extension Remediation.Collection {
-    convenience init(flow: InteractionCodeFlowAPI, ion object: IonResponse?) {
+    convenience init(flow: any InteractionCodeFlowAPI, ion object: IonResponse?) {
         var remediations: [Remediation] = object?.remediation?.value.compactMap { (value) in
             Remediation.makeRemediation(flow: flow, ion: value)
         } ?? []
@@ -220,8 +225,8 @@ extension Remediation.Collection {
     }
 }
 
-extension Capability.Sendable {
-    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
+extension SendCapability {
+    init?(flow: any InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let authenticator = authenticators.compactMap(\.send).first,
               let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
         else {
@@ -231,8 +236,8 @@ extension Capability.Sendable {
     }
 }
 
-extension Capability.Resendable {
-    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
+extension ResendCapability {
+    init?(flow: any InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let authenticator = authenticators.compactMap(\.resend).first,
               let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
         else {
@@ -242,8 +247,8 @@ extension Capability.Resendable {
     }
 }
 
-extension Capability.Recoverable {
-    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
+extension RecoverCapability {
+    init?(flow: any InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let authenticator = authenticators.compactMap(\.recover).first,
               let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
         else {
@@ -253,22 +258,21 @@ extension Capability.Recoverable {
     }
 }
 
-extension Capability.Pollable {
-    convenience init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
-        guard let typeName = authenticators.first?.type,
+extension PollCapability {
+    convenience init?(flow: any InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
+        guard let type = authenticators.first?.type,
               let authenticator = authenticators.compactMap(\.poll).first,
               let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
         else {
             return nil
         }
         
-        let type = Authenticator.Kind(string: typeName)
         self.init(flow: flow,
                   authenticatorType: type,
                   remediation: remediation)
     }
 
-    convenience init?(flow: InteractionCodeFlowAPI, ion form: IonForm) {
+    convenience init?(flow: any InteractionCodeFlowAPI, ion form: IonForm) {
         guard form.name == "enroll-poll" ||
                 form.name == "challenge-poll"
         else {
@@ -287,9 +291,10 @@ extension Capability.Pollable {
     }
 }
 
-extension Capability.NumberChallenge {
-    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
-        guard let answer = authenticators.compactMap(\.contextualData?["correctAnswer"]).first?.stringValue()
+extension NumberChallengeCapability {
+    init?(flow: any InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
+        guard let answerJson = authenticators.compactMap(\.contextualData?["correctAnswer"]).first,
+              case let .string(answer) = answerJson
         else {
             return nil
         }
@@ -298,8 +303,8 @@ extension Capability.NumberChallenge {
     }
 }
 
-extension Capability.Profile {
-    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
+extension ProfileCapability {
+    init?(flow: any InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let profile = authenticators.compactMap(\.profile).first
         else {
             return nil
@@ -309,10 +314,10 @@ extension Capability.Profile {
     }
 }
 
-extension Capability.PasswordSettings {
-    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
-        guard let typeName = authenticators.first?.type,
-              Authenticator.Kind(string: typeName) == .password,
+extension PasswordSettingsCapability {
+    init?(flow: any InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
+        guard let type = authenticators.first?.type,
+              type == .password,
               let settings = authenticators.compactMap(\.settings).first
         else {
             return nil
@@ -322,29 +327,34 @@ extension Capability.PasswordSettings {
     }
 }
 
-extension Capability.OTP {
-    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
+extension OTPCapability {
+    init?(flow: any InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         let methods = methodTypes(from: authenticators)
         guard methods.contains(.otp) || methods.contains(.totp)
         else {
             return nil
         }
-        
-        guard let typeName = authenticators.first?.type else { return nil }
-        let type = Authenticator.Kind(string: typeName)
-        
-        guard type == .app,
-              let contextualData = authenticators.compactMap(\.contextualData).first,
-              let qrcode = contextualData["qrcode"]?.toAnyObject() as? [String: String],
-              qrcode["method"] == "embedded",
-              let mimeType = qrcode["type"],
-              let imageUrlString = qrcode["href"],
-              let imageData = imageUrlString.base64ImageData
+
+        guard let authenticator = authenticators.first(where: { $0.type == .app })
+        else {
+            return nil
+        }
+
+        guard let contextualData = authenticator.contextualData,
+              case let .object(qrcode) = contextualData["qrcode"],
+              case let .string(method) = qrcode["method"],
+              method == "embedded",
+              case let .string(mimeType) = qrcode["type"],
+              case let .string(href) = qrcode["href"],
+              let imageData = href.base64ImageData
         else {
             return nil
         }
         
-        let sharedSecret = contextualData["sharedSecret"]?.stringValue()
+        var sharedSecret: String?
+        if case let .string(value) = contextualData["sharedSecret"] {
+            sharedSecret = value
+        }
 
         self.init(mimeType: mimeType,
                   imageData: imageData,
@@ -352,8 +362,8 @@ extension Capability.OTP {
     }
 }
 
-extension Capability.Duo {
-    convenience init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
+extension DuoCapability {
+    convenience init?(flow: any InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         // Exit early if none of the authenticators have a "duo" method
         let methods = methodTypes(from: authenticators)
         guard methods.contains(.duo) else {
@@ -361,12 +371,12 @@ extension Capability.Duo {
         }
 
         // Extract the duo authenticator data
-        let duoAuthenticators = authenticators.filter({ $0.type == "app" && $0.key == "duo" })
+        let duoAuthenticators = authenticators.filter({ $0.type == .app && $0.key == "duo" })
         guard let authenticator = duoAuthenticators.first(where: { $0.contextualData != nil }),
               let contextualData = authenticator.contextualData,
-              let host = contextualData["host"]?.stringValue(),
-              let signedToken = contextualData["signedToken"]?.stringValue(),
-              let script = contextualData["script"]?.stringValue()
+              case let .string(host) = contextualData["host"],
+              case let .string(signedToken) = contextualData["signedToken"],
+              case let .string(script) = contextualData["script"]
         else {
             return nil
         }
@@ -375,8 +385,8 @@ extension Capability.Duo {
     }
 }
 
-extension Capability.SocialIDP {
-    init?(flow: InteractionCodeFlowAPI, ion object: IonForm) {
+extension SocialIDPCapability {
+    init?(flow: any InteractionCodeFlowAPI, ion object: IonForm) {
         let type = Remediation.RemediationType(string: object.name)
         guard type == .redirectIdp,
               let idpObject = object.idp,
@@ -411,13 +421,13 @@ private func methodTypes(from authenticators: [IonAuthenticator]) -> [Authentica
             key == "type"
         }
         .map { (key, value) in
-            return Authenticator.Method(string: value)
+            return Authenticator.Method(rawValue: value)
         }
     return methodTypes
 }
 
 extension Authenticator {
-    static func makeAuthenticator(flow: InteractionCodeFlowAPI,
+    static func makeAuthenticator(flow: any InteractionCodeFlowAPI,
                                   ion authenticators: [IonAuthenticator],
                                   jsonPaths: [String],
                                   in response: IonResponse) throws -> Authenticator?
@@ -426,23 +436,23 @@ extension Authenticator {
 
         let filteredTypes = Set(authenticators.map(\.type))
         guard filteredTypes.count == 1 else {
-            throw InteractionCodeFlowError.internalMessage("Some mapped authenticators have differing types: \(filteredTypes.joined(separator: ", "))")
+            throw InteractionCodeFlowError.responseValidationFailed("Some mapped authenticators have differing types: \(filteredTypes.map(\.rawValue).joined(separator: ", "))")
         }
         
         let state = response.authenticatorState(for: authenticators, in: jsonPaths)
         let key = authenticators.compactMap(\.key).first
         let methods = authenticators.compactMap(\.methods).first
 
-        let capabilities: [AuthenticatorCapability?] = [
-            Capability.Profile(flow: flow, ion: authenticators),
-            Capability.Sendable(flow: flow, ion: authenticators),
-            Capability.Resendable(flow: flow, ion: authenticators),
-            Capability.Pollable(flow: flow, ion: authenticators),
-            Capability.Recoverable(flow: flow, ion: authenticators),
-            Capability.PasswordSettings(flow: flow, ion: authenticators),
-            Capability.NumberChallenge(flow: flow, ion: authenticators),
-            Capability.OTP(flow: flow, ion: authenticators),
-            Capability.Duo(flow: flow, ion: authenticators)
+        let capabilities: [(any Capability)?] = [
+            ProfileCapability(flow: flow, ion: authenticators),
+            SendCapability(flow: flow, ion: authenticators),
+            ResendCapability(flow: flow, ion: authenticators),
+            PollCapability(flow: flow, ion: authenticators),
+            RecoverCapability(flow: flow, ion: authenticators),
+            PasswordSettingsCapability(flow: flow, ion: authenticators),
+            NumberChallengeCapability(flow: flow, ion: authenticators),
+            OTPCapability(flow: flow, ion: authenticators),
+            DuoCapability(flow: flow, ion: authenticators)
         ]
         
         return Authenticator(flow: flow,
@@ -458,7 +468,7 @@ extension Authenticator {
 }
 
 extension Remediation {
-    static func makeRemediation(flow: InteractionCodeFlowAPI,
+    static func makeRemediation(flow: any InteractionCodeFlowAPI,
                                 ion object: IonForm?,
                                 createCapabilities: Bool = true) -> Remediation?
     {
@@ -471,9 +481,9 @@ extension Remediation {
         let refresh = (object.refresh != nil) ? Double(object.refresh!) / 1000.0 : nil
         // swiftlint:enable force_unwrapping
 
-        let capabilities: [RemediationCapability?] = createCapabilities ? [
-            Capability.SocialIDP(flow: flow, ion: object),
-            Capability.Pollable(flow: flow, ion: object)
+        let capabilities: [(any Capability)?] = createCapabilities ? [
+            SocialIDPCapability(flow: flow, ion: object),
+            PollCapability(flow: flow, ion: object)
         ] : []
         
         return Remediation(flow: flow,
@@ -487,7 +497,7 @@ extension Remediation {
                            capabilities: capabilities.compactMap { $0 })
     }
 
-    internal convenience init?(flow: InteractionCodeFlowAPI, ion object: IonForm?) {
+    internal convenience init?(flow: any InteractionCodeFlowAPI, ion object: IonForm?) {
         guard let object = object,
               let form = Form(fields: object.value?.map({ (value) in
                 .init(flow: flow, ion: value)
@@ -509,13 +519,13 @@ extension Remediation {
 }
 
 extension Remediation.Form.Field {
-    internal convenience init(flow: InteractionCodeFlowAPI, ion object: IonFormValue) {
+    internal convenience init(flow: any InteractionCodeFlowAPI, ion object: IonFormValue) {
         // Fields default to visible, except there are circumstances where
         // fields (such as `id`) don't properly include a `visible: false`. As a result,
         // we need to infer visibility from other values.
         var visible = object.visible ?? true
         if let isMutable = object.mutable,
-           !isMutable && object.value != nil
+           !isMutable && object.value != .null
         {
             visible = false
         }
@@ -523,7 +533,7 @@ extension Remediation.Form.Field {
         self.init(name: object.name,
                   label: object.label,
                   type: object.type,
-                  value: object.value?.toAnyObject(),
+                  value: object.value,
                   visible: visible,
                   mutable: object.mutable ?? true,
                   required: object.required ?? false,
@@ -535,7 +545,7 @@ extension Remediation.Form.Field {
                   options: object.options?.map { (value) in
                     .init(flow: flow, ion: value)
                   },
-                  messages: .init(messages: object.messages?.value.compactMap {
+                  messages: .init(object.messages?.value.compactMap {
             Response.Message(flow: flow, ion: $0)
                   }))
         self.messages.allMessages.forEach { $0.field = self }

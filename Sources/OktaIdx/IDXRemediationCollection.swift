@@ -14,7 +14,7 @@ import Foundation
 
 extension Remediation {
     /// Represents a collection of remediation options.
-    public class Collection {
+    public final class Collection: Sendable, Equatable, Hashable {
         /// Returns a remediation based on its string name.
         public subscript(name: String) -> Remediation? {
             remediations.first { $0.name == name }
@@ -25,6 +25,16 @@ extension Remediation {
             remediations.first { $0.type == type }
         }
         
+        @_documentation(visibility: internal)
+        public static func == (lhs: Remediation.Collection, rhs: Remediation.Collection) -> Bool {
+            lhs.remediations == rhs.remediations
+        }
+
+        @_documentation(visibility: internal)
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(remediations)
+        }
+
         let remediations: [Remediation]
         
         init(remediations: [Remediation]?) {

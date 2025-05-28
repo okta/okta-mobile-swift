@@ -14,13 +14,13 @@ import Foundation
 
 extension Authenticator {
     /// The state this authenticator is currently in.
-    public enum State: Comparable {
+    public enum State: Sendable, Comparable {
         case normal, enrolled, authenticating, enrolling, recovery
     }
     
     /// The type of authenticator.
-    public enum Kind: Equatable {
-        case unknown
+    public enum Kind: Sendable, Hashable, Codable, Equatable {
+        case other(type: String)
         case app
         case email
         case phone
@@ -32,8 +32,8 @@ extension Authenticator {
     }
     
     /// The method, or sub-type, of an authenticator.
-    public enum Method: Equatable {
-        case unknown
+    public enum Method: Sendable, Hashable, Codable, Equatable {
+        case other(type: String)
         case sms
         case voice
         case email

@@ -24,7 +24,7 @@ class DelegateRecorder: InteractionCodeFlowDelegate {
         }
         
         let type: CallType
-        let object: AnyObject?
+        let object: (any Sendable)?
         
         var response: Response? {
             guard let result = object as? Response else { return nil }
@@ -57,7 +57,7 @@ class DelegateRecorder: InteractionCodeFlowDelegate {
     }
     
     func authentication<Flow>(flow: Flow, received error: InteractionCodeFlowError) {
-        calls.append(Call(type: .error, object: nil))
+        calls.append(Call(type: .error, object: error))
     }
     
     func authentication<Flow>(flow: Flow, received response: Response) {
@@ -69,5 +69,6 @@ class DelegateRecorder: InteractionCodeFlowDelegate {
     }
     
     func authentication<Flow>(flow: Flow, received error: OAuth2Error) {
+        calls.append(Call(type: .error, object: error))
     }
 }

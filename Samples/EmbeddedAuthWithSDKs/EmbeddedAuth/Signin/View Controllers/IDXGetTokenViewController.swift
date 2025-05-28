@@ -29,15 +29,12 @@ class IDXGetTokenViewController: UIViewController, IDXResponseController {
             showError(SigninError.genericError(message: "Signin session or response is missing"))
             return
         }
-        
-        response.exchangeCode { [weak self] result in
-            switch result {
-            case .failure(let error):
-                self?.showError(error)
-                
-                signin.failure(with: error)
-            case .success(let token):
-                signin.success(with: token)
+
+        Task { @MainActor in
+            do {
+                signin.success(with: try await response.finish())
+            } catch {
+                self.showError(error)
             }
         }
     }

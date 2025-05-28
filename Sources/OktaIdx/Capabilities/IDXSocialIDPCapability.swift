@@ -12,62 +12,60 @@
 
 import Foundation
 
-extension Capability {
-    public struct SocialIDP: RemediationCapability {
-        /// The unique identifier for this social IDP.
-        public let id: String
-        
-        /// The URL an application should load or redirect to in order to continue authentication with the IDP service.
-        public let redirectUrl: URL
-        
-        /// The service for this social authentication remediation.
-        public let service: Service
-        
-        /// The developer-assigned IDP name within the Okta admin dashboard.
-        public let idpName: String
-        
-        /// The list of services that are possible within a social authentication workflow.
-        public enum Service {
-            /// SAML 2.0
-            case saml
-            /// Google
-            case google
-            /// Facebook
-            case facebook
-            /// LinkedIn
-            case linkedin
-            /// Microsoft
-            case microsoft
-            /// OIDC
-            case oidc
-            /// Okta
-            case okta
-            /// IWA
-            case iwa
-            /// AgentlessDSSO
-            case agentlessIwa
-            /// Certificate based authentication
-            case x509
-            /// Apple
-            case apple
-            /// OIN Social IdP Placeholder
-            case oinSocial
-            /// Other, unknown IDP service
-            case other
-        }
-        
-        let idpType: String
-        init(redirectUrl: URL,
-             id: String,
-             idpName: String,
-             idpType: String,
-             service: Service)
-        {
-            self.redirectUrl = redirectUrl
-            self.id = id
-            self.idpName = idpName
-            self.idpType = idpType
-            self.service = service
-        }
+public struct SocialIDPCapability: Capability, Sendable, Equatable, Hashable {
+    /// The unique identifier for this social IDP.
+    public let id: String
+
+    /// The URL an application should load or redirect to in order to continue authentication with the IDP service.
+    public let redirectUrl: URL
+
+    /// The service for this social authentication remediation.
+    public let service: Service
+
+    /// The developer-assigned IDP name within the Okta admin dashboard.
+    public let idpName: String
+
+    /// The list of services that are possible within a social authentication workflow.
+    public enum Service: Swift.Sendable, Equatable, Hashable {
+        /// SAML 2.0
+        case saml
+        /// Google
+        case google
+        /// Facebook
+        case facebook
+        /// LinkedIn
+        case linkedin
+        /// Microsoft
+        case microsoft
+        /// OIDC
+        case oidc
+        /// Okta
+        case okta
+        /// IWA
+        case iwa
+        /// AgentlessDSSO
+        case agentlessIwa
+        /// Certificate based authentication
+        case x509
+        /// Apple
+        case apple
+        /// OIN Social IdP Placeholder
+        case oinSocial
+        /// Other, unknown IDP service
+        case other(_ service: String)
+    }
+
+    let idpType: String
+    init(redirectUrl: URL,
+         id: String,
+         idpName: String,
+         idpType: String,
+         service: Service)
+    {
+        self.redirectUrl = redirectUrl
+        self.id = id
+        self.idpName = idpName
+        self.idpType = idpType
+        self.service = service
     }
 }
