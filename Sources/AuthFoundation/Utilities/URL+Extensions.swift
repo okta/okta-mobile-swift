@@ -54,7 +54,7 @@ extension URL {
                 throw OAuth2Error.redirectUri(self, reason: .scheme(components.scheme))
             }
 
-            guard components.host?.lowercased() == redirectUri.host?.lowercased(),
+            guard components.host?.lowercased() ?? "" == redirectUri.host?.lowercased() ?? "",
                   components.path == redirectUri.path
             else {
                 throw OAuth2Error.redirectUri(self, reason: .hostOrPath)

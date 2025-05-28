@@ -13,7 +13,6 @@
 import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
-@testable import OktaOAuth2
 
 final class URLExtensionTests: XCTestCase {
     func testQueryValuesCustomScheme() throws {
@@ -59,5 +58,10 @@ final class URLExtensionTests: XCTestCase {
         uri = try XCTUnwrap(try URL(requiredString: "https://example.com/callback?foo=bar&error_description=this+is+the+error"))
         XCTAssertEqual(try uri.queryValues(), ["foo": "bar", "error_description": "this is the error"])
         XCTAssertEqual(try uri.queryValues(matching: redirectUri), ["foo": "bar", "error_description": "this is the error"])
+    }
+
+    func testRedirectUriVariations() throws {
+        let nilHost = try XCTUnwrap(try URL(requiredString: "com.test:///login"))
+        XCTAssertNoThrow(try nilHost.queryValues(matching: nilHost))
     }
 }
