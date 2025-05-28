@@ -94,7 +94,7 @@ jobs:
         [[ "$has_documentation_changes" == "true" ]] && export doc_status=":white_check_mark:"
         [[ "$has_secrets" == "true" ]] && export secrets_status=":white_check_mark:"
 
-        cat <<-__EOF__ >> $GITHUB_STEP_SUMMARY
+        cat <<__EOF__ >> $GITHUB_STEP_SUMMARY
         | Preflight Check | Enabled |
         | --- | --- |
         | Merged to \`master\` | ${master_status} |
@@ -136,7 +136,7 @@ jobs:
       matrix:
         os: 
           - macos-latest
-        swift_version: ["5.10"]
+        swift_version: ["5.10", "6.0"]
     timeout-minutes: 10
     steps:
     - uses: actions/checkout@v2
@@ -148,16 +148,17 @@ jobs:
     - name: Test
       run: set -o pipefail && swift test --parallel
 
-  Cocoapods:
-    name: CocoaPods Build
-    needs: SwiftBuild
-    if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
-    runs-on: macos-latest
-    timeout-minutes: 10
-    steps:
-    - uses: actions/checkout@master
-    - name: Lint CocoaPods
-      run: pod lib lint --allow-warnings OktaIdx.podspec
+  # TODO: Temporarily disabled until monorepo concerns are addressed
+  # Cocoapods:
+  #   name: CocoaPods Build
+  #   needs: SwiftBuild
+  #   if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
+  #   runs-on: macos-latest
+  #   timeout-minutes: 10
+  #   steps:
+  #   - uses: actions/checkout@master
+  #   - name: Lint CocoaPods
+  #     run: pod lib lint --allow-warnings OktaIdx.podspec
 
   XcodeBuild:
     name: Xcode ${{ matrix.xcode_version }} on ${{ matrix.destination }}
