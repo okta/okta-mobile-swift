@@ -129,22 +129,24 @@ public struct ClaimCollection<Container: ClaimCollectionContainer>: Sendable {
     }
 }
 
-extension ClaimCollection: APIRequestArgument, Codable where Container.RawValue == String {
+extension ClaimCollection: APIRequestArgument where Container.RawValue == String {
     @_documentation(visibility: internal)
     public var stringValue: Container.RawValue {
         rawValue
     }
+}
 
+extension ClaimCollection: Codable where Container: Codable {
     @_documentation(visibility: internal)
     public init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.init(rawValue: try container.decode(String.self))
+        self.wrappedValue = try container.decode(Container.self)
     }
 
     @_documentation(visibility: internal)
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
-        try container.encode(stringValue)
+        try container.encode(wrappedValue)
     }
 }
 

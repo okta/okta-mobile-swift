@@ -146,10 +146,17 @@ final class ClaimCollectionTests: XCTestCase {
         XCTAssertEqual(list.rawValue, "guest user")
     }
 
-    func testCodable() throws {
+    func testCodableCollection() throws {
         let list = ClaimCollection<[String]>(wrappedValue: ["a", "b", "c"])
         let data = try JSONEncoder().encode(list)
         let result = try JSONDecoder().decode(ClaimCollection<[String]>.self, from: data)
+        XCTAssertEqual(list, result)
+    }
+
+    func testCodableOptionalCollection() throws {
+        let list = ClaimCollection<[String]?>(wrappedValue: ["a", "b", "c"])
+        let data = try JSONEncoder().encode(list)
+        let result = try JSONDecoder().decode(ClaimCollection<[String]?>.self, from: data)
         XCTAssertEqual(list, result)
     }
 }
