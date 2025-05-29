@@ -185,12 +185,12 @@ jobs:
 
   Cocoapods:
     name: CocoaPods Build
-    needs: SwiftBuild
+    needs:
+      - SwiftBuild
+      - XcodeBuild
     if: ${{ !github.event.pull_request.draft && needs.Preflight.outputs.has_source_changes == 'true' }}
     runs-on: macos-15-xlarge # Running on xlarge to use arm64 chipset
     timeout-minutes: 10
-    needs:
-      - SwiftBuild
     steps:
     - uses: actions/checkout@master
     - name: OktaAuthFoundation.podspec
