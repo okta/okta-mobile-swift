@@ -20,6 +20,20 @@ public enum APIRequestPollingHandlerError: Error {
     case timeout
 }
 
+@_documentation(visibility: internal)
+public struct APIRequestPollingOption: OptionSet, Sendable {
+    public let rawValue: Int
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+
+    public static let delayFirstRequest = Self.init(rawValue: 1 << 0)
+    public static let respectOAuth2Errors = Self.init(rawValue: 1 << 1)
+    public static let ignoreLostNetworkConnection = Self.init(rawValue: 1 << 2)
+
+    public static let `default`: Self = [.respectOAuth2Errors, .ignoreLostNetworkConnection]
+}
+
 /// Utility actor class used to represent a pollable request.
 @_documentation(visibility: internal)
 public actor APIRequestPollingHandler<RequestType: Sendable, ResultType: Sendable> {
@@ -35,24 +49,30 @@ public actor APIRequestPollingHandler<RequestType: Sendable, ResultType: Sendabl
     }
 
     public private(set) var isActive: Bool = false
+    public private(set) var iterationCount: Int = 0
     public private(set) var interval: TimeInterval
     public let slowDownInterval: TimeInterval
     public let expirationDate: Date?
+    public let options: APIRequestPollingOption
     public private(set) var nextRequest: RequestType?
     
+    private let initialInterval: TimeInterval
     private let operationBlock: OperationBlock
 
     public init(interval: TimeInterval = 5.0,
                 expiresIn: TimeInterval? = nil,
                 slowDownInterval: TimeInterval = 5.0,
+                options: APIRequestPollingOption = .default,
                 operation block: @escaping OperationBlock) throws
     {
         guard interval > 0 else {
             throw APIRequestPollingHandlerError.invalidInterval
         }
-        
+
         self.interval = interval
+        self.initialInterval = interval
         self.slowDownInterval = slowDownInterval
+        self.options = options
         self.operationBlock = block
 
         if let expiresIn = expiresIn {
@@ -71,15 +91,16 @@ public actor APIRequestPollingHandler<RequestType: Sendable, ResultType: Sendabl
     ///   - request: Request definition to perform
     ///   - delay: Optional delay before the request should begin.
     /// - Returns: The expected successful response result.
-    public func start(with request: RequestType, delay: TimeInterval? = nil) async throws -> ResultType {
+    public func start(with request: RequestType) async throws -> ResultType {
         guard !isActive else {
             throw APIRequestPollingHandlerError.alreadyStarted
         }
 
         isActive = true
         nextRequest = request
+        iterationCount = 0
 
-        var delay = delay ?? 0.0
+        var delay = options.contains(.delayFirstRequest) ? interval : 0.0
         pollLoop: while isActive {
             if delay > 0 {
                 try await Task.sleep(delay: delay)
@@ -95,6 +116,8 @@ public actor APIRequestPollingHandler<RequestType: Sendable, ResultType: Sendabl
                 break pollLoop
             }
             
+            iterationCount += 1
+
             let status: Status
             do {
                 guard let request = nextRequest else {
@@ -107,7 +130,7 @@ public actor APIRequestPollingHandler<RequestType: Sendable, ResultType: Sendabl
             
             switch status {
             case .success(let response):
-                isActive = false
+                stop()
                 return response
             case .continueWith(request: let newRequest, interval: let newInterval):
                 if let newRequest = newRequest {
@@ -120,7 +143,24 @@ public actor APIRequestPollingHandler<RequestType: Sendable, ResultType: Sendabl
             case .continue:
                 delay = interval
             case .failure(let error):
-                if let error = error as? APIClientError,
+                // If the error is related to a lost network connection,
+                // conditionally allow the polling to continue.
+                if options.contains(.ignoreLostNetworkConnection),
+                   (error as NSError).domain == NSURLErrorDomain
+                {
+                    switch (error as NSError).code {
+                    case NSURLErrorNotConnectedToInternet,
+                        NSURLErrorNetworkConnectionLost,
+                        NSURLErrorDNSLookupFailed:
+                        continue pollLoop
+                    default:
+                        break
+                    }
+                }
+
+                // Determine if the server is asking to slow down or to continue
+                if options.contains(.respectOAuth2Errors),
+                   let error = error as? APIClientError,
                    case .httpError(let serverError) = error,
                    let oauthError = serverError as? OAuth2ServerError
                 {
@@ -134,12 +174,18 @@ public actor APIRequestPollingHandler<RequestType: Sendable, ResultType: Sendabl
                     }
                 }
 
-                isActive = false
+                stop()
                 throw error
             }
         }
         
-        isActive = false
+        stop()
         throw APIRequestPollingHandlerError.timeout
+    }
+
+    func stop() {
+        isActive = false
+        nextRequest = nil
+        interval = initialInterval
     }
 }

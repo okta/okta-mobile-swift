@@ -466,6 +466,7 @@ final class OAuth2ClientTests: XCTestCase {
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/introspect", data: nil, statusCode: 401)
+
         let expect = expectation(description: "network request")
         client.introspect(token: token, type: .refreshToken) { result in
             switch result {
@@ -473,8 +474,10 @@ final class OAuth2ClientTests: XCTestCase {
                 XCTFail()
             case .failure(let error):
                 XCTAssertNotNil(error)
+
+                let expectedUrlRequest = URLRequest(url: URL(string: "https://example.com/oauth2/v1/introspect")!)
                 XCTAssertEqual(error.localizedDescription,
-                               OAuth2Error.network(error: APIClientError.missingResponse).localizedDescription)
+                               OAuth2Error.network(error: APIClientError.missingResponse(request: expectedUrlRequest)).localizedDescription)
             }
             expect.fulfill()
         }

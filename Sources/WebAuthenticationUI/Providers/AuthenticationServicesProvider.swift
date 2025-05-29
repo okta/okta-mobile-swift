@@ -103,14 +103,10 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
     func process(redirectUri: URL, url: URL?, error: (any Error)?) -> Result<URL, any Error> {
         defer { authenticationSession = nil }
         
-        if let error = error {
-            if let url = url,
-               let serverError = try? url.oauth2ServerError(redirectUri: redirectUri)
-            {
-                return .failure(serverError)
-            } else {
-                return .failure(WebAuthenticationError(error))
-            }
+        if let error = error as? OAuth2ServerError {
+            return .failure(error)
+        } else if let error = error {
+            return .failure(WebAuthenticationError(error))
         }
         
         guard let url = url else {

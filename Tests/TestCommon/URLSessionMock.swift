@@ -114,7 +114,7 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
                     if let error = call?.error {
                         continuation.resume(throwing: error)
                     } else {
-                        continuation.resume(throwing: APIClientError.missingResponse)
+                        continuation.resume(throwing: APIClientError.missingResponse(request: request))
                     }
                     return
                 }

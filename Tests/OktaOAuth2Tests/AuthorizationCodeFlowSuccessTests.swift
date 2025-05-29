@@ -156,7 +156,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         // Exchange code
         nonisolated(unsafe) var token: Token?
         let resumeWait = expectation(description: "resume")
-        try flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!) { result in
+        flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!) { result in
             switch result {
             case .success(let resultToken):
                 token = resultToken
@@ -216,13 +216,13 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
     }
     
     func testAuthorizationCodeFromURL() async throws {
-        typealias RedirectError = AuthorizationCodeFlow.RedirectError
-
-        XCTAssertThrowsError(try URL(string: "https://example.com")!.authorizationCode(redirectUri: redirectUri, state: "ABC123" )) { error in
-            XCTAssertEqual(error as? RedirectError, .unexpectedScheme("https"))
+        var redirectUri = try XCTUnwrap(URL(string: "https://example.com"))
+        XCTAssertThrowsError(try redirectUri.authorizationCode(state: "ABC123", configuration: client.configuration )) { error in
+            XCTAssertEqual(error as? OAuth2Error, .redirectUri(redirectUri, reason: .scheme("https")))
         }
 
-        XCTAssertEqual(try URL(string: "com.example:/?state=ABC123&code=foo")!.authorizationCode(redirectUri: redirectUri, state: "ABC123"), "foo")
+        redirectUri = try XCTUnwrap(URL(string: "com.example:/callback?state=ABC123&code=foo"))
+        XCTAssertEqual(try redirectUri.authorizationCode(state: "ABC123", configuration: client.configuration), "foo")
     }
     
     func testTokenRequestParameters() throws {

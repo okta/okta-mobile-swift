@@ -15,14 +15,12 @@ import AuthFoundation
 
 extension AuthorizationCodeFlow {
     struct TokenRequest: OAuth2TokenRequest, AuthenticationFlowRequest {
-        typealias ResponseType = Token
         typealias Flow = AuthorizationCodeFlow
 
         let openIdConfiguration: OpenIdConfiguration
         let clientConfiguration: OAuth2Client.Configuration
         let additionalParameters: [String: any APIRequestArgument]?
         let context: Flow.Context
-        let redirectUri: URL
         let authorizationCode: String
         
         init(openIdConfiguration: OpenIdConfiguration,
@@ -31,8 +29,8 @@ extension AuthorizationCodeFlow {
              context: Context,
              authorizationCode: String) throws
         {
-            guard let redirectUri = clientConfiguration.redirectUri else {
-                throw OAuth2Error.missingRedirectUri
+            guard clientConfiguration.redirectUri != nil else {
+                throw OAuth2Error.redirectUriRequired
             }
             
             self.openIdConfiguration = openIdConfiguration
@@ -40,7 +38,6 @@ extension AuthorizationCodeFlow {
             self.additionalParameters = additionalParameters
             self.context = context
             self.authorizationCode = authorizationCode
-            self.redirectUri = redirectUri
         }
     }
 }

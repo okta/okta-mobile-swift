@@ -12,14 +12,18 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 /// Errors that may occur at the API or network level.
 public enum APIClientError: Error {
     /// Could not create an invalid URL. This typically means the string passed to `URL` was malformed.
     case invalidUrl
     
     /// No response received from the server.
-    case missingResponse
-    
+    case missingResponse(request: URLRequest? = nil)
+
     /// Did not receive an HTTP response.
     case invalidResponse
     
@@ -68,12 +72,21 @@ extension APIClientError: LocalizedError {
                                      bundle: .authFoundation,
                                      comment: "Invalid URL")
             
-        case .missingResponse:
-            return NSLocalizedString("missing_response_description",
-                                     tableName: "AuthFoundation",
-                                     bundle: .authFoundation,
-                                     comment: "Invalid URL")
-            
+        case .missingResponse(request: let request):
+            if let requestUrl = request?.url {
+                return String.localizedStringWithFormat(
+                    NSLocalizedString("missing_response_request_description",
+                                      tableName: "AuthFoundation",
+                                      bundle: .authFoundation,
+                                      comment: "Invalid URL"),
+                    requestUrl.absoluteString)
+            } else {
+                return NSLocalizedString("missing_response_description",
+                                         tableName: "AuthFoundation",
+                                         bundle: .authFoundation,
+                                         comment: "Invalid URL")
+            }
+
         case .invalidResponse:
             return NSLocalizedString("invalid_response_description",
                                      tableName: "AuthFoundation",

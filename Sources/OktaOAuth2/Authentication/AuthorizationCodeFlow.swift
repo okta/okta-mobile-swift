@@ -66,18 +66,6 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 /// let token = try await flow.resume(with: redirectUri)
 /// ```
 public actor AuthorizationCodeFlow: AuthenticationFlow {
-    
-    /// Errors reported during processing and handling of redirect URLs.
-    ///
-    /// These errors are mostly reported as a result of the ``start(with:additionalParameters:completion:)`` or ``start(with:additionalParameters:)`` methods.
-    public enum RedirectError: Error, Equatable {
-        case invalidRedirectUrl
-        case unexpectedScheme(_ scheme: String?)
-        case missingQueryArguments
-        case invalidState(_ state: String?)
-        case missingAuthorizationCode
-    }
-    
     /// The OAuth2Client this authentication flow will use.
     nonisolated public let client: OAuth2Client
 
@@ -138,7 +126,7 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
                 additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         guard client.configuration.redirectUri != nil else {
-            throw OAuth2Error.missingRedirectUri
+            throw OAuth2Error.redirectUriRequired
         }
      
         self.init(verifiedClient: client, additionalParameters: additionalParameters)
@@ -200,15 +188,12 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
     /// - Returns: The Token created as a result of exchanging an authorization code.
     public func resume(with url: URL) async throws -> Token {
         return try await withExpression {
-            guard let redirectUri = client.configuration.redirectUri else {
-                throw OAuth2Error.missingRedirectUri
-            }
-
             guard let context = _context else {
-                throw OAuth2Error.missingClientConfiguration
+                throw OAuth2Error.invalidContext
             }
 
-            let code = try url.authorizationCode(redirectUri: redirectUri, state: context.state)
+            let code = try url.authorizationCode(state: context.state,
+                                                 configuration: client.configuration)
             let request = try TokenRequest(openIdConfiguration: try await client.openIdConfiguration(),
                                            clientConfiguration: client.configuration,
                                            additionalParameters: additionalParameters,
@@ -291,7 +276,7 @@ extension AuthorizationCodeFlow {
     /// - Parameters:
     ///   - url: Authorization redirect URI
     ///   - completion: Completion block to retrieve the returned result.
-    nonisolated public func resume(with url: URL, completion: @escaping @Sendable (Result<Token, OAuth2Error>) -> Void) throws {
+    nonisolated public func resume(with url: URL, completion: @escaping @Sendable (Result<Token, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await resume(with: url)))

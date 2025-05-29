@@ -1,0 +1,36 @@
+name: Setup Swift
+inputs:
+  swift-version:
+    description: 'Swift Version'
+    required: true
+  version-manifest:
+    description: 'YAML file describing Xcode versions'
+    required: false
+    default: ./.github/actions/setup-swift/versions.yaml
+outputs:
+  developer_dir:
+    description: 'Selected developer dir'
+runs:
+  using: composite
+  steps:
+    - name: Select the appropriate version of Xcode
+      id: check_xcode_version
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        for xcode_version in $(yq ".swift[] | select(.version == \"${{ inputs.swift-version }}\") | .xcode_versions[]" "${{inputs.version-manifest}}"); do
+          developer_dir="/Applications/Xcode_${xcode_version}.app/Contents/Developer"
+          if [[ -d "$developer_dir" ]]; then
+            echo "DEVELOPER_DIR=${developer_dir}" >> $GITHUB_ENV
+            echo "developer_dir=${developer_dir}" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+        done
+        echo "developer_dir=" >> $GITHUB_OUTPUT
+    - uses: SwiftyLab/setup-swift@latest
+      if: steps.check_xcode_version.outputs.developer_dir == ''
+      with:
+        swift-version: ${{ inputs.swift-version }}
+    - name: Get swift version
+      shell: bash
+      run: swift --version

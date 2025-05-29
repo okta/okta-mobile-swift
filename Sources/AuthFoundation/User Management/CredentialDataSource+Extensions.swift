@@ -18,6 +18,6 @@ import FoundationNetworking
 
 extension CredentialDataSource {
     public func urlSession(for token: Token) -> any URLSessionProtocol {
-        URLSession(configuration: .ephemeral)
+        OAuth2Client.defaultSession ?? URLSession(configuration: .ephemeral)
     }
 }

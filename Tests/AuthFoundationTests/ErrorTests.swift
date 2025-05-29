@@ -32,7 +32,7 @@ final class ErrorTests: XCTestCase {
     func testAPIClientError() {
         XCTAssertNotEqual(APIClientError.invalidUrl.errorDescription,
                           "invalid_url_description")
-        XCTAssertNotEqual(APIClientError.missingResponse.errorDescription,
+        XCTAssertNotEqual(APIClientError.missingResponse().errorDescription,
                           "missing_response_description")
         XCTAssertNotEqual(APIClientError.invalidResponse.errorDescription,
                           "invalid_response_description")

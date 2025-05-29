@@ -14,81 +14,28 @@ import Foundation
 import AuthFoundation
 
 extension URL {
-    typealias RedirectError = AuthorizationCodeFlow.RedirectError
-    
-    func oauth2QueryComponents(redirectUri: URL?) throws -> [String: String] {
-        guard let components = URLComponents(url: self,
-                                             resolvingAgainstBaseURL: false)
-        else {
-            throw RedirectError.invalidRedirectUrl
-        }
-        
-        guard components.scheme?.lowercased() == redirectUri?.scheme?.lowercased()
-        else {
-            throw RedirectError.unexpectedScheme(components.scheme)
-        }
-        
-        guard var query = components.queryItems?.reduce(into: [String: String](), { partialResult, queryItem in
-            if let value = queryItem.value {
-                partialResult[queryItem.name] = value
-            }
-        }) else {
-            throw RedirectError.missingQueryArguments
-        }
-        
-        if let description = query["error_description"]?
-            .removingPercentEncoding?
-            .replacingOccurrences(of: "+", with: " ")
-        {
-            query["error_description"] = description
-        }
-        
-        return query
-    }
-    
-    func errorFrom(query: [String: String]) -> OAuth2ServerError? {
-        guard let errorCode = query["error"] else {
-            return nil
-        }
-
-        let additionalKeys = query.filter { element in
-            element.key != "error" && element.key != "error_description"
-        }
-        
-        return OAuth2ServerError(code: errorCode,
-                                 description: query["error_description"],
-                                 additionalValues: additionalKeys)
-
-    }
-    
     /// Convenience function to return an authorization code from the given URL.
     /// - Parameters:
     ///   - redirectUri: Redirect URI to match against.
     ///   - state: State token to match against.
+    ///   - configuration: OAuth2 client configuration to validate.
     /// - Returns: The authorization code for the given URI.
-    public func authorizationCode(redirectUri: URL, state: String) throws -> String {
-        let query = try oauth2QueryComponents(redirectUri: redirectUri)
-        if let error = errorFrom(query: query) {
+    public func authorizationCode(state: String,
+                                  configuration: OAuth2Client.Configuration?) throws -> String
+    {
+        let query = try queryValues(matching: configuration?.redirectUri)
+        if let error = try OAuth2ServerError(from: query) {
             throw error
         }
-        
+
         guard query["state"] == state else {
-            throw RedirectError.invalidState(query["state"])
+            throw OAuth2Error.redirectUri(self, reason: .state(query["state"]))
         }
         
         guard let code = query["code"] else {
-            throw RedirectError.missingAuthorizationCode
+            throw OAuth2Error.redirectUri(self, reason: .codeRequired)
         }
         
         return code
-    }
-    
-    /// Convenience function that extracts an OAuth2 server error from a URL
-    /// - Parameters:
-    ///   - redirectUri: Redirect URI to match against.
-    /// - Returns: Server error, if one is present.
-    public func oauth2ServerError(redirectUri: URL? = nil) throws -> OAuth2ServerError? {
-        let query = try oauth2QueryComponents(redirectUri: redirectUri)
-        return errorFrom(query: query)
     }
 }

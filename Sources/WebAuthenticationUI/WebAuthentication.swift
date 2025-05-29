@@ -103,7 +103,7 @@ public final class WebAuthentication {
         
         guard let redirectUri = signInFlow.client.configuration.redirectUri
         else {
-            throw OAuth2Error.missingRedirectUri
+            throw OAuth2Error.redirectUriRequired
         }
 
         async let authorizeUrl = signInFlow.start(with: context)

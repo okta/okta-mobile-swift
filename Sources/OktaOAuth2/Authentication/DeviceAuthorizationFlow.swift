@@ -172,7 +172,7 @@ public actor DeviceAuthorizationFlow: AuthenticationFlow {
             guard let context = _context,
                   let verification = context.verification
             else {
-                throw OAuth2Error.missingClientConfiguration
+                throw OAuth2Error.invalidContext
             }
 
             let request = TokenRequest(openIdConfiguration: try await client.openIdConfiguration(),

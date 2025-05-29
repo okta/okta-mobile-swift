@@ -73,7 +73,15 @@ extension AuthenticationFlow {
 
         return validatorContext.maxAge
     }
-    
+
+    /// Resets the authentication flow to its original state, invoking the the completion block once it has reset.
+    nonisolated public func reset(completion: @escaping @Sendable () -> Void) {
+        Task {
+            await reset()
+            completion()
+        }
+    }
+
     /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
     public init() throws {
         try self.init(plistConfiguration: try .init())
