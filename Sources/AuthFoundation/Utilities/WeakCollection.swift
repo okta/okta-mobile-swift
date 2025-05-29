@@ -15,7 +15,7 @@ import Foundation
 /// Property wrapper representing a weak value.
 @_documentation(visibility: internal)
 @propertyWrapper
-public struct Weak<Object: AnyObject>: Sendable {
+public struct Weak<Object: AnyObject>: @unchecked Sendable {
     public var wrappedValue: Object? {
         get { lock.withLock { _wrappedValue } }
         set { lock.withLock { _wrappedValue = newValue } }
