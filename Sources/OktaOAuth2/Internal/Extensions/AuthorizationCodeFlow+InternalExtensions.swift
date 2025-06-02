@@ -18,7 +18,7 @@ extension AuthorizationCodeFlow {
                                  using context: AuthorizationCodeFlow.Context) throws -> URL
     {
         guard client.configuration.redirectUri != nil else {
-            throw OAuth2Error.missingRedirectUri
+            throw OAuth2Error.redirectUriRequired
         }
         
         guard var components = URLComponents(url: authenticationUrl, resolvingAgainstBaseURL: true)

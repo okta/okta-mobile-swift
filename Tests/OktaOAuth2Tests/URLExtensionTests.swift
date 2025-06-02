@@ -16,58 +16,75 @@ import XCTest
 @testable import OktaOAuth2
 
 final class URLExtensionTests: XCTestCase {
-    let redirectUri = URL(string: "com.example:/callback")!
-
     func testAuthorizationCodeFromURL() throws {
-        typealias RedirectError = AuthorizationCodeFlow.RedirectError
-        
-        XCTAssertThrowsError(try URL(string: "urn:foo:bar")!
-            .authorizationCode(redirectUri: redirectUri,
-                               state: "ABCD123"))
+        let redirectUri = try XCTUnwrap(try URL(requiredString: "com.example:/callback"))
+        let configuration = OAuth2Client.Configuration(issuerURL: URL(string: "https://example.com")!,
+                                                       clientId: "clientid",
+                                                       scope: "openid",
+                                                       redirectUri: redirectUri)
+        var uri: URL
+
+        uri = try XCTUnwrap(try URL(requiredString: "urn:foo:bar"))
+        XCTAssertThrowsError(try uri.authorizationCode(state: "ABCD123",
+                                                       configuration: configuration))
         { error in
-            XCTAssertEqual(error as? RedirectError, .unexpectedScheme("urn"))
+            XCTAssertEqual(error as? OAuth2Error, .redirectUri(uri, reason: .scheme("urn")))
         }
-        
-        XCTAssertThrowsError(try URL(string: "com.example:/")!
-            .authorizationCode(redirectUri: redirectUri,
-                               state: "ABCD123"))
+
+        uri = try XCTUnwrap(try URL(requiredString: "com.example:/"))
+        XCTAssertThrowsError(try uri.authorizationCode(state: "ABCD123",
+                                                       configuration: configuration))
         { error in
-            XCTAssertEqual(error as? RedirectError, .missingQueryArguments)
+            XCTAssertEqual(error as? OAuth2Error, .redirectUri(uri, reason: .hostOrPath))
         }
-        
-        XCTAssertThrowsError(try URL(string: "com.example:/?foo=bar")!
-            .authorizationCode(redirectUri: redirectUri,
-                               state: "ABCD123"))
+
+        uri = try XCTUnwrap(try URL(requiredString: "com.example:/callback"))
+        XCTAssertThrowsError(try uri.authorizationCode(state: "ABCD123",
+                                                       configuration: configuration))
         { error in
-            XCTAssertEqual(error as? RedirectError, .invalidState(nil))
+            XCTAssertEqual(error as? OAuth2Error, .redirectUri(uri, reason: .state(nil)))
         }
-        
-        XCTAssertThrowsError(try URL(string: "com.example:/?foo=bar&state=abcd")!
-            .authorizationCode(redirectUri: redirectUri,
-                               state: "ABCD123"))
+
+        uri = try XCTUnwrap(try URL(requiredString: "com.example:/callback?state=abcd"))
+        XCTAssertThrowsError(try uri.authorizationCode(state: "ABCD123",
+                                                       configuration: configuration))
         { error in
-            XCTAssertEqual(error as? RedirectError, .invalidState("abcd"))
+            XCTAssertEqual(error as? OAuth2Error, .redirectUri(uri, reason: .state("abcd")))
         }
-        
-        XCTAssertThrowsError(try URL(string: "com.example:/?state=ABCD123&error=some_error&error_description=some+error+message")!
-            .authorizationCode(redirectUri: redirectUri,
-                               state: "ABCD123"))
+
+        uri = try XCTUnwrap(try URL(requiredString: "com.example:/callback?state=ABCD123"))
+        XCTAssertThrowsError(try uri.authorizationCode(state: "ABCD123",
+                                                       configuration: configuration))
+        { error in
+            XCTAssertEqual(error as? OAuth2Error, .redirectUri(uri, reason: .codeRequired))
+        }
+
+        uri = try XCTUnwrap(try URL(requiredString: "com.example:/callback?error=some_error&error_description=some+error+message"))
+        XCTAssertThrowsError(try uri.authorizationCode(state: "ABCD123",
+                                                       configuration: configuration))
         { error in
             let serverError = error as? OAuth2ServerError
             XCTAssertEqual(serverError?.code, .other(code: "some_error"))
             XCTAssertEqual(serverError?.description, "some error message")
         }
-        
-        XCTAssertThrowsError(try URL(string: "com.example:/?state=ABCD123")!
-            .authorizationCode(redirectUri: redirectUri,
-                               state: "ABCD123"))
-        { error in
-            XCTAssertEqual(error as? RedirectError, .missingAuthorizationCode)
-        }
 
-        let code = try URL(string: "com.example:/?state=ABCD123&code=foo")!
-            .authorizationCode(redirectUri: redirectUri,
-                               state: "ABCD123")
-        XCTAssertEqual(code, "foo")
+        uri = try XCTUnwrap(try URL(requiredString: "com.example:/callback?state=ABCD123&code=foo"))
+        XCTAssertEqual(try uri.authorizationCode(state: "ABCD123",
+                                                 configuration: configuration),
+                       "foo")
+    }
+
+    func testAuthorizationCodeFromHTTPSURL() throws {
+        let redirectUri = try XCTUnwrap(try URL(requiredString: "https://example.com/callback"))
+        let configuration = OAuth2Client.Configuration(issuerURL: URL(string: "https://example.com")!,
+                                                       clientId: "clientid",
+                                                       scope: "openid",
+                                                       redirectUri: redirectUri)
+        var uri: URL
+
+        uri = try XCTUnwrap(try URL(requiredString: "https://example.com/callback?state=ABCD123&code=foo"))
+        XCTAssertEqual(try uri.authorizationCode(state: "ABCD123",
+                                                 configuration: configuration),
+                       "foo")
     }
 }

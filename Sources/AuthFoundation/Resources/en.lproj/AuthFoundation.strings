@@ -2,6 +2,7 @@
 /* APIClientError */
 "invalid_url_description" = "Could not create an invalid URL.";
 "missing_response_description" = "No response received from the server.";
+"missing_response_request_description" = "No response received from the server request %@.";
 "invalid_response_description" = "Did not receive an HTTP response.";
 "cannot_parse_response_description" = "Cannot parse server response: %@";
 "invalid_request_data_description" = "Cannot send invalid request data to the server.";
@@ -14,8 +15,10 @@
 
 /* OAuth2Error */
 "missing_client_configuration_description" = "Cannot perform an operation since the token is missing its client configuration.";
-"missing_client_redirect_uri" = "An operation was performed which requires a `redirect_uri`, but none was supplied to the client configuration.";
-"cannot_compose_url_description" = "Cannot compose a URL to authenticate with.";
+"redirect_uri_required" = "An operation was performed which requires a `redirect_uri`, but none was supplied to the client configuration.";
+"invalid_context" = "The context for this operation is missing or is invalid.";
+"redirect_uri" = "The redirect URI \"%@\" is unsupported because %@.";
+"cannot_compose_url_description" = "Cannot compose a URL with which to authenticate.";
 "oauth2_error_description" = "Authentication error: %@ (%@).";
 "oauth2_error_code_description" = "Authentication error code %@.";
 "missing_token_description" = "Missing %@ token.";
@@ -26,6 +29,17 @@
 "multiple_oauth2_errors" = "Multiple errors occurred: %@";
 "cannot_revoke_token_type" = "Cannot revoke token type.";
 "missing_oauth2_response_key" = "Missing the \"%@\" required response key.";
+
+/* OAuth2Error.RedirectReason */
+"redirect_reason_invalid" = "it is not a properly formed URL";
+"redirect_reason_scheme" = "its scheme must be \"%@\"";
+"redirect_reason_host_or_path" = "the host or path is incorrect";
+"redirect_reason_scheme_null" = "its scheme is null";
+"redirect_reason_query_argument" = "the query argument \"%@\" is missing or invalid";
+"redirect_reason_query_argument_null" = "the query argument \"%@\" is missing or invalid";
+"redirect_reason_state" = "the state \"%@\" is invalid";
+"redirect_reason_state_null" = "the state was not supplied";
+"redirect_reason_code_required" = "a code was required but wasn't supplied";
 
 /* JWTError */
 "jwt_invalid_base64_encoding" = "The token is invalid (incorrect Base64 encoding).";

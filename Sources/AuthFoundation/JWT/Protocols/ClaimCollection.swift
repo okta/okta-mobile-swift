@@ -136,6 +136,20 @@ extension ClaimCollection: APIRequestArgument where Container.RawValue == String
     }
 }
 
+extension ClaimCollection: Codable where Container: Codable {
+    @_documentation(visibility: internal)
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.wrappedValue = try container.decode(Container.self)
+    }
+
+    @_documentation(visibility: internal)
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(wrappedValue)
+    }
+}
+
 extension ClaimCollection: ExpressibleByArrayLiteral {
     /// Initializer using an array literal representation of values.
     ///

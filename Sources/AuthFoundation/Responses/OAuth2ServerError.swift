@@ -59,7 +59,27 @@ public struct OAuth2ServerError: Decodable, Error, LocalizedError, Equatable {
         self.description = description
         self.additionalValues = additionalValues
     }
-    
+
+    /// Convenience function that extracts an OAuth2 server error from a URL
+    /// - Parameters:
+    ///   - url: Redirect URI that potentially contains an error.
+    ///   - matching: Client-defined `redirect_uri` value, or `nil` to skip validation checks.
+    /// - Returns: Server error, if one is present.
+    @_documentation(visibility: internal)
+    public init?(from query: [String: String]) throws {
+        guard let errorCode = query["error"] else {
+            return nil
+        }
+
+        let additionalKeys = query.filter { element in
+            element.key != "error" && element.key != "error_description"
+        }
+
+        self.init(code: errorCode,
+                  description: query["error_description"],
+                  additionalValues: additionalKeys)
+    }
+
     @_documentation(visibility: internal)
     public static func == (lhs: OAuth2ServerError, rhs: OAuth2ServerError) -> Bool {
         lhs.code == rhs.code &&

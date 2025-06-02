@@ -100,6 +100,18 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
             }
         }
     }
+    
+    /// Explicity begins observing the given client for API network request logging.
+    /// - Parameter client: Client to observe.
+    nonisolated public func startObserving(client: OAuth2Client) {
+        client.add(delegate: self)
+    }
+
+    /// Explicity stops observing the given client for API network request logging.
+    /// - Parameter client: Client to stop observing.
+    nonisolated public func stopObserving(client: OAuth2Client) {
+        client.remove(delegate: self)
+    }
 
     @_documentation(visibility: private)
     public func api(client: any APIClient, willSend request: inout URLRequest) {

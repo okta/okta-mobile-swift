@@ -79,7 +79,7 @@ public actor SessionTokenFlow: AuthenticationFlow {
                 additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         guard client.configuration.redirectUri != nil else {
-            throw OAuth2Error.missingRedirectUri
+            throw OAuth2Error.redirectUriRequired
         }
         
         assert(SDKVersion.oauth2 != nil)
