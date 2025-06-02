@@ -206,7 +206,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Lint Podspec
-      run: pod lib lint OktaClient.podspec --include-podspecs="**.podspec --allow-warnings --verbose --platforms=${{ matrix.platform }}
+      run: pod lib lint OktaClient.podspec --include-podspecs="**.podspec" --allow-warnings --verbose --platforms=${{ matrix.platform }}
 
   XcodeBuild:
     name: Xcode ${{ matrix.xcode_version }} on ${{ matrix.destination }}

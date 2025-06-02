@@ -87,10 +87,8 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
                 })
             
             #if !os(watchOS) && !os(tvOS)
-            if #available(macCatalyst 13.0, macOS 10.15, visionOS 1.0, *) {
-                session.presentationContextProvider = self
-                session.prefersEphemeralWebBrowserSession = usesEphemeralSession
-            }
+            session.presentationContextProvider = self
+            session.prefersEphemeralWebBrowserSession = usesEphemeralSession
             #endif
 
             self.authenticationSession = session
