@@ -20,6 +20,6 @@ extension SDKVersion.Name {
 extension SDKVersion {
     @_documentation(visibility: private)
     public static let authFoundation: SDKVersion? = {
-        register(.authFoundation, version: "1.8.2")
+        register(.authFoundation, version: "2.0.0")
     }()
 }
