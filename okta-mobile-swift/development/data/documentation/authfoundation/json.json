@@ -89,11 +89,20 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONRepresentable",
         "doc:\/\/AuthFoundation\/s8CopyableP",
         "doc:\/\/AuthFoundation\/s28CustomDebugStringConvertibleP",
         "doc:\/\/AuthFoundation\/Se",
         "doc:\/\/AuthFoundation\/SE",
         "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/s27ExpressibleByBooleanLiteralP",
+        "doc:\/\/AuthFoundation\/s43ExpressibleByExtendedGraphemeClusterLiteralP",
+        "doc:\/\/AuthFoundation\/s25ExpressibleByFloatLiteralP",
+        "doc:\/\/AuthFoundation\/s27ExpressibleByIntegerLiteralP",
+        "doc:\/\/AuthFoundation\/s23ExpressibleByNilLiteralP",
+        "doc:\/\/AuthFoundation\/s26ExpressibleByStringLiteralP",
+        "doc:\/\/AuthFoundation\/s33ExpressibleByUnicodeScalarLiteralP",
+        "doc:\/\/AuthFoundation\/SH",
         "doc:\/\/AuthFoundation\/s8SendableP"
       ],
       "kind" : "relationships",
@@ -149,9 +158,9 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/init(_:)-26uor",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/init(_:)-2k5bl",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/init(_:)-4xbf4",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/init(_:)-5zny4",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/init(_:)-83djb"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/init(_:)-5zny4"
       ],
       "title" : "Initializers"
     },
@@ -167,8 +176,8 @@
       "anchor" : "Subscripts",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-2v37h",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-6bjdj"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-560k7",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-9ugbm"
       ],
       "title" : "Subscripts"
     },
@@ -176,8 +185,9 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/Equatable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/Equatable-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/ExpressibleByExtendedGraphemeClusterLiteral-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/ExpressibleByUnicodeScalarLiteral-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -199,6 +209,11 @@
 "doc://AuthFoundation/SE": {
   "identifier" : "doc:\/\/AuthFoundation\/SE",
   "title" : "Swift.Encodable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/SH": {
+  "identifier" : "doc:\/\/AuthFoundation\/SH",
+  "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
 "doc://AuthFoundation/SQ": {
@@ -533,17 +548,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/json"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JSON/CustomDebugStringConvertible-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/CustomDebugStringConvertible-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "CustomDebugStringConvertible Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/json\/customdebugstringconvertible-implementations"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/JSON/Equatable-Implementations": {
   "abstract" : [
 
@@ -554,6 +558,28 @@
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/json\/equatable-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSON/ExpressibleByExtendedGraphemeClusterLiteral-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/ExpressibleByExtendedGraphemeClusterLiteral-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "ExpressibleByExtendedGraphemeClusterLiteral Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/json\/expressiblebyextendedgraphemeclusterliteral-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSON/ExpressibleByUnicodeScalarLiteral-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/ExpressibleByUnicodeScalarLiteral-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "ExpressibleByUnicodeScalarLiteral Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/json\/expressiblebyunicodescalarliteral-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JSON/anyValue": {
   "abstract" : [
@@ -722,6 +748,43 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/json\/init(_:)-26uor"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/JSON/init(_:)-2k5bl": {
+  "abstract" : [
+    {
+      "text" : "Initializes a JSON object from an encodable object representation.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "(some "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SE",
+      "text" : "Encodable"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/init(_:)-2k5bl",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/json\/init(_:)-2k5bl"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JSON/init(_:)-4xbf4": {
   "abstract" : [
     {
@@ -795,39 +858,6 @@
   "title" : "init(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/json\/init(_:)-5zny4"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JSON/init(_:)-83djb": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "keyword",
-      "text" : "Any"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/init(_:)-83djb",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/json\/init(_:)-83djb"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JSON/null": {
   "abstract" : [
@@ -989,9 +1019,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/json\/string(_:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JSON/subscript(_:)-2v37h": {
+"doc://AuthFoundation/documentation/AuthFoundation/JSON/subscript(_:)-560k7": {
   "abstract" : [
-
+    {
+      "text" : "Returns the array value at the given index, or ",
+      "type" : "text"
+    },
+    {
+      "code" : "nil",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " if the object is not an array.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -1012,24 +1053,36 @@
       "text" : ") -> "
     },
     {
-      "kind" : "keyword",
-      "text" : "Any"
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+      "text" : "JSON"
     },
     {
       "kind" : "text",
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-2v37h",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-560k7",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/json\/subscript(_:)-2v37h"
+  "url" : "\/documentation\/authfoundation\/json\/subscript(_:)-560k7"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JSON/subscript(_:)-6bjdj": {
+"doc://AuthFoundation/documentation/AuthFoundation/JSON/subscript(_:)-9ugbm": {
   "abstract" : [
-
+    {
+      "text" : "Returns the object value with the given key, or ",
+      "type" : "text"
+    },
+    {
+      "code" : "nil",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " if this is not an object.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -1050,20 +1103,21 @@
       "text" : ") -> "
     },
     {
-      "kind" : "keyword",
-      "text" : "Any"
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+      "text" : "JSON"
     },
     {
       "kind" : "text",
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-6bjdj",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-9ugbm",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/json\/subscript(_:)-6bjdj"
+  "url" : "\/documentation\/authfoundation\/json\/subscript(_:)-9ugbm"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer": {
   "abstract" : [
@@ -1098,6 +1152,40 @@
   "title" : "JSONClaimContainer",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsonclaimcontainer"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONRepresentable": {
+  "abstract" : [
+    {
+      "text" : "Represents types that are interoperable or usable with JSON.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONRepresentable"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONRepresentable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONRepresentable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONRepresentable",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonrepresentable"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
@@ -1249,9 +1337,44 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/workingwithclaims"
 },
+"doc://AuthFoundation/s23ExpressibleByNilLiteralP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s23ExpressibleByNilLiteralP",
+  "title" : "Swift.ExpressibleByNilLiteral",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s25ExpressibleByFloatLiteralP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s25ExpressibleByFloatLiteralP",
+  "title" : "Swift.ExpressibleByFloatLiteral",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s26ExpressibleByStringLiteralP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s26ExpressibleByStringLiteralP",
+  "title" : "Swift.ExpressibleByStringLiteral",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s27ExpressibleByBooleanLiteralP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s27ExpressibleByBooleanLiteralP",
+  "title" : "Swift.ExpressibleByBooleanLiteral",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s27ExpressibleByIntegerLiteralP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s27ExpressibleByIntegerLiteralP",
+  "title" : "Swift.ExpressibleByIntegerLiteral",
+  "type" : "unresolvable"
+},
 "doc://AuthFoundation/s28CustomDebugStringConvertibleP": {
   "identifier" : "doc:\/\/AuthFoundation\/s28CustomDebugStringConvertibleP",
   "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s33ExpressibleByUnicodeScalarLiteralP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s33ExpressibleByUnicodeScalarLiteralP",
+  "title" : "Swift.ExpressibleByUnicodeScalarLiteral",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s43ExpressibleByExtendedGraphemeClusterLiteralP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s43ExpressibleByExtendedGraphemeClusterLiteralP",
+  "title" : "Swift.ExpressibleByExtendedGraphemeClusterLiteral",
   "type" : "unresolvable"
 },
 "doc://AuthFoundation/s8CopyableP": {

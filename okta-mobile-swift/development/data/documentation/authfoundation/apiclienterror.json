@@ -129,7 +129,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/invalidResponse",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/invalidUrl",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/missingRefreshSettings",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/missingResponse",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/missingResponse(request:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/statusCode(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/unknown",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/unsupportedContentType(_:)",
@@ -463,7 +463,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror\/missingrefreshsettings"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIClientError/missingResponse": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError/missingResponse(request:)": {
   "abstract" : [
     {
       "text" : "No response received from the server.",
@@ -482,14 +482,35 @@
     {
       "kind" : "identifier",
       "text" : "missingResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "request"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV",
+      "text" : "URLRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/missingResponse",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/missingResponse(request:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "APIClientError.missingResponse",
+  "title" : "APIClientError.missingResponse(request:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclienterror\/missingresponse"
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/missingresponse(request:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/statusCode(_:)": {
   "abstract" : [

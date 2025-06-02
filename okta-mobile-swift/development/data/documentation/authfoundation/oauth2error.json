@@ -126,19 +126,29 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/cannotComposeUrl",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/cannotRevoke(type:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/error(_:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/invalidContext",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/invalidUrl",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingClientConfiguration",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingLocationHeader",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingOAuth2ResponseKey(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingOpenIdConfiguration(attribute:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingRedirectUri",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingToken(type:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/multiple(errors:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/network(error:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/redirectUri(_:reason:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/redirectUriRequired",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/server(error:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/signatureInvalid"
       ],
       "title" : "Enumeration Cases"
+    },
+    {
+      "anchor" : "Enumerations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason"
+      ],
+      "title" : "Enumerations"
     },
     {
       "anchor" : "Default-Implementations",
@@ -454,6 +464,40 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2error\/localizederror-implementations"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/RedirectReason": {
+  "abstract" : [
+    {
+      "text" : "Describes the various reasons why a redirect URI may be invalid.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "RedirectReason"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "RedirectReason"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Error.RedirectReason",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/redirectreason"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/cannotComposeUrl": {
   "abstract" : [
     {
@@ -580,6 +624,34 @@
   "title" : "OAuth2Error.error(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2error\/error(_:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/invalidContext": {
+  "abstract" : [
+    {
+      "text" : "An operation was expecting a valid context state.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/invalidContext",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.invalidContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/invalidcontext"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/invalidUrl": {
   "abstract" : [
@@ -763,42 +835,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2error\/missingopenidconfiguration(attribute:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/missingRedirectUri": {
-  "abstract" : [
-    {
-      "text" : "An operation was performed which requires a ",
-      "type" : "text"
-    },
-    {
-      "code" : "redirect_uri",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ", but none was supplied to the client configuration.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "case"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "missingRedirectUri"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingRedirectUri",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "OAuth2Error.missingRedirectUri",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2error\/missingredirecturi"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/missingToken(type:)": {
   "abstract" : [
     {
@@ -972,6 +1008,109 @@
   "title" : "OAuth2Error.network(error:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2error\/network(error:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/redirectUri(_:reason:)": {
+  "abstract" : [
+    {
+      "text" : "The redirect URI is invalid or unsupported by the client.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "redirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "reason"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
+      "text" : "OAuth2Error"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO14RedirectReasonO",
+      "text" : "RedirectReason"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/redirectUri(_:reason:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.redirectUri(_:reason:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/redirecturi(_:reason:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/redirectUriRequired": {
+  "abstract" : [
+    {
+      "text" : "An operation was performed which requires a ",
+      "type" : "text"
+    },
+    {
+      "code" : "redirect_uri",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", but none was supplied to the client configuration.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "redirectUriRequired"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/redirectUriRequired",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.redirectUriRequired",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/redirecturirequired"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/server(error:)": {
   "abstract" : [

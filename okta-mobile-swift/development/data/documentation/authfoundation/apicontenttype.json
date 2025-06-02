@@ -90,7 +90,10 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/Se",
+        "doc:\/\/AuthFoundation\/SE",
         "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SH",
         "doc:\/\/AuthFoundation\/SY",
         "doc:\/\/AuthFoundation\/s8SendableP"
       ],
@@ -186,6 +189,16 @@
   ]
 , 
 "references": {
+"doc://AuthFoundation/SE": {
+  "identifier" : "doc:\/\/AuthFoundation\/SE",
+  "title" : "Swift.Encodable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/SH": {
+  "identifier" : "doc:\/\/AuthFoundation\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
 "doc://AuthFoundation/SQ": {
   "identifier" : "doc:\/\/AuthFoundation\/SQ",
   "title" : "Swift.Equatable",
@@ -194,6 +207,11 @@
 "doc://AuthFoundation/SY": {
   "identifier" : "doc:\/\/AuthFoundation\/SY",
   "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/Se": {
+  "identifier" : "doc:\/\/AuthFoundation\/Se",
+  "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
 "doc://AuthFoundation/documentation/AuthFoundation": {

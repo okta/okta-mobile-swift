@@ -2139,6 +2139,15 @@
                 "type" : "typealias"
               },
               {
+                "title" : "Type Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/oauth2client\/defaultsession",
+                "title" : "static var defaultSession: (any URLSessionProtocol)?",
+                "type" : "property"
+              },
+              {
                 "title" : "Enumerations",
                 "type" : "groupMarker"
               },
@@ -3209,6 +3218,11 @@
               {
                 "path" : "\/documentation\/authfoundation\/authenticationflow\/reset()",
                 "title" : "func reset()",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationflow\/reset(completion:)",
+                "title" : "func reset(completion: () -> Void)",
                 "type" : "method"
               }
             ],
@@ -6000,6 +6014,86 @@
                     "type" : "groupMarker"
                   },
                   {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-18i21",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-1dbma",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-1xe6t",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-23dvv",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-27ar3",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-2zi2g",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-3m0jf",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-4n7dz",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-4plb1",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-4rhvw",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-5f8h6",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-5jdi9",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-68s80",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-9cijw",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-9ew2s",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-sjfj",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
                     "path" : "\/documentation\/authfoundation\/claimcollection\/init(rawvalue:)-5inry",
                     "title" : "init(rawValue: Container.RawValue)",
                     "type" : "init"
@@ -6021,6 +6115,86 @@
                   {
                     "title" : "Instance Methods",
                     "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-111ud",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-36on1",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-3ozks",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-4jrui",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-5ozbf",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-5xy8o",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-6r2vx",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-7596o",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-7d9be",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-7fv7e",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-7kc7n",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-89pau",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-8i7f2",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-8tnu1",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-9jjfk",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/claimcollection\/encode(to:)-9up0a",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/authfoundation\/claimcollection\/hash(into:)-47kox",
@@ -6097,6 +6271,11 @@
                 "type" : "init"
               },
               {
+                "path" : "\/documentation\/authfoundation\/json\/init(_:)-2k5bl",
+                "title" : "init(some Encodable) throws",
+                "type" : "init"
+              },
+              {
                 "path" : "\/documentation\/authfoundation\/json\/init(_:)-4xbf4",
                 "title" : "init(String) throws",
                 "type" : "init"
@@ -6104,11 +6283,6 @@
               {
                 "path" : "\/documentation\/authfoundation\/json\/init(_:)-5zny4",
                 "title" : "init((any Sendable)?) throws",
-                "type" : "init"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/json\/init(_:)-83djb",
-                "title" : "init(Any) throws",
                 "type" : "init"
               },
               {
@@ -6125,34 +6299,18 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/authfoundation\/json\/subscript(_:)-2v37h",
-                "title" : "subscript(Int) -> Any?",
+                "path" : "\/documentation\/authfoundation\/json\/subscript(_:)-560k7",
+                "title" : "subscript(Int) -> JSON?",
                 "type" : "subscript"
               },
               {
-                "path" : "\/documentation\/authfoundation\/json\/subscript(_:)-6bjdj",
-                "title" : "subscript(String) -> Any?",
+                "path" : "\/documentation\/authfoundation\/json\/subscript(_:)-9ugbm",
+                "title" : "subscript(String) -> JSON?",
                 "type" : "subscript"
               },
               {
                 "title" : "Default Implementations",
                 "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/json\/debugdescription",
-                    "title" : "var debugDescription: String",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/json\/customdebugstringconvertible-implementations",
-                "title" : "CustomDebugStringConvertible Implementations",
-                "type" : "symbol"
               },
               {
                 "children" : [
@@ -6168,6 +6326,38 @@
                 ],
                 "path" : "\/documentation\/authfoundation\/json\/equatable-implementations",
                 "title" : "Equatable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/json\/init(extendedgraphemeclusterliteral:)",
+                    "title" : "init(extendedGraphemeClusterLiteral: Self.StringLiteralType)",
+                    "type" : "init"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/json\/expressiblebyextendedgraphemeclusterliteral-implementations",
+                "title" : "ExpressibleByExtendedGraphemeClusterLiteral Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/json\/init(unicodescalarliteral:)",
+                    "title" : "init(unicodeScalarLiteral: Self.ExtendedGraphemeClusterLiteralType)",
+                    "type" : "init"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/json\/expressiblebyunicodescalarliteral-implementations",
+                "title" : "ExpressibleByUnicodeScalarLiteral Implementations",
                 "type" : "symbol"
               }
             ],
@@ -7118,13 +7308,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-5cmar",
-                        "title" : "func api<T>(client: any APIClient, didSend: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
+                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
-                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-5cmar",
+                        "title" : "func api<T>(client: any APIClient, didSend: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       }
                     ],
@@ -7284,13 +7474,13 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
-                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
+                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
-                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
+                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
                         "type" : "method"
                       }
                     ],
@@ -7307,11 +7497,6 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
-                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
                         "title" : "func didSend(request: URLRequest, received: APIClientError)",
                         "type" : "method"
@@ -7319,6 +7504,11 @@
                       {
                         "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-4xpk5",
                         "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
+                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       }
                     ],
@@ -7474,13 +7664,41 @@
               {
                 "children" : [
                   {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/apicontenttype\/init(from:)",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
                     "title" : "Instance Properties",
                     "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/apicontenttype\/hashvalue",
+                    "title" : "var hashValue: Int",
+                    "type" : "property"
                   },
                   {
                     "path" : "\/documentation\/authfoundation\/apicontenttype\/rawvalue-swift.property",
                     "title" : "var rawValue: String",
                     "type" : "property"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/apicontenttype\/encode(to:)",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/apicontenttype\/hash(into:)",
+                    "title" : "func hash(into: inout Hasher)",
+                    "type" : "method"
                   }
                 ],
                 "path" : "\/documentation\/authfoundation\/apicontenttype\/rawrepresentable-implementations",
@@ -7662,6 +7880,15 @@
               {
                 "children" : [
                   {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/apirequestmethod\/init(from:)",
+                    "title" : "init(from: any Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
                     "title" : "Instance Properties",
                     "type" : "groupMarker"
                   },
@@ -7673,6 +7900,11 @@
                   {
                     "title" : "Instance Methods",
                     "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/apirequestmethod\/encode(to:)",
+                    "title" : "func encode(to: any Encoder) throws",
+                    "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/authfoundation\/apirequestmethod\/hash(into:)",
@@ -7709,12 +7941,12 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-3d3te",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-44rkc",
                         "title" : "var acceptsType: APIContentType?",
                         "type" : "property"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-44rkc",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-3d3te",
                         "title" : "var acceptsType: APIContentType?",
                         "type" : "property"
                       }
@@ -7768,12 +8000,12 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-824pc",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-96qjt",
                         "title" : "var contentType: APIContentType?",
                         "type" : "property"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-96qjt",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-824pc",
                         "title" : "var contentType: APIContentType?",
                         "type" : "property"
                       }
@@ -7890,17 +8122,17 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-8cybb",
-                        "title" : "func body() throws -> Data?",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/authfoundation\/apirequest\/body()-6rb14",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       },
                       {
                         "path" : "\/documentation\/authfoundation\/apirequest\/body()-2spui",
+                        "title" : "func body() throws -> Data?",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-8cybb",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       }
@@ -8369,8 +8601,8 @@
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/apiclienterror\/missingresponse",
-                "title" : "case missingResponse",
+                "path" : "\/documentation\/authfoundation\/apiclienterror\/missingresponse(request:)",
+                "title" : "case missingResponse(request: URLRequest?)",
                 "type" : "case"
               },
               {
@@ -8983,6 +9215,11 @@
                 "type" : "case"
               },
               {
+                "path" : "\/documentation\/authfoundation\/oauth2error\/invalidcontext",
+                "title" : "case invalidContext",
+                "type" : "case"
+              },
+              {
                 "path" : "\/documentation\/authfoundation\/oauth2error\/invalidurl",
                 "title" : "case invalidUrl",
                 "type" : "case"
@@ -9008,11 +9245,6 @@
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/oauth2error\/missingredirecturi",
-                "title" : "case missingRedirectUri",
-                "type" : "case"
-              },
-              {
                 "path" : "\/documentation\/authfoundation\/oauth2error\/missingtoken(type:)",
                 "title" : "case missingToken(type: Token.Kind)",
                 "type" : "case"
@@ -9028,6 +9260,16 @@
                 "type" : "case"
               },
               {
+                "path" : "\/documentation\/authfoundation\/oauth2error\/redirecturi(_:reason:)",
+                "title" : "case redirectUri(URL, reason: OAuth2Error.RedirectReason)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/oauth2error\/redirecturirequired",
+                "title" : "case redirectUriRequired",
+                "type" : "case"
+              },
+              {
                 "path" : "\/documentation\/authfoundation\/oauth2error\/server(error:)",
                 "title" : "case server(error: OAuth2ServerError)",
                 "type" : "case"
@@ -9036,6 +9278,113 @@
                 "path" : "\/documentation\/authfoundation\/oauth2error\/signatureinvalid",
                 "title" : "case signatureInvalid",
                 "type" : "case"
+              },
+              {
+                "title" : "Enumerations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/coderequired",
+                    "title" : "case codeRequired",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/hostorpath",
+                    "title" : "case hostOrPath",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/invalid",
+                    "title" : "case invalid",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/queryargument(_:)",
+                    "title" : "case queryArgument(String)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/scheme(_:)",
+                    "title" : "case scheme(String?)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/state(_:)",
+                    "title" : "case state(String?)",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/localizeddescription",
+                        "title" : "var localizedDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/error-implementations",
+                    "title" : "Error Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/failurereason",
+                        "title" : "var failureReason: String?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/helpanchor",
+                        "title" : "var helpAnchor: String?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/recoverysuggestion",
+                        "title" : "var recoverySuggestion: String?",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/localizederror-implementations",
+                    "title" : "LocalizedError Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/oauth2error\/redirectreason",
+                "title" : "OAuth2Error.RedirectReason",
+                "type" : "enum"
               },
               {
                 "title" : "Default Implementations",
@@ -9050,11 +9399,6 @@
                   {
                     "path" : "\/documentation\/authfoundation\/oauth2error\/!=(_:_:)",
                     "title" : "static func != (Self, Self) -> Bool",
-                    "type" : "op"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/oauth2error\/==(_:_:)",
-                    "title" : "static func == (OAuth2Error, OAuth2Error) -> Bool",
                     "type" : "op"
                   }
                 ],
@@ -9083,11 +9427,6 @@
                   {
                     "title" : "Instance Properties",
                     "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/oauth2error\/errordescription",
-                    "title" : "var errorDescription: String?",
-                    "type" : "property"
                   },
                   {
                     "path" : "\/documentation\/authfoundation\/oauth2error\/failurereason",
@@ -9852,133 +10191,6 @@
             "type" : "protocol"
           },
           {
-            "children" : [
-              {
-                "title" : "Initializers",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/weakcollection\/init(wrappedvalue:)",
-                "title" : "init(wrappedValue: Collect)",
-                "type" : "init"
-              },
-              {
-                "title" : "Instance Properties",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/weakcollection\/wrappedvalue",
-                "title" : "var wrappedValue: Collect",
-                "type" : "property"
-              },
-              {
-                "title" : "Default Implementations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Operators",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/weakcollection\/!=(_:_:)",
-                    "title" : "static func != (Self, Self) -> Bool",
-                    "type" : "op"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/weakcollection\/==(_:_:)",
-                    "title" : "static func == (WeakCollection<Collect, Element>, WeakCollection<Collect, Element>) -> Bool",
-                    "type" : "op"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/weakcollection\/equatable-implementations",
-                "title" : "Equatable Implementations",
-                "type" : "symbol"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Instance Methods",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/weakcollection\/hash(into:)",
-                    "title" : "func hash(into: inout Hasher)",
-                    "type" : "method"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/weakcollection\/hashable-implementations",
-                "title" : "Hashable Implementations",
-                "type" : "symbol"
-              }
-            ],
-            "path" : "\/documentation\/authfoundation\/weakcollection",
-            "title" : "WeakCollection",
-            "type" : "struct"
-          },
-          {
-            "children" : [
-              {
-                "title" : "Initializers",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/weak\/init(_:)",
-                "title" : "init?(Object?)",
-                "type" : "init"
-              },
-              {
-                "title" : "Instance Properties",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/weak\/wrappedvalue",
-                "title" : "var wrappedValue: Object?",
-                "type" : "property"
-              },
-              {
-                "title" : "Default Implementations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Operators",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/weak\/!=(_:_:)",
-                    "title" : "static func != (Self, Self) -> Bool",
-                    "type" : "op"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/weak\/equatable-implementations",
-                "title" : "Equatable Implementations",
-                "type" : "symbol"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Instance Methods",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/weak\/hash(into:)",
-                    "title" : "func hash(into: inout Hasher)",
-                    "type" : "method"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/weak\/hashable-implementations",
-                "title" : "Hashable Implementations",
-                "type" : "symbol"
-              }
-            ],
-            "path" : "\/documentation\/authfoundation\/weak",
-            "title" : "Weak",
-            "type" : "struct"
-          },
-          {
             "title" : "Classes",
             "type" : "groupMarker"
           },
@@ -9997,6 +10209,20 @@
                 "path" : "\/documentation\/authfoundation\/debugapirequestobserver\/showheaders",
                 "title" : "var showHeaders: Bool",
                 "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/debugapirequestobserver\/startobserving(client:)",
+                "title" : "func startObserving(client: OAuth2Client)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/debugapirequestobserver\/stopobserving(client:)",
+                "title" : "func stopObserving(client: OAuth2Client)",
+                "type" : "method"
               },
               {
                 "title" : "Type Properties",
@@ -10130,6 +10356,26 @@
             "path" : "\/documentation\/authfoundation\/migration",
             "title" : "Migration",
             "type" : "class"
+          },
+          {
+            "title" : "Protocols",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonrepresentable\/json",
+                "title" : "var json: JSON",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/jsonrepresentable",
+            "title" : "JSONRepresentable",
+            "type" : "protocol"
           },
           {
             "title" : "Extended Modules",
@@ -10359,7 +10605,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/resume(with:completion:)",
-                "title" : "func resume(with: URL, completion: (Result<Token, OAuth2Error>) -> Void) throws",
+                "title" : "func resume(with: URL, completion: (Result<Token, OAuth2Error>) -> Void)",
                 "type" : "method"
               },
               {
@@ -10450,114 +10696,6 @@
                 ],
                 "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/prompt",
                 "title" : "AuthorizationCodeFlow.Prompt",
-                "type" : "enum"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Enumeration Cases",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/invalidredirecturl",
-                    "title" : "case invalidRedirectUrl",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/invalidstate(_:)",
-                    "title" : "case invalidState(String?)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/missingauthorizationcode",
-                    "title" : "case missingAuthorizationCode",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/missingqueryarguments",
-                    "title" : "case missingQueryArguments",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/unexpectedscheme(_:)",
-                    "title" : "case unexpectedScheme(String?)",
-                    "type" : "case"
-                  },
-                  {
-                    "title" : "Default Implementations",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Operators",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/!=(_:_:)",
-                        "title" : "static func != (Self, Self) -> Bool",
-                        "type" : "op"
-                      },
-                      {
-                        "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/==(_:_:)",
-                        "title" : "static func == (AuthorizationCodeFlow.RedirectError, AuthorizationCodeFlow.RedirectError) -> Bool",
-                        "type" : "op"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/equatable-implementations",
-                    "title" : "Equatable Implementations",
-                    "type" : "symbol"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/localizeddescription",
-                        "title" : "var localizedDescription: String",
-                        "type" : "property"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/error-implementations",
-                    "title" : "Error Implementations",
-                    "type" : "symbol"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/errordescription",
-                        "title" : "var errorDescription: String?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/failurereason",
-                        "title" : "var failureReason: String?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/helpanchor",
-                        "title" : "var helpAnchor: String?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/recoverysuggestion",
-                        "title" : "var recoverySuggestion: String?",
-                        "type" : "property"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/localizederror-implementations",
-                    "title" : "LocalizedError Implementations",
-                    "type" : "symbol"
-                  }
-                ],
-                "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror",
-                "title" : "AuthorizationCodeFlow.RedirectError",
                 "type" : "enum"
               },
               {
@@ -10725,6 +10863,15 @@
                     "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/init(plist:)",
                     "title" : "init(plist: URL) throws",
                     "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/reset(completion:)",
+                    "title" : "func reset(completion: () -> Void)",
+                    "type" : "method"
                   }
                 ],
                 "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/authenticationflow-implementations",
@@ -11490,6 +11637,15 @@
                     "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/init(plist:)",
                     "title" : "init(plist: URL) throws",
                     "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/reset(completion:)",
+                    "title" : "func reset(completion: () -> Void)",
+                    "type" : "method"
                   }
                 ],
                 "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/authenticationflow-implementations",
@@ -11910,6 +12066,15 @@
                     "path" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init(plist:)",
                     "title" : "init(plist: URL) throws",
                     "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/reset(completion:)",
+                    "title" : "func reset(completion: () -> Void)",
+                    "type" : "method"
                   }
                 ],
                 "path" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/authenticationflow-implementations",
@@ -12146,6 +12311,15 @@
                     "path" : "\/documentation\/oktaoauth2\/resourceownerflow\/init(plist:)",
                     "title" : "init(plist: URL) throws",
                     "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/resourceownerflow\/reset(completion:)",
+                    "title" : "func reset(completion: () -> Void)",
+                    "type" : "method"
                   }
                 ],
                 "path" : "\/documentation\/oktaoauth2\/resourceownerflow\/authenticationflow-implementations",
@@ -12361,6 +12535,15 @@
                     "path" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init(plist:)",
                     "title" : "init(plist: URL) throws",
                     "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/sessiontokenflow\/reset(completion:)",
+                    "title" : "func reset(completion: () -> Void)",
+                    "type" : "method"
                   }
                 ],
                 "path" : "\/documentation\/oktaoauth2\/sessiontokenflow\/authenticationflow-implementations",
@@ -12576,6 +12759,15 @@
                     "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/init(plist:)",
                     "title" : "init(plist: URL) throws",
                     "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/reset(completion:)",
+                    "title" : "func reset(completion: () -> Void)",
+                    "type" : "method"
                   }
                 ],
                 "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/authenticationflow-implementations",
@@ -12762,13 +12954,8 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/oktaoauth2\/foundation\/url\/authorizationcode(redirecturi:state:)",
-                    "title" : "func authorizationCode(redirectUri: URL, state: String) throws -> String",
-                    "type" : "method"
-                  },
-                  {
-                    "path" : "\/documentation\/oktaoauth2\/foundation\/url\/oauth2servererror(redirecturi:)",
-                    "title" : "func oauth2ServerError(redirectUri: URL?) throws -> OAuth2ServerError?",
+                    "path" : "\/documentation\/oktaoauth2\/foundation\/url\/authorizationcode(state:configuration:)",
+                    "title" : "func authorizationCode(state: String, configuration: OAuth2Client.Configuration?) throws -> String",
                     "type" : "method"
                   }
                 ],
@@ -13688,6 +13875,15 @@
                     "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(plist:)",
                     "title" : "init(plist: URL) throws",
                     "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/reset(completion:)",
+                    "title" : "func reset(completion: () -> Void)",
+                    "type" : "method"
                   }
                 ],
                 "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/authenticationflow-implementations",

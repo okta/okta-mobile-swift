@@ -14,7 +14,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "Foundation",
-    "externalID" : "s:e:s:10Foundation3URLV10OktaOAuth2E13RedirectErrora",
+    "externalID" : "s:e:s:10Foundation3URLV10OktaOAuth2E17authorizationCode5state13configurationS2S_04AuthA00D6ClientC13ConfigurationVSgtKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -92,8 +92,7 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/Foundation\/URL\/authorizationCode(redirectUri:state:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/Foundation\/URL\/oauth2ServerError(redirectUri:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/Foundation\/URL\/authorizationCode(state:configuration:)"
       ],
       "title" : "Instance Methods"
     }
@@ -169,7 +168,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/foundation\/url"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/Foundation/URL/authorizationCode(redirectUri:state:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/Foundation/URL/authorizationCode(state:configuration:)": {
   "abstract" : [
     {
       "text" : "Convenience function to return an authorization code from the given URL.",
@@ -195,23 +194,6 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "redirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
       "text" : "state"
     },
     {
@@ -225,56 +207,11 @@
     },
     {
       "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/Foundation\/URL\/authorizationCode(redirectUri:state:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "authorizationCode(redirectUri:state:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/foundation\/url\/authorizationcode(redirecturi:state:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/Foundation/URL/oauth2ServerError(redirectUri:)": {
-  "abstract" : [
-    {
-      "text" : "Convenience function that extracts an OAuth2 server error from a URL",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "oauth2ServerError"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
+      "text" : ", "
     },
     {
       "kind" : "externalParam",
-      "text" : "redirectUri"
+      "text" : "configuration"
     },
     {
       "kind" : "text",
@@ -282,8 +219,17 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationV",
+      "text" : "Configuration"
     },
     {
       "kind" : "text",
@@ -299,20 +245,16 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation17OAuth2ServerErrorV",
-      "text" : "OAuth2ServerError"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/Foundation\/URL\/oauth2ServerError(redirectUri:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/Foundation\/URL\/authorizationCode(state:configuration:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "oauth2ServerError(redirectUri:)",
+  "title" : "authorizationCode(state:configuration:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/foundation\/url\/oauth2servererror(redirecturi:)"
+  "url" : "\/documentation\/oktaoauth2\/foundation\/url\/authorizationcode(state:configuration:)"
 }
 }
 }

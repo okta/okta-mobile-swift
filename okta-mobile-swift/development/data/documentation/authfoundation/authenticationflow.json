@@ -201,7 +201,8 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/reset()"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/reset()",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/reset(completion:)"
       ],
       "title" : "Instance Methods"
     }
@@ -811,6 +812,55 @@
   "title" : "reset()",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow\/reset()"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/reset(completion:)": {
+  "abstract" : [
+    {
+      "text" : "Resets the authentication flow to its original state, invoking the the completion block once it has reset.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "reset"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": () -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/reset(completion:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "reset(completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/reset(completion:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationMethod": {
   "abstract" : [
