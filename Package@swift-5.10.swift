@@ -34,7 +34,7 @@ extension Array<SwiftSetting> {
 }
 
 var package = Package(
-    name: "AuthFoundation",
+    name: "OktaClient",
     defaultLocalization: "en",
     platforms: [
         .iOS(.v13),

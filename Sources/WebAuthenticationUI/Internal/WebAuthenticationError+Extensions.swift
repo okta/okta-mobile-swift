@@ -13,6 +13,7 @@
 import Foundation
 import AuthenticationServices
 
+@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension WebAuthenticationError: LocalizedError {
     init(_ error: any Error) {
         let nsError = error as NSError

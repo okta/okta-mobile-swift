@@ -250,13 +250,6 @@ workflows:
           requires:
             - setup
 
-  semgrep:
-    jobs:
-      - platform-helpers/job-semgrep-scan:
-          name: semgrep-scan
-          context:
-            - static-analysis
-
   security-scan:
     jobs:
       - setup:

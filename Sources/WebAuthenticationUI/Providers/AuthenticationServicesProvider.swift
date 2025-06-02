@@ -16,36 +16,45 @@ import OktaOAuth2
 #if canImport(AuthenticationServices)
 import AuthenticationServices
 
-@available(iOS 12.0, macCatalyst 13.0, macOS 10.15, watchOS 6.2, tvOS 16.0, *)
+@available(iOS 12.0, macCatalyst 13.0, macOS 10.15, tvOS 16.0, visionOS 1.0, watchOS 6.2, *)
 protocol AuthenticationServicesProviderSession: NSObjectProtocol, Sendable {
     init(url URL: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler)
 
-    @available(iOS 13.0, macOS 10.15, *)
-    var presentationContextProvider: (any ASWebAuthenticationPresentationContextProviding)? { get set }
-
-    @available(iOS 13.0, macOS 10.15, watchOS 6.2, *)
-    var prefersEphemeralWebBrowserSession: Bool { get set }
-
-    @available(iOS 13.4, macCatalyst 13.4, macOS 10.15.4, watchOS 6.2, *)
+    @available(iOS 13.4, macCatalyst 13.4, macOS 10.15.4, watchOS 6.2, visionOS 1.0, tvOS 16.0, *)
     var canStart: Bool { get }
 
+    @available(iOS 13.0, macCatalyst 13.0, macOS 10.15, watchOS 6.2, visionOS 1.0, tvOS 16.0, *)
     func start() -> Bool
 
+    #if os(iOS) || os(macOS) || os(visionOS) || os(watchOS) || targetEnvironment(macCatalyst)
+    #if !os(watchOS)
+    @available(iOS 13.0, macCatalyst 13.0, macOS 10.15, visionOS 1.0, *)
+    var presentationContextProvider: (any ASWebAuthenticationPresentationContextProviding)? { get set }
+    #endif
+
+    @available(iOS 13.0, macCatalyst 13.0, macOS 10.15, watchOS 6.2, visionOS 1.0, *)
+    var prefersEphemeralWebBrowserSession: Bool { get set }
+
     func cancel()
+    #endif
 }
 
 #if swift(<6.0)
+@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension ASWebAuthenticationSession: @unchecked Sendable, AuthenticationServicesProviderSession {}
 #else
+@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension ASWebAuthenticationSession: @retroactive @unchecked Sendable, AuthenticationServicesProviderSession {}
 #endif
 
+@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 protocol WebAuthenticationProviderFactory {
     static func createWebAuthenticationProvider(for webAuth: WebAuthentication,
                                                 from window: WebAuthentication.WindowAnchor?,
                                                 usesEphemeralSession: Bool) async throws -> (any WebAuthenticationProvider)?
 }
 
+@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     private(set) var authenticationSession: (any AuthenticationServicesProviderSession)? {
         get {
@@ -57,7 +66,9 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
     }
 
     init(from window: WebAuthentication.WindowAnchor?, usesEphemeralSession: Bool = false) throws {
+        #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
         self.anchor = window
+        #endif
         self.usesEphemeralSession = usesEphemeralSession
         
         super.init()
@@ -75,15 +86,17 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
                                                            error: error))
                 })
             
-            if #available(iOS 13.0, macCatalyst 13.0, *) {
+            #if !os(watchOS) && !os(tvOS)
+            if #available(macCatalyst 13.0, macOS 10.15, visionOS 1.0, *) {
                 session.presentationContextProvider = self
                 session.prefersEphemeralWebBrowserSession = usesEphemeralSession
             }
-            
+            #endif
+
             self.authenticationSession = session
             
             Task { @MainActor in
-                if #available(iOS 13.4, macCatalyst 13.4, macOS 10.15.4, watchOS 6.2, *) {
+                if #available(iOS 13.4, macCatalyst 13.4, macOS 10.15.4, *) {
                     guard session.canStart else {
                         continuation.resume(throwing: WebAuthenticationError.cannotStartBrowserSession)
                         return
@@ -96,7 +109,9 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
     }
     
     func cancel() {
+        #if os(iOS) || os(macOS) || os(visionOS) || targetEnvironment(macCatalyst)
         authenticationSession?.cancel()
+        #endif
         authenticationSession = nil
     }
     
@@ -136,7 +151,11 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
     // MARK: Private properties / methods
     private static let lock = Lock()
     private let lock = Lock()
+
+    #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
     private let anchor: ASPresentationAnchor?
+    #endif
+
     private let usesEphemeralSession: Bool
 
     nonisolated(unsafe) private static var _authenticationSessionClass: any AuthenticationServicesProviderSession.Type = ASWebAuthenticationSession.self
@@ -145,11 +164,15 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
 
 // Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.
 #if swift(<6.0)
+@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension AuthenticationServicesProvider: @unchecked Sendable {}
 #else
+@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension AuthenticationServicesProvider: Sendable {}
 #endif
 
+#if os(iOS) || os(macOS) || os(visionOS) || targetEnvironment(macCatalyst)
+@available(iOS 13.0, macOS 10.15, visionOS 1.0, macCatalyst 13.0, *)
 extension AuthenticationServicesProvider: ASWebAuthenticationPresentationContextProviding {
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         if let anchor = anchor {
@@ -165,4 +188,5 @@ extension AuthenticationServicesProvider: ASWebAuthenticationPresentationContext
         }
     }
 }
+#endif
 #endif

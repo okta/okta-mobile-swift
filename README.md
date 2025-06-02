@@ -4,9 +4,9 @@
 [![API Reference](https://img.shields.io/badge/docs-reference-lightgrey.svg)][swiftdocs]
 
 
-# Okta Mobile SDK for Swift
+# Okta Client SDK for Swift
 
-The Okta Mobile SDK replaces our legacy mobile SDKs (such as okta-oidc-ios) and enables:
+The Okta Client SDK replaces our legacy mobile SDKs (such as okta-oidc-ios) and enables:
 
 * Streamlined development
 * Increased maintainability of the Okta portion of your code
