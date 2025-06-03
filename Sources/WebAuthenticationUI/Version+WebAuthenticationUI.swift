@@ -21,6 +21,6 @@ extension SDKVersion.Name {
 extension SDKVersion {
     @_documentation(visibility: private)
     public static let webAuthenticationUI: SDKVersion? = {
-        register(.webAuthenticationUI, version: "1.8.2")
+        register(.webAuthenticationUI, version: "2.0.0")
     }()
 }

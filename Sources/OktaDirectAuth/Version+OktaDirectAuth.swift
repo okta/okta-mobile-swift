@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2023-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -14,12 +14,12 @@
 
 extension SDKVersion.Name {
     @_documentation(visibility: internal)
-    public static let oauth2 = SDKVersion.Name("okta-oauth2-swift")
+    public static let directAuth = SDKVersion.Name("okta-directauth-swift")
 }
 
 extension SDKVersion {
     @_documentation(visibility: private)
-    public static let oauth2: SDKVersion? = {
-        register(.oauth2, version: "1.8.2")
+    public static let directAuth: SDKVersion? = {
+        register(.directAuth, version: "2.0.0")
     }()
 }

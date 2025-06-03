@@ -6,7 +6,7 @@ Add web-based sign in and single sign-on that uses the token exchange flow from 
 
 ## Overview
 
-The Okta Mobile SDK for Swift provides a libraries and utility classes that manage standard sign-on flows. The `WebAuthentication` class manages the web-based sign-on process, while the `TokenExchangeFlow` class manages the OAuth 2.0 token exchange flow used to implement Single Sign On (SSO).
+The Okta Client SDK for Swift provides a libraries and utility classes that manage standard sign-on flows. The `WebAuthentication` class manages the web-based sign-on process, while the `TokenExchangeFlow` class manages the OAuth 2.0 token exchange flow used to implement Single Sign On (SSO).
 
 The sample contains two different targets:
 
@@ -22,4 +22,4 @@ Update the `WebSignIn (iOS) > WebSignIn > Okta.plist` file with the information 
 ## Related Resources
 
 - For information on configuring the device SSO feature in your Okta Admin Console, see [Configure Native SSO for your Okta org](https://developer.okta.com/docs/guides/configure-native-sso/-/main/#configure-native-sso-for-your-okta-org).
-- [Okta Mobile SDK for Swift](https://github.com/okta/okta-mobile-swift)
+- [Okta Client SDK for Swift](https://github.com/okta/okta-mobile-swift)

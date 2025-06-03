@@ -10,16 +10,16 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import Foundation
+@_exported import AuthFoundation
 
 extension SDKVersion.Name {
     @_documentation(visibility: internal)
-    public static let authFoundation = SDKVersion.Name("okta-authfoundation-swift")
+    public static let oauth2 = SDKVersion.Name("okta-oauth2-swift")
 }
 
 extension SDKVersion {
     @_documentation(visibility: private)
-    public static let authFoundation: SDKVersion? = {
-        register(.authFoundation, version: "1.8.2")
+    public static let oauth2: SDKVersion? = {
+        register(.oauth2, version: "2.0.0")
     }()
 }

@@ -4,9 +4,9 @@
 [![API Reference](https://img.shields.io/badge/docs-reference-lightgrey.svg)][swiftdocs]
 
 
-# Okta Mobile SDK for Swift
+# Okta Client SDK for Swift
 
-The Okta Mobile SDK replaces our legacy mobile SDKs (such as okta-oidc-ios) and enables:
+The Okta Client SDK replaces our legacy mobile SDKs (such as okta-oidc-ios) and enables:
 
 * Streamlined development
 * Increased maintainability of the Okta portion of your code
@@ -26,7 +26,8 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 
 | Version | Status                             |
 | ------- | ---------------------------------- |
-| 1.8.2   | ✔️ Stable                             |
+| 1.8.2   | Retiring                           |
+| 2.0.0   | ✔️ Stable                             |
 
 The latest release can always be found on the [releases page][github-releases].
 

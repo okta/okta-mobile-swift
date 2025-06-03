@@ -72,7 +72,7 @@ commands:
               xcrun xcodebuild \
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
-                -workspace OktaMobileSDK.xcworkspace \
+                -workspace OktaClient.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
                 -destination "$DESTINATION" \
@@ -98,7 +98,7 @@ commands:
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
                 -resultBundlePath "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" \
-                -workspace OktaMobileSDK.xcworkspace \
+                -workspace OktaClient.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
                 -destination "$DESTINATION" \
@@ -249,13 +249,6 @@ workflows:
       - test-classicnativeauth-ios:
           requires:
             - setup
-
-  semgrep:
-    jobs:
-      - platform-helpers/job-semgrep-scan:
-          name: semgrep-scan
-          context:
-            - static-analysis
 
   security-scan:
     jobs:

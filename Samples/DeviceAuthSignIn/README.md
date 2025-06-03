@@ -6,7 +6,7 @@ Add sign-in using the OAuth 2.0 device authorization grant flow to your tvOS app
 
 ## Overview
 
-The Okta Mobile SDK for Swift provides a number of utility classes that manage standard sign-on flows. The `DeviceAuthorizationFlow` class manages the OAuth 2.0 device authorization code flow.
+The Okta Client SDK for Swift provides a number of utility classes that manage standard sign-on flows. The `DeviceAuthorizationFlow` class manages the OAuth 2.0 device authorization code flow.
 
 The sample contains two different targets:
 
@@ -22,9 +22,9 @@ Add the issuer URL for your Okta org and the client ID for your Okta Application
 
 ## See Also
 
-- OktaBrowserSignIn > OktaOAuth2 > [Introduction to Authentication Flows](https://okta.github.io/okta-mobile-swift/development/oktaoauth2/documentation/oktaoauth2/introductiontoauthenticationflows) in the Okta Mobile SDK documentation.
+- OktaBrowserSignIn > OktaOAuth2 > [Introduction to Authentication Flows](https://okta.github.io/okta-mobile-swift/development/oktaoauth2/documentation/oktaoauth2/introductiontoauthenticationflows) in the Okta Client SDK documentation.
 
 ## Related Resources
 
 - For information on configuring the device authorization grant flow in your Okta Admin Console, see [Configure Device Authorization Grant Flow](https://developer.okta.com/docs/guides/device-authorization-grant/main/#configure-the-authorization-server-policy-rule-for-device-authorization).
-- [Okta Mobile SDK for Swift](https://github.com/okta/okta-mobile-swift)
+- [Okta Client SDK for Swift](https://github.com/okta/okta-mobile-swift)

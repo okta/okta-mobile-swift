@@ -51,11 +51,14 @@ public enum WebAuthenticationError: Error {
 ///
 ///  > Important: If your application targets iOS 9.x-10.x, you should add the redirect URI for your client configuration to your app's supported URL schemes.  This is because users on devices older than iOS 11 will be prompted to sign in using `SFSafariViewController`, which does not allow your application to detect the final token redirect.
 @MainActor
+@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 public final class WebAuthentication {
     #if os(macOS)
     public typealias WindowAnchor = NSWindow
-    #else
+    #elseif os(iOS) || os(macOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
     public typealias WindowAnchor = UIWindow
+    #else
+    public typealias WindowAnchor = Void
     #endif
     
     /// Active / default shared instance of the ``WebAuthentication`` session.
@@ -295,6 +298,7 @@ public final class WebAuthentication {
     var provider: (any WebAuthenticationProvider)?
 }
 
+@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension WebAuthentication: WebAuthenticationProviderFactory {
     nonisolated static func createWebAuthenticationProvider(
         for webAuth: WebAuthentication,
@@ -305,6 +309,7 @@ extension WebAuthentication: WebAuthenticationProviderFactory {
     }
 }
 
+@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension WebAuthentication {
     /// Asynchronously initiates authentication from the given window.
     /// - Parameters:

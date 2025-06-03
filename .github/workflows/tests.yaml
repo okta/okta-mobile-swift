@@ -25,6 +25,8 @@ jobs:
       is_draft: ${{ steps.check_draft_status.outputs.is_draft }}
       tag_name: ${{ steps.check_master.outputs.tag_name }}
       changed_files: ${{ steps.list_changed_files.outputs.changed_files }}
+      has_duplicates: ${{ steps.report_summary.outputs.has_duplicates }}
+      duplicate_files: ${{ steps.list_changed_files.outputs.duplicate_paths_list }}
       has_source_changes: ${{ steps.check_source_changes.outputs.has_source_changes }}
       has_documentation_changes: ${{ steps.check_documentation_changes.outputs.has_documentation_changes }}
       has_secrets: ${{ steps.check_secrets.outputs.has_secrets }}
@@ -71,7 +73,7 @@ jobs:
     - name: Check for Source Changes
       id: check_source_changes
       run: |
-        if grep -qE '^(Sources/|Tests/|Package)' changes; then
+        if grep -qE '^(Sources/|Tests/|Package|\w+\.podspec)' changes; then
           echo "has_source_changes=true" >> $GITHUB_OUTPUT
         fi
     - name: Check for Documentation Changes
@@ -90,6 +92,7 @@ jobs:
           echo "has_secrets=true" >> $GITHUB_OUTPUT
         fi
     - name: Report preflight check summary
+      id: report_summary
       env:
         is_master: ${{ steps.check_master.outputs.is_master }}
         is_draft: ${{ steps.check_draft_status.outputs.is_draft }}
@@ -125,6 +128,7 @@ jobs:
         fi
 
         cat <<__EOF__ >> $GITHUB_STEP_SUMMARY
+        ## Preflight Status Checks
         | Preflight Check | Enabled |
         | --- | --- |
         | Is a draft PR | ${draft_status} |
@@ -135,6 +139,9 @@ jobs:
         | Documentation rebuild needed | ${doc_status} |
         | Has integration test secrets | ${secrets_status} |
         __EOF__
+
+        echo "## Duplicate Source Files" >> $GITHUB_STEP_SUMMARY
+        ./.github/workflows/preflight-check_duplicate_files.sh Sources >> $GITHUB_STEP_SUMMARY
     - name: Upload Preflight Artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -190,18 +197,16 @@ jobs:
       - XcodeBuild
     if: ${{ !github.event.pull_request.draft && needs.Preflight.outputs.has_source_changes == 'true' }}
     runs-on: macos-15-xlarge # Running on xlarge to use arm64 chipset
+    strategy:
+      matrix:
+        platform: [iOS, tvOS, watchOS, macOS, visionOS]
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
     timeout-minutes: 10
     steps:
     - uses: actions/checkout@master
-    - name: OktaAuthFoundation.podspec
-      run: pod lib lint --allow-warnings OktaAuthFoundation.podspec
-    # TODO: Enable dependent podspec linting once unreleased local spec version checking is fixed.
-    #- name: OktaOAuth2.podspec
-    #  run: pod lib lint --allow-warnings OktaOAuth2.podspec
-    #- name: OktaDirectAuth.podspec
-    #  run: pod lib lint --allow-warnings OktaDirectAuth.podspec
-    #- name: OktaWebAuthenticationUI.podspec
-    #  run: pod lib lint --allow-warnings OktaWebAuthenticationUI.podspec
+    - name: Lint Podspec
+      run: pod lib lint OktaClient.podspec --include-podspecs="**.podspec" --allow-warnings --verbose --platforms=${{ matrix.platform }}
 
   XcodeBuild:
     name: Xcode ${{ matrix.xcode_version }} on ${{ matrix.destination }}
