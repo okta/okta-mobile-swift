@@ -17,7 +17,7 @@
 		96AE3D02281B4EF40048E66B /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96AE3D01281B4EF40048E66B /* Okta.plist */; };
 		96C462AD28204AD000D732DC /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462AC28204AD000D732DC /* WebAuthenticationUI */; };
 		96C462AF28204AD800D732DC /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462AE28204AD800D732DC /* AuthFoundation */; };
-		96C462B128204AD800D732DC /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462B028204AD800D732DC /* OktaOAuth2 */; };
+		96C462B128204AD800D732DC /* OAuth2Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462B028204AD800D732DC /* OAuth2Auth */; };
 		96C462B32820A80600D732DC /* OktaOidc in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462B22820A80600D732DC /* OktaOidc */; };
 		96C462B42821B74B00D732DC /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3D07281B51350048E66B /* TokenDetailViewController.swift */; };
 		96C462B52821B74B00D732DC /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3D06281B51350048E66B /* ProfileTableViewController.swift */; };
@@ -70,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96C462B128204AD800D732DC /* OktaOAuth2 in Frameworks */,
+				96C462B128204AD800D732DC /* OAuth2Auth in Frameworks */,
 				96C462AF28204AD800D732DC /* AuthFoundation in Frameworks */,
 				96C462B32820A80600D732DC /* OktaOidc in Frameworks */,
 				96C462AD28204AD000D732DC /* WebAuthenticationUI in Frameworks */,
@@ -215,7 +215,7 @@
 			packageProductDependencies = (
 				96C462AC28204AD000D732DC /* WebAuthenticationUI */,
 				96C462AE28204AD800D732DC /* AuthFoundation */,
-				96C462B028204AD800D732DC /* OktaOAuth2 */,
+				96C462B028204AD800D732DC /* OAuth2Auth */,
 				96C462B22820A80600D732DC /* OktaOidc */,
 			);
 			productName = OIDCMigration;
@@ -622,9 +622,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AuthFoundation;
 		};
-		96C462B028204AD800D732DC /* OktaOAuth2 */ = {
+		96C462B028204AD800D732DC /* OAuth2Auth */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = OktaOAuth2;
+			productName = OAuth2Auth;
 		};
 		96C462B22820A80600D732DC /* OktaOidc */ = {
 			isa = XCSwiftPackageProductDependency;

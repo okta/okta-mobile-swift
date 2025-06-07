@@ -1,4 +1,4 @@
-# ``OktaOAuth2/TokenExchangeFlow``
+# ``OAuth2Auth/TokenExchangeFlow``
 
 @Metadata {
     @DocumentationExtension(mergeBehavior: append)

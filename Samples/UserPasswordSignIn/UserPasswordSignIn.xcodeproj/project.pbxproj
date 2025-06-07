@@ -10,7 +10,7 @@
 		96B3DBD227FF6F0F004C3BA7 /* main+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B3DBD127FF6F0F004C3BA7 /* main+Extensions.swift */; };
 		96D66FBE27EB870500AE89AD /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D66FBD27EB870500AE89AD /* main.swift */; };
 		96D66FC727EB87A200AE89AD /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 96D66FC627EB87A200AE89AD /* AuthFoundation */; };
-		96D66FC927EB87A200AE89AD /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 96D66FC827EB87A200AE89AD /* OktaOAuth2 */; };
+		96D66FC927EB87A200AE89AD /* OAuth2Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 96D66FC827EB87A200AE89AD /* OAuth2Auth */; };
 		96D66FCC27EB87CE00AE89AD /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 96D66FCB27EB87CE00AE89AD /* ArgumentParser */; };
 		96E98AB4282979A500CE251E /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AB3282979A500CE251E /* SignInTests.swift */; };
 		96E98ABC2829EE2C00CE251E /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98ABB2829EE2C00CE251E /* Command.swift */; };
@@ -55,7 +55,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96D66FCC27EB87CE00AE89AD /* ArgumentParser in Frameworks */,
-				96D66FC927EB87A200AE89AD /* OktaOAuth2 in Frameworks */,
+				96D66FC927EB87A200AE89AD /* OAuth2Auth in Frameworks */,
 				96D66FC727EB87A200AE89AD /* AuthFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,7 +142,7 @@
 			name = "UserPasswordSignIn (macOS)";
 			packageProductDependencies = (
 				96D66FC627EB87A200AE89AD /* AuthFoundation */,
-				96D66FC827EB87A200AE89AD /* OktaOAuth2 */,
+				96D66FC827EB87A200AE89AD /* OAuth2Auth */,
 				96D66FCB27EB87CE00AE89AD /* ArgumentParser */,
 			);
 			productName = "UserPasswordSignIn (macOS)";
@@ -476,9 +476,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AuthFoundation;
 		};
-		96D66FC827EB87A200AE89AD /* OktaOAuth2 */ = {
+		96D66FC827EB87A200AE89AD /* OAuth2Auth */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = OktaOAuth2;
+			productName = OAuth2Auth;
 		};
 		96D66FCB27EB87CE00AE89AD /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;

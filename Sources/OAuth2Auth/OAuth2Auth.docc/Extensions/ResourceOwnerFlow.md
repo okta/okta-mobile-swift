@@ -1,4 +1,4 @@
-# ``OktaOAuth2/ResourceOwnerFlow``
+# ``OAuth2Auth/ResourceOwnerFlow``
 
 @Metadata {
     @DocumentationExtension(mergeBehavior: append)

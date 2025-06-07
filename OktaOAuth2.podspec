@@ -1,5 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "OktaOAuth2"
+    s.module_name      = "OAuth2Auth"
     s.version          = "2.0.0"
     s.summary          = "Okta OAuth2 Authentication"
     s.description      = <<-DESC
@@ -23,8 +24,8 @@ Enables application developers to authenticate users utilizing a variety of OAut
     s.authors       = { "Okta Developers" => "developer@okta.com"}
     s.source        = { :git => "https://github.com/okta/okta-mobile-swift.git", :tag => s.version.to_s }
 
-    s.source_files  = "Sources/OktaOAuth2/**/*.swift"
-    s.resource_bundles = { "OktaOAuth2" => "Sources/OktaOAuth2/Resources/**/*" }
+    s.source_files  = "Sources/OAuth2Auth/**/*.swift"
+    s.resource_bundles = { "OAuth2Auth" => "Sources/OAuth2Auth/Resources/**/*" }
     s.swift_versions = ['5.10', '6.0']
     s.prefix_header_file = false
 

@@ -13,7 +13,7 @@
 import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
-@testable import OktaOAuth2
+@testable import OAuth2Auth
 
 final class URLExtensionTests: XCTestCase {
     func testAuthorizationCodeFromURL() throws {

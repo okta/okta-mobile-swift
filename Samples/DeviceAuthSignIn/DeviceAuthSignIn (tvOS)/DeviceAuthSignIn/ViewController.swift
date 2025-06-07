@@ -11,7 +11,7 @@
 //
 
 import UIKit
-import OktaOAuth2
+import OAuth2Auth
 import CoreImage.CIFilterBuiltins
 
 class ViewController: UIViewController {

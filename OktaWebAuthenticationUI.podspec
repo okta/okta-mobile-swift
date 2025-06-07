@@ -29,5 +29,5 @@ Authenticate users using web-based OIDC.
     s.swift_versions = ['5.10', '6.0']
     s.prefix_header_file = false
 
-    s.dependency "OktaOAuth2", "~> #{s.version.to_s}"
+    s.dependency "OAuth2Auth", "~> #{s.version.to_s}"
 end

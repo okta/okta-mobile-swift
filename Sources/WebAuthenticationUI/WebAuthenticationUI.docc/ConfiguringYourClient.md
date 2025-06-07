@@ -113,10 +113,10 @@ func application(_ application: UIApplication,
 
 ## Supply a custom URLSession
 
-If you need to have control over the URLSession instance that is used when authenticating a user, you can construct an `OktaOAuth2` `AuthorizationCodeFlow.Configuration` object and supply the custom session to the initializer.
+If you need to have control over the URLSession instance that is used when authenticating a user, you can construct an `OAuth2Auth` `AuthorizationCodeFlow.Configuration` object and supply the custom session to the initializer.
 
 ```swift
-import OktaOAuth2
+import OAuth2Auth
 
 let config = AuthorizationCodeFlow.Configuration(
     issuer: issuer,
@@ -134,7 +134,7 @@ If your application interacts with other OAuth2 API endpoints, and you want to u
 Alternatively, if you have an authorization code flow context from a previous authentication session, and you want to resume authenticating from that point (e.g. your user is signing in, and the application is closed unexpectedly during that process). This context can be supplied to the flow and can be resumed.
 
 ```swift
-import OktaOAuth2
+import OAuth2Auth
 
 let flow = AuthorizationCodeFlow(clientConfig,
                                  client: oauth2Client)

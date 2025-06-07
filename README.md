@@ -35,7 +35,7 @@ The latest release can always be found on the [releases page][github-releases].
 
 If you run into problems using the SDK, you can:
 
-* Review the API documentation for [AuthFoundation][authfoundation-docs], [OktaOAuth2][oktaoauth2-docs], and [WebAuthenticationUI][webauthenticationui-docs]
+* Review the API documentation for [AuthFoundation][authfoundation-docs], [OAuth2Auth][oauth2auth-docs], and [WebAuthenticationUI][webauthenticationui-docs]
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
 
@@ -45,13 +45,13 @@ This SDK consists of several different libraries, each with detailed documentati
 
 ```mermaid
   graph TD;
-    AuthFoundation-->OktaOAuth2;
-    OktaOAuth2-->WebAuthenticationUI;
+    AuthFoundation-->OAuth2Auth;
+    OAuth2Auth-->WebAuthenticationUI;
 ```
 
 - [AuthFoundation][authfoundation-docs] -- Common classes for managing credentials and used as a foundation for other libraries.
 - [OktaDirectAuth][oktadirectauth-docs] -- Direct Authentication capabilities for advanced browserless authentication (EA).
-- [OktaOAuth2][oktaoauth2-docs] -- OAuth2 authentication capabilities for advanced use-cases.
+- [OAuth2Auth][oauth2auth-docs] -- OAuth2 authentication capabilities for advanced use-cases.
 - [WebAuthenticationUI][webauthenticationui-docs] -- Authenticate users using web-based OIDC flows.
 
 This SDK enables you to build or support a myriad of different authentication flows and approaches.
@@ -119,10 +119,10 @@ Then install it into your project:
 pod install --repo-update
 ```
 
-If you are interested in only consuming the OktaOAuth2 library, instead use the following:
+If you are interested in only consuming the OAuth2Auth library, instead use the following:
 
 ```ruby
-pod 'OktaOAuth2'
+pod 'OAuth2Auth'
 ```
 
 If you are participating in the Early Access preview of the Okta Direct Authentication API, use the following:
@@ -179,7 +179,7 @@ The `signIn(from:)` function returns a token and, by using the `Credential` clas
 
 ### Authentication using Device Code-Flow Grant
 
-For headless devices, or devices that are difficult to use a keyboard (e.g. AppleTV), your application can use OktaOAuth2 directly with the `DeviceAuthorizationFlow` class. This will enable you to present a easy to remember code to your user, which they can use on a different device to authorize your application.
+For headless devices, or devices that are difficult to use a keyboard (e.g. AppleTV), your application can use OAuth2Auth directly with the `DeviceAuthorizationFlow` class. This will enable you to present a easy to remember code to your user, which they can use on a different device to authorize your application.
 
 Using this is simple:
 
@@ -463,7 +463,7 @@ We are happy to accept contributions and PRs! Please see the [contribution guide
 [github-releases]: https://github.com/okta/okta-mobile-swift/releases
 [authfoundation-docs]: https://okta.github.io/okta-mobile-swift/development/authfoundation/
 [oktadirectauth-docs]: https://okta.github.io/okta-mobile-swift/development/oktadirectauth/
-[oktaoauth2-docs]: https://okta.github.io/okta-mobile-swift/development/oktaoauth2/
+[oauth2auth-docs]: https://okta.github.io/okta-mobile-swift/development/oauth2auth/
 [webauthenticationui-docs]: https://okta.github.io/okta-mobile-swift/development/webauthenticationui/
 [Rate Limiting at Okta]: https://developer.okta.com/docs/api/getting_started/rate-limits
 [okta-library-versioning]: https://developer.okta.com/code/library-versions

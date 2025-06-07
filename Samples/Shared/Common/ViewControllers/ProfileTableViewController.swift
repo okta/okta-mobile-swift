@@ -13,7 +13,7 @@
 import UIKit
 
 #if os(tvOS)
-import OktaOAuth2
+import OAuth2Auth
 #elseif canImport(WebAuthenticationUI) && !WEB_AUTH_DISABLED
 import WebAuthenticationUI
 #else

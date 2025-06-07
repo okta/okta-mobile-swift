@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import OktaOAuth2
+import OAuth2Auth
 import UIKit
 
 final class SingleSignOnViewController: UIViewController {

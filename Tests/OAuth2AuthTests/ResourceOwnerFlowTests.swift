@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2024-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -13,14 +13,11 @@
 import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
-@testable import OktaOAuth2
+@testable import OAuth2Auth
 
-final class JWTAuthorizationFlowDelegateRecorder: AuthenticationDelegate {
-    typealias Flow = JWTAuthorizationFlow
-    
+class AuthenticationDelegateRecorder: AuthenticationDelegate {
     var token: Token?
     var error: OAuth2Error?
-    var url: URL?
     var started = false
     var finished = false
     
@@ -31,7 +28,7 @@ final class JWTAuthorizationFlowDelegateRecorder: AuthenticationDelegate {
     func authenticationFinished<Flow>(flow: Flow) {
         finished = true
     }
-    
+
     func authentication<Flow>(flow: Flow, received token: Token) {
         self.token = token
     }
@@ -41,25 +38,22 @@ final class JWTAuthorizationFlowDelegateRecorder: AuthenticationDelegate {
     }
 }
 
-
-final class JWTAuthorizationFlowTests: XCTestCase {
-    let issuer = URL(string: "https://example.okta.com")!
-    let redirectUri = URL(string: "com.example:/callback")!
+final class ResourceOwnerFlowSuccessTests: XCTestCase {
+    let issuer = URL(string: "https://example.com")!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
-    var flow: JWTAuthorizationFlow!
-    var jwt: JWT!
-    
+    var flow: ResourceOwnerFlow!
+
     override func setUpWithError() throws {
         client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scope: "profile openid",
+                              scope: "openid profile",
                               session: urlSession)
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
         Token.accessTokenValidator = MockTokenHashValidator()
 
-        urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
@@ -68,10 +62,7 @@ final class JWTAuthorizationFlowTests: XCTestCase {
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
-        
-        flow = client.jwtAuthorizationFlow()
-        
-        jwt = try JWT(JWT.mockIDToken)
+        flow = client.resourceOwnerFlow()
     }
     
     override func tearDownWithError() throws {
@@ -80,72 +71,54 @@ final class JWTAuthorizationFlowTests: XCTestCase {
     }
 
     func testWithDelegate() async throws {
-        let delegate = JWTAuthorizationFlowDelegateRecorder()
+        let delegate = AuthenticationDelegateRecorder()
         flow.add(delegate: delegate)
-        
+
+        // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertFalse(delegate.started)
-
-        let token = try await flow.start(with: jwt)
+        
+        // Authenticate
+        let token = try await flow.start(username: "username", password: "password")
         await MainActor.yield()
 
+        XCTAssertTrue(delegate.started)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertEqual(token, delegate.token)
         XCTAssertTrue(delegate.finished)
-        
-        XCTAssertEqual(urlSession.requests.count, 3)
-        
-        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.url?.lastPathComponent == "token"
-        }))
-
-        XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
-        XCTAssertEqual(request.httpBody?.urlFormEncoded, [
-            "assertion": JWT.mockIDToken,
-            "client_id": "clientId",
-            "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
-            "scope": "profile+openid",
-        ])
     }
-    
-    func testAuthenticationSucceeded() async throws {
+
+    func testWithBlocks() async throws {
+        // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
 
-        let expect = expectation(description: "start")
-        flow.start(with: jwt) { result in
-            if case let .failure(error) = result {
-                XCTFail(error.localizedDescription)
+        // Authenticate
+        let wait = expectation(description: "resume")
+        nonisolated(unsafe) var token: Token?
+        flow.start(username: "username", password: "password") { result in
+            switch result {
+            case .success(let resultToken):
+                token = resultToken
+            case .failure(let error):
+                XCTAssertNil(error)
             }
-
-            expect.fulfill()
+            wait.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1)
+        await fulfillment(of: [wait], timeout: 1)
 
         XCTAssertFalse(flow.isAuthenticating)
-        XCTAssertEqual(urlSession.requests.count, 3)
-
-        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.url?.lastPathComponent == "token"
-        }))
-
-        XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
-        XCTAssertEqual(request.bodyString, "assertion=\(JWT.mockIDToken)&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=profile+openid")
+        XCTAssertNotNil(token)
     }
-    
-    func testAsyncAuthenticationSucceeded() async throws {
+
+    func testWithAsync() async throws {
+        // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
 
-        let _ = try await flow.start(with: jwt)
+        // Authenticate
+        let token = try await flow.start(username: "username", password: "password")
 
         XCTAssertFalse(flow.isAuthenticating)
-        XCTAssertEqual(urlSession.requests.count, 3)
-        
-        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.url?.lastPathComponent == "token"
-        }))
-
-        XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
-        XCTAssertEqual(request.bodyString, "assertion=\(JWT.mockIDToken)&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=profile+openid")
+        XCTAssertNotNil(token)
     }
 }

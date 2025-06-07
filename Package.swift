@@ -39,7 +39,7 @@ var package = Package(
     ],
     products: [
         .library(name: "AuthFoundation", targets: ["AuthFoundation"]),
-        .library(name: "OktaOAuth2", targets: ["OktaOAuth2"]),
+        .library(name: "OAuth2Auth", targets: ["OAuth2Auth"]),
         .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
         .library(name: "OktaIdxAuth", targets: ["OktaIdxAuth"])
     ],
@@ -51,7 +51,7 @@ var package = Package(
                 dependencies: [],
                 resources: [.process("Resources")],
                 swiftSettings: .libraryTarget),
-        .target(name: "OktaOAuth2",
+        .target(name: "OAuth2Auth",
                 dependencies: [
                     .target(name: "AuthFoundation")
                 ],
@@ -81,8 +81,8 @@ var package = Package(
                         .copy("ConfigResources"),
                     ],
                     swiftSettings: .testTarget),
-        .testTarget(name: "OktaOAuth2Tests",
-                    dependencies: ["OktaOAuth2", "TestCommon"],
+        .testTarget(name: "OAuth2AuthTests",
+                    dependencies: ["OAuth2Auth", "TestCommon"],
                     resources: [ .copy("MockResponses") ],
                     swiftSettings: .testTarget),
         .testTarget(name: "OktaDirectAuthTests",
@@ -101,7 +101,7 @@ var package = Package(
 package.targets.append(contentsOf: [
     .target(name: "WebAuthenticationUI",
             dependencies: [
-                .target(name: "OktaOAuth2")
+                .target(name: "OAuth2Auth")
             ],
             resources: [.process("Resources")],
             swiftSettings: .libraryTarget),
