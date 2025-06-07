@@ -41,6 +41,7 @@ var package = Package(
         .library(name: "AuthFoundation", targets: ["AuthFoundation"]),
         .library(name: "OktaOAuth2", targets: ["OktaOAuth2"]),
         .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
+        .library(name: "OktaIdxAuth", targets: ["OktaIdxAuth"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.0")
@@ -57,6 +58,12 @@ var package = Package(
                 resources: [.process("Resources")],
                 swiftSettings: .libraryTarget),
         .target(name: "OktaDirectAuth",
+                dependencies: [
+                    .target(name: "AuthFoundation")
+                ],
+                resources: [.process("Resources")],
+                swiftSettings: .libraryTarget),
+        .target(name: "OktaIdxAuth",
                 dependencies: [
                     .target(name: "AuthFoundation")
                 ],
@@ -81,6 +88,10 @@ var package = Package(
         .testTarget(name: "OktaDirectAuthTests",
                     dependencies: ["OktaDirectAuth", "TestCommon"],
                     resources: [ .copy("MockResponses") ],
+                    swiftSettings: .testTarget),
+        .testTarget(name: "OktaIdxAuthTests",
+                    dependencies: ["OktaIdxAuth", "TestCommon"],
+                    resources: [.copy("MockResponses")],
                     swiftSettings: .testTarget),
     ],
     swiftLanguageModes: [.v6]

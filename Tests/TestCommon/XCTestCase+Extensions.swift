@@ -15,7 +15,7 @@ import XCTest
 @testable import AuthFoundation
 
 enum TestError: Error {
-    case noBundleResourceFound
+    case noBundleResourceFound(bundle: Bundle, filename: String, folder: String?)
 }
 
 public extension XCTest {
@@ -131,7 +131,7 @@ public extension XCTestCase {
                                    withExtension: fileExtension,
                                    subdirectory: folder)
         else {
-            throw TestError.noBundleResourceFound
+            throw TestError.noBundleResourceFound(bundle: bundle, filename: filename, folder: folder)
         }
         
         return url
@@ -143,7 +143,7 @@ public extension XCTestCase {
     }
     
     func data(for file: URL) throws -> Data {
-        return try Data(contentsOf: file)
+        try Data(contentsOf: file)
     }
     
     func decode<T>(type: T.Type, _ file: URL) throws -> T where T : Decodable & JSONDecodable {
@@ -157,6 +157,10 @@ public extension XCTestCase {
     }
 
     func decode<T>(type: T.Type, _ json: String) throws -> T where T : Decodable & JSONDecodable {
+        try decode(type: type, data(for: json))
+    }
+
+    func decode<T>(type: T.Type, _ json: Data) throws -> T where T : Decodable & JSONDecodable {
         try decode(type: type, decoder: T.jsonDecoder, json)
     }
 
@@ -165,10 +169,37 @@ public extension XCTestCase {
     }
 
     func decode<T>(type: T.Type, decoder: JSONDecoder, _ json: String) throws -> T where T : Decodable {
-        let jsonData = data(for: json)
-        return try decoder.decode(T.self, from: jsonData)
+        try decode(type: type, decoder: decoder, data(for: json))
     }
-    
+
+    func decode<T>(type: T.Type, decoder: JSONDecoder, _ json: Data) throws -> T where T : Decodable {
+        return try decoder.decode(T.self, from: json)
+    }
+
+//    func decode<T>(type: T.Type, _ file: URL) throws -> T where T : Decodable & JSONDecodable {
+//        try decode(type: type, decoder: T.jsonDecoder, try data(for: file))
+//    }
+//
+//    func decode<T>(type: T.Type, _ file: URL, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
+//        try test(try decode(type: type, decoder: T.jsonDecoder, try data(for: file)))
+//    }
+//
+//    func decode<T>(type: T.Type, _ json: String) throws -> T where T : Decodable & JSONDecodable {
+//        try decode(type: type, decoder: T.jsonDecoder, data(for: json))
+//    }
+//
+//    func decode<T>(type: T.Type, _ json: String, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
+//        try test(try decode(type: type, decoder: T.jsonDecoder, data(for: json)))
+//    }
+//
+//    func decode<T>(type: T.Type, decoder: JSONDecoder = JSONDecoder(), _ json: String) throws -> T where T : Decodable {
+//        try decode(type: type, decoder: decoder, data(for: json))
+//    }
+//
+//    func decode<T>(type: T.Type, decoder: JSONDecoder = JSONDecoder(), _ json: Data) throws -> T where T : Decodable {
+//        try decoder.decode(T.self, from: json)
+//    }
+
     func perform(queueCount: Int = 5, iterationCount: Int = 4, _ block: @Sendable @escaping () async throws -> Void) rethrows {
         let queues: [DispatchQueue] = (0..<queueCount).map { queueNumber in
             DispatchQueue(label: "Async queue \(queueNumber)")

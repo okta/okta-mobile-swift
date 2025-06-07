@@ -56,9 +56,20 @@ NOTE: This Swift-based pod requires `use_frameworks!` in your Podfile.
         ss.watchos.deployment_target  = '7.0'
         ss.visionos.deployment_target = '1.0'
         ss.osx.deployment_target      = '10.15'
-       
+
         ss.dependency 'OktaClient/AuthFoundation'
         ss.dependency 'OktaDirectAuth', "~> #{s.version.to_s}"
+    end
+
+    s.subspec 'IdxAuth' do |ss|
+        ss.ios.deployment_target      = '13.0'
+        ss.tvos.deployment_target     = '16.0'
+        ss.watchos.deployment_target  = '7.0'
+        ss.visionos.deployment_target = '1.0'
+        ss.osx.deployment_target      = '10.15'
+       
+        ss.dependency 'OktaClient/AuthFoundation'
+        ss.dependency 'OktaIdxAuth', "~> #{s.version.to_s}"
     end
   
     s.subspec 'WebAuthenticationUI' do |ss|

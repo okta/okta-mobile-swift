@@ -1,5 +1,10 @@
-//
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>FILEHEADER</key>
+		<string>
+// Copyright (c) ___YEAR___-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -8,22 +13,6 @@
 // WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //
 // See the License for the specific language governing permissions and limitations under the License.
-//
-
-E2E_USERNAME=
-E2E_PASSWORD=
-E2E_OTP_SECRET=
-E2E_MFA_USERNAME=
-E2E_MFA_PASSWORD=
-E2E_MFA_OTP_SECRET=
-E2E_DOMAIN=
-E2E_CLIENT_ID=
-E2E_SCOPES=
-
-// API keys to connect to, and configure, a test org
-OKTA_API_KEY =
-OKTA_DOMAIN =
-
-// Username and password used for social auth tests
-SOCIAL_AUTH_USERNAME =
-SOCIAL_AUTH_PASSWORD =
+//</string>
+</dict>
+</plist>

@@ -287,6 +287,21 @@ jobs:
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaOAuth2 \
           -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+    - name: Build OktaIdxAuth
+      run: |
+        set -o pipefail && xcrun xcodebuild build-for-testing \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
+          -scheme OktaIdxAuth \
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+    - name: Test OktaIdxAuth
+      run: |
+        set -o pipefail && xcrun xcodebuild test-without-building \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+          -derivedDataPath .build/DerivedData \
+          -clonedSourcePackagesDirPath .build/ClonedSources \
+          -scheme OktaIdxAuth \
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Test OktaOAuth2
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
@@ -347,6 +362,13 @@ jobs:
           -derivedDataPath ~/Build/DerivedData \
           -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -scheme OktaDirectAuth | xcbeautify --renderer github-actions
+    - name: OktaIdxAuth
+      run: |
+        set -o pipefail
+        xcodebuild docbuild \
+          -derivedDataPath ~/Build/DerivedData \
+          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
+          -scheme OktaIdxAuth | xcbeautify --renderer github-actions
     - name: OktaOAuth2
       run: |
         set -o pipefail
@@ -377,6 +399,11 @@ jobs:
       with:
         name: OktaDirectAuth.doccarchive.zip
         path: ~/Build/OktaDirectAuth.doccarchive.zip
+    - name: Upload OktaIdxAuth DocC Archive
+      uses: actions/upload-artifact@v4
+      with:
+        name: OktaIdxAuth.doccarchive.zip
+        path: ~/Build/OktaIdxAuth.doccarchive.zip
     - name: Upload OktaOAuth2 DocC Archive
       uses: actions/upload-artifact@v4
       with:

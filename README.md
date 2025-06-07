@@ -187,9 +187,9 @@ Using this is simple:
 
 ```swift
 let flow = DeviceAuthorizationFlow(
-    issuer: URL(string: "https://example.okta.com")!,
+    issuerURL: URL(string: "https://example.okta.com")!,
     clientId: "abc123client",
-    scopes: "openid offline_access email profile")
+    scope: "openid offline_access email profile")
 ```
 
 2. Start an authentication session to receive the code and authorize URL to present to your user.
@@ -212,9 +212,9 @@ When using the `device_sso` scope, your application can receive a "device secret
 
 ```swift
 let flow = TokenExchangeFlow(
-    issuer: URL(string: "https://example.okta.com")!,
+    issuerURL: URL(string: "https://example.okta.com")!,
     clientId: "abc123client",
-    scopes: "openid offline_access email profile",
+    scope: "openid offline_access email profile",
     audience: .default)
 
 let token = try await flow.start(with: [
@@ -230,9 +230,9 @@ For simple authentication use-cases, you can use the `ResourceOwnerFlow` class t
 > *NOTE:* The ResourceOwnerFlow class has been marked as deprecated, since its functionality is being replaced with the more comprehensive OktaDirectAuth library.
 
 ```swift
-let flow = ResourceOwnerFlow(issuer: URL(string: "https://example.okta.com")!,
+let flow = ResourceOwnerFlow(issuerURL: URL(string: "https://example.okta.com")!,
                              clientId: "abc123client",
-                             scopes: "openid offline_access email profile")
+                             scope: "openid offline_access email profile")
 let token = try await flow.start(username: "jane.doe", password: "secretPassword")
 ```
 
@@ -243,9 +243,9 @@ For simple authentication use-cases, you can use the `ResourceOwnerFlow` class t
 > **NOTE:** The Okta Direct Authentication API is currently marked as Early Access (EA) and is not generally available yet.
 
 ```swift
-let flow = DirectAuthenticationFlow(issuer: URL(string: "https://example.okta.com")!,
+let flow = DirectAuthenticationFlow(issuerURL: URL(string: "https://example.okta.com")!,
                                     clientId: "abc123client",
-                                    scopes: "openid offline_access email profile")
+                                    scope: "openid offline_access email profile")
 switch try await flow.start("jane.doe@example.com", with: .password("secretPassword")) {
     case .success(let token):
         // Store the token
@@ -256,6 +256,19 @@ switch try await flow.start("jane.doe@example.com", with: .password("secretPassw
 
 For more information, see the [OktaDirectAuth API documentation][oktadirectauth-docs].
 
+### Authentication using the Okta Identity Engine using IDX
+
+For more advanced native authentication use-cases, you can use the `InteractionCodeFlow` class to authenticate using the Okta Identity Engine.
+
+```swift
+let flow = try InteractionCodeFlow(issuerURL: URL(string: "https://example.okta.com")!,
+                                   clientId: "abc123client",
+                                   scope: "openid offline_access email profile",
+                                   redirectUri: URL(string: "my.app:/callback"))
+```
+
+For more information, see the [OktaIdxAuth API documentation][oktaidxauth-docs].
+ 
 ## Storing and using tokens
 
 Once your user has authenticated and you have a `Token` object, your application can store and use those credentials. The most direct approach is to use the `Credential.store(_:tags:security:)` function.
