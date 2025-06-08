@@ -2,15 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>issuer</key>
+	<key>issuer_url</key>
 	<string>https://{orgDomain}/oauth2/default</string>
-	<key>clientId</key>
+	<key>client_id</key>
 	<string>{clientId}</string>
-	<key>scopes</key>
-	<string>openid profile offline_access device_sso</string>
-	<key>redirectUri</key>
+	<key>scope</key>
+	<string>openid profile offline_access</string>
+	<key>redirect_uri</key>
 	<string>{appScheme}:/callback</string>
-	<key>logoutRedirectUri</key>
+	<key>logout_redirect_uri</key>
 	<string>{appScheme}:/</string>
 </dict>
 </plist>

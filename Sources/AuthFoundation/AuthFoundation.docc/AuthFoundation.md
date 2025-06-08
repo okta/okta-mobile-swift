@@ -51,6 +51,7 @@ You can use AuthFoundation when you want to:
 - ``JSONClaimContainer``
 - ``JSON``
 - ``AnyJSON``
+- ``JSONRepresentable``
 - ``ClaimConvertable``
 - ``IsClaim``
 - ``Expires``
@@ -113,12 +114,14 @@ You can use AuthFoundation when you want to:
 
 ### Migration and versioning
 
+- ``Migration``
 - ``SDKVersion``
 - ``SDKVersionMigrator``
 
-### Internals and mocking
+### Internals and Debugging
 
 - ``DelegateCollection``
+- ``DebugAPIRequestObserver``
 - ``URLSessionDataTaskProtocol``
 - ``URLSessionProtocol``
 - ``UsesDelegateCollection``

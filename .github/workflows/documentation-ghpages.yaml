@@ -48,7 +48,7 @@ jobs:
         done
 
         echo "Generating combined documentation"
-        swift package --allow-writing-to-directory docs generate-documentation \
+        swift package --allow-writing-to-directory docs generate documentation \
             --disable-indexing \
             --transform-for-static-hosting \
             --hosting-base-path "okta-mobile-swift/$VERSION" \

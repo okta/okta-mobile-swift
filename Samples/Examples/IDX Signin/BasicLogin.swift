@@ -18,9 +18,9 @@ import OktaIdxAuth
 /// Example:
 ///
 /// ```swift
-/// let auth = BasicLogin(issuer: URL(string: "https://example.okta.com/oauth2/default")!,
+/// let auth = BasicLogin(issuerURL: URL(string: "https://example.okta.com/oauth2/default")!,
 ///                       clientId: "0oabcde12345",
-///                       scopes: "openid profile offline_access",
+///                       scope: "openid profile offline_access",
 ///                       redirectUri: URL(string: "com.example.myapp:/callback")!)
 /// let token = try await auth.login(username: "user@example.com",
 ///                                  password: "secretPassword")
@@ -29,15 +29,15 @@ import OktaIdxAuth
 public class BasicLogin {
     let flow: InteractionCodeFlow
     
-    public init(issuer: URL,
+    public init(issuerURL: URL,
                 clientId: String,
-                scopes: String,
+                scope: String,
                 redirectUri: URL)
     {
         // Initializes the flow which can be used later in the process.
-        flow = InteractionCodeFlow(issuer: issuer,
+        flow = InteractionCodeFlow(issuerURL: issuerURL,
                                    clientId: clientId,
-                                   scopes: scopes,
+                                   scope: scope,
                                    redirectUri: redirectUri)
     }
     
@@ -97,7 +97,7 @@ public class BasicLogin {
         }
         
         // Exchange the successful response with a token.
-        return try await response.exchangeCode()
+        return try await response.finish()
     }
     
     public enum LoginError: Error {

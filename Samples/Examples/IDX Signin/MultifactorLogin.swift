@@ -104,21 +104,21 @@ public class MultifactorLogin {
     
     /// Initializer used to create a multifactor login session.
     /// - Parameters:
-    ///   - issuer: The authorization server issuer URL.
+    ///   - issuerURL: The authorization server issuer URL.
     ///   - clientId: The application's client ID.
-    ///   - scopes: The scopes to use for the resulting token.
+    ///   - scope: The scopes to use for the resulting token.
     ///   - redirectUri: The application's redirect URI.
     ///   - stepHandler: Closure used when input from the user is needed.
-    public init(issuer: URL,
+    public init(issuerURL: URL,
                 clientId: String,
-                scopes: String,
+                scope: String,
                 redirectUri: URL,
                 stepHandler: @escaping (Step) -> Void)
     {
         // Initializes the flow which can be used later in the process.
-        flow = InteractionCodeFlow(issuer: issuer,
+        flow = InteractionCodeFlow(issuerURL: issuerURL,
                                    clientId: clientId,
-                                   scopes: scopes,
+                                   scope: scope,
                                    redirectUri: redirectUri)
         self.stepHandler = stepHandler
         
@@ -135,7 +135,7 @@ public class MultifactorLogin {
         self.password = password
         self.completion = completion
         
-        flow.start(completion: nil)
+        flow.start() { _ in }
     }
     
     /// Public function used to initiate self-service user registration.
@@ -150,7 +150,7 @@ public class MultifactorLogin {
         self.profile = profile
         self.completion = completion
         
-        flow.start(completion: nil)
+        flow.start() { _ in }
     }
     
     /// Public function to initiate a password reset for an existing user.
@@ -163,7 +163,7 @@ public class MultifactorLogin {
         self.username = username
         self.completion = completion
        
-        flow.start(completion: nil)
+        flow.start() { _ in }
     }
     
     /// Method called by you to select an authenticator. This can be used in response to a `Step.chooseFactor` stepHandler call.
@@ -181,9 +181,9 @@ public class MultifactorLogin {
                 field.authenticator?.type == factor
             })
             authenticatorsField.selectedOption = factorField
-            remediation.proceed(completion: nil)
+            remediation.proceed() { _ in }
         } else if let skipRemediation = response?.remediations[.skip] {
-            skipRemediation.proceed(completion: nil)
+            skipRemediation.proceed() { _ in }
         } else {
             finish(with: .cannotProceed)
             return
@@ -223,7 +223,7 @@ public class MultifactorLogin {
         authenticatorsField.selectedOption = methodOption
         factorField["phoneNumber"]?.value = phoneNumber
 
-        remediation.proceed(completion: nil)
+        remediation.proceed() { _ in }
     }
     
     /// Method used to verify a factor.
@@ -238,7 +238,7 @@ public class MultifactorLogin {
         }
         
         remediation.credentials?.passcode?.value = code
-        remediation.proceed(completion: nil)
+        remediation.proceed() { _ in }
     }
     
     /// Enumeration representing the different actionable steps that the
@@ -283,7 +283,7 @@ extension MultifactorLogin: InteractionCodeFlowDelegate {
         
         // If a response is successful, immediately exchange it for a token.
         guard !response.isLoginSuccessful else {
-            response.exchangeCode(completion: nil)
+            response.finish() { _ in }
             return
         }
         
@@ -291,7 +291,7 @@ extension MultifactorLogin: InteractionCodeFlowDelegate {
         if let remediation = response.remediations[.selectEnrollProfile],
            profile != nil
         {
-            remediation.proceed(completion: nil)
+            remediation.proceed() { _ in }
             return
         }
         
@@ -312,7 +312,7 @@ extension MultifactorLogin: InteractionCodeFlowDelegate {
            (remediation.type == .identify || remediation.type == .challengeAuthenticator),
            let passwordAuthenticator = response.authenticators.current as? Authenticator.Password
         {
-            passwordAuthenticator.recover(completion: nil)
+            passwordAuthenticator.recover() { _ in }
             return
         }
 
@@ -322,8 +322,8 @@ extension MultifactorLogin: InteractionCodeFlowDelegate {
         case .identifyRecovery:
             remediation.identifier?.value = username
             remediation.credentials?.passcode?.value = password
-            remediation.proceed(completion: nil)
-            
+            remediation.proceed() { _ in }
+
         // The challenge authenticator remediation is used to request a passcode
          // of some sort from the user, either the user's password, or an
          // authenticator verification code.
@@ -341,7 +341,7 @@ extension MultifactorLogin: InteractionCodeFlowDelegate {
             case .password:
                 if let password = password {
                     remediation.credentials?.passcode?.value = password
-                    remediation.proceed(completion: nil)
+                    remediation.proceed() { _ in }
                 } else {
                     fallthrough
                 }
@@ -395,7 +395,7 @@ extension MultifactorLogin: InteractionCodeFlowDelegate {
             remediation["userProfile.firstName"]?.value = profile?[.firstName]
             remediation["userProfile.lastName"]?.value = profile?[.lastName]
             remediation["userProfile.email"]?.value = username
-            remediation.proceed(completion: nil)
+            remediation.proceed() { _ in }
 
         default:
             finish(with: .cannotProceed)

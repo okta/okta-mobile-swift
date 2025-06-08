@@ -6,14 +6,14 @@
 
 # Okta Client SDK for Swift
 
-The Okta Client SDK replaces our legacy mobile SDKs (such as okta-oidc-ios) and enables:
+The Okta Client SDK represents a collection of SDKs for different languages, each of which itself is a modular ecosystem of libraries that build upon one-another to enable client applications to:
 
-* Streamlined development
-* Increased maintainability of the Okta portion of your code
-* Easier feature expansion
-* Support for use cases that were previously difficult or impractical to implement.
+* Authenticate clients with an Authorization Server (AS) using a variety of authentication flows.
+* Flexibly store and manage the resulting tokens enabling a wide variety of use-cases.
+* Transparently persist and manage the lifecycle of those tokens through authentication, refresh, and revocation.
+* Secure applications and tokens, using best practices, by default.
 
-This new SDK is built as a platform, enabling you to choose the components you need for your app.
+This SDK emphasizes security, developer experience, and customization of the SDK's core capabilities. It is built as a platform, enabling you to choose the individual library components you need for your app.
 
 **Table of Contents**
 
@@ -35,7 +35,7 @@ The latest release can always be found on the [releases page][github-releases].
 
 If you run into problems using the SDK, you can:
 
-* Review the API documentation for [AuthFoundation][authfoundation-docs], [OAuth2Auth][oauth2auth-docs], and [WebAuthenticationUI][webauthenticationui-docs]
+* Review the API documentation for [AuthFoundation][authfoundation-docs], [OAuth2Auth][oauth2auth-docs], [OktaDirectAuth][oktadirectauth-docs], [OktaDirectAuth][oktadirectauth-docs], and [WebAuthenticationUI][webauthenticationui-docs]
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
 
@@ -44,21 +44,24 @@ If you run into problems using the SDK, you can:
 This SDK consists of several different libraries, each with detailed documentation.
 
 ```mermaid
-  graph TD;
-    AuthFoundation-->OAuth2Auth;
-    OAuth2Auth-->WebAuthenticationUI;
+graph BT;
+  AuthFoundation-->OAuth2Auth;
+  AuthFoundation-->OktaDirectAuth;
+  AuthFoundation-->OktaIdxAuth;
+  OAuth2Auth-->WebAuthenticationUI;
 ```
 
 - [AuthFoundation][authfoundation-docs] -- Common classes for managing credentials and used as a foundation for other libraries.
-- [OktaDirectAuth][oktadirectauth-docs] -- Direct Authentication capabilities for advanced browserless authentication (EA).
 - [OAuth2Auth][oauth2auth-docs] -- OAuth2 authentication capabilities for advanced use-cases.
+- [OktaDirectAuth][oktadirectauth-docs] -- Direct Authentication capabilities for advanced browserless authentication.
+- [OktaIdxAuth][oktaidxauth-docs] -- Okta's Identity Engine support using Okta's IDX API for native browserless authentication.
 - [WebAuthenticationUI][webauthenticationui-docs] -- Authenticate users using web-based OIDC flows.
 
 This SDK enables you to build or support a myriad of different authentication flows and approaches.
 
 ## Development Roadmap
 
-This SDK is being actively developed, with plans for future expansion. At this time, we are seeking feedback from the developer community to evaluate:
+This SDK is being actively developed, with plans for future expansion. We are always seeking feedback from the developer community to evaluate:
 
 * The overall SDK and its components
 * The APIs and overall developer experience
@@ -78,6 +81,7 @@ Several key features and capabilities are introduced with this library, with som
 | Authorization Code Flow |
 | Native SSO / Token Exchange Flow |
 | Device Authorization Grant Flow |
+| JWT Authorization Grant Flow |
 | Resource Owner Flow |
 | Simplified JWT parsing and handling |
 | Streamlined authorization of URLSession requests using credential tokens |
@@ -89,7 +93,7 @@ To get started, you will need:
 
 * An Okta account, called an _organization_ (sign up for a free [developer organization](https://developer.okta.com/signup) if you need one).
 * An Okta Application configured as a "Native App". Use Okta's administrator console to create the application by following the wizard and using default properties.
-* Xcode 13.x, targeting one of the supported platforms and target versions (see the [Support Policy][support-policy] below).
+* Xcode 16.x, targeting one of the supported platforms and target versions (see the [Support Policy][support-policy] below).
 
 For examples of how this SDK can be utilized, please refer to the [sample applications](Samples) included within this repository.
 
@@ -125,10 +129,16 @@ If you are interested in only consuming the OAuth2Auth library, instead use the 
 pod 'OAuth2Auth'
 ```
 
-If you are participating in the Early Access preview of the Okta Direct Authentication API, use the following:
+If you intend to use the Okta Direct Authentication API, use the following:
 
 ```ruby
 pod 'OktaDirectAuth'
+```
+
+If your application requires advanced integration with Okta's IDX API, use the following:
+
+```ruby
+pod 'OktaIdxAuth'
 ```
 
 ## Usage Guide
@@ -146,15 +156,15 @@ Before authenticating your user, you need to create your client configuration us
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>issuer</key>
+    <key>issuer_url</key>
     <string>https://{yourOktaDomain}.com</string>
-    <key>clientId</key>
+    <key>client_id</key>
     <string>{clientId}</string>
-    <key>redirectUri</key>
+    <key>redirect_uri</key>
     <string>{redirectUri}</string>
-    <key>logoutRedirectUri</key>
+    <key>logout_redirect_uri</key>
     <string>{logoutRedirectUri}</string>
-    <key>scopes</key>
+    <key>scope</key>
     <string>openid profile offline_access</string>
   </dict>
 </plist>
@@ -169,7 +179,7 @@ Once you've configured your application settings within your `Okta.plist` file, 
 ```swift
 import WebAuthenticationUI
 
-func signIn() async {
+func signIn() async throws {
     let token = try await WebAuthentication.signIn(from: view.window)
     let credential = try Credential.store(token)
 }
@@ -227,7 +237,7 @@ let token = try await flow.start(with: [
 
 For simple authentication use-cases, you can use the `ResourceOwnerFlow` class to authenticate with a plain username and password.
 
-> *NOTE:* The ResourceOwnerFlow class has been marked as deprecated, since its functionality is being replaced with the more comprehensive OktaDirectAuth library.
+> *NOTE:* The ResourceOwnerFlow class is not recommended since this flow does not support multifactor authentication.  For alternatives to this flow, please see the more comprehensive OktaDirectAuth or OktaIdxAuth libraries.
 
 ```swift
 let flow = ResourceOwnerFlow(issuerURL: URL(string: "https://example.okta.com")!,
@@ -236,11 +246,11 @@ let flow = ResourceOwnerFlow(issuerURL: URL(string: "https://example.okta.com")!
 let token = try await flow.start(username: "jane.doe", password: "secretPassword")
 ```
 
-### Authentication using Direct Authentication (EA)
+### Authentication using Direct Authentication
 
 For simple authentication use-cases, you can use the `ResourceOwnerFlow` class to authenticate with a plain username and password.
 
-> **NOTE:** The Okta Direct Authentication API is currently marked as Early Access (EA) and is not generally available yet.
+> **NOTE:** The Okta Direct Authentication library is only available in Swift at this time.
 
 ```swift
 let flow = DirectAuthenticationFlow(issuerURL: URL(string: "https://example.okta.com")!,
@@ -390,7 +400,9 @@ The only supported versions of Xcode are those that can be currently used to sub
 
 ### Swift
 
-The minimum supported Swift 5 minor version is the one released with the oldest-supported Xcode version. Once a Swift 5 minor becomes unsupported, dropping support for it will not be considered a breaking change, and will be done in a minor release.
+The minimum supported Swift version is 5.10, which is the version shipped with the oldest-supported Xcode version. Once a Swift 5 minor becomes unsupported, dropping support for it will not be considered a breaking change, and will be done in a minor release.
+
+This library supports Swift 6, with full support for Strict Concurrency.
 
 ### Platforms
 
@@ -398,24 +410,39 @@ Only the last 4 major platform versions are officially supported, unless there a
 
 | Platform    | Supported | Best-Effort |
 | ----------- | --------- | ----------- |
-| iOS         | 13.0      | 12.0        |
-| tvOS        | 13.0      | 12.0        |
-| watchOS     | 7.0       | 7.0         |
+| iOS         | 15.0      | 13.0        |
+| tvOS        | 15.0      | 13.0        |
+| watchOS     | 8.0       | 7.0         |
 | visionOS    | 1.0       | 1.0         |
-| macCatalyst | 13.0      | 13.0        |
+| macCatalyst | 15.0      | 13.0        |
 | macOS       | 12.0      | 10.15       |
 
-Once a platform version becomes unsupported, dropping support for it will not be considered a breaking change and will be done in a minor release. For example, iOS 13 will cease to be supported when iOS 18 gets released, and might be dropped in a minor release.
+Once a platform version becomes unsupported, dropping support for it will not be considered a breaking change and will be done in a minor release. For example, iOS 15 will cease to be supported when iOS 19 is released, and might be dropped in a minor release in the future.
 
 In the case of macOS, the yearly named releases are considered a major platform version for this Policy, regardless of the actual version numbers.
 
 > *Note:* Older OS versions are supported in a best-effort manner. Unless there are API limitations that prevent the SDK from working effectively on older OS versions, the minimum requirements will not be changed.
-> 
-> Additionally, Linux compatibility is considered best-effort and is not officially supported.
+
+<details>
+
+<summary>Linux Compatibility</summary>
+
+Linux support is experimental. Compatibility with Linux considered is best-effort and is not officially supported. Ubuntu is included as a test target for all Continuous Integration tests, and every effort is taken to ensure its continued compatibility.
+
+Some features are not yet supported in Linux, including but not limited to:
+
+| Feature | Comments |
+| ------- | -------- |
+| Keychain Token Storage | The UserDefaults token storage mechanism is supported, but encryption / security at rest is not implemented yet. |
+| Browser Authentication | The WebAuthenticationUI library only targets Apple platforms, and is unavailable in Linux |
+| JWT Validation | The Linux-compatible crypto libraries have not yet been integrated into JWT validation |
+| PKCE | PKCE key and signature generation has not been implemented in Linux yet |
+
+</details>
 
 ### Legacy SDK support
 
-After the okta-mobile-swift SDK becomes generally available, we intend all new feature development to proceed within this new library. We plan to support okta-oidc-ios (and our other legacy SDKs that okta-mobile-swift replaces) with critical bug and security fixes for the foreseeable future. 
+The okta-oidc-ios SDK is considered legacy, and all new feature development is made to okta-mobile-swift.  The legacy SDKs only receive critical bug and security fixes, so it's advisable for developers to migrate to this new SDK.
 
 ## Development
 
@@ -463,6 +490,7 @@ We are happy to accept contributions and PRs! Please see the [contribution guide
 [github-releases]: https://github.com/okta/okta-mobile-swift/releases
 [authfoundation-docs]: https://okta.github.io/okta-mobile-swift/development/authfoundation/
 [oktadirectauth-docs]: https://okta.github.io/okta-mobile-swift/development/oktadirectauth/
+[oktaidxauth-docs]: https://okta.github.io/okta-mobile-swift/development/oktaidxauth/
 [oauth2auth-docs]: https://okta.github.io/okta-mobile-swift/development/oauth2auth/
 [webauthenticationui-docs]: https://okta.github.io/okta-mobile-swift/development/webauthenticationui/
 [Rate Limiting at Okta]: https://developer.okta.com/docs/api/getting_started/rate-limits

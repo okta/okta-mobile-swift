@@ -21,9 +21,9 @@ import AuthenticationServices
 /// Example:
 ///
 /// ```swift
-/// let auth = SocialLogin(issuer: URL(string: "https://example.okta.com/oauth2/default")!,
+/// let auth = SocialLogin(issuerURL: URL(string: "https://example.okta.com/oauth2/default")!,
 ///                        clientId: "0oabcde12345",
-///                        scopes: "openid profile offline_access",
+///                        scope: "openid profile offline_access",
 ///                        redirectUri: URL(string: "com.example.myapp:/callback")!))
 /// let token = try await auth.login(service: .facebook)
 /// ```
@@ -32,15 +32,15 @@ import AuthenticationServices
 public class SocialLogin {
     private let flow: InteractionCodeFlow
 
-    public init(issuer: URL,
+    public init(issuerURL: URL,
                 clientId: String,
-                scopes: String,
+                scope: String,
                 redirectUri: URL)
     {
         // Initializes the flow which can be used later in the process.
-        flow = InteractionCodeFlow(issuer: issuer,
+        flow = InteractionCodeFlow(issuerURL: issuerURL,
                                    clientId: clientId,
-                                   scopes: scopes,
+                                   scope: scope,
                                    redirectUri: redirectUri)
     }
 
@@ -68,15 +68,20 @@ public class SocialLogin {
         let callbackUrl = try await socialRedirect(using: capability,
                                                    from: presentationContext)
 
-        // Inspect the redirect URL to deterine what the result was.
-        switch flow.redirectResult(for: callbackUrl) {
-        case .authenticated:
-            // When the social login result is `authenticated`, use the
-            // flow to exchange the callback URL returned from
-            // ASWebAuthenticationSession with an Okta token.
-            return try await flow.exchangeCode(redirect: callbackUrl)
+        // Use the callback URL from ASWebAuthenticationSession
+        // to determine if the user is authenticated, or if
+        // additional MFA factors need to be verified.
+        switch try await flow.resume(with: callbackUrl) {
+        case .success(let token):
+            // The user is now logged in.
+            return token
 
-        default:
+        case .interactionRequired(let response):
+            // The user needs to remediate additional authentication
+            // factors. You can use other examples to determine the
+            // best way to implement this within your app.
+            //
+            // For the purposes of this example, we will abort the signin.
             throw LoginError.cannotProceed
         }
     }
