@@ -280,12 +280,12 @@ jobs:
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaDirectAuth \
           -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
-    - name: Build OktaOAuth2
+    - name: Build OAuth2Auth
       run: |
         set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
-          -scheme OktaOAuth2 \
+          -scheme OAuth2Auth \
           -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Build OktaIdxAuth
       run: |
@@ -302,13 +302,13 @@ jobs:
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaIdxAuth \
           -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
-    - name: Test OktaOAuth2
+    - name: Test OAuth2Auth
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
-          -scheme OktaOAuth2 \
+          -scheme OAuth2Auth \
           -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Build WebAuthenticationUI
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
@@ -369,13 +369,13 @@ jobs:
           -derivedDataPath ~/Build/DerivedData \
           -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -scheme OktaIdxAuth | xcbeautify --renderer github-actions
-    - name: OktaOAuth2
+    - name: OAuth2Auth
       run: |
         set -o pipefail
         xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
           -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-          -scheme OktaOAuth2 | xcbeautify --renderer github-actions
+          -scheme OAuth2Auth | xcbeautify --renderer github-actions
     - name: WebAuthenticationUI
       run: |
         set -o pipefail
@@ -404,11 +404,11 @@ jobs:
       with:
         name: OktaIdxAuth.doccarchive.zip
         path: ~/Build/OktaIdxAuth.doccarchive.zip
-    - name: Upload OktaOAuth2 DocC Archive
+    - name: Upload OAuth2Auth DocC Archive
       uses: actions/upload-artifact@v4
       with:
-        name: OktaOAuth2.doccarchive.zip
-        path: ~/Build/OktaOAuth2.doccarchive.zip
+        name: OAuth2Auth.doccarchive.zip
+        path: ~/Build/OAuth2Auth.doccarchive.zip
     - name: Upload WebAuthenticationUI DocC Archive
       uses: actions/upload-artifact@v4
       with:
