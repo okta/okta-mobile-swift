@@ -1,0 +1,291 @@
+{
+   "app" : {
+      "type" : "object",
+      "value" : {
+         "id" : "0ZczewGCFPlxNYYcLq5i",
+         "label" : "Mike Test App",
+         "name" : "oidc_client"
+      }
+   },
+   "authenticatorEnrollments" : {
+      "type" : "array",
+      "value" : [
+         {
+            "displayName" : "Email",
+            "id" : "eae3kddt2tDgpoCBc0g7",
+            "methods" : [
+               {
+                  "type" : "email"
+               }
+            ],
+            "profile" : {
+               "email" : "v***r@okta.com"
+            },
+            "type" : "email"
+         },
+         {
+            "displayName" : "Password",
+            "id" : "lae8wj8nnjB3BrbcH0g6",
+            "methods" : [
+               {
+                  "type" : "password"
+               }
+            ],
+            "type" : "password"
+         },
+         {
+            "displayName" : "Security Question",
+            "id" : "qae3kbg951OahVoal0g7",
+            "methods" : [
+               {
+                  "type" : "security_question"
+               }
+            ],
+            "profile" : {
+               "question" : "What is the food you least liked as a child?",
+               "questionKey" : "disliked_food"
+            },
+            "type" : "security_question"
+         }
+      ]
+   },
+   "authenticators" : {
+      "type" : "array",
+      "value" : [
+         {
+            "displayName" : "Email",
+            "id" : "aut3jya5v1oIgaLuV0g7",
+            "methods" : [
+               {
+                  "type" : "email"
+               }
+            ],
+            "type" : "email"
+         },
+         {
+            "displayName" : "Password",
+            "id" : "aut3jya5v0NEuJiiB0g7",
+            "methods" : [
+               {
+                  "type" : "password"
+               }
+            ],
+            "type" : "password"
+         },
+         {
+            "displayName" : "Security Question",
+            "id" : "aut3jya5v3dTh5ftl0g7",
+            "methods" : [
+               {
+                  "type" : "security_question"
+               }
+            ],
+            "type" : "security_question"
+         }
+      ]
+   },
+   "cancel" : {
+      "accepts" : "application/json; okta-version=1.0.0",
+      "href" : "https://example.com/idp/idx/cancel",
+      "method" : "POST",
+      "name" : "cancel",
+      "produces" : "application/ion+json; okta-version=1.0.0",
+      "rel" : [
+         "create-form"
+      ],
+      "value" : [
+         {
+            "mutable" : false,
+            "name" : "stateHandle",
+            "required" : true,
+            "value" : "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+            "visible" : false
+         }
+      ]
+   },
+   "currentAuthenticatorEnrollment" : {
+      "type" : "object",
+      "value" : {
+         "contextualData" : {
+            "enrolledQuestion" : {
+               "question" : "What is the food you least liked as a child?",
+               "questionKey" : "disliked_food"
+            }
+         },
+         "displayName" : "Security Question",
+         "id" : "qae3kbg951OahVoal0g7",
+         "methods" : [
+            {
+               "type" : "security_question"
+            }
+         ],
+         "profile" : {
+            "question" : "What is the food you least liked as a child?",
+            "questionKey" : "disliked_food"
+         },
+         "type" : "security_question"
+      }
+   },
+   "expiresAt" : "2021-01-14T22:15:38.000Z",
+   "intent" : "LOGIN",
+   "remediation" : {
+      "type" : "array",
+      "value" : [
+         {
+            "accepts" : "application/json; okta-version=1.0.0",
+            "href" : "https://example.com/idp/idx/challenge/answer",
+            "method" : "POST",
+            "name" : "challenge-authenticator",
+            "produces" : "application/ion+json; okta-version=1.0.0",
+            "rel" : [
+               "create-form"
+            ],
+            "relatesTo" : [
+               "$.currentAuthenticatorEnrollment"
+            ],
+            "value" : [
+               {
+                  "form" : {
+                     "value" : [
+                        {
+                           "label" : "What is the food you least liked as a child?",
+                           "mutable" : false,
+                           "name" : "questionKey",
+                           "required" : true,
+                           "value" : "disliked_food",
+                           "visible" : false
+                        },
+                        {
+                           "label" : "Answer",
+                           "messages" : {
+                              "type" : "array",
+                              "value" : [
+                                 {
+                                    "class" : "ERROR",
+                                    "i18n" : {
+                                       "key" : "authfactor.challenge.question_factor.answer_invalid"
+                                    },
+                                    "message" : "Your answer doesn't match our records. Please try again."
+                                 }
+                              ]
+                           },
+                           "name" : "answer",
+                           "required" : true
+                        }
+                     ]
+                  },
+                  "name" : "credentials",
+                  "required" : true,
+                  "type" : "object"
+               },
+               {
+                  "mutable" : false,
+                  "name" : "stateHandle",
+                  "required" : true,
+                  "value" : "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+                  "visible" : false
+               }
+            ]
+         },
+         {
+            "accepts" : "application/json; okta-version=1.0.0",
+            "href" : "https://example.com/idp/idx/challenge",
+            "method" : "POST",
+            "name" : "select-authenticator-authenticate",
+            "produces" : "application/ion+json; okta-version=1.0.0",
+            "rel" : [
+               "create-form"
+            ],
+            "value" : [
+               {
+                  "name" : "authenticator",
+                  "options" : [
+                     {
+                        "label" : "Email",
+                        "relatesTo" : "$.authenticatorEnrollments.value[0]",
+                        "value" : {
+                           "form" : {
+                              "value" : [
+                                 {
+                                    "mutable" : false,
+                                    "name" : "id",
+                                    "required" : true,
+                                    "value" : "aut3jya5v1oIgaLuV0g7"
+                                 },
+                                 {
+                                    "mutable" : false,
+                                    "name" : "methodType",
+                                    "required" : false,
+                                    "value" : "email"
+                                 }
+                              ]
+                           }
+                        }
+                     },
+                     {
+                        "label" : "Password",
+                        "relatesTo" : "$.authenticatorEnrollments.value[1]",
+                        "value" : {
+                           "form" : {
+                              "value" : [
+                                 {
+                                    "mutable" : false,
+                                    "name" : "id",
+                                    "required" : true,
+                                    "value" : "aut3jya5v0NEuJiiB0g7"
+                                 },
+                                 {
+                                    "mutable" : false,
+                                    "name" : "methodType",
+                                    "required" : false,
+                                    "value" : "password"
+                                 }
+                              ]
+                           }
+                        }
+                     },
+                     {
+                        "label" : "Security Question",
+                        "relatesTo" : "$.authenticatorEnrollments.value[2]",
+                        "value" : {
+                           "form" : {
+                              "value" : [
+                                 {
+                                    "mutable" : false,
+                                    "name" : "id",
+                                    "required" : true,
+                                    "value" : "aut3jya5v3dTh5ftl0g7"
+                                 },
+                                 {
+                                    "mutable" : false,
+                                    "name" : "methodType",
+                                    "required" : false,
+                                    "value" : "security_question"
+                                 }
+                              ]
+                           }
+                        }
+                     }
+                  ],
+                  "type" : "object"
+               },
+               {
+                  "mutable" : false,
+                  "name" : "stateHandle",
+                  "required" : true,
+                  "value" : "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+                  "visible" : false
+               }
+            ]
+         }
+      ]
+   },
+   "stateHandle" : "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+   "user" : {
+      "type" : "object",
+      "value" : {
+         "id" : "9ET1Z6TaxBAxzbL0Z0bb"
+      }
+   },
+   "version" : "1.0.0"
+}

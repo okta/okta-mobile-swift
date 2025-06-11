@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# Pre-commit hook used to ensure changes to test configuration files
+# are not inadvertently committed.
+
+for argument in $(awk -F= '/E2E_.*=/ { print $2 }' Samples/Shared/TestConfiguration.xcconfig); do
+    if [[ ! -z $argument ]]; then
+        cat <<\EOF
+Error: Attempt to commit changes to Samples/Shared/TestConfiguration.xcconfig
+
+This can inadvertently leak secrets into the Git revision history.  Please
+reset this file to prevent submitting updates containing test configuration.
+EOF
+        exit 1
+    fi
+done
+
+function checkPlist() {
+    local key=$1
+    local expect=$2
+    local value=$(plutil -extract "$key" raw -o - Samples/Shared/Okta.plist)
+
+    if [[ $value != $expect ]]; then
+        cat <<\EOF
+Error: Attempt to commit changes to Samples/Shared/Okta.plist
+
+This can inadvertently leak secrets into the Git revision history.  Please
+reset this file to prevent submitting updates containing test configuration.
+EOF
+        exit 1
+    fi
+}
+
+if [[ -f Samples/Shared/Okta.plist ]]; then
+    checkPlist "clientId"          "{clientId}"
+    checkPlist "issuer"            "https://{orgDomain}/oauth2/default"
+    checkPlist "redirectUri"       "{appScheme}:/callback"
+fi

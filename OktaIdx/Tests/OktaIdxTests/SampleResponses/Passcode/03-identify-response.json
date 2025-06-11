@@ -1,0 +1,110 @@
+{
+	"stateHandle": "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+	"version": "1.0.0",
+	"expiresAt": "2020-12-30T17:22:28.000Z",
+	"intent": "LOGIN",
+	"remediation": {
+		"type": "array",
+		"value": [{
+			"rel": ["create-form"],
+			"name": "challenge-authenticator",
+			"relatesTo": ["$.currentAuthenticatorEnrollment"],
+			"href": "https://example.com/idp/idx/challenge/answer",
+			"method": "POST",
+			"value": [{
+				"name": "credentials",
+				"type": "object",
+				"form": {
+					"value": [{
+						"name": "passcode",
+						"label": "Password",
+						"secret": true
+					}]
+				},
+				"required": true
+			}, {
+				"name": "stateHandle",
+				"required": true,
+				"value": "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+				"visible": false,
+				"mutable": false
+			}],
+			"accepts": "application/ion+json; okta-version=1.0.0"
+		}]
+	},
+	"currentAuthenticatorEnrollment": {
+		"type": "object",
+		"value": {
+			"recover": {
+				"rel": ["create-form"],
+				"name": "recover",
+				"href": "https://example.com/idp/idx/recover",
+				"method": "POST",
+				"value": [{
+					"name": "stateHandle",
+					"required": true,
+					"value": "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+					"visible": false,
+					"mutable": false
+				}],
+				"accepts": "application/ion+json; okta-version=1.0.0"
+			},
+			"type": "password",
+			"id": "lae609uDthwWF3VvV2o4",
+			"displayName": "Password",
+			"methods": [{
+				"type": "password"
+			}]
+		}
+	},
+	"authenticators": {
+		"type": "array",
+		"value": [{
+			"type": "password",
+			"id": "autzvyfLYrflgZIwN2o4",
+			"displayName": "Password",
+			"methods": [{
+				"type": "password"
+			}]
+		}]
+	},
+	"authenticatorEnrollments": {
+		"type": "array",
+		"value": [{
+			"type": "password",
+			"id": "lae609uDthwWF3VvV2o4",
+			"displayName": "Password",
+			"methods": [{
+				"type": "password"
+			}]
+		}]
+	},
+	"user": {
+		"type": "object",
+		"value": {
+			"id": "9ET1Z6TaxBAxzbL0Z0bb"
+		}
+	},
+	"cancel": {
+		"rel": ["create-form"],
+		"name": "cancel",
+		"href": "https://example.com/idp/idx/cancel",
+		"method": "POST",
+		"value": [{
+			"name": "stateHandle",
+			"required": true,
+			"value": "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+			"visible": false,
+			"mutable": false
+		}],
+		"accepts": "application/ion+json; okta-version=1.0.0"
+	},
+	"app": {
+		"type": "object",
+		"value": {
+			"name": "oidc_client",
+			"label": "ak-test-oie-app",
+			"id": "0ZczewGCFPlxNYYcLq5i"
+		}
+	}
+}
