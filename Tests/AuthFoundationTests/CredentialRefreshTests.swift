@@ -276,7 +276,8 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked
             XCTAssertFalse(credential.token.isRefreshing)
         }
     }
-    
+
+    // TODO: This test should be refactored to not rely on wallclock timing, which can become flaky within CI environments.
     func testAutomaticRefresh() async throws {
         try await taskData {
             Credential.refreshGraceInterval = 0.5
