@@ -38,7 +38,7 @@ class UserAgentTests: XCTestCase {
                                    in: "MockResponses"))
         flow = try InteractionCodeFlow(client: client)
 
-        let pattern = "okta-authfoundation-swift/[\\d\\.]+ okta-idx-swift/[\\d\\.]+ (iOS|watchOS|tvOS|macOS|linux)/[\\d\\.]+ Device/\\S+"
+        let pattern = "okta-authfoundation-swift/[\\d\\.]+ okta-idxauth-swift/[\\d\\.]+ (iOS|watchOS|tvOS|macOS|visionOS|linux)/[\\d\\.]+ Device/\\S+"
         regex = try NSRegularExpression(pattern: pattern, options: [])
     }
     

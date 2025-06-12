@@ -24,13 +24,13 @@ if [[ ! -d "$SOURCE_DIR" ]]; then
     exit 0
 fi
 
-echo "Scanning '$SOURCE_DIR' for duplicate filenames..." >> $GITHUB_STEP_SUMMARY
 find "$SOURCE_DIR" -type f -name '*.swift' -exec basename '{}' ';' | sort | uniq -d > "$DUPLICATE_BASENAMES_FILE"
 
 if [[ -s "$DUPLICATE_BASENAMES_FILE" ]]; then
     HAS_DUPLICATES_RESULT="true"
     echo "" >> $GITHUB_STEP_SUMMARY
-    echo "ERROR: Duplicate filenames detected"
+    echo "*Error:* Duplicate filenames detected in \`$SOURCE_DIR\`."
+    echo "" >> $GITHUB_STEP_SUMMARY
     echo "| Filename | Conflicting File Paths |" >> $GITHUB_STEP_SUMMARY
     echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
 
@@ -68,6 +68,7 @@ if [[ -s "$DUPLICATE_BASENAMES_FILE" ]]; then
     } >> "$GITHUB_OUTPUT"
     exit 1
 else
+    echo "No duplicate filenames detected in \`$SOURCE_DIR\`"
     {
       echo "has_duplicates=false"
       echo "duplicate_paths_list="

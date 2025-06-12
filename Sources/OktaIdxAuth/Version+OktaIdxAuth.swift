@@ -16,12 +16,12 @@ import Foundation
 
 extension SDKVersion.Name {
     @_documentation(visibility: internal)
-    public static let oktaIdx = SDKVersion.Name("okta-idx-swift")
+    public static let oktaIdx = SDKVersion.Name("okta-idxauth-swift")
 }
 
 extension SDKVersion {
     @_documentation(visibility: private)
     public static let oktaIdx: SDKVersion? = {
-        register(.oktaIdx, version: "3.2.4")
+        register(.oktaIdx, version: "2.0.0")
     }()
 }
