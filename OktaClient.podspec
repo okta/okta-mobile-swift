@@ -47,7 +47,7 @@ NOTE: This Swift-based pod requires `use_frameworks!` in your Podfile.
         ss.osx.deployment_target      = '10.15'
        
         ss.dependency 'OktaClient/AuthFoundation'
-        ss.dependency 'OAuth2Auth', "~> #{s.version.to_s}"
+        ss.dependency 'OktaOAuth2', "~> #{s.version.to_s}"
     end
   
     s.subspec 'DirectAuth' do |ss|
