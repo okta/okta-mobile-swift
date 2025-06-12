@@ -141,7 +141,7 @@ jobs:
         __EOF__
 
         echo "## Duplicate Source Files" >> $GITHUB_STEP_SUMMARY
-        ./.github/workflows/preflight-check_duplicate_files.sh Sources >> $GITHUB_STEP_SUMMARY
+        ./.github/workflows/preflight-check_duplicate_files.sh Sources
     - name: Upload Preflight Artifacts
       uses: actions/upload-artifact@v4
       with:
