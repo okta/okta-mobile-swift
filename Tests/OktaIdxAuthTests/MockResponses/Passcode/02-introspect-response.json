@@ -1,0 +1,52 @@
+{
+	"stateHandle": "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+	"version": "1.0.0",
+	"expiresAt": "2020-12-30T19:17:26.000Z",
+	"intent": "LOGIN",
+	"remediation": {
+		"type": "array",
+		"value": [{
+			"rel": ["create-form"],
+			"name": "identify",
+			"href": "https://example.com/idp/idx/identify",
+			"method": "POST",
+			"value": [{
+				"name": "identifier",
+				"label": "Username"
+			}, {
+				"name": "rememberMe",
+				"type": "boolean",
+				"label": "Remember this device"
+			}, {
+				"name": "stateHandle",
+				"required": true,
+				"value": "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+				"visible": false,
+				"mutable": false
+			}],
+			"accepts": "application/ion+json; okta-version=1.0.0"
+		}]
+	},
+	"cancel": {
+		"rel": ["create-form"],
+		"name": "cancel",
+		"href": "https://example.com/idp/idx/cancel",
+		"method": "POST",
+		"value": [{
+			"name": "stateHandle",
+			"required": true,
+			"value": "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+			"visible": false,
+			"mutable": false
+		}],
+		"accepts": "application/ion+json; okta-version=1.0.0"
+	},
+	"app": {
+		"type": "object",
+		"value": {
+			"name": "oidc_client",
+			"label": "ak-test-oie-app",
+			"id": "0ZczewGCFPlxNYYcLq5i"
+		}
+	}
+}

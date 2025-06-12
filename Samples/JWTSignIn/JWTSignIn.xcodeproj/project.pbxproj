@@ -10,7 +10,7 @@
 		E02042D72C6582DF0088BB34 /* JWTSignin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02042D62C6582DF0088BB34 /* JWTSignin.swift */; };
 		E02042E12C6585090088BB34 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = E02042E02C6585090088BB34 /* ArgumentParser */; };
 		E02042E42C6585200088BB34 /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = E02042E32C6585200088BB34 /* AuthFoundation */; };
-		E02042E62C6585200088BB34 /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = E02042E52C6585200088BB34 /* OktaOAuth2 */; };
+		E02042E62C6585200088BB34 /* OAuth2Auth in Frameworks */ = {isa = PBXBuildFile; productRef = E02042E52C6585200088BB34 /* OAuth2Auth */; };
 		E02042E82C658D420088BB34 /* JWTSignin+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02042E72C658D420088BB34 /* JWTSignin+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +41,7 @@
 			files = (
 				E02042E12C6585090088BB34 /* ArgumentParser in Frameworks */,
 				E02042E42C6585200088BB34 /* AuthFoundation in Frameworks */,
-				E02042E62C6585200088BB34 /* OktaOAuth2 in Frameworks */,
+				E02042E62C6585200088BB34 /* OAuth2Auth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,7 +102,7 @@
 			packageProductDependencies = (
 				E02042E02C6585090088BB34 /* ArgumentParser */,
 				E02042E32C6585200088BB34 /* AuthFoundation */,
-				E02042E52C6585200088BB34 /* OktaOAuth2 */,
+				E02042E52C6585200088BB34 /* OAuth2Auth */,
 			);
 			productName = JWTSignIn;
 			productReference = E02042D32C6582DF0088BB34 /* JWTSignIn */;
@@ -341,9 +341,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AuthFoundation;
 		};
-		E02042E52C6585200088BB34 /* OktaOAuth2 */ = {
+		E02042E52C6585200088BB34 /* OAuth2Auth */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = OktaOAuth2;
+			productName = OAuth2Auth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

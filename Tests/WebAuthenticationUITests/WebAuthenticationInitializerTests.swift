@@ -13,7 +13,7 @@
 import XCTest
 @testable import AuthFoundation
 @testable import TestCommon
-@testable import OktaOAuth2
+@testable import OAuth2Auth
 @testable import WebAuthenticationUI
 
 class WebAuthenticationInitializerTests: XCTestCase {

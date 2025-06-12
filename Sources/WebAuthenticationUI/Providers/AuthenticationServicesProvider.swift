@@ -11,7 +11,7 @@
 //
 
 import AuthFoundation
-import OktaOAuth2
+import OAuth2Auth
 
 #if canImport(AuthenticationServices)
 import AuthenticationServices

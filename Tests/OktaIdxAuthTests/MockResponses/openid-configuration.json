@@ -1,0 +1,161 @@
+{
+   "authorization_endpoint" : "https://example.com/oauth2/default/v1/authorize",
+   "backchannel_authentication_request_signing_alg_values_supported" : [
+      "HS256",
+      "HS384",
+      "HS512",
+      "RS256",
+      "RS384",
+      "RS512",
+      "ES256",
+      "ES384",
+      "ES512"
+   ],
+   "backchannel_token_delivery_modes_supported" : [
+      "poll"
+   ],
+   "claims_supported" : [
+      "iss",
+      "ver",
+      "sub",
+      "aud",
+      "iat",
+      "exp",
+      "jti",
+      "auth_time",
+      "amr",
+      "idp",
+      "nonce",
+      "name",
+      "nickname",
+      "preferred_username",
+      "given_name",
+      "middle_name",
+      "family_name",
+      "email",
+      "email_verified",
+      "profile",
+      "zoneinfo",
+      "locale",
+      "address",
+      "phone_number",
+      "picture",
+      "website",
+      "gender",
+      "birthdate",
+      "updated_at",
+      "at_hash",
+      "c_hash"
+   ],
+   "code_challenge_methods_supported" : [
+      "S256"
+   ],
+   "device_authorization_endpoint" : "https://example.com/oauth2/default/v1/device/authorize",
+   "dpop_signing_alg_values_supported" : [
+      "RS256",
+      "RS384",
+      "RS512",
+      "ES256",
+      "ES384",
+      "ES512"
+   ],
+   "end_session_endpoint" : "https://example.com/oauth2/default/v1/logout",
+   "grant_types_supported" : [
+      "authorization_code",
+      "implicit",
+      "refresh_token",
+      "password",
+      "urn:ietf:params:oauth:grant-type:device_code",
+      "urn:openid:params:grant-type:ciba",
+      "urn:okta:params:oauth:grant-type:otp",
+      "http://auth0.com/oauth/grant-type/mfa-otp",
+      "urn:okta:params:oauth:grant-type:oob",
+      "http://auth0.com/oauth/grant-type/mfa-oob"
+   ],
+   "id_token_signing_alg_values_supported" : [
+      "RS256"
+   ],
+   "introspection_endpoint" : "https://example.com/oauth2/default/v1/introspect",
+   "introspection_endpoint_auth_methods_supported" : [
+      "client_secret_basic",
+      "client_secret_post",
+      "client_secret_jwt",
+      "private_key_jwt",
+      "none"
+   ],
+   "issuer" : "https://example.com/oauth2/default",
+   "jwks_uri" : "https://example.com/oauth2/default/v1/keys",
+   "pushed_authorization_request_endpoint" : "https://example.com/oauth2/default/v1/par",
+   "registration_endpoint" : "https://example.com/oauth2/v1/clients",
+   "request_object_signing_alg_values_supported" : [
+      "HS256",
+      "HS384",
+      "HS512",
+      "RS256",
+      "RS384",
+      "RS512",
+      "ES256",
+      "ES384",
+      "ES512"
+   ],
+   "request_parameter_supported" : true,
+   "response_modes_supported" : [
+      "query",
+      "fragment",
+      "form_post",
+      "okta_post_message"
+   ],
+   "response_types_supported" : [
+      "code",
+      "id_token",
+      "code id_token",
+      "code token",
+      "id_token token",
+      "code id_token token"
+   ],
+   "revocation_endpoint" : "https://example.com/oauth2/default/v1/revoke",
+   "revocation_endpoint_auth_methods_supported" : [
+      "client_secret_basic",
+      "client_secret_post",
+      "client_secret_jwt",
+      "private_key_jwt",
+      "none"
+   ],
+   "scopes_supported" : [
+      "okta.myAccount.appAuthenticator.maintenance.manage",
+      "okta.myAccount.appAuthenticator.maintenance.read",
+      "okta.myAccount.appAuthenticator.manage",
+      "okta.myAccount.appAuthenticator.read",
+      "okta.myAccount.authenticators.manage",
+      "okta.myAccount.authenticators.read",
+      "okta.myAccount.email.manage",
+      "okta.myAccount.email.read",
+      "okta.myAccount.manage",
+      "okta.myAccount.oktaApplications.read",
+      "okta.myAccount.organization.read",
+      "okta.myAccount.phone.manage",
+      "okta.myAccount.phone.read",
+      "okta.myAccount.profile.manage",
+      "okta.myAccount.profile.read",
+      "okta.myAccount.read",
+      "openid",
+      "profile",
+      "email",
+      "address",
+      "phone",
+      "offline_access",
+      "device_sso"
+   ],
+   "subject_types_supported" : [
+      "public"
+   ],
+   "token_endpoint" : "https://example.com/oauth2/default/v1/token",
+   "token_endpoint_auth_methods_supported" : [
+      "client_secret_basic",
+      "client_secret_post",
+      "client_secret_jwt",
+      "private_key_jwt",
+      "none"
+   ],
+   "userinfo_endpoint" : "https://example.com/oauth2/default/v1/userinfo"
+}

@@ -46,8 +46,9 @@ var package = Package(
     ],
     products: [
         .library(name: "AuthFoundation", targets: ["AuthFoundation"]),
-        .library(name: "OktaOAuth2", targets: ["OktaOAuth2"]),
+        .library(name: "OAuth2Auth", targets: ["OAuth2Auth"]),
         .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
+        .library(name: "OktaIdxAuth", targets: ["OktaIdxAuth"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.0")
@@ -57,13 +58,19 @@ var package = Package(
                 dependencies: [],
                 resources: [.process("Resources")],
                 swiftSettings: .libraryTarget),
-        .target(name: "OktaOAuth2",
+        .target(name: "OAuth2Auth",
                 dependencies: [
                     .target(name: "AuthFoundation")
                 ],
                 resources: [.process("Resources")],
                 swiftSettings: .libraryTarget),
         .target(name: "OktaDirectAuth",
+                dependencies: [
+                    .target(name: "AuthFoundation")
+                ],
+                resources: [.process("Resources")],
+                swiftSettings: .libraryTarget),
+        .target(name: "OktaIdxAuth",
                 dependencies: [
                     .target(name: "AuthFoundation")
                 ],
@@ -81,13 +88,17 @@ var package = Package(
                         .copy("ConfigResources"),
                     ],
                     swiftSettings: .testTarget),
-        .testTarget(name: "OktaOAuth2Tests",
-                    dependencies: ["OktaOAuth2", "TestCommon"],
+        .testTarget(name: "OAuth2AuthTests",
+                    dependencies: ["OAuth2Auth", "TestCommon"],
                     resources: [ .copy("MockResponses") ],
                     swiftSettings: .testTarget),
         .testTarget(name: "OktaDirectAuthTests",
                     dependencies: ["OktaDirectAuth", "TestCommon"],
                     resources: [ .copy("MockResponses") ],
+                    swiftSettings: .testTarget),
+        .testTarget(name: "OktaIdxAuthTests",
+                    dependencies: ["OktaIdxAuth", "TestCommon"],
+                    resources: [.copy("MockResponses")],
                     swiftSettings: .testTarget),
     ],
     swiftLanguageVersions: [.v5]
@@ -97,7 +108,7 @@ var package = Package(
 package.targets.append(contentsOf: [
     .target(name: "WebAuthenticationUI",
             dependencies: [
-                .target(name: "OktaOAuth2")
+                .target(name: "OAuth2Auth")
             ],
             resources: [.process("Resources")],
             swiftSettings: .libraryTarget),

@@ -1,0 +1,451 @@
+{
+   "app" : {
+      "type" : "object",
+      "value" : {
+         "id" : "0oatuasdfasdf",
+         "label" : "Example App",
+         "name" : "idx_client"
+      }
+   },
+   "authenticatorEnrollments" : {
+      "type" : "array",
+      "value" : [
+         {
+            "displayName" : "Password",
+            "id" : "lae7w9m73tjGc7y3p5d6",
+            "key" : "okta_password",
+            "methods" : [
+               {
+                  "type" : "password"
+               }
+            ],
+            "type" : "password"
+         }
+      ]
+   },
+   "authenticators" : {
+      "type" : "array",
+      "value" : [
+         {
+            "displayName" : "Email",
+            "id" : "auttcd6chMKSpJxFO5d6",
+            "key" : "okta_email",
+            "methods" : [
+               {
+                  "type" : "email"
+               }
+            ],
+            "type" : "email"
+         },
+         {
+            "displayName" : "Google Authenticator",
+            "id" : "aut1m88l8tqrD2KGo5d7",
+            "key" : "google_otp",
+            "methods" : [
+               {
+                  "type" : "otp"
+               }
+            ],
+            "type" : "app"
+         },
+         {
+            "displayName" : "Okta Verify",
+            "id" : "auttcd6clibYlwbTD5d6",
+            "key" : "okta_verify",
+            "methods" : [
+               {
+                  "type" : "push"
+               },
+               {
+                  "type" : "totp"
+               }
+            ],
+            "type" : "app"
+         },
+         {
+            "displayName" : "Phone",
+            "id" : "auttcd6ciXg1cX6iO5d6",
+            "key" : "phone_number",
+            "methods" : [
+               {
+                  "type" : "sms"
+               }
+            ],
+            "type" : "phone"
+         },
+         {
+            "displayName" : "Security Key or Biometric",
+            "id" : "auttcd6ckbZXFScID5d6",
+            "key" : "webauthn",
+            "methods" : [
+               {
+                  "type" : "webauthn"
+               }
+            ],
+            "type" : "security_key"
+         },
+         {
+            "displayName" : "Security Question",
+            "id" : "auttcd6cjoVdSXOh25d6",
+            "key" : "security_question",
+            "methods" : [
+               {
+                  "type" : "security_question"
+               }
+            ],
+            "type" : "security_question"
+         }
+      ]
+   },
+   "cancel" : {
+      "accepts" : "application/json; okta-version=1.0.0",
+      "href" : "https://example.com/idp/idx/cancel",
+      "method" : "POST",
+      "name" : "cancel",
+      "produces" : "application/ion+json; okta-version=1.0.0",
+      "rel" : [
+         "create-form"
+      ],
+      "value" : [
+         {
+            "mutable" : false,
+            "name" : "stateHandle",
+            "required" : true,
+            "value" : "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp",
+            "visible" : false
+         }
+      ]
+   },
+   "currentAuthenticator" : {
+      "type" : "object",
+      "value" : {
+         "contextualData" : {
+            "qrcode" : {
+               "href" : "data:image/png;base64,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",
+               "method" : "embedded",
+               "type" : "image/png"
+            },
+            "selectedChannel" : "qrcode"
+         },
+         "displayName" : "Okta Verify",
+         "id" : "auttcd6clibYlwbTD5d6",
+         "key" : "okta_verify",
+         "methods" : [
+            {
+               "type" : "push"
+            }
+         ],
+         "type" : "app"
+      }
+   },
+   "enrollmentAuthenticator" : {
+      "type" : "object",
+      "value" : {
+         "displayName" : "Okta Verify",
+         "id" : "auttcd6clibYlwbTD5d6",
+         "key" : "okta_verify",
+         "methods" : [
+            {
+               "type" : "push"
+            }
+         ],
+         "type" : "app"
+      }
+   },
+   "expiresAt" : "2021-11-19T21:12:17.000Z",
+   "intent" : "LOGIN",
+   "remediation" : {
+      "type" : "array",
+      "value" : [
+         {
+            "accepts" : "application/json; okta-version=1.0.0",
+            "href" : "https://example.com/idp/idx/challenge/poll",
+            "method" : "POST",
+            "name" : "enroll-poll",
+            "produces" : "application/ion+json; okta-version=1.0.0",
+            "refresh" : 4000,
+            "rel" : [
+               "create-form"
+            ],
+            "value" : [
+               {
+                  "mutable" : false,
+                  "name" : "stateHandle",
+                  "required" : true,
+                  "value" : "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp",
+                  "visible" : false
+               }
+            ]
+         },
+         {
+            "accepts" : "application/json; okta-version=1.0.0",
+            "href" : "https://example.com/idp/idx/credential/enroll",
+            "method" : "POST",
+            "name" : "select-enrollment-channel",
+            "produces" : "application/ion+json; okta-version=1.0.0",
+            "rel" : [
+               "create-form"
+            ],
+            "value" : [
+               {
+                  "label" : "Okta Verify",
+                  "name" : "authenticator",
+                  "type" : "object",
+                  "value" : {
+                     "form" : {
+                        "value" : [
+                           {
+                              "mutable" : false,
+                              "name" : "id",
+                              "required" : true,
+                              "value" : "auttcd6clibYlwbTD5d6"
+                           },
+                           {
+                              "name" : "channel",
+                              "options" : [
+                                 {
+                                    "label" : "QRCODE",
+                                    "value" : "qrcode"
+                                 },
+                                 {
+                                    "label" : "EMAIL",
+                                    "value" : "email"
+                                 },
+                                 {
+                                    "label" : "SMS",
+                                    "value" : "sms"
+                                 }
+                              ],
+                              "required" : false,
+                              "type" : "string"
+                           }
+                        ]
+                     }
+                  }
+               },
+               {
+                  "mutable" : false,
+                  "name" : "stateHandle",
+                  "required" : true,
+                  "value" : "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp",
+                  "visible" : false
+               }
+            ]
+         },
+         {
+            "accepts" : "application/json; okta-version=1.0.0",
+            "href" : "https://example.com/idp/idx/credential/enroll",
+            "method" : "POST",
+            "name" : "select-authenticator-enroll",
+            "produces" : "application/ion+json; okta-version=1.0.0",
+            "rel" : [
+               "create-form"
+            ],
+            "value" : [
+               {
+                  "name" : "authenticator",
+                  "options" : [
+                     {
+                        "label" : "Email",
+                        "relatesTo" : "$.authenticators.value[0]",
+                        "value" : {
+                           "form" : {
+                              "value" : [
+                                 {
+                                    "mutable" : false,
+                                    "name" : "id",
+                                    "required" : true,
+                                    "value" : "auttcd6chMKSpJxFO5d6"
+                                 },
+                                 {
+                                    "mutable" : false,
+                                    "name" : "methodType",
+                                    "required" : false,
+                                    "value" : "email"
+                                 }
+                              ]
+                           }
+                        }
+                     },
+                     {
+                        "label" : "Google Authenticator",
+                        "relatesTo" : "$.authenticators.value[1]",
+                        "value" : {
+                           "form" : {
+                              "value" : [
+                                 {
+                                    "mutable" : false,
+                                    "name" : "id",
+                                    "required" : true,
+                                    "value" : "aut1m88l8tqrD2KGo5d7"
+                                 },
+                                 {
+                                    "mutable" : false,
+                                    "name" : "methodType",
+                                    "required" : false,
+                                    "value" : "otp"
+                                 }
+                              ]
+                           }
+                        }
+                     },
+                     {
+                        "label" : "Okta Verify",
+                        "relatesTo" : "$.authenticators.value[2]",
+                        "value" : {
+                           "form" : {
+                              "value" : [
+                                 {
+                                    "mutable" : false,
+                                    "name" : "id",
+                                    "required" : true,
+                                    "value" : "auttcd6clibYlwbTD5d6"
+                                 },
+                                 {
+                                    "name" : "channel",
+                                    "options" : [
+                                       {
+                                          "label" : "QRCODE",
+                                          "value" : "qrcode"
+                                       },
+                                       {
+                                          "label" : "EMAIL",
+                                          "value" : "email"
+                                       },
+                                       {
+                                          "label" : "SMS",
+                                          "value" : "sms"
+                                       }
+                                    ],
+                                    "required" : false,
+                                    "type" : "string"
+                                 }
+                              ]
+                           }
+                        }
+                     },
+                     {
+                        "label" : "Phone",
+                        "relatesTo" : "$.authenticators.value[3]",
+                        "value" : {
+                           "form" : {
+                              "value" : [
+                                 {
+                                    "mutable" : false,
+                                    "name" : "id",
+                                    "required" : true,
+                                    "value" : "auttcd6ciXg1cX6iO5d6"
+                                 },
+                                 {
+                                    "name" : "methodType",
+                                    "options" : [
+                                       {
+                                          "label" : "SMS",
+                                          "value" : "sms"
+                                       }
+                                    ],
+                                    "required" : false,
+                                    "type" : "string"
+                                 },
+                                 {
+                                    "label" : "Phone number",
+                                    "name" : "phoneNumber",
+                                    "required" : false
+                                 }
+                              ]
+                           }
+                        }
+                     },
+                     {
+                        "label" : "Security Key or Biometric",
+                        "relatesTo" : "$.authenticators.value[4]",
+                        "value" : {
+                           "form" : {
+                              "value" : [
+                                 {
+                                    "mutable" : false,
+                                    "name" : "id",
+                                    "required" : true,
+                                    "value" : "auttcd6ckbZXFScID5d6"
+                                 },
+                                 {
+                                    "mutable" : false,
+                                    "name" : "methodType",
+                                    "required" : false,
+                                    "value" : "webauthn"
+                                 }
+                              ]
+                           }
+                        }
+                     },
+                     {
+                        "label" : "Security Question",
+                        "relatesTo" : "$.authenticators.value[5]",
+                        "value" : {
+                           "form" : {
+                              "value" : [
+                                 {
+                                    "mutable" : false,
+                                    "name" : "id",
+                                    "required" : true,
+                                    "value" : "auttcd6cjoVdSXOh25d6"
+                                 },
+                                 {
+                                    "mutable" : false,
+                                    "name" : "methodType",
+                                    "required" : false,
+                                    "value" : "security_question"
+                                 }
+                              ]
+                           }
+                        }
+                     }
+                  ],
+                  "type" : "object"
+               },
+               {
+                  "mutable" : false,
+                  "name" : "stateHandle",
+                  "required" : true,
+                  "value" : "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp",
+                  "visible" : false
+               }
+            ]
+         },
+         {
+            "accepts" : "application/json; okta-version=1.0.0",
+            "href" : "https://example.com/idp/idx/skip",
+            "method" : "POST",
+            "name" : "skip",
+            "produces" : "application/ion+json; okta-version=1.0.0",
+            "rel" : [
+               "create-form"
+            ],
+            "value" : [
+               {
+                  "mutable" : false,
+                  "name" : "stateHandle",
+                  "required" : true,
+                  "value" : "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp",
+                  "visible" : false
+               }
+            ]
+         }
+      ]
+   },
+   "stateHandle" : "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp",
+   "user" : {
+      "type" : "object",
+      "value" : {
+         "id" : "00u3iyi3x06D2aWUR1d6",
+         "identifier" : "test@example.com",
+         "profile" : {
+            "firstName" : "Test",
+            "lastName" : "User",
+            "locale" : "en_US",
+            "timeZone" : "America/Los_Angeles"
+         }
+      }
+   },
+   "version" : "1.0.0"
+}

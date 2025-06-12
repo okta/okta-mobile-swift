@@ -1,0 +1,136 @@
+{
+   "app" : {
+      "type" : "object",
+      "value" : {
+         "id" : "0ZczewGCFPlxNYYcLq5i",
+         "label": "API Demo App",
+         "name" : "oidc_client"
+      }
+   },
+   "authenticatorEnrollments" : {
+      "type" : "array",
+      "value" : [
+         {
+            "displayName" : "Email",
+            "key" : "okta_email",
+            "methods" : [
+               {
+                  "type" : "email"
+               }
+            ],
+            "type" : "email"
+         }
+      ]
+   },
+   "authenticators" : {
+      "type" : "array",
+      "value" : [
+         {
+            "displayName" : "Email",
+            "id" : "auttcd6chMKSpJxFO5d6",
+            "key" : "okta_email",
+            "methods" : [
+               {
+                  "type" : "email"
+               }
+            ],
+            "type" : "email"
+         }
+      ]
+   },
+   "cancel" : {
+      "accepts" : "application/json; okta-version=1.0.0",
+      "href" : "https://ios-idx-sdk.okta.com/idp/idx/cancel",
+      "method" : "POST",
+      "name" : "cancel",
+      "produces" : "application/ion+json; okta-version=1.0.0",
+      "rel" : [
+         "create-form"
+      ],
+      "value" : [
+         {
+            "mutable" : false,
+            "name" : "stateHandle",
+            "required" : true,
+            "value" : "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+            "visible" : false
+         }
+      ]
+   },
+   "expiresAt" : "2021-07-13T20:49:38.000Z",
+   "intent" : "LOGIN",
+   "recoveryAuthenticator" : {
+      "type" : "object",
+      "value" : {
+         "displayName" : "Password",
+         "id" : "auttcd6cgpdPok11J5d6",
+         "key" : "okta_password",
+         "methods" : [
+            {
+               "type" : "password"
+            }
+         ],
+         "type" : "password"
+      }
+   },
+   "remediation" : {
+      "type" : "array",
+      "value" : [
+         {
+            "accepts" : "application/json; okta-version=1.0.0",
+            "href" : "https://ios-idx-sdk.okta.com/idp/idx/challenge",
+            "method" : "POST",
+            "name" : "select-authenticator-authenticate",
+            "produces" : "application/ion+json; okta-version=1.0.0",
+            "rel" : [
+               "create-form"
+            ],
+            "value" : [
+               {
+                  "name" : "authenticator",
+                  "options" : [
+                     {
+                        "label" : "Email",
+                        "relatesTo" : "$.authenticatorEnrollments.value[0]",
+                        "value" : {
+                           "form" : {
+                              "value" : [
+                                 {
+                                    "mutable" : false,
+                                    "name" : "id",
+                                    "required" : true,
+                                    "value" : "auttcd6chMKSpJxFO5d6"
+                                 },
+                                 {
+                                    "mutable" : false,
+                                    "name" : "methodType",
+                                    "required" : false,
+                                    "value" : "email"
+                                 }
+                              ]
+                           }
+                        }
+                     }
+                  ],
+                  "type" : "object"
+               },
+               {
+                  "mutable" : false,
+                  "name" : "stateHandle",
+                  "required" : true,
+                  "value" : "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+                  "visible" : false
+               }
+            ]
+         }
+      ]
+   },
+   "stateHandle" : "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+   "user" : {
+      "type" : "object",
+      "value" : {
+         "identifier" : "someuser@example.com"
+      }
+   },
+   "version" : "1.0.0"
+}

@@ -9,7 +9,7 @@ AuthFoundation provides the fundamentals for interacting with Okta, and exposing
 You can use AuthFoundation when you want to:
 
 * Manage, store, and use tokens and user information.
-* Interact with supplementary native SDKs, such as WebAuthenticationUI or OktaOAuth2.
+* Interact with supplementary native SDKs, such as WebAuthenticationUI or OAuth2Auth.
 * Introspect or monitor network activity, customize behavior, or other operations related to user interaction.
 
 ## Topics
@@ -51,6 +51,7 @@ You can use AuthFoundation when you want to:
 - ``JSONClaimContainer``
 - ``JSON``
 - ``AnyJSON``
+- ``JSONRepresentable``
 - ``ClaimConvertable``
 - ``IsClaim``
 - ``Expires``
@@ -113,12 +114,14 @@ You can use AuthFoundation when you want to:
 
 ### Migration and versioning
 
+- ``Migration``
 - ``SDKVersion``
 - ``SDKVersionMigrator``
 
-### Internals and mocking
+### Internals and Debugging
 
 - ``DelegateCollection``
+- ``DebugAPIRequestObserver``
 - ``URLSessionDataTaskProtocol``
 - ``URLSessionProtocol``
 - ``UsesDelegateCollection``

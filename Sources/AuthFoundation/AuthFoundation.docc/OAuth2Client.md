@@ -22,7 +22,7 @@ When working with an ``OAuth2Client``, either for the purposes of authenticating
 
 ### Authenticating using a custom URLSession
 
-Within the OktaOAuth2 library, the initializers for the various authentication flows can accept a custom ``OAuth2Client`` instance that would then be used for all API requests made to process the login. The client ID and other settings from the ``OAuth2Client`` are used within that flow.
+Within the OAuth2Auth library, the initializers for the various authentication flows can accept a custom ``OAuth2Client`` instance that would then be used for all API requests made to process the login. The client ID and other settings from the ``OAuth2Client`` are used within that flow.
 
 ### Using a custom URLSession for existing token lifecycle
 

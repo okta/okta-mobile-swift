@@ -1,0 +1,124 @@
+{
+   "app" : {
+      "type" : "object",
+      "value" : {
+         "id" : "0ZczewGCFPlxNYYcLq5i",
+         "label" : "Test App",
+         "name" : "oidc_client"
+      }
+   },
+   "authenticatorEnrollments" : {
+      "type" : "array",
+      "value" : [
+         {
+            "displayName" : "Email",
+            "id" : "eae3l3gechJLaMjH60g7",
+            "methods" : [
+               {
+                  "type" : "email"
+               }
+            ],
+            "profile" : {
+               "email" : "m***r@okta.com"
+            },
+            "type" : "email"
+         }
+      ]
+   },
+   "authenticators" : {
+      "type" : "array",
+      "value" : [
+         {
+            "displayName" : "Email",
+            "id" : "aut3jya5v1oIgaLuV0g7",
+            "methods" : [
+               {
+                  "type" : "email"
+               }
+            ],
+            "type" : "email"
+         }
+      ]
+   },
+   "cancel" : {
+      "accepts" : "application/json; okta-version=1.0.0",
+      "href" : "https://example.com/idp/idx/cancel",
+      "method" : "POST",
+      "name" : "cancel",
+      "produces" : "application/ion+json; okta-version=1.0.0",
+      "rel" : [
+         "create-form"
+      ],
+      "value" : [
+         {
+            "mutable" : false,
+            "name" : "stateHandle",
+            "required" : true,
+            "value" : "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+            "visible" : false
+         }
+      ]
+   },
+   "expiresAt" : "2021-01-25T18:42:17.000Z",
+   "intent" : "LOGIN",
+   "remediation" : {
+      "type" : "array",
+      "value" : [
+         {
+            "accepts" : "application/json; okta-version=1.0.0",
+            "href" : "https://example.com/idp/idx/challenge",
+            "method" : "POST",
+            "name" : "select-authenticator-authenticate",
+            "produces" : "application/ion+json; okta-version=1.0.0",
+            "rel" : [
+               "create-form"
+            ],
+            "value" : [
+               {
+                  "name" : "authenticator",
+                  "options" : [
+                     {
+                        "label" : "Email",
+                        "relatesTo" : "$.authenticatorEnrollments.value[0]",
+                        "value" : {
+                           "form" : {
+                              "value" : [
+                                 {
+                                    "mutable" : false,
+                                    "name" : "id",
+                                    "required" : true,
+                                    "value" : "aut3jya5v1oIgaLuV0g7"
+                                 },
+                                 {
+                                    "mutable" : false,
+                                    "name" : "methodType",
+                                    "required" : false,
+                                    "value" : "email"
+                                 }
+                              ]
+                           }
+                        }
+                     }
+                  ],
+                  "type" : "object"
+               },
+               {
+                  "mutable" : false,
+                  "name" : "stateHandle",
+                  "required" : true,
+                  "value" : "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+                  "visible" : false
+               }
+            ]
+         }
+      ]
+   },
+   "stateHandle" : "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+   "user" : {
+      "type" : "object",
+      "value" : {
+         "id" : "9ET1Z6TaxBAxzbL0Z0bb"
+      }
+   },
+   "version" : "1.0.0"
+}

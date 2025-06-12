@@ -13,7 +13,7 @@
 import Foundation
 
 extension Data {
-    var urlFormEncoded: [String: String?]? {
+    public var urlFormEncoded: [String: String?]? {
         guard let string = String(data: self, encoding: .utf8),
               let url = URL(string: "?\(string)"),
               let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
@@ -23,5 +23,9 @@ extension Data {
         return queryItems.reduce(into: [String:String?]()) {
             $0[$1.name] = $1.value
         }
+    }
+
+    func jsonEncoded() throws -> [String: Any?]? {
+        try JSONSerialization.jsonObject(with: self) as? [String: Any?]
     }
 }

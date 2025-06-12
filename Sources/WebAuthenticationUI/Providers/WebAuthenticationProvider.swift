@@ -12,7 +12,7 @@
 
 import Foundation
 import AuthFoundation
-import OktaOAuth2
+import OAuth2Auth
 
 protocol WebAuthenticationProvider: Sendable {
     func open(authorizeUrl: URL, redirectUri: URL) async throws -> URL

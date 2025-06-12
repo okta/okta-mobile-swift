@@ -22,7 +22,7 @@ Add the issuer URL for your Okta org and the client ID for your Okta Application
 
 ## See Also
 
-- OktaBrowserSignIn > OktaOAuth2 > [Introduction to Authentication Flows](https://okta.github.io/okta-mobile-swift/development/oktaoauth2/documentation/oktaoauth2/introductiontoauthenticationflows) in the Okta Client SDK documentation.
+- OktaBrowserSignIn > OAuth2Auth > [Introduction to Authentication Flows](https://okta.github.io/okta-mobile-swift/development/oauth2auth/documentation/oauth2auth/introductiontoauthenticationflows) in the Okta Client SDK documentation.
 
 ## Related Resources
 

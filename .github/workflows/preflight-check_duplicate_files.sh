@@ -24,15 +24,15 @@ if [[ ! -d "$SOURCE_DIR" ]]; then
     exit 0
 fi
 
-echo "Scanning '$SOURCE_DIR' for duplicate filenames..."
-find "$SOURCE_DIR" -type f -exec basename '{}' ';' | sort | uniq -d > "$DUPLICATE_BASENAMES_FILE"
+find "$SOURCE_DIR" -type f -name '*.swift' -exec basename '{}' ';' | sort | uniq -d > "$DUPLICATE_BASENAMES_FILE"
 
 if [[ -s "$DUPLICATE_BASENAMES_FILE" ]]; then
     HAS_DUPLICATES_RESULT="true"
-    echo ""
-    echo "ERROR: Duplicate filenames detected"
-    echo "| Filename | Conflicting File Paths |"
-    echo "| --- | --- |"
+    echo "" >> $GITHUB_STEP_SUMMARY
+    echo "*Error:* Duplicate filenames detected in \`$SOURCE_DIR\`."
+    echo "" >> $GITHUB_STEP_SUMMARY
+    echo "| Filename | Conflicting File Paths |" >> $GITHUB_STEP_SUMMARY
+    echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
 
     while IFS= read -r dup_basename; do
         if [[ -z "$dup_basename" ]]; then
@@ -44,6 +44,7 @@ if [[ -s "$DUPLICATE_BASENAMES_FILE" ]]; then
         while IFS= read -r -d $'\0' found_path; do
             paths_for_this_basename_array+=("$found_path")
             echo "$found_path" >> "$TEMP_FINAL_ALL_DUPLICATE_PATHS"
+            echo "::error file=$found_path,title=Duplicate file detected::Filename $dup_basename conflicts with other files with the same name"
         done < <(find "$SOURCE_DIR" -type f -name "$dup_basename" -print0)
 
         path_list_for_table_cell=""
@@ -52,7 +53,7 @@ if [[ -s "$DUPLICATE_BASENAMES_FILE" ]]; then
             path_list_for_table_cell=${path_list_for_table_cell%, }
         fi
 
-        echo "| ${dup_basename} | ${path_list_for_table_cell} |"
+        echo "| ${dup_basename} | ${path_list_for_table_cell} |" >> $GITHUB_STEP_SUMMARY
     done < "$DUPLICATE_BASENAMES_FILE"
 
     if [[ -s "$TEMP_FINAL_ALL_DUPLICATE_PATHS" ]]; then
@@ -65,11 +66,12 @@ if [[ -s "$DUPLICATE_BASENAMES_FILE" ]]; then
         echo "$DUPLICATE_PATHS_LIST_RESULT"
         echo "DUPLICATE_PATHS_EOF"
     } >> "$GITHUB_OUTPUT"
-    echo 0
+    exit 1
 else
+    echo "No duplicate filenames detected in \`$SOURCE_DIR\`"
     {
       echo "has_duplicates=false"
       echo "duplicate_paths_list="
     } >> "$GITHUB_OUTPUT"
-    echo 0
 fi
+exit 0

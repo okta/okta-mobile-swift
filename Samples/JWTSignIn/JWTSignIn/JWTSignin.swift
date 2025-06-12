@@ -12,7 +12,7 @@
 
 import Foundation
 import ArgumentParser
-import OktaOAuth2
+import OAuth2Auth
 
 @main
 struct JWTSignin: AsyncParsableCommand {
