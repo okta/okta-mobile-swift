@@ -66,6 +66,7 @@ if [[ -s "$DUPLICATE_BASENAMES_FILE" ]]; then
         echo "$DUPLICATE_PATHS_LIST_RESULT"
         echo "DUPLICATE_PATHS_EOF"
     } >> "$GITHUB_OUTPUT"
+    exit 1
 else
     {
       echo "has_duplicates=false"
