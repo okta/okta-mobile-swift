@@ -37,18 +37,20 @@ jobs:
 
         TARGET_LIST=""
 
+        echo "Initializing target list"
         for TARGET in $(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g'); do
-            echo "Configuring $TARGET"
+            echo "🎯 $TARGET"
             NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
             TARGET_LIST="$TARGET_LIST --target $TARGET"
 
-            echo "Create redirection file from the old doc path"
             mkdir -p "docs/okta-mobile-swift/$VERSION/$NAME"
             echo "<html><head><meta http-equiv='refresh' content='0;url=/okta-mobile-swift/$VERSION/documentation/$NAME/'></head></html>" > "docs/okta-mobile-swift/$VERSION/$NAME/index.html"
         done
 
-        echo "Generating combined documentation"
-        swift package --allow-writing-to-directory docs generate documentation \
+        echo
+        echo "📓 Generating combined documentation"
+
+        swift package --allow-writing-to-directory docs generate-documentation \
             --disable-indexing \
             --transform-for-static-hosting \
             --hosting-base-path "okta-mobile-swift/$VERSION" \
