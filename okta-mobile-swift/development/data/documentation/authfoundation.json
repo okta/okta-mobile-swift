@@ -76,7 +76,7 @@
                 {
                   "inlineContent" : [
                     {
-                      "text" : "Interact with supplementary native SDKs, such as WebAuthenticationUI or OktaOAuth2.",
+                      "text" : "Interact with supplementary native SDKs, such as BrowserSignin or OAuth2Auth.",
                       "type" : "text"
                     }
                   ],
@@ -160,6 +160,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONRepresentable",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
@@ -237,35 +238,20 @@
     {
       "anchor" : "Migration-and-versioning",
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Migration",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersionMigrator"
       ],
       "title" : "Migration and versioning"
     },
     {
-      "anchor" : "Internals-and-mocking",
+      "anchor" : "Internals-and-Debugging",
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DebugAPIRequestObserver",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection"
       ],
-      "title" : "Internals and mocking"
-    },
-    {
-      "anchor" : "Classes",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DebugAPIRequestObserver",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Migration"
-      ],
-      "title" : "Classes"
-    },
-    {
-      "anchor" : "Protocols",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONRepresentable"
-      ],
-      "title" : "Protocols"
+      "title" : "Internals and Debugging"
     },
     {
       "anchor" : "Extended-Modules",
