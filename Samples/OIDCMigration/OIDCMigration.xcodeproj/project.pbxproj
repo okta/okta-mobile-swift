@@ -15,7 +15,7 @@
 		96AE3CD6281B2E020048E66B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96AE3CD4281B2E020048E66B /* LaunchScreen.storyboard */; };
 		96AE3CEB281B2E020048E66B /* MigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CEA281B2E020048E66B /* MigrationTests.swift */; };
 		96AE3D02281B4EF40048E66B /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96AE3D01281B4EF40048E66B /* Okta.plist */; };
-		96C462AD28204AD000D732DC /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462AC28204AD000D732DC /* WebAuthenticationUI */; };
+		96C462AD28204AD000D732DC /* BrowserSignin in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462AC28204AD000D732DC /* BrowserSignin */; };
 		96C462AF28204AD800D732DC /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462AE28204AD800D732DC /* AuthFoundation */; };
 		96C462B128204AD800D732DC /* OAuth2Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462B028204AD800D732DC /* OAuth2Auth */; };
 		96C462B32820A80600D732DC /* OktaOidc in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462B22820A80600D732DC /* OktaOidc */; };
@@ -73,7 +73,7 @@
 				96C462B128204AD800D732DC /* OAuth2Auth in Frameworks */,
 				96C462AF28204AD800D732DC /* AuthFoundation in Frameworks */,
 				96C462B32820A80600D732DC /* OktaOidc in Frameworks */,
-				96C462AD28204AD000D732DC /* WebAuthenticationUI in Frameworks */,
+				96C462AD28204AD000D732DC /* BrowserSignin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +213,7 @@
 			);
 			name = OIDCMigration;
 			packageProductDependencies = (
-				96C462AC28204AD000D732DC /* WebAuthenticationUI */,
+				96C462AC28204AD000D732DC /* BrowserSignin */,
 				96C462AE28204AD800D732DC /* AuthFoundation */,
 				96C462B028204AD800D732DC /* OAuth2Auth */,
 				96C462B22820A80600D732DC /* OktaOidc */,
@@ -614,9 +614,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		96C462AC28204AD000D732DC /* WebAuthenticationUI */ = {
+		96C462AC28204AD000D732DC /* BrowserSignin */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = WebAuthenticationUI;
+			productName = BrowserSignin;
 		};
 		96C462AE28204AD800D732DC /* AuthFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
