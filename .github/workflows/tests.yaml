@@ -247,15 +247,24 @@ jobs:
     - uses: actions/checkout@master
     - name: Setup test environment
       run: xcrun simctl shutdown all
-    - name: Setup log environment
-      run: mkdir -p .build/ci-logs
+    - name: Setup environment
+      run: |
+        mkdir -p .build/ci-logs
+
+        XCODE_MAJOR_VERSION=$(echo "${{ matrix.xcode_version }}" | cut -d'.' -f1)
+        if [[ "$XCODE_MAJOR_VERSION" -lt 16 ]]; then
+          echo "Xcode version is < 16. Filtering noisy warnings from xcbeautify output."
+          echo "XCBEAUTIFY_ARGS=--renderer github-actions --quieter" >> $GITHUB_ENV
+        else
+          echo "XCBEAUTIFY_ARGS=--renderer github-actions" >> $GITHUB_ENV
+        fi
     - name: Build AuthFoundation
       run: |
         set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify $XCBEAUTIFY_ARGS
     - name: Test AuthFoundation
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
@@ -263,14 +272,14 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify $XCBEAUTIFY_ARGS
     - name: Build OktaDirectAuth
       run: |
         set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify $XCBEAUTIFY_ARGS
     - name: Test OktaDirectAuth
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
@@ -278,21 +287,21 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify $XCBEAUTIFY_ARGS
     - name: Build OAuth2Auth
       run: |
         set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OAuth2Auth \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify $XCBEAUTIFY_ARGS
     - name: Build OktaIdxAuth
       run: |
         set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaIdxAuth \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify $XCBEAUTIFY_ARGS
     - name: Test OktaIdxAuth
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
@@ -300,7 +309,7 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OktaIdxAuth \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify $XCBEAUTIFY_ARGS
     - name: Test OAuth2Auth
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
@@ -308,7 +317,7 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OAuth2Auth \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify $XCBEAUTIFY_ARGS
     - name: Build BrowserSignin
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -316,7 +325,7 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme BrowserSignin \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify $XCBEAUTIFY_ARGS
     - name: Test BrowserSignin
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
@@ -325,7 +334,7 @@ jobs:
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme BrowserSignin \
-          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
+          -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify $XCBEAUTIFY_ARGS
     - name: Upload Logs
       if: failure()
       uses: actions/upload-artifact@v4
