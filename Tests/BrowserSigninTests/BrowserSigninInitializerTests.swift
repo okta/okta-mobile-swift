@@ -14,15 +14,15 @@ import XCTest
 @testable import AuthFoundation
 @testable import TestCommon
 @testable import OAuth2Auth
-@testable import WebAuthenticationUI
+@testable import BrowserSignin
 
-class WebAuthenticationInitializerTests: XCTestCase {
+class BrowserSigninInitializerTests: XCTestCase {
     private let issuer = URL(string: "https://example.com")!
     private let redirectUri = URL(string: "com.example:/callback")!
     private let logoutRedirectUri = URL(string: "com.example:/logout")!
 
     func testInitializer() async throws {
-        let auth = try await WebAuthentication(
+        let auth = try await BrowserSignin(
             issuerURL: issuer,
             clientId: "client_id",
             scope: "openid profile",

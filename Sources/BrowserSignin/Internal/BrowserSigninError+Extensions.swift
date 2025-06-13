@@ -14,7 +14,7 @@ import Foundation
 import AuthenticationServices
 
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
-extension WebAuthenticationError: LocalizedError {
+extension BrowserSigninError: LocalizedError {
     init(_ error: any Error) {
         let nsError = error as NSError
         if nsError.domain == ASWebAuthenticationSessionErrorDomain,
@@ -34,14 +34,14 @@ extension WebAuthenticationError: LocalizedError {
         switch self {
         case .noCompatibleAuthenticationProviders:
             return NSLocalizedString("no_compatible_authentication_providers_description",
-                                     tableName: "WebAuthenticationUI",
-                                     bundle: .webAuthenticationUI,
+                                     tableName: "BrowserSignin",
+                                     bundle: .browserSignin,
                                      comment: "")
             
         case .cannotComposeAuthenticationURL:
             return NSLocalizedString("cannot_compose_authentication_url_description",
-                                     tableName: "WebAuthenticationUI",
-                                     bundle: .webAuthenticationUI,
+                                     tableName: "BrowserSignin",
+                                     bundle: .browserSignin,
                                      comment: "")
             
         case .authenticationProvider(error: let error):
@@ -50,31 +50,31 @@ extension WebAuthenticationError: LocalizedError {
             }
             
             return NSLocalizedString("authentication_provider_error",
-                                     tableName: "WebAuthenticationUI",
-                                     bundle: .webAuthenticationUI,
+                                     tableName: "BrowserSignin",
+                                     bundle: .browserSignin,
                                      comment: "")
             
         case .invalidRedirectScheme(let scheme):
             return String.localizedStringWithFormat(
                 NSLocalizedString("invalid_redirect_scheme_description",
-                                  tableName: "WebAuthenticationUI",
-                                  bundle: .webAuthenticationUI,
+                                  tableName: "BrowserSignin",
+                                  bundle: .browserSignin,
                                   comment: ""),
                 scheme ?? NSLocalizedString("no_scheme_defined",
-                                            tableName: "WebAuthenticationUI",
-                                            bundle: .webAuthenticationUI,
+                                            tableName: "BrowserSignin",
+                                            bundle: .browserSignin,
                                             comment: ""))
             
         case .userCancelledLogin:
             return NSLocalizedString("user_cancelled_login_description",
-                                     tableName: "WebAuthenticationUI",
-                                     bundle: .webAuthenticationUI,
+                                     tableName: "BrowserSignin",
+                                     bundle: .browserSignin,
                                      comment: "")
             
         case .missingIdToken:
             return NSLocalizedString("missing_id_token_description",
-                                     tableName: "WebAuthenticationUI",
-                                     bundle: .webAuthenticationUI,
+                                     tableName: "BrowserSignin",
+                                     bundle: .browserSignin,
                                      comment: "Missing ID Token")
             
         case .oauth2(error: let error):
@@ -91,15 +91,15 @@ extension WebAuthenticationError: LocalizedError {
             
             return String.localizedStringWithFormat(
                 NSLocalizedString("generic_description",
-                                  tableName: "WebAuthenticationUI",
-                                  bundle: .webAuthenticationUI,
+                                  tableName: "BrowserSignin",
+                                  bundle: .browserSignin,
                                   comment: ""),
                 errorString)
 
         case .noAuthenticatorProviderResonse:
             return NSLocalizedString("no_authenticator_provider_response",
-                                     tableName: "WebAuthenticationUI",
-                                     bundle: .webAuthenticationUI,
+                                     tableName: "BrowserSignin",
+                                     bundle: .browserSignin,
                                      comment: "No authenticator provider response")
         case .genericError(message: let message):
             return message
@@ -111,7 +111,7 @@ extension WebAuthenticationError: LocalizedError {
     }
 }
 
-extension WebAuthenticationError: Equatable {
+extension BrowserSigninError: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         switch (lhs, rhs) {
         case (.noCompatibleAuthenticationProviders, .noCompatibleAuthenticationProviders): return true

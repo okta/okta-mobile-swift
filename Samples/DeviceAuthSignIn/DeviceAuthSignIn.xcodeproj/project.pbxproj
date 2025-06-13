@@ -35,7 +35,7 @@
 		96E98B05282C32A300CE251E /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98ACC282AD24E00CE251E /* ProfileTableViewController.swift */; };
 		96E98B06282C32A300CE251E /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98ACD282AD24E00CE251E /* TokenDetailViewController.swift */; };
 		96E98B09282C32BE00CE251E /* Keychain+Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98B08282C32BE00CE251E /* Keychain+Token.swift */; };
-		96E98B0B282C3E1900CE251E /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 96E98B0A282C3E1900CE251E /* WebAuthenticationUI */; };
+		96E98B0B282C3E1900CE251E /* BrowserSignin in Frameworks */ = {isa = PBXBuildFile; productRef = 96E98B0A282C3E1900CE251E /* BrowserSignin */; };
 		96E98B13282C3F6600CE251E /* DeviceSignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98B12282C3F6600CE251E /* DeviceSignInTests.swift */; };
 		96E98B1E282C5F8900CE251E /* DeviceCodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98B1D282C5F4900CE251E /* DeviceCodeScreen.swift */; };
 		96E98B1F282C5FB700CE251E /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AC7282AD24E00CE251E /* Screen.swift */; };
@@ -117,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96E98B0B282C3E1900CE251E /* WebAuthenticationUI in Frameworks */,
+				96E98B0B282C3E1900CE251E /* BrowserSignin in Frameworks */,
 				96E98B01282C2EC300CE251E /* OAuth2Auth in Frameworks */,
 				96E98AFF282C2EC300CE251E /* AuthFoundation in Frameworks */,
 			);
@@ -342,7 +342,7 @@
 			packageProductDependencies = (
 				96E98AFE282C2EC300CE251E /* AuthFoundation */,
 				96E98B00282C2EC300CE251E /* OAuth2Auth */,
-				96E98B0A282C3E1900CE251E /* WebAuthenticationUI */,
+				96E98B0A282C3E1900CE251E /* BrowserSignin */,
 			);
 			productName = "DeviceAuthSignIn (iOS)";
 			productReference = 96E98AE7282B44DE00CE251E /* DeviceAuthSignIn (iOS).app */;
@@ -939,9 +939,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = OAuth2Auth;
 		};
-		96E98B0A282C3E1900CE251E /* WebAuthenticationUI */ = {
+		96E98B0A282C3E1900CE251E /* BrowserSignin */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = WebAuthenticationUI;
+			productName = BrowserSignin;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

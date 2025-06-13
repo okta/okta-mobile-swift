@@ -72,7 +72,7 @@ NOTE: This Swift-based pod requires `use_frameworks!` in your Podfile.
         ss.dependency 'OktaIdxAuth', "~> #{s.version.to_s}"
     end
   
-    s.subspec 'WebAuthenticationUI' do |ss|
+    s.subspec 'BrowserSignin' do |ss|
         ss.ios.deployment_target      = '13.0'
         ss.tvos.deployment_target     = '16.0'
         ss.watchos.deployment_target  = '7.0'
@@ -80,6 +80,6 @@ NOTE: This Swift-based pod requires `use_frameworks!` in your Podfile.
         ss.osx.deployment_target      = '10.15'
        
         ss.dependency 'OktaClient/OAuth2'
-        ss.dependency 'OktaWebAuthenticationUI', "~> #{s.version.to_s}"
+        ss.dependency 'OktaBrowserSignin', "~> #{s.version.to_s}"
     end
 end

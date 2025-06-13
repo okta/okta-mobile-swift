@@ -1,6 +1,6 @@
 # Configuring Your Client
 
-Configure your WebAuthentication client to connect to your OAuth2 application.
+Configure your BrowserSignin client to connect to your OAuth2 application.
 
 ## Overview
 
@@ -27,18 +27,18 @@ Once this file is created, your application can use the default initializer:
 
 ```swift
 @IBAction func signIn(_ sender: Any) {
-    let auth = try WebAuthentication()
+    let auth = try BrowserSignin()
     auth.signIn(from: view.window) { result in
         // Handle the response
     }
 }
 ```
 
-Alternatively, the ``WebAuthentication/shared`` property implicitly will do this for you.
+Alternatively, the ``BrowserSignin/shared`` property implicitly will do this for you.
 
 ```swift
 @IBAction func signIn(_ sender: Any) {
-    WebAuthentication.shared.signIn(from: view.window) { result in
+    BrowserSignin.shared.signIn(from: view.window) { result in
         // Handle the response
     }
 }
@@ -46,7 +46,7 @@ Alternatively, the ``WebAuthentication/shared`` property implicitly will do this
 
 ## Use a custom property list
 
-There may be circumstances where your application connects to multiple client configurations, particularly during development. In this case, you can create a custom property list file that follows the same keys described in the previous section, and you can construct your authentication session using the ``WebAuthentication/init(plist:)`` initializer.
+There may be circumstances where your application connects to multiple client configurations, particularly during development. In this case, you can create a custom property list file that follows the same keys described in the previous section, and you can construct your authentication session using the ``BrowserSignin/init(plist:)`` initializer.
 
 ```swift
 @IBAction func signIn(_ sender: Any) {
@@ -57,7 +57,7 @@ There may be circumstances where your application connects to multiple client co
         return
     }
 
-    let auth = try WebAuthentication(plist: fileURL)
+    let auth = try BrowserSignin(plist: fileURL)
     auth.signIn(from: view.window) { result in
         // Handle the response
     }
@@ -70,7 +70,7 @@ Another approach can be to use an initializer that passes those configuration va
 
 ```swift
 @IBAction func signIn(_ sender: Any) {
-    let auth = WebAuthentication(
+    let auth = BrowserSignin(
         issuer: URL(string: "https://my-app.okta.com")!,
         clientId: "my-client-id",
         scopes: "openid offline_access profile",
@@ -86,9 +86,9 @@ Another approach can be to use an initializer that passes those configuration va
 
 ## Singleton Access
 
-The ``WebAuthentication/shared`` singleton provides convenient access to your client's authentication instance. By default this value will use the `Okta.plist` file to configure the client, if one is available.
+The ``BrowserSignin/shared`` singleton provides convenient access to your client's authentication instance. By default this value will use the `Okta.plist` file to configure the client, if one is available.
 
-If your application constructs a ``WebAuthentication`` client using a custom property list, or through one of the other initializers, the ``WebAuthentication/shared`` property will retain that value for you.
+If your application constructs a ``BrowserSignin`` client using a custom property list, or through one of the other initializers, the ``BrowserSignin/shared`` property will retain that value for you.
 
 For example:
 
@@ -96,7 +96,7 @@ For example:
 func application(_ application: UIApplication, 
                  didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
 {
-    let _ = WebAuthentication(issuer: issuerUrl,
+    let _ = BrowserSignin(issuer: issuerUrl,
                               clientId: "my-client-id",
                               scopes: "openid offline_access profile",
                               redirectUri: redirectUri)
@@ -105,7 +105,7 @@ func application(_ application: UIApplication,
 
 // In another part of your application
 @IBAction func signIn(_ sender: Any) {
-    WebAuthentication.shared?.signIn(from: view.window) { result in
+    BrowserSignin.shared?.signIn(from: view.window) { result in
         // Handle the response
     }
 }
@@ -123,7 +123,7 @@ let config = AuthorizationCodeFlow.Configuration(
     clientId: clientId,
     scopes: scopes,
     redirectUri: redirectUri)
-let auth = WebAuthentication(configuration: config,
+let auth = BrowserSignin(configuration: config,
                              session: myURLSession)
 ```
 
@@ -138,7 +138,7 @@ import OAuth2Auth
 
 let flow = AuthorizationCodeFlow(clientConfig,
                                  client: oauth2Client)
-let auth = WebAuthentication(flow: flow,
+let auth = BrowserSignin(flow: flow,
                           context: flowContext)
 auth.signIn(from: view.window) { result in
     // Handle the response

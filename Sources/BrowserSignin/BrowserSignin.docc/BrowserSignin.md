@@ -1,10 +1,10 @@
-# ``WebAuthenticationUI``
+# ``BrowserSignin``
 
 Make it easy to enable users to sign in to your app through browser-based sign on.
 
 ## Overview
 
-Use the WebAuthenticationUI framework to quickly and easily integrate user sign on within your application.
+Use the BrowserSignin framework to quickly and easily integrate user sign on within your application.
 
 * Simple API for initiating a browser-based sign-in flow.
 * Provides convenient hooks for customizing the sign on process.
@@ -27,7 +27,7 @@ macOS Catalyst  | 13.0 - Current | ASWebAuthenticationSession
 
 ### Essentials
 
-- ``WebAuthentication``
+- ``BrowserSignin``
 - <doc:ConfiguringYourClient>
 
 ### Customizations

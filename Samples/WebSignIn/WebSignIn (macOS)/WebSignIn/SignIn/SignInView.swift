@@ -12,7 +12,7 @@
 
 import SwiftUI
 import Combine
-import WebAuthenticationUI
+import BrowserSignin
 import AuthenticationServices
 
 enum AppSettings {
@@ -45,7 +45,7 @@ struct SignInView: View {
             Text("Have an account?")
             
             Button("Sign In") {
-                guard let auth = WebAuthentication.shared else { return }
+                guard let auth = BrowserSignin.shared else { return }
                 auth.ephemeralSession = ephemeralSession
                 Task {
                     do {
@@ -79,14 +79,14 @@ struct SignInView: View {
             }
             .onAppear {
                 Task {
-                    clientId = await WebAuthentication.shared?.signInFlow.client.configuration.clientId
+                    clientId = await BrowserSignin.shared?.signInFlow.client.configuration.clientId
                 }
             }
         }
     }
 
     func signIn() async {
-        guard let auth = WebAuthentication.shared else { return }
+        guard let auth = BrowserSignin.shared else { return }
 
         auth.ephemeralSession = ephemeralSession
         do {

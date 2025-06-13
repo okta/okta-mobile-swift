@@ -15,9 +15,9 @@ import AuthenticationServices
 @testable import AuthFoundation
 @testable import TestCommon
 @testable import OAuth2Auth
-@testable import WebAuthenticationUI
+@testable import BrowserSignin
 
-class WebAuthenticationFlowTests: XCTestCase {
+class BrowserSigninFlowTests: XCTestCase {
     private let issuer = URL(string: "https://example.okta.com")!
     private let redirectUri = URL(string: "com.example:/callback")!
     private let logoutRedirectUri = URL(string: "com.example:/logout")!
@@ -26,7 +26,7 @@ class WebAuthenticationFlowTests: XCTestCase {
 
     override func setUp() async throws {
         await MainActor.run {
-            WebAuthentication.providerFactory = WebAuthenticationProviderFactoryMock.self
+            BrowserSignin.providerFactory = BrowserSigninProviderFactoryMock.self
         }
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -51,7 +51,7 @@ class WebAuthenticationFlowTests: XCTestCase {
     
     override func tearDown() async throws {
         await MainActor.run {
-            WebAuthentication.resetToDefault()
+            BrowserSignin.resetToDefault()
         }
         JWK.resetToDefault()
         Token.resetToDefault()
@@ -59,17 +59,17 @@ class WebAuthenticationFlowTests: XCTestCase {
 
     @MainActor
     func testStart() async throws {
-        let webAuth = try WebAuthentication(client: client,
+        let webAuth = try BrowserSignin(client: client,
                                             additionalParameters: ["testName": name])
 
-        try await WebAuthenticationProviderFactoryMock.register(
+        try await BrowserSigninProviderFactoryMock.register(
             result: .success(URL(string: "com.example:/callback?state=qwe&code=the_auth_code")!),
             for: webAuth)
 
         let token = try await webAuth.signIn(from: nil, context: .init(state: "qwe"))
         XCTAssertEqual(token.refreshToken, "therefreshtoken")
 
-        let optionalProvider = await WebAuthenticationProviderFactoryMock.provider(for: webAuth)
+        let optionalProvider = await BrowserSigninProviderFactoryMock.provider(for: webAuth)
         let provider = try XCTUnwrap(optionalProvider)
         guard case let .opened(authorizeUrl: authorizeUrl, redirectUri: redirectUri) = provider.state
         else {
@@ -87,17 +87,17 @@ class WebAuthenticationFlowTests: XCTestCase {
 
     @MainActor
     func testLogout() async throws {
-        let webAuth = try WebAuthentication(client: client,
+        let webAuth = try BrowserSignin(client: client,
                                             additionalParameters: ["testName": name])
 
-        try await WebAuthenticationProviderFactoryMock.register(
+        try await BrowserSigninProviderFactoryMock.register(
             result: .success(URL(string: "com.example:/logout?state=qwe")!),
             for: webAuth)
 
         let result = try await webAuth.signOut(from: nil, context: .init(idToken: "idToken", state: "qwe"))
         XCTAssertEqual(result.absoluteString, "com.example:/logout?state=qwe")
 
-        let optionalProvider = await WebAuthenticationProviderFactoryMock.provider(for: webAuth)
+        let optionalProvider = await BrowserSigninProviderFactoryMock.provider(for: webAuth)
         let provider = try XCTUnwrap(optionalProvider)
         guard case let .opened(authorizeUrl: authorizeUrl, redirectUri: redirectUri) = provider.state
         else {
@@ -114,20 +114,20 @@ class WebAuthenticationFlowTests: XCTestCase {
     }
     
     func testCancel() async throws {
-        let webAuth = try await WebAuthentication(
+        let webAuth = try await BrowserSignin(
             client: client,
             additionalParameters: ["testName": name])
 
-        try await WebAuthenticationProviderFactoryMock.register(
+        try await BrowserSigninProviderFactoryMock.register(
             result: .failure(NSError(domain: ASWebAuthenticationSessionErrorDomain,
                                      code: ASWebAuthenticationSessionError.canceledLogin.rawValue,
                                      userInfo: nil)),
             for: webAuth)
 
         let error = try await XCTAssertThrowsErrorAsync(await webAuth.signIn(from: nil, context: .init(state: "qwe")))
-        XCTAssertEqual(error as? WebAuthenticationError, .userCancelledLogin)
+        XCTAssertEqual(error as? BrowserSigninError, .userCancelledLogin)
 
-        let optionalProvider = await WebAuthenticationProviderFactoryMock.provider(for: webAuth)
+        let optionalProvider = await BrowserSigninProviderFactoryMock.provider(for: webAuth)
         let provider = try XCTUnwrap(optionalProvider)
         guard case .cancelled = provider.state
         else {

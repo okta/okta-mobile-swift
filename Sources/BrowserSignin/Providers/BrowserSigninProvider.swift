@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,19 +10,11 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import SwiftUI
-import BrowserSignin
+import Foundation
+import AuthFoundation
+import OAuth2Auth
 
-struct RootView: View {
-    @State var signedIn = false
-    
-    var body: some View {
-        VStack {
-            if signedIn {
-                ProfileDetailsView(viewModel: .init(credential: Credential.default), signedIn: $signedIn)
-            } else {
-                SignInView(signedIn: $signedIn)
-            }
-        }
-    }
+protocol BrowserSigninProvider: Sendable {
+    func open(authorizeUrl: URL, redirectUri: URL) async throws -> URL
+    func cancel()
 }

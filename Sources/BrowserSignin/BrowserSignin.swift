@@ -21,7 +21,7 @@ import UIKit
 import AppKit
 #endif
 
-public enum WebAuthenticationError: Error {
+public enum BrowserSigninError: Error {
     case noCompatibleAuthenticationProviders
     case noSignOutFlowProvided
     case cannotStartBrowserSession
@@ -44,7 +44,7 @@ public enum WebAuthenticationError: Error {
 /// The simplest way to authenticate a user is to use the ``shared`` property to access your default session, and calling ``signIn(from:)`` to present the browser to the user.
 ///
 /// ```swift
-/// let token = try await WebAuthentication.shared?.signIn(from: view.window)
+/// let token = try await BrowserSignin.shared?.signIn(from: view.window)
 /// ```
 ///
 /// To customize the authentication flow, please read more about the underlying OAuth2 client within the OAuth2Auth library, and how that relates to the ``signInFlow`` or ``signOutFlow`` properties.
@@ -52,7 +52,7 @@ public enum WebAuthenticationError: Error {
 ///  > Important: If your application targets iOS 9.x-10.x, you should add the redirect URI for your client configuration to your app's supported URL schemes.  This is because users on devices older than iOS 11 will be prompted to sign in using `SFSafariViewController`, which does not allow your application to detect the final token redirect.
 @MainActor
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
-public final class WebAuthentication {
+public final class BrowserSignin {
     #if os(macOS)
     public typealias WindowAnchor = NSWindow
     #elseif os(iOS) || os(macOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
@@ -61,7 +61,7 @@ public final class WebAuthentication {
     public typealias WindowAnchor = Void
     #endif
     
-    /// Active / default shared instance of the ``WebAuthentication`` session.
+    /// Active / default shared instance of the ``BrowserSignin`` session.
     ///
     /// This convenience property can be used in one of two ways:
     ///
@@ -69,13 +69,13 @@ public final class WebAuthentication {
     /// 2. Programmatically create an instance that can be shared across your application.
     ///
     /// For more information on how to configure your client, see <doc:ConfiguringYourClient> for more details.
-    public private(set) static var shared: WebAuthentication? {
+    public private(set) static var shared: BrowserSignin? {
         set {
             _shared = newValue
         }
         get {
             guard let result = _shared else {
-                _shared = try? WebAuthentication()
+                _shared = try? BrowserSignin()
                 return _shared
             }
             return result
@@ -115,7 +115,7 @@ public final class WebAuthentication {
             from: window,
             usesEphemeralSession: ephemeralSession)
         else {
-            throw WebAuthenticationError.noCompatibleAuthenticationProviders
+            throw BrowserSigninError.noCompatibleAuthenticationProviders
         }
         
         self.provider = provider
@@ -170,7 +170,7 @@ public final class WebAuthentication {
         guard let signOutFlow,
               let redirectUri = signOutFlow.client.configuration.logoutRedirectUri
         else {
-            throw WebAuthenticationError.noSignOutFlowProvided
+            throw BrowserSigninError.noSignOutFlowProvided
         }
         
         if provider != nil {
@@ -183,7 +183,7 @@ public final class WebAuthentication {
             from: window,
             usesEphemeralSession: ephemeralSession)
         else {
-            throw WebAuthenticationError.noCompatibleAuthenticationProviders
+            throw BrowserSigninError.noCompatibleAuthenticationProviders
         }
 
         self.provider = provider
@@ -278,39 +278,39 @@ public final class WebAuthentication {
     ///   - loginFlow: Authorization code flow instance for signing in to this client.
     ///   - logoutFlow: Session sign out flow to use when signing out from this client.
     public init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?) {
-        assert(SDKVersion.webAuthenticationUI != nil)
+        assert(SDKVersion.browserSignin != nil)
 
         self.signInFlow = loginFlow
         self.signOutFlow = logoutFlow
 
-        WebAuthentication.shared = self
+        BrowserSignin.shared = self
     }
     
     // MARK: Internal members
-    private static var _shared: WebAuthentication?
-    static var providerFactory: any WebAuthenticationProviderFactory.Type = WebAuthentication.self
+    private static var _shared: BrowserSignin?
+    static var providerFactory: any BrowserSigninProviderFactory.Type = BrowserSignin.self
     
     // Used for testing only
     static func resetToDefault() {
-        providerFactory = WebAuthentication.self
+        providerFactory = BrowserSignin.self
     }
     
-    var provider: (any WebAuthenticationProvider)?
+    var provider: (any BrowserSigninProvider)?
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
-extension WebAuthentication: WebAuthenticationProviderFactory {
+extension BrowserSignin: BrowserSigninProviderFactory {
     nonisolated static func createWebAuthenticationProvider(
-        for webAuth: WebAuthentication,
-        from window: WebAuthentication.WindowAnchor?,
-        usesEphemeralSession: Bool = false) throws -> (any WebAuthenticationProvider)?
+        for webAuth: BrowserSignin,
+        from window: BrowserSignin.WindowAnchor?,
+        usesEphemeralSession: Bool = false) throws -> (any BrowserSigninProvider)?
     {
         try AuthenticationServicesProvider(from: window, usesEphemeralSession: usesEphemeralSession)
     }
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
-extension WebAuthentication {
+extension BrowserSignin {
     /// Asynchronously initiates authentication from the given window.
     /// - Parameters:
     ///   - window: The window from which the authentication browser should be shown.
@@ -318,13 +318,13 @@ extension WebAuthentication {
     ///   - completion: Completion block that will be invoked when authentication finishes.
     public final func signIn(from window: WindowAnchor?,
                              context: AuthorizationCodeFlow.Context = .init(),
-                             completion: @escaping (Result<Token, WebAuthenticationError>) -> Void)
+                             completion: @escaping (Result<Token, BrowserSigninError>) -> Void)
     {
         Task { @MainActor in
             do {
                 completion(.success(try await signIn(from: window, context: context)))
             } catch {
-                completion(.failure(WebAuthenticationError(error)))
+                completion(.failure(BrowserSigninError(error)))
             }
         }
     }
@@ -338,13 +338,13 @@ extension WebAuthentication {
     public final func signOut(from window: WindowAnchor?,
                               credential: Credential? = .default,
                               context: SessionLogoutFlow.Context = .init(),
-                              completion: @escaping (Result<URL, WebAuthenticationError>) -> Void)
+                              completion: @escaping (Result<URL, BrowserSigninError>) -> Void)
     {
         Task { @MainActor in
             do {
                 completion(.success(try await signOut(from: window, credential: credential, context: context)))
             } catch {
-                completion(.failure(WebAuthenticationError(error)))
+                completion(.failure(BrowserSigninError(error)))
             }
         }
     }
@@ -358,13 +358,13 @@ extension WebAuthentication {
     public final func signOut(from window: WindowAnchor?,
                               token: Token,
                               context: SessionLogoutFlow.Context = .init(),
-                              completion: @escaping (Result<URL, WebAuthenticationError>) -> Void)
+                              completion: @escaping (Result<URL, BrowserSigninError>) -> Void)
     {
         Task { @MainActor in
             do {
                 completion(.success(try await signOut(from: window, token: token, context: context)))
             } catch {
-                completion(.failure(WebAuthenticationError(error)))
+                completion(.failure(BrowserSigninError(error)))
             }
         }
     }
@@ -375,13 +375,13 @@ extension WebAuthentication {
     ///   - context: Context options used when composing the signout URL.
     public final func signOut(from window: WindowAnchor?,
                               context: SessionLogoutFlow.Context = .init(),
-                              completion: @escaping (Result<URL, WebAuthenticationError>) -> Void)
+                              completion: @escaping (Result<URL, BrowserSigninError>) -> Void)
     {
         Task { @MainActor in
             do {
                 completion(.success(try await signOut(from: window, context: context)))
             } catch {
-                completion(.failure(WebAuthenticationError(error)))
+                completion(.failure(BrowserSigninError(error)))
             }
         }
     }

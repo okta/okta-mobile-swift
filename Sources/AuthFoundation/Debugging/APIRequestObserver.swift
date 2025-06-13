@@ -71,7 +71,7 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
     }
 
     /// Convenience flag that automatically binds newly-created ``OAuth2Client`` instances to the debug observer.
-    nonisolated(unsafe) public var observeAllOAuth2Clients: Bool {
+    nonisolated public var observeAllOAuth2Clients: Bool {
         get {
             Self.lock.withLock {
                 _observeAllOAuth2Clients

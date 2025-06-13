@@ -16,7 +16,7 @@ import XCTest
 @testable import AuthFoundation
 @testable import TestCommon
 @testable import OAuth2Auth
-@testable import WebAuthenticationUI
+@testable import BrowserSignin
 import AuthenticationServices
 
 class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, AuthenticationServicesProviderSession {
@@ -106,8 +106,8 @@ class AuthenticationServicesProviderTests: XCTestCase {
         MockAuthenticationServicesProviderSession.result.wrappedValue = .failure(responseError)
         let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
         
-        guard let webAuthError = response as? WebAuthenticationError,
-              case let WebAuthenticationError.generic(error: error) = webAuthError
+        guard let webAuthError = response as? BrowserSigninError,
+              case let BrowserSigninError.generic(error: error) = webAuthError
         else {
             XCTFail()
             return
@@ -127,7 +127,7 @@ class AuthenticationServicesProviderTests: XCTestCase {
         MockAuthenticationServicesProviderSession.result.wrappedValue = .failure(error)
         let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
         
-        XCTAssertEqual(response as? WebAuthenticationError, .userCancelledLogin)
+        XCTAssertEqual(response as? BrowserSigninError, .userCancelledLogin)
         XCTAssertNil(provider.authenticationSession)
     }
 
@@ -138,7 +138,7 @@ class AuthenticationServicesProviderTests: XCTestCase {
         MockAuthenticationServicesProviderSession.result.wrappedValue = nil
         let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
         
-        XCTAssertEqual(response as? WebAuthenticationError, .noAuthenticatorProviderResonse)
+        XCTAssertEqual(response as? BrowserSigninError, .noAuthenticatorProviderResonse)
         XCTAssertNil(provider.authenticationSession)
     }
 }

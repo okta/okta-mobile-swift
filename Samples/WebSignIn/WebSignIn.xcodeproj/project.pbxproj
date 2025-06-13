@@ -12,7 +12,7 @@
 		92088FA327A9938B00A4DC1B /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92088F9F27A9938B00A4DC1B /* SignInView.swift */; };
 		92088FA527A99C6700A4DC1B /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 92088FA427A99C6700A4DC1B /* AuthFoundation */; };
 		92088FA727A99C6700A4DC1B /* OAuth2Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 92088FA627A99C6700A4DC1B /* OAuth2Auth */; };
-		92088FA927A99C6700A4DC1B /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 92088FA827A99C6700A4DC1B /* WebAuthenticationUI */; };
+		92088FA927A99C6700A4DC1B /* BrowserSignin in Frameworks */ = {isa = PBXBuildFile; productRef = 92088FA827A99C6700A4DC1B /* BrowserSignin */; };
 		928255B727B292050066A4C4 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928255B627B292050066A4C4 /* RootView.swift */; };
 		928255B927B29C2B0066A4C4 /* ProfileDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928255B827B29C2B0066A4C4 /* ProfileDetailsViewModel.swift */; };
 		928255D827B30F2F0066A4C4 /* ProfileDetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928255D727B30F2F0066A4C4 /* ProfileDetailItemView.swift */; };
@@ -25,7 +25,7 @@
 		92DF178B279178AD00473E7E /* SingleSignOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF178A279178AD00473E7E /* SingleSignOnViewController.swift */; };
 		92DF179227917A0100473E7E /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 92DF179127917A0100473E7E /* AuthFoundation */; };
 		92DF179427917A0100473E7E /* OAuth2Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 92DF179327917A0100473E7E /* OAuth2Auth */; };
-		92DF179627917A0100473E7E /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 92DF179527917A0100473E7E /* WebAuthenticationUI */; };
+		92DF179627917A0100473E7E /* BrowserSignin in Frameworks */ = {isa = PBXBuildFile; productRef = 92DF179527917A0100473E7E /* BrowserSignin */; };
 		92DF179C2791C5E100473E7E /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B24752757FEAC007ABC1A /* TokenDetailViewController.swift */; };
 		92DF179D2791C5E100473E7E /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B24732757FBF0007ABC1A /* ProfileTableViewController.swift */; };
 		92DF17A22791C61A00473E7E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DF17A12791C61A00473E7E /* Profile.storyboard */; };
@@ -41,7 +41,7 @@
 		9653DCC5274C3008003C6E20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9653DCC3274C3008003C6E20 /* Main.storyboard */; };
 		9653DCC7274C3009003C6E20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9653DCC6274C3009003C6E20 /* Assets.xcassets */; };
 		9653DCCA274C3009003C6E20 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9653DCC8274C3009003C6E20 /* LaunchScreen.storyboard */; };
-		9653DCF2274C355E003C6E20 /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9653DCF1274C355E003C6E20 /* WebAuthenticationUI */; };
+		9653DCF2274C355E003C6E20 /* BrowserSignin in Frameworks */ = {isa = PBXBuildFile; productRef = 9653DCF1274C355E003C6E20 /* BrowserSignin */; };
 		9653DCF4274C3564003C6E20 /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 9653DCF3274C3564003C6E20 /* AuthFoundation */; };
 		9653DCF6274C3564003C6E20 /* OAuth2Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 9653DCF5274C3564003C6E20 /* OAuth2Auth */; };
 		9698F1F228259133002D50C2 /* BrowserSignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9698F1F128259133002D50C2 /* BrowserSignInTests.swift */; };
@@ -131,7 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92088FA927A99C6700A4DC1B /* WebAuthenticationUI in Frameworks */,
+				92088FA927A99C6700A4DC1B /* BrowserSignin in Frameworks */,
 				92088FA727A99C6700A4DC1B /* OAuth2Auth in Frameworks */,
 				92088FA527A99C6700A4DC1B /* AuthFoundation in Frameworks */,
 			);
@@ -141,7 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92DF179627917A0100473E7E /* WebAuthenticationUI in Frameworks */,
+				92DF179627917A0100473E7E /* BrowserSignin in Frameworks */,
 				92DF179427917A0100473E7E /* OAuth2Auth in Frameworks */,
 				92DF179227917A0100473E7E /* AuthFoundation in Frameworks */,
 			);
@@ -151,7 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9653DCF2274C355E003C6E20 /* WebAuthenticationUI in Frameworks */,
+				9653DCF2274C355E003C6E20 /* BrowserSignin in Frameworks */,
 				9653DCF4274C3564003C6E20 /* AuthFoundation in Frameworks */,
 				9653DCF6274C3564003C6E20 /* OAuth2Auth in Frameworks */,
 			);
@@ -407,7 +407,7 @@
 			packageProductDependencies = (
 				92088FA427A99C6700A4DC1B /* AuthFoundation */,
 				92088FA627A99C6700A4DC1B /* OAuth2Auth */,
-				92088FA827A99C6700A4DC1B /* WebAuthenticationUI */,
+				92088FA827A99C6700A4DC1B /* BrowserSignin */,
 			);
 			productName = "WebSignIn-macos";
 			productReference = 92088F8A27A9936D00A4DC1B /* WebSignIn (macOS).app */;
@@ -429,7 +429,7 @@
 			packageProductDependencies = (
 				92DF179127917A0100473E7E /* AuthFoundation */,
 				92DF179327917A0100473E7E /* OAuth2Auth */,
-				92DF179527917A0100473E7E /* WebAuthenticationUI */,
+				92DF179527917A0100473E7E /* BrowserSignin */,
 			);
 			productName = SingleSignOn;
 			productReference = 92DF175A2791785200473E7E /* SingleSignOn (iOS).app */;
@@ -449,7 +449,7 @@
 			);
 			name = "WebSignIn (iOS)";
 			packageProductDependencies = (
-				9653DCF1274C355E003C6E20 /* WebAuthenticationUI */,
+				9653DCF1274C355E003C6E20 /* BrowserSignin */,
 				9653DCF3274C3564003C6E20 /* AuthFoundation */,
 				9653DCF5274C3564003C6E20 /* OAuth2Auth */,
 			);
@@ -1148,9 +1148,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = OAuth2Auth;
 		};
-		92088FA827A99C6700A4DC1B /* WebAuthenticationUI */ = {
+		92088FA827A99C6700A4DC1B /* BrowserSignin */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = WebAuthenticationUI;
+			productName = BrowserSignin;
 		};
 		92DF179127917A0100473E7E /* AuthFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1160,13 +1160,13 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = OAuth2Auth;
 		};
-		92DF179527917A0100473E7E /* WebAuthenticationUI */ = {
+		92DF179527917A0100473E7E /* BrowserSignin */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = WebAuthenticationUI;
+			productName = BrowserSignin;
 		};
-		9653DCF1274C355E003C6E20 /* WebAuthenticationUI */ = {
+		9653DCF1274C355E003C6E20 /* BrowserSignin */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = WebAuthenticationUI;
+			productName = BrowserSignin;
 		};
 		9653DCF3274C3564003C6E20 /* AuthFoundation */ = {
 			isa = XCSwiftPackageProductDependency;

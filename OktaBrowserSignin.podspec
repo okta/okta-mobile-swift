@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
-    s.name             = "OktaWebAuthenticationUI"
-    s.module_name      = "WebAuthenticationUI"
+    s.name             = "OktaBrowserSignin"
+    s.module_name      = "BrowserSignin"
     s.version          = "2.0.0"
-    s.summary          = "Okta Web Authentication UI"
+    s.summary          = "Okta Browser Sign In UI"
     s.description      = <<-DESC
 Authenticate users using web-based OIDC.
                          DESC
@@ -24,8 +24,8 @@ Authenticate users using web-based OIDC.
     s.authors       = { "Okta Developers" => "developer@okta.com"}
     s.source        = { :git => "https://github.com/okta/okta-mobile-swift.git", :tag => s.version.to_s }
 
-    s.source_files  = "Sources/WebAuthenticationUI/**/*.swift"
-    s.resource_bundles = { "WebAuthenticationUI" => "Sources/WebAuthenticationUI/Resources/**/*" }
+    s.source_files  = "Sources/BrowserSignin/**/*.swift"
+    s.resource_bundles = { "BrowserSignin" => "Sources/BrowserSignin/Resources/**/*" }
     s.swift_versions = ['5.10', '6.0']
     s.prefix_header_file = false
 

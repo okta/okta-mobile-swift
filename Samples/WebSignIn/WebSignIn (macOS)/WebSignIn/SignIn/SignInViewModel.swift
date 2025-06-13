@@ -12,7 +12,7 @@
 
 import Foundation
 import Combine
-import WebAuthenticationUI
+import BrowserSignin
 import AuthenticationServices
 
 final class SignInViewModel: ObservableObject {
@@ -24,7 +24,7 @@ final class SignInViewModel: ObservableObject {
     @Published private(set) var signInError: Error?
     @Published private(set) var signedIn = Credential.default != nil
 
-    private let auth = WebAuthentication.shared
+    private let auth = BrowserSignin.shared
     private var cancellableSet: Set<AnyCancellable> = []
  
     init() {
