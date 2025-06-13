@@ -4,7 +4,7 @@ Create custom sign in experiences using OAuth2 authentication flows.
 
 ## Overview
 
-Authenticating using a web browser and the `WebAuthenticationUI` library is quick and easy, but there are times when you need to craft more custom sign in experiences. For example, you may want to sign a user in across multiple applications, or enable users to sign in on a tvOS application. These advanced use-cases are supported through a variety of authentication flows.
+Authenticating using a web browser and the `BrowserSignin` library is quick and easy, but there are times when you need to craft more custom sign in experiences. For example, you may want to sign a user in across multiple applications, or enable users to sign in on a tvOS application. These advanced use-cases are supported through a variety of authentication flows.
 
 If you wish to have more control over the authentication process, you may wish to look into using an authentication flow directly.
 
@@ -67,4 +67,4 @@ All authorization flows support the use of a delegate, which enables parts of yo
 
 Some delegates, such as ``AuthorizationCodeFlowDelegate``, supports customizing the workflow through the use of a delegate. See the ``AuthorizationCodeFlowDelegate/authentication(flow:shouldAuthenticateUsing:)-9ux29`` or ``AuthorizationCodeFlowDelegate/authentication(flow:customizeUrl:)-9f4xy`` functions for more details.
 
-Additionally, convenience libraries such as `WebAuthenticationUI` provides access to the underlying flow, giving convenient access to customizing the flow for your own application's needs. For more information, please see the documentation for that library.
+Additionally, convenience libraries such as `BrowserSignin` provides access to the underlying flow, giving convenient access to customizing the flow for your own application's needs. For more information, please see the documentation for that library.

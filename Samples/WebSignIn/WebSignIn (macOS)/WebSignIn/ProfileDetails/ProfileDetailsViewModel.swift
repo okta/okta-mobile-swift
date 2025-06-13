@@ -12,7 +12,7 @@
 
 import Foundation
 import Combine
-import WebAuthenticationUI
+import BrowserSignin
 
 final class ProfileDetailsViewModel: ObservableObject {
     var givenName: String? { userInfo?.givenName }

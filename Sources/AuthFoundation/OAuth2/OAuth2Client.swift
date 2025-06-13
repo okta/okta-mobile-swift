@@ -52,7 +52,7 @@ public final class OAuth2Client: UsesDelegateCollection {
     public let configuration: Configuration
     
     /// Additional HTTP headers to include in outgoing network requests.
-    nonisolated(unsafe) public var additionalHttpHeaders: [String: String]? {
+    nonisolated public var additionalHttpHeaders: [String: String]? {
         get {
             lock.withLock {
                 _additionalHttpHeaders
@@ -428,8 +428,8 @@ extension OAuth2Client: APIClient {
 
     @_documentation(visibility: private)
     public func decode<T>(_ type: T.Type, from data: Data, parsing context: (any APIParsingContext)? = nil) throws -> T where T: Decodable {
-        var info: [CodingUserInfoKey: Any] = context?.codingUserInfo ?? [:]
-        
+        var info: [CodingUserInfoKey: any Sendable] = context?.codingUserInfo as? [CodingUserInfoKey: any Sendable] ?? [:]
+
         if let tokenRequest = context as? any OAuth2TokenRequest,
            info[.tokenContext] == nil
         {

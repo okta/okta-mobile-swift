@@ -35,7 +35,7 @@ The latest release can always be found on the [releases page][github-releases].
 
 If you run into problems using the SDK, you can:
 
-* Review the API documentation for [AuthFoundation][authfoundation-docs], [OAuth2Auth][oauth2auth-docs], [OktaDirectAuth][oktadirectauth-docs], [OktaIdxAuth][oktaidxauth-docs], and [WebAuthenticationUI][webauthenticationui-docs]
+* Review the API documentation for [AuthFoundation][authfoundation-docs], [OAuth2Auth][oauth2auth-docs], [OktaDirectAuth][oktadirectauth-docs], [OktaIdxAuth][oktaidxauth-docs], and [BrowserSignin][browsersignin-docs]
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
 
@@ -48,14 +48,14 @@ graph BT;
   AuthFoundation-->OAuth2Auth;
   AuthFoundation-->OktaDirectAuth;
   AuthFoundation-->OktaIdxAuth;
-  OAuth2Auth-->WebAuthenticationUI;
+  OAuth2Auth-->BrowserSignin;
 ```
 
 - [AuthFoundation][authfoundation-docs] -- Common classes for managing credentials and used as a foundation for other libraries.
 - [OAuth2Auth][oauth2auth-docs] -- OAuth2 authentication capabilities for advanced use-cases.
 - [OktaDirectAuth][oktadirectauth-docs] -- Direct Authentication capabilities for advanced browserless authentication.
 - [OktaIdxAuth][oktaidxauth-docs] -- Okta's Identity Engine support using Okta's IDX API for native browserless authentication.
-- [WebAuthenticationUI][webauthenticationui-docs] -- Authenticate users using web-based OIDC flows.
+- [BrowserSignin][browsersignin-docs] -- Authenticate users using web-based OIDC flows.
 
 This SDK enables you to build or support a myriad of different authentication flows and approaches.
 
@@ -114,7 +114,7 @@ dependencies: [
 Simply add the following line to your `Podfile`:
 
 ```ruby
-pod 'OktaWebAuthenticationUI'
+pod 'OktaBrowserSignin'
 ```
 
 Then install it into your project:
@@ -170,17 +170,17 @@ Before authenticating your user, you need to create your client configuration us
 </plist>
 ```
 
-Alternatively, you can supply those values to the constructor the `WebAuthentication` we're about to discuss in the next section.
+Alternatively, you can supply those values to the constructor the `BrowserSignin` we're about to discuss in the next section.
 
 #### Create a Web Authentication session
 
-Once you've configured your application settings within your `Okta.plist` file, a shared configuration is automatically available through the `WebAuthentication.shared` singleton property. With that in place, you can use the convenience `WebAuthentication.signIn(from:)` method to prompt the user to sign in.
+Once you've configured your application settings within your `Okta.plist` file, a shared configuration is automatically available through the `BrowserSignin.shared` singleton property. With that in place, you can use the convenience `BrowserSignin.signIn(from:)` method to prompt the user to sign in.
 
 ```swift
-import WebAuthenticationUI
+import BrowserSignin
 
 func signIn() async throws {
-    let token = try await WebAuthentication.signIn(from: view.window)
+    let token = try await BrowserSignin.signIn(from: view.window)
     let credential = try Credential.store(token)
 }
 ```
@@ -434,7 +434,7 @@ Some features are not yet supported in Linux, including but not limited to:
 | Feature | Comments |
 | ------- | -------- |
 | Keychain Token Storage | The UserDefaults token storage mechanism is supported, but encryption / security at rest is not implemented yet. |
-| Browser Authentication | The WebAuthenticationUI library only targets Apple platforms, and is unavailable in Linux |
+| Browser Authentication | The BrowserSignin library only targets Apple platforms, and is unavailable in Linux |
 | JWT Validation | The Linux-compatible crypto libraries have not yet been integrated into JWT validation |
 | PKCE | PKCE key and signature generation has not been implemented in Linux yet |
 
@@ -492,7 +492,7 @@ We are happy to accept contributions and PRs! Please see the [contribution guide
 [oktadirectauth-docs]: https://okta.github.io/okta-mobile-swift/development/oktadirectauth/
 [oktaidxauth-docs]: https://okta.github.io/okta-mobile-swift/development/oktaidxauth/
 [oauth2auth-docs]: https://okta.github.io/okta-mobile-swift/development/oauth2auth/
-[webauthenticationui-docs]: https://okta.github.io/okta-mobile-swift/development/webauthenticationui/
+[browsersignin-docs]: https://okta.github.io/okta-mobile-swift/development/browsersignin/
 [Rate Limiting at Okta]: https://developer.okta.com/docs/api/getting_started/rate-limits
 [okta-library-versioning]: https://developer.okta.com/code/library-versions
 [support-policy]: #support-policy

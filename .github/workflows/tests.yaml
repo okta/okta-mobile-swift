@@ -310,22 +310,22 @@ jobs:
           -clonedSourcePackagesDirPath .build/ClonedSources \
           -scheme OAuth2Auth \
           -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
-    - name: Build WebAuthenticationUI
+    - name: Build BrowserSignin
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
         set -o pipefail && xcrun xcodebuild build-for-testing \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
-          -scheme WebAuthenticationUI \
+          -scheme BrowserSignin \
           -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
-    - name: Test WebAuthenticationUI
+    - name: Test BrowserSignin
       if: "!contains(matrix.destination, 'tvOS') && !contains(matrix.destination, 'watchOS')"
       run: |
         set -o pipefail && xcrun xcodebuild test-without-building \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
           -derivedDataPath .build/DerivedData \
           -clonedSourcePackagesDirPath .build/ClonedSources \
-          -scheme WebAuthenticationUI \
+          -scheme BrowserSignin \
           -destination "$DESTINATION" 2>&1 | tee -a ".build/ci-logs/${LOG_NAME}.log" | xcbeautify --renderer github-actions
     - name: Upload Logs
       if: failure()
@@ -376,13 +376,13 @@ jobs:
           -derivedDataPath ~/Build/DerivedData \
           -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -scheme OAuth2Auth | xcbeautify --renderer github-actions
-    - name: WebAuthenticationUI
+    - name: BrowserSignin
       run: |
         set -o pipefail
         xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
           -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-          -scheme WebAuthenticationUI | xcbeautify --renderer github-actions
+          -scheme BrowserSignin | xcbeautify --renderer github-actions
     - name: Compress DocC archive
       run: |
         for archive in $(find ~/Build/DerivedData/Build/Products -type d -name '*.doccarchive'); do
@@ -409,8 +409,8 @@ jobs:
       with:
         name: OAuth2Auth.doccarchive.zip
         path: ~/Build/OAuth2Auth.doccarchive.zip
-    - name: Upload WebAuthenticationUI DocC Archive
+    - name: Upload BrowserSignin DocC Archive
       uses: actions/upload-artifact@v4
       with:
-        name: WebAuthenticationUI.doccarchive.zip
-        path: ~/Build/WebAuthenticationUI.doccarchive.zip
+        name: BrowserSignin.doccarchive.zip
+        path: ~/Build/BrowserSignin.doccarchive.zip

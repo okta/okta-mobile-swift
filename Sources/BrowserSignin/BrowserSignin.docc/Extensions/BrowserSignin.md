@@ -1,4 +1,4 @@
-# ``WebAuthenticationUI/WebAuthentication``
+# ``BrowserSignin/BrowserSignin``
 
 ## Topics
 

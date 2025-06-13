@@ -99,18 +99,18 @@ var package = Package(
 
 #if canImport(UIKit) || canImport(AppKit)
 package.targets.append(contentsOf: [
-    .target(name: "WebAuthenticationUI",
+    .target(name: "BrowserSignin",
             dependencies: [
                 .target(name: "OAuth2Auth")
             ],
             resources: [.process("Resources")],
             swiftSettings: .libraryTarget),
-    .testTarget(name: "WebAuthenticationUITests",
-                dependencies: ["WebAuthenticationUI", "TestCommon"],
+    .testTarget(name: "BrowserSigninTests",
+                dependencies: ["BrowserSignin", "TestCommon"],
                 resources: [ .copy("MockResponses") ],
                 swiftSettings: .testTarget)
 ])
 package.products.append(
-    .library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"])
+    .library(name: "BrowserSignin", targets: ["BrowserSignin"])
 )
 #endif

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2025-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,20 +10,10 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import Foundation
+@_documentation(visibility: private)
+@available(*, deprecated, renamed: "BrowserSignin")
+typealias WebAuthentication = BrowserSignin
 
-#if !SWIFT_PACKAGE
-private let sharedLocalizationBundle: Bundle = {
-    Bundle(for: WebAuthentication.self)
-}()
-#endif
-
-extension Bundle {
-    static var webAuthenticationUI: Bundle {
-        #if SWIFT_PACKAGE
-        Bundle.module
-        #else
-        sharedLocalizationBundle
-        #endif
-    }
-}
+@_documentation(visibility: private)
+@available(*, deprecated, renamed: "BrowserSigninError")
+typealias WebAuthenticationError = BrowserSigninError

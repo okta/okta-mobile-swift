@@ -55,15 +55,15 @@ When you no longer need a credential (usually when a user chooses to sign out), 
 
 * ``Credential/revoke(type:)``
 * ``Credential/remove()``
-* `WebAuthentication/signOut(from:credential:)` (when using WebAuthenticationUI)
+* `BrowserSignin/signOut(from:credential:)` (when using BrowserSignin)
 
 ### When to use `signOut`
 
-When authenticating using a web browser, there are circumstances where cookies representing the user's session are saved within the browser. To properly sign out in this situation, it's important to use the `WebAuthentication` class' `signOut` function to ensure those cookies are properly reset.
+When authenticating using a web browser, there are circumstances where cookies representing the user's session are saved within the browser. To properly sign out in this situation, it's important to use the `BrowserSignin` class' `signOut` function to ensure those cookies are properly reset.
 
 ### When to use `revoke`
 
-When authenticating a user via a browser without cookies (see the `ephemeralSession` option on `WebAuthentication`), or when authenticating using a non-browser flow, signing a user out is simpler when using the ``Credential/revoke(type:)`` function. See that function's documentation for more information.
+When authenticating a user via a browser without cookies (see the `ephemeralSession` option on `BrowserSignin`), or when authenticating using a non-browser flow, signing a user out is simpler when using the ``Credential/revoke(type:)`` function. See that function's documentation for more information.
 
 ### When to use `remove`
 

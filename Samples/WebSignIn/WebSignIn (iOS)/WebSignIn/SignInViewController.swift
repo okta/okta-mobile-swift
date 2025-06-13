@@ -11,7 +11,7 @@
 //
 
 import UIKit
-import WebAuthenticationUI
+import BrowserSignin
 
 class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
@@ -19,7 +19,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var ephemeralSwitch: UISwitch!
     @IBOutlet weak var clientIdLabel: UILabel!
 
-    let auth = WebAuthentication.shared
+    let auth = BrowserSignin.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

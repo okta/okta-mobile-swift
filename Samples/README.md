@@ -17,6 +17,6 @@ Sample | Summary |
 [DeviceAuthSignIn Samples](DeviceAuthSignIn) | Add sign-in using the OAuth 2.0 device authorization grant flow to your tvOS app.
 [OIDCMigration Sample](OIDCMigration) | Migrate your app to the new Okta Client SDK for Swift from legacy SDKs.
 [UserPasswordSignIn Samples](UserPasswordSignIn) | Add sign-in with a username and password to a macOS app.
-[WebSignIn Samples](WebSignIn) | Add web-based sign in and single sign-on that uses the token exchange flow from the OAuth 2.0 specification with the WebAuthenticationUI Library.
+[WebSignIn Samples](WebSignIn) | Add web-based sign in and single sign-on that uses the token exchange flow from the OAuth 2.0 specification with the BrowserSignin Library.
 [DirectAuthSignIn Samples](DirectAuthSignIn) | Add native sign-in and sign out that uses the Okta Direct Authentication API (EA) using the OktaDirectAuth library.
 [IdxAuthSignIn Samples](IdxAuthSignIn) | Add native sign-in and sign out that uses the Okta Identity Engine via the IDX Authentication API.

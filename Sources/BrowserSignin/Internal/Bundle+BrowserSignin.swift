@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2022-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -11,16 +11,19 @@
 //
 
 import Foundation
-import AuthFoundation
 
-extension SDKVersion.Name {
-    @_documentation(visibility: internal)
-    public static let webAuthenticationUI = SDKVersion.Name("okta-webauthenticationui-swift")
-}
+#if !SWIFT_PACKAGE
+private let sharedLocalizationBundle: Bundle = {
+    Bundle(for: BrowserSignin.self)
+}()
+#endif
 
-extension SDKVersion {
-    @_documentation(visibility: private)
-    public static let webAuthenticationUI: SDKVersion? = {
-        register(.webAuthenticationUI, version: "2.0.0")
-    }()
+extension Bundle {
+    static var browserSignin: Bundle {
+        #if SWIFT_PACKAGE
+        Bundle.module
+        #else
+        sharedLocalizationBundle
+        #endif
+    }
 }

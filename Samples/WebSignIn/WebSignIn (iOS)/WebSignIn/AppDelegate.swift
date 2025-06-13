@@ -11,7 +11,7 @@
 //
 
 import UIKit
-import WebAuthenticationUI
+import BrowserSignin
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

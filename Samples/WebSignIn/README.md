@@ -2,11 +2,11 @@
 
 ## Abstract
 
-Add web-based sign in and single sign-on that uses the token exchange flow from the OAuth 2.0 specification with the WebAuthenticationUI Library.
+Add web-based sign in and single sign-on that uses the token exchange flow from the OAuth 2.0 specification with the BrowserSignin Library.
 
 ## Overview
 
-The Okta Client SDK for Swift provides a libraries and utility classes that manage standard sign-on flows. The `WebAuthentication` class manages the web-based sign-on process, while the `TokenExchangeFlow` class manages the OAuth 2.0 token exchange flow used to implement Single Sign On (SSO).
+The Okta Client SDK for Swift provides a libraries and utility classes that manage standard sign-on flows. The `BrowserSignin` class manages the web-based sign-on process, while the `TokenExchangeFlow` class manages the OAuth 2.0 token exchange flow used to implement Single Sign On (SSO).
 
 The sample contains two different targets:
 

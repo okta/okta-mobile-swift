@@ -13,18 +13,18 @@
 import XCTest
 @testable import AuthFoundation
 @testable import OAuth2Auth
-@testable import WebAuthenticationUI
+@testable import BrowserSignin
 
 @MainActor
-struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
+struct BrowserSigninProviderFactoryMock: BrowserSigninProviderFactory {
     private static var results: [String: Result<URL, any Error>?] = [:]
-    private static var providers: [String: WebAuthenticationProviderMock] = [:]
+    private static var providers: [String: BrowserSigninProviderMock] = [:]
     
     enum TestError: Error {
         case invalidTestName
     }
     
-    static func register(result: Result<URL, any Error>?, for webAuth: WebAuthentication) async throws {
+    static func register(result: Result<URL, any Error>?, for webAuth: BrowserSignin) async throws {
         guard let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
         else {
             throw TestError.invalidTestName
@@ -33,7 +33,7 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
         results[testName] = result
     }
     
-    static func provider(for webAuth: WebAuthentication) async -> WebAuthenticationProviderMock? {
+    static func provider(for webAuth: BrowserSignin) async -> BrowserSigninProviderMock? {
         guard let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
         else {
             return nil
@@ -42,9 +42,9 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
         return providers[testName]
     }
     
-    static func createWebAuthenticationProvider(for webAuth: WebAuthentication,
-                                                from window: WebAuthentication.WindowAnchor?,
-                                                usesEphemeralSession: Bool) async -> (any WebAuthenticationProvider)?
+    static func createWebAuthenticationProvider(for webAuth: BrowserSignin,
+                                                from window: BrowserSignin.WindowAnchor?,
+                                                usesEphemeralSession: Bool) async -> (any BrowserSigninProvider)?
     {
         let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
 
@@ -55,7 +55,7 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
             result = testResult
         }
 
-        let provider = WebAuthenticationProviderMock(from: window,
+        let provider = BrowserSigninProviderMock(from: window,
                                                      usesEphemeralSession: usesEphemeralSession,
                                                      result: result)
         if let testName {
@@ -66,8 +66,8 @@ struct WebAuthenticationProviderFactoryMock: WebAuthenticationProviderFactory {
     }
 }
 
-class WebAuthenticationProviderMock: @unchecked Sendable, WebAuthenticationProvider {
-    let anchor: WebAuthentication.WindowAnchor?
+class BrowserSigninProviderMock: @unchecked Sendable, BrowserSigninProvider {
+    let anchor: BrowserSignin.WindowAnchor?
     let usesEphemeralSession: Bool
     
     enum State {
@@ -79,7 +79,7 @@ class WebAuthenticationProviderMock: @unchecked Sendable, WebAuthenticationProvi
     var state: State = .initialized
     let result: Result<URL, any Error>?
     
-    init(from anchor: WebAuthentication.WindowAnchor?, usesEphemeralSession: Bool, result: Result<URL, any Error>? = nil) {
+    init(from anchor: BrowserSignin.WindowAnchor?, usesEphemeralSession: Bool, result: Result<URL, any Error>? = nil) {
         self.anchor = anchor
         self.usesEphemeralSession = usesEphemeralSession
         self.result = result
@@ -92,13 +92,13 @@ class WebAuthenticationProviderMock: @unchecked Sendable, WebAuthenticationProvi
         case .success(let url):
             return url
         case .failure(let error):
-            let error = WebAuthenticationError(error)
+            let error = BrowserSigninError(error)
             if error == .userCancelledLogin {
                 state = .cancelled
             }
             throw error
         case nil:
-            throw WebAuthenticationError.noAuthenticatorProviderResonse
+            throw BrowserSigninError.noAuthenticatorProviderResonse
         }
     }
     

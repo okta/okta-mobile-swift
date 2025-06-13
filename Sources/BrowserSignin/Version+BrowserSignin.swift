@@ -12,9 +12,15 @@
 
 import Foundation
 import AuthFoundation
-import OAuth2Auth
 
-protocol WebAuthenticationProvider: Sendable {
-    func open(authorizeUrl: URL, redirectUri: URL) async throws -> URL
-    func cancel()
+extension SDKVersion.Name {
+    @_documentation(visibility: internal)
+    public static let browserSignin = SDKVersion.Name("okta-browsersignin-swift")
+}
+
+extension SDKVersion {
+    @_documentation(visibility: private)
+    public static let browserSignin: SDKVersion? = {
+        register(.browserSignin, version: "2.0.0")
+    }()
 }

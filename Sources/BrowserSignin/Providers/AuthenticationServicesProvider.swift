@@ -48,14 +48,14 @@ extension ASWebAuthenticationSession: @retroactive @unchecked Sendable, Authenti
 #endif
 
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
-protocol WebAuthenticationProviderFactory {
-    static func createWebAuthenticationProvider(for webAuth: WebAuthentication,
-                                                from window: WebAuthentication.WindowAnchor?,
-                                                usesEphemeralSession: Bool) async throws -> (any WebAuthenticationProvider)?
+protocol BrowserSigninProviderFactory {
+    static func createWebAuthenticationProvider(for webAuth: BrowserSignin,
+                                                from window: BrowserSignin.WindowAnchor?,
+                                                usesEphemeralSession: Bool) async throws -> (any BrowserSigninProvider)?
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
-final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
+final class AuthenticationServicesProvider: NSObject, BrowserSigninProvider {
     private(set) var authenticationSession: (any AuthenticationServicesProviderSession)? {
         get {
             lock.withLock { _authenticationSession }
@@ -65,7 +65,7 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
         }
     }
 
-    init(from window: WebAuthentication.WindowAnchor?, usesEphemeralSession: Bool = false) throws {
+    init(from window: BrowserSignin.WindowAnchor?, usesEphemeralSession: Bool = false) throws {
         #if os(iOS) || os(macOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
         self.anchor = window
         #endif
@@ -96,7 +96,7 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
             Task { @MainActor in
                 if #available(iOS 13.4, macCatalyst 13.4, macOS 10.15.4, *) {
                     guard session.canStart else {
-                        continuation.resume(throwing: WebAuthenticationError.cannotStartBrowserSession)
+                        continuation.resume(throwing: BrowserSigninError.cannotStartBrowserSession)
                         return
                     }
                 }
@@ -119,11 +119,11 @@ final class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider 
         if let error = error as? OAuth2ServerError {
             return .failure(error)
         } else if let error = error {
-            return .failure(WebAuthenticationError(error))
+            return .failure(BrowserSigninError(error))
         }
         
         guard let url = url else {
-            return .failure(WebAuthenticationError.noAuthenticatorProviderResonse)
+            return .failure(BrowserSigninError.noAuthenticatorProviderResonse)
         }
         
         return .success(url)

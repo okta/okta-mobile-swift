@@ -11,7 +11,7 @@
 //
 
 import UIKit
-import WebAuthenticationUI
+import BrowserSignin
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
