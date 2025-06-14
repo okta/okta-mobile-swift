@@ -39,7 +39,7 @@ public final class OAuth2Client: UsesDelegateCollection {
     ///
     /// This is used by any class that needs to perform network operations and needs an instance of `URLSession` to be able to do so. If this value is `nil`, the behavior is to create a new instance as necessary. Assign a value to this property if you want to explicitly use your own session.
     ///
-    /// > Important: This value only overrides the default session, and will not supercede any explicitly-assigned value supplied to the initializer, such as ``OAuth2Client/init(_:state:session:)``.
+    /// > Important: This value only overrides the default session, and will not supercede any explicitly-assigned value supplied to the initializer, such as ``OAuth2Client/init(_:session:)``.
     public static var defaultSession: (any URLSessionProtocol)? {
         get { lock.withLock { _defaultSession } }
         set { lock.withLock { _defaultSession = newValue } }
@@ -133,6 +133,7 @@ public final class OAuth2Client: UsesDelegateCollection {
     /// Retrieves the org's OpenID configuration.
     ///
     /// If this value has recently been retrieved, the cached result is returned.
+    /// - Returns: The OpenID configuration for the org identified by the client's base URL.
     public func openIdConfiguration() async throws -> OpenIdConfiguration {
         try await openIdConfigurationAction.perform {
             try await OpenIdConfigurationRequest(url: configuration.discoveryURL)
@@ -251,7 +252,6 @@ public final class OAuth2Client: UsesDelegateCollection {
     /// Fetches the ``UserInfo`` associated with the given token.
     /// - Parameters:
     ///   - token: Token to retrieve user information for.
-    ///   - completion: Completion block invoked with the result.
     public func userInfo(token: Token) async throws -> UserInfo {
         let request = try UserInfo.Request(openIdConfiguration: try await openIdConfiguration(),
                                            token: token)
@@ -261,7 +261,7 @@ public final class OAuth2Client: UsesDelegateCollection {
     /// Retrieves the org's ``JWKS`` key configuration.
     ///
     /// If this value has recently been retrieved, the cached result is returned.
-    /// - Parameter completion: Completion block invoked with the result.
+    /// - Returns: The ``JWKS`` configuration for the org identified by the client's base URL.
     public func jwks() async throws -> JWKS {
         try await jwksAction.perform {
             try await KeysRequest(openIdConfiguration: try await openIdConfiguration(),
@@ -316,7 +316,6 @@ extension OAuth2Client {
     /// Asynchronously retrieves the org's OpenID configuration.
     ///
     /// If this value has recently been retrieved, the cached result is returned.
-    /// - Returns: The OpenID configuration for the org identified by the client's base URL.
     /// - Parameter completion: Completion block invoked with the result.
     public func openIdConfiguration(completion: @Sendable @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
         Task {
@@ -331,7 +330,6 @@ extension OAuth2Client {
     /// Asynchronously retrieves the org's ``JWKS`` key configuration.
     ///
     /// If this value has recently been retrieved, the cached result is returned.
-    /// - Returns: The ``JWKS`` configuration for the org identified by the client's base URL.
     /// - Parameter completion: Completion block invoked with the result.
     public func jwks(completion: @Sendable @escaping (Result<JWKS, OAuth2Error>) -> Void) {
         Task {

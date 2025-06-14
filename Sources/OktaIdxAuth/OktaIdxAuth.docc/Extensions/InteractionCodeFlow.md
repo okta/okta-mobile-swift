@@ -1,20 +1,23 @@
-# ``OktaIdx/InteractionCodeFlow``
-
-@Metadata {
-    @DocumentationExtension(mergeBehavior: append)
-}
+# ``OktaIdxAuth/InteractionCodeFlow``
 
 ## Topics
 
 ### Essentials
 
-- ``init(issuer:clientId:scopes:redirectUri:additionalParameters:)``
-- ``start(options:)``
+- ``init()``
+- ``init(plist:)``
+- ``init(client:additionalParameters:)``
+- ``init(issuerURL:clientId:scope:redirectUri:additionalParameters:)``
+- ``start(with:)``
 - ``resume()``
-- ``exchangeCode(redirect:)``
+- ``resume(with:)->Response``
+- ``resume(with:)->InteractionCodeFlow.RedirectResult``
+- ``resume(with:)->Token``
 
 ### Completion Block Functions
 
-- ``start(options:completion:)``
+- ``start(with:completion:)``
 - ``resume(completion:)``
-- ``exchangeCode(redirect:completion:)``
+- ``resume(with:completion:)-(Response,_)``
+- ``resume(with:completion:)-(URL,_)``
+- ``resume(with:completion:)-(Remediation,_)``

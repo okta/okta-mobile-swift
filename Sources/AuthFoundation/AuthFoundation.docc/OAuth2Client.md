@@ -31,4 +31,4 @@ When using the ``Credential`` class to manage operations with a user's ``Token``
 If you want to manually assign your own ``OAuth2Client`` to a credential, you can either:
 
 1. Create a credential manually using the ``Credential/init(token:oauth2:)`` initializer. Note that you'll need to ensure the token and client's configuration match (e.g. the same client ID and base URL), otherwise an exception may be thrown.
-2. Implement the ``CredentialDataSource`` protocol and supply a custom URLSession instance in the ``CredentialDataSource/urlSession(for:)-4uxwd`` method.
+2. Implement the ``CredentialDataSource`` protocol and supply a custom URLSession instance in the ``CredentialDataSource/urlSession(for:)`` method.

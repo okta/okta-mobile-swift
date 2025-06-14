@@ -102,6 +102,8 @@ extension AuthorizationCodeFlow {
         /// - Parameters:
         ///   - state: State string to use, or `nil` to accept an automatically generated default.
         ///   - maxAge: The maximum age an ID token can be when authenticating.
+        ///   - acrValues: Optional ACR values to use.
+        ///   - additionalParameters: Optional parameters to include in all requests to the Authoriation Server.
         public init(state: String? = nil,
                     maxAge: TimeInterval? = nil,
                     acrValues: ClaimCollection<[String]?> = nil,
@@ -212,7 +214,7 @@ extension AuthorizationCodeFlow {
     
     /// Defines how a user will be prompted to sign in.
     ///
-    /// This is used with the ``BrowserSignin/Option/prompt(_:)`` enumeration. For more information, see the [API documentation for this parameter](https://developer.okta.com/docs/reference/api/oidc/#parameter-details).
+    /// This is used with the ``AuthorizationCodeFlow/Context-swift.struct/prompt`` enumeration. For more information, see the [API documentation for this parameter](https://developer.okta.com/docs/reference/api/oidc/#parameter-details).
     public enum Prompt: String, Sendable {
         /// If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
         case none

@@ -21,6 +21,8 @@ public protocol Capability: Sendable, Equatable, Hashable {
 }
 
 /// Represents the enumeration type expected within a ``CapabilityCollection``.
+///
+/// See ``Capability`` for more information.
 public protocol IsCapabilityType {
     /// Returns the current capability's underlying value if it matches the given type.
     /// - Parameter type: The capability type requested.
@@ -37,6 +39,8 @@ public protocol IsCapabilityType {
 }
 
 /// A collection of capabilities that can be associated with some parent object, such as an ``Authenticator`` or ``Remediation``.
+///
+/// See ``Capability`` for more information.
 public protocol CapabilityCollection: AnyObject {
     @_documentation(visibility: internal)
     associatedtype CapabilityType: IsCapabilityType
@@ -50,6 +54,7 @@ public protocol CapabilityCollection: AnyObject {
 }
 
 extension Authenticator: CapabilityCollection {
+    /// Enumeration describing the individual type of capability available within ``Authenticator`` objects, and its associated underlying ``Capability`` instance.
     public enum CapabilityType: IsCapabilityType, Sendable, Equatable, Hashable {
         case sendable(_ capability: SendCapability)
         case resendable(_ capability: ResendCapability)
@@ -65,11 +70,15 @@ extension Authenticator: CapabilityCollection {
     /// Exposes the authenticator's capability to send a code.
     ///
     /// If this authenticator is incapable of sending a code, this value will be `nil`.
+    ///
+    /// See ``Capability`` for more information.
     public var sendable: SendCapability? { capabilities(of: SendCapability.self).first }
 
     /// Exposes the authenticator's capability to resend a code.
     ///
     /// If this authenticator is incapable of performing this action, this value will be `nil`.
+    ///
+    /// See ``Capability`` for more information.
     public var resendable: ResendCapability? { capabilities(of: ResendCapability.self).first }
 
     /// Exposes the authenticator's capability to recover this authenticator.
@@ -103,6 +112,7 @@ extension Authenticator: CapabilityCollection {
 }
 
 extension Remediation: CapabilityCollection {
+    /// Enumeration describing the individual type of capability available within ``Remediation`` objects, and its associated underlying ``Capability`` instance.
     public enum CapabilityType: IsCapabilityType, Sendable, Equatable, Hashable {
         case pollable(_ capability: PollCapability)
         case socialIdp(_ capability: SocialIDPCapability)

@@ -22,7 +22,7 @@ public final class Authenticator: Sendable, Equatable, Hashable {
     /// The user-visible name to use for this authenticator enrollment.
     public let displayName: String?
     
-    /// The type of this authenticator, or ``Kind/unknown`` if the type isn't represented by this enumeration.
+    /// The type of this authenticator, or ``Kind/other(type:)`` if the type isn't known.
     public let type: Kind
     
     /// The key name for the authenticator

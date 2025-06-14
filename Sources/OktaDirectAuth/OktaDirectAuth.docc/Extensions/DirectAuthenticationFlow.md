@@ -33,9 +33,10 @@ case .mfaRequired(_):
 
 ## Handling the authentication workflow
 
-Authentication factors are separated into two groups:
-* ``PrimaryFactor`` -- Used for initial authentication when calling ``start(_:with:)`` (or ``start(_:with:completion:)`` when using blocks)
-* ``SecondaryFactor`` -- Used for supplying additional MFA factors, with the ``resume(_:with:)`` function (or ``resume(_:with:completion:)`` when using blocks)
+Authentication factors are separated into three groups:
+* ``PrimaryFactor`` -- Used for initial authentication when calling ``start(_:with:context:)`` (or ``start(_:with:context:completion:)`` when using blocks).
+* ``SecondaryFactor`` -- Used for supplying additional MFA factors, with the ``resume(with:)-(SecondaryFactor)`` function (or ``resume(with:completion:)-(SecondaryFactor,_)`` when using blocks).
+* ``ContinuationFactor`` -- Used when an authentication factor requires user or develoepr interaction to continue authentication, using the ``resume(with:)-(ContinuationFactor)`` function (or ``resume(with:completion:)-(ContinuationFactor,_)`` when using blocks).
 
 Each of the fuctions using these factors returns an instance of ``Status``, which indicates whether or not authentication is successful, or if multiple factors are required.
 
@@ -47,22 +48,28 @@ Each of the fuctions using these factors returns an instance of ``Status``, whic
 
 - ``DirectAuthenticationFlow/init()``
 - ``DirectAuthenticationFlow/init(plist:)``
-- ``DirectAuthenticationFlow/init(issuer:clientId:scopes:supportedGrants:)``
-- ``DirectAuthenticationFlow/init(supportedGrants:client:)``
+- ``DirectAuthenticationFlow/init(issuerURL:clientId:scope:supportedGrants:additionalParameters:)``
+- ``DirectAuthenticationFlow/init(client:supportedGrants:additionalParameters:)``
 
 ### Starting MFA or signing in with 1FA
 
-- ``DirectAuthenticationFlow/start(_:with:)``
-- ``DirectAuthenticationFlow/start(_:with:completion:)``
+- ``DirectAuthenticationFlow/start(_:with:context:)``
+- ``DirectAuthenticationFlow/start(_:with:context:completion:)``
 - ``DirectAuthenticationFlow/PrimaryFactor``
 - ``DirectAuthenticationFlow/OOBChannel``
 
-### Continuing sign in with MFA
+### Resuming sign in with MFA
 
-- ``DirectAuthenticationFlow/resume(_:with:)``
-- ``DirectAuthenticationFlow/resume(_:with:completion:)``
+- ``DirectAuthenticationFlow/resume(with:)-(SecondaryFactor)``
+- ``DirectAuthenticationFlow/resume(with:completion:)-(SecondaryFactor,_)``
 - ``DirectAuthenticationFlow/SecondaryFactor``
 - ``DirectAuthenticationFlow/OOBChannel``
+
+### Continuing authenticating a factor
+
+- ``DirectAuthenticationFlow/resume(with:)-(ContinuationFactor)``
+- ``DirectAuthenticationFlow/resume(with:completion:)-(ContinuationFactor,_)``
+- ``DirectAuthenticationFlow/ContinuationFactor``
 
 ### Sign in responses
 

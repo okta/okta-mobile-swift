@@ -41,7 +41,7 @@ public enum BrowserSigninError: Error {
 ///
 /// This simple class encapsulates the details of managing browser instances across iOS/macOS versions, coordinating with OAuth2 endpoints, and supporting a variety of conveniences when signing users into your application.
 ///
-/// The simplest way to authenticate a user is to use the ``shared`` property to access your default session, and calling ``signIn(from:)`` to present the browser to the user.
+/// The simplest way to authenticate a user is to use the ``shared`` property to access your default session, and calling ``signIn(from:context:)`` to present the browser to the user.
 ///
 /// ```swift
 /// let token = try await BrowserSignin.shared?.signIn(from: view.window)
@@ -161,7 +161,6 @@ public final class BrowserSignin {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - context: Context options used when composing the signout URL.
-    ///   - completion: Completion block that will be invoked when sign-out finishes.
     @discardableResult
     @MainActor
     public final func signOut(from window: WindowAnchor?,
@@ -373,6 +372,7 @@ extension BrowserSignin {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - context: Context options used when composing the signout URL.
+    ///   - completion: Completion block that will be invoked when sign-out finishes.
     public final func signOut(from window: WindowAnchor?,
                               context: SessionLogoutFlow.Context = .init(),
                               completion: @escaping (Result<URL, BrowserSigninError>) -> Void)
