@@ -16,7 +16,6 @@ import AuthFoundation
 extension URL {
     /// Convenience function to return an authorization code from the given URL.
     /// - Parameters:
-    ///   - redirectUri: Redirect URI to match against.
     ///   - state: State token to match against.
     ///   - configuration: OAuth2 client configuration to validate.
     /// - Returns: The authorization code for the given URI.

@@ -27,12 +27,12 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
     ///   - flow: The authentication flow that has finished.
     func authenticationFinished<Flow: DeviceAuthorizationFlow>(flow: Flow)
     
-    /// Called when a ``DeviceAuthorizationFlow/Context-swift.struct`` instance is returned from the ``DeviceAuthorizationFlow/start(completion:)`` method.
+    /// Called when a ``DeviceAuthorizationFlow/Context-swift.struct`` instance is returned from the ``DeviceAuthorizationFlow/start(with:)`` method.
     ///
     /// This context object is used to present the user with the user code, and verification URI, which will enable them to authorized the user from a different device.
     /// - Parameters:
     ///   - flow: The authentication flow that has finished.
-    ///   - context: The context to display to the user.
+    ///   - verification: The verification information to display to the user.
     func authentication<Flow: DeviceAuthorizationFlow>(flow: Flow, received verification: DeviceAuthorizationFlow.Verification)
 }
 
@@ -127,9 +127,7 @@ public actor DeviceAuthorizationFlow: AuthenticationFlow {
 
     /// Initiates a device authentication flow.
     ///
-    /// This method is used to begin an authentication session. The resulting ``Context-swift.struct`` object can be used to display the user code and URI necessary for them to complete authentication on a different device.
-    ///
-    /// The ``resume(with:completion:)`` method also uses this context, to poll the server to determine when the user approves the authorization request.
+    /// This method is used to begin an authentication session. The resulting ``Verification`` object can be used to display the user code and URI necessary for them to complete authentication on a different device.
     /// - Parameters:
     ///   - context: Optional context object used to customize this flow.
     public func start(with context: Context = .init()) async throws -> Verification {
@@ -161,9 +159,9 @@ public actor DeviceAuthorizationFlow: AuthenticationFlow {
         }
     }
 
-    /// Polls to determine when authorization completes, using the supplied ``Context-swift.struct`` instance.
+    /// Polls to determine when authorization completes, returning a token once it is authorized by a user out-of-band.
     ///
-    /// Once an authentication session has begun, using ``start(completion:)``, the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.
+    /// Once an authentication session has begun, using ``start(with:)``, the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.
     /// - Returns: The Token created as a result of exchanging an authorization code.
     public func resume() async throws -> Token {
         let client = client
@@ -256,13 +254,12 @@ public actor DeviceAuthorizationFlow: AuthenticationFlow {
 extension DeviceAuthorizationFlow {
     /// Asynchronously initiates a device authentication flow.
     ///
-    /// This method is used to begin an authentication session. The resulting ``Context-swift.struct`` object can be used to display the user code and URI necessary for them to complete authentication on a different device.
+    /// This method is used to begin an authentication session. The resulting ``Verification`` object can be used to display the user code and URI necessary for them to complete authentication on a different device.
     ///
-    /// The ``resume(with:)`` method also uses this context, to poll the server to determine when the user approves the authorization request.
-    /// - Parameter context: Optional context object used to customize this flow
-    ///   - completion: Completion block for receiving the context.
-    /// - Returns: The information a user should be presented with to continue authorization on a different device.
-    nonisolated public func start(context: Context = .init(), completion: @escaping @Sendable (Result<Verification, OAuth2Error>) -> Void) {
+    /// - Parameters:
+    ///   - context: Optional context object used to customize this flow.
+    ///   - completion: Completion block for receiving the verification result which should be presented to the user.
+    nonisolated public func start(with context: Context = .init(), completion: @escaping @Sendable (Result<Verification, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await start(with: context)))
@@ -272,9 +269,9 @@ extension DeviceAuthorizationFlow {
         }
     }
 
-    /// Asynchronously polls to determine when authorization completes, using the supplied ``Context-swift.struct`` instance.
+    /// Asynchronously polls to determine when authorization completes, returning a token once it is authorized by a user out-of-band.
     ///
-    /// Once an authentication session has begun, using ``start()``, the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.
+    /// Once an authentication session has begun, using ``start(with:completion:)``, the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.
     /// - Parameters:
     ///   - completion: Completion block for receiving the token.
     nonisolated public func resume(completion: @escaping @Sendable (Result<Token, OAuth2Error>) -> Void) {

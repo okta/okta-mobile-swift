@@ -91,8 +91,6 @@ public final class Remediation: Sendable, Equatable, Hashable {
     /// This method is used to proceed through the authentication flow, using the data assigned to the nested fields' `value` to make selections.
     /// - Important:
     /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to process any response or error returned from this call.
-    /// - Parameters:
-    ///   - completion: Optional completion handler invoked when a response is received.
     public func proceed() async throws -> Response {
         guard let flow = flow else {
             throw InteractionCodeFlowError.invalidFlow
@@ -130,6 +128,7 @@ extension Remediation {
     /// Executes the remediation option and proceeds through the workflow using the supplied form parameters.
     ///
     /// This method is used to proceed through the authentication flow, using the data assigned to the nested fields' `value` to make selections.
+    /// - Parameter completion: Completion handler invoked when a ``Response`` is received.
     public func proceed(completion: @escaping @Sendable (Result<Response, any Error>) -> Void)
     {
         Task {

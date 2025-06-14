@@ -294,7 +294,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// Fetches the user info for this credential.
     ///
     /// In addition to passing the result to the provided completion block, a successful request will result in the ``Credential/userInfo`` property being set with the new value for later use.
-    /// - Parameter completion: Optional completion block to be invoked when a result is returned.
+    /// - Returns: The user info for this user.
     public func userInfo() async throws -> UserInfo {
         try await userInfoAction.perform {
             try await oauth2.userInfo(token: token)

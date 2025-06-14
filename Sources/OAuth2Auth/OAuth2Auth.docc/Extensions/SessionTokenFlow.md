@@ -1,9 +1,5 @@
 # ``OAuth2Auth/SessionTokenFlow``
 
-@Metadata {
-    @DocumentationExtension(mergeBehavior: append)
-}
-
 ## Usage
 
 When implementing OktaAuthNative, the `onStatusChange` argument is invoked for various state changes throughout authentication. Once the `.success` state is received, the returned status contains a session token which can be exchanged for full access tokens. Within that handler, you can use the ``SessionTokenFlow/start(with:context:)`` function to receive a token.

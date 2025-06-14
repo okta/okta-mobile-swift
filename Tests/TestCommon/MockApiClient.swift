@@ -39,7 +39,7 @@ class MockApiClient: APIClient, @unchecked Sendable {
     }
     
     func decode<T>(_ type: T.Type, from data: Data, parsing context: (any APIParsingContext)?) throws -> T where T : Decodable {
-        var info: [CodingUserInfoKey: Any] = context?.codingUserInfo ?? [:]
+        var info: [CodingUserInfoKey: any Sendable] = context?.codingUserInfo as? [CodingUserInfoKey: any Sendable] ?? [:]
         if info[.apiClientConfiguration] == nil {
             info[.apiClientConfiguration] = configuration
         }

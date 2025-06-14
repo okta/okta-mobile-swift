@@ -47,6 +47,7 @@ extension InteractionCodeFlow {
 
         /// Initializer for creating a context with a custom state string.
         /// - Parameters:
+        ///   - recoveryToken: Optional token to use when initiating password recovery.
         ///   - state: State string to use, or `nil` to accept an automatically generated default.
         ///   - maxAge: The maximum age an ID token can be when authenticating.
         ///   - acrValues: The ACR values, if any, which should be requested by the client.

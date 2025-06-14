@@ -106,7 +106,6 @@ extension Credential {
     /// Fetches the user info for this user.
     ///
     /// In addition to passing the result to the provided completion block, a successful request will result in the ``UserInfo`` property being set with the new value for later use.
-    /// - Returns: The user info for this user.
     /// - Parameter completion: Optional completion block to be invoked when a result is returned.
     public func userInfo(completion: @Sendable @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
         Task {

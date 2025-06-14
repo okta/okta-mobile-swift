@@ -122,8 +122,4 @@ You can use AuthFoundation when you want to:
 
 - ``DelegateCollection``
 - ``DebugAPIRequestObserver``
-- ``URLSessionDataTaskProtocol``
-- ``URLSessionProtocol``
 - ``UsesDelegateCollection``
-- ``WeakCollection``
-- ``Weak``

@@ -1,4 +1,4 @@
-# ``OktaIdx``
+# ``OktaIdxAuth``
 
 Authenticate users using policy-driven native authentication with the Okta Identity Engine.
 
@@ -36,24 +36,18 @@ Authenticate users using policy-driven native authentication with the Okta Ident
 
 - ``Capability``
 - ``CapabilityCollection``
-- ``IDXCapability``
-- ``AuthenticatorCapability``
-- ``RemediationCapability``
-- ``Capability/NumberChallenge``
-- ``Capability/PasswordSettings``
-- ``Capability/Pollable``
-- ``Capability/Profile``
-- ``Capability/Recoverable``
-- ``Capability/Sendable``
-- ``Capability/Resendable``
-- ``Capability/SocialIDP``
-- ``Capability/OTP``
+- ``Capability``
+- ``NumberChallengeCapability``
+- ``PasswordSettingsCapability``
+- ``PollCapability``
+- ``ProfileCapability``
+- ``RecoverCapability``
+- ``SendCapability``
+- ``ResendCapability``
+- ``SocialIDPCapability``
+- ``OTPCapability``
 
 ### Errors
 
 - ``IDXServerError``
 - ``InteractionCodeFlowError``
-
-### Deprecations
-
-- ``IDXClient``

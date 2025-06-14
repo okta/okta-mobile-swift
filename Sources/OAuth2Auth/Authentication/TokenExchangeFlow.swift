@@ -62,7 +62,6 @@ public actor TokenExchangeFlow: AuthenticationFlow {
     ///   - issuerURL: The issuer URL.
     ///   - clientId: The client ID.
     ///   - scope: The scopes to request.
-    ///   - audience: The audience of the authorization server.
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
     public init(issuerURL: URL,
                 clientId: String,
@@ -90,8 +89,8 @@ public actor TokenExchangeFlow: AuthenticationFlow {
 
     /// Initializer to construct a flow from a default audience and client.
     /// - Parameters:
-    ///   - audience: The audience of the authorization server.
     ///   - client: The `OAuth2Client` to use with this flow.
+    ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
     public init(client: OAuth2Client,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
@@ -104,7 +103,9 @@ public actor TokenExchangeFlow: AuthenticationFlow {
     }
     
     /// Asynchronously initiates a token exchange flow.
-    /// - Parameter tokens: Tokens to exchange. If empty, the method throws an error.
+    /// - Parameters:
+    ///   - tokens: Tokens to exchange. If empty, the method throws an error.
+    ///   - context: Optional context used to customize the flow's behavior.
     /// - Returns: The the token created as a result of exchanging the tokens.
     public func start(with tokens: [TokenType],
                       context: Context = .init()) async throws -> Token
@@ -175,10 +176,11 @@ extension TokenExchangeFlow: OAuth2ClientDelegate {
 
 extension TokenExchangeFlow {
     /// Initiates a token exchange flow.
-    ///
+    /// 
     /// This method is used to begin a token exchange.  This method is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - tokens: Tokens to exchange.
+    ///   - context: Optional context used to customize the flow's behavior.
     ///   - completion: Completion block for receiving the response.
     nonisolated public func start(with tokens: [TokenType],
                                   context: Context = .init(),
@@ -196,7 +198,7 @@ extension TokenExchangeFlow {
 
 extension OAuth2Client {
     /// Creates a new Token Exchange flow configured to use this OAuth2Client, using the supplied arguments.
-    /// - Parameter audience: Audience to configure the flow to use
+    /// - Parameter additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
     /// - Returns: Initialized authorization flow.
     public func tokenExchangeFlow(additionalParameters: [String: String]? = nil) -> TokenExchangeFlow
     {
