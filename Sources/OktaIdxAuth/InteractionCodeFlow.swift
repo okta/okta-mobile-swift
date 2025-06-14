@@ -344,8 +344,7 @@ extension InteractionCodeFlow {
     /// Starts a new authentication session. If the client is able to successfully interact with Okta Identity Engine, a ``context-swift.property`` is assigned, and the initial ``Response`` is returned.
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
-    ///   - completion: Completion handler invoked when a response is received.
-    /// - Returns: A ``Response``.
+    ///   - completion: Completion handler invoked when a ``Response`` is received.
     nonisolated public func start(with context: Context = .init(),
                                   completion: @escaping @Sendable (Result<Response, any Error>) -> Void)
     {
@@ -360,9 +359,9 @@ extension InteractionCodeFlow {
 
     /// Resumes the authentication state to identify the available remediation steps.
     ///
-    /// This method is usually performed after an ``InteractionCodeFlow`` is created in ``start(with:)``, but can also be called at any time to identify what next remediation steps are available to the user.
+    /// This method is usually performed after an ``InteractionCodeFlow`` is created in ``start(with:completion:)``, but can also be called at any time to identify what next remediation steps are available to the user.
     /// - Parameters:
-    ///   - completion: Completion handler invoked when a response is received.
+    ///   - completion: Completion handler invoked when a ``Response`` is received.
     nonisolated public func resume(completion: @escaping @Sendable (Result<Response, any Error>) -> Void) {
         Task {
             do {
@@ -374,9 +373,10 @@ extension InteractionCodeFlow {
     }
 
     /// Exchanges the successful response for a token.
-    ///
+    /// 
     /// Once the ``Response/isLoginSuccessful`` property is `true`, the developer can exchange the response for a valid token by using this method.
     /// - Parameters:
+    ///   - successResponse: The ``Response`` object whose ``Response/isLoginSuccessful`` is `true`.
     ///   - completion: Completion handler invoked when a token, or error, is received.
     nonisolated public func resume(with successResponse: Response,
                                    completion: @escaping @Sendable (Result<Token, any Error>) -> Void)
@@ -391,10 +391,11 @@ extension InteractionCodeFlow {
     }
 
     /// Executes the given remediation option and proceeds through the workflow using the supplied form parameters.
-    ///
+    /// 
     /// This method is used to proceed through the authentication flow, using the data assigned to the nested fields' `value` to make selections.
     /// - Parameters:
-    ///   - completion: Completion handler invoked when a response is received.
+    ///   - remediation: The individual ``Remediation`` the user has selected.
+    ///   - completion: Completion handler invoked when a ``Response`` is received.
     nonisolated public func resume(with remediation: Remediation,
                                    completion: @escaping @Sendable (Result<Response, any Error>) -> Void)
     {
@@ -462,19 +463,19 @@ public protocol InteractionCodeFlowDelegate: AuthenticationDelegate {
 
     /// Message sent when an error is received at any point during the authentication process.
     /// - Parameters:
-    ///   - client: ``InteractionCodeFlow`` sending the error.
+    ///   - flow: The ``InteractionCodeFlow`` sending the error.
     ///   - error: The error that was received.
     func authentication<Flow: InteractionCodeFlow>(flow: Flow, received error: InteractionCodeFlowError)
     
     /// Informs the delegate when an IDX response is received, either through an ``InteractionCodeFlow/resume()`` or ``Remediation/proceed(completion:)`` call.
     /// - Parameters:
-    ///   - client: ``InteractionCodeFlow`` receiving the response.
+    ///   - flow: The ``InteractionCodeFlow`` receiving the response.
     ///   - response: The response that was received.
     func authentication<Flow: InteractionCodeFlow>(flow: Flow, received response: Response)
     
     /// Informs the delegate when authentication is successful, and the token is returned.
     /// - Parameters:
-    ///   - client: ``InteractionCodeFlow`` receiving the token.
+    ///   - flow: The ``InteractionCodeFlow`` receiving the token.
     ///   - token: The token object describing the user's credentials.
     func authentication<Flow: InteractionCodeFlow>(flow: Flow, received token: Token)
 }

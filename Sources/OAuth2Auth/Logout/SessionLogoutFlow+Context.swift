@@ -44,7 +44,10 @@ extension SessionLogoutFlow {
         
         /// Initializer for creating a context.
         /// - Parameters:
+        ///   - idToken: The ID token hint to use when signing out.
+        ///   - logoutHint: A hint about the identifier used to log out.
         ///   - state: State string to use, or `nil` to accept an automatically generated default.
+        ///   - additionalParameters: Any additional query string parameters you would like to supply to the authorization server.
         public init(idToken: String? = nil,
                     logoutHint: String? = nil,
                     state: String? = nil,
@@ -58,7 +61,10 @@ extension SessionLogoutFlow {
 
         /// Initializer for creating a context.
         /// - Parameters:
+        ///   - token: The token to provide information about which user to sign out.
+        ///   - logoutHint: A hint about the identifier used to log out.
         ///   - state: State string to use, or `nil` to accept an automatically generated default.
+        ///   - additionalParameters: Any additional query string parameters you would like to supply to the authorization server.
         public init(token: Token,
                     logoutHint: String? = nil,
                     state: String? = nil,

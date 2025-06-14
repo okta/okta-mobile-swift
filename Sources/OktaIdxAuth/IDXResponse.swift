@@ -40,18 +40,13 @@ public final class Response: Sendable, Hashable, Equatable {
     /// ``Message`` objects reported from the server are usually errors, but may include other information relevant to the user. They should be displayed to the user in the context of the remediation form itself.
     public let messages: Response.Message.Collection
     
-    /// Indicates whether or not the user has logged in successfully. If this is `true`, this response object should be exchanged for access tokens utilizing the ``exchangeCode(completion:)`` method.
+    /// Indicates whether or not the user has logged in successfully. If this is `true`, this response object should be exchanged for access tokens utilizing the ``finish()`` method.
     public let isLoginSuccessful: Bool
     
     /// Indicates whether or not the response can be cancelled.
     public let canRestart: Bool
 
     /// Cancels and restarts the current session.
-    ///
-    /// - Important:
-    /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to process any response or error returned from this call.
-    /// - Parameters:
-    ///   - completion: Optional completion handler invoked when the operation is cancelled.
     public func restart() async throws -> Response {
         guard let cancelOption = remediations[.cancel] else {
             throw InteractionCodeFlowError.missingRemediation(name: "cancel")
@@ -63,10 +58,6 @@ public final class Response: Sendable, Hashable, Equatable {
     /// Finishes sign-in, exchanging the successful response with a token.
     ///
     /// Once the ``isLoginSuccessful`` property is `true`, the developer can exchange the response for a valid token by using this method.
-    /// - Important:
-    /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to receive the token or to handle any errors.
-    /// - Parameters:
-    ///   - completion: Optional completion handler invoked when a token, or error, is received.
     public func finish() async throws -> Token {
         try await flow.resume(with: self)
     }
@@ -126,10 +117,7 @@ public final class Response: Sendable, Hashable, Equatable {
 extension Response {
     /// Cancels and restarts the current session.
     ///
-    /// - Important:
-    /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to process any response or error returned from this call.
-    /// - Parameters:
-    ///   - completion: Optional completion handler invoked when the operation is cancelled.
+    /// - Parameter completion: Completion handler invoked when the operation is cancelled.
     nonisolated public func restart(completion: @escaping @Sendable (Result<Response, any Error>) -> Void)
     {
         Task {
@@ -144,10 +132,7 @@ extension Response {
     /// Finishes sign-in, exchanging the successful response with a token.
     ///
     /// Once the ``isLoginSuccessful`` property is `true`, the developer can exchange the response for a valid token by using this method.
-    /// - Important:
-    /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to receive the token or to handle any errors.
-    /// - Parameters:
-    ///   - completion: Optional completion handler invoked when a token, or error, is received.
+    /// - Parameter completion: Completion handler invoked when a token, or error, is received.
     nonisolated public func finish(completion: @escaping @Sendable (Result<Token, any Error>) -> Void)
     {
         Task {

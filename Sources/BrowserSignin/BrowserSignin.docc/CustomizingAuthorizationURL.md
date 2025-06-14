@@ -10,30 +10,33 @@ Since this URL is typically generated at runtime, APIs are needed to give you th
 
 ## signIn and signOut Options
 
-The simplest approach to customizing your authorization URL is by specifying options when invoking the ``BrowserSignin/signIn(from:options:)`` or ``BrowserSignin/signOut(from:credential:options:)`` functions. These options are defined in the ``BrowserSignin/Option`` enumeration, and gives you control over the behavior of the sign-in experience within the browser.
+The simplest approach to customizing your authorization URL is by specifying options when invoking the ``BrowserSignin/BrowserSignin/signIn(from:context:)`` or ``BrowserSignin/BrowserSignin/signOut(from:token:context:)`` functions.
 
 ```swift
-let auth = BrowserSignin(issuer: issuer,
+let auth = BrowserSignin(issuerURL: issuer,
                          clientId: clientId,
-                         scopes: "openid profile offline_access",
-                         redirectUri: redirectUri)
+                         scope: "openid profile offline_access",
+                         redirectUri: redirectUri,
+                         logoutRedirectUri: logoutRedirectUri)
+
+var context = AuthoriationCodeFlow.Context()
+context.loginHint = "user@example.com"
+context.prompt = .login
+
 let token = try await auth.signIn(from: view.window,
-                                  options: [
-                                      .login(hint: "user@example.com"),
-                                      .prompt(.login),
-                                  ])
+                                  context: context)
 ```
 
 ## Query String Parameters
 
-Another approach to customizing your authorization URL is through adding additional parameters to the query string. These values can be supplied to the initializer through the ``BrowserSignin/init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)`` initializer or through the `Okta.plist` configuration format (see <doc:ConfiguringYourClient> for more information), or by when invoking the ``BrowserSignin/signIn(from:options:)`` or ``BrowserSignin/signOut(from:credential:options:)`` functions.
+Another approach to customizing your authorization URL is through adding additional parameters to the query string. These values can be supplied to the initializer through the ``BrowserSignin/BrowserSignin/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)`` initializer or through the `Okta.plist` configuration format (see <doc:ConfiguringYourClient> for more information), or through the optional context objects supplied to the `signIn` or `signOut` functions.
 
 When passing values to the initializer, you can supply raw string key/value pairs.
 
 ```swift
-let auth = BrowserSignin(issuer: issuer,
+let auth = BrowserSignin(issuerURL: issuer,
                          clientId: clientId,
-                         scopes: "openid profile offline_access",
+                         scope: "openid profile offline_access",
                          redirectUri: redirectUri,
                          additionalParameters: [ "idp": myIdpString ])
 let token = try await auth.signIn()
@@ -41,7 +44,7 @@ let token = try await auth.signIn()
 
 ## Customizing the Authorization URL through Delegation
 
-The ``BrowserSignin`` class exposes the underlying OAuth2 flow through the ``BrowserSignin/signInFlow`` property. The authentication flows, defined within the OAuth2Auth SDK, all support a multicast delegate mechanism to notify other parts of the SDK as well as your application of important events.
+The ``BrowserSignin/BrowserSignin`` class exposes the underlying OAuth2 flow through the ``BrowserSignin/BrowserSignin/signInFlow`` property. The authentication flows, defined within the OAuth2Auth SDK, all support a multicast delegate mechanism to notify other parts of the SDK as well as your application of important events.
 
 If your code conforms to the `AuthorizationCodeFlowDelegate` protocol, and implements the `authentication(flow:customizeUrl:)` method, you can alter the URL before it is loaded in the browser.
 

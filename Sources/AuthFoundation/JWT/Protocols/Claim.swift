@@ -18,6 +18,8 @@ public protocol IsClaim: RawRepresentable<String> {}
 /// Used by classes that contains OAuth2 claims.
 ///
 /// This provides common conveniences for interacting with user or token information within those claims. For example, iterating through ``allClaims`` or using keyed subscripting to access specific claims.
+///
+/// Please see the <doc:WorkingWithClaims> documentation for a bigger in-depth discussion around claims.
 public protocol HasClaims {
     associatedtype ClaimType: IsClaim
     
