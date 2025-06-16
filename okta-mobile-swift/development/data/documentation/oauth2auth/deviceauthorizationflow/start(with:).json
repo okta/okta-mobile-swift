@@ -238,29 +238,12 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct",
+              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Verification",
               "isActive" : true,
               "type" : "reference"
             },
             {
               "text" : " object can be used to display the user code and URI necessary for them to complete authentication on a different device.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "The ",
-              "type" : "text"
-            },
-            {
-              "code" : "resume(with:completion:)",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " method also uses this context, to poll the server to determine when the user approves the authorization request.",
               "type" : "text"
             }
           ],

@@ -212,8 +212,9 @@
               "type" : "text"
             },
             {
-              "code" : "cancel",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/PollCapability\/cancel()",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : " is called, or when the authenticator has finished. The result is returned once the user has completed the action out-of-band, or when an error is received.",
@@ -250,7 +251,10 @@
 "references": {
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",
@@ -292,6 +296,38 @@
   "title" : "PollCapability",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/pollcapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/PollCapability/cancel()": {
+  "abstract" : [
+    {
+      "text" : "Stops the polling process from continuing.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cancel"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/PollCapability\/cancel()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "cancel()",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/pollcapability\/cancel()"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/PollCapability/proceed(completion:)": {
   "abstract" : [

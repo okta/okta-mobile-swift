@@ -202,6 +202,29 @@
             {
               "inlineContent" : [
                 {
+                  "text" : "The ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : " sending the error.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "flow"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
                   "text" : "The error that was received.",
                   "type" : "text"
                 }
@@ -238,7 +261,10 @@
 "references": {
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",

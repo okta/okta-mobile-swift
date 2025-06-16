@@ -13,8 +13,9 @@
       "type" : "text"
     },
     {
-      "code" : "exchangeCode(completion:)",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/finish()",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
       "text" : " method.",
@@ -131,7 +132,10 @@
 "references": {
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",
@@ -174,6 +178,59 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/response"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/finish()": {
+  "abstract" : [
+    {
+      "text" : "Finishes sign-in, exchanging the successful response with a token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "finish"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenV",
+      "text" : "Token"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/finish()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "finish()",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/finish()"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/isLoginSuccessful": {
   "abstract" : [
     {
@@ -189,8 +246,9 @@
       "type" : "text"
     },
     {
-      "code" : "exchangeCode(completion:)",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/finish()",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
       "text" : " method.",

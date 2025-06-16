@@ -179,8 +179,9 @@
                   "type" : "text"
                 },
                 {
-                  "code" : "OAuth2Client\/init(_:state:session:)",
-                  "type" : "codeVoice"
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(_:session:)",
+                  "isActive" : true,
+                  "type" : "reference"
                 },
                 {
                   "text" : ".",
@@ -324,6 +325,64 @@
   "title" : "defaultSession",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/defaultsession"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/init(_:session:)": {
+  "abstract" : [
+    {
+      "text" : "Constructs an OAuth2Client for the given base URL.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationV",
+      "text" : "Configuration"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "session"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "URLSessionProtocol"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(_:session:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(_:session:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/init(_:session:)"
 }
 }
 }

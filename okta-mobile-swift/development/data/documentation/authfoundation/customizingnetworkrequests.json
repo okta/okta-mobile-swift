@@ -232,8 +232,9 @@
               "type" : "text"
             },
             {
-              "code" : "APIResponse\/APIRateLimit",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : ", associated links (e.g. next, previous, and current pagination results), and information about the request ID (which can be used for debugging purposes).",
@@ -519,6 +520,40 @@
   "title" : "api(client:willSend:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:willsend:)-9cnzq"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIRateLimit": {
+  "abstract" : [
+    {
+      "text" : "Describes information related to the organization’s current rate limit.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRateLimit"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRateLimit"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRateLimit",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiratelimit"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Credential": {
   "abstract" : [

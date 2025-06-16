@@ -146,15 +146,20 @@
   "sections" : [
 
   ],
-  "topicSections" : [
+  "seeAlsoSections" : [
     {
-      "anchor" : "Classes",
+      "anchor" : "Working-with-Authenticators",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Kind",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/State-swift.enum"
       ],
-      "title" : "Classes"
-    },
+      "title" : "Working with Authenticators"
+    }
+  ],
+  "topicSections" : [
     {
       "anchor" : "Instance-Properties",
       "generated" : true,
@@ -177,16 +182,6 @@
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/type"
       ],
       "title" : "Instance Properties"
-    },
-    {
-      "anchor" : "Enumerations",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Kind",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/State-swift.enum"
-      ],
-      "title" : "Enumerations"
     },
     {
       "anchor" : "Default-Implementations",
@@ -224,7 +219,10 @@
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",
@@ -356,6 +354,52 @@
   "title" : "Authenticator.Kind",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/kind"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Kind/other(type:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "other"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "type"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Kind\/other(type:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Kind.other(type:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/kind\/other(type:)"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method": {
   "abstract" : [
@@ -1070,11 +1114,12 @@
       "type" : "text"
     },
     {
-      "code" : "Kind\/unknown",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Kind\/other(type:)",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
-      "text" : " if the type isn’t represented by this enumeration.",
+      "text" : " if the type isn’t known.",
       "type" : "text"
     }
   ],

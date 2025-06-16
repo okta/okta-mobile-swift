@@ -17,8 +17,6 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/Sequence-Implementations"
       ]
@@ -353,7 +351,10 @@
 "references": {
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",
@@ -361,74 +362,6 @@
   "title" : "OktaIdxAuth",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response": {
-  "abstract" : [
-    {
-      "text" : "Describes the response from an Okta Identity Engine workflow stage.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Response"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Response"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Response",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message": {
-  "abstract" : [
-    {
-      "text" : "Represents messages sent from the server to indicate error or warning conditions related to responses or form values.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Message"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Message"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Response.Message",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/message"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection": {
   "abstract" : [

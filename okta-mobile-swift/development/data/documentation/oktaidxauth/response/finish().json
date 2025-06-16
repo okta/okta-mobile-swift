@@ -213,7 +213,10 @@
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",
@@ -324,8 +327,9 @@
       "type" : "text"
     },
     {
-      "code" : "exchangeCode(completion:)",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/finish()",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
       "text" : " method.",

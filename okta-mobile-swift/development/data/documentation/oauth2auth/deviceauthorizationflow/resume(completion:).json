@@ -1,16 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Asynchronously polls to determine when authorization completes, using the supplied ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " instance.",
+      "text" : "Asynchronously polls to determine when authorization completes, returning a token once it is authorized by a user out-of-band.",
       "type" : "text"
     }
   ],
@@ -230,8 +221,9 @@
               "type" : "text"
             },
             {
-              "code" : "start()",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/start(with:completion:)",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : ", the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.",
@@ -370,53 +362,10 @@
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow"
 },
-"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/Context-swift.struct": {
-  "abstract" : [
-    {
-      "text" : "A model representing the context and current state for an authorization session.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Context"
-    }
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Context"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "DeviceAuthorizationFlow.Context",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct"
-},
 "doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/resume(completion:)": {
   "abstract" : [
     {
-      "text" : "Asynchronously polls to determine when authorization completes, using the supplied ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " instance.",
+      "text" : "Asynchronously polls to determine when authorization completes, returning a token once it is authorized by a user out-of-band.",
       "type" : "text"
     }
   ],
@@ -488,6 +437,117 @@
   "title" : "resume(completion:)",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/resume(completion:)"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/start(with:completion:)": {
+  "abstract" : [
+    {
+      "text" : "Asynchronously initiates a device authentication flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "start"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth23DeviceAuthorizationFlowC",
+      "text" : "DeviceAuthorizationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth23DeviceAuthorizationFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6ResultO",
+      "text" : "Result"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth23DeviceAuthorizationFlowC",
+      "text" : "DeviceAuthorizationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth23DeviceAuthorizationFlowC12VerificationV",
+      "text" : "Verification"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
+      "text" : "OAuth2Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/start(with:completion:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "start(with:completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/start(with:completion:)"
 }
 }
 }

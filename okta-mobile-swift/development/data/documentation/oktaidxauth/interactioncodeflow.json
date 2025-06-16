@@ -148,15 +148,38 @@
   "sections" : [
 
   ],
-  "topicSections" : [
+  "seeAlsoSections" : [
     {
-      "anchor" : "Initializers",
+      "anchor" : "Essentials",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(client:additionalParameters:)",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlowDelegate",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation"
       ],
-      "title" : "Initializers"
+      "title" : "Essentials"
+    }
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Essentials",
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init()",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(plist:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(client:additionalParameters:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/start(with:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume()"
+      ],
+      "title" : "Essentials"
+    },
+    {
+      "anchor" : "Completion-Block-Functions",
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/start(with:completion:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(completion:)"
+      ],
+      "title" : "Completion Block Functions"
     },
     {
       "anchor" : "Instance-Properties",
@@ -174,16 +197,12 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/reset()",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume()",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(completion:)",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:)-8uogq",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:)-994wx",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:)-9z8bd",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)-14v3z",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)-5mb6r",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)-6wh2e",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/start(with:)",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/start(with:completion:)"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)-6wh2e"
       ],
       "title" : "Instance Methods"
     },
@@ -355,7 +374,10 @@
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",
@@ -644,6 +666,31 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/context-swift.property"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/init()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init()",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/init()"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/init(client:additionalParameters:)": {
   "abstract" : [
     {
@@ -857,6 +904,48 @@
   "title" : "init(issuerURL:clientId:scope:redirectUri:additionalParameters:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/init(issuerurl:clientid:scope:redirecturi:additionalparameters:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/init(plist:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "plist"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(plist:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(plist:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/init(plist:)"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/isAuthenticating": {
   "abstract" : [
@@ -1797,6 +1886,49 @@
   "title" : "start(with:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/start(with:completion:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlowDelegate": {
+  "abstract" : [
+    {
+      "text" : "Delegate protocol that can be used to receive updates from the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " through the process of a user’s authentication.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "InteractionCodeFlowDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlowDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "InteractionCodeFlowDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "InteractionCodeFlowDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/interactioncodeflowdelegate"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation": {
   "abstract" : [

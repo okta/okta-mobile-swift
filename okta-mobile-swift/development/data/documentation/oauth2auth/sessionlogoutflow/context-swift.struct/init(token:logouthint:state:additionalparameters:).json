@@ -228,6 +228,34 @@
             {
               "inlineContent" : [
                 {
+                  "text" : "The token to provide information about which user to sign out.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "token"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "A hint about the identifier used to log out.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "logoutHint"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
                   "text" : "State string to use, or ",
                   "type" : "text"
                 },
@@ -244,6 +272,20 @@
             }
           ],
           "name" : "state"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Any additional query string parameters you would like to supply to the authorization server.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "additionalParameters"
         }
       ]
     }

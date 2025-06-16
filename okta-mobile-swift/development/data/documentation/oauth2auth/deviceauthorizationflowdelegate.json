@@ -294,6 +294,94 @@
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct"
 },
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/start(with:)": {
+  "abstract" : [
+    {
+      "text" : "Initiates a device authentication flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "start"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth23DeviceAuthorizationFlowC",
+      "text" : "DeviceAuthorizationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth23DeviceAuthorizationFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth23DeviceAuthorizationFlowC",
+      "text" : "DeviceAuthorizationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth23DeviceAuthorizationFlowC12VerificationV",
+      "text" : "Verification"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/start(with:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "start(with:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/start(with:)"
+},
 "doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlowDelegate": {
   "abstract" : [
     {
@@ -353,8 +441,9 @@
       "type" : "text"
     },
     {
-      "code" : "DeviceAuthorizationFlow\/start(completion:)",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/start(with:)",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
       "text" : " method.",

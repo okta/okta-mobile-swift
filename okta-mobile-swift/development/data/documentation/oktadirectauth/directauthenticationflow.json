@@ -171,7 +171,7 @@
         {
           "inlineContent" : [
             {
-              "text" : "Authentication factors are separated into two groups:",
+              "text" : "Authentication factors are separated into three groups:",
               "type" : "text"
             }
           ],
@@ -193,19 +193,21 @@
                       "type" : "text"
                     },
                     {
-                      "code" : "start(_:with:)",
-                      "type" : "codeVoice"
+                      "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:context:)",
+                      "isActive" : true,
+                      "type" : "reference"
                     },
                     {
                       "text" : " (or ",
                       "type" : "text"
                     },
                     {
-                      "code" : "start(_:with:completion:)",
-                      "type" : "codeVoice"
+                      "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:context:completion:)",
+                      "isActive" : true,
+                      "type" : "reference"
                     },
                     {
-                      "text" : " when using blocks)",
+                      "text" : " when using blocks).",
                       "type" : "text"
                     }
                   ],
@@ -227,7 +229,7 @@
                       "type" : "text"
                     },
                     {
-                      "code" : "resume(_:with:)",
+                      "code" : "resume(with:)-(SecondaryFactor)",
                       "type" : "codeVoice"
                     },
                     {
@@ -235,11 +237,45 @@
                       "type" : "text"
                     },
                     {
-                      "code" : "resume(_:with:completion:)",
+                      "code" : "resume(with:completion:)-(SecondaryFactor,_)",
                       "type" : "codeVoice"
                     },
                     {
-                      "text" : " when using blocks)",
+                      "text" : " when using blocks).",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : " – Used when an authentication factor requires user or develoepr interaction to continue authentication, using the ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "resume(with:)-(ContinuationFactor)",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " function (or ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "resume(with:completion:)-(ContinuationFactor,_)",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " when using blocks).",
                       "type" : "text"
                     }
                   ],
@@ -321,25 +357,36 @@
       "anchor" : "Creating-a-flow",
       "identifiers" : [
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init()",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(plist:)"
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(plist:)",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(issuerURL:clientId:scope:supportedGrants:additionalParameters:)",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(client:supportedGrants:additionalParameters:)"
       ],
       "title" : "Creating a flow"
     },
     {
       "anchor" : "Starting-MFA-or-signing-in-with-1FA",
       "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:context:)",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:context:completion:)",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/PrimaryFactor",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/OOBChannel"
       ],
       "title" : "Starting MFA or signing in with 1FA"
     },
     {
-      "anchor" : "Continuing-sign-in-with-MFA",
+      "anchor" : "Resuming-sign-in-with-MFA",
       "identifiers" : [
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/SecondaryFactor",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/OOBChannel"
       ],
-      "title" : "Continuing sign in with MFA"
+      "title" : "Resuming sign in with MFA"
+    },
+    {
+      "anchor" : "Continuing-authenticating-a-factor",
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor"
+      ],
+      "title" : "Continuing authenticating a factor"
     },
     {
       "anchor" : "Sign-in-responses",
@@ -384,9 +431,7 @@
       "anchor" : "Initializers",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(client:additionalParameters:)",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(client:supportedGrants:additionalParameters:)",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(issuerURL:clientId:scope:supportedGrants:additionalParameters:)"
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(client:additionalParameters:)"
       ],
       "title" : "Initializers"
     },
@@ -406,9 +451,7 @@
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(with:)-72hnt",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(with:)-9gu1l",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(with:completion:)-1wdhn",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(with:completion:)-3imz8",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:context:)",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:context:completion:)"
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(with:completion:)-3imz8"
       ],
       "title" : "Instance Methods"
     },
@@ -416,7 +459,6 @@
       "anchor" : "Enumerations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationType",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Intent"
       ],

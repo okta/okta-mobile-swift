@@ -128,7 +128,10 @@
 "references": {
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",
@@ -184,7 +187,28 @@
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/CapabilityType": {
   "abstract" : [
-
+    {
+      "text" : "Enumeration describing the individual type of capability available within ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " objects, and its associated underlying ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Capability",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " instance.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -250,6 +274,40 @@
   "title" : "Authenticator.CapabilityType.otp(_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/capabilitytype\/otp(_:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Capability": {
+  "abstract" : [
+    {
+      "text" : "A generic protocol used to identify objects that describe a capability.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Capability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Capability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Capability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Capability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/capability"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/OTPCapability": {
   "abstract" : [

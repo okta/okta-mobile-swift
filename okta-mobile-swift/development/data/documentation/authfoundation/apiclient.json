@@ -168,8 +168,9 @@
                         {
                           "inlineContent" : [
                             {
-                              "code" : "didSend(request:received:)-5li2y",
-                              "type" : "codeVoice"
+                              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:)-42ak",
+                              "isActive" : true,
+                              "type" : "reference"
                             },
                             {
                               "text" : " - This is invoked when a successful response is received from a request.",
@@ -185,7 +186,7 @@
                         {
                           "inlineContent" : [
                             {
-                              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:)-7fkxl",
+                              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:requestId:rateLimit:)",
                               "isActive" : true,
                               "type" : "reference"
                             },
@@ -766,69 +767,6 @@
   "title" : "didSend(request:received:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-628bc"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/didSend(request:received:)-7fkxl": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "didSend"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "request"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
-      "text" : "APIClientError"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:)-7fkxl",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "didSend(request:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClient/didSend(request:received:requestId:rateLimit:)": {
   "abstract" : [

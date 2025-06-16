@@ -102,8 +102,8 @@
     {
       "kind" : "mentions",
       "mentions" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ManagingUserCredentials"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ManagingUserCredentials",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims"
       ]
     },
     {
@@ -117,16 +117,16 @@
         {
           "inlineContent" : [
             {
-              "text" : "For more information on working with an ID token, see the ",
+              "text" : "For more information on working with an ID token, see ",
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
               "isActive" : true,
               "type" : "reference"
             },
             {
-              "text" : " documentation.",
+              "text" : " for more.",
               "type" : "text"
             }
           ],
@@ -171,6 +171,40 @@
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
+  "abstract" : [
+    {
+      "text" : "Used by classes that contains OAuth2 claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "HasClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT": {
   "abstract" : [

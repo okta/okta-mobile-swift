@@ -93,7 +93,7 @@
               "type" : "text"
             },
             {
-              "code" : "DirectAuthenticationFlow\/resume(_:with:)",
+              "code" : "DirectAuthenticationFlow\/resume(with:)-(SecondaryFactor)",
               "type" : "codeVoice"
             },
             {
@@ -128,12 +128,12 @@
   ],
   "seeAlsoSections" : [
     {
-      "anchor" : "Continuing-sign-in-with-MFA",
+      "anchor" : "Resuming-sign-in-with-MFA",
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/OOBChannel"
       ],
-      "title" : "Continuing sign in with MFA"
+      "title" : "Resuming sign in with MFA"
     }
   ],
   "topicSections" : [

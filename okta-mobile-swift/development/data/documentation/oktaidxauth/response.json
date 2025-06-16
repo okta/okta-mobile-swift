@@ -135,24 +135,19 @@
   "sections" : [
 
   ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "Essentials",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlowDelegate",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation"
+      ],
+      "title" : "Essentials"
+    }
+  ],
   "topicSections" : [
-    {
-      "anchor" : "Classes",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message"
-      ],
-      "title" : "Classes"
-    },
-    {
-      "anchor" : "Structures",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Application",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/User-swift.struct"
-      ],
-      "title" : "Structures"
-    },
     {
       "anchor" : "Instance-Properties",
       "generated" : true,
@@ -223,7 +218,10 @@
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",
@@ -231,6 +229,83 @@
   "title" : "OktaIdxAuth",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow used to authenticate users using the Okta Identity Engine.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "InteractionCodeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "InteractionCodeFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "InteractionCodeFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlowDelegate": {
+  "abstract" : [
+    {
+      "text" : "Delegate protocol that can be used to receive updates from the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " through the process of a user’s authentication.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "InteractionCodeFlowDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlowDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "InteractionCodeFlowDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "InteractionCodeFlowDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/interactioncodeflowdelegate"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation": {
   "abstract" : [
@@ -300,40 +375,6 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/response"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Application": {
-  "abstract" : [
-    {
-      "text" : "Provides information about the client application being authenticated against.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Application"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Application",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Application"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Response.Application",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/application"
-},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Equatable-Implementations": {
   "abstract" : [
 
@@ -378,74 +419,6 @@
   "title" : "Response.Intent",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/response\/intent-swift.enum"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message": {
-  "abstract" : [
-    {
-      "text" : "Represents messages sent from the server to indicate error or warning conditions related to responses or form values.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Message"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Message"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Response.Message",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/message"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/User-swift.struct": {
-  "abstract" : [
-    {
-      "text" : "Provides information about the user being authenticated.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "User"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/User-swift.struct",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "User"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Response.User",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/user-swift.struct"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/app": {
   "abstract" : [
@@ -811,8 +784,9 @@
       "type" : "text"
     },
     {
-      "code" : "exchangeCode(completion:)",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/finish()",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
       "text" : " method.",

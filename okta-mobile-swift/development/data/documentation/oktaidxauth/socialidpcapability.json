@@ -93,6 +93,26 @@
   "sections" : [
 
   ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "Using-Capabilities",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Capability",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/CapabilityCollection",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Capability",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/NumberChallengeCapability",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/PasswordSettingsCapability",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/PollCapability",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/ProfileCapability",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/RecoverCapability",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/SendCapability",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/ResendCapability",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/OTPCapability"
+      ],
+      "title" : "Using Capabilities"
+    }
+  ],
   "topicSections" : [
     {
       "anchor" : "Instance-Properties",
@@ -149,7 +169,10 @@
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",
@@ -157,6 +180,40 @@
   "title" : "OktaIdxAuth",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator": {
+  "abstract" : [
+    {
+      "text" : "Represents information describing the available authenticators and enrolled authenticators.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Capability": {
   "abstract" : [
@@ -191,6 +248,364 @@
   "title" : "Capability",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/capability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/CapabilityCollection": {
+  "abstract" : [
+    {
+      "text" : "A collection of capabilities that can be associated with some parent object, such as an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " or ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "CapabilityCollection"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/CapabilityCollection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "CapabilityCollection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "CapabilityCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/capabilitycollection"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/NumberChallengeCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability to recover an account.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "NumberChallengeCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/NumberChallengeCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NumberChallengeCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NumberChallengeCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/numberchallengecapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/OTPCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability to recover an account.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OTPCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/OTPCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OTPCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OTPCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/otpcapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/PasswordSettingsCapability": {
+  "abstract" : [
+    {
+      "text" : "Describes the password complexity settings.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "PasswordSettingsCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/PasswordSettingsCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "PasswordSettingsCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "PasswordSettingsCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/passwordsettingscapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/PollCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability for authentiators or remedations to be polled to determine out-of-band actions taken by the user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "PollCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/PollCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "PollCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "PollCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/pollcapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/ProfileCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability when an authenticator or rememediation contains related profile information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ProfileCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/ProfileCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ProfileCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ProfileCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/profilecapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/RecoverCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability to recover an account.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "RecoverCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/RecoverCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "RecoverCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "RecoverCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/recovercapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation": {
+  "abstract" : [
+    {
+      "text" : "Describes choices the user can make to proceed through the authentication workflow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Remediation"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Remediation"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Remediation",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/ResendCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability used for being able to “resend” a verification code.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ResendCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/ResendCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ResendCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ResendCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/resendcapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/SendCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability used for being able to “send” a verification code.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SendCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/SendCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SendCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SendCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/sendcapability"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/SocialIDPCapability": {
   "abstract" : [

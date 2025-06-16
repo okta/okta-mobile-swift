@@ -94,8 +94,9 @@
               "type" : "text"
             },
             {
-              "code" : "BrowserSignin\/Option\/prompt(_:)",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/prompt",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : " enumeration. For more information, see the ",
@@ -302,6 +303,56 @@
   "title" : "AuthorizationCodeFlow",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/authorizationcodeflow"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Context-swift.struct/prompt": {
+  "abstract" : [
+    {
+      "text" : "Control how the user is prompted when authentication starts.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "prompt"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth21AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth21AuthorizationCodeFlowC6PromptO",
+      "text" : "Prompt"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/prompt",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "prompt",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/context-swift.struct\/prompt"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Prompt": {
   "abstract" : [

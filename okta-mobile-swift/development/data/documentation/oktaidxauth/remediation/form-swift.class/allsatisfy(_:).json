@@ -17,7 +17,6 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/Sequence-Implementations"
       ]
@@ -229,7 +228,10 @@
 "references": {
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",
@@ -237,40 +239,6 @@
   "title" : "OktaIdxAuth",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation": {
-  "abstract" : [
-    {
-      "text" : "Describes choices the user can make to proceed through the authentication workflow.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Remediation"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Remediation"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Remediation",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/remediation"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class": {
   "abstract" : [

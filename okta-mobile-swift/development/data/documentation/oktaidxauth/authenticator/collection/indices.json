@@ -17,7 +17,6 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Collection-Implementations"
       ]
@@ -193,7 +192,10 @@
 "references": {
 "doc://OktaIdxAuth/documentation/OktaIdxAuth": {
   "abstract" : [
-
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
   "kind" : "symbol",
@@ -201,40 +203,6 @@
   "title" : "OktaIdxAuth",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator": {
-  "abstract" : [
-    {
-      "text" : "Represents information describing the available authenticators and enrolled authenticators.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Authenticator"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Authenticator"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Authenticator",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/authenticator"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection": {
   "abstract" : [

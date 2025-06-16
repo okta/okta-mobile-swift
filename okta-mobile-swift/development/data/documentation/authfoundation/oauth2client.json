@@ -422,8 +422,9 @@
                       "type" : "text"
                     },
                     {
-                      "code" : "CredentialDataSource\/urlSession(for:)-4uxwd",
-                      "type" : "codeVoice"
+                      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource\/urlSession(for:)-6mklp",
+                      "isActive" : true,
+                      "type" : "reference"
                     },
                     {
                       "text" : " method.",
@@ -1045,6 +1046,61 @@
   "title" : "CredentialDataSource",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credentialdatasource"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialDataSource/urlSession(for:)-6mklp": {
+  "abstract" : [
+    {
+      "text" : "Enables developers to provide a custom URLSession when a credential is created for the given token.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "urlSession"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenV",
+      "text" : "Token"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "URLSessionProtocol"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource\/urlSession(for:)-6mklp",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "urlSession(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/credentialdatasource\/urlsession(for:)-6mklp"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/CustomizingNetworkRequests": {
   "abstract" : [
