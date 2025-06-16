@@ -19,7 +19,7 @@ let auth = BrowserSignin(issuerURL: issuer,
                          redirectUri: redirectUri,
                          logoutRedirectUri: logoutRedirectUri)
 
-var context = AuthoriationCodeFlow.Context()
+var context = AuthorizationCodeFlow.Context()
 context.loginHint = "user@example.com"
 context.prompt = .login
 

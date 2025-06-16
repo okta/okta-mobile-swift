@@ -2,7 +2,7 @@
 
 ## Migrating from Okta Client SDK 1.x
 
-The Okta Client SDK for Swift (formerly named "Okta Mobile SDK for Swift") introduced a number of changes in the 2.0 release, which had some impacts to public API names and function signatures. Many of these APIs have deprecation warnings to enable Xcode to automatically migrate your code, but in some areas this was not possible.
+The Okta Client SDK for Swift (formerly named "Okta Mobile SDK for Swift") introduces a number of changes in the 2.0 release, which impacts some of the public API names and function signatures. Many of these APIs have deprecation warnings to enable Xcode to automatically migrate your code, but in some areas this was not possible.
 
 The primary changes and introductions are:
 

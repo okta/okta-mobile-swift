@@ -28,7 +28,7 @@ extension DeviceAuthorizationFlow {
         /// Initializer for creating a context with a custom state string.
         /// - Parameters:
         ///   - acrValues: Optional ACR values to use.
-        ///   - additionalParameters: Optional parameters to include in all requests to the Authoriation Server.
+        ///   - additionalParameters: Optional parameters to include in all requests to the Authorization Server.
         public init(acrValues: ClaimCollection<[String]?> = nil,
                     additionalParameters: [String: any APIRequestArgument]? = nil)
         {

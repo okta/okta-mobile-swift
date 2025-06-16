@@ -356,69 +356,23 @@ jobs:
       NSUnbufferedIO: YES
     steps:
     - uses: actions/checkout@master
-    - name: AuthFoundation
+    - name: Swift Package Documentation lint
       run: |
-        set -o pipefail
-        xcodebuild docbuild \
-          -derivedDataPath ~/Build/DerivedData \
-          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-          -scheme AuthFoundation | xcbeautify --renderer github-actions
-    - name: OktaDirectAuth
-      run: |
-        set -o pipefail
-        xcodebuild docbuild \
-          -derivedDataPath ~/Build/DerivedData \
-          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-          -scheme OktaDirectAuth | xcbeautify --renderer github-actions
-    - name: OktaIdxAuth
-      run: |
-        set -o pipefail
-        xcodebuild docbuild \
-          -derivedDataPath ~/Build/DerivedData \
-          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-          -scheme OktaIdxAuth | xcbeautify --renderer github-actions
-    - name: OAuth2Auth
-      run: |
-        set -o pipefail
-        xcodebuild docbuild \
-          -derivedDataPath ~/Build/DerivedData \
-          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-          -scheme OAuth2Auth | xcbeautify --renderer github-actions
-    - name: BrowserSignin
-      run: |
-        set -o pipefail
-        xcodebuild docbuild \
-          -derivedDataPath ~/Build/DerivedData \
-          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-          -scheme BrowserSignin | xcbeautify --renderer github-actions
-    - name: Compress DocC archive
-      run: |
-        for archive in $(find ~/Build/DerivedData/Build/Products -type d -name '*.doccarchive'); do
-          cd $(dirname "$archive")
-          zip -r ~/Build/$(basename "$archive").zip $(basename "$archive")
+        export DOCC_JSON_PRETTYPRINT=YES
+        mkdir -p ~/Build/Docs
+
+        TARGET_LIST=""
+
+        for TARGET in $(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g'); do
+            NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
+            TARGET_LIST="$TARGET_LIST --target $TARGET"
         done
-    - name: Upload AuthFoundation DocC Archive
-      uses: actions/upload-artifact@v4
-      with:
-        name: AuthFoundation.doccarchive.zip
-        path: ~/Build/AuthFoundation.doccarchive.zip
-    - name: Upload OktaDirectAuth DocC Archive
-      uses: actions/upload-artifact@v4
-      with:
-        name: OktaDirectAuth.doccarchive.zip
-        path: ~/Build/OktaDirectAuth.doccarchive.zip
-    - name: Upload OktaIdxAuth DocC Archive
-      uses: actions/upload-artifact@v4
-      with:
-        name: OktaIdxAuth.doccarchive.zip
-        path: ~/Build/OktaIdxAuth.doccarchive.zip
-    - name: Upload OAuth2Auth DocC Archive
-      uses: actions/upload-artifact@v4
-      with:
-        name: OAuth2Auth.doccarchive.zip
-        path: ~/Build/OAuth2Auth.doccarchive.zip
-    - name: Upload BrowserSignin DocC Archive
-      uses: actions/upload-artifact@v4
-      with:
-        name: BrowserSignin.doccarchive.zip
-        path: ~/Build/BrowserSignin.doccarchive.zip
+
+        swift package --allow-writing-to-directory ~/Build/Docs generate-documentation \
+            --disable-indexing \
+            --output-path ~/Build/Docs \
+            --include-extended-types \
+            --enable-experimental-combined-documentation \
+            --enable-experimental-mentioned-in \
+            --enable-experimental-external-link-support \
+            $TARGET_LIST

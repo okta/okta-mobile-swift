@@ -29,7 +29,7 @@ extension TokenExchangeFlow {
         /// - Parameters:
         ///   - audience: The audience of the authorization server.
         ///   - acrValues: Optional ACR values to use.
-        ///   - additionalParameters: Optional parameters to include in all requests to the Authoriation Server.
+        ///   - additionalParameters: Optional parameters to include in all requests to the Authorization Server.
         public init(audience: Audience = .default,
                     acrValues: ClaimCollection<[String]?> = nil,
                     additionalParameters: [String: any APIRequestArgument]? = nil)
