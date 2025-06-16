@@ -377,4 +377,4 @@ jobs:
             --enable-experimental-external-link-support \
             --analyze \
             --emit-fixits \
-            $TARGET_LIST | ./github/workflows/swift-log-renderer.sh
+            $TARGET_LIST | ./.github/workflows/swift-log-renderer.sh
