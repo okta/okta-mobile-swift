@@ -1,9 +1,5 @@
 # ``OAuth2Auth/ResourceOwnerFlow``
 
-@Metadata {
-    @DocumentationExtension(mergeBehavior: append)
-}
-
 ## Usage
 
 As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily.
@@ -18,7 +14,7 @@ let flow = client.resourceOwnerFlow()
 let token = try await flow.start(username: "smeagol", password: "myprecious")
 ```
 
-Alternatively, an instance of ``ResourceOwnerFlow`` can be created using one of its initializers. The following example uses the ``ResourceOwnerFlow/init(issuerURL:clientId:scope:additionalParameters:)` initializer.
+Alternatively, an instance of ``ResourceOwnerFlow`` can be created using one of its initializers. The following example uses the ``ResourceOwnerFlow/init(issuerURL:clientId:scope:additionalParameters:)`` initializer.
 
 ```swift
 let flow = ResourceOwnerFlow(issuerURL: URL(string: "https://example.okta.com")!,
@@ -27,7 +23,7 @@ let flow = ResourceOwnerFlow(issuerURL: URL(string: "https://example.okta.com")!
 let token = try await flow.start(username: "smeagol", password: "myprecious")
 ```
 
-Finally, if you already have an `OAuth2Client` instance available, you can supply that to the ``ResourceOwnerFlow/init(client:)`` initializer.
+Finally, if you already have an `OAuth2Client` instance available, you can supply that to the ``ResourceOwnerFlow/init(client:additionalParameters:)`` initializer.
 
 ```swift
 let client = OAuth2Client(issuerURL: URL(string: "https://example.okta.com")!,

@@ -22,7 +22,7 @@ public final class PollCapability: Capability, Sendable, Equatable, Hashable {
 
     /// Starts the polling process.
     ///
-    /// The action will be continually polled in the background either until ``cancel`` is called, or when the authenticator has finished. The result is returned once the user has completed the action out-of-band, or when an error is received.
+    /// The action will be continually polled in the background either until ``cancel()`` is called, or when the authenticator has finished. The result is returned once the user has completed the action out-of-band, or when an error is received.
     public func proceed() async throws -> Response {
         // Stop any previous polling
         cancel()
@@ -125,7 +125,7 @@ public final class PollCapability: Capability, Sendable, Equatable, Hashable {
 extension PollCapability {
     /// Starts the polling process.
     ///
-    /// The action will be continually polled in the background either until ``cancel`` is called, or when the authenticator has finished. The result is returned once the user has completed the action out-of-band, or when an error is received.
+    /// The action will be continually polled in the background either until ``cancel()`` is called, or when the authenticator has finished. The result is returned once the user has completed the action out-of-band, or when an error is received.
     /// - Parameter completion: Completion handler when the response is returned with the result of the operation.
     public func proceed(completion: @escaping @Sendable (Result<Response, any Error>) -> Void)
     {

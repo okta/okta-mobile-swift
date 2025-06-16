@@ -182,8 +182,7 @@ extension SessionLogoutFlow {
     /// This method is used to begin a logout session. The method will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - context: The context, providing information to help in signing out the user.
-    ///   - additionalParameters: Optional parameters to add to the authorization URL query string.
-    /// - Returns: The URL a user should be presented with within a broser, to befing a logout flow.
+    ///   - completion: Completion block for receiving the URL a user should be presented with within a browser, to begin a logout flow.
     nonisolated public func start(with context: Context = .init(),
                                   completion: @escaping @Sendable (Result<URL, OAuth2Error>) -> Void)
     {

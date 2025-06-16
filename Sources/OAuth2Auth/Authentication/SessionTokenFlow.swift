@@ -41,6 +41,7 @@ public actor SessionTokenFlow: AuthenticationFlow {
     ///   - issuerURL: The issuer URL.
     ///   - clientId: The client ID
     ///   - scope: The scopes to request
+    ///   - redirectUri: The application's redirect URI.
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
     @inlinable
     public init(issuerURL: URL,
@@ -275,9 +276,7 @@ extension SessionTokenFlow: OAuth2ClientDelegate {
 
 extension OAuth2Client {
     /// Creates a new Session Token flow configured to use this OAuth2Client.
-    /// - Parameters:
-    ///   - redirectUri: Redirect URI
-    ///   - additionalParameters: Additional parameters to pass to the flow
+    /// - Parameter additionalParameters: Additional parameters to pass to the flow
     /// - Returns: Initialized authorization flow.
     public func sessionTokenFlow(additionalParameters: [String: String]? = nil) throws -> SessionTokenFlow
     {

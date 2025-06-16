@@ -19,7 +19,7 @@ import AuthFoundation
 public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
     /// Sent when an authentication session receives a new status response.
     ///
-    /// This function is invoked when a new status is returned either from ``DirectAuthenticationFlow/start(_:with:)`` or ``DirectAuthenticationFlow/resume(_:with:)`` (or their block-based counterparts).
+    /// This function is invoked when a new status is returned either from ``DirectAuthenticationFlow/start(_:with:context:)``, ``DirectAuthenticationFlow/resume(with:)-(SecondaryFactor)`` or ``DirectAuthenticationFlow/resume(with:)-(ContinuationFactor)``  (or their block-based counterparts).
     func authentication<Flow>(flow: Flow, received status: DirectAuthenticationFlow.Status)
 }
 
@@ -64,7 +64,7 @@ public enum DirectAuthenticationFlowError: Error {
 public actor DirectAuthenticationFlow: AuthenticationFlow {
     /// Enumeration defining the list of possible primary authentication factors.
     ///
-    /// These values are used by the ``DirectAuthenticationFlow/start(_:with:)`` function.
+    /// These values are used by the ``DirectAuthenticationFlow/start(_:with:context:)`` function.
     public enum PrimaryFactor: Sendable, Equatable {
         /// Authenticate the user with the given password.
         ///
@@ -107,7 +107,7 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     
     /// Enumeration defining the list of possible secondary authentication factors.
     ///
-    /// These values are used by ``DirectAuthenticationFlow/resume(_:with:)``.
+    /// These values are used by ``DirectAuthenticationFlow/resume(with:)-(SecondaryFactor)``.
     public enum SecondaryFactor: Sendable, Equatable {
         /// Authenticate the user with the given OTP code.
         ///
@@ -245,7 +245,7 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     
     /// The current status of the authentication flow.
     ///
-    /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and ``DirectAuthenticationFlow/resume(with:)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
+    /// This value is returned from ``DirectAuthenticationFlow/start(_:with:context:)``,  ``DirectAuthenticationFlow/resume(with:)-(SecondaryFactor)`` , and ``DirectAuthenticationFlow/resume(with:)-(ContinuationFactor)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
     public enum Status: Sendable, Equatable {
         /// Authentication was successful, returning the given token.
         case success(_ token: Token)
@@ -257,7 +257,7 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
         
         /// Indicates the user should be challenged with some other secondary factor.
         ///
-        /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(with:)`` function to supply a secondary factor to verify the user.
+        /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(with:)-(ContinuationFactor)`` function to supply a secondary factor to verify the user.
         case mfaRequired(_ context: MFAContext)
     }
     

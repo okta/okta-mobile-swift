@@ -178,9 +178,9 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
         }
     }
     
-    /// Asynchronously continues an authentication flow using the given authentication redirect URI, using Swift Concurrency.
+    /// Asynchronously continues an authentication flow using the given authentication redirect URI.
     ///
-    /// Once the user completes authorization, using the URL provided by the ``start(with:additionalParameters:)`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    /// Once the user completes authorization by opening the authorization URL returned by the ``start(with:)`` function within a browser, the browser will return a URL that matches the scheme provided in the client configuration's ``OAuth2Client/Configuration/redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
     ///
     /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
     /// - Parameters:
@@ -270,7 +270,7 @@ extension AuthorizationCodeFlow {
 
     /// Continues an authentication flow using the given authentication redirect URI.
     ///
-    /// Once the user completes authorization, using the URL provided by the ``start(with:additionalParameters:completion:)`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    /// Once the user completes authorization by opening the authorization URL returned by the ``start(with:completion:)`` function within a browser, the browser will return a URL that matches the scheme provided in the client configuration's ``OAuth2Client/Configuration/redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
     ///
     /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
     /// - Parameters:

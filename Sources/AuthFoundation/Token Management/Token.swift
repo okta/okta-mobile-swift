@@ -81,7 +81,7 @@ public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer,
     
     /// The ID token, if requested.
     ///
-    /// For more information on working with an ID token, see the <doc:WorkingWithClaims> documentation.
+    /// For more information on working with an ID token, see ``HasClaims`` for more.
     public let idToken: JWT?
     
     /// Defines the context this token was issued from.

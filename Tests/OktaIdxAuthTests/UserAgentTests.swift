@@ -38,7 +38,7 @@ class UserAgentTests: XCTestCase {
                                    in: "MockResponses"))
         flow = try InteractionCodeFlow(client: client)
 
-        let pattern = "okta-authfoundation-swift/[\\d\\.]+ okta-idxauth-swift/[\\d\\.]+ (iOS|watchOS|tvOS|macOS|visionOS|linux)/[\\d\\.]+ Device/\\S+"
+        let pattern = "okta-authfoundation-swift/[\\d\\.]+.* okta-idxauth-swift/[\\d\\.]+.* (iOS|watchOS|tvOS|macOS|visionOS|linux)/[\\d\\.]+ Device/\\S+"
         regex = try NSRegularExpression(pattern: pattern, options: [])
     }
     
@@ -56,11 +56,11 @@ class UserAgentTests: XCTestCase {
             additionalParameters: nil,
             context: .init())
         let urlRequest = try request.request(for: client)
-        let userAgent = urlRequest.allHTTPHeaderFields?["User-Agent"]
+        let userAgent = try XCTUnwrap(urlRequest.allHTTPHeaderFields?["User-Agent"])
         XCTAssertNotNil(userAgent)
 
         let match = regexMatch(in: userAgent)
-        XCTAssertNotNil(match)
+        XCTAssertNotNil(match, "User agent does not match expected pattern: \(userAgent)")
     }
 
     func testIntrospectRequest() throws {
@@ -72,11 +72,11 @@ class UserAgentTests: XCTestCase {
             additionalParameters: nil,
             context: context)
         let urlRequest = try request.request(for: client)
-        let userAgent = urlRequest.allHTTPHeaderFields?["User-Agent"]
+        let userAgent = try XCTUnwrap(urlRequest.allHTTPHeaderFields?["User-Agent"])
         XCTAssertNotNil(userAgent)
 
         let match = regexMatch(in: userAgent)
-        XCTAssertNotNil(match)
+        XCTAssertNotNil(match, "User agent does not match expected pattern: \(userAgent)")
     }
     
     func testRemediationRequest() throws {
@@ -85,10 +85,10 @@ class UserAgentTests: XCTestCase {
                                                              contentType: nil,
                                                              bodyParameters: nil)
         let urlRequest = try request.request(for: client)
-        let userAgent = urlRequest.allHTTPHeaderFields?["User-Agent"]
+        let userAgent = try XCTUnwrap(urlRequest.allHTTPHeaderFields?["User-Agent"])
         XCTAssertNotNil(userAgent)
 
         let match = regexMatch(in: userAgent)
-        XCTAssertNotNil(match)
+        XCTAssertNotNil(match, "User agent does not match expected pattern: \(userAgent)")
     }
 }

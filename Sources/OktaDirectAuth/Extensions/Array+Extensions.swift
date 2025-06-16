@@ -16,13 +16,13 @@ extension Array where Element == GrantType {
     /// The list of all grants that the Direct Authentication SDK supports.
     ///
     /// Currently this library supports the following authentication grant types:
-    /// * ``GrantType.password``
-    /// * ``GrantType.oob``
-    /// * ``GrantType.otp``
-    /// * ``GrantType.webAuthn``
-    /// * ``GrantType.oobMFA``
-    /// * ``GrantType.otpMFA``
-    /// * ``GrantType.webAuthnMFA``
+    /// * ``GrantType/password``
+    /// * ``GrantType/oob``
+    /// * ``GrantType/otp``
+    /// * ``GrantType/webAuthn``
+    /// * ``GrantType/oobMFA``
+    /// * ``GrantType/otpMFA``
+    /// * ``GrantType/webAuthnMFA``
     public static var directAuth: [GrantType] {
         [ .password, .oob, .otp, .oobMFA, .otpMFA, .webAuthn, .webAuthnMFA ]
     }

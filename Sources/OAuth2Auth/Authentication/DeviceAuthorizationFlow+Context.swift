@@ -27,8 +27,8 @@ extension DeviceAuthorizationFlow {
         
         /// Initializer for creating a context with a custom state string.
         /// - Parameters:
-        ///   - state: State string to use, or `nil` to accept an automatically generated default.
-        ///   - maxAge: The maximum age an ID token can be when authenticating.
+        ///   - acrValues: Optional ACR values to use.
+        ///   - additionalParameters: Optional parameters to include in all requests to the Authorization Server.
         public init(acrValues: ClaimCollection<[String]?> = nil,
                     additionalParameters: [String: any APIRequestArgument]? = nil)
         {

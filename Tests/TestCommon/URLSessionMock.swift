@@ -37,12 +37,16 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
     private(set) var requests: [URLRequest] {
         get {
             lock.withLock {
-                _requests
+                queue.sync {
+                    _requests
+                }
             }
         }
         set {
             lock.withLock {
-                _requests = newValue
+                queue.sync {
+                    _requests = newValue
+                }
             }
         }
     }
