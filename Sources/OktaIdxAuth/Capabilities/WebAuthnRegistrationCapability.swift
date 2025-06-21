@@ -60,7 +60,7 @@ public final class WebAuthnRegistrationCapability: Capability, Sendable, Equatab
     }
 
     var remediation: Remediation? {
-        get { lock.withLock { _remediation} }
+        get { lock.withLock { _remediation } }
         set { lock.withLock { _remediation = newValue } }
     }
 
