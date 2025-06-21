@@ -15,6 +15,8 @@ import Foundation
 public enum JSONError: Error {
     case cannotDecode(value: (any Sendable)?)
     case invalidContentEncoding
+    case objectExpected
+    case arrayExpected
 }
 
 /// Efficiently represents ``JSON`` values, and exchanges between its String or Data representations.
@@ -126,7 +128,11 @@ public final class AnyJSON {
     /// Initializes the JSON data based on a ``JSON`` value.
     /// - Parameter json: The ``JSON`` value.
     public init(_ json: JSON) {
-        value = .json(json)
+        if case let .string(value) = json {
+            self.value = .string(value)
+        } else {
+            value = .json(json)
+        }
     }
 }
 
@@ -231,21 +237,13 @@ public enum JSON: Sendable, Hashable, Equatable {
     }
 
     /// Returns the array value at the given index, or `nil` if the object is not an array.
-    public subscript(index: Int) -> JSON? {
-        guard case let .array(array) = self else {
-            return nil
-        }
-
-        return array[index]
+    public subscript(index: Int) -> JSON {
+        get { (try? value(at: index)) ?? .null }
     }
 
     /// Returns the object value with the given key, or `nil` if this is not an object.
-    public subscript(key: String) -> JSON? {
-        guard case let .object(dictionary) = self else {
-            return nil
-        }
-
-        return dictionary[key]
+    public subscript(key: String) -> JSON {
+        get { (try? value(forKey: key)) ?? .null }
     }
     
     @_documentation(visibility: internal)
@@ -266,6 +264,40 @@ public enum JSON: Sendable, Hashable, Equatable {
         default:
             return false
         }
+    }
+}
+
+extension JSON {
+    /// Returns the specified value from a JSON array.
+    /// - Parameter index: Index to return
+    /// - Returns: JSON value at that array index.
+    /// - Throws: ``JSONError/jsonNotArray`` if the receiver is not an array.
+    @inlinable
+    public func value(at index: Int) throws -> JSON {
+        guard case let .array(array) = self else {
+            throw JSONError.arrayExpected
+        }
+
+        if array.indices.contains(index) {
+            return array[index]
+        } else {
+            return .null
+        }
+    }
+}
+
+extension JSON {
+    /// Returns the object value for the given key, if the receiver is an object.
+    /// - Parameter key: Key to return the value for.
+    /// - Returns: The old value, if any, that was at that key.
+    /// - Throws: ``JSONError/jsonNotObject`` if the receiver is not an object.
+    @inlinable
+    public func value(forKey key: String) throws -> JSON {
+        guard case let .object(dict) = self else {
+            throw JSONError.objectExpected
+        }
+
+        return dict[key] ?? .null
     }
 }
 
@@ -329,21 +361,38 @@ fileprivate extension NSNumber {
     }
 }
 
-extension JSON: CustomDebugStringConvertible {
+extension JSON: CustomStringConvertible, CustomDebugStringConvertible {
     @_documentation(visibility: internal)
+    @inlinable
+    public var description: String {
+        _stringValue(debug: false)
+    }
+
+    @_documentation(visibility: internal)
+    @inlinable
     public var debugDescription: String {
+        _stringValue(debug: true)
+    }
+
+    @usableFromInline
+    func _stringValue(debug: Bool) -> String {
         switch self {
         case .string(let str):
-            return str.debugDescription
+            return debug ? str.debugDescription : str
         case .number(let num):
-            return num.debugDescription
+            return debug ? num.debugDescription : num.description
         case .bool(let bool):
             return bool ? "true" : "false"
         case .null:
             return "null"
         default:
             let encoder = JSONEncoder()
-            encoder.outputFormatting = [.prettyPrinted]
+            if debug {
+                encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
+            } else {
+                encoder.outputFormatting = [.sortedKeys]
+            }
+
             // swiftlint:disable force_unwrapping
             // swiftlint:disable force_try
             return try! String(data: encoder.encode(self), encoding: .utf8)!
@@ -418,67 +467,69 @@ public protocol JSONRepresentable: Sendable {
 extension JSON: JSONRepresentable {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        self
+        get { self }
     }
 }
 
 extension String: JSONRepresentable {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        .string(self)
+        get { .string(self) }
     }
 }
 
 extension Int: JSONRepresentable {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        .number(NSNumber(value: self))
+        get { .number(NSNumber(value: self)) }
     }
 }
 
 extension Double: JSONRepresentable {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        .number(NSNumber(value: self))
+        get { .number(NSNumber(value: self)) }
     }
 }
 
 extension Float: JSONRepresentable {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        .number(NSNumber(value: self))
+        get { .number(NSNumber(value: self)) }
     }
 }
 
 extension Bool: JSONRepresentable {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        .bool(self)
+        get { .bool(self) }
     }
 }
 
 extension Array: JSONRepresentable where Element: JSONRepresentable {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        .array(compactMap({ $0.json }))
+        get { .array(compactMap({ $0.json })) }
     }
 }
 
 extension Dictionary: JSONRepresentable where Key == String, Value: JSONRepresentable {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        .object(mapValues(\.json))
+        get { .object(mapValues(\.json)) }
     }
 }
 
 extension Optional: JSONRepresentable where Wrapped: JSONRepresentable {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        switch self {
-        case .none:
-            return .null
-        case .some(let wrapped):
-            return wrapped.json
+        get {
+            switch self {
+            case .none:
+                return .null
+            case .some(let wrapped):
+                return wrapped.json
+            }
         }
     }
 }
@@ -486,13 +537,20 @@ extension Optional: JSONRepresentable where Wrapped: JSONRepresentable {
 extension NSNull: JSONRepresentable {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        .null
+        get { .null }
     }
 }
 
-extension NSNumber: JSONRepresentable {
+extension RawRepresentable where RawValue == JSON {
     @_documentation(visibility: internal)
     @inlinable public var json: JSON {
-        .number(self)
+        get { rawValue }
+    }
+}
+
+extension RawRepresentable where RawValue: JSONRepresentable {
+    @_documentation(visibility: internal)
+    @inlinable public var json: JSON {
+        get { rawValue.json }
     }
 }

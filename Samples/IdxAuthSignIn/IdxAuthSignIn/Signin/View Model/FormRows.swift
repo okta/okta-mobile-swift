@@ -173,7 +173,9 @@ extension Remediation.Form.Field {
 }
 
 extension Remediation {
-    class func title(for type: Remediation.RemediationType) -> String {
+    class func title(for type: Remediation.RemediationType,
+                     authenticatorType: Authenticator.Kind? = nil) -> String
+    {
         switch type {
         case .selectEnrollProfile, .enrollProfile:
             return "Sign Up"
@@ -182,8 +184,21 @@ extension Remediation {
             return "Sign In"
         
         case .challengeAuthenticator:
-            return "Password"
-            
+            switch authenticatorType {
+            case .securityKey:
+                return "Sign In"
+            default:
+                return "Continue"
+            }
+
+        case .enrollAuthenticator:
+            switch authenticatorType {
+            case .securityKey:
+                return "Set Up"
+            default:
+                return "Continue"
+            }
+
         case .selectAuthenticatorAuthenticate:
             return "Choose Method"
             
@@ -205,7 +220,47 @@ extension Remediation {
     }
     
     var title: String {
-        Remediation.title(for: type)
+        switch type {
+        case .selectEnrollProfile, .enrollProfile:
+            return "Sign Up"
+
+        case .selectIdentify, .identify:
+            return "Sign In"
+
+        case .challengeAuthenticator:
+            switch authenticators.first?.type {
+            case .securityKey:
+                return "Sign In with WebAuthN"
+            default:
+                return "Enter Password"
+            }
+
+        case .enrollAuthenticator:
+            switch authenticators.current?.type {
+            case .securityKey:
+                return "Set Up WebAuthN"
+            default:
+                return "Enroll"
+            }
+
+        case .selectAuthenticatorAuthenticate, .selectAuthenticatorEnroll:
+            return "Choose Method"
+
+        case .skip:
+            return "Skip"
+
+        case .cancel:
+            return "Restart"
+
+        case .enrollPoll, .challengePoll:
+            return "Verify"
+
+        case .unlockAccount, .selectAuthenticatorUnlockAccount:
+            return "Unlock Account"
+
+        default:
+            return "Next"
+        }
     }
 }
 
@@ -276,7 +331,20 @@ extension Response {
                             parent: nil,
                             delegate: nil))
         }
-        
+
+        if remediationOption.webAuthnRegistration != nil ||
+            remediationOption.webAuthnAuthentication != nil
+        {
+            let config = UIImage.SymbolConfiguration(pointSize: 50,
+                                                     weight: .regular,
+                                                     scale: .large)
+                .applying(UIImage.SymbolConfiguration.preferringMulticolor())
+                .applying(UIImage.SymbolConfiguration(hierarchicalColor: .tintColor))
+            if let image = UIImage(systemName: "faceid", withConfiguration: config) {
+                rows.append(Row(kind: .image(image), parent: nil))
+            }
+        }
+
         rows.append(contentsOf: remediationOption.form.flatMap { nested in
             nested.remediationRow(delegate: delegate)
         })

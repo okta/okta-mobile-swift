@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -51,7 +51,6 @@
 		96576C8725ACFC5900B02E3B /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96576C8625ACFC5900B02E3B /* TokenDetailViewController.swift */; };
 		965A112F26547EC1006B784F /* A18NProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A112E26547EC1006B784F /* A18NProfile.swift */; };
 		965A113326547EE9006B784F /* CodeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A113226547EE9006B784F /* CodeReceiver.swift */; };
-		965F9F11280DD69000B6E34A /* OktaIdx in Frameworks */ = {isa = PBXBuildFile; productRef = 965F9F10280DD69000B6E34A /* OktaIdx */; };
 		9669E16D2748343C00E3057D /* IDXImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9669E16C2748343C00E3057D /* IDXImageTableViewCell.swift */; };
 		96749AF825B8AC3B002849A0 /* ClientConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96749AF725B8AC3B002849A0 /* ClientConfiguration.swift */; };
 		96749B0625B8EAAD002849A0 /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96749B0525B8EAAD002849A0 /* XCTest+Extensions.swift */; };
@@ -82,6 +81,8 @@
 		96F79495266AC67000D340CD /* SelfServiceRegistrationScenarioValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F79494266AC67000D340CD /* SelfServiceRegistrationScenarioValidator.swift */; };
 		96F7949A266AC6F200D340CD /* ScenarioTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F79499266AC6F200D340CD /* ScenarioTestCase.swift */; };
 		96F8B34925BB556500DAECDC /* IDXPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8B34825BB556500DAECDC /* IDXPickerTableViewCell.swift */; };
+		E0F8A87D2E0226F600F3F353 /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = E0F8A87C2E0226F600F3F353 /* AuthFoundation */; };
+		E0F8A87F2E0226F600F3F353 /* OktaIdxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E0F8A87E2E0226F600F3F353 /* OktaIdxAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,6 +202,7 @@
 		96F79499266AC6F200D340CD /* ScenarioTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioTestCase.swift; sourceTree = "<group>"; };
 		96F8B34825BB556500DAECDC /* IDXPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXPickerTableViewCell.swift; sourceTree = "<group>"; };
 		96F8B35E25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetTransactionScenarioTests.swift; sourceTree = "<group>"; };
+		E007AD132E03A25700155796 /* IdxAuthSignIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IdxAuthSignIn.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +210,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				965F9F11280DD69000B6E34A /* OktaIdx in Frameworks */,
+				E0F8A87D2E0226F600F3F353 /* AuthFoundation in Frameworks */,
+				E0F8A87F2E0226F600F3F353 /* OktaIdxAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +291,7 @@
 		964F745125A3E5F0003EE300 /* IdxAuthSignIn */ = {
 			isa = PBXGroup;
 			children = (
+				E007AD132E03A25700155796 /* IdxAuthSignIn.entitlements */,
 				96576C6B25ACDD4F00B02E3B /* Signin */,
 				9652D9C625A90F8F00927FA5 /* Views */,
 				964D5A012658198B00DDBCBB /* View Controllers */,
@@ -500,7 +504,8 @@
 			);
 			name = IdxAuthSignIn;
 			packageProductDependencies = (
-				965F9F10280DD69000B6E34A /* OktaIdx */,
+				E0F8A87C2E0226F600F3F353 /* AuthFoundation */,
+				E0F8A87E2E0226F600F3F353 /* OktaIdxAuth */,
 			);
 			productName = IdxAuthSignIn;
 			productReference = 964F744F25A3E5F0003EE300 /* IdxAuthSignIn.app */;
@@ -862,9 +867,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IdxAuthSignIn/IdxAuthSignIn.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4U57NCZEKP;
 				INFOPLIST_FILE = IdxAuthSignIn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -882,9 +889,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IdxAuthSignIn/IdxAuthSignIn.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4U57NCZEKP;
 				INFOPLIST_FILE = IdxAuthSignIn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1028,9 +1037,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		965F9F10280DD69000B6E34A /* OktaIdx */ = {
+		E0F8A87C2E0226F600F3F353 /* AuthFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = OktaIdx;
+			productName = AuthFoundation;
+		};
+		E0F8A87E2E0226F600F3F353 /* OktaIdxAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OktaIdxAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

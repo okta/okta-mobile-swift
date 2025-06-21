@@ -167,10 +167,18 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
                        didSend request: URLRequest,
                        received response: APIResponse<T>) where T: Decodable
     {
-        var result = ""
-        dump(response.result, to: &result)
-        
-        os_log(.debug, log: Self.log, "Response:\n\n%s", result)
+        let responseString: String
+        if let data = response.responseBody {
+            responseString = String(data: data, encoding: .utf8) ?? "<unreadable>"
+        } else if let debutResult = response.result as? any CustomDebugStringConvertible {
+            responseString = debutResult.debugDescription
+        } else {
+            var result = ""
+            dump(response.result, to: &result)
+            responseString = result
+        }
+
+        os_log(.debug, log: Self.log, "Response:\n\n%s", responseString)
     }
 
     private static let log = OSLog(subsystem: "com.okta.client.network", category: "Debugging")

@@ -733,6 +733,28 @@ class IDXClientV1ResponseTests: XCTestCase {
         let _ = try XCTUnwrap(remediation.pollable)
     }
 
+    func testEnrollWebAuthnAuthenticator() throws {
+        let obj = try decode(type: IonResponse.self,
+                             try data(from: .module,
+                                      for: "webauthn-enrolment-challenge-response",
+                                      in: "MockResponses"))
+        let publicObj = try Response(flow: flowMock, ion: obj)
+
+        let enrollRemediation = try XCTUnwrap(publicObj.remediations[.enrollAuthenticator])
+        XCTAssertEqual(publicObj.authenticators.current, enrollRemediation.authenticators.current)
+
+        let capability = try XCTUnwrap(enrollRemediation.webAuthnRegistration)
+        XCTAssertEqual(capability.displayName, "Jane Doe")
+        XCTAssertEqual(capability.name, "jane.doe@example.com")
+        XCTAssertEqual(capability.userId.base64EncodedString(), "MDB1ZmxrdTBpbzM4T0RHclAwdzY=")
+        XCTAssertNil(enrollRemediation.webAuthnAuthentication)
+
+        // Ensure the webAuthnRegistration capability is only attached to the enroll remediation
+        let selectRemediation = try XCTUnwrap(publicObj.remediations[.selectAuthenticatorEnroll])
+        XCTAssertNil(selectRemediation.webAuthnRegistration)
+        XCTAssertNil(selectRemediation.webAuthnAuthentication)
+    }
+
     func testMultipleRelatedAuthenticators() throws {
         let obj = try decode(type: IonResponse.self,
                              try data(from: .module,
