@@ -271,7 +271,7 @@ extension JSON {
     /// Returns the specified value from a JSON array.
     /// - Parameter index: Index to return
     /// - Returns: JSON value at that array index.
-    /// - Throws: ``JSONError/jsonNotArray`` if the receiver is not an array.
+    /// - Throws: ``JSONError/arrayExpected`` if the receiver is not an array.
     @inlinable
     public func value(at index: Int) throws -> JSON {
         guard case let .array(array) = self else {
@@ -290,7 +290,7 @@ extension JSON {
     /// Returns the object value for the given key, if the receiver is an object.
     /// - Parameter key: Key to return the value for.
     /// - Returns: The old value, if any, that was at that key.
-    /// - Throws: ``JSONError/jsonNotObject`` if the receiver is not an object.
+    /// - Throws: ``JSONError/objectExpected`` if the receiver is not an object.
     @inlinable
     public func value(forKey key: String) throws -> JSON {
         guard case let .object(dict) = self else {

@@ -170,8 +170,8 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
         let responseString: String
         if let data = response.responseBody {
             responseString = String(data: data, encoding: .utf8) ?? "<unreadable>"
-        } else if let debutResult = response.result as? any CustomDebugStringConvertible {
-            responseString = debutResult.debugDescription
+        } else if let debugResult = response.result as? any CustomDebugStringConvertible {
+            responseString = debugResult.debugDescription
         } else {
             var result = ""
             dump(response.result, to: &result)
