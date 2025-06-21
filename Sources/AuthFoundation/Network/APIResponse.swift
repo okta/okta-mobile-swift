@@ -22,6 +22,9 @@ public struct APIResponse<T: Decodable & Sendable>: Sendable, Decodable {
     /// Result provided from the request.
     public let result: T
     
+    /// HTTP response body data.
+    public let responseBody: Data?
+
     /// The date the response was received, as reported by the server.
     public let date: Date
     

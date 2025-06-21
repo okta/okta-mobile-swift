@@ -28,8 +28,7 @@ public final class DuoCapability: Capability, Sendable, Equatable, Hashable {
         guard remediation.authenticators.contains(where: {
             $0.type == .app && $0.methods?.contains(.duo) ?? false
         }),
-              let credentialsField = remediation.form["credentials"],
-              let signatureField = credentialsField.form?.allFields.first(where: { $0.name == "signatureData" })
+              let signatureField = remediation.form[allFields: "credentials.signatureData"]
         else {
             return
         }

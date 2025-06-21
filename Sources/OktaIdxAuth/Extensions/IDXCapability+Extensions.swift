@@ -34,25 +34,26 @@ extension IsCapabilityType {
 
 extension Authenticator.CapabilityType {
     public init?(_ capability: any Capability) {
-        if let capability = capability as? SendCapability {
+        switch capability {
+        case let capability as SendCapability:
             self = .sendable(capability)
-        } else if let capability = capability as? ResendCapability {
+        case let capability as ResendCapability:
             self = .resendable(capability)
-        } else if let capability = capability as? RecoverCapability {
+        case let capability as RecoverCapability:
             self = .recoverable(capability)
-        } else if let capability = capability as? PasswordSettingsCapability {
+        case let capability as PasswordSettingsCapability:
             self = .passwordSettings(capability)
-        } else if let capability = capability as? PollCapability {
+        case let capability as PollCapability:
             self = .pollable(capability)
-        } else if let capability = capability as? ProfileCapability {
+        case let capability as ProfileCapability:
             self = .profile(capability)
-        } else if let capability = capability as? OTPCapability {
+        case let capability as OTPCapability:
             self = .otp(capability)
-        } else if let capability = capability as? DuoCapability {
+        case let capability as DuoCapability:
             self = .duo(capability)
-        } else if let capability = capability as? NumberChallengeCapability {
+        case let capability as NumberChallengeCapability:
             self = .numberChallenge(capability)
-        } else {
+        default:
             return nil
         }
     }
@@ -83,11 +84,16 @@ extension Authenticator.CapabilityType {
 
 extension Remediation.CapabilityType {
     public init?(_ capability: any Capability) {
-        if let capability = capability as? PollCapability {
+        switch capability {
+        case let capability as PollCapability:
             self = .pollable(capability)
-        } else if let capability = capability as? SocialIDPCapability {
+        case let capability as SocialIDPCapability:
             self = .socialIdp(capability)
-        } else {
+        case let capability as WebAuthnRegistrationCapability:
+            self = .webAuthnRegistration(capability)
+        case let capability as WebAuthnAuthenticationCapability:
+            self = .webAuthnAuthentication(capability)
+        default:
             return nil
         }
     }
@@ -97,6 +103,10 @@ extension Remediation.CapabilityType {
         case .pollable(let capability):
             return capability
         case .socialIdp(let capability):
+            return capability
+        case .webAuthnAuthentication(let capability):
+            return capability
+        case .webAuthnRegistration(let capability):
             return capability
         }
     }

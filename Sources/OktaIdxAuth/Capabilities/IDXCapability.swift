@@ -116,6 +116,8 @@ extension Remediation: CapabilityCollection {
     public enum CapabilityType: IsCapabilityType, Sendable, Equatable, Hashable {
         case pollable(_ capability: PollCapability)
         case socialIdp(_ capability: SocialIDPCapability)
+        case webAuthnAuthentication(_ capability: WebAuthnAuthenticationCapability)
+        case webAuthnRegistration(_ capability: WebAuthnRegistrationCapability)
     }
 
     /// Exposes the remediation's ability to poll for an out-of-band result.
@@ -132,4 +134,14 @@ extension Remediation: CapabilityCollection {
     ///
     /// This value will only be present for social IDP remediation options, and will otherwise be `nil`.
     public var allSocialIdps: [SocialIDPCapability] { capabilities(of: SocialIDPCapability.self) }
+    
+    /// Enables registration / enrollment of WebAuthn credentials.
+    public var webAuthnRegistration: WebAuthnRegistrationCapability? {
+        capabilities(of: WebAuthnRegistrationCapability.self).first
+    }
+    
+    /// Enables authentication of a WebAuthn credential.
+    public var webAuthnAuthentication: WebAuthnAuthenticationCapability? {
+        capabilities(of: WebAuthnAuthenticationCapability.self).first
+    }
 }

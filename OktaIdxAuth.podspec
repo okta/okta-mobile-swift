@@ -23,7 +23,7 @@ Integrate your native app with Okta using the Okta Identity Engine library.
     s.authors       = { "Okta Developers" => "developer@okta.com"}
     s.source        = { :git => 'https://github.com/okta/okta-mobile-swift.git', :tag => s.version.to_s }
 
-    s.source_files  = 'Sources/OktaIdx/**/*.swift'
+    s.source_files  = 'Sources/OktaIdxAuth/**/*.swift'
     s.resource_bundles = { 'OktaIdxAuth' => 'Sources/OktaIdxAuth/Resources/**/*' }
     s.swift_versions = ['5.10', '6.0']
     s.prefix_header_file = false

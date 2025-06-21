@@ -120,7 +120,7 @@ public class Signin {
                 return "Social Login"
             }
             
-        case .selectAuthenticatorAuthenticate:
+        case .selectAuthenticatorAuthenticate, .selectAuthenticatorEnroll:
             return "Choose"
             
         case .launchAuthenticator:
@@ -131,12 +131,28 @@ public class Signin {
             
         case .unlockAccount:
             return "Unlock Account"
-            
+
+        case .challengeAuthenticator:
+            switch option.authenticators.first?.type {
+            case .securityKey:
+                return "Sign In"
+            default:
+                return "Continue"
+            }
+
+        case .enrollAuthenticator:
+            switch option.authenticators.first?.type {
+            case .securityKey:
+                return "Set Up"
+            default:
+                return "Continue"
+            }
+
         default:
             return "Continue"
         }
     }
-    
+
     /// Called by each view controller once their remediation step has been completed, allowing it to proceed to the next step of the workflow.
     /// - Parameter response: IDX response object received from the API.
     @MainActor

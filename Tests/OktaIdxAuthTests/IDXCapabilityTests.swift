@@ -133,6 +133,7 @@ class IDXCapabilityTests: XCTestCase {
                                            type: .app,
                                            key: "app",
                                            methods: [["type":"duo"]],
+                                           contextualData: nil,
                                            capabilities: [duo])
         remediation = Remediation(flow: flowMock,
                                   name: "remediation",
