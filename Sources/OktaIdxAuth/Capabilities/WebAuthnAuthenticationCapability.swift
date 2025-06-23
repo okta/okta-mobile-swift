@@ -58,13 +58,14 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
     private let lock = Lock()
     nonisolated(unsafe) private weak var _remediation: Remediation?
     internal init(issuerURL: URL, rawChallengeJSON json: JSON) throws {
-        guard case let .string(challengeString) = json["challenge"]
+        guard case let .string(challengeString) = json["challenge"],
+              let challenge = Data(base64Encoded: challengeString.base64URLDecoded)
         else {
             throw WebAuthnCapabilityError.missingUserData
         }
 
         self.rawChallengeJSON = json
-        self.challenge = Data(challengeString.base64URLDecoded.utf8)
+        self.challenge = challenge
         self.relyingPartyIdentifier = try String.relyingPartyIssuer(from: json,
                                                                     issuerURL: issuerURL)
     }

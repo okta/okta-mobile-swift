@@ -186,7 +186,7 @@ public extension XCTestCase {
             for _ in 0..<iterationCount {
                 group.enter()
                 queue.async {
-                    Task {
+                    Task.detached {
                         try await block()
                         group.leave()
                     }
