@@ -103,20 +103,6 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
     }
 
     func proceed(to remediationOption: Remediation?, from sender: Any? = nil) {
-        let response: Response
-
-        if let remediation = response.remediations[.challengeAuthenticator],
-           let capability = remediation.webAuthnAuthentication
-        {
-            let request = capability.createCredentialAssertionRequest()
-            let authController = ASAuthorizationController(authorizationRequests: [
-                capability.createCredentialAssertionRequest()
-            ])
-            authController.delegate = self
-            authController.presentationContextProvider = self
-            authController.performRequests()
-        }
-
         guard let signin = signin else {
             showError(SigninError.genericError(message: "Signin session deallocated"))
             return

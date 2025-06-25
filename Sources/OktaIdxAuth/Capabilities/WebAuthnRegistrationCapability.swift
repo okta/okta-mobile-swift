@@ -158,9 +158,11 @@ extension WebAuthnRegistrationCapability {
                                                                            userID: userId)
         request.displayName = displayName
 
+        #if !os(tvOS)
         if let attestationPreference {
             request.attestationPreference = ASAuthorizationPublicKeyCredentialAttestationKind(rawValue: attestationPreference)
         }
+        #endif
 
         if let userVerificationPreference {
             request.userVerificationPreference = ASAuthorizationPublicKeyCredentialUserVerificationPreference(rawValue: userVerificationPreference)
