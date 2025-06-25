@@ -41,8 +41,11 @@ public final class WebAuthnRegistrationCapability: Capability, Sendable, Equatab
     public nonisolated let userId: Data
     
     /// The relying party identifier indicated on the credential assertion request issued from the server.
-    public nonisolated let relyingPartyIdentifier: String
-    
+    public nonisolated var relyingPartyIdentifier: String {
+        get { lock.withLock { _relyingPartyIdentifier } }
+        set { lock.withLock { _relyingPartyIdentifier = newValue } }
+    }
+
     /// The user verification preference indicated on the credential assertion request issued from the server.
     public nonisolated let userVerificationPreference: String?
     
@@ -86,6 +89,7 @@ public final class WebAuthnRegistrationCapability: Capability, Sendable, Equatab
 
     private let lock = Lock()
     nonisolated(unsafe) private weak var _remediation: Remediation?
+    nonisolated(unsafe) var _relyingPartyIdentifier: String
     internal init(issuerURL: URL, rawActivationJSON json: JSON) throws {
         guard case let .string(challengeString) = json["challenge"],
               let challenge = Data(base64Encoded: challengeString.base64URLDecoded),
@@ -102,8 +106,8 @@ public final class WebAuthnRegistrationCapability: Capability, Sendable, Equatab
         self.userId = Data(userID.utf8)
         self.displayName = displayName
         self.name = name
-        self.relyingPartyIdentifier = try String.relyingPartyIssuer(from: json,
-                                                                    issuerURL: issuerURL)
+        self._relyingPartyIdentifier = try String.relyingPartyIssuer(from: json,
+                                                                     issuerURL: issuerURL)
 
         if case let .object(authenticatorSelection) = json["authenticatorSelection"],
            case let .string(userVerification) = authenticatorSelection["userVerification"]

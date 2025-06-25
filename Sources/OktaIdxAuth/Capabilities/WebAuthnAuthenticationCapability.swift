@@ -22,7 +22,10 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
     nonisolated let rawChallengeJSON: JSON
     
     /// The relying party identifier indicated on the credential assertion request issued from the server.
-    public nonisolated let relyingPartyIdentifier: String
+    public nonisolated var relyingPartyIdentifier: String {
+        get { lock.withLock { _relyingPartyIdentifier } }
+        set { lock.withLock { _relyingPartyIdentifier = newValue } }
+    }
 
     /// The authentication challenge data in the credential assertion request issued from the server.
     public nonisolated let challenge: Data
@@ -56,12 +59,14 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
 
     @_documentation(visibility: internal)
     public static func == (lhs: WebAuthnAuthenticationCapability, rhs: WebAuthnAuthenticationCapability) -> Bool {
-        lhs.rawChallengeJSON == rhs.rawChallengeJSON
+        lhs.rawChallengeJSON == rhs.rawChallengeJSON &&
+        lhs.relyingPartyIdentifier == rhs.relyingPartyIdentifier
     }
 
     @_documentation(visibility: internal)
     public nonisolated func hash(into hasher: inout Hasher) {
         hasher.combine(rawChallengeJSON)
+        hasher.combine(relyingPartyIdentifier)
     }
 
     var remediation: Remediation? {
@@ -71,6 +76,7 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
 
     private let lock = Lock()
     nonisolated(unsafe) private weak var _remediation: Remediation?
+    nonisolated(unsafe) var _relyingPartyIdentifier: String
     internal init(issuerURL: URL, rawChallengeJSON json: JSON) throws {
         guard case let .string(challengeString) = json["challenge"],
               let challenge = Data(base64Encoded: challengeString.base64URLDecoded)
@@ -80,12 +86,10 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
 
         self.rawChallengeJSON = json
         self.challenge = challenge
-        self.relyingPartyIdentifier = try String.relyingPartyIssuer(from: json,
-                                                                    issuerURL: issuerURL)
+        self._relyingPartyIdentifier = try String.relyingPartyIssuer(from: json,
+                                                                     issuerURL: issuerURL)
 
-        if case let .object(authenticatorSelection) = json["authenticatorSelection"],
-           case let .string(userVerification) = authenticatorSelection["userVerification"]
-        {
+        if case let .string(userVerification) = json["userVerification"] {
             userVerificationPreference = userVerification
         } else {
             userVerificationPreference = nil
