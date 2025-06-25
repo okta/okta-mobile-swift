@@ -1,0 +1,347 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityCollection-Implementations",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityType"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityType\/webAuthnAuthentication(_:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:11OktaIdxAuth11RemediationC14CapabilityTypeO22webAuthnAuthenticationyAeA03WebhiE0CcAEmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "webAuthnAuthentication"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC",
+        "text" : "WebAuthnAuthenticationCapability"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaIdxAuth"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "Remediation.CapabilityType.webAuthnAuthentication(_:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "webAuthnAuthentication"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "_"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC",
+              "text" : "WebAuthnAuthenticationCapability"
+            },
+            {
+              "kind" : "text",
+              "text" : ")"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaidxauth\/remediation\/capabilitytype\/webauthnauthentication(_:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaIdxAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Capability": {
+  "abstract" : [
+    {
+      "text" : "A generic protocol used to identify objects that describe a capability.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Capability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Capability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Capability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Capability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/capability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation": {
+  "abstract" : [
+    {
+      "text" : "Describes choices the user can make to proceed through the authentication workflow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Remediation"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Remediation"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Remediation",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/CapabilityCollection-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityCollection-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "CapabilityCollection Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/capabilitycollection-implementations"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/CapabilityType": {
+  "abstract" : [
+    {
+      "text" : "Enumeration describing the individual type of capability available within ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " objects, and its associated underlying ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Capability",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " instance.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "CapabilityType"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "CapabilityType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Remediation.CapabilityType",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/capabilitytype"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/CapabilityType/webAuthnAuthentication(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "webAuthnAuthentication"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC",
+      "text" : "WebAuthnAuthenticationCapability"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityType\/webAuthnAuthentication(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Remediation.CapabilityType.webAuthnAuthentication(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/capabilitytype\/webauthnauthentication(_:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability for authenticating a user with an existing WebAuthn credential.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnAuthenticationCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnAuthenticationCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthnAuthenticationCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability"
+}
+}
+}

@@ -108,7 +108,9 @@
       "anchor" : "Classes",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/DuoCapability"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/DuoCapability",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability"
       ],
       "title" : "Classes"
     },
@@ -119,6 +121,14 @@
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/IsCapabilityType"
       ],
       "title" : "Protocols"
+    },
+    {
+      "anchor" : "Enumerations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError"
+      ],
+      "title" : "Enumerations"
     },
     {
       "anchor" : "Extended-Modules",
@@ -1229,6 +1239,105 @@
   "title" : "SocialIDPCapability",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/socialidpcapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability for authenticating a user with an existing WebAuthn credential.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnAuthenticationCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnAuthenticationCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthnAuthenticationCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnCapabilityError"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnCapabilityError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthnCapabilityError",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability for registering \/ enrolling a user with a new WebAuthn credential.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnRegistrationCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnRegistrationCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthnRegistrationCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability"
 }
 }
 }

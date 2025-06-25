@@ -261,7 +261,9 @@
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/name",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/pollable",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/socialIdp",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/type"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/type",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/webAuthnAuthentication",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/webAuthnRegistration"
       ],
       "title" : "Instance Properties"
     },
@@ -1229,6 +1231,88 @@
   "title" : "type",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/type"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/webAuthnAuthentication": {
+  "abstract" : [
+    {
+      "text" : "Enables authentication of a WebAuthn credential.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "webAuthnAuthentication"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC",
+      "text" : "WebAuthnAuthenticationCapability"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/webAuthnAuthentication",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "webAuthnAuthentication",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/webauthnauthentication"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/webAuthnRegistration": {
+  "abstract" : [
+    {
+      "text" : "Enables registration \/ enrollment of WebAuthn credentials.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "webAuthnRegistration"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth30WebAuthnRegistrationCapabilityC",
+      "text" : "WebAuthnRegistrationCapability"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/webAuthnRegistration",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "webAuthnRegistration",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/webauthnregistration"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response": {
   "abstract" : [

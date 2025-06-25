@@ -114,8 +114,10 @@
       "anchor" : "Enumeration-Cases",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError\/arrayExpected",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError\/cannotDecode(value:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError\/invalidContentEncoding"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError\/invalidContentEncoding",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError\/objectExpected"
       ],
       "title" : "Enumeration Cases"
     },
@@ -297,6 +299,31 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsonerror\/error-implementations"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/JSONError/arrayExpected": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "arrayExpected"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError\/arrayExpected",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JSONError.arrayExpected",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonerror\/arrayexpected"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JSONError/cannotDecode(value:)": {
   "abstract" : [
 
@@ -367,6 +394,31 @@
   "title" : "JSONError.invalidContentEncoding",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsonerror\/invalidcontentencoding"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONError/objectExpected": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "objectExpected"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError\/objectExpected",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JSONError.objectExpected",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonerror\/objectexpected"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWTError": {
   "abstract" : [

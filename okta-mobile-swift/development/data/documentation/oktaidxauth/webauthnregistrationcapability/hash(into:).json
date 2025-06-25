@@ -1,0 +1,283 @@
+{
+  "abstract" : [
+    {
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "Hashable.hash(into:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/hash(into:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:11OktaIdxAuth30WebAuthnRegistrationCapabilityC4hash4intoys6HasherVz_tF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "hash"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "into"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "inout"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s6HasherV",
+        "text" : "Hasher"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaIdxAuth"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "hash(into:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "nonisolated"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "hash"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "into"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "hasher"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "inout"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s6HasherV",
+              "text" : "Hasher"
+            },
+            {
+              "kind" : "text",
+              "text" : ")"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/hash(into:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaIdxAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability for registering \/ enrolling a user with a new WebAuthn credential.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnRegistrationCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnRegistrationCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthnRegistrationCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/hash(into:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hash"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "into"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "inout"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6HasherV",
+      "text" : "Hasher"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/hash(into:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hash(into:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/hash(into:)"
+}
+}
+}

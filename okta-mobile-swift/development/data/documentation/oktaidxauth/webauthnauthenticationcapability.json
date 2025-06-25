@@ -1,0 +1,606 @@
+{
+  "abstract" : [
+    {
+      "text" : "Capability for authenticating a user with an existing WebAuthn credential.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "WebAuthnAuthenticationCapability"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaIdxAuth"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "WebAuthnAuthenticationCapability"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "WebAuthnAuthenticationCapability"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "final"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "WebAuthnAuthenticationCapability"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Capability",
+        "doc:\/\/OktaIdxAuth\/SQ",
+        "doc:\/\/OktaIdxAuth\/SH",
+        "doc:\/\/OktaIdxAuth\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Operators",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/==(_:_:)"
+      ],
+      "title" : "Operators"
+    },
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/rawChallengeJSON",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/relyingPartyIdentifier"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "anchor" : "Instance-Methods",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(authenticatorData:clientData:signatureData:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/hash(into:)"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/Capability-Implementations",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/Equatable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaidxauth\/webauthnauthenticationcapability"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaIdxAuth/SH": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/SQ": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaIdxAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Capability": {
+  "abstract" : [
+    {
+      "text" : "A generic protocol used to identify objects that describe a capability.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Capability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Capability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Capability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Capability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/capability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability for authenticating a user with an existing WebAuthn credential.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnAuthenticationCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnAuthenticationCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthnAuthenticationCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/==(_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "=="
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC",
+      "text" : "WebAuthnAuthenticationCapability"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC",
+      "text" : "WebAuthnAuthenticationCapability"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/==(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "==(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/==(_:_:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/Capability-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/Capability-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Capability Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/capability-implementations"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/equatable-implementations"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/challenge": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "challenge"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "challenge",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/challenge(authenticatorData:clientData:signatureData:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "challenge"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authenticatorData"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "clientData"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "signatureData"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth8ResponseC",
+      "text" : "Response"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(authenticatorData:clientData:signatureData:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "challenge(authenticatorData:clientData:signatureData:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge(authenticatordata:clientdata:signaturedata:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/hash(into:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hash"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "into"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "inout"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6HasherV",
+      "text" : "Hasher"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/hash(into:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hash(into:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/hash(into:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/rawChallengeJSON": {
+  "abstract" : [
+    {
+      "text" : "JSON data representing the WebAuthn authenticator authentication capability.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "rawChallengeJSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/rawChallengeJSON",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "rawChallengeJSON",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/rawchallengejson"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/relyingPartyIdentifier": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "relyingPartyIdentifier"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/relyingPartyIdentifier",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "relyingPartyIdentifier",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/relyingpartyidentifier"
+},
+"doc://OktaIdxAuth/s8SendableP": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

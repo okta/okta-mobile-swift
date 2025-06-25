@@ -1,0 +1,378 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/register(attestation:clientJSON:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:11OktaIdxAuth30WebAuthnRegistrationCapabilityC8register11attestation10clientJSONAA8ResponseC10Foundation4DataV_AKtYaKF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "register"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "attestation"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation4DataV",
+        "text" : "Data"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "clientJSON"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation4DataV",
+        "text" : "Data"
+      },
+      {
+        "kind" : "text",
+        "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "throws"
+      },
+      {
+        "kind" : "text",
+        "text" : " -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:11OktaIdxAuth8ResponseC",
+        "text" : "Response"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaIdxAuth"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "register(attestation:clientJSON:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "register"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "attestation"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation4DataV",
+              "text" : "Data"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "clientJSON"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation4DataV",
+              "text" : "Data"
+            },
+            {
+              "kind" : "text",
+              "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "throws"
+            },
+            {
+              "kind" : "text",
+              "text" : " -> "
+            },
+            {
+              "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:11OktaIdxAuth8ResponseC",
+              "text" : "Response"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/register(attestation:clientjson:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaIdxAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response": {
+  "abstract" : [
+    {
+      "text" : "Describes the response from an Okta Identity Engine workflow stage.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability for registering \/ enrolling a user with a new WebAuthn credential.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnRegistrationCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnRegistrationCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthnRegistrationCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/register(attestation:clientJSON:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "register"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "attestation"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "clientJSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth8ResponseC",
+      "text" : "Response"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/register(attestation:clientJSON:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "register(attestation:clientJSON:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/register(attestation:clientjson:)"
+}
+}
+}

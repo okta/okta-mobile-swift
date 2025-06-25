@@ -92,6 +92,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONRepresentable",
         "doc:\/\/AuthFoundation\/s8CopyableP",
         "doc:\/\/AuthFoundation\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/AuthFoundation\/s23CustomStringConvertibleP",
         "doc:\/\/AuthFoundation\/Se",
         "doc:\/\/AuthFoundation\/SE",
         "doc:\/\/AuthFoundation\/SQ",
@@ -174,11 +175,20 @@
       "title" : "Instance Properties"
     },
     {
+      "anchor" : "Instance-Methods",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/value(at:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/value(forKey:)"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
       "anchor" : "Subscripts",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-560k7",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-9ugbm"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-15cyx",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-190mn"
       ],
       "title" : "Subscripts"
     },
@@ -1020,57 +1030,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/json\/string(_:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JSON/subscript(_:)-560k7": {
-  "abstract" : [
-    {
-      "text" : "Returns the array value at the given index, or ",
-      "type" : "text"
-    },
-    {
-      "code" : "nil",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " if the object is not an array.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "subscript"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
-      "text" : "JSON"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-560k7",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "subscript(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/json\/subscript(_:)-560k7"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JSON/subscript(_:)-9ugbm": {
+"doc://AuthFoundation/documentation/AuthFoundation/JSON/subscript(_:)-15cyx": {
   "abstract" : [
     {
       "text" : "Returns the object value with the given key, or ",
@@ -1107,18 +1067,184 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:14AuthFoundation4JSONO",
       "text" : "JSON"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-9ugbm",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-15cyx",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/json\/subscript(_:)-9ugbm"
+  "url" : "\/documentation\/authfoundation\/json\/subscript(_:)-15cyx"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSON/subscript(_:)-190mn": {
+  "abstract" : [
+    {
+      "text" : "Returns the array value at the given index, or ",
+      "type" : "text"
+    },
+    {
+      "code" : "nil",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " if the object is not an array.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/subscript(_:)-190mn",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/json\/subscript(_:)-190mn"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSON/value(at:)": {
+  "abstract" : [
+    {
+      "text" : "Returns the specified value from a JSON array.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "at"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/value(at:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(at:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/json\/value(at:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSON/value(forKey:)": {
+  "abstract" : [
+    {
+      "text" : "Returns the object value for the given key, if the receiver is an object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "forKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/value(forKey:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(forKey:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/json\/value(forkey:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer": {
   "abstract" : [
@@ -1337,6 +1463,11 @@
   "title" : "Working with Claims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/workingwithclaims"
+},
+"doc://AuthFoundation/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
 },
 "doc://AuthFoundation/s23ExpressibleByNilLiteralP": {
   "identifier" : "doc:\/\/AuthFoundation\/s23ExpressibleByNilLiteralP",

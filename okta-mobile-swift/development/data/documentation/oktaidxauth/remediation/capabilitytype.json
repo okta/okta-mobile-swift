@@ -126,7 +126,9 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityType\/pollable(_:)",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityType\/socialIdp(_:)"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityType\/socialIdp(_:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityType\/webAuthnAuthentication(_:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityType\/webAuthnRegistration(_:)"
       ],
       "title" : "Enumeration Cases"
     },
@@ -501,6 +503,82 @@
   "title" : "Remediation.CapabilityType.socialIdp(_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/capabilitytype\/socialidp(_:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/CapabilityType/webAuthnAuthentication(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "webAuthnAuthentication"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC",
+      "text" : "WebAuthnAuthenticationCapability"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityType\/webAuthnAuthentication(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Remediation.CapabilityType.webAuthnAuthentication(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/capabilitytype\/webauthnauthentication(_:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/CapabilityType/webAuthnRegistration(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "webAuthnRegistration"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth30WebAuthnRegistrationCapabilityC",
+      "text" : "WebAuthnRegistrationCapability"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/CapabilityType\/webAuthnRegistration(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Remediation.CapabilityType.webAuthnRegistration(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/capabilitytype\/webauthnregistration(_:)"
 },
 "doc://OktaIdxAuth/s8SendableP": {
   "identifier" : "doc:\/\/OktaIdxAuth\/s8SendableP",

@@ -192,6 +192,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/links",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/rateInfo",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/requestId",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/responseBody",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/result",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/statusCode"
       ],
@@ -1067,6 +1068,47 @@
   "title" : "requestId",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse\/requestid"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponse/responseBody": {
+  "abstract" : [
+    {
+      "text" : "HTTP response body data.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "responseBody"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/responseBody",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "responseBody",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiresponse\/responsebody"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIResponse/result": {
   "abstract" : [

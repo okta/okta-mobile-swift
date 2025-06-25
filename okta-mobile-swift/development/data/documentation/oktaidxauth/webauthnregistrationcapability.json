@@ -1,0 +1,694 @@
+{
+  "abstract" : [
+    {
+      "text" : "Capability for registering \/ enrolling a user with a new WebAuthn credential.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:11OktaIdxAuth30WebAuthnRegistrationCapabilityC",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "WebAuthnRegistrationCapability"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaIdxAuth"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "WebAuthnRegistrationCapability"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "WebAuthnRegistrationCapability"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "final"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "WebAuthnRegistrationCapability"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Capability",
+        "doc:\/\/OktaIdxAuth\/SQ",
+        "doc:\/\/OktaIdxAuth\/SH",
+        "doc:\/\/OktaIdxAuth\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Operators",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/==(_:_:)"
+      ],
+      "title" : "Operators"
+    },
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/challenge",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/displayName",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/name",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/rawActivationJSON",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/relyingPartyIdentifier",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/userId"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "anchor" : "Instance-Methods",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/hash(into:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/register(attestation:clientJSON:)"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/Capability-Implementations",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/Equatable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaidxauth\/webauthnregistrationcapability"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaIdxAuth/SH": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/SQ": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaIdxAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Capability": {
+  "abstract" : [
+    {
+      "text" : "A generic protocol used to identify objects that describe a capability.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Capability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Capability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Capability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Capability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/capability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability for registering \/ enrolling a user with a new WebAuthn credential.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnRegistrationCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnRegistrationCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthnRegistrationCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/==(_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "=="
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth30WebAuthnRegistrationCapabilityC",
+      "text" : "WebAuthnRegistrationCapability"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth30WebAuthnRegistrationCapabilityC",
+      "text" : "WebAuthnRegistrationCapability"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/==(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "==(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/==(_:_:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/Capability-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/Capability-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Capability Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/capability-implementations"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/equatable-implementations"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/challenge": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "challenge"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/challenge",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "challenge",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/challenge"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/displayName": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "displayName"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/displayName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "displayName",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/displayname"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/hash(into:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hash"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "into"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "inout"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6HasherV",
+      "text" : "Hasher"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/hash(into:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hash(into:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/hash(into:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/name": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "name"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/name",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "name",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/name"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/rawActivationJSON": {
+  "abstract" : [
+    {
+      "text" : "JSON data representing the WebAuthn authenticator activation capability.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "rawActivationJSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/rawActivationJSON",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "rawActivationJSON",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/rawactivationjson"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/register(attestation:clientJSON:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "register"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "attestation"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "clientJSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth8ResponseC",
+      "text" : "Response"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/register(attestation:clientJSON:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "register(attestation:clientJSON:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/register(attestation:clientjson:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/relyingPartyIdentifier": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "relyingPartyIdentifier"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/relyingPartyIdentifier",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "relyingPartyIdentifier",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/relyingpartyidentifier"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/userId": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userId"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/userId",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "userId",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/userid"
+},
+"doc://OktaIdxAuth/s8SendableP": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

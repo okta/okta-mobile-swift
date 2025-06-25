@@ -165,6 +165,7 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/capabilities",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/context",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/displayName",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/duo",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/id",
@@ -518,6 +519,56 @@
   "title" : "capabilities",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/capabilities"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/context": {
+  "abstract" : [
+    {
+      "text" : "Additional context data associated with this authenticator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/context",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "context",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/context"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/displayName": {
   "abstract" : [

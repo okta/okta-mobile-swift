@@ -1,0 +1,267 @@
+{
+  "abstract" : [
+    {
+      "text" : "JSON data representing the WebAuthn authenticator authentication capability.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/rawChallengeJSON"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC16rawChallengeJSON0C10Foundation0J0Ovp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "rawChallengeJSON"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+        "text" : "JSON"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaIdxAuth"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "rawChallengeJSON"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "nonisolated"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "rawChallengeJSON"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+              "text" : "JSON"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This usually contains information used to challenge a platform authenticator",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/rawchallengejson"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/documentation/AuthFoundation/JSON": {
+  "abstract" : [
+    {
+      "text" : "Represent mixed JSON values as instances of ",
+      "type" : "text"
+    },
+    {
+      "code" : "Any",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JSON",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/json"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaIdxAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability": {
+  "abstract" : [
+    {
+      "text" : "Capability for authenticating a user with an existing WebAuthn credential.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnAuthenticationCapability"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnAuthenticationCapability"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthnAuthenticationCapability",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/rawChallengeJSON": {
+  "abstract" : [
+    {
+      "text" : "JSON data representing the WebAuthn authenticator authentication capability.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "rawChallengeJSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/rawChallengeJSON",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "rawChallengeJSON",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/rawchallengejson"
+}
+}
+}
