@@ -14,16 +14,28 @@ import Foundation
 import AuthFoundation
 
 /// Capability for authenticating a user with an existing WebAuthn credential.
+///
+/// This represents the authentication portion of WebAuthn sign-in, and is used to complete a WebAuthn or Passkey authentication request. The properties exposed here may be used individually, or the ``createCredentialAssertionRequest()`` convenience function may be used to produce a request suitable for presentation to the user.
+///
+/// Once the platform authenticator has completed creating an assertion response, the resulting data can be supplied to the ``challenge(authenticatorData:clientData:signatureData:)`` function to validate the results with the server. Alternatively the ``challenge(credential:)`` convenience function may be used with the passkey authenticator assertion response.
 public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equatable, Hashable {
-    /// JSON data representing the WebAuthn authenticator authentication capability.
-    ///
-    /// This usually contains information used to challenge a platform authenticator
-    public nonisolated let rawChallengeJSON: JSON
-
+    nonisolated let rawChallengeJSON: JSON
+    
+    /// The relying party identifier indicated on the credential assertion request issued from the server.
     public nonisolated let relyingPartyIdentifier: String
 
+    /// The authentication challenge data in the credential assertion request issued from the server.
     public nonisolated let challenge: Data
 
+    /// The user verification preference, if any, indicated in the credential assertion request issued from the server.
+    public nonisolated let userVerificationPreference: String?
+    
+    /// Completes a WebAuthn assertion challenge request by submitting the passkey authenticator's results to the server.
+    /// - Parameters:
+    ///   - authenticatorData: Authenticator data.
+    ///   - clientData: Client data.
+    ///   - signatureData: Signature data.
+    /// - Returns: The ``Response`` for the next step of the authentication flow.
     public func challenge(authenticatorData: Data,
                           clientData: Data,
                           signatureData: Data) async throws -> Response
@@ -42,10 +54,12 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
         return try await remediation.proceed()
     }
 
+    @_documentation(visibility: internal)
     public static func == (lhs: WebAuthnAuthenticationCapability, rhs: WebAuthnAuthenticationCapability) -> Bool {
         lhs.rawChallengeJSON == rhs.rawChallengeJSON
     }
 
+    @_documentation(visibility: internal)
     public nonisolated func hash(into hasher: inout Hasher) {
         hasher.combine(rawChallengeJSON)
     }
@@ -68,6 +82,14 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
         self.challenge = challenge
         self.relyingPartyIdentifier = try String.relyingPartyIssuer(from: json,
                                                                     issuerURL: issuerURL)
+
+        if case let .object(authenticatorSelection) = json["authenticatorSelection"],
+           case let .string(userVerification) = authenticatorSelection["userVerification"]
+        {
+            userVerificationPreference = userVerification
+        } else {
+            userVerificationPreference = nil
+        }
     }
 }
 
@@ -78,3 +100,52 @@ extension WebAuthnAuthenticationCapability: ReferencesParent {
         self.remediation = remediation
     }
 }
+
+#if canImport(AuthenticationServices) && !os(watchOS)
+import AuthenticationServices
+
+@available(iOS 15.0, macCatalyst 15.0, macOS 12.0, tvOS 16.0, visionOS 1.0, *)
+extension WebAuthnAuthenticationCapability {
+    /// Creates an Authentication Services WebAuthn credential assertion request suitable to be presented to the user.
+    ///
+    /// The request object returned from this may be customized before presentation, or may be used as-is. For example:
+    ///
+    /// ```swift
+    /// if let remediation = response.remediations[.challengeAuthenticator],
+    ///    let capability = remediation.webAuthnAuthentication
+    /// {
+    ///     let authController = ASAuthorizationController(authorizationRequests: [
+    ///         capability.createCredentialAssertionRequest()
+    ///     ])
+    ///     authController.delegate = self
+    ///     authController.presentationContextProvider = self
+    ///     authController.performRequests()
+    /// }
+    /// ```
+    /// - Returns: Configured credential assertion request.
+    public nonisolated func createCredentialAssertionRequest() -> ASAuthorizationPlatformPublicKeyCredentialAssertionRequest {
+        let platformProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: relyingPartyIdentifier)
+        let request = platformProvider.createCredentialAssertionRequest(challenge: challenge)
+
+        if let userVerificationPreference {
+            request.userVerificationPreference = ASAuthorizationPublicKeyCredentialUserVerificationPreference(rawValue: userVerificationPreference)
+        }
+
+        return request
+    }
+
+    /// Completes a WebAuthn assertion challenge request by submitting the passkey authenticator's results to the server.
+    /// - Parameter credential: The Authorization Services credential assertion response from the platform authenticator.
+    /// - Returns: The ``Response`` for the next step of the authentication flow.
+    public func challenge(credential: ASAuthorizationPlatformPublicKeyCredentialAssertion) async throws -> Response {
+        guard let authenticatorData = credential.rawAuthenticatorData,
+              let signatureData = credential.signature
+        else {
+            throw WebAuthnCapabilityError.unsupportedCredentialType
+        }
+        return try await challenge(authenticatorData: authenticatorData,
+                                   clientData: credential.rawClientDataJSON,
+                                   signatureData: signatureData)
+    }
+}
+#endif
