@@ -19,6 +19,8 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
     var signin: Signin?
 
     private var webAuthSession: ASWebAuthenticationSession?
+    private var authController: ASAuthorizationController?
+    private var authRemediationOption: Remediation?
     private weak var poll: PollCapability?
     
     private var dataSource: UITableViewDiffableDataSource<Signin.Section, Signin.Row>!
@@ -148,6 +150,36 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             return
         }
 
+        else if let webAuthnRegistration = remediationOption?.webAuthnRegistration {
+            let platformProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: webAuthnRegistration.relyingPartyIdentifier)
+            let platformKeyRequest = platformProvider.createCredentialRegistrationRequest(
+                challenge: webAuthnRegistration.challenge,
+                name: webAuthnRegistration.name,
+                userID: webAuthnRegistration.userId)
+
+            let authController = ASAuthorizationController(authorizationRequests: [platformKeyRequest])
+            authController.delegate = self
+            authController.presentationContextProvider = self
+            authController.performRequests()
+
+            self.authController = authController
+            self.authRemediationOption = remediationOption
+            return
+        }
+
+        else if let webAuthnAuthentication = remediationOption?.webAuthnAuthentication {
+            let platformProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: webAuthnAuthentication.relyingPartyIdentifier)
+            let assertionRequest = platformProvider.createCredentialAssertionRequest(challenge: webAuthnAuthentication.challenge)
+            let authController = ASAuthorizationController(authorizationRequests: [assertionRequest])
+            authController.delegate = self
+            authController.presentationContextProvider = self
+            authController.performRequests()
+
+            self.authController = authController
+            self.authRemediationOption = remediationOption
+            return
+        }
+
         guard let remediationOption else { return }
         Task { @MainActor in
             do {
@@ -203,6 +235,68 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
 
 extension IDXRemediationTableViewController: ASWebAuthenticationPresentationContextProviding {
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        view.window ?? UIWindow()
+    }
+}
+
+extension IDXRemediationTableViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithAuthorization authorization: ASAuthorization)
+    {
+        guard let signin = signin else { return }
+
+        switch authorization.credential {
+        case let credential as ASAuthorizationPlatformPublicKeyCredentialRegistration:
+            if let attestation = credential.rawAttestationObject,
+               let capability = authRemediationOption?.webAuthnRegistration
+            {
+                Task { @MainActor in
+                    do {
+                        signin.proceed(to: try await capability.register(attestation: attestation,
+                                                                         clientJSON: credential.rawClientDataJSON))
+                    } catch {
+                        signin.failure(with: error)
+                    }
+                }
+            }
+            break
+        case let credential as ASAuthorizationPlatformPublicKeyCredentialAssertion:
+            if let authenticatorData = credential.rawAuthenticatorData,
+               let signatureData = credential.signature,
+               let capability = authRemediationOption?.webAuthnAuthentication
+            {
+                Task { @MainActor in
+                    do {
+                        signin.proceed(to: try await capability.challenge(authenticatorData: authenticatorData,
+                                                                          clientData: credential.rawClientDataJSON,
+                                                                          signatureData: signatureData))
+                    } catch {
+                        signin.failure(with: error)
+                    }
+                }
+            }
+            break
+        default:
+            // Handle other authentication cases, such as Sign in with Apple.
+            break
+        }
+
+        authController = nil
+        authRemediationOption = nil
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
+        authController = nil
+        authRemediationOption = nil
+
+        Task { @MainActor in
+            showError(error)
+        }
+    }
+}
+
+extension IDXRemediationTableViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         view.window ?? UIWindow()
     }
 }
@@ -364,10 +458,13 @@ extension Signin.Row {
             
         case .button(remediationOption: let option):
             if let cell = cell as? IDXButtonTableViewCell {
-                cell.style = .remediation(type: option.type)
-                cell.buttonView.setTitle(signin?.buttonTitle(for: option), for: .normal)
+                cell.style = .remediation(type: option.type,
+                                          authenticatorType: option.authenticators.first?.type)
+                cell.buttonView.setTitle(signin?.buttonTitle(for: option),
+                                         for: .normal)
                 cell.update = { (sender, _) in
-                    delegate?.buttonSelected(remediationOption: option, sender: sender)
+                    delegate?.buttonSelected(remediationOption: option,
+                                             sender: sender)
                 }
             }
             

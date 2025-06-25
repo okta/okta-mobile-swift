@@ -13,10 +13,14 @@
 import Foundation
 import AuthFoundation
 
+protocol ReferencesParent: AnyObject {
+    func assign<ParentType>(parent: ParentType?)
+}
+
 extension Response {
     internal convenience init(flow: any InteractionCodeFlowAPI, ion response: IonResponse) throws {
         let authenticators = try Authenticator.Collection(flow: flow, ion: response)
-        let remediations = Remediation.Collection(flow: flow, ion: response)
+        let remediations = Remediation.Collection(flow: flow, ion: response, authenticatorCollection: authenticators)
         let successRemediationOption = Remediation(flow: flow, ion: response.successWithInteractionCode)
         let messages = Response.Message.Collection(response.messages?.value.compactMap { Response.Message(flow: flow, ion: $0) },
                                                    nestedMessages: remediations.nestedMessages())
@@ -208,9 +212,14 @@ extension Authenticator.Collection {
 }
 
 extension Remediation.Collection {
-    convenience init(flow: any InteractionCodeFlowAPI, ion object: IonResponse?) {
+    convenience init(flow: any InteractionCodeFlowAPI,
+                     ion object: IonResponse?,
+                     authenticatorCollection: Authenticator.Collection)
+    {
         var remediations: [Remediation] = object?.remediation?.value.compactMap { (value) in
-            Remediation.makeRemediation(flow: flow, ion: value)
+            Remediation.makeRemediation(flow: flow,
+                                        ion: value,
+                                        authenticatorCollection: authenticatorCollection)
         } ?? []
         
         if let cancelResponse = Remediation.makeRemediation(flow: flow, ion: object?.cancel) {
@@ -405,6 +414,59 @@ extension SocialIDPCapability {
     }
 }
 
+extension WebAuthnRegistrationCapability {
+    convenience init?(flow: any InteractionCodeFlowAPI,
+                      ion object: IonForm?,
+                      authenticatorCollection: Authenticator.Collection?) throws
+    {
+        // WebAuthn registration information is listed on the currentAuthenticator,
+        // but is actionable by the Remediation. So we need to enure this capability
+        // can access the authenticator contextualData information, and that the
+        // registration capability is only bound to the remediation capable of
+        // carrying out the operation.
+        guard let authenticatorCollection,
+              object?.relatesTo != nil
+        else { return nil }
+
+        let webAuthnAuthenticators = authenticatorCollection.filter { authenticator in
+            authenticator.type == .securityKey && authenticator.key == "webauthn"
+        }
+
+        guard let contextualData = webAuthnAuthenticators.compactMap(\.context).first,
+              let activationData = contextualData["activationData"]
+        else {
+            return nil
+        }
+
+        try self.init(issuerURL: flow.client.configuration.issuerURL,
+                      rawActivationJSON: activationData)
+    }
+}
+
+extension WebAuthnAuthenticationCapability {
+    convenience init?(flow: any InteractionCodeFlowAPI,
+                      ion object: IonForm?,
+                      authenticatorCollection: Authenticator.Collection?) throws
+    {
+        guard let authenticatorCollection,
+              object?.relatesTo != nil
+        else { return nil }
+
+        let webAuthnAuthenticators = authenticatorCollection.filter { authenticator in
+            authenticator.type == .securityKey && authenticator.key == "webauthn"
+        }
+
+        guard let contextualData = webAuthnAuthenticators.compactMap(\.context).first,
+              let challengeData = contextualData["challengeData"]
+        else {
+            return nil
+        }
+
+        try self.init(issuerURL: flow.client.configuration.issuerURL,
+                      rawChallengeJSON: challengeData)
+    }
+}
+
 private func methodTypes(from authenticators: [IonAuthenticator]) -> [Authenticator.Method]
 {
     let methods = authenticators
@@ -442,6 +504,7 @@ extension Authenticator {
         let state = response.authenticatorState(for: authenticators, in: jsonPaths)
         let key = authenticators.compactMap(\.key).first
         let methods = authenticators.compactMap(\.methods).first
+        let contextualData = authenticators.compactMap(\.contextualData).first
 
         let capabilities: [(any Capability)?] = [
             ProfileCapability(flow: flow, ion: authenticators),
@@ -463,6 +526,7 @@ extension Authenticator {
                              type: first.type,
                              key: key,
                              methods: methods,
+                             contextualData: contextualData,
                              capabilities: capabilities.compactMap { $0 })
     }
 }
@@ -470,31 +534,46 @@ extension Authenticator {
 extension Remediation {
     static func makeRemediation(flow: any InteractionCodeFlowAPI,
                                 ion object: IonForm?,
+                                authenticatorCollection: Authenticator.Collection? = nil,
                                 createCapabilities: Bool = true) -> Remediation?
     {
         guard let object = object else { return nil }
 
         // swiftlint:disable force_unwrapping
         let form = Form(fields: object.value?.map({ (value) in
-          .init(flow: flow, ion: value)
+                .init(flow: flow, ion: value)
         })) ?? Form(fields: [])!
         let refresh = (object.refresh != nil) ? Double(object.refresh!) / 1000.0 : nil
         // swiftlint:enable force_unwrapping
 
         let capabilities: [(any Capability)?] = createCapabilities ? [
             SocialIDPCapability(flow: flow, ion: object),
-            PollCapability(flow: flow, ion: object)
+            PollCapability(flow: flow, ion: object),
+            try? WebAuthnRegistrationCapability(flow: flow,
+                                                ion: object,
+                                                authenticatorCollection: authenticatorCollection),
+            try? WebAuthnAuthenticationCapability(flow: flow,
+                                                ion: object,
+                                                authenticatorCollection: authenticatorCollection)
         ] : []
-        
-        return Remediation(flow: flow,
-                           name: object.name,
-                           method: object.method,
-                           href: object.href,
-                           accepts: object.accepts,
-                           form: form,
-                           refresh: refresh,
-                           relatesTo: object.relatesTo,
-                           capabilities: capabilities.compactMap { $0 })
+
+        let remediation = Remediation(flow: flow,
+                                      name: object.name,
+                                      method: object.method,
+                                      href: object.href,
+                                      accepts: object.accepts,
+                                      form: form,
+                                      refresh: refresh,
+                                      relatesTo: object.relatesTo,
+                                      capabilities: capabilities.compactMap { $0 })
+        remediation?
+            .capabilities
+            .compactMap { $0.capabilityValue as? any ReferencesParent }
+            .forEach {
+                $0.assign(parent: remediation)
+            }
+
+        return remediation
     }
 
     internal convenience init?(flow: any InteractionCodeFlowAPI, ion object: IonForm?) {

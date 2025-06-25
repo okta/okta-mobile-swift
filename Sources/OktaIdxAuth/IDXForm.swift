@@ -15,17 +15,30 @@ import Foundation
 extension Remediation {
     /// Object that represents a form of fields associated with a remediation.
     public final class Form: Sendable, Hashable, Equatable {
+        /// Access the form's fields by index.
         public subscript(index: Int) -> Field? {
             fields[index]
         }
-        
+
+        /// Access the form's fields by name. Nested fields may be accessed by separating keypaths by `.`.
         public subscript(name: String) -> Field? {
+            let field = self[allFields: name]
+            if let field,
+               !field.isVisible
+            {
+                return nil
+            }
+
+            return field
+        }
+
+        subscript(allFields name: String) -> Field? {
             var components = name.components(separatedBy: ".")
 
             let name = components.removeFirst()
-            var result = fields.first { $0.name == name }
+            var result = allFields.first { $0.name == name }
             if result != nil && !components.isEmpty {
-                result = result?.form?[components.joined(separator: ".")]
+                result = result?.form?[allFields: components.joined(separator: ".")]
             }
             
             return result

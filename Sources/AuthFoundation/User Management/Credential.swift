@@ -414,7 +414,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         let timeOffset = max(0.0, expiresAt.timeIntervalSinceNow - Date.nowCoordinated.timeIntervalSinceNow - graceInterval)
         let repeatInterval = min(_token.expiresIn - graceInterval, _token.expiresIn)
 
-        _automaticRefreshTask = Task(priority: .medium) {
+        _automaticRefreshTask = Task(priority: .userInitiated) {
             if timeOffset > 0 {
                 do {
                     try await Task.sleep(delay: timeOffset)

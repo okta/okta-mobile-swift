@@ -17,8 +17,17 @@ extension String {
     public enum CaseStyle {
         case snakeCase
     }
-    
-    var base64URLDecoded: String {
+
+    #if COCOAPODS
+    @_documentation(visibility: internal)
+    public var base64URLDecoded: String  { convertToBase64URLDecoded() }
+    #else
+    @_documentation(visibility: internal)
+    package var base64URLDecoded: String { convertToBase64URLDecoded() }
+    #endif
+
+    @inline(__always)
+    private func convertToBase64URLDecoded() -> String {
         var result = replacingOccurrences(of: "-", with: "+")
             .replacingOccurrences(of: "_", with: "/")
 

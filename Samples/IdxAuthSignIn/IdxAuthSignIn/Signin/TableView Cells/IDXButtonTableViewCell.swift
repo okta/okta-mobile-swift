@@ -16,8 +16,9 @@ import OktaIdxAuth
 class IDXButtonTableViewCell: UITableViewCell {
     enum Style {
         case cancel
-        case remediation(type: Remediation.RemediationType)
-        
+        case remediation(type: Remediation.RemediationType,
+                         authenticatorType: Authenticator.Kind? = nil)
+
         var backgroundColor: UIColor {
             switch self {
             case .cancel:
@@ -40,8 +41,8 @@ class IDXButtonTableViewCell: UITableViewCell {
             switch self {
             case .cancel:
                 return "Restart"
-            case .remediation(type: let type):
-                return Remediation.title(for: type)
+            case .remediation(type: let type, authenticatorType: let authenticatorType):
+                return Remediation.title(for: type, authenticatorType: authenticatorType)
             }
         }
     }
