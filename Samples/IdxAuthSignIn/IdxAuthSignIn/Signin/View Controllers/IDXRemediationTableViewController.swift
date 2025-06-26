@@ -152,6 +152,13 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
 
         else if let webAuthnRegistration = remediationOption?.webAuthnRegistration {
             let request = webAuthnRegistration.createCredentialRegistrationRequest()
+
+            // If running on the simulator, authenticator attestation needs to be disabled
+            // since it's unsupported in that environment.
+            #if targetEnvironment(simulator) && !os(tvOS)
+            request.attestationPreference = .none
+            #endif
+
             let authController = ASAuthorizationController(authorizationRequests: [request])
             authController.delegate = self
             authController.presentationContextProvider = self
