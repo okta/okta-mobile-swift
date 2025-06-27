@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Completes a WebAuthn assertion challenge request by submitting the passkey authenticator’s results to the server.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -218,6 +224,82 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Authenticator data.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "authenticatorData"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Client data.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "clientData"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Signature data.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "signatureData"
+        }
+      ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " for the next step of the authentication flow.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -326,7 +408,10 @@
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/challenge(authenticatorData:clientData:signatureData:)": {
   "abstract" : [
-
+    {
+      "text" : "Completes a WebAuthn assertion challenge request by submitting the passkey authenticator’s results to the server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

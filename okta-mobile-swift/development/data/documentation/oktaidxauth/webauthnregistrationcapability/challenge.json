@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The challenge data indicated on the credential assertion request issued from the server.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -165,7 +171,10 @@
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/challenge": {
   "abstract" : [
-
+    {
+      "text" : "The challenge data indicated on the credential assertion request issued from the server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

@@ -7316,13 +7316,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-5cmar",
-                        "title" : "func api<T>(client: any APIClient, didSend: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
+                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
-                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-5cmar",
+                        "title" : "func api<T>(client: any APIClient, didSend: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       }
                     ],
@@ -7339,13 +7339,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
-                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-5cmar",
+                        "title" : "func api<T>(client: any APIClient, didSend: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-5cmar",
-                        "title" : "func api<T>(client: any APIClient, didSend: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
+                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       }
                     ],
@@ -7500,13 +7500,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
-                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-4xpk5",
+                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-4xpk5",
-                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
+                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       },
                       {
@@ -7528,13 +7528,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
-                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-4xpk5",
+                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-4xpk5",
-                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
+                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
                         "type" : "method"
                       },
                       {
@@ -8031,12 +8031,12 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-824pc",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-96qjt",
                         "title" : "var contentType: APIContentType?",
                         "type" : "property"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-96qjt",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-824pc",
                         "title" : "var contentType: APIContentType?",
                         "type" : "property"
                       }
@@ -8072,12 +8072,12 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/httpmethod-26lqm",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/httpmethod-2jjvk",
                         "title" : "var httpMethod: APIRequestMethod",
                         "type" : "property"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/httpmethod-2jjvk",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/httpmethod-26lqm",
                         "title" : "var httpMethod: APIRequestMethod",
                         "type" : "property"
                       }
@@ -8158,12 +8158,12 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-2spui",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-8cybb",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-8cybb",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-2spui",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       }
@@ -15738,15 +15738,6 @@
           {
             "children" : [
               {
-                "title" : "Operators",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/==(_:_:)",
-                "title" : "static func == (WebAuthnAuthenticationCapability, WebAuthnAuthenticationCapability) -> Bool",
-                "type" : "op"
-              },
-              {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
               },
@@ -15756,13 +15747,13 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/rawchallengejson",
-                "title" : "let rawChallengeJSON: JSON",
+                "path" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/relyingpartyidentifier",
+                "title" : "var relyingPartyIdentifier: String",
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/relyingpartyidentifier",
-                "title" : "let relyingPartyIdentifier: String",
+                "path" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/userverificationpreference",
+                "title" : "let userVerificationPreference: String?",
                 "type" : "property"
               },
               {
@@ -15775,8 +15766,13 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/hash(into:)",
-                "title" : "func hash(into: inout Hasher)",
+                "path" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge(credential:)",
+                "title" : "func challenge(credential: ASAuthorizationPlatformPublicKeyCredentialAssertion) async throws -> Response",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/createcredentialassertionrequest()",
+                "title" : "func createCredentialAssertionRequest() -> ASAuthorizationPlatformPublicKeyCredentialAssertionRequest",
                 "type" : "method"
               },
               {
@@ -15823,17 +15819,13 @@
           {
             "children" : [
               {
-                "title" : "Operators",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/==(_:_:)",
-                "title" : "static func == (WebAuthnRegistrationCapability, WebAuthnRegistrationCapability) -> Bool",
-                "type" : "op"
-              },
-              {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/attestationpreference",
+                "title" : "let attestationPreference: String?",
+                "type" : "property"
               },
               {
                 "path" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/challenge",
@@ -15851,13 +15843,8 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/rawactivationjson",
-                "title" : "let rawActivationJSON: JSON",
-                "type" : "property"
-              },
-              {
                 "path" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/relyingpartyidentifier",
-                "title" : "let relyingPartyIdentifier: String",
+                "title" : "var relyingPartyIdentifier: String",
                 "type" : "property"
               },
               {
@@ -15866,17 +15853,27 @@
                 "type" : "property"
               },
               {
+                "path" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/userverificationpreference",
+                "title" : "let userVerificationPreference: String?",
+                "type" : "property"
+              },
+              {
                 "title" : "Instance Methods",
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/hash(into:)",
-                "title" : "func hash(into: inout Hasher)",
+                "path" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/createcredentialregistrationrequest()",
+                "title" : "func createCredentialRegistrationRequest() -> ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest",
                 "type" : "method"
               },
               {
                 "path" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/register(attestation:clientjson:)",
                 "title" : "func register(attestation: Data, clientJSON: Data) async throws -> Response",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/register(credential:)",
+                "title" : "func register(credential: ASAuthorizationPlatformPublicKeyCredentialRegistration) async throws -> Response",
                 "type" : "method"
               },
               {
@@ -15963,6 +15960,11 @@
               {
                 "path" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/missinguserdata",
                 "title" : "case missingUserData",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/unsupportedcredentialtype",
+                "title" : "case unsupportedCredentialType",
                 "type" : "case"
               },
               {

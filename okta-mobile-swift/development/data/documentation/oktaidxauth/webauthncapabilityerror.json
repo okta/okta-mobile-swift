@@ -100,7 +100,8 @@
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/invalidRemediationForm",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/missingRelyingPartyIdentifier",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/missingUserData"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/missingUserData",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/unsupportedCredentialType"
       ],
       "title" : "Enumeration Cases"
     },
@@ -279,6 +280,31 @@
   "title" : "WebAuthnCapabilityError.missingUserData",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/missinguserdata"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/unsupportedCredentialType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "unsupportedCredentialType"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/unsupportedCredentialType",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthnCapabilityError.unsupportedCredentialType",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/unsupportedcredentialtype"
 },
 "doc://OktaIdxAuth/s5ErrorP": {
   "identifier" : "doc:\/\/OktaIdxAuth\/s5ErrorP",

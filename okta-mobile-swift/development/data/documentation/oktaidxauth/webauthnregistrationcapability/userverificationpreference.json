@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "The display name indicated on the credential assertion request issued from the server.",
+      "text" : "The user verification preference indicated on the credential assertion request issued from the server.",
       "type" : "text"
     }
   ],
@@ -15,11 +15,11 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/displayName"
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/userVerificationPreference"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:11OktaIdxAuth30WebAuthnRegistrationCapabilityC11displayNameSSvp",
+    "externalID" : "s:11OktaIdxAuth30WebAuthnRegistrationCapabilityC26userVerificationPreferenceSSSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -31,7 +31,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "displayName"
+        "text" : "userVerificationPreference"
       },
       {
         "kind" : "text",
@@ -41,6 +41,10 @@
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:SS",
         "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
       }
     ],
     "modules" : [
@@ -51,7 +55,7 @@
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
-    "title" : "displayName"
+    "title" : "userVerificationPreference"
   },
   "primaryContentSections" : [
     {
@@ -82,7 +86,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "displayName"
+              "text" : "userVerificationPreference"
             },
             {
               "kind" : "text",
@@ -92,6 +96,10 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SS",
               "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "?"
             }
           ]
         }
@@ -110,7 +118,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/displayname"
+        "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/userverificationpreference"
       ],
       "traits" : [
         {
@@ -169,10 +177,10 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/displayName": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/userVerificationPreference": {
   "abstract" : [
     {
-      "text" : "The display name indicated on the credential assertion request issued from the server.",
+      "text" : "The user verification preference indicated on the credential assertion request issued from the server.",
       "type" : "text"
     }
   ],
@@ -187,7 +195,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "displayName"
+      "text" : "userVerificationPreference"
     },
     {
       "kind" : "text",
@@ -197,14 +205,18 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SS",
       "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/displayName",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/userVerificationPreference",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "displayName",
+  "title" : "userVerificationPreference",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/displayname"
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/userverificationpreference"
 }
 }
 }

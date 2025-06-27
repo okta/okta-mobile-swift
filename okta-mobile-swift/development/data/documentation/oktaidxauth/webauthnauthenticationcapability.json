@@ -84,6 +84,62 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This represents the authentication portion of WebAuthn sign-in, and is used to complete a WebAuthn or Passkey authentication request. The properties exposed here may be used individually, or the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/createCredentialAssertionRequest()",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " convenience function may be used to produce a request suitable for presentation to the user.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Once the platform authenticator has completed creating an assertion response, the resulting data can be supplied to the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(authenticatorData:clientData:signatureData:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " function to validate the results with the server. Alternatively the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(credential:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " convenience function may be used with the passkey authenticator assertion response.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "relationshipsSections" : [
@@ -109,20 +165,12 @@
   ],
   "topicSections" : [
     {
-      "anchor" : "Operators",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/==(_:_:)"
-      ],
-      "title" : "Operators"
-    },
-    {
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/rawChallengeJSON",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/relyingPartyIdentifier"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/relyingPartyIdentifier",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/userVerificationPreference"
       ],
       "title" : "Instance Properties"
     },
@@ -131,7 +179,8 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(authenticatorData:clientData:signatureData:)",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/hash(into:)"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(credential:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/createCredentialAssertionRequest()"
       ],
       "title" : "Instance Methods"
     },
@@ -251,70 +300,6 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/==(_:_:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "=="
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC",
-      "text" : "WebAuthnAuthenticationCapability"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC",
-      "text" : "WebAuthnAuthenticationCapability"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/==(_:_:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "==(_:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/==(_:_:)"
-},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/Capability-Implementations": {
   "abstract" : [
 
@@ -339,7 +324,10 @@
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/challenge": {
   "abstract" : [
-
+    {
+      "text" : "The authentication challenge data in the credential assertion request issued from the server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -373,7 +361,10 @@
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/challenge(authenticatorData:clientData:signatureData:)": {
   "abstract" : [
-
+    {
+      "text" : "Completes a WebAuthn assertion challenge request by submitting the passkey authenticator’s results to the server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -472,9 +463,12 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge(authenticatordata:clientdata:signaturedata:)"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/hash(into:)": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/challenge(credential:)": {
   "abstract" : [
-
+    {
+      "text" : "Completes a WebAuthn assertion challenge request by submitting the passkey authenticator’s results to the server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -487,7 +481,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "hash"
+      "text" : "challenge"
     },
     {
       "kind" : "text",
@@ -495,48 +489,61 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "into"
+      "text" : "credential"
     },
     {
       "kind" : "text",
       "text" : ": "
     },
     {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ASAuthorizationPlatformPublicKeyCredentialAssertion",
+      "text" : "ASAuthorizationPlatformPublicKeyCredentialAssertion"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
       "kind" : "keyword",
-      "text" : "inout"
+      "text" : "async"
     },
     {
       "kind" : "text",
       "text" : " "
     },
     {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s6HasherV",
-      "text" : "Hasher"
+      "kind" : "keyword",
+      "text" : "throws"
     },
     {
       "kind" : "text",
-      "text" : ")"
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth8ResponseC",
+      "text" : "Response"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/hash(into:)",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(credential:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "hash(into:)",
+  "title" : "challenge(credential:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/hash(into:)"
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge(credential:)"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/rawChallengeJSON": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/createCredentialAssertionRequest()": {
   "abstract" : [
     {
-      "text" : "JSON data representing the WebAuthn authenticator authentication capability.",
+      "text" : "Creates an Authentication Services WebAuthn credential assertion request suitable to be presented to the user.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "func"
     },
     {
       "kind" : "text",
@@ -544,33 +551,36 @@
     },
     {
       "kind" : "identifier",
-      "text" : "rawChallengeJSON"
+      "text" : "createCredentialAssertionRequest"
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : "() -> "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
-      "text" : "JSON"
+      "preciseIdentifier" : "c:objc(cs)ASAuthorizationPlatformPublicKeyCredentialAssertionRequest",
+      "text" : "ASAuthorizationPlatformPublicKeyCredentialAssertionRequest"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/rawChallengeJSON",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/createCredentialAssertionRequest()",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "rawChallengeJSON",
+  "title" : "createCredentialAssertionRequest()",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/rawchallengejson"
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/createcredentialassertionrequest()"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/relyingPartyIdentifier": {
   "abstract" : [
-
+    {
+      "text" : "The relying party identifier indicated on the credential assertion request issued from the server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -596,6 +606,47 @@
   "title" : "relyingPartyIdentifier",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/relyingpartyidentifier"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/userVerificationPreference": {
+  "abstract" : [
+    {
+      "text" : "The user verification preference, if any, indicated in the credential assertion request issued from the server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userVerificationPreference"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/userVerificationPreference",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "userVerificationPreference",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/userverificationpreference"
 },
 "doc://OktaIdxAuth/s8SendableP": {
   "identifier" : "doc:\/\/OktaIdxAuth\/s8SendableP",
