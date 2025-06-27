@@ -11,6 +11,7 @@
  */
 
 import Foundation
+import AuthFoundation
 
 struct ClientConfiguration {
     private static let issuerKey = "issuerUrl"
@@ -119,23 +120,19 @@ struct ClientConfiguration {
     
     static var plistConfiguration: ClientConfiguration? {
         guard let path = Bundle.main.url(forResource: "Okta", withExtension: "plist"),
-              let data = try? Data(contentsOf: path),
-              let content = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String:String],
-              let issuer = content["issuer"],
-              !issuer.hasPrefix("{"),
-              let clientId = content["clientId"],
-              !clientId.hasPrefix("{"),
-              let scopes = content["scopes"],
-              let redirectUri = content["redirectUri"],
-              !redirectUri.hasPrefix("{")
+              let config = try? OAuth2Client.PropertyListConfiguration(plist: path),
+              !config.issuerURL.absoluteString.hasPrefix("{"),
+              !config.clientId.hasPrefix("{"),
+              let redirectUri = config.redirectUri,
+              !redirectUri.absoluteString.hasPrefix("{")
         else {
             return nil
         }
         
-        return try? ClientConfiguration(clientId: clientId,
-                                        issuer: issuer,
-                                        redirectUri: redirectUri,
-                                        scopes: scopes,
+        return try? ClientConfiguration(clientId: config.clientId,
+                                        issuer: config.issuerURL.absoluteString,
+                                        redirectUri: redirectUri.absoluteString,
+                                        scopes: config.scope.stringValue,
                                         recoveryToken: nil,
                                         shouldSave: false)
     }

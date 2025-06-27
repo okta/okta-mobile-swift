@@ -151,13 +151,15 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         }
 
         else if let webAuthnRegistration = remediationOption?.webAuthnRegistration {
-            let platformProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: webAuthnRegistration.relyingPartyIdentifier)
-            let platformKeyRequest = platformProvider.createCredentialRegistrationRequest(
-                challenge: webAuthnRegistration.challenge,
-                name: webAuthnRegistration.name,
-                userID: webAuthnRegistration.userId)
+            let request = webAuthnRegistration.createCredentialRegistrationRequest()
 
-            let authController = ASAuthorizationController(authorizationRequests: [platformKeyRequest])
+            // If running on the simulator, authenticator attestation needs to be disabled
+            // since it's unsupported in that environment.
+            #if targetEnvironment(simulator) && !os(tvOS)
+            request.attestationPreference = .none
+            #endif
+
+            let authController = ASAuthorizationController(authorizationRequests: [request])
             authController.delegate = self
             authController.presentationContextProvider = self
             authController.performRequests()
@@ -168,9 +170,8 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         }
 
         else if let webAuthnAuthentication = remediationOption?.webAuthnAuthentication {
-            let platformProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: webAuthnAuthentication.relyingPartyIdentifier)
-            let assertionRequest = platformProvider.createCredentialAssertionRequest(challenge: webAuthnAuthentication.challenge)
-            let authController = ASAuthorizationController(authorizationRequests: [assertionRequest])
+            let request = webAuthnAuthentication.createCredentialAssertionRequest()
+            let authController = ASAuthorizationController(authorizationRequests: [request])
             authController.delegate = self
             authController.presentationContextProvider = self
             authController.performRequests()
@@ -247,29 +248,22 @@ extension IDXRemediationTableViewController: ASAuthorizationControllerDelegate {
 
         switch authorization.credential {
         case let credential as ASAuthorizationPlatformPublicKeyCredentialRegistration:
-            if let attestation = credential.rawAttestationObject,
-               let capability = authRemediationOption?.webAuthnRegistration
-            {
+            if let capability = authRemediationOption?.webAuthnRegistration {
                 Task { @MainActor in
                     do {
-                        signin.proceed(to: try await capability.register(attestation: attestation,
-                                                                         clientJSON: credential.rawClientDataJSON))
+                        signin.proceed(to: try await capability.register(credential: credential))
                     } catch {
                         signin.failure(with: error)
                     }
                 }
             }
             break
+
         case let credential as ASAuthorizationPlatformPublicKeyCredentialAssertion:
-            if let authenticatorData = credential.rawAuthenticatorData,
-               let signatureData = credential.signature,
-               let capability = authRemediationOption?.webAuthnAuthentication
-            {
+            if let capability = authRemediationOption?.webAuthnAuthentication {
                 Task { @MainActor in
                     do {
-                        signin.proceed(to: try await capability.challenge(authenticatorData: authenticatorData,
-                                                                          clientData: credential.rawClientDataJSON,
-                                                                          signatureData: signatureData))
+                        signin.proceed(to: try await capability.challenge(credential: credential))
                     } catch {
                         signin.failure(with: error)
                     }
