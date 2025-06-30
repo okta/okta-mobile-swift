@@ -21,7 +21,6 @@ import Foundation
 public actor CoalescedResult<T: Sendable>: Sendable {
     private let taskName: String?
     private var task: BackgroundTask?
-    private let queue: DispatchQueue
     private var continuations: [CheckedContinuation<T, any Error>] = []
     private var _value: T?
     private var _isActive: Bool = false  {
@@ -39,24 +38,19 @@ public actor CoalescedResult<T: Sendable>: Sendable {
     /// - Parameter taskName: The name of a background task to initiate while the operation is active.
     public init(taskName: String? = nil) {
         self.taskName = taskName
-        self.queue = DispatchQueue(label: "com.okta.coalescedResult.\(taskName ?? "unspecified")")
     }
 
     /// Indicates if the asynchronous operation is being performed.
     nonisolated public var isActive: Bool {
+        let semaphore = DispatchSemaphore(value: 0)
         nonisolated(unsafe) var result: Bool = false
 
-        let group = DispatchGroup()
-        group.enter()
-        queue.async { [weak self] in
-            Task {
-                guard let self else { return }
-                result = await self._isActive
-                group.leave()
-            }
+        // TODO: Due to [a false-positive within Xcode 26 beta's sendable data-race detection](https://forums.swift.org/t/potential-false-positive-sending-risks-causing-data-races/78859), the following workaround was introduced. This should be removed once it is fixed in future betas
+        Task.detached(priority: Task.currentPriority) { @Sendable in
+            result = await self._isActive
+            semaphore.signal()
         }
-        group.wait()
-
+        semaphore.wait()
         return result
     }
 
