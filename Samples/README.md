@@ -4,7 +4,7 @@ These samples show you how to add different ways to sign-in a user, called authe
 
 ## Using the Samples
 
-These samples are designed to be built and run from the `OktaClientSDK` workspace. To use them outside of the workspace:
+These samples are designed to be built and run from the `OktaClient.xcworkspace` workspace. To use them outside of the workspace:
 
 1. Copy the sample folder to the desired location.
 2. Copy the `Shared` folder to the same location at the same level as the sample folder.
