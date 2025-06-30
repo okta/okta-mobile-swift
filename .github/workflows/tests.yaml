@@ -174,7 +174,7 @@ jobs:
         os: 
           - macos-latest-large
           - ubuntu-latest
-        swift_version: ["5.10", "6.0"]
+        swift_version: ["5.10", "6.0", "6.1", "6.2"]
         exclude:
           - os: ubuntu-latest
             swift_version: "5.10"
@@ -200,7 +200,7 @@ jobs:
       matrix:
         platform: [iOS, tvOS, watchOS, macOS, visionOS]
     env:
-      DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
     timeout-minutes: 10
     steps:
     - uses: actions/checkout@master
@@ -222,20 +222,23 @@ jobs:
         - destination: "platform=iOS Simulator,OS=18.2,name=iPhone 16 Pro Max"
           xcode_version: "16.2"
           os: macos-15-large
-        - destination: "platform=tvOS Simulator,OS=18.2,name=Apple TV"
-          xcode_version: "16.2"
+        - destination: "platform=iOS Simulator,OS=18.5,name=iPhone 16 Pro Max"
+          xcode_version: "16.4"
+          os: macos-15-large
+        - destination: "platform=tvOS Simulator,OS=18.5,name=Apple TV"
+          xcode_version: "16.4"
           os: macos-15-large
         - destination: "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
           xcode_version: "15.4"
           os: macos-14-xlarge
-        - destination: "platform=visionOS Simulator,OS=2.2,name=Apple Vision Pro"
-          xcode_version: "16.2"
+        - destination: "platform=visionOS Simulator,OS=2.5,name=Apple Vision Pro"
+          xcode_version: "16.4"
           os: macos-15-xlarge
-        - destination: "platform=watchOS Simulator,OS=11.1,name=Apple Watch Series 10 (46mm)"
-          xcode_version: "16.2"
+        - destination: "platform=watchOS Simulator,OS=11.5,name=Apple Watch Series 10 (46mm)"
+          xcode_version: "16.4"
           os: macos-15-large
         - destination: "platform=macOS,name=My Mac"
-          xcode_version: "16.2"
+          xcode_version: "16.4"
           os: macos-15-large
     runs-on: ${{ matrix.os }}
     env:
@@ -350,7 +353,9 @@ jobs:
     if: ${{ !github.event.pull_request.draft && needs.Preflight.outputs.has_documentation_changes == 'true' }}
     runs-on: macos-latest
     env:
-      DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
+      ENABLE_DOC_GENERATION: YES
+      DOCC_JSON_PRETTYPRINT: YES
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
       DESTINATION: "${{ matrix.destination }}"
       LOG_NAME: "${{github.job}}-${{ matrix.xcode_version }}-${{ matrix.destination }}"
       NSUnbufferedIO: YES
@@ -358,7 +363,6 @@ jobs:
     - uses: actions/checkout@master
     - name: Swift Package Documentation lint
       run: |
-        export DOCC_JSON_PRETTYPRINT=YES
         mkdir -p ~/Build/Docs
 
         TARGET_LIST=""
@@ -372,9 +376,12 @@ jobs:
             --disable-indexing \
             --output-path ~/Build/Docs \
             --include-extended-types \
+            --symbol-graph-minimum-access-level public \
+            --experimental-skip-synthesized-symbols \
             --enable-experimental-combined-documentation \
             --enable-experimental-mentioned-in \
             --enable-experimental-external-link-support \
+            --enable-experimental-overloaded-symbol-presentation \
             --analyze \
             --emit-fixits \
             $TARGET_LIST | ./.github/workflows/swift-log-renderer.sh

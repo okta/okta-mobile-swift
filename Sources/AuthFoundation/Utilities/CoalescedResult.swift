@@ -21,6 +21,7 @@ import Foundation
 public actor CoalescedResult<T: Sendable>: Sendable {
     private let taskName: String?
     private var task: BackgroundTask?
+    private let queue: DispatchQueue
     private var continuations: [CheckedContinuation<T, any Error>] = []
     private var _value: T?
     private var _isActive: Bool = false  {
@@ -38,17 +39,24 @@ public actor CoalescedResult<T: Sendable>: Sendable {
     /// - Parameter taskName: The name of a background task to initiate while the operation is active.
     public init(taskName: String? = nil) {
         self.taskName = taskName
+        self.queue = DispatchQueue(label: "com.okta.coalescedResult.\(taskName ?? "unspecified")")
     }
 
     /// Indicates if the asynchronous operation is being performed.
     nonisolated public var isActive: Bool {
-        let semaphore = DispatchSemaphore(value: 0)
         nonisolated(unsafe) var result: Bool = false
-        Task.detached {
-            result = await self._isActive
-            semaphore.signal()
+
+        let group = DispatchGroup()
+        group.enter()
+        queue.async { [weak self] in
+            Task {
+                guard let self else { return }
+                result = await self._isActive
+                group.leave()
+            }
         }
-        semaphore.wait()
+        group.wait()
+
         return result
     }
 
