@@ -18,9 +18,10 @@ runs:
       if: runner.os == 'macOS'
       shell: bash
       run: |
-        for xcode_version in $(yq ".swift[] | select(.version == \"${{ inputs.swift-version }}\") | .xcode_versions[]" "${{inputs.version-manifest}}"); do
+        for xcode_version in $(yq ".swift[] | select(.version == \"${{ inputs.swift-version }}\") | .xcode_versions[]" "${{inputs.version-manifest}}" | sort -r); do
           developer_dir="/Applications/Xcode_${xcode_version}.app/Contents/Developer"
           if [[ -d "$developer_dir" ]]; then
+            echo "Using Xcode ${xcode_version} for Swift ${{ inputs.swift-version }}" >> $GITHUB_STEP_SUMMARY
             echo "DEVELOPER_DIR=${developer_dir}" >> $GITHUB_ENV
             echo "developer_dir=${developer_dir}" >> $GITHUB_OUTPUT
             exit 0
