@@ -18,6 +18,7 @@ runs:
       if: runner.os == 'macOS'
       shell: bash
       run: |
+        ls -1d /Applications/Xcode*
         for xcode_version in $(yq ".swift[] | select(.version == \"${{ inputs.swift-version }}\") | .xcode_versions[]" "${{inputs.version-manifest}}" | sort -r); do
           developer_dir="/Applications/Xcode_${xcode_version}.app/Contents/Developer"
           echo "Evaluating Xcode ${xcode_version} at \`${developer_dir}\`"
