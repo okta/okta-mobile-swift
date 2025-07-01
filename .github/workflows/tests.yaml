@@ -174,7 +174,11 @@ jobs:
         os: 
           - macos-latest-large
           - ubuntu-latest
-        swift_version: ["6.1", "6.2"] #["5.10", "6.0", "6.1", "6.2"]
+        swift_version: 
+          - "5.10"
+          - "6.0"
+          #- "6.1" -- Disabled since Xcode 16.3/16.4 do not appear to be on GitHub runners
+          - "6.2"
         exclude:
           - os: ubuntu-latest
             swift_version: "5.10"
