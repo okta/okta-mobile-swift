@@ -17,8 +17,8 @@ import XCTest
 @testable import TestCommon
 #endif
 
-class RelyingParthIdentifierTests: XCTestCase {
-    func testExplicitChallengeIdentifier() throws {
+class RelyingPartyIdentifierTests: XCTestCase {
+    func testExplicitRegistrationIdentifier() throws {
         let issuerURL = try XCTUnwrap(URL(string: "https://issuer.example.com"))
         let json = try JSONDecoder().decode(JSON.self, from: data(for: """
             {
