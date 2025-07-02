@@ -85,7 +85,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
 
         let requests: [String: URLRequest] = urlSession.requests.reduce(into: [:]) { partialResult, request in
             guard let url = request.url,
@@ -134,7 +134,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
 
         await CredentialActor.run {
             XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
@@ -170,7 +170,7 @@ final class CredentialTests: XCTestCase {
                 XCTAssertEqual(oauth2Error.code, .invalidToken)
             }
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
     }
 
     func testRevokeAll() async throws {
@@ -193,7 +193,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
 
         let accessTokenRequest = try XCTUnwrap(urlSession.request(matching: "token=abcd123"))
         XCTAssertEqual(accessTokenRequest.bodyString,
@@ -236,7 +236,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
 
         await CredentialActor.run {
             XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)

@@ -118,7 +118,7 @@ final class JWTAuthorizationFlowTests: XCTestCase {
 
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1)
+        await fulfillment(of: [expect], timeout: .standard)
 
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertEqual(urlSession.requests.count, 3)

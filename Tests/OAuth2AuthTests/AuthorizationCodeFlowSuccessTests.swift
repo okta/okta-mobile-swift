@@ -144,7 +144,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
             }
             startWait.fulfill()
         }
-        await fulfillment(of: [startWait], timeout: 1)
+        await fulfillment(of: [startWait], timeout: .standard)
 
         XCTAssertEqual(flow.context?.state, context.state)
         XCTAssertTrue(flow.isAuthenticating)
@@ -165,7 +165,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
             }
             resumeWait.fulfill()
         }
-        await fulfillment(of: [resumeWait], timeout: 1)
+        await fulfillment(of: [resumeWait], timeout: .standard)
 
         XCTAssertNotNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)

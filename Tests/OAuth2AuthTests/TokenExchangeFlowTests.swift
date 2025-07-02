@@ -111,7 +111,7 @@ final class TokenExchangeFlowTests: XCTestCase {
 
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1)
+        await fulfillment(of: [expect], timeout: .standard)
 
         XCTAssertFalse(flow.isAuthenticating)
 

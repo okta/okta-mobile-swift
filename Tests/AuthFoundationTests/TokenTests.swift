@@ -186,7 +186,7 @@ final class TokenTests: XCTestCase {
             }
             wait.fulfill()
         }
-        await fulfillment(of: [wait], timeout: 1)
+        await fulfillment(of: [wait], timeout: .standard)
 
         let token = try XCTUnwrap(tokenResult)
         
