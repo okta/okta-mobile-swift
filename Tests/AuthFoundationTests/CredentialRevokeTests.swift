@@ -194,17 +194,16 @@ final class CredentialTests: XCTestCase {
             expect.fulfill()
         }
         await fulfillment(of: [expect], timeout: .standard)
-        await MainActor.yield()
 
-        let accessTokenRequest = try XCTUnwrap(urlSession.request(matching: "token=abcd123"))
+        let accessTokenRequest = try XCTUnwrap(urlSession.request(matching: .body("token=abcd123")))
         XCTAssertEqual(accessTokenRequest.bodyString,
                        "client_id=clientid&token=abcd123&token_type_hint=access_token")
 
-        let refreshTokenRequest = try XCTUnwrap(urlSession.request(matching: "token=refresh123"))
+        let refreshTokenRequest = try XCTUnwrap(urlSession.request(matching: .body("token=refresh123")))
         XCTAssertEqual(refreshTokenRequest.bodyString,
                        "client_id=clientid&token=refresh123&token_type_hint=refresh_token")
 
-        let deviceSecretRequest = try XCTUnwrap(urlSession.request(matching: "token=device123"))
+        let deviceSecretRequest = try XCTUnwrap(urlSession.request(matching: .body("token=device123")))
         XCTAssertEqual(deviceSecretRequest.bodyString,
                        "client_id=clientid&token=device123&token_type_hint=device_secret")
     }
