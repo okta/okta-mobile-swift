@@ -195,20 +195,15 @@ final class CredentialTests: XCTestCase {
         }
         await fulfillment(of: [expect], timeout: 1.0)
 
-        let accessTokenRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.bodyString?.contains("abcd123") ?? false
-        }))
-        let refreshTokenRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.bodyString?.contains("refresh123") ?? false
-        }))
-        let deviceSecretRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.bodyString?.contains("device123") ?? false
-        }))
-
+        let accessTokenRequest = try XCTUnwrap(urlSession.request(matching: "token=abcd123"))
         XCTAssertEqual(accessTokenRequest.bodyString,
                        "client_id=clientid&token=abcd123&token_type_hint=access_token")
+
+        let refreshTokenRequest = try XCTUnwrap(urlSession.request(matching: "token=refresh123"))
         XCTAssertEqual(refreshTokenRequest.bodyString,
                        "client_id=clientid&token=refresh123&token_type_hint=refresh_token")
+
+        let deviceSecretRequest = try XCTUnwrap(urlSession.request(matching: "token=device123"))
         XCTAssertEqual(deviceSecretRequest.bodyString,
                        "client_id=clientid&token=device123&token_type_hint=device_secret")
     }

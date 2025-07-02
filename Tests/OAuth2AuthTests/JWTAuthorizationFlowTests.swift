@@ -96,9 +96,7 @@ final class JWTAuthorizationFlowTests: XCTestCase {
         
         XCTAssertEqual(urlSession.requests.count, 3)
         
-        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.url?.lastPathComponent == "token"
-        }))
+        let request = try XCTUnwrap(urlSession.request(matching: "/token"))
 
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.httpBody?.urlFormEncoded, [
@@ -125,9 +123,7 @@ final class JWTAuthorizationFlowTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertEqual(urlSession.requests.count, 3)
 
-        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.url?.lastPathComponent == "token"
-        }))
+        let request = try XCTUnwrap(urlSession.request(matching: "/token"))
 
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "assertion=\(JWT.mockIDToken)&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=profile+openid")
@@ -141,9 +137,7 @@ final class JWTAuthorizationFlowTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertEqual(urlSession.requests.count, 3)
         
-        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.url?.lastPathComponent == "token"
-        }))
+        let request = try XCTUnwrap(urlSession.request(matching: "/token"))
 
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "assertion=\(JWT.mockIDToken)&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=profile+openid")
