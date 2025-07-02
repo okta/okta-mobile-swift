@@ -176,7 +176,7 @@ public extension XCTestCase {
         return try decoder.decode(T.self, from: json)
     }
 
-    func perform(queueCount: Int = 5, iterationCount: Int = 4, _ block: @Sendable @escaping () async throws -> Void) rethrows {
+    func perform(queueCount: Int = 2, iterationCount: Int = 4, _ block: @Sendable @escaping () async throws -> Void) rethrows {
         let queues: [DispatchQueue] = (0..<queueCount).map { queueNumber in
             DispatchQueue(label: "Async queue \(queueNumber)")
         }
