@@ -182,16 +182,28 @@ jobs:
           os: macos-15
         - swift_version: "6.0"
           os: ubuntu-latest
+    env:
+      LOG_NAME: "${{github.job}}-${{ matrix.swift_version }}-${{ matrix.os }}"
     timeout-minutes: 10
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/setup-swift
       with:
         swift-version: "${{ matrix.swift_version }}"
+    - name: Setup environment
+      run: |
+        mkdir -p .build/ci-logs
     - name: Build
-      run: set -o pipefail && swift build --build-tests
+      run: set -o pipefail && swift build --build-tests --verbose 2>> .build/ci-logs/${LOG_NAME}-error.log
     - name: Test
-      run: set -o pipefail && swift test
+      run: set -o pipefail && swift test --verbose 2>> .build/ci-logs/${LOG_NAME}-error.log
+    - name: Upload Logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: Logs
+        path: |
+          .build/ci-logs/**
 
   Cocoapods:
     name: CocoaPods Build

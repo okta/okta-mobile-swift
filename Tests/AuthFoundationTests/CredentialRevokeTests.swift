@@ -194,6 +194,7 @@ final class CredentialTests: XCTestCase {
             expect.fulfill()
         }
         await fulfillment(of: [expect], timeout: .standard)
+        await MainActor.yield()
 
         let accessTokenRequest = try XCTUnwrap(urlSession.request(matching: "token=abcd123"))
         XCTAssertEqual(accessTokenRequest.bodyString,
