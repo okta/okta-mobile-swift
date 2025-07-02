@@ -241,7 +241,7 @@ final class OAuth2ClientTests: XCTestCase {
             }
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
 
         XCTAssertEqual(userInfo?.subject, "00uid4BxXw6I6TV4m0g3")
     }
@@ -305,7 +305,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
         
         XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
         XCTAssertEqual(tokenInfo?.active, true)
@@ -334,7 +334,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
         
         XCTAssertEqual(tokenInfo?.active, false)
     }
@@ -370,7 +370,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
         
         XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
         XCTAssertEqual(tokenInfo?.active, true)
@@ -407,7 +407,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
         
         XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
         XCTAssertEqual(tokenInfo?.active, true)
@@ -444,7 +444,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
         
         XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
         XCTAssertEqual(tokenInfo?.active, true)
@@ -482,7 +482,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
     }
  
     func testRevoke() async throws {
@@ -501,7 +501,7 @@ final class OAuth2ClientTests: XCTestCase {
             }
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
     }
     
     func testRevokeRequestClientAuthentication() throws {

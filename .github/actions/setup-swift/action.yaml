@@ -23,8 +23,6 @@ runs:
           echo "Evaluating Xcode ${xcode_version} at \`${developer_dir}\`"
           if [[ -d "$developer_dir" ]]; then
             echo "Using Xcode ${xcode_version} for Swift ${{ inputs.swift-version }}"
-            echo "# Swift Setup" >> $GITHUB_STEP_SUMMARY
-            echo "Using Xcode ${xcode_version} for Swift ${{ inputs.swift-version }}" >> $GITHUB_STEP_SUMMARY
             echo "DEVELOPER_DIR=${developer_dir}" >> $GITHUB_ENV
             echo "developer_dir=${developer_dir}" >> $GITHUB_OUTPUT
             exit 0
