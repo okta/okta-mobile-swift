@@ -151,7 +151,7 @@ jobs:
     name: Lint Sources
     needs: Preflight
     if: ${{ needs.Preflight.outputs.has_source_changes == 'true' }}
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
     - uses: actions/checkout@v2
     - name: Setup Swift Lint
@@ -171,17 +171,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: 
-          - macos-latest-large
-          - ubuntu-latest
-        swift_version: 
-          - "5.10"
-          - "6.0"
-          #- "6.1" -- Disabled since Xcode 16.3/16.4 do not appear to be on GitHub runners
-          - "6.2"
-        exclude:
-          - os: ubuntu-latest
-            swift_version: "5.10"
+        include:
+        - swift_version: "5.10"
+          os: macos-14
+        - swift_version: "6.0"
+          os: macos-15
+        - swift_version: "6.1"
+          os: macos-15
+        - swift_version: "6.2"
+          os: macos-15
+        - swift_version: "6.0"
+          os: ubuntu-latest
     timeout-minutes: 10
     steps:
     - uses: actions/checkout@v2
@@ -199,7 +199,7 @@ jobs:
       - SwiftBuild
       - XcodeBuild
     if: ${{ !github.event.pull_request.draft && needs.Preflight.outputs.has_source_changes == 'true' }}
-    runs-on: macos-15-xlarge # Running on xlarge to use arm64 chipset
+    runs-on: macos-15
     strategy:
       matrix:
         platform: [iOS, tvOS, watchOS, macOS, visionOS]
@@ -225,25 +225,25 @@ jobs:
           os: macos-14-large
         - destination: "platform=iOS Simulator,OS=18.2,name=iPhone 16 Pro Max"
           xcode_version: "16.2"
-          os: macos-15-large
+          os: macos-15
         - destination: "platform=iOS Simulator,OS=18.5,name=iPhone 16 Pro Max"
           xcode_version: "16.4"
-          os: macos-15-large
+          os: macos-15
         - destination: "platform=tvOS Simulator,OS=18.5,name=Apple TV"
           xcode_version: "16.4"
-          os: macos-15-large
+          os: macos-15
         - destination: "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
           xcode_version: "15.4"
-          os: macos-14-xlarge
+          os: macos-14
         - destination: "platform=visionOS Simulator,OS=2.5,name=Apple Vision Pro"
           xcode_version: "16.4"
-          os: macos-15-xlarge
+          os: macos-15
         - destination: "platform=watchOS Simulator,OS=11.5,name=Apple Watch Series 10 (46mm)"
           xcode_version: "16.4"
-          os: macos-15-large
+          os: macos-15
         - destination: "platform=macOS,name=My Mac"
           xcode_version: "16.4"
-          os: macos-15-large
+          os: macos-15
     runs-on: ${{ matrix.os }}
     env:
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app/Contents/Developer
@@ -355,7 +355,7 @@ jobs:
     name: Build Documentation Archives
     needs: SwiftLint
     if: ${{ !github.event.pull_request.draft && needs.Preflight.outputs.has_documentation_changes == 'true' }}
-    runs-on: macos-latest
+    runs-on: macos-15
     env:
       ENABLE_DOC_GENERATION: YES
       DOCC_JSON_PRETTYPRINT: YES

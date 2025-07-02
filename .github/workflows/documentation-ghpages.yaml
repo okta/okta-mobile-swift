@@ -16,7 +16,7 @@ env:
 jobs:
   ExportToGHPages:
     name: Export to Github Pages
-    runs-on: macos-latest-large
+    runs-on: macos-15
     steps:
     - uses: actions/checkout@master
     - name: Build Documentation
