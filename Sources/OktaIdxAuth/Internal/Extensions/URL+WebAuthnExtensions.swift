@@ -15,9 +15,15 @@ import AuthFoundation
 
 extension String {
     static func relyingPartyIssuer(from json: JSON, issuerURL: URL) throws -> String {
+        // On registration requests, the server-supplied rpId value is within the `rp.id` path.
         if case let .object(rp) = json["rp"],
            case let .string(id) = rp["id"]
         {
+            return id
+        }
+
+        // On authentication requests, the server-supplied rpId value is in the root `rpId` property.
+        if case let .string(id) = json["rpId"] {
             return id
         }
 
