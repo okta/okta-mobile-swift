@@ -191,7 +191,7 @@ jobs:
     - name: Build
       run: set -o pipefail && swift build --build-tests
     - name: Test
-      run: set -o pipefail && swift test --parallel
+      run: set -o pipefail && swift test
 
   Cocoapods:
     name: CocoaPods Build
