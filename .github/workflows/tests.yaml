@@ -201,7 +201,7 @@ jobs:
       if: failure()
       uses: actions/upload-artifact@v4
       with:
-        name: Logs
+        name: Logs-${{ env.LOG_NAME }}
         path: |
           .build/ci-logs/**
 
@@ -358,7 +358,7 @@ jobs:
       if: failure()
       uses: actions/upload-artifact@v4
       with:
-        name: Logs
+        name: Logs-${{ env.LOG_NAME }}
         path: |
           .build/ci-logs/**
           .build/DerivedData/Logs/
