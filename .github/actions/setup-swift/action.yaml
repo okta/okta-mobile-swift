@@ -37,6 +37,7 @@ runs:
       if: runner.os == 'Linux'
       shell: bash
       run: |
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
         brew install xcbeautify
     - name: Get swift version
       shell: bash
