@@ -33,6 +33,10 @@ runs:
       if: steps.check_xcode_version.outputs.developer_dir == ''
       with:
         swift-version: ${{ inputs.swift-version }}
+    - name: Install Linux utilities
+      if: runner.os == 'Linux'
+      run: |
+        brew install xcbeautify
     - name: Get swift version
       shell: bash
       run: swift --version
