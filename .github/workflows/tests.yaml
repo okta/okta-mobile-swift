@@ -193,10 +193,15 @@ jobs:
     - name: Setup environment
       run: |
         mkdir -p .build/ci-logs
+        echo "XCBEAUTIFY_ARGS=--renderer github-actions --disable-logging" >> $GITHUB_ENV
     - name: Build
-      run: set -o pipefail && swift build --build-tests --verbose 2>> .build/ci-logs/${LOG_NAME}-error.log
+      run: |
+        set -o pipefail
+        swift build --build-tests --verbose 2>&1 | tee -a .build/ci-logs/${LOG_NAME}-build.log | xcbeautify $XCBEAUTIFY_ARGS
     - name: Test
-      run: set -o pipefail && swift test --verbose 2>> .build/ci-logs/${LOG_NAME}-error.log
+      run: |
+        set -o pipefail
+        swift test --verbose 2>&1 | tee -a .build/ci-logs/${LOG_NAME}-test.log | xcbeautify $XCBEAUTIFY_ARGS
     - name: Upload Logs
       if: failure()
       uses: actions/upload-artifact@v4
@@ -273,9 +278,9 @@ jobs:
         XCODE_MAJOR_VERSION=$(echo "${{ matrix.xcode_version }}" | cut -d'.' -f1)
         if [[ "$XCODE_MAJOR_VERSION" -lt 16 ]]; then
           echo "Xcode version is < 16. Filtering noisy warnings from xcbeautify output."
-          echo "XCBEAUTIFY_ARGS=--renderer github-actions --quieter" >> $GITHUB_ENV
+          echo "XCBEAUTIFY_ARGS=--renderer github-actions --quieter --disable-logging" >> $GITHUB_ENV
         else
-          echo "XCBEAUTIFY_ARGS=--renderer github-actions" >> $GITHUB_ENV
+          echo "XCBEAUTIFY_ARGS=--renderer github-actions --disable-logging" >> $GITHUB_ENV
         fi
     - name: Build AuthFoundation
       run: |

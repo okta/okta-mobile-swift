@@ -162,7 +162,7 @@ final class OAuth2ClientTests: XCTestCase {
                           contentType: "application/json")
 
         let client = try XCTUnwrap(self.client)
-        try perform {
+        try await perform {
             let config = try await client.openIdConfiguration()
             XCTAssertEqual(config.authorizationEndpoint.absoluteString,
                            "https://example.com/oauth2/v1/authorize")
