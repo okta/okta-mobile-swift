@@ -36,9 +36,17 @@ runs:
     - name: Install Linux utilities
       if: runner.os == 'Linux'
       shell: bash
+      env:
+        HOMEBREW_NO_INSTALL_CLEANUP: YES
+        HOMEBREW_NO_ENV_HINTS: YES
       run: |
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
         brew install xcbeautify
+        echo "HOMEBREW_PREFIX=${HOMEBREW_PREFIX}" >> $GITHUB_ENV
+        echo "HOMEBREW_CELLAR=${HOMEBREW_CELLAR}" >> $GITHUB_ENV
+        echo "HOMEBREW_REPOSITORY=${HOMEBREW_REPOSITORY}" >> $GITHUB_ENV
+        echo "${HOMEBREW_PREFIX}/bin" >> $GITHUB_PATH
+        echo "${HOMEBREW_PREFIX}/sbin" >> $GITHUB_PATH
     - name: Get swift version
       shell: bash
       run: swift --version
