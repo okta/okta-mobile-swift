@@ -35,6 +35,7 @@ runs:
         swift-version: ${{ inputs.swift-version }}
     - name: Install Linux utilities
       if: runner.os == 'Linux'
+      shell: bash
       run: |
         brew install xcbeautify
     - name: Get swift version
