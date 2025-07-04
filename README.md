@@ -1,10 +1,17 @@
-[<img src="https://www.okta.com/sites/default/files/Dev_Logo-01_Large-thumbnail.png" align="right" width="256px"/>](https://devforum.okta.com/)
+[![Latest Release](https://img.shields.io/github/v/release/okta/okta-mobile-swift)](https://github.com/okta/okta-mobile-swift/releases/latest)
+[![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fokta%2Fokta-mobile-swift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/okta/okta-mobile-swift)
+[![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fokta%2Fokta-mobile-swift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/okta/okta-mobile-swift)
+[![Tests](https://github.com/okta/okta-mobile-swift/actions/workflows/tests.yaml/badge.svg)](https://github.com/okta/okta-mobile-swift/actions/workflows/tests.yaml)
+[![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-green?style=flat)](https://swiftpackageindex.com/okta/okta-mobile-swift)
+[![CocoaPods](https://img.shields.io/badge/CocoaPods-compatible-green?style=flat)](https://cocoapods.org/pods/OktaAuthFoundation)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Support](https://img.shields.io/badge/support-Developer%20Forum-blue.svg)][devforum]
-[![API Reference](https://img.shields.io/badge/docs-reference-lightgrey.svg)][swiftdocs]
-
+[![SDK Documentation](https://img.shields.io/badge/docs-SDK%20Documentation-blue.svg)][sdkdocumentation]
+[![Integration Guide](https://img.shields.io/badge/docs-Integration%20Guide-blue.svg)][integrationdocs]
 
 # Okta Client SDK for Swift
+
+[<img src="https://www.okta.com/sites/default/files/Dev_Logo-01_Large-thumbnail.png" align="right" width="256px"/>](https://devforum.okta.com/)
 
 The Okta Client SDK represents a collection of SDKs for different languages, each of which itself is a modular ecosystem of libraries that build upon one-another to enable client applications to:
 
@@ -27,7 +34,8 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 | Version | Status                             |
 | ------- | ---------------------------------- |
 | 1.8.3   | Retiring                           |
-| 2.0.0   | ✔️ Stable                             |
+| 2.0.0   |                                    |
+| 2.0.1   | ✔️ Stable                             |
 
 The latest release can always be found on the [releases page][github-releases].
 
@@ -35,7 +43,7 @@ The latest release can always be found on the [releases page][github-releases].
 
 If you run into problems using the SDK, you can:
 
-* Review the API documentation for [AuthFoundation][authfoundation-docs], [OAuth2Auth][oauth2auth-docs], [OktaDirectAuth][oktadirectauth-docs], [OktaIdxAuth][oktaidxauth-docs], and [BrowserSignin][browsersignin-docs]
+* Review the [API documentation](sdkdocumentation) for [AuthFoundation][authfoundation-docs], [OAuth2Auth][oauth2auth-docs], [OktaDirectAuth][oktadirectauth-docs], [OktaIdxAuth][oktaidxauth-docs], and [BrowserSignin][browsersignin-docs]
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
 
@@ -346,6 +354,33 @@ if let credential = try Credential.find(where: { $0.email == "user@example.com" 
 }
 ```
 
+### Authorizing outgoing requests to a Resource Server (RS)
+
+While the traditional approach of manually adding the `access_token` value to an HTTP header is supported, the Credential class provides conveniences that drastically improves your developer experience when working with the Authorization header.
+
+The recommended approach to is to use the `authorize(_:)` function, which accepts a URLRequest object and adds the appropriate headers to the request's HTTP headers with the appropriate token information. The are two versions of the same function:
+
+1. A synchronous function that simply adds the access token header to the request.
+2. An `async` function that ensures the token has not expired, and proactively refreshes the token on your behalf before adding the headers to the request.
+
+For example:
+
+```swift
+// Retrieve the credentials for the user
+guard let credential = Credential.default else { return }
+
+// Create the API request
+var request = URLRequest(url: URL(string: "https://api.example.com/some/path")!)
+request.method = "POST"
+
+// Authorize the request with the user's credentials. The request is
+// passed as a pointer so it is updated in-place.
+try await credential.authorize(&request)
+
+// Send the request, retrieving the results.
+let (data, response) = try await URLSession.shared.data(for: request)
+```
+
 ### Rate Limit Handling
 
 The Okta API will return 429 responses if too many requests are made within a given time. Please see [Rate Limiting at Okta](https://developer.okta.com/docs/api/getting_started/rate-limits) for a complete
@@ -484,15 +519,16 @@ docker run --rm --privileged --interactive --tty \
 We are happy to accept contributions and PRs! Please see the [contribution guide](CONTRIBUTING.md) to understand how to structure a contribution.
 
 [devforum]: https://devforum.okta.com/
-[swiftdocs]: https://developer.okta.com/okta-mobile-swift/latest/
+[integrationdocs]: https://developer.okta.com/docs/guides/sign-into-mobile-app-redirect/ios/main/
 [lang-landing]: https://developer.okta.com/code/swift/
 [github-issues]: https://github.com/okta/okta-mobile-swift/issues
 [github-releases]: https://github.com/okta/okta-mobile-swift/releases
-[authfoundation-docs]: https://okta.github.io/okta-mobile-swift/development/authfoundation/
-[oktadirectauth-docs]: https://okta.github.io/okta-mobile-swift/development/oktadirectauth/
-[oktaidxauth-docs]: https://okta.github.io/okta-mobile-swift/development/oktaidxauth/
-[oauth2auth-docs]: https://okta.github.io/okta-mobile-swift/development/oauth2auth/
-[browsersignin-docs]: https://okta.github.io/okta-mobile-swift/development/browsersignin/
+[sdkdocumentation]: https://okta.github.io/okta-mobile-swift/development/documentation/
+[authfoundation-docs]: https://okta.github.io/okta-mobile-swift/development/documentation/authfoundation/
+[oktadirectauth-docs]: https://okta.github.io/okta-mobile-swift/development/documentation/oktadirectauth/
+[oktaidxauth-docs]: https://okta.github.io/okta-mobile-swift/development/documentation/oktaidxauth/
+[oauth2auth-docs]: https://okta.github.io/okta-mobile-swift/development/documentation/oauth2auth/
+[browsersignin-docs]: https://okta.github.io/okta-mobile-swift/development/documentation/browsersignin/
 [Rate Limiting at Okta]: https://developer.okta.com/docs/api/getting_started/rate-limits
 [okta-library-versioning]: https://developer.okta.com/code/library-versions
 [support-policy]: #support-policy

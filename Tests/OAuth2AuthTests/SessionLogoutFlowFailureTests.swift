@@ -77,7 +77,7 @@ class SessionLogoutFlowFailureTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        await fulfillment(of: [expectation], timeout: 1)
+        await fulfillment(of: [expectation], timeout: .standard)
 
         XCTAssertFalse(flow.inProgress)
         XCTAssertNotNil(flow.context)

@@ -85,7 +85,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
 
         let requests: [String: URLRequest] = urlSession.requests.reduce(into: [:]) { partialResult, request in
             guard let url = request.url,
@@ -134,7 +134,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
 
         await CredentialActor.run {
             XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
@@ -170,7 +170,7 @@ final class CredentialTests: XCTestCase {
                 XCTAssertEqual(oauth2Error.code, .invalidToken)
             }
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
     }
 
     func testRevokeAll() async throws {
@@ -193,22 +193,17 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
 
-        let accessTokenRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.bodyString?.contains("abcd123") ?? false
-        }))
-        let refreshTokenRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.bodyString?.contains("refresh123") ?? false
-        }))
-        let deviceSecretRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.bodyString?.contains("device123") ?? false
-        }))
-
+        let accessTokenRequest = try XCTUnwrap(urlSession.request(matching: .body("token=abcd123")))
         XCTAssertEqual(accessTokenRequest.bodyString,
                        "client_id=clientid&token=abcd123&token_type_hint=access_token")
+
+        let refreshTokenRequest = try XCTUnwrap(urlSession.request(matching: .body("token=refresh123")))
         XCTAssertEqual(refreshTokenRequest.bodyString,
                        "client_id=clientid&token=refresh123&token_type_hint=refresh_token")
+
+        let deviceSecretRequest = try XCTUnwrap(urlSession.request(matching: .body("token=device123")))
         XCTAssertEqual(deviceSecretRequest.bodyString,
                        "client_id=clientid&token=device123&token_type_hint=device_secret")
     }
@@ -241,7 +236,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1.0)
+        await fulfillment(of: [expect], timeout: .standard)
 
         await CredentialActor.run {
             XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)

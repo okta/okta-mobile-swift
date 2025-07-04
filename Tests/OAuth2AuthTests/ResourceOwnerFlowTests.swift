@@ -105,7 +105,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
             }
             wait.fulfill()
         }
-        await fulfillment(of: [wait], timeout: 1)
+        await fulfillment(of: [wait], timeout: .standard)
 
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)

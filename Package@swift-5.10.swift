@@ -1,6 +1,7 @@
 // swift-tools-version:5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
+import Foundation
 import PackageDescription
 
 let strictConcurrencyEnabled = true
@@ -121,3 +122,8 @@ package.products.append(
     .library(name: "BrowserSignin", targets: ["BrowserSignin"])
 )
 #endif
+
+if ProcessInfo.processInfo.environment["ENABLE_DOC_GENERATION"] != nil {
+    package.dependencies.append(.package(url: "https://github.com/apple/swift-docc-plugin",
+                                         from: "1.4.0"))
+}

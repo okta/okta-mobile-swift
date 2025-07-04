@@ -293,7 +293,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked
             delegate.refreshExpectation = refreshExpectation
             credential.automaticRefresh = true
 
-            await fulfillment(of: [refreshExpectation], timeout: 1.0)
+            await fulfillment(of: [refreshExpectation], timeout: .standard)
             XCTAssertEqual(urlSession.requests.count, 2)
 
             // Should automatically refresh after a delay
@@ -363,7 +363,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked
     func testRefreshAsync() async throws {
         try await taskData {
             let credential = try await credential(for: Token.simpleMockToken)
-            try perform {
+            try await perform {
                 try await credential.refresh()
             }
         }
@@ -372,7 +372,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked
     func testRefreshIfNeededExpiredAsync() async throws {
         try await taskData {
             let credential = try await credential(for: Token.mockToken(issuedOffset: 6000))
-            try perform {
+            try await perform {
                 try await credential.refreshIfNeeded(graceInterval: 300)
             }
         }
@@ -382,7 +382,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked
         try await taskData {
             let credential = try await credential(for: Token.mockToken(issuedOffset: 0),
                                                   expectAPICalls: .none)
-            try perform {
+            try await perform {
                 try await credential.refreshIfNeeded(graceInterval: 300)
             }
         }
@@ -391,7 +391,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked
     func testRefreshIfNeededOutsideGraceIntervalAsync() async throws {
         try await taskData {
             let credential = try await credential(for: Token.mockToken(issuedOffset: 3500))
-            try perform {
+            try await perform {
                 try await credential.refreshIfNeeded(graceInterval: 300)
             }
         }

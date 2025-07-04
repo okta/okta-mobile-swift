@@ -94,9 +94,7 @@ final class TokenExchangeFlowTests: XCTestCase {
         
         XCTAssertEqual(urlSession.requests.count, 3)
         
-        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.url?.lastPathComponent == "token"
-        }))
+        let request = try XCTUnwrap(urlSession.request(matching: "/token"))
 
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
@@ -113,15 +111,13 @@ final class TokenExchangeFlowTests: XCTestCase {
 
             expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: 1)
+        await fulfillment(of: [expect], timeout: .standard)
 
         XCTAssertFalse(flow.isAuthenticating)
 
         XCTAssertEqual(urlSession.requests.count, 3)
 
-        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.url?.lastPathComponent == "token"
-        }))
+        let request = try XCTUnwrap(urlSession.request(matching: "/token"))
 
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
@@ -136,9 +132,7 @@ final class TokenExchangeFlowTests: XCTestCase {
 
         XCTAssertEqual(urlSession.requests.count, 3)
         
-        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.url?.lastPathComponent == "token"
-        }))
+        let request = try XCTUnwrap(urlSession.request(matching: "/token"))
 
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
