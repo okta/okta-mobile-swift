@@ -176,24 +176,21 @@ public extension XCTestCase {
         return try decoder.decode(T.self, from: json)
     }
 
-    func perform(queueCount: Int = 5, iterationCount: Int = 4, _ block: @Sendable @escaping () async throws -> Void) rethrows {
-        let queues: [DispatchQueue] = (0..<queueCount).map { queueNumber in
-            DispatchQueue(label: "Async queue \(queueNumber)")
-        }
-        
-        let group = DispatchGroup()
-        for queue in queues {
-            for _ in 0..<iterationCount {
-                group.enter()
-                queue.async {
-                    Task.detached {
-                        try await block()
-                        group.leave()
-                    }
+    func perform(queueCount: Int = ProcessInfo.processInfo.activeProcessorCount,
+                 iterationCount: Int = 4,
+                 timeout: TimeInterval = .standard,
+                 _ block: @Sendable @escaping () async throws -> Void) async rethrows
+    {
+        let operationCount = queueCount * iterationCount
+
+        try await withThrowingTaskGroup(of: Void.self) { group in
+            for _ in 0..<operationCount {
+                group.addTask {
+                    try await block()
                 }
             }
+
+            try await group.waitForAll()
         }
-        
-        _ = group.wait(timeout: .short)
     }
 }

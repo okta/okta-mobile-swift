@@ -120,7 +120,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
                 resumeExpection.fulfill()
             }
         }
-        await fulfillment(of: [resumeExpection], timeout: 1)
+        await fulfillment(of: [resumeExpection], timeout: .standard)
 
         let newContext = try XCTUnwrap(flow.context)
         XCTAssertNotEqual(newContext.logoutURL, context.logoutURL)

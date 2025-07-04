@@ -44,7 +44,9 @@ public actor CoalescedResult<T: Sendable>: Sendable {
     nonisolated public var isActive: Bool {
         let semaphore = DispatchSemaphore(value: 0)
         nonisolated(unsafe) var result: Bool = false
-        Task.detached {
+
+        // TODO: Due to [a false-positive within Xcode 26 beta's sendable data-race detection](https://forums.swift.org/t/potential-false-positive-sending-risks-causing-data-races/78859), the following workaround was introduced. This should be removed once it is fixed in future betas
+        Task.detached(priority: Task.currentPriority) { @Sendable in
             result = await self._isActive
             semaphore.signal()
         }

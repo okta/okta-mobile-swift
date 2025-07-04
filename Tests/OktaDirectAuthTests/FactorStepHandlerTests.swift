@@ -267,9 +267,7 @@ final class FactorStepHandlerTests: XCTestCase {
             return
         }
 
-        let tokenBody = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.url?.lastPathComponent == "token"
-        }).flatMap({ $0.bodyString }))
+        let tokenBody = try XCTUnwrap(urlSession.request(matching: "/token")?.bodyString)
         let tokenParams = tokenBody.urlFormDecoded()
         
         XCTAssertEqual(tokenParams["grant_type"],

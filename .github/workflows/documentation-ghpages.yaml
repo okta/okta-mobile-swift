@@ -8,21 +8,15 @@ on:
       - '*'
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_16.2.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+  ENABLE_DOC_GENERATION: YES
+  DOCC_JSON_PRETTYPRINT: YES
   NSUnbufferedIO: YES 
 
-# NOTE: The DocC `generate-documentation` plugin does not handle the 
-#       hostingBasePath well. In particular, it doesn't properly handle
-#       multiple child paths. Furthermore, the current 1.0.0 version of
-#       the plugin doesn't handle updates to the index.html or *.js
-#       files.
-#
-#       This workflow should be revisited once Xcode 14 GA is released
-#       so the newer DocC utilities can be utilized.
 jobs:
   ExportToGHPages:
     name: Export to Github Pages
-    runs-on: macos-latest-large
+    runs-on: macos-15
     steps:
     - uses: actions/checkout@master
     - name: Build Documentation
@@ -37,14 +31,13 @@ jobs:
 
         TARGET_LIST=""
 
+        mkdir -p "docs/okta-mobile-swift/$VERSION"
+
         echo "Initializing target list"
         for TARGET in $(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g'); do
             echo "🎯 $TARGET"
             NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
             TARGET_LIST="$TARGET_LIST --target $TARGET"
-
-            mkdir -p "docs/okta-mobile-swift/$VERSION/$NAME"
-            echo "<html><head><meta http-equiv='refresh' content='0;url=/okta-mobile-swift/$VERSION/documentation/$NAME/'></head></html>" > "docs/okta-mobile-swift/$VERSION/$NAME/index.html"
         done
 
         echo
@@ -56,9 +49,12 @@ jobs:
             --hosting-base-path "okta-mobile-swift/$VERSION" \
             --output-path "docs/okta-mobile-swift/$VERSION" \
             --include-extended-types \
+            --symbol-graph-minimum-access-level public \
+            --experimental-skip-synthesized-symbols \
             --enable-experimental-combined-documentation \
             --enable-experimental-mentioned-in \
             --enable-experimental-external-link-support \
+            --enable-experimental-overloaded-symbol-presentation \
             $TARGET_LIST
     - name: Deploy documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3

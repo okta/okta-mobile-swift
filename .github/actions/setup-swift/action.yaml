@@ -18,9 +18,11 @@ runs:
       if: runner.os == 'macOS'
       shell: bash
       run: |
-        for xcode_version in $(yq ".swift[] | select(.version == \"${{ inputs.swift-version }}\") | .xcode_versions[]" "${{inputs.version-manifest}}"); do
+        for xcode_version in $(yq ".swift[] | select(.version == \"${{ inputs.swift-version }}\") | .xcode_versions[]" "${{inputs.version-manifest}}" | sort -r); do
           developer_dir="/Applications/Xcode_${xcode_version}.app/Contents/Developer"
+          echo "Evaluating Xcode ${xcode_version} at \`${developer_dir}\`"
           if [[ -d "$developer_dir" ]]; then
+            echo "Using Xcode ${xcode_version} for Swift ${{ inputs.swift-version }}"
             echo "DEVELOPER_DIR=${developer_dir}" >> $GITHUB_ENV
             echo "developer_dir=${developer_dir}" >> $GITHUB_OUTPUT
             exit 0
@@ -31,6 +33,20 @@ runs:
       if: steps.check_xcode_version.outputs.developer_dir == ''
       with:
         swift-version: ${{ inputs.swift-version }}
+    - name: Install Linux utilities
+      if: runner.os == 'Linux'
+      shell: bash
+      env:
+        HOMEBREW_NO_INSTALL_CLEANUP: YES
+        HOMEBREW_NO_ENV_HINTS: YES
+      run: |
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        brew install xcbeautify
+        echo "HOMEBREW_PREFIX=${HOMEBREW_PREFIX}" >> $GITHUB_ENV
+        echo "HOMEBREW_CELLAR=${HOMEBREW_CELLAR}" >> $GITHUB_ENV
+        echo "HOMEBREW_REPOSITORY=${HOMEBREW_REPOSITORY}" >> $GITHUB_ENV
+        echo "${HOMEBREW_PREFIX}/bin" >> $GITHUB_PATH
+        echo "${HOMEBREW_PREFIX}/sbin" >> $GITHUB_PATH
     - name: Get swift version
       shell: bash
       run: swift --version

@@ -24,6 +24,11 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
     let queue = DispatchQueue(label: "URLSessionMock")
     private let lock = Lock()
 
+    enum Match {
+        case url(String)
+        case body(String)
+    }
+
     struct Call {
         let url: String
         let data: Data?
@@ -62,8 +67,19 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
         }
     }
     
+    func request(matching match: Match) -> URLRequest? {
+        requests.first(where: { request in
+            switch match {
+            case .url(let string):
+                return request.url?.absoluteString.localizedCaseInsensitiveContains(string) ?? false
+            case .body(let string):
+                return request.bodyString?.localizedCaseInsensitiveContains(string) ?? false
+            }
+        })
+    }
+
     func request(matching string: String) -> URLRequest? {
-        requests.first(where: { $0.url?.absoluteString.localizedCaseInsensitiveContains(string) ?? false })
+        request(matching: .url(string))
     }
     
     func formDecodedBody(matching string: String) -> [String: String?]? {
