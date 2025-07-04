@@ -1,0 +1,670 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:13BrowserSignin0aB5ErrorO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "BrowserSigninError"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "BrowserSignin"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "BrowserSigninError"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "BrowserSigninError"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "BrowserSigninError"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/10Foundation14LocalizedErrorP",
+        "doc:\/\/BrowserSignin\/s8CopyableP",
+        "doc:\/\/BrowserSignin\/SQ",
+        "doc:\/\/BrowserSignin\/s5ErrorP",
+        "doc:\/\/BrowserSignin\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Enumeration-Cases",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/authenticationProvider(error:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/cannotComposeAuthenticationURL",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/cannotStartBrowserSession",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/generic(error:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/genericError(message:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/invalidRedirectScheme(_:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/missingIdToken",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noAuthenticatorProviderResonse",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noCompatibleAuthenticationProviders",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noSignOutFlowProvided",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/oauth2(error:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/serverError(_:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/userCancelledLogin"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/Equatable-Implementations",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/LocalizedError-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/browsersignin\/browsersigninerror"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://BrowserSignin/10Foundation14LocalizedErrorP": {
+  "identifier" : "doc:\/\/BrowserSignin\/10Foundation14LocalizedErrorP",
+  "title" : "Foundation.LocalizedError",
+  "type" : "unresolvable"
+},
+"doc://BrowserSignin/SQ": {
+  "identifier" : "doc:\/\/BrowserSignin\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://BrowserSignin/documentation/BrowserSignin": {
+  "abstract" : [
+    {
+      "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "BrowserSignin",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "BrowserSigninError"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "BrowserSigninError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSigninError",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/equatable-implementations"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/LocalizedError-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/LocalizedError-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "LocalizedError Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/localizederror-implementations"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/authenticationProvider(error:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationProvider"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "error"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/authenticationProvider(error:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.authenticationProvider(error:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/authenticationprovider(error:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/cannotComposeAuthenticationURL": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cannotComposeAuthenticationURL"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/cannotComposeAuthenticationURL",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.cannotComposeAuthenticationURL",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/cannotcomposeauthenticationurl"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/cannotStartBrowserSession": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cannotStartBrowserSession"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/cannotStartBrowserSession",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.cannotStartBrowserSession",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/cannotstartbrowsersession"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/generic(error:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "generic"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "error"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/generic(error:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.generic(error:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/generic(error:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/genericError(message:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "genericError"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "message"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/genericError(message:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.genericError(message:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/genericerror(message:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/invalidRedirectScheme(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidRedirectScheme"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/invalidRedirectScheme(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.invalidRedirectScheme(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/invalidredirectscheme(_:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/missingIdToken": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "missingIdToken"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/missingIdToken",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.missingIdToken",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/missingidtoken"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/noAuthenticatorProviderResonse": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "noAuthenticatorProviderResonse"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noAuthenticatorProviderResonse",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.noAuthenticatorProviderResonse",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/noauthenticatorproviderresonse"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/noCompatibleAuthenticationProviders": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "noCompatibleAuthenticationProviders"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noCompatibleAuthenticationProviders",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.noCompatibleAuthenticationProviders",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/nocompatibleauthenticationproviders"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/noSignOutFlowProvided": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "noSignOutFlowProvided"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noSignOutFlowProvided",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.noSignOutFlowProvided",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/nosignoutflowprovided"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/oauth2(error:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "oauth2"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "error"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
+      "text" : "OAuth2Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/oauth2(error:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.oauth2(error:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/oauth2(error:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/serverError(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "serverError"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation17OAuth2ServerErrorV",
+      "text" : "OAuth2ServerError"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/serverError(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.serverError(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/servererror(_:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/userCancelledLogin": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userCancelledLogin"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/userCancelledLogin",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.userCancelledLogin",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/usercancelledlogin"
+},
+"doc://BrowserSignin/s5ErrorP": {
+  "identifier" : "doc:\/\/BrowserSignin\/s5ErrorP",
+  "title" : "Swift.Error",
+  "type" : "unresolvable"
+},
+"doc://BrowserSignin/s8CopyableP": {
+  "identifier" : "doc:\/\/BrowserSignin\/s8CopyableP",
+  "title" : "Swift.Copyable",
+  "type" : "unresolvable"
+},
+"doc://BrowserSignin/s8SendableP": {
+  "identifier" : "doc:\/\/BrowserSignin\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

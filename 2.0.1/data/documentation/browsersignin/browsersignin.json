@@ -1,0 +1,2063 @@
+{
+  "abstract" : [
+    {
+      "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:13BrowserSigninAAC",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "BrowserSignin"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "BrowserSignin"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "BrowserSignin"
+      }
+    ],
+    "platforms" : [
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "13.0",
+        "name" : "iOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "13.0",
+        "name" : "Mac Catalyst",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "10.15",
+        "name" : "macOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "16.0",
+        "name" : "tvOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "1.0",
+        "name" : "visionOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "7.0",
+        "name" : "watchOS",
+        "unavailable" : false
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "BrowserSignin"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@"
+            },
+            {
+              "kind" : "attribute",
+              "preciseIdentifier" : "s:ScM",
+              "text" : "MainActor"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "final"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "BrowserSignin"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "kind" : "mentions",
+      "mentions" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/ConfiguringYourClient",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/CustomizingAuthorizationURL"
+      ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This simple class encapsulates the details of managing browser instances across iOS\/macOS versions, coordinating with OAuth2 endpoints, and supporting a variety of conveniences when signing users into your application.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The simplest way to authenticate a user is to use the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/shared",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " property to access your default session, and calling ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signIn(from:context:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " to present the browser to the user.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let token = try await BrowserSignin.shared?.signIn(from: view.window)"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To customize the authentication flow, please read more about the underlying OAuth2 client within the OAuth2Auth library, and how that relates to the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signInFlow",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOutFlow",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " properties.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "If your application targets iOS 9.x-10.x, you should add the redirect URI for your client configuration to your app’s supported URL schemes.  This is because users on devices older than iOS 11 will be prompted to sign in using ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "SFSafariViewController",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ", which does not allow your application to detect the final token redirect.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Important",
+          "style" : "important",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "Essentials",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/ConfiguringYourClient"
+      ],
+      "title" : "Essentials"
+    }
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Essentials",
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/ConfiguringYourClient",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/shared",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/ephemeralSession"
+      ],
+      "title" : "Essentials"
+    },
+    {
+      "anchor" : "Initializers",
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init()",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(plist:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(loginFlow:logoutFlow:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "anchor" : "Sign-In",
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signIn(from:context:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signIn(from:context:completion:)"
+      ],
+      "title" : "Sign In"
+    },
+    {
+      "anchor" : "Sign-Out-Using-Credential",
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/HowToSignOut",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:credential:context:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:credential:context:completion:)"
+      ],
+      "title" : "Sign Out Using Credential"
+    },
+    {
+      "anchor" : "Sign-Out-Using-Token",
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/HowToSignOut",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:token:context:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:token:context:completion:)"
+      ],
+      "title" : "Sign Out Using Token"
+    },
+    {
+      "anchor" : "Sign-Out-Using-Custom-Settings",
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/HowToSignOut",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:context:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:context:completion:)"
+      ],
+      "title" : "Sign Out Using Custom Settings"
+    },
+    {
+      "abstract" : [
+        {
+          "text" : "Signing in and -out is intended to be simple using this class, with several options for configuring your client (see ",
+          "type" : "text"
+        },
+        {
+          "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/ConfiguringYourClient",
+          "isActive" : true,
+          "type" : "reference"
+        },
+        {
+          "text" : " for more information). Once your client is configured, it is available through a shared singleton property ",
+          "type" : "text"
+        },
+        {
+          "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/shared",
+          "isActive" : true,
+          "type" : "reference"
+        },
+        {
+          "text" : ", or can be directly accessed if you create an instance directly.",
+          "type" : "text"
+        }
+      ],
+      "anchor" : "Customizing-OAuth2-Flows",
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signInFlow",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOutFlow"
+      ],
+      "title" : "Customizing OAuth2 Flows"
+    },
+    {
+      "anchor" : "Instance-Methods",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/cancel()"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "anchor" : "Type-Aliases",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/WindowAnchor"
+      ],
+      "title" : "Type Aliases"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/browsersignin\/browsersignin"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://BrowserSignin/documentation/BrowserSignin": {
+  "abstract" : [
+    {
+      "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "BrowserSignin",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin": {
+  "abstract" : [
+    {
+      "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "BrowserSignin"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "BrowserSignin"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSignin",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/WindowAnchor": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WindowAnchor"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/WindowAnchor",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WindowAnchor"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSignin.WindowAnchor",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/windowanchor"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/cancel()": {
+  "abstract" : [
+    {
+      "text" : "Cancels the authentication session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cancel"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/cancel()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "cancel()",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/cancel()"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/ephemeralSession": {
+  "abstract" : [
+    {
+      "text" : "Indicates whether or not the developer prefers an ephemeral browser session, or if the user’s browser state should be shared with the system browser.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ephemeralSession"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/ephemeralSession",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ephemeralSession",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/ephemeralsession"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/init()": {
+  "abstract" : [
+    {
+      "text" : "Initializes a web authentiation session using client credentials defined within the application’s ",
+      "type" : "text"
+    },
+    {
+      "code" : "Okta.plist",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " file.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init()",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/init()"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)": {
+  "abstract" : [
+    {
+      "text" : "Initializes a web authentication session using the supplied client credentials.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "issuerURL"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "clientId"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "scope"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+      "text" : "ClaimCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]>, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "redirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "logoutRedirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:additionalparameters:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/init(loginFlow:logoutFlow:)": {
+  "abstract" : [
+    {
+      "text" : "Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "loginFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth21AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "logoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(loginFlow:logoutFlow:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(loginFlow:logoutFlow:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/init(loginflow:logoutflow:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/init(plist:)": {
+  "abstract" : [
+    {
+      "text" : "Initializes a web authentication session using client credentials defined within the provided file URL.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "plist"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(plist:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(plist:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/init(plist:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/shared": {
+  "abstract" : [
+    {
+      "text" : "Active \/ default shared instance of the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shared"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC",
+      "text" : "BrowserSignin"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/shared",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shared",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/shared"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/signIn(from:context:)": {
+  "abstract" : [
+    {
+      "text" : "Starts sign-in using the configured client.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signIn"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC",
+      "text" : "BrowserSignin"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC12WindowAnchora",
+      "text" : "WindowAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth21AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth21AuthorizationCodeFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenV",
+      "text" : "Token"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signIn(from:context:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signIn(from:context:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/signin(from:context:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/signIn(from:context:completion:)": {
+  "abstract" : [
+    {
+      "text" : "Asynchronously initiates authentication from the given window.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signIn"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC",
+      "text" : "BrowserSignin"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC12WindowAnchora",
+      "text" : "WindowAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth21AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth21AuthorizationCodeFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6ResultO",
+      "text" : "Result"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenV",
+      "text" : "Token"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSignin0aB5ErrorO",
+      "text" : "BrowserSigninError"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signIn(from:context:completion:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signIn(from:context:completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/signin(from:context:completion:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/signInFlow": {
+  "abstract" : [
+    {
+      "text" : "The underlying OAuth2 flow that implements the authentication behavior.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signInFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth21AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signInFlow",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signInFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/signinflow"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/signOut(from:context:)": {
+  "abstract" : [
+    {
+      "text" : "Starts log-out using the ID token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signOut"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC",
+      "text" : "BrowserSignin"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC12WindowAnchora",
+      "text" : "WindowAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:context:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signOut(from:context:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/signout(from:context:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/signOut(from:context:completion:)": {
+  "abstract" : [
+    {
+      "text" : "Asynchronous convenience method that initiates log-out using the ID Token, throwing the error if fails.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signOut"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC",
+      "text" : "BrowserSignin"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC12WindowAnchora",
+      "text" : "WindowAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6ResultO",
+      "text" : "Result"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSignin0aB5ErrorO",
+      "text" : "BrowserSigninError"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:context:completion:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signOut(from:context:completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/signout(from:context:completion:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/signOut(from:credential:context:)": {
+  "abstract" : [
+    {
+      "text" : "Starts log-out using the credential.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signOut"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC",
+      "text" : "BrowserSignin"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC12WindowAnchora",
+      "text" : "WindowAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "credential"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation10CredentialC",
+      "text" : "Credential"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:credential:context:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signOut(from:credential:context:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/signout(from:credential:context:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/signOut(from:credential:context:completion:)": {
+  "abstract" : [
+    {
+      "text" : "Asynchronous convenience method that initiates log-out using the credential object, throwing the error if fails.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signOut"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC",
+      "text" : "BrowserSignin"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC12WindowAnchora",
+      "text" : "WindowAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "credential"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation10CredentialC",
+      "text" : "Credential"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6ResultO",
+      "text" : "Result"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSignin0aB5ErrorO",
+      "text" : "BrowserSigninError"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:credential:context:completion:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signOut(from:credential:context:completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/signout(from:credential:context:completion:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/signOut(from:token:context:)": {
+  "abstract" : [
+    {
+      "text" : "Starts log-out using the ",
+      "type" : "text"
+    },
+    {
+      "code" : "Token",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signOut"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC",
+      "text" : "BrowserSignin"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC12WindowAnchora",
+      "text" : "WindowAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "token"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenV",
+      "text" : "Token"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:token:context:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signOut(from:token:context:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/signout(from:token:context:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/signOut(from:token:context:completion:)": {
+  "abstract" : [
+    {
+      "text" : "Asynchronous convenience method that initiates log-out using the ",
+      "type" : "text"
+    },
+    {
+      "code" : "Token",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " object, throwing the error if fails.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signOut"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC",
+      "text" : "BrowserSignin"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC12WindowAnchora",
+      "text" : "WindowAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "token"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenV",
+      "text" : "Token"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6ResultO",
+      "text" : "Result"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSignin0aB5ErrorO",
+      "text" : "BrowserSigninError"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOut(from:token:context:completion:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signOut(from:token:context:completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/signout(from:token:context:completion:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/signOutFlow": {
+  "abstract" : [
+    {
+      "text" : "The underlying OAuth2 flow that implements the session logout behaviour.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signOutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/signOutFlow",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signOutFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/signoutflow"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/ConfiguringYourClient": {
+  "abstract" : [
+    {
+      "text" : "Configure your BrowserSignin client to connect to your OAuth2 application.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/ConfiguringYourClient",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Configuring Your Client",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/configuringyourclient"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/CustomizingAuthorizationURL": {
+  "abstract" : [
+    {
+      "text" : "Features and APIs to enable customization of the authorization URL.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/CustomizingAuthorizationURL",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Customizing the Authorization URL",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/customizingauthorizationurl"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/HowToSignOut": {
+  "abstract" : [
+    {
+      "text" : "Determine the optimal approach to signing users out of your application.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/HowToSignOut",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "How To Sign Out",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/howtosignout"
+},
+"doc://BrowserSignin/s8SendableP": {
+  "identifier" : "doc:\/\/BrowserSignin\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

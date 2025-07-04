@@ -1,0 +1,1119 @@
+{
+  "abstract" : [
+    {
+      "text" : "Describes errors that may occur with parsing or validating JWT tokens.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation8JWTErrorO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "JWTError"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "JWTError"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "JWTError"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "JWTError"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/10Foundation14LocalizedErrorP",
+        "doc:\/\/AuthFoundation\/s8CopyableP",
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/s5ErrorP",
+        "doc:\/\/AuthFoundation\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "Error-Types",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenError"
+      ],
+      "title" : "Error Types"
+    }
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Enumeration-Cases",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/badTokenStructure",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/cannotCreateKey(code:description:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/cannotGenerateHash",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/exceedsMaxAge",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/expired",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidAudience",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidAuthenticationTime",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidBase64Encoding",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidIssuer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidKey",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidSigningAlgorithm",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidSubject",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/issuedAtTimeExceedsGraceInterval",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/issuerRequiresHTTPS",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/nonceMismatch",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/signatureInvalid",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/signatureVerificationUnavailable",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/unsupportedAlgorithm(_:)"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/LocalizedError-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwterror"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/10Foundation14LocalizedErrorP": {
+  "identifier" : "doc:\/\/AuthFoundation\/10Foundation14LocalizedErrorP",
+  "title" : "Foundation.LocalizedError",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError": {
+  "abstract" : [
+    {
+      "text" : "Errors that may occur at the API or network level.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIClientError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIClientError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIClientError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ClaimError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimerror"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialError": {
+  "abstract" : [
+    {
+      "text" : "Errors that may occur in the process of managing credentials.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "CredentialError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "CredentialError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "CredentialError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/credentialerror"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonerror"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors that may occur with parsing or validating JWT tokens.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWTError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWTError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWTError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/LocalizedError-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/LocalizedError-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "LocalizedError Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/localizederror-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/badTokenStructure": {
+  "abstract" : [
+    {
+      "text" : "The token is not structured correctly.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "badTokenStructure"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/badTokenStructure",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.badTokenStructure",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/badtokenstructure"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/cannotCreateKey(code:description:)": {
+  "abstract" : [
+    {
+      "text" : "Cannot create a public key with the information supplied from the server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cannotCreateKey"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "code"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@OSStatus",
+      "text" : "OSStatus"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/cannotCreateKey(code:description:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.cannotCreateKey(code:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/cannotcreatekey(code:description:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/cannotGenerateHash": {
+  "abstract" : [
+    {
+      "text" : "Cannot generate hash signature.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cannotGenerateHash"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/cannotGenerateHash",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.cannotGenerateHash",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/cannotgeneratehash"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/exceedsMaxAge": {
+  "abstract" : [
+    {
+      "text" : "The given token exceeds the supplied maximum age.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "exceedsMaxAge"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/exceedsMaxAge",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.exceedsMaxAge",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/exceedsmaxage"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/expired": {
+  "abstract" : [
+    {
+      "text" : "The token has expired.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expired"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/expired",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.expired",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/expired"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/invalidAudience": {
+  "abstract" : [
+    {
+      "text" : "The token’s audience does not match.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidAudience"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidAudience",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.invalidAudience",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/invalidaudience"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/invalidAuthenticationTime": {
+  "abstract" : [
+    {
+      "text" : "The token’s authentication time is missing or is invalid.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidAuthenticationTime"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidAuthenticationTime",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.invalidAuthenticationTime",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/invalidauthenticationtime"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/invalidBase64Encoding": {
+  "abstract" : [
+    {
+      "text" : "The token is invalid (incorrect Base64 encoding).",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidBase64Encoding"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidBase64Encoding",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.invalidBase64Encoding",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/invalidbase64encoding"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/invalidIssuer": {
+  "abstract" : [
+    {
+      "text" : "The token’s issuer is either not well-formed, or does not match.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidIssuer"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidIssuer",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.invalidIssuer",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/invalidissuer"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/invalidKey": {
+  "abstract" : [
+    {
+      "text" : "Invalid key data.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidKey"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.invalidKey",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/invalidkey"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/invalidSigningAlgorithm": {
+  "abstract" : [
+    {
+      "text" : "The token’s signing algorithm is invalid or unsupported.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidSigningAlgorithm"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidSigningAlgorithm",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.invalidSigningAlgorithm",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/invalidsigningalgorithm"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/invalidSubject": {
+  "abstract" : [
+    {
+      "text" : "The token’s subject is missing or is invalid.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidSubject"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/invalidSubject",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.invalidSubject",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/invalidsubject"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/issuedAtTimeExceedsGraceInterval": {
+  "abstract" : [
+    {
+      "text" : "This token was issued at a time that exceeds the allowed grace interval.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "issuedAtTimeExceedsGraceInterval"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/issuedAtTimeExceedsGraceInterval",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.issuedAtTimeExceedsGraceInterval",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/issuedattimeexceedsgraceinterval"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/issuerRequiresHTTPS": {
+  "abstract" : [
+    {
+      "text" : "Token issuer addresses must use HTTPS.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "issuerRequiresHTTPS"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/issuerRequiresHTTPS",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.issuerRequiresHTTPS",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/issuerrequireshttps"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/nonceMismatch": {
+  "abstract" : [
+    {
+      "text" : "The nonce value does not match the value expected.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nonceMismatch"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/nonceMismatch",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.nonceMismatch",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/noncemismatch"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/signatureInvalid": {
+  "abstract" : [
+    {
+      "text" : "Token signature is invalid.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signatureInvalid"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/signatureInvalid",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.signatureInvalid",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/signatureinvalid"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/signatureVerificationUnavailable": {
+  "abstract" : [
+    {
+      "text" : "Signature verification is unavailable on this platform, e.g. Linux.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signatureVerificationUnavailable"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/signatureVerificationUnavailable",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.signatureVerificationUnavailable",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/signatureverificationunavailable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/unsupportedAlgorithm(_:)": {
+  "abstract" : [
+    {
+      "text" : "The indicated signing algorithm is unsupported.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "unsupportedAlgorithm"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWKV",
+      "text" : "JWK"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWKV9AlgorithmO",
+      "text" : "Algorithm"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/unsupportedAlgorithm(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.unsupportedAlgorithm(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/unsupportedalgorithm(_:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors that may occur when interacting with the keychain.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "KeychainError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "KeychainError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "KeychainError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error": {
+  "abstract" : [
+    {
+      "text" : "Errors that may occur when interacting with OAuth2 endpoints.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Error"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Error"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Error",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors reported from an OAuth2 server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2ServerError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2ServerError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2ServerError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors that may be reported from an Okta API endpoint.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OktaAPIError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OktaAPIError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OktaAPIError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oktaapierror"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/TokenError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors that may occur when working with tokens.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokenerror"
+},
+"doc://AuthFoundation/s5ErrorP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s5ErrorP",
+  "title" : "Swift.Error",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s8CopyableP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s8CopyableP",
+  "title" : "Swift.Copyable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s8SendableP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}
