@@ -34,8 +34,7 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 | Version | Status                             |
 | ------- | ---------------------------------- |
 | 1.8.3   | Retiring                           |
-| 2.0.0   |                                    |
-| 2.0.1   | ✔️ Stable                             |
+| 2.x     | :heavy_check_mark: Stable ([migration guide][migration-1x]) |
 
 The latest release can always be found on the [releases page][github-releases].
 
@@ -532,3 +531,4 @@ We are happy to accept contributions and PRs! Please see the [contribution guide
 [Rate Limiting at Okta]: https://developer.okta.com/docs/api/getting_started/rate-limits
 [okta-library-versioning]: https://developer.okta.com/code/library-versions
 [support-policy]: #support-policy
+[migration-1x]: MIGRATION.md#migrating-from-okta-client-sdk-1x

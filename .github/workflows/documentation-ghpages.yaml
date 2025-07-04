@@ -31,7 +31,7 @@ jobs:
 
         TARGET_LIST=""
 
-        mkdir -p "docs/okta-mobile-swift/$VERSION"
+        mkdir -p "docs/$VERSION"
 
         echo "Initializing target list"
         for TARGET in $(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g'); do
@@ -47,7 +47,7 @@ jobs:
             --disable-indexing \
             --transform-for-static-hosting \
             --hosting-base-path "okta-mobile-swift/$VERSION" \
-            --output-path "docs/okta-mobile-swift/$VERSION" \
+            --output-path "docs/$VERSION" \
             --include-extended-types \
             --symbol-graph-minimum-access-level public \
             --experimental-skip-synthesized-symbols \
