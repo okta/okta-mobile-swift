@@ -48,20 +48,28 @@ jobs:
         fi
     - name: Check if the PR is a draft
       id: check_draft_status
-      if: ${{ github.event.pull_request.draft }}
+      if: ${{ github.event_name == 'pull_request' && github.event.pull_request.draft }}
       shell: bash
       run: |
         echo "is_draft=true" >> $GITHUB_OUTPUT
     - name: List Changed Files
       id: list_changed_files
       run: |
+        COMMITS_RANGE=""
+
         if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-          git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > changes
+          # For Pull Requests: Compare the HEAD of the PR branch with its base branch.
+          COMMITS_RANGE="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
         elif [[ "${{ github.event_name }}" == "push" && "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
-          git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changes
-        elif [[ "${{ github.event_name }}" == "push" && "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+          # For standard Push events, compare the current commit with the commit before the push.
+          COMMITS_RANGE="${{ github.event.before }}..${{ github.sha }}"
+        fi
+
+        if [[ -z "$COMMITS_RANGE" ]]; then
+          # If no commit range was identified from the github events, get a list of all changes
           git ls-tree -r HEAD --name-only > changes
-        else
+        elif ! git diff --name-only "$COMMITS_RANGE" > changes; then
+          # If diffing the commit range failed (e.g. due to a force push or rebased branch), fall back to listing all changes
           git ls-tree -r HEAD --name-only > changes
         fi
 
