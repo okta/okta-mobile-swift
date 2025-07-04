@@ -22,7 +22,7 @@
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "class"
+        "text" : "actor"
       },
       {
         "kind" : "text",
@@ -164,12 +164,13 @@
     {
       "anchor" : "Essentials",
       "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init()",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(plist:)",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(client:additionalParameters:)",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/start(with:)",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume()"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume()",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:)-994wx",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:)-8uogq",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:)-9z8bd"
       ],
       "title" : "Essentials"
     },
@@ -177,7 +178,10 @@
       "anchor" : "Completion-Block-Functions",
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/start(with:completion:)",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(completion:)"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(completion:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)-5mb6r",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)-14v3z",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)-6wh2e"
       ],
       "title" : "Completion Block Functions"
     },
@@ -197,12 +201,8 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/reset()",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:)-8uogq",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:)-994wx",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:)-9z8bd",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)-14v3z",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)-5mb6r",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)-6wh2e"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)"
       ],
       "title" : "Instance Methods"
     },
@@ -226,7 +226,6 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/Actor-Implementations",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/AuthenticationFlow-Implementations",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/UsesDelegateCollection-Implementations"
       ],
@@ -396,7 +395,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "actor"
     },
     {
       "kind" : "text",
@@ -419,17 +418,6 @@
   "title" : "InteractionCodeFlow",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/interactioncodeflow"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/Actor-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/Actor-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Actor Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/actor-implementations"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/AuthenticationFlow-Implementations": {
   "abstract" : [
@@ -666,31 +654,6 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/context-swift.property"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/init()": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init()",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init()",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/init()"
-},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/init(client:additionalParameters:)": {
   "abstract" : [
     {
@@ -905,48 +868,6 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/init(issuerurl:clientid:scope:redirecturi:additionalparameters:)"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/init(plist:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "plist"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(plist:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(plist:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/init(plist:)"
-},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/isAuthenticating": {
   "abstract" : [
     {
@@ -1144,6 +1065,55 @@
   "title" : "resume(completion:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/resume(completion:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/resume(with:)": {
+  "abstract" : [
+    {
+      "text" : "Resumes the authentication flow when a redirect URI is received, typically in response to a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/SocialIDPCapability",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " or other redirect-based authentication factor.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "resume"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "resume(with:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/resume(with:)"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/resume(with:)-8uogq": {
   "abstract" : [
@@ -1372,6 +1342,63 @@
   "title" : "resume(with:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/resume(with:)-9z8bd"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/resume(with:completion:)": {
+  "abstract" : [
+    {
+      "text" : "Resumes the authentication flow when a redirect URI is received, typically in response to a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/SocialIDPCapability",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " or other redirect-based authentication factor.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "resume"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ":"
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/resume(with:completion:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "resume(with:completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/resume(with:completion:)"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/resume(with:completion:)-14v3z": {
   "abstract" : [

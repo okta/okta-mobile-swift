@@ -121,15 +121,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/init(rawValue:)"
       ],
       "title" : "Initializers"
-    },
-    {
-      "anchor" : "Default-Implementations",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/Equatable-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/RawRepresentable-Implementations"
-      ],
-      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -209,7 +200,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers-8ieky": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers": {
   "abstract" : [
     {
       "text" : "Optional HTTP headers to supply.",
@@ -253,13 +244,13 @@
       "text" : ")?]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "headers",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/headers-8ieky"
+  "url" : "\/documentation\/authfoundation\/apirequest\/headers"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequest/query-730ld": {
   "abstract" : [
@@ -324,7 +315,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
       "isActive" : true,
       "type" : "reference"
     },
@@ -436,28 +427,6 @@
   "title" : "Token.Kind",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/kind"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Token/Kind/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/token\/kind\/equatable-implementations"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Token/Kind/RawRepresentable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/RawRepresentable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "RawRepresentable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/token\/kind\/rawrepresentable-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Token/Kind/accessToken": {
   "abstract" : [

@@ -116,9 +116,8 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-      "isActive" : true,
-      "type" : "reference"
+      "code" : "JWT\/authenticationMethods",
+      "type" : "codeVoice"
     },
     {
       "text" : ".",
@@ -179,47 +178,6 @@
   "title" : "AuthenticationMethod.smsConfirmation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationmethod\/smsconfirmation"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
-  "abstract" : [
-    {
-      "text" : "The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "authenticationMethods"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation20AuthenticationMethodO",
-      "text" : "AuthenticationMethod"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "authenticationMethods",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods"
 }
 }
 }

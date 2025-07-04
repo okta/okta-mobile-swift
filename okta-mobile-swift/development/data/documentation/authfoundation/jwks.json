@@ -181,8 +181,7 @@
       "anchor" : "Subscripts",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1lvoo",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1qepr"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)"
       ],
       "title" : "Subscripts"
     },
@@ -194,16 +193,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Index"
       ],
       "title" : "Type Aliases"
-    },
-    {
-      "anchor" : "Default-Implementations",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Equatable-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations"
-      ],
-      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -767,17 +756,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/==(_:_:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Collection-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Collection Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/collection-implementations"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/Element": {
   "abstract" : [
 
@@ -809,17 +787,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/element"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/equatable-implementations"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/Index": {
   "abstract" : [
 
@@ -850,17 +817,6 @@
   "title" : "JWKS.Index",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/index"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Sequence-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Sequence Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/sequence-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/endIndex": {
   "abstract" : [
@@ -1059,7 +1015,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/startindex"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/subscript(_:)-1lvoo": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/subscript(_:)": {
   "abstract" : [
 
   ],
@@ -1073,83 +1029,20 @@
       "text" : "("
     },
     {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "kind" : "externalParam",
+      "text" : "_"
     },
     {
       "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation3JWKV",
-      "text" : "JWK"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
+      "text" : ":)"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1lvoo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)-1lvoo"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/subscript(_:)-1qepr": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "subscript"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
-      "text" : "JWKS"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JWKSV5Indexa",
-      "text" : "Index"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
-      "text" : "JWKS"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JWKSV7Elementa",
-      "text" : "Element"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1qepr",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "subscript(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)-1qepr"
+  "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT": {
   "abstract" : [

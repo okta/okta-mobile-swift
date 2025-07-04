@@ -1,15 +1,23 @@
 {
+  "abstract" : [
+    {
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "APIClientDelegate.api(client:didSend:received:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-1zx4x"
-      ],
-      [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-4ob1d"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate"
       ]
     ]
   },
@@ -375,192 +383,6 @@
   "title" : "APIClientDelegate",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclientdelegate"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate/api(client:didSend:received:)-1zx4x": {
-  "abstract" : [
-    {
-      "text" : "Invoked when a request returns a successful response.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 2,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "api"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
-      "text" : "APIClient"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "didSend"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
-      "text" : "APIResponse"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">)"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-1zx4x",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "api(client:didSend:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-1zx4x"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate/api(client:didSend:received:)-4ob1d": {
-  "abstract" : [
-    {
-      "text" : "Invoked when a request returns a successful response.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 2,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "api"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
-      "text" : "APIClient"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "didSend"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSHTTPURLResponse",
-      "text" : "HTTPURLResponse"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-4ob1d",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "api(client:didSend:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4ob1d"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate/api(client:didSend:received:)-5cmar": {
   "abstract" : [

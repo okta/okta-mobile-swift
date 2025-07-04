@@ -22,7 +22,7 @@
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "class"
+        "text" : "actor"
       },
       {
         "kind" : "text",
@@ -264,6 +264,7 @@
       "anchor" : "Enumerations",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/Audience",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType"
       ],
       "title" : "Enumerations"
@@ -272,11 +273,7 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/APIClientDelegate-Implementations",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/Actor-Implementations",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/AuthenticationFlow-Implementations",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/OAuth2ClientDelegate-Implementations",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/UsesDelegateCollection-Implementations"
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/AuthenticationFlow-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -527,7 +524,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "actor"
     },
     {
       "kind" : "text",
@@ -550,28 +547,6 @@
   "title" : "TokenExchangeFlow",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/tokenexchangeflow"
-},
-"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/APIClientDelegate-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/APIClientDelegate-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "APIClientDelegate Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/apiclientdelegate-implementations"
-},
-"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/Actor-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/Actor-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Actor Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/actor-implementations"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/Audience": {
   "abstract" : [
@@ -618,17 +593,6 @@
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/authenticationflow-implementations"
 },
-"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/OAuth2ClientDelegate-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/OAuth2ClientDelegate-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "OAuth2ClientDelegate Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/oauth2clientdelegate-implementations"
-},
 "doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/TokenType": {
   "abstract" : [
     {
@@ -662,17 +626,6 @@
   "title" : "TokenExchangeFlow.TokenType",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/tokentype"
-},
-"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/UsesDelegateCollection-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/UsesDelegateCollection-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "UsesDelegateCollection Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/usesdelegatecollection-implementations"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/additionalParameters": {
   "abstract" : [

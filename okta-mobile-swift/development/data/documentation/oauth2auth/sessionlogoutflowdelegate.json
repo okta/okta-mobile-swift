@@ -163,9 +163,9 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-7vjni",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:received:)",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:shouldLogoutUsing:)-6nalx"
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:shouldLogoutUsing:)"
       ],
       "title" : "Instance Methods"
     }
@@ -208,7 +208,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "actor"
     },
     {
       "kind" : "text",
@@ -353,7 +353,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "actor"
     },
     {
       "kind" : "text",
@@ -454,7 +454,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/sessionlogoutflowdelegate"
 },
-"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlowDelegate/logout(flow:customizeUrl:)-7vjni": {
+"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlowDelegate/logout(flow:customizeUrl:)": {
   "abstract" : [
     {
       "text" : "Provides the opportunity to customize the logout URL.",
@@ -529,13 +529,13 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-7vjni",
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "logout(flow:customizeUrl:)",
   "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/sessionlogoutflowdelegate\/logout(flow:customizeurl:)-7vjni"
+  "url" : "\/documentation\/oauth2auth\/sessionlogoutflowdelegate\/logout(flow:customizeurl:)"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlowDelegate/logout(flow:received:)": {
   "abstract" : [
@@ -611,7 +611,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/sessionlogoutflowdelegate\/logout(flow:received:)"
 },
-"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlowDelegate/logout(flow:shouldLogoutUsing:)-6nalx": {
+"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlowDelegate/logout(flow:shouldLogoutUsing:)": {
   "abstract" : [
     {
       "text" : "Called when the logout URL has been created, indicating the URL should be presented to the user.",
@@ -678,13 +678,13 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:shouldLogoutUsing:)-6nalx",
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:shouldLogoutUsing:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "logout(flow:shouldLogoutUsing:)",
   "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/sessionlogoutflowdelegate\/logout(flow:shouldlogoutusing:)-6nalx"
+  "url" : "\/documentation\/oauth2auth\/sessionlogoutflowdelegate\/logout(flow:shouldlogoutusing:)"
 }
 }
 }

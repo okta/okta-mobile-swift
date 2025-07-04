@@ -150,7 +150,7 @@
                         {
                           "inlineContent" : [
                             {
-                              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/willSend(request:)-9lrtd",
+                              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/willSend(request:)",
                               "isActive" : true,
                               "type" : "reference"
                             },
@@ -222,7 +222,7 @@
                         {
                           "inlineContent" : [
                             {
-                              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-701g0",
+                              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)",
                               "isActive" : true,
                               "type" : "reference"
                             }
@@ -288,11 +288,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Empty",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlowRequest",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable"
       ],
       "title" : "Networking"
     }
@@ -302,11 +298,11 @@
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/additionalHttpHeaders-7z63z",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/additionalHttpHeaders",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/baseURL",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader-3029y",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/session",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-8m9b4"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/userAgent"
       ],
       "title" : "Instance Properties"
     },
@@ -315,13 +311,12 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/decode(_:from:parsing:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:)-42ak",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:)-628bc",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:requestId:rateLimit:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-701g0",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/send(_:parsing:)-95vw0",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/shouldRetry(request:rateLimit:)-5s7no",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/willSend(request:)-9lrtd"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/send(_:parsing:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/shouldRetry(request:rateLimit:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/willSend(request:)"
       ],
       "title" : "Instance Methods"
     }
@@ -431,7 +426,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/additionalHttpHeaders-7z63z": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/additionalHttpHeaders": {
   "abstract" : [
     {
       "text" : "Any additional headers that should be added to all requests sent through this client.",
@@ -475,13 +470,13 @@
       "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/additionalHttpHeaders-7z63z",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/additionalHttpHeaders",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "additionalHttpHeaders",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/additionalhttpheaders-7z63z"
+  "url" : "\/documentation\/authfoundation\/apiclient\/additionalhttpheaders"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClient/baseURL": {
   "abstract" : [
@@ -616,6 +611,56 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/decode(_:from:parsing:)"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/didSend(request:received:)": {
+  "abstract" : [
+    {
+      "text" : "Invoked when a request receives an HTTP response.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 3,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "didSend"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "request"
+    },
+    {
+      "kind" : "text",
+      "text" : ":"
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "received"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:)",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "didSend(request:received:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/APIClient/didSend(request:received:)-42ak": {
   "abstract" : [
     {
@@ -683,90 +728,6 @@
   "title" : "didSend(request:received:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-42ak"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/didSend(request:received:)-628bc": {
-  "abstract" : [
-    {
-      "text" : "Invoked when a request returns a successful response.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 3,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "didSend"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "request"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
-      "text" : "APIResponse"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">)"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:)-628bc",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "didSend(request:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-628bc"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClient/didSend(request:received:requestId:rateLimit:)": {
   "abstract" : [
@@ -869,7 +830,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:requestid:ratelimit:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/error(from:)-701g0": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/error(from:)": {
   "abstract" : [
     {
       "text" : "Parses HTTP response body data when a request fails.",
@@ -921,15 +882,15 @@
       "text" : ")?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-701g0",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "error(from:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/error(from:)-701g0"
+  "url" : "\/documentation\/authfoundation\/apiclient\/error(from:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/requestIdHeader-3029y": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/requestIdHeader": {
   "abstract" : [
     {
       "text" : "The name of the HTTP response header where unique request IDs can be found.",
@@ -964,15 +925,15 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader-3029y",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "requestIdHeader",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/requestidheader-3029y"
+  "url" : "\/documentation\/authfoundation\/apiclient\/requestidheader"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/send(_:parsing:)-95vw0": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/send(_:parsing:)": {
   "abstract" : [
     {
       "text" : "Send the given URLRequest.",
@@ -1065,13 +1026,13 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/send(_:parsing:)-95vw0",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/send(_:parsing:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "send(_:parsing:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/send(_:parsing:)-95vw0"
+  "url" : "\/documentation\/authfoundation\/apiclient\/send(_:parsing:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClient/session": {
   "abstract" : [
@@ -1110,7 +1071,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/session"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/shouldRetry(request:rateLimit:)-5s7no": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/shouldRetry(request:rateLimit:)": {
   "abstract" : [
     {
       "text" : "Provides the ",
@@ -1184,15 +1145,15 @@
       "text" : "APIRetry"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/shouldRetry(request:rateLimit:)-5s7no",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/shouldRetry(request:rateLimit:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "shouldRetry(request:rateLimit:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/shouldretry(request:ratelimit:)-5s7no"
+  "url" : "\/documentation\/authfoundation\/apiclient\/shouldretry(request:ratelimit:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/userAgent-8m9b4": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/userAgent": {
   "abstract" : [
     {
       "text" : "The User-Agent string to be sent along with all outgoing requests.",
@@ -1223,15 +1184,15 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-8m9b4",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/userAgent",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "userAgent",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/useragent-8m9b4"
+  "url" : "\/documentation\/authfoundation\/apiclient\/useragent"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/willSend(request:)-9lrtd": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/willSend(request:)": {
   "abstract" : [
     {
       "text" : "Invoked immediately prior to a URLRequest being converted to a DataTask.",
@@ -1282,13 +1243,13 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/willSend(request:)-9lrtd",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/willSend(request:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "willSend(request:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/willsend(request:)-9lrtd"
+  "url" : "\/documentation\/authfoundation\/apiclient\/willsend(request:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientConfiguration": {
   "abstract" : [
@@ -1509,7 +1470,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers-8ieky": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers": {
   "abstract" : [
     {
       "text" : "Optional HTTP headers to supply.",
@@ -1553,13 +1514,13 @@
       "text" : ")?]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "headers",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/headers-8ieky"
+  "url" : "\/documentation\/authfoundation\/apirequest\/headers"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequest/query-730ld": {
   "abstract" : [
@@ -1624,7 +1585,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
       "isActive" : true,
       "type" : "reference"
     },
@@ -1848,83 +1809,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiretry"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow": {
-  "abstract" : [
-    {
-      "text" : "A protocol defining a type of authentication flow.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlow"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlow"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthenticationFlow",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationflow"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlowRequest": {
-  "abstract" : [
-    {
-      "text" : "Protocol used by requests that are initiated by a class conforming to ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlowRequest"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlowRequest",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlowRequest"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthenticationFlowRequest",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationflowrequest"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/CustomizingNetworkRequests": {
   "abstract" : [
     {
@@ -2013,92 +1897,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsondecodable"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequest": {
-  "abstract" : [
-    {
-      "text" : "Sub-protocol of ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " used to define requests that are performed using links supplied via an organization’s ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2APIRequest"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2APIRequest"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "OAuth2APIRequest",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2apirequest"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequestCategory": {
-  "abstract" : [
-    {
-      "text" : "Categorizes the types of requests made to an authorization server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2APIRequestCategory"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2APIRequestCategory"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "OAuth2APIRequestCategory",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2apirequestcategory"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
@@ -2132,74 +1930,6 @@
   "title" : "OAuth2Client",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
-  "abstract" : [
-    {
-      "text" : "Describes the configuration of an OpenID server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "OpenIdConfiguration"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "OpenIdConfiguration"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "OpenIdConfiguration",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/openidconfiguration"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
-  "abstract" : [
-    {
-      "text" : "Used by types that are capable of providing parameters to OAuth2 API requests.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ProvidesOAuth2Parameters"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ProvidesOAuth2Parameters"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ProvidesOAuth2Parameters",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/providesoauth2parameters"
 },
 "doc://AuthFoundation/s8SendableP": {
   "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",

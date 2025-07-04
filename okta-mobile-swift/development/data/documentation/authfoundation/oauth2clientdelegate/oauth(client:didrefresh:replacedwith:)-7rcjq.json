@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:didRefresh:replacedWith:)-2jgwk"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate"
       ]
     ]
   },
@@ -324,91 +323,6 @@
   "title" : "OAuth2ClientDelegate",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2clientdelegate"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ClientDelegate/oauth(client:didRefresh:replacedWith:)-2jgwk": {
-  "abstract" : [
-    {
-      "text" : "Sent when a token has finished refreshing.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "oauth"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
-      "text" : "OAuth2Client"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "didRefresh"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5TokenV",
-      "text" : "Token"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "replacedWith"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5TokenV",
-      "text" : "Token"
-    },
-    {
-      "kind" : "text",
-      "text" : "?)"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:didRefresh:replacedWith:)-2jgwk",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "oauth(client:didRefresh:replacedWith:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2clientdelegate\/oauth(client:didrefresh:replacedwith:)-2jgwk"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2ClientDelegate/oauth(client:didRefresh:replacedWith:)-7rcjq": {
   "abstract" : [

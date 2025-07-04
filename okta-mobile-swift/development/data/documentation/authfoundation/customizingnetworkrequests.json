@@ -190,9 +190,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/add(delegate:)",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "OAuth2Client\/add(delegate:)",
+              "type" : "codeVoice"
             },
             {
               "text" : "), your class can then intercept these messages and monitor, or alter, outgoing requests.",
@@ -862,60 +861,6 @@
   "title" : "OAuth2Client",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/add(delegate:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "add"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "delegate"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP0D0Qa",
-      "text" : "Delegate"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/add(delegate:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "add(delegate:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/add(delegate:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TimeCoordinator": {
   "abstract" : [

@@ -221,10 +221,8 @@
       "anchor" : "Initializers",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(rawValue:)-5angw",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(rawValue:)-69td3",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(wrappedValue:)-24g7s",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(wrappedValue:)-2dr4k"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(rawValue:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(wrappedValue:)"
       ],
       "title" : "Initializers"
     },
@@ -339,7 +337,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers-8ieky": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers": {
   "abstract" : [
     {
       "text" : "Optional HTTP headers to supply.",
@@ -383,13 +381,13 @@
       "text" : ")?]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "headers",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/headers-8ieky"
+  "url" : "\/documentation\/authfoundation\/apirequest\/headers"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequest/query-730ld": {
   "abstract" : [
@@ -454,7 +452,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
       "isActive" : true,
       "type" : "reference"
     },
@@ -701,7 +699,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcollection\/rawrepresentable-implementations"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(rawValue:)-5angw": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(rawValue:)": {
   "abstract" : [
 
   ],
@@ -768,80 +766,14 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
+      "text" : ":)"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(rawValue:)-5angw",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(rawValue:)",
   "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(rawValue:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcollection\/init(rawvalue:)-5angw"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(rawValue:)-69td3": {
-  "abstract" : [
-
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "Container",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "ClaimCollectionContainer",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " and ",
-        "type" : "text"
-      },
-      {
-        "code" : "Container.RawValue",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " is ",
-        "type" : "text"
-      },
-      {
-        "code" : "String?",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
+  "navigatorTitle" : [
     {
-      "kind" : "identifier",
+      "kind" : "keyword",
       "text" : "init"
     },
     {
@@ -854,26 +786,15 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?)"
+      "text" : ":)"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(rawValue:)-69td3",
-  "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcollection\/init(rawvalue:)-69td3"
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(rawvalue:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(wrappedValue:)-24g7s": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(wrappedValue:)": {
   "abstract" : [
     {
       "text" : "Initializer accepting a whitespace-separated string representation of the value.",
@@ -927,35 +848,14 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
+      "text" : ":)"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(wrappedValue:)-24g7s",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(wrappedValue:)",
   "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(wrappedValue:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcollection\/init(wrappedvalue:)-24g7s"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(wrappedValue:)-2dr4k": {
-  "abstract" : [
+  "navigatorTitle" : [
     {
-      "text" : "Initializer using the array representation of this value.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
+      "kind" : "keyword",
       "text" : "init"
     },
     {
@@ -968,23 +868,13 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Container"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
+      "text" : ":)"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(wrappedValue:)-2dr4k",
-  "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(wrappedValue:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcollection\/init(wrappedvalue:)-2dr4k"
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(wrappedvalue:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/projectedValue": {
   "abstract" : [

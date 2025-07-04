@@ -125,11 +125,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Empty",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlowRequest"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Empty"
       ],
       "title" : "Networking"
     }
@@ -468,7 +464,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers-8ieky": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers": {
   "abstract" : [
     {
       "text" : "Optional HTTP headers to supply.",
@@ -512,13 +508,13 @@
       "text" : ")?]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "headers",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/headers-8ieky"
+  "url" : "\/documentation\/authfoundation\/apirequest\/headers"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequest/query-730ld": {
   "abstract" : [
@@ -583,7 +579,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
       "isActive" : true,
       "type" : "reference"
     },
@@ -928,49 +924,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow\/context-swift.associatedtype"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlowRequest": {
-  "abstract" : [
-    {
-      "text" : "Protocol used by requests that are initiated by a class conforming to ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlowRequest"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlowRequest",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlowRequest"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthenticationFlowRequest",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationflowrequest"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/Empty": {
   "abstract" : [
     {
@@ -1013,123 +966,6 @@
   "title" : "Empty",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/empty"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JSONDecodable": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "JSONDecodable"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "JSONDecodable"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "JSONDecodable",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jsondecodable"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequest": {
-  "abstract" : [
-    {
-      "text" : "Sub-protocol of ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " used to define requests that are performed using links supplied via an organization’s ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2APIRequest"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2APIRequest"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "OAuth2APIRequest",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2apirequest"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequestCategory": {
-  "abstract" : [
-    {
-      "text" : "Categorizes the types of requests made to an authorization server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2APIRequestCategory"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2APIRequestCategory"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "OAuth2APIRequestCategory",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2apirequestcategory"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
@@ -1241,40 +1077,6 @@
   "title" : "OAuth2Client.Configuration",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
-  "abstract" : [
-    {
-      "text" : "Describes the configuration of an OpenID server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "OpenIdConfiguration"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "OpenIdConfiguration"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "OpenIdConfiguration",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/openidconfiguration"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
   "abstract" : [

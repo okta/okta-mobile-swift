@@ -8,7 +8,9 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message"
       ]
     ]
   },
@@ -145,8 +147,7 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/hash(into:)",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/message(for:)-6deon",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/message(for:)-9d5ny"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/message(for:)"
       ],
       "title" : "Instance Methods"
     },
@@ -155,7 +156,6 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/Collection-Implementations",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/Equatable-Implementations",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/Sequence-Implementations"
       ],
       "title" : "Default Implementations"
@@ -456,17 +456,6 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/response\/message\/collection\/collection-implementations"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/message\/collection\/equatable-implementations"
-},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection/Sequence-Implementations": {
   "abstract" : [
 
@@ -582,7 +571,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/response\/message\/collection\/hash(into:)"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection/message(for:)-6deon": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection/message(for:)": {
   "abstract" : [
     {
       "text" : "Convenience to return the message associated with the given field.",
@@ -612,127 +601,15 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
-      "text" : "Remediation"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC4FormC",
-      "text" : "Form"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC4FormC5FieldC",
-      "text" : "Field"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth8ResponseC",
-      "text" : "Response"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth8ResponseC7MessageC",
-      "text" : "Message"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
+      "text" : ":)"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/message(for:)-6deon",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/message(for:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "message(for:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/message\/collection\/message(for:)-6deon"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection/message(for:)-9d5ny": {
-  "abstract" : [
-    {
-      "text" : "Convenience method to return the message for a field with the given name.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "message"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "for"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth8ResponseC",
-      "text" : "Response"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth8ResponseC7MessageC",
-      "text" : "Message"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/message(for:)-9d5ny",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "message(for:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/message\/collection\/message(for:)-9d5ny"
+  "url" : "\/documentation\/oktaidxauth\/response\/message\/collection\/message(for:)"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/User-swift.struct": {
   "abstract" : [

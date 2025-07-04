@@ -9,12 +9,7 @@
     "paths" : [
       [
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct"
-      ],
-      [
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/AuthenticationFlow-Implementations",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct"
       ]
     ]
@@ -167,7 +162,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "actor"
     },
     {
       "kind" : "text",
@@ -190,17 +185,6 @@
   "title" : "AuthorizationCodeFlow",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/authorizationcodeflow"
-},
-"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/AuthenticationFlow-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/AuthenticationFlow-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "AuthenticationFlow Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/authenticationflow-implementations"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Context-swift.struct": {
   "abstract" : [

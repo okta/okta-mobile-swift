@@ -9,6 +9,7 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection"
       ]
     ]
@@ -74,6 +75,108 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/subscript(_:)-1qpze",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "index"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC",
+                    "text" : "Authenticator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC10CollectionC",
+                    "text" : "Collection"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Index",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC10CollectionC5Indexa",
+                    "text" : "Index"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC",
+                    "text" : "Authenticator"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC10CollectionC",
+                    "text" : "Collection"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Element",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC10CollectionC7Elementa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 1
+          },
           "platforms" : [
             "macOS"
           ],
@@ -87,6 +190,7 @@
               "text" : "("
             },
             {
+              "highlight" : "changed",
               "kind" : "internalParam",
               "text" : "type"
             },
@@ -105,6 +209,7 @@
               "text" : "."
             },
             {
+              "highlight" : "changed",
               "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Kind",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC4KindO",
@@ -121,8 +226,13 @@
               "text" : "Authenticator"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : "? { "
+              "text" : "?"
+            },
+            {
+              "kind" : "text",
+              "text" : " { "
             },
             {
               "kind" : "keyword",
@@ -242,6 +352,68 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/collection"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/Element": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Element"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Element",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Element"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator.Collection.Element",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/collection\/element"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/Index": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Index"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Index",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Index"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator.Collection.Index",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/collection\/index"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/subscript(_:)-15itx": {
   "abstract" : [
     {
@@ -292,6 +464,77 @@
   "title" : "subscript(_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/collection\/subscript(_:)-15itx"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/subscript(_:)-1qpze": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC",
+      "text" : "Authenticator"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC10CollectionC",
+      "text" : "Collection"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC10CollectionC5Indexa",
+      "text" : "Index"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC",
+      "text" : "Authenticator"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC10CollectionC",
+      "text" : "Collection"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC10CollectionC7Elementa",
+      "text" : "Element"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/subscript(_:)-1qpze",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/collection\/subscript(_:)-1qpze"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Kind": {
   "abstract" : [

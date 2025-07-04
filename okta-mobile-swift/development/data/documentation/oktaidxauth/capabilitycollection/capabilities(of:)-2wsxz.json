@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/CapabilityCollection",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/CapabilityCollection\/capabilities(of:)-260vb"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/CapabilityCollection"
       ]
     ]
   },
@@ -340,72 +339,6 @@
   "title" : "CapabilityCollection",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/capabilitycollection"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/CapabilityCollection/capabilities(of:)-260vb": {
-  "abstract" : [
-    {
-      "text" : "Returns the capabilities defined by the given type, if available in this collection.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "capabilities"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "of"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ".Type) -> ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/CapabilityCollection\/capabilities(of:)-260vb",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "capabilities(of:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/capabilitycollection\/capabilities(of:)-260vb"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/CapabilityCollection/capabilities(of:)-2wsxz": {
   "abstract" : [

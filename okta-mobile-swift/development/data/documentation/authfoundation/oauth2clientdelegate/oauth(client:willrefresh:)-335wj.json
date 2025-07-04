@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:willRefresh:)-9otzq"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate"
       ]
     ]
   },
@@ -344,74 +343,6 @@
   "title" : "oauth(client:willRefresh:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2clientdelegate\/oauth(client:willrefresh:)-335wj"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ClientDelegate/oauth(client:willRefresh:)-9otzq": {
-  "abstract" : [
-    {
-      "text" : "Sent before a token will begin to refresh.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "oauth"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
-      "text" : "OAuth2Client"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "willRefresh"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5TokenV",
-      "text" : "Token"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:willRefresh:)-9otzq",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "oauth(client:willRefresh:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2clientdelegate\/oauth(client:willrefresh:)-9otzq"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [

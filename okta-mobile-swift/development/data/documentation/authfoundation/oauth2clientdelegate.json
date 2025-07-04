@@ -149,8 +149,8 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:didRefresh:replacedWith:)-2jgwk",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:willRefresh:)-9otzq"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:didRefresh:replacedWith:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:willRefresh:)"
       ],
       "title" : "Instance Methods"
     }
@@ -413,9 +413,8 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-      "isActive" : true,
-      "type" : "reference"
+      "code" : "JWT\/authenticationMethods",
+      "type" : "codeVoice"
     },
     {
       "text" : ".",
@@ -551,47 +550,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
-  "abstract" : [
-    {
-      "text" : "The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "authenticationMethods"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation20AuthenticationMethodO",
-      "text" : "AuthenticationMethod"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "authenticationMethods",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
@@ -669,7 +627,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2clientdelegate"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ClientDelegate/oauth(client:didRefresh:replacedWith:)-2jgwk": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ClientDelegate/oauth(client:didRefresh:replacedWith:)": {
   "abstract" : [
     {
       "text" : "Sent when a token has finished refreshing.",
@@ -746,15 +704,15 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:didRefresh:replacedWith:)-2jgwk",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:didRefresh:replacedWith:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "oauth(client:didRefresh:replacedWith:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2clientdelegate\/oauth(client:didrefresh:replacedwith:)-2jgwk"
+  "url" : "\/documentation\/authfoundation\/oauth2clientdelegate\/oauth(client:didrefresh:replacedwith:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ClientDelegate/oauth(client:willRefresh:)-9otzq": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ClientDelegate/oauth(client:willRefresh:)": {
   "abstract" : [
     {
       "text" : "Sent before a token will begin to refresh.",
@@ -814,13 +772,13 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:willRefresh:)-9otzq",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate\/oauth(client:willRefresh:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "oauth(client:willRefresh:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2clientdelegate\/oauth(client:willrefresh:)-9otzq"
+  "url" : "\/documentation\/authfoundation\/oauth2clientdelegate\/oauth(client:willrefresh:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest": {
   "abstract" : [

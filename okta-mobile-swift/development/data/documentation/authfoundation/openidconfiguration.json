@@ -214,14 +214,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata"
       ],
       "title" : "Enumerations"
-    },
-    {
-      "anchor" : "Default-Implementations",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/HasClaims-Implementations"
-      ],
-      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -458,9 +450,8 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-      "isActive" : true,
-      "type" : "reference"
+      "code" : "JWT\/authenticationMethods",
+      "type" : "codeVoice"
     },
     {
       "text" : ".",
@@ -626,47 +617,6 @@
   "title" : "JSONDecodable",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsondecodable"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
-  "abstract" : [
-    {
-      "text" : "The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "authenticationMethods"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation20AuthenticationMethodO",
-      "text" : "AuthenticationMethod"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "authenticationMethods",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
@@ -852,17 +802,6 @@
   "title" : "OpenIdConfiguration.ClaimType",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration\/claimtype"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/HasClaims-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/HasClaims-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "HasClaims Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/openidconfiguration\/hasclaims-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata": {
   "abstract" : [

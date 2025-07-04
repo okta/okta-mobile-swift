@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/willSend(request:)-9lrtd"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient"
       ]
     ]
   },
@@ -264,65 +263,6 @@
   "title" : "willSend(request:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/willsend(request:)-72e7e"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/willSend(request:)-9lrtd": {
-  "abstract" : [
-    {
-      "text" : "Invoked immediately prior to a URLRequest being converted to a DataTask.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "willSend"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "request"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "inout"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/willSend(request:)-9lrtd",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "willSend(request:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/willsend(request:)-9lrtd"
 }
 }
 }

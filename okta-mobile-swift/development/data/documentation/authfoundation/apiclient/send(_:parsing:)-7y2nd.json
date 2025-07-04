@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/send(_:parsing:)-95vw0"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient"
       ]
     ]
   },
@@ -454,107 +453,6 @@
   "title" : "send(_:parsing:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/send(_:parsing:)-7y2nd"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/send(_:parsing:)-95vw0": {
-  "abstract" : [
-    {
-      "text" : "Send the given URLRequest.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "send"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "parsing"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation17APIParsingContextP",
-      "text" : "APIParsingContext"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
-      "text" : "APIResponse"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/send(_:parsing:)-95vw0",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "send(_:parsing:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/send(_:parsing:)-95vw0"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIParsingContext": {
   "abstract" : [

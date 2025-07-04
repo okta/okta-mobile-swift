@@ -113,20 +113,10 @@
   ],
   "topicSections" : [
     {
-      "anchor" : "Subscripts",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/subscript(_:)-8kp58",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/subscript(_:)-99a5f"
-      ],
-      "title" : "Subscripts"
-    },
-    {
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/Collection-Implementations",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/Equatable-Implementations",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/Sequence-Implementations"
       ],
       "title" : "Default Implementations"
@@ -259,17 +249,6 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/collection\/collection-implementations"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Collection/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/remediation\/collection\/equatable-implementations"
-},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Collection/Sequence-Implementations": {
   "abstract" : [
 
@@ -280,99 +259,6 @@
   "title" : "Sequence Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/collection\/sequence-implementations"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Collection/subscript(_:)-8kp58": {
-  "abstract" : [
-    {
-      "text" : "Returns a remediation based on its string name.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "subscript"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
-      "text" : "Remediation"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/subscript(_:)-8kp58",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "subscript(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/remediation\/collection\/subscript(_:)-8kp58"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Collection/subscript(_:)-99a5f": {
-  "abstract" : [
-    {
-      "text" : "Returns a remediation based on its type.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "subscript"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
-      "text" : "Remediation"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC0D4TypeO",
-      "text" : "RemediationType"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
-      "text" : "Remediation"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/subscript(_:)-99a5f",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "subscript(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/remediation\/collection\/subscript(_:)-99a5f"
 },
 "doc://OktaIdxAuth/s8CopyableP": {
   "identifier" : "doc:\/\/OktaIdxAuth\/s8CopyableP",

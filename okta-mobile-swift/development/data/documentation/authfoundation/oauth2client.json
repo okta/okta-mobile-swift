@@ -422,7 +422,7 @@
                       "type" : "text"
                     },
                     {
-                      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource\/urlSession(for:)-6mklp",
+                      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource\/urlSession(for:)",
                       "isActive" : true,
                       "type" : "reference"
                     },
@@ -563,8 +563,7 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/UsesDelegateCollection-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -827,9 +826,8 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-      "isActive" : true,
-      "type" : "reference"
+      "code" : "JWT\/authenticationMethods",
+      "type" : "codeVoice"
     },
     {
       "text" : ".",
@@ -1047,7 +1045,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credentialdatasource"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/CredentialDataSource/urlSession(for:)-6mklp": {
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialDataSource/urlSession(for:)": {
   "abstract" : [
     {
       "text" : "Enables developers to provide a custom URLSession when a credential is created for the given token.",
@@ -1094,13 +1092,13 @@
       "text" : "URLSessionProtocol"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource\/urlSession(for:)-6mklp",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource\/urlSession(for:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "urlSession(for:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/credentialdatasource\/urlsession(for:)-6mklp"
+  "url" : "\/documentation\/authfoundation\/credentialdatasource\/urlsession(for:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/CustomizingNetworkRequests": {
   "abstract" : [
@@ -1183,47 +1181,6 @@
   "title" : "JWKS",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
-  "abstract" : [
-    {
-      "text" : "The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "authenticationMethods"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation20AuthenticationMethodO",
-      "text" : "AuthenticationMethod"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "authenticationMethods",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
@@ -1450,17 +1407,6 @@
   "title" : "OAuth2Client.PropertyListConfigurationError",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfigurationerror"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/UsesDelegateCollection-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/UsesDelegateCollection-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "UsesDelegateCollection Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/usesdelegatecollection-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/additionalHttpHeaders": {
   "abstract" : [

@@ -160,9 +160,7 @@
       "anchor" : "Initializers",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON\/init(_:)-3mtzd",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON\/init(_:)-3ziqj",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON\/init(_:)-5gmir"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON\/init(_:)"
       ],
       "title" : "Initializers"
     },
@@ -285,82 +283,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/anyjson\/datavalue"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/AnyJSON/init(_:)-3mtzd": {
-  "abstract" : [
-    {
-      "text" : "Initializes the JSON data based on a ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " value.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
-      "text" : "JSON"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON\/init(_:)-3mtzd",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/anyjson\/init(_:)-3mtzd"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/AnyJSON/init(_:)-3ziqj": {
-  "abstract" : [
-    {
-      "text" : "Initializes the JSON data based on a string value.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON\/init(_:)-3ziqj",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/anyjson\/init(_:)-3ziqj"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/AnyJSON/init(_:)-5gmir": {
+"doc://AuthFoundation/documentation/AuthFoundation/AnyJSON/init(_:)": {
   "abstract" : [
     {
       "text" : "Initializes the JSON data based on a data value.",
@@ -377,21 +300,38 @@
       "text" : "("
     },
     {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation4DataV",
-      "text" : "Data"
+      "kind" : "externalParam",
+      "text" : "_"
     },
     {
       "kind" : "text",
-      "text" : ")"
+      "text" : ":)"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON\/init(_:)-5gmir",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON\/init(_:)",
   "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "keyword",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "_"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
   "role" : "symbol",
   "title" : "init(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/anyjson\/init(_:)-5gmir"
+  "url" : "\/documentation\/authfoundation\/anyjson\/init(_:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AnyJSON/jsonValue": {
   "abstract" : [

@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:shouldLogoutUsing:)-6nalx"
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate"
       ]
     ]
   },
@@ -249,7 +248,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "actor"
     },
     {
       "kind" : "text",
@@ -315,81 +314,6 @@
   "title" : "SessionLogoutFlowDelegate",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/sessionlogoutflowdelegate"
-},
-"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlowDelegate/logout(flow:shouldLogoutUsing:)-6nalx": {
-  "abstract" : [
-    {
-      "text" : "Called when the logout URL has been created, indicating the URL should be presented to the user.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "logout"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "shouldLogoutUsing"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:shouldLogoutUsing:)-6nalx",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "logout(flow:shouldLogoutUsing:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/sessionlogoutflowdelegate\/logout(flow:shouldlogoutusing:)-6nalx"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlowDelegate/logout(flow:shouldLogoutUsing:)-96tg9": {
   "abstract" : [

@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/cachePolicy-8eox0"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest"
       ]
     ]
   },
@@ -243,54 +242,6 @@
   "title" : "cachePolicy",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/cachepolicy-6ni0p"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/cachePolicy-8eox0": {
-  "abstract" : [
-    {
-      "text" : "The HTTP request cache policy to use.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "cachePolicy"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV11CachePolicya",
-      "text" : "CachePolicy"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/cachePolicy-8eox0",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "cachePolicy",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/cachepolicy-8eox0"
 }
 }
 }

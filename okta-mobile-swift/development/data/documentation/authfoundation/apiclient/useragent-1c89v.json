@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-8m9b4"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient"
       ]
     ]
   },
@@ -216,45 +215,6 @@
   "title" : "userAgent",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/useragent-1c89v"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/userAgent-8m9b4": {
-  "abstract" : [
-    {
-      "text" : "The User-Agent string to be sent along with all outgoing requests.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "userAgent"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-8m9b4",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "userAgent",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/useragent-8m9b4"
 }
 }
 }

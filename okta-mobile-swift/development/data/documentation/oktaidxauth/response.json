@@ -149,6 +149,23 @@
   ],
   "topicSections" : [
     {
+      "anchor" : "Classes",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message"
+      ],
+      "title" : "Classes"
+    },
+    {
+      "anchor" : "Structures",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Application",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/User-swift.struct"
+      ],
+      "title" : "Structures"
+    },
+    {
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
@@ -182,14 +199,6 @@
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum"
       ],
       "title" : "Enumerations"
-    },
-    {
-      "anchor" : "Default-Implementations",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Equatable-Implementations"
-      ],
-      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -240,7 +249,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "actor"
     },
     {
       "kind" : "text",
@@ -375,16 +384,39 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/response"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Equatable-Implementations": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Application": {
   "abstract" : [
-
+    {
+      "text" : "Provides information about the client application being authenticated against.",
+      "type" : "text"
+    }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Application"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Application",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Application"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response.Application",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/equatable-implementations"
+  "url" : "\/documentation\/oktaidxauth\/response\/application"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Intent-swift.enum": {
   "abstract" : [
@@ -419,6 +451,74 @@
   "title" : "Response.Intent",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/response\/intent-swift.enum"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message": {
+  "abstract" : [
+    {
+      "text" : "Represents messages sent from the server to indicate error or warning conditions related to responses or form values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Message"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Message"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response.Message",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/message"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/User-swift.struct": {
+  "abstract" : [
+    {
+      "text" : "Provides information about the user being authenticated.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "User"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/User-swift.struct",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "User"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response.User",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/user-swift.struct"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/app": {
   "abstract" : [

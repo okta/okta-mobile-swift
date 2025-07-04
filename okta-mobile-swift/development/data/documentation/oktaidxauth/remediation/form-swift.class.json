@@ -8,7 +8,8 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation"
       ]
     ]
   },
@@ -122,6 +123,14 @@
   ],
   "topicSections" : [
     {
+      "anchor" : "Classes",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/Field"
+      ],
+      "title" : "Classes"
+    },
+    {
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
@@ -133,8 +142,7 @@
       "anchor" : "Subscripts",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/subscript(_:)-3mdig",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/subscript(_:)-auyu"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/subscript(_:)"
       ],
       "title" : "Subscripts"
     },
@@ -143,7 +151,6 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/Collection-Implementations",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/Equatable-Implementations",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/Sequence-Implementations"
       ],
       "title" : "Default Implementations"
@@ -197,6 +204,40 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation": {
+  "abstract" : [
+    {
+      "text" : "Describes choices the user can make to proceed through the authentication workflow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Remediation"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Remediation"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Remediation",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class": {
   "abstract" : [
     {
@@ -241,17 +282,6 @@
   "title" : "Collection Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class\/collection-implementations"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class\/equatable-implementations"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class/Field": {
   "abstract" : [
@@ -357,75 +387,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class\/fields"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class/subscript(_:)-3mdig": {
-  "abstract" : [
-    {
-      "text" : "Access the form’s fields by name. Nested fields may be accessed by separating keypaths by ",
-      "type" : "text"
-    },
-    {
-      "code" : ".",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "subscript"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
-      "text" : "Remediation"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC4FormC",
-      "text" : "Form"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC4FormC5FieldC",
-      "text" : "Field"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/subscript(_:)-3mdig",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "subscript(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class\/subscript(_:)-3mdig"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class/subscript(_:)-auyu": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class/subscript(_:)": {
   "abstract" : [
     {
       "text" : "Access the form’s fields by index.",
@@ -442,48 +404,20 @@
       "text" : "("
     },
     {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
+      "kind" : "externalParam",
+      "text" : "_"
     },
     {
       "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
-      "text" : "Remediation"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC4FormC",
-      "text" : "Form"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC4FormC5FieldC",
-      "text" : "Field"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
+      "text" : ":)"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/subscript(_:)-auyu",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/subscript(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class\/subscript(_:)-auyu"
+  "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class\/subscript(_:)"
 },
 "doc://OktaIdxAuth/s8CopyableP": {
   "identifier" : "doc:\/\/OktaIdxAuth\/s8CopyableP",

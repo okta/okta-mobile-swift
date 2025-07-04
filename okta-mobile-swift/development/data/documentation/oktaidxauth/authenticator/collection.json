@@ -8,7 +8,8 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator"
       ]
     ]
   },
@@ -134,19 +135,10 @@
       "title" : "Instance Properties"
     },
     {
-      "anchor" : "Subscripts",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/subscript(_:)-15itx"
-      ],
-      "title" : "Subscripts"
-    },
-    {
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Collection-Implementations",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Equatable-Implementations",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Sequence-Implementations"
       ],
       "title" : "Default Implementations"
@@ -279,17 +271,6 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/collection\/collection-implementations"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/authenticator\/collection\/equatable-implementations"
-},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/Sequence-Implementations": {
   "abstract" : [
 
@@ -382,57 +363,6 @@
   "title" : "enrolled",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/collection\/enrolled"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/subscript(_:)-15itx": {
-  "abstract" : [
-    {
-      "text" : "Access authenticators based on their type.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "subscript"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC",
-      "text" : "Authenticator"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC4KindO",
-      "text" : "Kind"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth13AuthenticatorC",
-      "text" : "Authenticator"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/subscript(_:)-15itx",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "subscript(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/authenticator\/collection\/subscript(_:)-15itx"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Kind": {
   "abstract" : [

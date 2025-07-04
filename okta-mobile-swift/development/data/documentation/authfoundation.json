@@ -621,7 +621,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers-8ieky": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers": {
   "abstract" : [
     {
       "text" : "Optional HTTP headers to supply.",
@@ -665,13 +665,13 @@
       "text" : ")?]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "headers",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/headers-8ieky"
+  "url" : "\/documentation\/authfoundation\/apirequest\/headers"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequest/query-730ld": {
   "abstract" : [
@@ -736,7 +736,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
       "isActive" : true,
       "type" : "reference"
     },
@@ -1208,9 +1208,8 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-      "isActive" : true,
-      "type" : "reference"
+      "code" : "JWT\/authenticationMethods",
+      "type" : "codeVoice"
     },
     {
       "text" : ".",
@@ -2246,47 +2245,6 @@
   "title" : "JWT",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
-  "abstract" : [
-    {
-      "text" : "The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "authenticationMethods"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation20AuthenticationMethodO",
-      "text" : "AuthenticationMethod"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "authenticationMethods",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWTClaim": {
   "abstract" : [

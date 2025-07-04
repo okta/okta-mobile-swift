@@ -18,8 +18,7 @@
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/Collection-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection"
       ]
     ]
   },
@@ -108,6 +107,134 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/subscript(_:)-8kp58",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "name"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:SS",
+                    "text" : "String"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
+                    "text" : "Remediation"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "?"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/subscript(_:)-99a5f",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "type"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
+                    "text" : "Remediation"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/RemediationType",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC0D4TypeO",
+                    "text" : "RemediationType"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
+                    "text" : "Remediation"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "?"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 0
+          },
           "platforms" : [
             "macOS"
           ],
@@ -121,6 +248,7 @@
               "text" : "("
             },
             {
+              "highlight" : "changed",
               "kind" : "internalParam",
               "text" : "index"
             },
@@ -129,26 +257,31 @@
               "text" : ": "
             },
             {
+              "highlight" : "changed",
               "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
               "text" : "Remediation"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : "."
             },
             {
+              "highlight" : "changed",
               "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC10CollectionC",
               "text" : "Collection"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : "."
             },
             {
+              "highlight" : "changed",
               "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/Index",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC10CollectionC5Indexa",
@@ -165,20 +298,24 @@
               "text" : "Remediation"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : "."
             },
             {
+              "highlight" : "changed",
               "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC10CollectionC",
               "text" : "Collection"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : "."
             },
             {
+              "highlight" : "changed",
               "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/Element",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC10CollectionC7Elementa",
@@ -305,17 +442,6 @@
   "title" : "Remediation.Collection",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/collection"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Collection/Collection-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/Collection-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Collection Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/remediation\/collection\/collection-implementations"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Collection/Element": {
   "abstract" : [
@@ -449,6 +575,141 @@
   "title" : "subscript(_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/collection\/subscript(_:)-17mty"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Collection/subscript(_:)-8kp58": {
+  "abstract" : [
+    {
+      "text" : "Returns a remediation based on its string name.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
+      "text" : "Remediation"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/subscript(_:)-8kp58",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/collection\/subscript(_:)-8kp58"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Collection/subscript(_:)-99a5f": {
+  "abstract" : [
+    {
+      "text" : "Returns a remediation based on its type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
+      "text" : "Remediation"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC0D4TypeO",
+      "text" : "RemediationType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:11OktaIdxAuth11RemediationC",
+      "text" : "Remediation"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/subscript(_:)-99a5f",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/collection\/subscript(_:)-99a5f"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/RemediationType": {
+  "abstract" : [
+    {
+      "text" : "Enumeration describing the possible remedation types. This is expanded from the possible option values that may be present in the ",
+      "type" : "text"
+    },
+    {
+      "code" : "name",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " property.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "RemediationType"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/RemediationType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "RemediationType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Remediation.RemediationType",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/remediationtype"
 }
 }
 }

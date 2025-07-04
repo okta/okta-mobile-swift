@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/additionalHttpHeaders-7z63z"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient"
       ]
     ]
   },
@@ -251,58 +250,6 @@
   "title" : "additionalHttpHeaders",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/additionalhttpheaders-77qac"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/additionalHttpHeaders-7z63z": {
-  "abstract" : [
-    {
-      "text" : "Any additional headers that should be added to all requests sent through this client.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "additionalHttpHeaders"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/additionalHttpHeaders-7z63z",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "additionalHttpHeaders",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/additionalhttpheaders-7z63z"
 }
 }
 }

@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:shouldRetry:)-1f8ai"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate"
       ]
     ]
   },
@@ -282,79 +281,6 @@
   "title" : "APIClientDelegate",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclientdelegate"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate/api(client:shouldRetry:)-1f8ai": {
-  "abstract" : [
-    {
-      "text" : "Provides the APIRetry configurations from the delegate in responds to a retry request.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "api"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
-      "text" : "APIClient"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "shouldRetry"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation8APIRetryO",
-      "text" : "APIRetry"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:shouldRetry:)-1f8ai",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "api(client:shouldRetry:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:shouldretry:)-1f8ai"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate/api(client:shouldRetry:)-6w2a8": {
   "abstract" : [

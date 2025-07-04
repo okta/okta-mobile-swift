@@ -133,11 +133,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Empty",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlowRequest",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable"
       ],
       "title" : "Networking"
     }
@@ -155,15 +151,15 @@
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/acceptsType-529gv",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/authorization-7539h",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/cachePolicy-8eox0",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/contentType-2rqd7",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod-3kav0",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query-96683",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-7fbtk",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url-3elcu"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/acceptsType",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/authorization",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/cachePolicy",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/contentType",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url"
       ],
       "title" : "Instance Properties"
     },
@@ -171,9 +167,9 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/body()-2l9s0",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/request(for:)-20zou",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/send(to:parsing:)-5wi6c"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/body()",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/request(for:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/send(to:parsing:)"
       ],
       "title" : "Instance Methods"
     }
@@ -546,7 +542,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/responsetype"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/acceptsType-529gv": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/acceptsType": {
   "abstract" : [
     {
       "text" : "Optional accept type to request.",
@@ -581,15 +577,15 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/acceptsType-529gv",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/acceptsType",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "acceptsType",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/acceptstype-529gv"
+  "url" : "\/documentation\/authfoundation\/apirequest\/acceptstype"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/authorization-7539h": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/authorization": {
   "abstract" : [
     {
       "text" : "Optional API authorization information to use.",
@@ -624,15 +620,15 @@
       "text" : ")?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/authorization-7539h",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/authorization",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "authorization",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/authorization-7539h"
+  "url" : "\/documentation\/authfoundation\/apirequest\/authorization"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/body()-2l9s0": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/body()": {
   "abstract" : [
     {
       "text" : "Function to generate the HTTP request body.",
@@ -675,15 +671,15 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/body()-2l9s0",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/body()",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "body()",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/body()-2l9s0"
+  "url" : "\/documentation\/authfoundation\/apirequest\/body()"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/cachePolicy-8eox0": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/cachePolicy": {
   "abstract" : [
     {
       "text" : "The HTTP request cache policy to use.",
@@ -723,15 +719,15 @@
       "text" : "CachePolicy"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/cachePolicy-8eox0",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/cachePolicy",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "cachePolicy",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/cachepolicy-8eox0"
+  "url" : "\/documentation\/authfoundation\/apirequest\/cachepolicy"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/contentType-2rqd7": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/contentType": {
   "abstract" : [
     {
       "text" : "Optional request body content type.",
@@ -766,15 +762,15 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/contentType-2rqd7",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/contentType",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "contentType",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/contenttype-2rqd7"
+  "url" : "\/documentation\/authfoundation\/apirequest\/contenttype"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers-8ieky": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers": {
   "abstract" : [
     {
       "text" : "Optional HTTP headers to supply.",
@@ -818,15 +814,15 @@
       "text" : ")?]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "headers",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/headers-8ieky"
+  "url" : "\/documentation\/authfoundation\/apirequest\/headers"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/httpMethod-3kav0": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/httpMethod": {
   "abstract" : [
     {
       "text" : "HTTP method to perform.",
@@ -857,13 +853,65 @@
       "text" : "APIRequestMethod"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod-3kav0",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "httpMethod",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/httpmethod-3kav0"
+  "url" : "\/documentation\/authfoundation\/apirequest\/httpmethod"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/query": {
+  "abstract" : [
+    {
+      "text" : "Optional query string arguments.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "query"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "query",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/query"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequest/query-730ld": {
   "abstract" : [
@@ -912,59 +960,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/query-730ld"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/query-96683": {
-  "abstract" : [
-    {
-      "text" : "Optional query string arguments.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "query"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : (any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
-      "text" : "APIRequestArgument"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query-96683",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "query",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/query-96683"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/request(for:)-20zou": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/request(for:)": {
   "abstract" : [
     {
       "text" : "Composes a URLRequest for this object.",
@@ -1020,15 +1016,15 @@
       "text" : "URLRequest"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/request(for:)-20zou",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/request(for:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "request(for:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/request(for:)-20zou"
+  "url" : "\/documentation\/authfoundation\/apirequest\/request(for:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/send(to:parsing:)-5wi6c": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/send(to:parsing:)": {
   "abstract" : [
     {
       "text" : "Asynchronously sends the request to the given ",
@@ -1139,15 +1135,15 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/send(to:parsing:)-5wi6c",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/send(to:parsing:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "send(to:parsing:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/send(to:parsing:)-5wi6c"
+  "url" : "\/documentation\/authfoundation\/apirequest\/send(to:parsing:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/timeoutInterval-7fbtk": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/timeoutInterval": {
   "abstract" : [
     {
       "text" : "The HTTP timeout interval.",
@@ -1178,15 +1174,15 @@
       "text" : "TimeInterval"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-7fbtk",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "timeoutInterval",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/timeoutinterval-7fbtk"
+  "url" : "\/documentation\/authfoundation\/apirequest\/timeoutinterval"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/url-3elcu": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/url": {
   "abstract" : [
     {
       "text" : "The URL to perform the API request against.",
@@ -1217,13 +1213,13 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url-3elcu",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "url",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/url-3elcu"
+  "url" : "\/documentation\/authfoundation\/apirequest\/url"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequestArgument": {
   "abstract" : [
@@ -1241,7 +1237,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
       "isActive" : true,
       "type" : "reference"
     },
@@ -1465,83 +1461,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiretry"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow": {
-  "abstract" : [
-    {
-      "text" : "A protocol defining a type of authentication flow.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlow"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlow"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthenticationFlow",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationflow"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlowRequest": {
-  "abstract" : [
-    {
-      "text" : "Protocol used by requests that are initiated by a class conforming to ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlowRequest"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlowRequest",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlowRequest"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthenticationFlowRequest",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationflowrequest"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/Empty": {
   "abstract" : [
     {
@@ -1668,40 +1587,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2apirequest"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequestCategory": {
-  "abstract" : [
-    {
-      "text" : "Categorizes the types of requests made to an authorization server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2APIRequestCategory"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2APIRequestCategory"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "OAuth2APIRequestCategory",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2apirequestcategory"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest": {
   "abstract" : [
     {
@@ -1778,40 +1663,6 @@
   "title" : "OpenIdConfiguration",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
-  "abstract" : [
-    {
-      "text" : "Used by types that are capable of providing parameters to OAuth2 API requests.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ProvidesOAuth2Parameters"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ProvidesOAuth2Parameters"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ProvidesOAuth2Parameters",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/providesoauth2parameters"
 },
 "doc://AuthFoundation/s8SendableP": {
   "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",

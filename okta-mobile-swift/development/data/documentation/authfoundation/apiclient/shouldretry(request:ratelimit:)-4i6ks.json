@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/shouldRetry(request:rateLimit:)-5s7no"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient"
       ]
     ]
   },
@@ -308,88 +307,6 @@
   "title" : "shouldRetry(request:rateLimit:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/shouldretry(request:ratelimit:)-4i6ks"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/shouldRetry(request:rateLimit:)-5s7no": {
-  "abstract" : [
-    {
-      "text" : "Provides the ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " configurations from the delegate in response to a retry request.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "shouldRetry"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "request"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "rateLimit"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12APIRateLimitV",
-      "text" : "APIRateLimit"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation8APIRetryO",
-      "text" : "APIRetry"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/shouldRetry(request:rateLimit:)-5s7no",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "shouldRetry(request:rateLimit:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/shouldretry(request:ratelimit:)-5s7no"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRateLimit": {
   "abstract" : [

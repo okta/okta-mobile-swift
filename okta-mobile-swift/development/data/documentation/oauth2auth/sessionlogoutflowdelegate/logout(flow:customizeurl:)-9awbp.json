@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-7vjni"
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate"
       ]
     ]
   },
@@ -265,7 +264,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "actor"
     },
     {
       "kind" : "text",
@@ -331,89 +330,6 @@
   "title" : "SessionLogoutFlowDelegate",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/sessionlogoutflowdelegate"
-},
-"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlowDelegate/logout(flow:customizeUrl:)-7vjni": {
-  "abstract" : [
-    {
-      "text" : "Provides the opportunity to customize the logout URL.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "logout"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "customizeUrl"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "inout"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation13URLComponentsV",
-      "text" : "URLComponents"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-7vjni",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "logout(flow:customizeUrl:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/sessionlogoutflowdelegate\/logout(flow:customizeurl:)-7vjni"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlowDelegate/logout(flow:customizeUrl:)-9awbp": {
   "abstract" : [

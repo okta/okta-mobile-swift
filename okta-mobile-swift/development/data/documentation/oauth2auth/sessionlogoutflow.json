@@ -22,7 +22,7 @@
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "class"
+        "text" : "actor"
       },
       {
         "kind" : "text",
@@ -196,6 +196,14 @@
   ],
   "topicSections" : [
     {
+      "anchor" : "Structures",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow\/Context-swift.struct"
+      ],
+      "title" : "Structures"
+    },
+    {
       "anchor" : "Initializers",
       "generated" : true,
       "identifiers" : [
@@ -231,9 +239,6 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow\/APIClientDelegate-Implementations",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow\/Actor-Implementations",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow\/OAuth2ClientDelegate-Implementations",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow\/UsesDelegateCollection-Implementations"
       ],
       "title" : "Default Implementations"
@@ -393,7 +398,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "actor"
     },
     {
       "kind" : "text",
@@ -538,7 +543,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "actor"
     },
     {
       "kind" : "text",
@@ -561,28 +566,6 @@
   "title" : "SessionLogoutFlow",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/sessionlogoutflow"
-},
-"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlow/APIClientDelegate-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow\/APIClientDelegate-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "APIClientDelegate Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/sessionlogoutflow\/apiclientdelegate-implementations"
-},
-"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlow/Actor-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow\/Actor-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Actor Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/sessionlogoutflow\/actor-implementations"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlow/Context-swift.struct": {
   "abstract" : [
@@ -617,17 +600,6 @@
   "title" : "SessionLogoutFlow.Context",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/sessionlogoutflow\/context-swift.struct"
-},
-"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlow/OAuth2ClientDelegate-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow\/OAuth2ClientDelegate-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "OAuth2ClientDelegate Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/sessionlogoutflow\/oauth2clientdelegate-implementations"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlow/UsesDelegateCollection-Implementations": {
   "abstract" : [

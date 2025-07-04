@@ -32,15 +32,6 @@
   ],
   "topicSections" : [
     {
-      "anchor" : "Instance-Methods",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/add(delegate:)",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/remove(delegate:)"
-      ],
-      "title" : "Instance Methods"
-    },
-    {
       "anchor" : "Type-Aliases",
       "generated" : true,
       "identifiers" : [
@@ -87,7 +78,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "actor"
     },
     {
       "kind" : "text",
@@ -141,114 +132,6 @@
   "title" : "InteractionCodeFlow.Delegate",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/delegate"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/add(delegate:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "add"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "delegate"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP0D0Qa",
-      "text" : "Delegate"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/add(delegate:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "add(delegate:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/add(delegate:)"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/remove(delegate:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "remove"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "delegate"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP0D0Qa",
-      "text" : "Delegate"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/remove(delegate:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "remove(delegate:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/remove(delegate:)"
 }
 }
 }

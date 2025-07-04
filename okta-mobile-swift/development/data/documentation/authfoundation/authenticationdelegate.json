@@ -114,8 +114,7 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authentication(flow:received:)-1a9vb",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authentication(flow:received:)-7uwab",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authentication(flow:received:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authenticationFinished(flow:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authenticationStarted(flow:)"
       ],
@@ -270,7 +269,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationdelegate"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate/authentication(flow:received:)-1a9vb": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate/authentication(flow:received:)": {
   "abstract" : [
     {
       "text" : "Sent when an authentication session receives an error.",
@@ -292,15 +291,7 @@
     },
     {
       "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
+      "text" : "("
     },
     {
       "kind" : "externalParam",
@@ -308,15 +299,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
+      "text" : ":"
     },
     {
       "kind" : "externalParam",
@@ -324,99 +307,16 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
-      "text" : "OAuth2Error"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
+      "text" : ":)"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authentication(flow:received:)-1a9vb",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authentication(flow:received:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "authentication(flow:received:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationdelegate\/authentication(flow:received:)-1a9vb"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate/authentication(flow:received:)-7uwab": {
-  "abstract" : [
-    {
-      "text" : "Sent when an authentication session receives a token.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "authentication"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5TokenV",
-      "text" : "Token"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authentication(flow:received:)-7uwab",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "authentication(flow:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationdelegate\/authentication(flow:received:)-7uwab"
+  "url" : "\/documentation\/authfoundation\/authenticationdelegate\/authentication(flow:received:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate/authenticationFinished(flow:)": {
   "abstract" : [
@@ -608,9 +508,8 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-      "isActive" : true,
-      "type" : "reference"
+      "code" : "JWT\/authenticationMethods",
+      "type" : "codeVoice"
     },
     {
       "text" : ".",
@@ -677,47 +576,6 @@
   "title" : "GrantType",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
-  "abstract" : [
-    {
-      "text" : "The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "authenticationMethods"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation20AuthenticationMethodO",
-      "text" : "AuthenticationMethod"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "authenticationMethods",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [

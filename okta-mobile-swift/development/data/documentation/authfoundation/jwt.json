@@ -428,16 +428,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/RawValue-swift.typealias"
       ],
       "title" : "Type Aliases"
-    },
-    {
-      "anchor" : "Default-Implementations",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/Expires-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/RawRepresentable-Implementations"
-      ],
-      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -517,7 +507,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers-8ieky": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers": {
   "abstract" : [
     {
       "text" : "Optional HTTP headers to supply.",
@@ -561,13 +551,13 @@
       "text" : ")?]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "headers",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/headers-8ieky"
+  "url" : "\/documentation\/authfoundation\/apirequest\/headers"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequest/query-730ld": {
   "abstract" : [
@@ -632,7 +622,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
       "isActive" : true,
       "type" : "reference"
     },
@@ -1349,28 +1339,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/claimtype"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/Expires-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/Expires-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Expires Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/expires-implementations"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/HasClaims-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "HasClaims Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/hasclaims-implementations"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/Header-swift.struct": {
   "abstract" : [
     {
@@ -1404,17 +1372,6 @@
   "title" : "JWT.Header",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/header-swift.struct"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/RawRepresentable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/RawRepresentable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "RawRepresentable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/rawrepresentable-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/RawValue-swift.typealias": {
   "abstract" : [

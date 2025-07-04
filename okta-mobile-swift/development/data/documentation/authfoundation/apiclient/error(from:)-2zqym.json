@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-701g0"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient"
       ]
     ]
   },
@@ -275,66 +274,6 @@
   "title" : "error(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/error(from:)-2zqym"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/error(from:)-701g0": {
-  "abstract" : [
-    {
-      "text" : "Parses HTTP response body data when a request fails.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "error"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "from"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation4DataV",
-      "text" : "Data"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> (any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5ErrorP",
-      "text" : "Error"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-701g0",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "error(from:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/error(from:)-701g0"
 }
 }
 }
