@@ -59,7 +59,7 @@ class LandingViewController: UIViewController {
         let actionsheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionsheet.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
 
-        #if targetEnvironment(simulator) && DEBUG
+        #if DEBUG
         let observer = DebugAPIRequestObserver.shared
         var title: String
         if observer.observeAllOAuth2Clients {

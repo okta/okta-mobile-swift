@@ -14,7 +14,7 @@ import Foundation
 import AuthFoundation
 
 protocol InteractionCodeFlowAPI: Actor {
-    var client: OAuth2Client { get }
+    nonisolated var client: OAuth2Client { get }
     var context: InteractionCodeFlow.Context? { get }
 
     func resume(with successResponse: Response) async throws -> Token

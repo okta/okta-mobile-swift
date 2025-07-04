@@ -1,0 +1,230 @@
+{
+  "version": "1.0.0",
+  "stateHandle": "02.id.DuoZbXR7wy72eavetTpvFquI1YPjVpzAczhWs4jB",
+  "expiresAt": "2025-06-20T21:11:07.000Z",
+  "intent": "LOGIN",
+  "remediation": {
+    "type": "array",
+    "value": [
+      {
+        "rel": [
+          "create-form"
+        ],
+        "name": "challenge-authenticator",
+        "relatesTo": [
+          "$.currentAuthenticator"
+        ],
+        "href": "https://auth.example.com/idp/idx/challenge/answer",
+        "method": "POST",
+        "produces": "application/ion+json; okta-version=1.0.0",
+        "value": [
+          {
+            "name": "credentials",
+            "type": "object",
+            "form": {
+              "value": [
+                {
+                  "name": "authenticatorData",
+                  "label": "Authenticator Data",
+                  "required": true,
+                  "visible": false
+                },
+                {
+                  "name": "clientData",
+                  "label": "Client Data",
+                  "required": true,
+                  "visible": false
+                },
+                {
+                  "name": "signatureData",
+                  "label": "Signature Data",
+                  "required": true,
+                  "visible": false
+                }
+              ]
+            },
+            "required": true
+          },
+          {
+            "name": "stateHandle",
+            "required": true,
+            "value": "02.id.DuoZbXR7wy72eavetTpvFquI1YPjVpzAczhWs4jB",
+            "visible": false,
+            "mutable": false
+          }
+        ],
+        "accepts": "application/json; okta-version=1.0.0"
+      },
+      {
+        "rel": [
+          "create-form"
+        ],
+        "name": "select-authenticator-authenticate",
+        "href": "https://auth.example.com/idp/idx/challenge",
+        "method": "POST",
+        "produces": "application/ion+json; okta-version=1.0.0",
+        "value": [
+          {
+            "name": "authenticator",
+            "type": "object",
+            "options": [
+              {
+                "label": "Security Key or Biometric",
+                "value": {
+                  "form": {
+                    "value": [
+                      {
+                        "name": "id",
+                        "required": true,
+                        "value": "autfks4whpQIqC9IF0w6",
+                        "mutable": false
+                      },
+                      {
+                        "name": "methodType",
+                        "required": false,
+                        "value": "webauthn",
+                        "mutable": false
+                      }
+                    ]
+                  }
+                },
+                "relatesTo": "$.authenticators.value[0]"
+              }
+            ]
+          },
+          {
+            "name": "stateHandle",
+            "required": true,
+            "value": "02.id.DuoZbXR7wy72eavetTpvFquI1YPjVpzAczhWs4jB",
+            "visible": false,
+            "mutable": false
+          }
+        ],
+        "accepts": "application/json; okta-version=1.0.0"
+      }
+    ]
+  },
+  "currentAuthenticator": {
+    "type": "object",
+    "value": {
+      "contextualData": {
+        "challengeData": {
+          "challenge": "X6GLEsXcstcsD2SrTGPSgeIrxINFGSxY",
+          "userVerification": "preferred",
+          "extensions": {
+            "appid": "https://auth.example.com"
+          }
+        }
+      },
+      "type": "security_key",
+      "key": "webauthn",
+      "id": "autfks4whpQIqC9IF0w6",
+      "displayName": "Security Key or Biometric",
+      "methods": [
+        {
+          "type": "webauthn"
+        }
+      ]
+    }
+  },
+  "authenticators": {
+    "type": "array",
+    "value": [
+      {
+        "type": "security_key",
+        "key": "webauthn",
+        "id": "autfks4whpQIqC9IF0w6",
+        "displayName": "Security Key or Biometric",
+        "methods": [
+          {
+            "type": "webauthn"
+          }
+        ],
+        "allowedFor": "none"
+      }
+    ]
+  },
+  "authenticatorEnrollments": {
+    "type": "array",
+    "value": [
+      {
+        "profile": {
+          "aaguid": "fbfc3007-154e-4ecc-8c0b-6e020557d7bd"
+        },
+        "type": "security_key",
+        "key": "webauthn",
+        "id": "fwffly3for5J9MDL70w6",
+        "displayName": "Security Key or Biometric",
+        "credentialId": "v4UNHLIuCHmE8077hibhcMKxO0A",
+        "methods": [
+          {
+            "type": "webauthn"
+          }
+        ]
+      }
+    ]
+  },
+  "user": {
+    "type": "object",
+    "value": {
+      "id": "00uflku0io38ODGrP0w6",
+      "identifier": "jane.doe@example.com",
+      "profile": {
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en_US",
+        "email": "j***e@example.com"
+      }
+    }
+  },
+  "cancel": {
+    "rel": [
+      "create-form"
+    ],
+    "name": "cancel",
+    "href": "https://auth.example.com/idp/idx/cancel",
+    "method": "POST",
+    "produces": "application/ion+json; okta-version=1.0.0",
+    "value": [
+      {
+        "name": "stateHandle",
+        "required": true,
+        "value": "02.id.DuoZbXR7wy72eavetTpvFquI1YPjVpzAczhWs4jB",
+        "visible": false,
+        "mutable": false
+      }
+    ],
+    "accepts": "application/json; okta-version=1.0.0"
+  },
+  "app": {
+    "type": "object",
+    "value": {
+      "name": "oidc_client",
+      "label": "Example Application",
+      "id": "0oafks78em8H93ll50w6"
+    }
+  },
+  "authentication": {
+    "type": "object",
+    "value": {
+      "protocol": "OAUTH2.0",
+      "issuer": {
+        "id": "ausfksc5jIqNVLEoN0w6",
+        "name": "sigmanet",
+        "uri": "https://auth.example.com/oauth2/ausabcdefg1234"
+      },
+      "request": {
+        "max_age": -1,
+        "scope": "openid profile email offline_access",
+        "response_type": "code",
+        "redirect_uri": "com.example.app:/callback",
+        "state": "72CAB214-2763-490C-ABBD-9BEAD2175CA7",
+        "code_challenge_method": "S256",
+        "nonce": "UxJjBmIZ4On9fJQ98AEvGQ",
+        "code_challenge": "AaOnmbTP9zqJoUnO9WiZtrnvdUQIPj2zAawfv-d4V9I",
+        "response_mode": "query"
+      }
+    }
+  }
+}

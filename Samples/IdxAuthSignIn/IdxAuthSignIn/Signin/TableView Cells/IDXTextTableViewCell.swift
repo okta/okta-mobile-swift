@@ -30,9 +30,11 @@ class IDXTextTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let text = textField.text,
-           let textRange = Range(range, in: text) {
-           let updatedText = text.replacingCharacters(in: textRange,
+        if !string.isEmpty,
+           let text = textField.text,
+           let textRange = Range(range, in: text)
+        {
+            let updatedText = text.replacingCharacters(in: textRange,
                                                        with: string)
             if let updateFunc = update {
                 updateFunc(updatedText)

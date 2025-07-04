@@ -36,6 +36,9 @@ public final class Authenticator: Sendable, Equatable, Hashable {
     
     /// Set of objects that describe the capabilities this authenticator may have.
     public let capabilities: [CapabilityType]
+    
+    /// Additional context data associated with this authenticator.
+    public let context: [String: JSON]?
 
     @_documentation(visibility: internal)
     public static func == (lhs: Authenticator, rhs: Authenticator) -> Bool {
@@ -68,6 +71,7 @@ public final class Authenticator: Sendable, Equatable, Hashable {
          type: Authenticator.Kind,
          key: String?,
          methods: [[String: String]]?,
+         contextualData: [String: JSON]?,
          capabilities: [any Capability])
     {
         self.flow = flow
@@ -80,6 +84,7 @@ public final class Authenticator: Sendable, Equatable, Hashable {
         self.methods = methods?
             .compactMap { $0["type"] }
             .compactMap(Method.init(rawValue:))
+        self.context = contextualData
         self.capabilities = capabilities.compactMap { CapabilityType($0) }
     }
 }
