@@ -18,7 +18,7 @@ extension String {
         case snakeCase
     }
     
-    var base64URLDecoded: String {
+    package var base64URLDecoded: String {
         var result = replacingOccurrences(of: "-", with: "+")
             .replacingOccurrences(of: "_", with: "/")
 

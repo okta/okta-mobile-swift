@@ -302,6 +302,7 @@ extension APIClient {
         return APIResponse(result: try decode(T.self,
                                               from: jsonData,
                                               parsing: context),
+                           responseBody: data,
                            date: date ?? Date(),
                            statusCode: response.statusCode,
                            links: relatedLinks(from: response.allHeaderFields["Link"] as? String),
