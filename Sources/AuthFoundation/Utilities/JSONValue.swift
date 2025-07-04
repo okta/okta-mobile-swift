@@ -363,14 +363,12 @@ fileprivate extension NSNumber {
 
 extension JSON: CustomStringConvertible, CustomDebugStringConvertible {
     @_documentation(visibility: internal)
-    @inlinable
-    public var description: String {
+    @inlinable public var description: String {
         _stringValue(debug: false)
     }
 
     @_documentation(visibility: internal)
-    @inlinable
-    public var debugDescription: String {
+    @inlinable public var debugDescription: String {
         _stringValue(debug: true)
     }
 
