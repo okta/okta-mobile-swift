@@ -73,6 +73,47 @@ class IDXCapabilityTests: XCTestCase {
         XCTAssertEqual(capability["email"], "email@okta.com")
     }
 
+    func testPasswordSettingsCapability() async throws {
+        var capability = try XCTUnwrap(PasswordSettingsCapability(with: try JSON(data(for: """
+            {
+              "complexity": {
+                "minLength": 8,
+                "minLowerCase": 0,
+                "minUpperCase": 0,
+                "minNumber": 0,
+                "minSymbol": 0,
+                "excludeUsername": true,
+                "excludeAttributes": [],
+                "maxConsecutiveRepeatingCharacters": 3
+              }
+             }
+            """))))
+
+        #if canImport(UIKit)
+        var passwordRulesDescription = await capability.passwordRules.passwordRulesDescriptor
+        XCTAssertEqual(passwordRulesDescription, "required: minlength: 8;\nrequired: max-consecutive: 3")
+
+        capability = PasswordSettingsCapability(daysToExpiry: 8,
+                                                    minLength: 10,
+                                                    minLowerCase: 2,
+                                                    minUpperCase: 3,
+                                                    minNumber: 4,
+                                                    minSymbol: 5,
+                                                    maxConsecutiveRepeatingCharacters: 3,
+                                                    excludeUsername: true,
+                                                    excludeAttributes: ["email"])
+        passwordRulesDescription = await capability.passwordRules.passwordRulesDescriptor
+        XCTAssertEqual(passwordRulesDescription, """
+            required: minlength: 10;
+            required: lower: 2;
+            required: upper: 3;
+            required: digit: 4;
+            required: symbol: 5;
+            required: max-consecutive: 3
+            """)
+        #endif
+    }
+
     func testRecoverCapability() async throws {
         await flowMock.expect(function: "resume(with:)",
                         arguments: ["object": response as Any])
@@ -214,19 +255,37 @@ class IDXCapabilityTests: XCTestCase {
 
         #if canImport(AuthenticationServices) && !os(watchOS)
         if #available(iOS 15.0, macCatalyst 15.0, macOS 12.0, tvOS 16.0, visionOS 1.0, *) {
-            var authServiceRequest = capability.createPlatformRegistrationRequest()
-            XCTAssertEqual(authServiceRequest.relyingPartyIdentifier, "auth.example.com")
-            XCTAssertEqual(authServiceRequest.displayName, "Jane Doe")
-            XCTAssertEqual(authServiceRequest.name, "jane.doe@example.com")
-            XCTAssertEqual(authServiceRequest.userID, Data("00uflku0io38ODGrP0w6".utf8))
-            XCTAssertEqual(authServiceRequest.userVerificationPreference, .preferred)
+            // Passkey / Platform registration
+            var platformRequest = capability.createPlatformRegistrationRequest()
+            XCTAssertEqual(platformRequest.relyingPartyIdentifier, "auth.example.com")
+            XCTAssertEqual(platformRequest.displayName, "Jane Doe")
+            XCTAssertEqual(platformRequest.name, "jane.doe@example.com")
+            XCTAssertEqual(platformRequest.userID, Data("00uflku0io38ODGrP0w6".utf8))
+            XCTAssertEqual(platformRequest.userVerificationPreference, .preferred)
             #if !os(tvOS)
-            XCTAssertEqual(authServiceRequest.attestationPreference, .none)
+            XCTAssertEqual(platformRequest.attestationPreference, .none)
             #endif
 
             capability.relyingPartyIdentifier = "example.com"
-            authServiceRequest = capability.createPlatformRegistrationRequest()
-            XCTAssertEqual(authServiceRequest.relyingPartyIdentifier, "example.com")
+            platformRequest = capability.createPlatformRegistrationRequest()
+            XCTAssertEqual(platformRequest.relyingPartyIdentifier, "example.com")
+
+            // Security Key registration
+            capability.relyingPartyIdentifier = "example.com"
+
+            var securityKeyRequest = capability.createSecurityKeyRegistrationRequest()
+            XCTAssertEqual(securityKeyRequest.relyingPartyIdentifier, "example.com")
+            XCTAssertEqual(securityKeyRequest.displayName, "Jane Doe")
+            XCTAssertEqual(securityKeyRequest.name, "jane.doe@example.com")
+            XCTAssertEqual(securityKeyRequest.userID, Data("00uflku0io38ODGrP0w6".utf8))
+            XCTAssertEqual(securityKeyRequest.userVerificationPreference, .preferred)
+            #if !os(tvOS)
+            XCTAssertEqual(securityKeyRequest.attestationPreference, .direct)
+            #endif
+
+            capability.relyingPartyIdentifier = "auth.example.com"
+            securityKeyRequest = capability.createSecurityKeyRegistrationRequest()
+            XCTAssertEqual(securityKeyRequest.relyingPartyIdentifier, "auth.example.com")
         }
         #endif
 
@@ -358,9 +417,11 @@ class IDXCapabilityTests: XCTestCase {
         let authenticatorData = Data("this-is-authenticator-data".utf8)
         let clientData = Data("this-is-client-data".utf8)
         let signatureData = Data("this-is-signature-data".utf8)
+        let userHandleData = Data("00amyuserid".utf8)
         let response = try await capability.challenge(authenticatorData: authenticatorData,
                                                       clientData: clientData,
-                                                      signatureData: signatureData)
+                                                      signatureData: signatureData,
+                                                      userHandle: userHandleData)
 
         XCTAssertTrue(response.isLoginSuccessful)
 
@@ -372,9 +433,11 @@ class IDXCapabilityTests: XCTestCase {
         let authenticatorField = try XCTUnwrap(callRemediation.form[allFields: "credentials.authenticatorData"])
         let clientField = try XCTUnwrap(callRemediation.form[allFields: "credentials.clientData"])
         let signatureField = try XCTUnwrap(callRemediation.form[allFields: "credentials.signatureData"])
+        let userHandleField = try XCTUnwrap(callRemediation.form[allFields: "credentials.userHandle"])
 
         XCTAssertEqual(authenticatorField.value as? String, "dGhpcy1pcy1hdXRoZW50aWNhdG9yLWRhdGE=")
         XCTAssertEqual(clientField.value as? String, "dGhpcy1pcy1jbGllbnQtZGF0YQ==")
         XCTAssertEqual(signatureField.value as? String, "dGhpcy1pcy1zaWduYXR1cmUtZGF0YQ==")
+        XCTAssertEqual(userHandleField.value as? String, "00amyuserid")
     }
 }

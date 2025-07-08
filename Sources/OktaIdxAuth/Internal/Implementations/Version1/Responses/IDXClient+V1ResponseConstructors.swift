@@ -170,8 +170,8 @@ extension IonResponse {
 }
 
 extension PasswordSettingsCapability {
-    init?(with settings: [String: JSON]?) {
-        guard let settings = settings,
+    init?(with settings: JSON?) {
+        guard case let .object(settings) = settings,
               let complexity = settings["complexity"]?.anyValue as? [String: Any]
         else { return nil }
 
@@ -186,6 +186,7 @@ extension PasswordSettingsCapability {
                   minUpperCase: complexity["minUpperCase"] as? Int ?? 0,
                   minNumber: complexity["minNumber"] as? Int ?? 0,
                   minSymbol: complexity["minSymbol"] as? Int ?? 0,
+                  maxConsecutiveRepeatingCharacters: complexity["maxConsecutiveRepeatingCharacters"] as? Int ?? 0,
                   excludeUsername: complexity["excludeUsername"] as? Bool ?? false,
                   excludeAttributes: complexity["excludeAttributes"] as? [String] ?? [])
     }

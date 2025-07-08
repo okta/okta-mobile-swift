@@ -73,7 +73,7 @@ extension PasswordSettingsCapability {
         var rules: [String] = []
 
         if minLength > 0 {
-            rules.append("minlength: \(minLength)")
+            rules.append("required: minlength: \(minLength)")
         }
         if minLowerCase > 0 {
             rules.append("required: lower: \(minLowerCase)")
@@ -85,7 +85,7 @@ extension PasswordSettingsCapability {
             rules.append("required: digit: \(minNumber)")
         }
         if minSymbol > 0 {
-            rules.append("required:symbol:\(minSymbol)")
+            rules.append("required: symbol: \(minSymbol)")
         }
         if maxConsecutiveRepeatingCharacters > 0 {
             rules.append("required: max-consecutive: \(maxConsecutiveRepeatingCharacters)")

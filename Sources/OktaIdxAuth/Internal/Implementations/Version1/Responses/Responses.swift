@@ -99,7 +99,7 @@ struct IonAuthenticator: Sendable, Decodable, IDXIONRelatable, ReceivesIDXRespon
     let type: Authenticator.Kind
     let key: String?
     let methods: [[String: String]]?
-    let settings: [String: JSON]?
+    let settings: JSON?
     let contextualData: [String: JSON]?
     let profile: [String: String]?
     let send: IonForm?

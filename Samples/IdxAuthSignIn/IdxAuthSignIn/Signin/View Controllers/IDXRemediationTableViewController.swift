@@ -352,6 +352,7 @@ extension Signin.Row {
                 cell.textField.accessibilityIdentifier = "\(fieldName).field"
                 cell.textField.textContentType = options.textContentType
                 cell.textField.keyboardType = options.keyboardType
+                cell.textField.passwordRules = options.passwordRules
                 cell.update = { value in
                     field.value = value
                 }
