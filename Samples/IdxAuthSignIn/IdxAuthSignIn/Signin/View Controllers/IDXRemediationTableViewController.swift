@@ -151,33 +151,24 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         }
 
         else if let webAuthnRegistration = remediationOption?.webAuthnRegistration {
-            let request = webAuthnRegistration.createCredentialRegistrationRequest()
-
-            // If running on the simulator, authenticator attestation needs to be disabled
-            // since it's unsupported in that environment.
-            #if targetEnvironment(simulator) && !os(tvOS)
-            request.attestationPreference = .none
-            #endif
-
-            let authController = ASAuthorizationController(authorizationRequests: [request])
-            authController.delegate = self
-            authController.presentationContextProvider = self
-            authController.performRequests()
-
-            self.authController = authController
-            self.authRemediationOption = remediationOption
+            signin.authorizationController(
+                with: [
+                    webAuthnRegistration.createPlatformRegistrationRequest(),
+                    webAuthnRegistration.createSecurityKeyRegistrationRequest()
+                ],
+                using: remediationOption)
+            .performRequests()
             return
         }
 
         else if let webAuthnAuthentication = remediationOption?.webAuthnAuthentication {
-            let request = webAuthnAuthentication.createCredentialAssertionRequest()
-            let authController = ASAuthorizationController(authorizationRequests: [request])
-            authController.delegate = self
-            authController.presentationContextProvider = self
-            authController.performRequests()
-
-            self.authController = authController
-            self.authRemediationOption = remediationOption
+            signin.authorizationController(
+                with: [
+                    webAuthnAuthentication.createPlatformCredentialAssertionRequest(),
+                    webAuthnAuthentication.createSecurityKeyCredentialAssertionRequest()
+                ],
+                using: remediationOption)
+            .performRequests()
             return
         }
 
@@ -236,61 +227,6 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
 
 extension IDXRemediationTableViewController: ASWebAuthenticationPresentationContextProviding {
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        view.window ?? UIWindow()
-    }
-}
-
-extension IDXRemediationTableViewController: ASAuthorizationControllerDelegate {
-    func authorizationController(controller: ASAuthorizationController,
-                                 didCompleteWithAuthorization authorization: ASAuthorization)
-    {
-        guard let signin = signin else { return }
-
-        switch authorization.credential {
-        case let credential as ASAuthorizationPlatformPublicKeyCredentialRegistration:
-            if let capability = authRemediationOption?.webAuthnRegistration {
-                Task { @MainActor in
-                    do {
-                        signin.proceed(to: try await capability.register(credential: credential))
-                    } catch {
-                        signin.failure(with: error)
-                    }
-                }
-            }
-            break
-
-        case let credential as ASAuthorizationPlatformPublicKeyCredentialAssertion:
-            if let capability = authRemediationOption?.webAuthnAuthentication {
-                Task { @MainActor in
-                    do {
-                        signin.proceed(to: try await capability.challenge(credential: credential))
-                    } catch {
-                        signin.failure(with: error)
-                    }
-                }
-            }
-            break
-        default:
-            // Handle other authentication cases, such as Sign in with Apple.
-            break
-        }
-
-        authController = nil
-        authRemediationOption = nil
-    }
-
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
-        authController = nil
-        authRemediationOption = nil
-
-        Task { @MainActor in
-            showError(error)
-        }
-    }
-}
-
-extension IDXRemediationTableViewController: ASAuthorizationControllerPresentationContextProviding {
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         view.window ?? UIWindow()
     }
 }
@@ -405,7 +341,7 @@ extension Signin.Row {
                 }
             }
             
-        case .text(field: let field):
+        case .text(field: let field, options: let options):
             if let cell = cell as? IDXTextTableViewCell,
                let fieldName = field.name
             {
@@ -414,6 +350,8 @@ extension Signin.Row {
                 cell.textField.isSecureTextEntry = field.isSecret
                 cell.textField.text = field.value as? String
                 cell.textField.accessibilityIdentifier = "\(fieldName).field"
+                cell.textField.textContentType = options.textContentType
+                cell.textField.keyboardType = options.keyboardType
                 cell.update = { value in
                     field.value = value
                 }

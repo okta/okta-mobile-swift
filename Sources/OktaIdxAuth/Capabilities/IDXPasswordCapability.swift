@@ -32,6 +32,9 @@ public struct PasswordSettingsCapability: Capability, Sendable, Hashable, Equata
     /// The minimum number of symbols (e.g. non-alpha-numeric characters).
     public let minSymbol: Int
 
+    /// The maximum number of repeated characters.
+    public let maxConsecutiveRepeatingCharacters: Int
+
     /// Indicates the user's username cannot be used in the password.
     public let excludeUsername: Bool
 
@@ -44,6 +47,7 @@ public struct PasswordSettingsCapability: Capability, Sendable, Hashable, Equata
          minUpperCase: Int,
          minNumber: Int,
          minSymbol: Int,
+         maxConsecutiveRepeatingCharacters: Int,
          excludeUsername: Bool,
          excludeAttributes: [String])
     {
@@ -53,7 +57,42 @@ public struct PasswordSettingsCapability: Capability, Sendable, Hashable, Equata
         self.minUpperCase = minUpperCase
         self.minNumber = minNumber
         self.minSymbol = minSymbol
+        self.maxConsecutiveRepeatingCharacters = maxConsecutiveRepeatingCharacters
         self.excludeUsername = excludeUsername
         self.excludeAttributes = excludeAttributes
     }
 }
+
+#if canImport(UIKit)
+import UIKit
+
+extension PasswordSettingsCapability {
+    /// A UITextInputPasswordRules object representing the password complexity rules.
+    @MainActor
+    public var passwordRules: UITextInputPasswordRules {
+        var rules: [String] = []
+
+        if minLength > 0 {
+            rules.append("minlength: \(minLength)")
+        }
+        if minLowerCase > 0 {
+            rules.append("required: lower: \(minLowerCase)")
+        }
+        if minUpperCase > 0 {
+            rules.append("required: upper: \(minUpperCase)")
+        }
+        if minNumber > 0 {
+            rules.append("required: digit: \(minNumber)")
+        }
+        if minSymbol > 0 {
+            rules.append("required:symbol:\(minSymbol)")
+        }
+        if maxConsecutiveRepeatingCharacters > 0 {
+            rules.append("required: max-consecutive: \(maxConsecutiveRepeatingCharacters)")
+        }
+
+        let rulesString = rules.joined(separator: ";\n")
+        return UITextInputPasswordRules(descriptor: rulesString)
+    }
+}
+#endif

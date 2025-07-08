@@ -209,23 +209,23 @@ class IDXCapabilityTests: XCTestCase {
         XCTAssertEqual(capability.name, "jane.doe@example.com")
         XCTAssertEqual(capability.userId, Data("00uflku0io38ODGrP0w6".utf8))
         XCTAssertEqual(capability.relyingPartyIdentifier, "auth.example.com")
-        XCTAssertEqual(capability.userVerificationPreference, "preferred")
-        XCTAssertEqual(capability.attestationPreference, "direct")
+        XCTAssertEqual(capability.userVerificationPreferenceString, "preferred")
+        XCTAssertEqual(capability.attestationPreferenceString, "direct")
 
         #if canImport(AuthenticationServices) && !os(watchOS)
         if #available(iOS 15.0, macCatalyst 15.0, macOS 12.0, tvOS 16.0, visionOS 1.0, *) {
-            var authServiceRequest = capability.createCredentialRegistrationRequest()
+            var authServiceRequest = capability.createPlatformRegistrationRequest()
             XCTAssertEqual(authServiceRequest.relyingPartyIdentifier, "auth.example.com")
             XCTAssertEqual(authServiceRequest.displayName, "Jane Doe")
             XCTAssertEqual(authServiceRequest.name, "jane.doe@example.com")
             XCTAssertEqual(authServiceRequest.userID, Data("00uflku0io38ODGrP0w6".utf8))
             XCTAssertEqual(authServiceRequest.userVerificationPreference, .preferred)
             #if !os(tvOS)
-            XCTAssertEqual(authServiceRequest.attestationPreference, .direct)
+            XCTAssertEqual(authServiceRequest.attestationPreference, .none)
             #endif
 
             capability.relyingPartyIdentifier = "example.com"
-            authServiceRequest = capability.createCredentialRegistrationRequest()
+            authServiceRequest = capability.createPlatformRegistrationRequest()
             XCTAssertEqual(authServiceRequest.relyingPartyIdentifier, "example.com")
         }
         #endif
@@ -271,17 +271,78 @@ class IDXCapabilityTests: XCTestCase {
 
         XCTAssertEqual(capability.relyingPartyIdentifier, "auth.example.com")
         XCTAssertEqual(capability.challenge, Data(base64Encoded: "X6GLEsXcstcsD2SrTGPSgeIrxINFGSxY"))
-        XCTAssertEqual(capability.userVerificationPreference, "preferred")
+        XCTAssertEqual(capability.userVerificationPreferenceString, "preferred")
 
         #if canImport(AuthenticationServices) && !os(watchOS)
         if #available(iOS 15.0, macCatalyst 15.0, macOS 12.0, tvOS 16.0, visionOS 1.0, *) {
-            var authServiceRequest = capability.createCredentialAssertionRequest()
+            var authServiceRequest = capability.createPlatformCredentialAssertionRequest()
             XCTAssertEqual(authServiceRequest.relyingPartyIdentifier, "auth.example.com")
             XCTAssertEqual(authServiceRequest.challenge, Data(base64Encoded: "X6GLEsXcstcsD2SrTGPSgeIrxINFGSxY"))
             XCTAssertEqual(authServiceRequest.userVerificationPreference, .preferred)
 
             capability.relyingPartyIdentifier = "example.com"
-            authServiceRequest = capability.createCredentialAssertionRequest()
+            authServiceRequest = capability.createPlatformCredentialAssertionRequest()
+            XCTAssertEqual(authServiceRequest.relyingPartyIdentifier, "example.com")
+        }
+        #endif
+
+        let successData = try data(from: .module,
+                                   for: "success-response",
+                                   in: "MockResponses")
+        let successResponse = try Response.response(flow: flowMock, data: successData)
+        urlSession.expect("https://auth.example.com/idp/idx/challenge/answer", data: successData)
+        await flowMock.expect(function: "resume(with:)",
+                              arguments: ["object": successResponse])
+
+        let authenticatorData = Data("this-is-authenticator-data".utf8)
+        let clientData = Data("this-is-client-data".utf8)
+        let signatureData = Data("this-is-signature-data".utf8)
+        let response = try await capability.challenge(authenticatorData: authenticatorData,
+                                                      clientData: clientData,
+                                                      signatureData: signatureData)
+
+        XCTAssertTrue(response.isLoginSuccessful)
+
+        let flowCalls = await flowMock.recordedCalls
+        XCTAssertEqual(flowCalls.count, 1)
+        let call = await flowMock.recordedCalls.first
+        let callRemediation = try XCTUnwrap(call?.arguments?["remediation"] as? Remediation)
+
+        let authenticatorField = try XCTUnwrap(callRemediation.form[allFields: "credentials.authenticatorData"])
+        let clientField = try XCTUnwrap(callRemediation.form[allFields: "credentials.clientData"])
+        let signatureField = try XCTUnwrap(callRemediation.form[allFields: "credentials.signatureData"])
+
+        XCTAssertEqual(authenticatorField.value as? String, "dGhpcy1pcy1hdXRoZW50aWNhdG9yLWRhdGE=")
+        XCTAssertEqual(clientField.value as? String, "dGhpcy1pcy1jbGllbnQtZGF0YQ==")
+        XCTAssertEqual(signatureField.value as? String, "dGhpcy1pcy1zaWduYXR1cmUtZGF0YQ==")
+    }
+
+    func testWebAuthnAutofillUIAuthenticationCapability() async throws {
+        responseData = try data(from: .module,
+                                for: "webauthn-autofillui-authentication-challenge-response",
+                                in: "MockResponses")
+        response = try Response.response(flow: flowMock, data: responseData)
+        remediation = try XCTUnwrap(response.remediations[.challengeWebAuthnAutofillUIAuthenticator])
+
+        XCTAssertNil(response.authenticators.current)
+
+        XCTAssertNil(remediation.webAuthnRegistration)
+        let capability = try XCTUnwrap(remediation.webAuthnAuthentication)
+        capability.assign(parent: remediation)
+
+        XCTAssertEqual(capability.relyingPartyIdentifier, "auth.example.com")
+        XCTAssertEqual(capability.challenge, Data(base64Encoded: "-Lifxbd9JKL1qBS-2dXEiH2MCM5s4uGa".base64URLDecoded))
+        XCTAssertEqual(capability.userVerificationPreferenceString, "preferred")
+
+        #if canImport(AuthenticationServices) && !os(watchOS)
+        if #available(iOS 15.0, macCatalyst 15.0, macOS 12.0, tvOS 16.0, visionOS 1.0, *) {
+            var authServiceRequest = capability.createPlatformCredentialAssertionRequest()
+            XCTAssertEqual(authServiceRequest.relyingPartyIdentifier, "auth.example.com")
+            XCTAssertEqual(authServiceRequest.challenge, Data(base64Encoded: "-Lifxbd9JKL1qBS-2dXEiH2MCM5s4uGa".base64URLDecoded))
+            XCTAssertEqual(authServiceRequest.userVerificationPreference, .preferred)
+
+            capability.relyingPartyIdentifier = "example.com"
+            authServiceRequest = capability.createPlatformCredentialAssertionRequest()
             XCTAssertEqual(authServiceRequest.relyingPartyIdentifier, "example.com")
         }
         #endif
