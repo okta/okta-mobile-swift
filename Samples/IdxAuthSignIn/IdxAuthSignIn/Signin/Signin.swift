@@ -16,17 +16,21 @@ import AuthenticationServices
 
 enum SigninError: Error {
     case genericError(message: String)
+    case noClientConfiguration
+    case cannotCompleteAuthorization(message: String)
     case stepUnsupported
     case invalidUrl
 }
 
 /// Signin wrapper that uses the Okta IDX client to step through the series
 /// of remediation steps necessary to sign a user in.
-public class Signin {
+public class Signin: NSObject {
     private let storyboard: UIStoryboard
     private var completion: ((Result<Credential, Error>) -> Void)?
-    private var navigationController: UINavigationController?
-    
+    private(set) var navigationController: UINavigationController?
+    var authController: ASAuthorizationController?
+    var authRemediationOption: Remediation?
+
     internal let flow: InteractionCodeFlow
     
     /// Initializes a signin instance with the given client configuration.
@@ -34,13 +38,10 @@ public class Signin {
     init(using flow: InteractionCodeFlow) {
         self.flow = flow
         self.storyboard = UIStoryboard(name: "IDXSignin", bundle: Bundle(for: type(of: self)))
-    }
-    
-    convenience init?() {
-        guard let flow = ClientConfiguration.active?.flow else {
-            return nil
-        }
-        self.init(using: flow)
+
+        super.init()
+
+        flow.add(delegate: self)
     }
     
     /// Begins the signin UI, presented from the given presenting view controller.
@@ -227,7 +228,36 @@ public class Signin {
 
         return nil
     }
-    
+
+    func showError(_ error: Error, from viewController: UIViewController? = nil, recoverable: Bool = false) {
+        if !Thread.isMainThread {
+            DispatchQueue.main.async {
+                self.showError(error, from: viewController, recoverable: recoverable)
+            }
+            return
+        }
+
+        let viewController = viewController ?? navigationController?.topViewController
+
+        let alert = UIAlertController(title: "Login error",
+                                      message: error.localizedDescription,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+
+        let parentController = navigationController?.presentingViewController
+        if recoverable {
+            viewController?.present(alert, animated: true)
+        } else {
+            viewController?.dismiss(animated: true) {
+                parentController?.present(alert, animated: true) {
+                    Task { @MainActor in
+                        self.failure(with: error)
+                    }
+                }
+            }
+        }
+    }
+
     /// Called by the signin view controllers when the Future should fail.
     /// - Parameter error: The error to pass to the future.
     @MainActor

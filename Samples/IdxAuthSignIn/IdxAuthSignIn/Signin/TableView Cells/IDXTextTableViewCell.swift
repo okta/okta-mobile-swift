@@ -26,7 +26,9 @@ class IDXTextTableViewCell: UITableViewCell, UITextFieldDelegate {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        textField.becomeFirstResponder()
+        if selected {
+            textField.becomeFirstResponder()
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -41,5 +43,11 @@ class IDXTextTableViewCell: UITableViewCell, UITextFieldDelegate {
             }
         }
         return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let updateFunc = update {
+            updateFunc(textField.text ?? "")
+        }
     }
 }

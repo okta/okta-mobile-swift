@@ -1,0 +1,156 @@
+{
+  "version": "1.0.0",
+  "stateHandle": "02.id.DuoZbXR7wy72eavetTpvFquI1YPjVpzAczhWs4jB",
+  "expiresAt": "2025-07-04T01:24:57.000Z",
+  "intent": "LOGIN",
+  "remediation": {
+    "type": "array",
+    "value": [
+      {
+        "rel": [
+          "create-form"
+        ],
+        "name": "identify",
+        "href": "https://auth.example.com/idp/idx/identify",
+        "method": "POST",
+        "produces": "application/ion+json; okta-version=1.0.0",
+        "value": [
+          {
+            "name": "identifier",
+            "label": "Username",
+            "required": true
+          },
+          {
+            "name": "rememberMe",
+            "type": "boolean",
+            "label": "Remember this device"
+          },
+          {
+            "name": "stateHandle",
+            "required": true,
+            "value": "eyJ6aXAiOiJERUYiLCJhbGlhcyI6ImVuY3J5cHRpb25rZXkiLCJ2ZXIiOiIxIiwib2lkIjoiMDBvZmtxeTV4TWN0c05EQmwwdzYiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiZGlyIn0..ro06A6johvVixPbG",
+            "visible": false,
+            "mutable": false
+          }
+        ],
+        "accepts": "application/json; okta-version=1.0.0"
+      },
+      {
+        "rel": [
+          "create-form"
+        ],
+        "name": "challenge-webauthn-autofillui-authenticator",
+        "relatesTo": [
+          "webauthnAutofillUIChallenge"
+        ],
+        "href": "https://auth.example.com/idp/idx/challenge/answer/webauthn-autofillui",
+        "method": "POST",
+        "produces": "application/ion+json; okta-version=1.0.0",
+        "value": [
+          {
+            "name": "credentials",
+            "type": "object",
+            "form": {
+              "value": [
+                {
+                  "name": "authenticatorData",
+                  "label": "Authenticator Data",
+                  "required": true,
+                  "visible": false
+                },
+                {
+                  "name": "clientData",
+                  "label": "Client Data",
+                  "required": true,
+                  "visible": false
+                },
+                {
+                  "name": "signatureData",
+                  "label": "Signature Data",
+                  "required": true,
+                  "visible": false
+                },
+                {
+                  "name": "userHandle",
+                  "label": "User Handle",
+                  "required": false,
+                  "visible": false
+                }
+              ]
+            },
+            "required": true
+          },
+          {
+            "name": "stateHandle",
+            "required": true,
+            "value": "eyJ6aXAiOiJERUYiLCJhbGlhcyI6ImVuY3J5cHRpb25rZXkiLCJ2ZXIiOiIxIiwib2lkIjoiMDBvZmtxeTV4TWN0c05EQmwwdzYiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiZGlyIn0..ro06A6johvVixPbG",
+            "visible": false,
+            "mutable": false
+          }
+        ],
+        "accepts": "application/json; okta-version=1.0.0"
+      }
+    ]
+  },
+  "cancel": {
+    "rel": [
+      "create-form"
+    ],
+    "name": "cancel",
+    "href": "https://auth.example.com/idp/idx/cancel",
+    "method": "POST",
+    "produces": "application/ion+json; okta-version=1.0.0",
+    "value": [
+      {
+        "name": "stateHandle",
+        "required": true,
+        "value": "eyJ6aXAiOiJERUYiLCJhbGlhcyI6ImVuY3J5cHRpb25rZXkiLCJ2ZXIiOiIxIiwib2lkIjoiMDBvZmtxeTV4TWN0c05EQmwwdzYiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiZGlyIn0",
+        "visible": false,
+        "mutable": false
+      }
+    ],
+    "accepts": "application/json; okta-version=1.0.0"
+  },
+  "app": {
+    "type": "object",
+    "value": {
+      "name": "oidc_client",
+      "label": "Example Application",
+      "id": "0oafks78em8H93ll50w6"
+    }
+  },
+  "webauthnAutofillUIChallenge": {
+    "type": "object",
+    "value": {
+      "challengeData": {
+        "challenge": "-Lifxbd9JKL1qBS-2dXEiH2MCM5s4uGa",
+        "userVerification": "preferred",
+        "extensions": {
+          "appid": "https://auth.example.com"
+        }
+      }
+    }
+  },
+  "authentication": {
+    "type": "object",
+    "value": {
+      "protocol": "OAUTH2.0",
+      "issuer": {
+        "id": "ausfksc5jIqNVLEoN0w6",
+        "name": "example app",
+        "uri": "https://auth.example.com/oauth2/ausfksc5jIqNVLEoN0w6"
+      },
+      "request": {
+        "max_age": -1,
+        "scope": "openid profile offline_access",
+        "response_type": "code",
+        "redirect_uri": "com.example.app:/callback",
+        "state": "E467EAAA-66EC-496B-806A-3391D20172E9",
+        "code_challenge_method": "S256",
+        "nonce": "-ujBA7VypqHxTaGuY-pIig",
+        "code_challenge": "jF1xwrAk_CNgSBhTFQRxyIDxAG-U1ScDOnbe6TH2ht8",
+        "response_mode": "query"
+      }
+    }
+  }
+}

@@ -19,30 +19,7 @@ protocol IDXSigninController: AnyObject {
 }
 extension IDXSigninController where Self: UIViewController {
     func showError(_ error: Error, recoverable: Bool = false) {
-        if !Thread.isMainThread {
-            DispatchQueue.main.async {
-                self.showError(error, recoverable: recoverable)
-            }
-            return
-        }
-        
-        let alert = UIAlertController(title: "Login error",
-                                      message: error.localizedDescription,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-
-        let parentController = navigationController?.presentingViewController
-        if recoverable {
-            present(alert, animated: true)
-        } else {
-            dismiss(animated: true) {
-                parentController?.present(alert, animated: true) {
-                    Task { @MainActor in
-                        self.signin?.failure(with: error)
-                    }
-                }
-            }
-        }
+        signin?.showError(error, from: self, recoverable: recoverable)
     }
 }
 

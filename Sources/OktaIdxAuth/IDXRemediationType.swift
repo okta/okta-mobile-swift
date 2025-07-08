@@ -90,5 +90,8 @@ extension Remediation {
         
         /// Underlying authenticator action used by the ``ResendCapability`` capability.
         case resend
+
+        // Represents the challenge for a WebAuthn Autofill UI capability.
+        case challengeWebAuthnAutofillUIAuthenticator
     }
 }

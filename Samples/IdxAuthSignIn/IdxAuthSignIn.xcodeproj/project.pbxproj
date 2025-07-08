@@ -81,6 +81,7 @@
 		96F79495266AC67000D340CD /* SelfServiceRegistrationScenarioValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F79494266AC67000D340CD /* SelfServiceRegistrationScenarioValidator.swift */; };
 		96F7949A266AC6F200D340CD /* ScenarioTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F79499266AC6F200D340CD /* ScenarioTestCase.swift */; };
 		96F8B34925BB556500DAECDC /* IDXPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8B34825BB556500DAECDC /* IDXPickerTableViewCell.swift */; };
+		E03613242E1C93F4004615E9 /* Signin+Passkeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03613232E1C93F1004615E9 /* Signin+Passkeys.swift */; };
 		E0F8A87D2E0226F600F3F353 /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = E0F8A87C2E0226F600F3F353 /* AuthFoundation */; };
 		E0F8A87F2E0226F600F3F353 /* OktaIdxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E0F8A87E2E0226F600F3F353 /* OktaIdxAuth */; };
 /* End PBXBuildFile section */
@@ -203,6 +204,7 @@
 		96F8B34825BB556500DAECDC /* IDXPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXPickerTableViewCell.swift; sourceTree = "<group>"; };
 		96F8B35E25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetTransactionScenarioTests.swift; sourceTree = "<group>"; };
 		E007AD132E03A25700155796 /* IdxAuthSignIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IdxAuthSignIn.entitlements; sourceTree = "<group>"; };
+		E03613232E1C93F1004615E9 /* Signin+Passkeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Signin+Passkeys.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +361,7 @@
 		96576C6B25ACDD4F00B02E3B /* Signin */ = {
 			isa = PBXGroup;
 			children = (
+				E03613232E1C93F1004615E9 /* Signin+Passkeys.swift */,
 				96AA246D2656DD4D000649ED /* Extensions */,
 				96ADA05F25B0D15D008BF50D /* View Model */,
 				9691E6C225AF7328000CD02C /* TableView Cells */,
@@ -631,6 +634,7 @@
 				964F745725A3E5F0003EE300 /* ClientConfigurationViewController.swift in Sources */,
 				9691E6C825AF73D9000CD02C /* IDXToggleTableViewCell.swift in Sources */,
 				96AA247C2656E2A6000649ED /* FooterView.swift in Sources */,
+				E03613242E1C93F4004615E9 /* Signin+Passkeys.swift in Sources */,
 				96E0A78D260500080002933C /* IDXSeparatorTableViewCell.swift in Sources */,
 				96E0A791260505F30002933C /* IDXTitleTableViewCell.swift in Sources */,
 				9691E6CE25AF73F0000CD02C /* IDXButtonTableViewCell.swift in Sources */,

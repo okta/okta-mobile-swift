@@ -3,7 +3,7 @@
 [![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fokta%2Fokta-mobile-swift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/okta/okta-mobile-swift)
 [![Tests](https://github.com/okta/okta-mobile-swift/actions/workflows/tests.yaml/badge.svg)](https://github.com/okta/okta-mobile-swift/actions/workflows/tests.yaml)
 [![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-green?style=flat)](https://swiftpackageindex.com/okta/okta-mobile-swift)
-[![CocoaPods](https://img.shields.io/badge/CocoaPods-compatible-green?style=flat)](https://cocoapods.org/pods/OktaAuthFoundation)
+[![CocoaPods](https://img.shields.io/badge/CocoaPods-compatible-green?style=flat)](https://cocoapods.org/pods/OktaClient)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Support](https://img.shields.io/badge/support-Developer%20Forum-blue.svg)][devforum]
 [![SDK Documentation](https://img.shields.io/badge/docs-SDK%20Documentation-blue.svg)][sdkdocumentation]
@@ -42,7 +42,7 @@ The latest release can always be found on the [releases page][github-releases].
 
 If you run into problems using the SDK, you can:
 
-* Review the [API documentation](sdkdocumentation) for [AuthFoundation][authfoundation-docs], [OAuth2Auth][oauth2auth-docs], [OktaDirectAuth][oktadirectauth-docs], [OktaIdxAuth][oktaidxauth-docs], and [BrowserSignin][browsersignin-docs]
+* Review the [SDK documentation][sdkdocumentation] for [AuthFoundation][authfoundation-docs], [OAuth2Auth][oauth2auth-docs], [OktaDirectAuth][oktadirectauth-docs], [OktaIdxAuth][oktaidxauth-docs], and [BrowserSignin][browsersignin-docs]
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
 
