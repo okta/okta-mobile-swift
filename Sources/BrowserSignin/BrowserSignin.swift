@@ -101,7 +101,7 @@ public final class BrowserSignin {
                              context: AuthorizationCodeFlow.Context = .init()) async throws -> Token
     {
         if provider != nil {
-            cancel()
+            await cancel()
         }
         
         guard let redirectUri = signInFlow.client.configuration.redirectUri
@@ -173,7 +173,7 @@ public final class BrowserSignin {
         }
         
         if provider != nil {
-            cancel()
+            await cancel()
         }
 
         async let authorizeUrl = signOutFlow.start(with: context)
@@ -193,11 +193,10 @@ public final class BrowserSignin {
     }
     
     /// Cancels the authentication session.
-    public final func cancel() {
-        withIsolationSync {
-            await self.signInFlow.reset()
-            await self.signOutFlow?.reset()
-        }
+    @MainActor
+    public final func cancel() async {
+        await self.signInFlow.reset()
+        await self.signOutFlow?.reset()
         provider?.cancel()
         provider = nil
     }
