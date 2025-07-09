@@ -1,0 +1,645 @@
+{
+  "abstract" : [
+    {
+      "text" : "Create custom sign in experiences using OAuth2 authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/IntroductionToAuthenticationFlows"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "OAuth2Auth"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Introduction to Authentication Flows"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Authenticating using a web browser and the ",
+              "type" : "text"
+            },
+            {
+              "code" : "BrowserSignin",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " library is quick and easy, but there are times when you need to craft more custom sign in experiences. For example, you may want to sign a user in across multiple applications, or enable users to sign in on a tvOS application. These advanced use-cases are supported through a variety of authentication flows.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "If you wish to have more control over the authentication process, you may wish to look into using an authentication flow directly.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "What-are-Authentication-Flows",
+          "level" : 2,
+          "text" : "What are Authentication Flows?",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Authentication Flows are classes that encapsulate the lifecycle of authenticating with a particular flow. For example, implementing the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.okta.com\/docs\/guides\/device-authorization-grant\/main\/",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " can be complex, particularly since it involves polling against the authorization server, which can increase the burden on you to get the details right.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "By leveraging an authentication flow, you can focus on your UI, leaving the technical details to the Okta SDK.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "These separate flows are built in such a way that they follow a similar pattern, making it easier to understand how to use the flow.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Typical-Authenticator-Workflow",
+          "level" : 2,
+          "text" : "Typical Authenticator Workflow",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Most authenticators follow a typical pattern involving similarly-named functions: ",
+              "type" : "text"
+            },
+            {
+              "code" : "start",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "code" : "resume",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". Optionally the ",
+              "type" : "text"
+            },
+            {
+              "code" : "reset",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function can be used to reset a flow.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "AuthenticatorFlowsWorkflow",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Single-Step-Flows",
+          "level" : 3,
+          "text" : "Single-Step Flows",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "A simple authenticator, such as ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/ResourceOwnerFlow",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", is a single-step flow which completes in one operation:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let flow = ResourceOwnerFlow(",
+            "    issuerURL: URL(string: \"https:\/\/example.okta.com\")!,",
+            "    clientId: \"abc123client\",",
+            "    scope: \"openid offline_access email profile\")",
+            "",
+            "let token = try await flow.start(",
+            "    username: \"smeagol\",",
+            "    password: \"myprecious\")"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Two-Step-Flows",
+          "level" : 3,
+          "text" : "Two-Step Flows",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "More complicated authenticators require some context or state to be provided to the ",
+              "type" : "text"
+            },
+            {
+              "code" : "resume",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function. In the case of ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " the redirect URI returned from the authorization server is provided to ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/resume(with:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", while the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " uses a context object returned from the ",
+              "type" : "text"
+            },
+            {
+              "code" : "DeviceAuthorizationFlow\/start()",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let flow = DeviceAuthorizationFlow(",
+            "    issuerURL: URL(string: \"https:\/\/example.okta.com\")!,",
+            "    clientId: \"abc123client\",",
+            "    scope: \"openid offline_access email profile\")",
+            "",
+            "\/\/ Retrieve the context for this session.",
+            "let context = try await flow.start()",
+            "",
+            "\/\/ Present information from the context to the user.",
+            "\/\/ Once that is done, use the following code to",
+            "\/\/ poll the server to retrieve a token when they",
+            "\/\/ authorize the code.",
+            "let token = try await flow.resume()"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Multi-Step-Flows",
+          "level" : 3,
+          "text" : "Multi-Step Flows",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "code" : "InteractionCodeFlow",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " (implemented in the ",
+              "type" : "text"
+            },
+            {
+              "code" : "OktaIdx",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " library) supports a many-step workflow, that adapts to user choices and server-driven policy settings. This workflow, while fundamentally simliar, has many more steps that guides a user through authentication. For more information, please see the documentation for that library.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Using-Delegation",
+          "level" : 2,
+          "text" : "Using Delegation",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "All authorization flows support the use of a delegate, which enables parts of your application to interact with the flow in a variety of ways. For example, your application could update UI state to reflect a progress indicator when authorization starts, or could present an error automatically in response to a failure.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Some delegates, such as ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlowDelegate",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", supports customizing the workflow through the use of a delegate. See the ",
+              "type" : "text"
+            },
+            {
+              "code" : "AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "code" : "AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-9f4xy",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " functions for more details.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Additionally, convenience libraries such as ",
+              "type" : "text"
+            },
+            {
+              "code" : "BrowserSignin",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " provides access to the underlying flow, giving convenient access to customizing the flow for your own application’s needs. For more information, please see the documentation for that library.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oauth2auth\/introductiontoauthenticationflows"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"AuthenticatorFlowsWorkflow": {
+  "alt" : "Flowchart describing typical authenticator flow.",
+  "identifier" : "AuthenticatorFlowsWorkflow",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "2x",
+        "light"
+      ],
+      "url" : "\/images\/OAuth2Auth\/AuthenticatorFlowsWorkflow@2x.png"
+    }
+  ]
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth": {
+  "abstract" : [
+    {
+      "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OAuth2Auth",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "actor"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthorizationCodeFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/resume(with:)": {
+  "abstract" : [
+    {
+      "text" : "Asynchronously continues an authentication flow using the given authentication redirect URI.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "resume"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenV",
+      "text" : "Token"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/resume(with:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "resume(with:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/resume(with:)"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlowDelegate": {
+  "abstract" : [
+    {
+      "text" : "The delegate of a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlowDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlowDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlowDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthorizationCodeFlowDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/authorizationcodeflowdelegate"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Device Authorization Grant flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "actor"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DeviceAuthorizationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DeviceAuthorizationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DeviceAuthorizationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/ResourceOwnerFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Resource Owner Flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "actor"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ResourceOwnerFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/ResourceOwnerFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ResourceOwnerFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ResourceOwnerFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/resourceownerflow"
+},
+"https://developer.okta.com/docs/guides/device-authorization-grant/main/": {
+  "identifier" : "https:\/\/developer.okta.com\/docs\/guides\/device-authorization-grant\/main\/",
+  "title" : "Device Authorization Grant Flow",
+  "titleInlineContent" : [
+    {
+      "text" : "Device Authorization Grant Flow",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.okta.com\/docs\/guides\/device-authorization-grant\/main\/"
+}
+}
+}

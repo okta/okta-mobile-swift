@@ -1,0 +1,859 @@
+{
+  "abstract" : [
+    {
+      "text" : "Represents types that are interoperable or usable with JSON.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONRepresentable"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation17JSONRepresentableP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "JSONRepresentable"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "JSONRepresentable"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "JSONRepresentable"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "JSONRepresentable"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Array",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Bool",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Double",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Float",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNull",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Optional",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/String"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "JWT-and-Token-Verification",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
+      ],
+      "title" : "JWT and Token Verification"
+    }
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONRepresentable\/json"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jsonrepresentable"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AnyJSON": {
+  "abstract" : [
+    {
+      "text" : "Efficiently represents ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " values, and exchanges between its String or Data representations.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AnyJSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AnyJSON"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AnyJSON",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/anyjson"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection": {
+  "abstract" : [
+    {
+      "text" : "Indicates a special type of claim whose value is interchangable between a whitespace-separated value, or an array of values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimCollection"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimCollection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ClaimCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable": {
+  "abstract" : [
+    {
+      "text" : "Indicates a type can be consumed from a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object and converted to the indicated type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimConvertable"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimConvertable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ClaimConvertable",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimconvertable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Expires": {
+  "abstract" : [
+    {
+      "text" : "Protocol that indicates an object is capable of expiring.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Expires"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Expires"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Expires",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/expires"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNull": {
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNull",
+  "title" : "NSNull",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
+  "abstract" : [
+    {
+      "text" : "Used by classes that contains OAuth2 claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "HasClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/ClaimType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation7IsClaimP",
+      "text" : "IsClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "ClaimType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/claimtype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IsClaim": {
+  "abstract" : [
+    {
+      "text" : "Indicates a type that can be used as an enum value for the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " associated type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "IsClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "IsClaim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "IsClaim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/isclaim"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSON": {
+  "abstract" : [
+    {
+      "text" : "Represent mixed JSON values as instances of ",
+      "type" : "text"
+    },
+    {
+      "code" : "Any",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/json"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to define shared behavior when an object can contain claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONClaimContainer"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONClaimContainer"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONClaimContainer",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonclaimcontainer"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONRepresentable": {
+  "abstract" : [
+    {
+      "text" : "Represents types that are interoperable or usable with JSON.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONRepresentable"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONRepresentable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONRepresentable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONRepresentable",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonrepresentable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONRepresentable/json": {
+  "abstract" : [
+    {
+      "text" : "Returns the JSON representation for this object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "json"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONRepresentable\/json",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "json",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonrepresentable\/json"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
+  "abstract" : [
+    {
+      "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWK",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
+  "abstract" : [
+    {
+      "text" : "Describes the collection of keys associated with an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWKS",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWT": {
+  "abstract" : [
+    {
+      "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim": {
+  "abstract" : [
+    {
+      "text" : "List of registered and public claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWTClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWTClaim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWTClaim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Array": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Element",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "JSONRepresentable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Sa",
+      "text" : "Array"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Array",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Array"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Array",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/array"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Bool": {
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Bool",
+  "title" : "Bool",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Dictionary": {
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary",
+  "title" : "Dictionary",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Double": {
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Double",
+  "title" : "Double",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Float": {
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Float",
+  "title" : "Float",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Int": {
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int",
+  "title" : "Int",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Optional": {
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Optional",
+  "title" : "Optional",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/String": {
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/String",
+  "title" : "String",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/WorkingWithClaims": {
+  "abstract" : [
+    {
+      "text" : "Using Claims on the various types included in OIDC and AuthFoundation.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Working with Claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/workingwithclaims"
+},
+"doc://AuthFoundation/s8SendableP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}
