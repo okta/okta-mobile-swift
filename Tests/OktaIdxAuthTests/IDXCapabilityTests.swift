@@ -89,7 +89,7 @@ class IDXCapabilityTests: XCTestCase {
              }
             """))))
 
-        #if canImport(UIKit)
+        #if canImport(UIKit) && !os(watchOS)
         var passwordRulesDescription = await capability.passwordRules.passwordRulesDescriptor
         XCTAssertEqual(passwordRulesDescription, "required: minlength: 8;\nrequired: max-consecutive: 3")
 
