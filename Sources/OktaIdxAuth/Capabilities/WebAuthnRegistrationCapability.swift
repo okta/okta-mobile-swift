@@ -196,6 +196,19 @@ extension WebAuthnRegistrationCapability {
                                                                            name: name,
                                                                            userID: userId)
 
+        if case let .array(publicKeyCredParams) = rawActivationJSON["pubKeyCredParams"] {
+            request.credentialParameters = publicKeyCredParams
+                .compactMap { item in
+                    guard case let .object(item) = item,
+                          item["type"] == .string("public-key"),
+                          case let .number(alg) = item["alg"]
+                    else {
+                        return nil
+                    }
+                    return ASAuthorizationPublicKeyCredentialParameters(algorithm: ASCOSEAlgorithmIdentifier(rawValue: alg.intValue))
+                }
+        }
+
         #if !os(tvOS)
         if let attestationPreferenceString {
             request.attestationPreference = ASAuthorizationPublicKeyCredentialAttestationKind(rawValue: attestationPreferenceString)

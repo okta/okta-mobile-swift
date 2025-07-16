@@ -107,13 +107,17 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             showError(SigninError.genericError(message: "Signin session deallocated"))
             return
         }
-        
+
+        guard let remediationOption else { return }
+
         //if let button = sender as? UIButton {
         //    button.isEnabled = false
         //}
         
         poll?.cancel()
-        if let socialAuth = remediationOption?.socialIdp,
+
+        
+        if let socialAuth = remediationOption.socialIdp,
            let scheme = signin.flow.client.configuration.redirectUri?.scheme
         {
             let session = ASWebAuthenticationSession(url: socialAuth.redirectUrl,
@@ -150,32 +154,15 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             return
         }
 
-        else if let webAuthnRegistration = remediationOption?.webAuthnRegistration {
-            signin.authorizationController(
-                with: [
-                    webAuthnRegistration.createPlatformRegistrationRequest(),
-                    webAuthnRegistration.createSecurityKeyRegistrationRequest()
-                ],
-                using: remediationOption)
-            .performRequests()
-            return
-        }
-
-        else if let webAuthnAuthentication = remediationOption?.webAuthnAuthentication {
-            signin.authorizationController(
-                with: [
-                    webAuthnAuthentication.createPlatformCredentialAssertionRequest(),
-                    webAuthnAuthentication.createSecurityKeyCredentialAssertionRequest()
-                ],
-                using: remediationOption)
-            .performRequests()
-            return
-        }
-
-        guard let remediationOption else { return }
         Task { @MainActor in
             do {
-                signin.proceed(to: try await remediationOption.proceed())
+                if let authorizationContext = signin.authorizationContext,
+                   authorizationContext.mode == .userInitiated
+                {
+                    authorizationContext.presentIfNeeded(userInitiated: true)
+                } else {
+                    signin.proceed(to: try await remediationOption.proceed())
+                }
             } catch {
                 showError(error, recoverable: true)
             }

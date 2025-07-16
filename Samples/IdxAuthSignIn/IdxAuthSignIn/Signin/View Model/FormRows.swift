@@ -193,7 +193,7 @@ extension Remediation.Form.Field {
                             options.textContentType = .password
                         }
 
-                        options.passwordRules = authenticator?.passwordSettings?.passwordRules ?? authenticator?.passwordSettings?.passwordRules
+                        options.passwordRules = authenticator?.passwordSettings?.passwordRules
 
                     default:
                         options.textContentType = .oneTimeCode
