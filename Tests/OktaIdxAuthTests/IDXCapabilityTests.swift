@@ -273,6 +273,7 @@ class IDXCapabilityTests: XCTestCase {
             // Security Key registration
             capability.relyingPartyIdentifier = "example.com"
 
+            #if !os(tvOS) && !os(visionOS)
             var securityKeyRequest = capability.createSecurityKeyRegistrationRequest()
             XCTAssertEqual(securityKeyRequest.relyingPartyIdentifier, "example.com")
             XCTAssertEqual(securityKeyRequest.displayName, "Jane Doe")
@@ -286,6 +287,7 @@ class IDXCapabilityTests: XCTestCase {
             capability.relyingPartyIdentifier = "auth.example.com"
             securityKeyRequest = capability.createSecurityKeyRegistrationRequest()
             XCTAssertEqual(securityKeyRequest.relyingPartyIdentifier, "auth.example.com")
+            #endif
         }
         #endif
 
