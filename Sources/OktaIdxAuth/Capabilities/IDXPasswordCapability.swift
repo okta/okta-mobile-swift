@@ -68,8 +68,7 @@ import UIKit
 
 extension PasswordSettingsCapability {
     /// A UITextInputPasswordRules object representing the password complexity rules.
-    @MainActor
-    public var passwordRules: UITextInputPasswordRules {
+    @MainActor public var passwordRules: UITextInputPasswordRules {
         var rules: [String] = []
 
         if minLength > 0 {
