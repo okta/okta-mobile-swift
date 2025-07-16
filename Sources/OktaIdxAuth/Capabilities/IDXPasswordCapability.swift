@@ -63,7 +63,7 @@ public struct PasswordSettingsCapability: Capability, Sendable, Hashable, Equata
     }
 }
 
-#if canImport(UIKit)
+#if canImport(UIKit) && !os(watchOS)
 import UIKit
 
 extension PasswordSettingsCapability {
