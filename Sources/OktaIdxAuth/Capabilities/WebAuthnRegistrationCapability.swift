@@ -172,6 +172,7 @@ extension WebAuthnRegistrationCapability {
         return request
     }
     
+    #if !os(tvOS) && !os(visionOS)
     /// Creates a Security Key WebAuthn credential registration request suitable to be presented to the user.
     ///
     /// The request object returned from this may be customized before presentation, or may be used as-is. For example:
@@ -209,11 +210,9 @@ extension WebAuthnRegistrationCapability {
                 }
         }
 
-        #if !os(tvOS)
         if let attestationPreferenceString {
             request.attestationPreference = ASAuthorizationPublicKeyCredentialAttestationKind(rawValue: attestationPreferenceString)
         }
-        #endif
 
         if let userVerificationPreferenceString {
             request.userVerificationPreference = ASAuthorizationPublicKeyCredentialUserVerificationPreference(rawValue: userVerificationPreferenceString)
@@ -221,6 +220,7 @@ extension WebAuthnRegistrationCapability {
 
         return request
     }
+    #endif
     
     /// Completes the WebAuthn credential registration request by submitting the passkey authenticator's results to the server.
     /// - Parameter credential: The Authorization Services credential registration response from the platform authenticator.

@@ -154,6 +154,7 @@ extension WebAuthnAuthenticationCapability {
         return request
     }
 
+    #if !os(tvOS) && !os(visionOS)
     /// Creates Security Key / WebAuthn credential assertion request suitable to be presented to the user.
     ///
     /// The request object returned from this may be customized before presentation, or may be used as-is. For example:
@@ -178,6 +179,7 @@ extension WebAuthnAuthenticationCapability {
 
         return request
     }
+    #endif
     
     /// The user verification preference, if any, indicated in the credential assertion request issued from the server.
     public nonisolated var userVerificationPreference: ASAuthorizationPublicKeyCredentialUserVerificationPreference {
