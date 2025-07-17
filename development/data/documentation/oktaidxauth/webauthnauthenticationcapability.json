@@ -100,9 +100,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/createCredentialAssertionRequest()",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "createCredentialAssertionRequest()",
+              "type" : "codeVoice"
             },
             {
               "text" : " convenience function may be used to produce a request suitable for presentation to the user.",
@@ -118,9 +117,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(authenticatorData:clientData:signatureData:)",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "challenge(authenticatorData:clientData:signatureData:)",
+              "type" : "codeVoice"
             },
             {
               "text" : " function to validate the results with the server. Alternatively the ",
@@ -170,7 +168,8 @@
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/relyingPartyIdentifier",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/userVerificationPreference"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/userVerificationPreference",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/userVerificationPreferenceString"
       ],
       "title" : "Instance Properties"
     },
@@ -178,9 +177,10 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(authenticatorData:clientData:signatureData:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(authenticatorData:clientData:signatureData:userHandle:)",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(credential:)",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/createCredentialAssertionRequest()"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/createPlatformCredentialAssertionRequest()",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/createSecurityKeyCredentialAssertionRequest()"
       ],
       "title" : "Instance Methods"
     }
@@ -328,7 +328,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/challenge(authenticatorData:clientData:signatureData:)": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/challenge(authenticatorData:clientData:signatureData:userHandle:)": {
   "abstract" : [
     {
       "text" : "Completes a WebAuthn assertion challenge request by submitting the passkey authenticator’s results to the server.",
@@ -401,7 +401,24 @@
     },
     {
       "kind" : "text",
-      "text" : ") "
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "userHandle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
     },
     {
       "kind" : "keyword",
@@ -425,12 +442,12 @@
       "text" : "Response"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(authenticatorData:clientData:signatureData:)",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(authenticatorData:clientData:signatureData:userHandle:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "challenge(authenticatorData:clientData:signatureData:)",
+  "title" : "challenge(authenticatorData:clientData:signatureData:userHandle:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge(authenticatordata:clientdata:signaturedata:)"
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge(authenticatordata:clientdata:signaturedata:userhandle:)"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/challenge(credential:)": {
   "abstract" : [
@@ -462,12 +479,12 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": any "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)ASAuthorizationPlatformPublicKeyCredentialAssertion",
-      "text" : "ASAuthorizationPlatformPublicKeyCredentialAssertion"
+      "preciseIdentifier" : "c:objc(pl)ASAuthorizationPublicKeyCredentialAssertion",
+      "text" : "ASAuthorizationPublicKeyCredentialAssertion"
     },
     {
       "kind" : "text",
@@ -502,10 +519,10 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge(credential:)"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/createCredentialAssertionRequest()": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/createPlatformCredentialAssertionRequest()": {
   "abstract" : [
     {
-      "text" : "Creates an Authentication Services WebAuthn credential assertion request suitable to be presented to the user.",
+      "text" : "Creates Passkey \/ WebAuthn credential assertion request suitable to be presented to the user.",
       "type" : "text"
     }
   ],
@@ -520,7 +537,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "createCredentialAssertionRequest"
+      "text" : "createPlatformCredentialAssertionRequest"
     },
     {
       "kind" : "text",
@@ -532,12 +549,49 @@
       "text" : "ASAuthorizationPlatformPublicKeyCredentialAssertionRequest"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/createCredentialAssertionRequest()",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/createPlatformCredentialAssertionRequest()",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "createCredentialAssertionRequest()",
+  "title" : "createPlatformCredentialAssertionRequest()",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/createcredentialassertionrequest()"
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/createplatformcredentialassertionrequest()"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/createSecurityKeyCredentialAssertionRequest()": {
+  "abstract" : [
+    {
+      "text" : "Creates Security Key \/ WebAuthn credential assertion request suitable to be presented to the user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "createSecurityKeyCredentialAssertionRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : "() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest",
+      "text" : "ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/createSecurityKeyCredentialAssertionRequest()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "createSecurityKeyCredentialAssertionRequest()",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/createsecuritykeycredentialassertionrequest()"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/relyingPartyIdentifier": {
   "abstract" : [
@@ -586,7 +640,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -602,12 +656,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
+      "preciseIdentifier" : "c:@T@ASAuthorizationPublicKeyCredentialUserVerificationPreference",
+      "text" : "ASAuthorizationPublicKeyCredentialUserVerificationPreference"
     }
   ],
   "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/userVerificationPreference",
@@ -616,6 +666,47 @@
   "title" : "userVerificationPreference",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/userverificationpreference"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/userVerificationPreferenceString": {
+  "abstract" : [
+    {
+      "text" : "The user verification preference represented as its underlying string value, if any, indicated in the credential assertion request issued from the server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userVerificationPreferenceString"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/userVerificationPreferenceString",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "userVerificationPreferenceString",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/userverificationpreferencestring"
 },
 "doc://OktaIdxAuth/s8SendableP": {
   "identifier" : "doc:\/\/OktaIdxAuth\/s8SendableP",

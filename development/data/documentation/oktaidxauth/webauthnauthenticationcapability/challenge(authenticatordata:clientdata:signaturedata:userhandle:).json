@@ -15,12 +15,11 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(credential:)"
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(authenticatorData:clientData:signatureData:userHandle:)"
   },
   "kind" : "symbol",
   "metadata" : {
-    "extendedModule" : "OktaIdxAuth",
-    "externalID" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC9challenge10credentialAA8ResponseCSo43ASAuthorizationPublicKeyCredentialAssertion_p_tYaKF",
+    "externalID" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC9challenge17authenticatorData06clientJ009signatureJ010userHandleAA8ResponseC10Foundation0J0V_A3MSgtYaKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -40,20 +39,71 @@
       },
       {
         "kind" : "externalParam",
-        "text" : "credential"
+        "text" : "authenticatorData"
       },
       {
         "kind" : "text",
-        "text" : ": any "
+        "text" : ": "
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "c:objc(pl)ASAuthorizationPublicKeyCredentialAssertion",
-        "text" : "ASAuthorizationPublicKeyCredentialAssertion"
+        "preciseIdentifier" : "s:10Foundation4DataV",
+        "text" : "Data"
       },
       {
         "kind" : "text",
-        "text" : ") "
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "clientData"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation4DataV",
+        "text" : "Data"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "signatureData"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation4DataV",
+        "text" : "Data"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "userHandle"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation4DataV",
+        "text" : "Data"
+      },
+      {
+        "kind" : "text",
+        "text" : "?) "
       },
       {
         "kind" : "keyword",
@@ -82,47 +132,10 @@
         "name" : "OktaIdxAuth"
       }
     ],
-    "platforms" : [
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "15.0",
-        "name" : "iOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "15.0",
-        "name" : "Mac Catalyst",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "12.0",
-        "name" : "macOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "16.0",
-        "name" : "tvOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "1.0",
-        "name" : "visionOS",
-        "unavailable" : false
-      }
-    ],
     "role" : "symbol",
     "roleHeading" : "Instance Method",
     "symbolKind" : "method",
-    "title" : "challenge(credential:)"
+    "title" : "challenge(authenticatorData:clientData:signatureData:userHandle:)"
   },
   "primaryContentSections" : [
     {
@@ -153,20 +166,71 @@
             },
             {
               "kind" : "externalParam",
-              "text" : "credential"
+              "text" : "authenticatorData"
             },
             {
               "kind" : "text",
-              "text" : ": any "
+              "text" : ": "
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "c:objc(pl)ASAuthorizationPublicKeyCredentialAssertion",
-              "text" : "ASAuthorizationPublicKeyCredentialAssertion"
+              "preciseIdentifier" : "s:10Foundation4DataV",
+              "text" : "Data"
             },
             {
               "kind" : "text",
-              "text" : ") "
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "clientData"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation4DataV",
+              "text" : "Data"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "signatureData"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation4DataV",
+              "text" : "Data"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "userHandle"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation4DataV",
+              "text" : "Data"
+            },
+            {
+              "kind" : "text",
+              "text" : "? = nil) "
             },
             {
               "kind" : "keyword",
@@ -203,14 +267,56 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The Authorization Services credential assertion response from the platform authenticator.",
+                  "text" : "Authenticator data.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "name" : "credential"
+          "name" : "authenticatorData"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Client data.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "clientData"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Signature data.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "signatureData"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Optional user handle, when used with an autofill UI challenge remediation.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "userHandle"
         }
       ]
     },
@@ -255,7 +361,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge(credential:)"
+        "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge(authenticatordata:clientdata:signaturedata:userhandle:)"
       ],
       "traits" : [
         {
@@ -348,7 +454,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/challenge(credential:)": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/challenge(authenticatorData:clientData:signatureData:userHandle:)": {
   "abstract" : [
     {
       "text" : "Completes a WebAuthn assertion challenge request by submitting the passkey authenticator’s results to the server.",
@@ -374,20 +480,71 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "credential"
+      "text" : "authenticatorData"
     },
     {
       "kind" : "text",
-      "text" : ": any "
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(pl)ASAuthorizationPublicKeyCredentialAssertion",
-      "text" : "ASAuthorizationPublicKeyCredentialAssertion"
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
     },
     {
       "kind" : "text",
-      "text" : ") "
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "clientData"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "signatureData"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "userHandle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
     },
     {
       "kind" : "keyword",
@@ -411,12 +568,12 @@
       "text" : "Response"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(credential:)",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/challenge(authenticatorData:clientData:signatureData:userHandle:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "challenge(credential:)",
+  "title" : "challenge(authenticatorData:clientData:signatureData:userHandle:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge(credential:)"
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/challenge(authenticatordata:clientdata:signaturedata:userhandle:)"
 }
 }
 }

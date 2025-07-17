@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "The user verification preference, if any, indicated in the credential assertion request issued from the server.",
+      "text" : "The user verification preference represented as its underlying string value, if any, indicated in the credential assertion request issued from the server.",
       "type" : "text"
     }
   ],
@@ -15,16 +15,15 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/userVerificationPreference"
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/userVerificationPreferenceString"
   },
   "kind" : "symbol",
   "metadata" : {
-    "extendedModule" : "OktaIdxAuth",
-    "externalID" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC26userVerificationPreferenceSo038ASAuthorizationPublicKeyCredentialUseriJ0avp",
+    "externalID" : "s:11OktaIdxAuth32WebAuthnAuthenticationCapabilityC32userVerificationPreferenceStringSSSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "var"
+        "text" : "let"
       },
       {
         "kind" : "text",
@@ -32,7 +31,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "userVerificationPreference"
+        "text" : "userVerificationPreferenceString"
       },
       {
         "kind" : "text",
@@ -40,8 +39,12 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "c:@T@ASAuthorizationPublicKeyCredentialUserVerificationPreference",
-        "text" : "ASAuthorizationPublicKeyCredentialUserVerificationPreference"
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
       }
     ],
     "modules" : [
@@ -49,47 +52,10 @@
         "name" : "OktaIdxAuth"
       }
     ],
-    "platforms" : [
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "15.0",
-        "name" : "iOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "15.0",
-        "name" : "Mac Catalyst",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "12.0",
-        "name" : "macOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "16.0",
-        "name" : "tvOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "1.0",
-        "name" : "visionOS",
-        "unavailable" : false
-      }
-    ],
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
-    "title" : "userVerificationPreference"
+    "title" : "userVerificationPreferenceString"
   },
   "primaryContentSections" : [
     {
@@ -112,7 +78,7 @@
             },
             {
               "kind" : "keyword",
-              "text" : "var"
+              "text" : "let"
             },
             {
               "kind" : "text",
@@ -120,7 +86,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "userVerificationPreference"
+              "text" : "userVerificationPreferenceString"
             },
             {
               "kind" : "text",
@@ -128,20 +94,12 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "c:@T@ASAuthorizationPublicKeyCredentialUserVerificationPreference",
-              "text" : "ASAuthorizationPublicKeyCredentialUserVerificationPreference"
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
             },
             {
               "kind" : "text",
-              "text" : " { "
-            },
-            {
-              "kind" : "keyword",
-              "text" : "get"
-            },
-            {
-              "kind" : "text",
-              "text" : " }"
+              "text" : "?"
             }
           ]
         }
@@ -160,7 +118,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/userverificationpreference"
+        "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/userverificationpreferencestring"
       ],
       "traits" : [
         {
@@ -219,17 +177,17 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/userVerificationPreference": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnAuthenticationCapability/userVerificationPreferenceString": {
   "abstract" : [
     {
-      "text" : "The user verification preference, if any, indicated in the credential assertion request issued from the server.",
+      "text" : "The user verification preference represented as its underlying string value, if any, indicated in the credential assertion request issued from the server.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "let"
     },
     {
       "kind" : "text",
@@ -237,7 +195,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "userVerificationPreference"
+      "text" : "userVerificationPreferenceString"
     },
     {
       "kind" : "text",
@@ -245,16 +203,20 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:@T@ASAuthorizationPublicKeyCredentialUserVerificationPreference",
-      "text" : "ASAuthorizationPublicKeyCredentialUserVerificationPreference"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/userVerificationPreference",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnAuthenticationCapability\/userVerificationPreferenceString",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "userVerificationPreference",
+  "title" : "userVerificationPreferenceString",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/userverificationpreference"
+  "url" : "\/documentation\/oktaidxauth\/webauthnauthenticationcapability\/userverificationpreferencestring"
 }
 }
 }

@@ -100,9 +100,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/createCredentialRegistrationRequest()",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "createCredentialRegistrationRequest()",
+              "type" : "codeVoice"
             },
             {
               "text" : " convenience function may be used to produce a request suitable for presentation to the user.",
@@ -164,13 +163,13 @@
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/attestationPreference",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/attestationPreferenceString",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/challenge",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/displayName",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/name",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/relyingPartyIdentifier",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/userId",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/userVerificationPreference"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/userVerificationPreferenceString"
       ],
       "title" : "Instance Properties"
     },
@@ -178,7 +177,8 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/createCredentialRegistrationRequest()",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/createPlatformRegistrationRequest()",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/createSecurityKeyRegistrationRequest()",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/register(attestation:clientJSON:)",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/register(credential:)"
       ],
@@ -291,7 +291,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/attestationPreference": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/attestationPreferenceString": {
   "abstract" : [
     {
       "text" : "The attestation preference indicated on the credential assertion request issued from the server.",
@@ -309,7 +309,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "attestationPreference"
+      "text" : "attestationPreferenceString"
     },
     {
       "kind" : "text",
@@ -325,12 +325,12 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/attestationPreference",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/attestationPreferenceString",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "attestationPreference",
+  "title" : "attestationPreferenceString",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/attestationpreference"
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/attestationpreferencestring"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/challenge": {
   "abstract" : [
@@ -369,10 +369,10 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/challenge"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/createCredentialRegistrationRequest()": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/createPlatformRegistrationRequest()": {
   "abstract" : [
     {
-      "text" : "Creates an Authentication Services WebAuthn credential registration request suitable to be presented to the user.",
+      "text" : "Creates a Passkey \/ WebAuthn credential registration request suitable to be presented to the user.",
       "type" : "text"
     }
   ],
@@ -387,7 +387,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "createCredentialRegistrationRequest"
+      "text" : "createPlatformRegistrationRequest"
     },
     {
       "kind" : "text",
@@ -399,12 +399,49 @@
       "text" : "ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/createCredentialRegistrationRequest()",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/createPlatformRegistrationRequest()",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "createCredentialRegistrationRequest()",
+  "title" : "createPlatformRegistrationRequest()",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/createcredentialregistrationrequest()"
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/createplatformregistrationrequest()"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/createSecurityKeyRegistrationRequest()": {
+  "abstract" : [
+    {
+      "text" : "Creates a Security Key WebAuthn credential registration request suitable to be presented to the user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "createSecurityKeyRegistrationRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : "() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest",
+      "text" : "ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/createSecurityKeyRegistrationRequest()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "createSecurityKeyRegistrationRequest()",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/createsecuritykeyregistrationrequest()"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/displayName": {
   "abstract" : [
@@ -597,12 +634,12 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": any "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)ASAuthorizationPlatformPublicKeyCredentialRegistration",
-      "text" : "ASAuthorizationPlatformPublicKeyCredentialRegistration"
+      "preciseIdentifier" : "c:objc(pl)ASAuthorizationPublicKeyCredentialRegistration",
+      "text" : "ASAuthorizationPublicKeyCredentialRegistration"
     },
     {
       "kind" : "text",
@@ -711,7 +748,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/userid"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/userVerificationPreference": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnRegistrationCapability/userVerificationPreferenceString": {
   "abstract" : [
     {
       "text" : "The user verification preference indicated on the credential assertion request issued from the server.",
@@ -729,7 +766,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "userVerificationPreference"
+      "text" : "userVerificationPreferenceString"
     },
     {
       "kind" : "text",
@@ -745,12 +782,12 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/userVerificationPreference",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnRegistrationCapability\/userVerificationPreferenceString",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "userVerificationPreference",
+  "title" : "userVerificationPreferenceString",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/userverificationpreference"
+  "url" : "\/documentation\/oktaidxauth\/webauthnregistrationcapability\/userverificationpreferencestring"
 },
 "doc://OktaIdxAuth/s8SendableP": {
   "identifier" : "doc:\/\/OktaIdxAuth\/s8SendableP",
