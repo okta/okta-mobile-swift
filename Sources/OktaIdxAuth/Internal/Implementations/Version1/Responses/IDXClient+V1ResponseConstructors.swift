@@ -17,6 +17,11 @@ protocol ReferencesParent: AnyObject {
     func assign<ParentType>(parent: ParentType?)
 }
 
+struct IonRemediationContext {
+    let webAuthnAutofillUIChallenge: IonObject<IonChallengeData>?
+    let authenticatorCollection: Authenticator.Collection?
+}
+
 extension Response {
     internal convenience init(flow: any InteractionCodeFlowAPI, ion response: IonResponse) throws {
         let authenticators = try Authenticator.Collection(flow: flow, ion: response)
@@ -165,8 +170,8 @@ extension IonResponse {
 }
 
 extension PasswordSettingsCapability {
-    init?(with settings: [String: JSON]?) {
-        guard let settings = settings,
+    init?(with settings: JSON?) {
+        guard case let .object(settings) = settings,
               let complexity = settings["complexity"]?.anyValue as? [String: Any]
         else { return nil }
 
@@ -181,6 +186,7 @@ extension PasswordSettingsCapability {
                   minUpperCase: complexity["minUpperCase"] as? Int ?? 0,
                   minNumber: complexity["minNumber"] as? Int ?? 0,
                   minSymbol: complexity["minSymbol"] as? Int ?? 0,
+                  maxConsecutiveRepeatingCharacters: complexity["maxConsecutiveRepeatingCharacters"] as? Int ?? 0,
                   excludeUsername: complexity["excludeUsername"] as? Bool ?? false,
                   excludeAttributes: complexity["excludeAttributes"] as? [String] ?? [])
     }
@@ -216,10 +222,14 @@ extension Remediation.Collection {
                      ion object: IonResponse?,
                      authenticatorCollection: Authenticator.Collection)
     {
+        let remediationContext = IonRemediationContext(
+            webAuthnAutofillUIChallenge: object?.webauthnAutofillUIChallenge,
+            authenticatorCollection: authenticatorCollection)
+
         var remediations: [Remediation] = object?.remediation?.value.compactMap { (value) in
             Remediation.makeRemediation(flow: flow,
                                         ion: value,
-                                        authenticatorCollection: authenticatorCollection)
+                                        context: remediationContext)
         } ?? []
         
         if let cancelResponse = Remediation.makeRemediation(flow: flow, ion: object?.cancel) {
@@ -417,14 +427,14 @@ extension SocialIDPCapability {
 extension WebAuthnRegistrationCapability {
     convenience init?(flow: any InteractionCodeFlowAPI,
                       ion object: IonForm?,
-                      authenticatorCollection: Authenticator.Collection?) throws
+                      context: IonRemediationContext?) throws
     {
         // WebAuthn registration information is listed on the currentAuthenticator,
         // but is actionable by the Remediation. So we need to enure this capability
         // can access the authenticator contextualData information, and that the
         // registration capability is only bound to the remediation capable of
         // carrying out the operation.
-        guard let authenticatorCollection,
+        guard let authenticatorCollection = context?.authenticatorCollection,
               object?.relatesTo != nil
         else { return nil }
 
@@ -446,10 +456,26 @@ extension WebAuthnRegistrationCapability {
 extension WebAuthnAuthenticationCapability {
     convenience init?(flow: any InteractionCodeFlowAPI,
                       ion object: IonForm?,
-                      authenticatorCollection: Authenticator.Collection?) throws
+                      context: IonRemediationContext?) throws
     {
-        guard let authenticatorCollection,
-              object?.relatesTo != nil
+        if let challengeData = context?.webAuthnAutofillUIChallenge {
+            try self.init(flow: flow,
+                          ion: object,
+                          challengeData: challengeData.value)
+        } else if let authenticatorCollection = context?.authenticatorCollection {
+            try self.init(flow: flow,
+                          ion: object,
+                          authenticatorCollection: authenticatorCollection)
+        } else {
+            return nil
+        }
+    }
+
+    convenience init?(flow: any InteractionCodeFlowAPI,
+                      ion object: IonForm?,
+                      authenticatorCollection: Authenticator.Collection) throws
+    {
+        guard object?.relatesTo != nil
         else { return nil }
 
         let webAuthnAuthenticators = authenticatorCollection.filter { authenticator in
@@ -464,6 +490,22 @@ extension WebAuthnAuthenticationCapability {
 
         try self.init(issuerURL: flow.client.configuration.issuerURL,
                       rawChallengeJSON: challengeData)
+    }
+
+    convenience init?(flow: any InteractionCodeFlowAPI,
+                      ion object: IonForm?,
+                      challengeData: IonChallengeData) throws
+    {
+        guard let object,
+              let relatesTo = object.relatesTo,
+              object.name == "challenge-webauthn-autofillui-authenticator",
+              relatesTo.contains("webauthnAutofillUIChallenge")
+        else {
+            return nil
+        }
+
+        try self.init(issuerURL: flow.client.configuration.issuerURL,
+                      rawChallengeJSON: challengeData.challengeData)
     }
 }
 
@@ -534,7 +576,7 @@ extension Authenticator {
 extension Remediation {
     static func makeRemediation(flow: any InteractionCodeFlowAPI,
                                 ion object: IonForm?,
-                                authenticatorCollection: Authenticator.Collection? = nil,
+                                context: IonRemediationContext? = nil,
                                 createCapabilities: Bool = true) -> Remediation?
     {
         guard let object = object else { return nil }
@@ -551,10 +593,10 @@ extension Remediation {
             PollCapability(flow: flow, ion: object),
             try? WebAuthnRegistrationCapability(flow: flow,
                                                 ion: object,
-                                                authenticatorCollection: authenticatorCollection),
+                                                context: context),
             try? WebAuthnAuthenticationCapability(flow: flow,
-                                                ion: object,
-                                                authenticatorCollection: authenticatorCollection)
+                                                  ion: object,
+                                                  context: context),
         ] : []
 
         let remediation = Remediation(flow: flow,

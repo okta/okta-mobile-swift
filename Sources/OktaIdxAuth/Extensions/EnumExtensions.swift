@@ -124,7 +124,8 @@ extension Remediation.RemediationType {
             (.adminConsent, .adminConsent),
             (.emailChallengeConsent, .emailChallengeConsent),
             (.requestActivationEmail, .requestActivationEmail),
-            (.userCode, .userCode):
+            (.userCode, .userCode),
+            (.challengeWebAuthnAutofillUIAuthenticator, .challengeWebAuthnAutofillUIAuthenticator):
             return true
         case (.unknown(let lhs), .unknown(let rhs)):
             return lhs == rhs
@@ -174,6 +175,8 @@ extension Remediation.RemediationType {
         case "email-challenge-consent":             self = .emailChallengeConsent
         case "request-activation-email":            self = .requestActivationEmail
         case "user-code":                           self = .userCode
+        case "challenge-webauthn-autofillui-authenticator":
+            self = .challengeWebAuthnAutofillUIAuthenticator
         default:                                    self = .unknown(value)
         }
     }

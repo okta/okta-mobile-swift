@@ -16,17 +16,20 @@ import AuthenticationServices
 
 enum SigninError: Error {
     case genericError(message: String)
+    case noClientConfiguration
+    case cannotCompleteAuthorization(message: String)
     case stepUnsupported
     case invalidUrl
 }
 
 /// Signin wrapper that uses the Okta IDX client to step through the series
 /// of remediation steps necessary to sign a user in.
-public class Signin {
+public final class Signin: NSObject {
     private let storyboard: UIStoryboard
     private var completion: ((Result<Credential, Error>) -> Void)?
-    private var navigationController: UINavigationController?
-    
+    private(set) var navigationController: UINavigationController?
+    private(set) var authorizationContext: AuthorizationContext?
+
     internal let flow: InteractionCodeFlow
     
     /// Initializes a signin instance with the given client configuration.
@@ -34,15 +37,10 @@ public class Signin {
     init(using flow: InteractionCodeFlow) {
         self.flow = flow
         self.storyboard = UIStoryboard(name: "IDXSignin", bundle: Bundle(for: type(of: self)))
+
+        super.init()
     }
-    
-    convenience init?() {
-        guard let flow = ClientConfiguration.active?.flow else {
-            return nil
-        }
-        self.init(using: flow)
-    }
-    
+
     /// Begins the signin UI, presented from the given presenting view controller.
     /// - Parameter viewController: View controller to modally present the sign in navigation controller from.
     /// - Returns: Future to represent the completion of the signin process.
@@ -198,6 +196,11 @@ public class Signin {
         }
         
         navigationController.setViewControllers([controller], animated: animated)
+
+        // If a native authorization controller is applicable to the contents of
+        // this response, prepare the appropriate authorization requests.
+        authorizationContext = authorizationContext(for: response)
+        authorizationContext?.presentIfNeeded(userInitiated: false)
     }
     
     /// Initializes the appropriate view controller for this response.
@@ -227,7 +230,36 @@ public class Signin {
 
         return nil
     }
-    
+
+    func showError(_ error: Error, from viewController: UIViewController? = nil, recoverable: Bool = false) {
+        if !Thread.isMainThread {
+            DispatchQueue.main.async {
+                self.showError(error, from: viewController, recoverable: recoverable)
+            }
+            return
+        }
+
+        let viewController = viewController ?? navigationController?.topViewController
+
+        let alert = UIAlertController(title: "Login error",
+                                      message: error.localizedDescription,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+
+        let parentController = navigationController?.presentingViewController
+        if recoverable {
+            viewController?.present(alert, animated: true)
+        } else {
+            viewController?.dismiss(animated: true) {
+                parentController?.present(alert, animated: true) {
+                    Task { @MainActor in
+                        self.failure(with: error)
+                    }
+                }
+            }
+        }
+    }
+
     /// Called by the signin view controllers when the Future should fail.
     /// - Parameter error: The error to pass to the future.
     @MainActor
@@ -262,6 +294,324 @@ public class Signin {
                 }
             } catch {
                 self.failure(with: error)
+            }
+        }
+    }
+}
+
+@MainActor
+protocol AuthorizationContext {
+    associatedtype Controller
+    associatedtype ControllerResult
+
+    var controller: Controller { get }
+    nonisolated var mode: AuthorizationContextMode { get }
+    var state: AuthorizationContextState { get }
+
+    func presentIfNeeded(userInitiated: Bool)
+    func cancel()
+
+    func complete(credential: ControllerResult) async throws -> Response
+}
+
+enum AuthorizationContextMode {
+    case automatic
+    case userInitiated
+}
+
+enum AuthorizationContextState {
+    case pending, presented, cancelled, registering, completed
+}
+
+extension Signin {
+    @MainActor
+    func authorizationContext(for response: Response) -> (any AuthorizationContext)? {
+        if let context = PasskeyAuthorizationContext(self, response: response) {
+            return context
+        }
+
+        if let context = WebAuthorizationContext(self, response: response) {
+            return context
+        }
+
+        return nil
+    }
+
+    @MainActor
+    final class PasskeyAuthorizationContext: AuthorizationContext {
+        nonisolated let mode: AuthorizationContextMode
+        private(set) var state: AuthorizationContextState = .pending
+        let controller: ASAuthorizationController
+        nonisolated let webAuthnAuthenticate: WebAuthnAuthenticationCapability?
+        nonisolated let webAuthnRegister: WebAuthnRegistrationCapability?
+
+        init?(_ signin: Signin, response: Response) {
+            var authorizationRequests = [ASAuthorizationRequest]()
+
+            if let remediation = response.remediations[.challengeWebAuthnAutofillUIAuthenticator],
+               let capability = remediation.webAuthnAuthentication
+            {
+                authorizationRequests.append(capability.createPlatformCredentialAssertionRequest())
+                self.webAuthnAuthenticate = capability
+                self.webAuthnRegister = nil
+                self.mode = .automatic
+            }
+
+            else {
+                self.mode = .userInitiated
+
+                if let remediation = response.remediations[.challengeAuthenticator],
+                   let capability = remediation.webAuthnAuthentication
+                {
+                    authorizationRequests.append(capability.createPlatformCredentialAssertionRequest())
+                    authorizationRequests.append(capability.createSecurityKeyCredentialAssertionRequest())
+                    self.webAuthnAuthenticate = capability
+                } else {
+                    self.webAuthnAuthenticate = nil
+                }
+
+                if let remediation = response.remediations[.enrollAuthenticator],
+                   let capability = remediation.webAuthnRegistration
+                {
+                    authorizationRequests.append(capability.createPlatformRegistrationRequest())
+                    authorizationRequests.append(capability.createSecurityKeyRegistrationRequest())
+                    self.webAuthnRegister = capability
+                } else {
+                    self.webAuthnRegister = nil
+                }
+            }
+
+            guard !authorizationRequests.isEmpty else {
+                return nil
+            }
+
+            self.controller = ASAuthorizationController(authorizationRequests: authorizationRequests)
+            self.controller.delegate = signin
+            self.controller.presentationContextProvider = signin
+        }
+
+        deinit {
+            if state == .presented {
+                controller.cancel()
+            }
+        }
+
+        func presentIfNeeded(userInitiated: Bool) {
+            guard state == .pending else {
+                return
+            }
+
+            if mode == .automatic && !userInitiated {
+                controller.performAutoFillAssistedRequests()
+            }
+
+            else if mode == .userInitiated && userInitiated {
+                controller.performRequests()
+            }
+
+            else {
+                return
+            }
+
+            state = .presented
+        }
+
+        func cancel() {
+            guard state == .presented else {
+                return
+            }
+
+            controller.cancel()
+            state = .cancelled
+        }
+
+        func complete(credential: any ASAuthorizationCredential) async throws -> Response {
+            guard state == .presented else {
+                throw SigninError.cannotCompleteAuthorization(message: "Authorization controller is not presented")
+            }
+
+            state = .registering
+            let response: Response
+
+            switch credential {
+            case let credential as any ASAuthorizationPublicKeyCredentialRegistration:
+                guard let webAuthnRegister else {
+                    throw SigninError.cannotCompleteAuthorization(message: "No registration capability associated with this remediation")
+                }
+
+                response = try await webAuthnRegister.register(credential: credential)
+
+            case let credential as any ASAuthorizationPublicKeyCredentialAssertion:
+                guard let webAuthnAuthenticate else {
+                    throw SigninError.cannotCompleteAuthorization(message: "No authentication capability associated with this remediation")
+                }
+
+                response = try await webAuthnAuthenticate.challenge(credential: credential)
+
+            default:
+                throw SigninError.cannotCompleteAuthorization(message: "Unsupported credential type \(type(of: credential))")
+            }
+
+            state = .completed
+            return response
+        }
+    }
+
+    @MainActor
+    final class WebAuthorizationContext: AuthorizationContext {
+        nonisolated let mode: AuthorizationContextMode = .userInitiated
+        private(set) var state: AuthorizationContextState = .pending
+        let controller: ASWebAuthenticationSession
+
+        init?(_ signin: Signin, remediation: Remediation) {
+            guard let socialAuth = remediation.socialIdp,
+                  let scheme = signin.flow.client.configuration.redirectUri?.scheme
+            else {
+                return nil
+            }
+
+            self.controller = ASWebAuthenticationSession(url: socialAuth.redirectUrl,
+                                                         callbackURLScheme: scheme)
+            { [weak self] (callbackURL, error) in
+                if let error {
+                    self.complete(error: error)
+                } else if let callbackURL {
+                    self.complete(url: callbackURL)
+                } else {
+                    self.complete(error: SigninError.genericError(message: "Could not authenticate"))
+                }
+            }
+
+            self.controller.presentationContextProvider = self
+            self.controller.prefersEphemeralWebBrowserSession = true
+        }
+
+        deinit {
+            if state == .presented {
+                controller.cancel()
+            }
+        }
+
+        func presentIfNeeded(userInitiated: Bool) {
+            guard state == .pending,
+                  userInitiated
+            else {
+                return
+            }
+
+            self.controller.start()
+
+            state = .presented
+        }
+
+        func cancel() {
+            guard state == .presented else {
+                return
+            }
+
+            controller.cancel()
+            state = .cancelled
+        }
+
+        func complete(error: Error) async throws -> Response {
+            guard error == nil,
+                  let callbackURL = callbackURL
+            else {
+                self?.showError(error ?? SigninError.genericError(message: "Could not authenticate"),
+                                recoverable: true)
+                return
+            }
+
+            Task {
+                do {
+                    switch try await signin.flow.resume(with: callbackURL) {
+                    case .success(let token):
+                        signin.success(with: token)
+                    case .interactionRequired(let response):
+                        signin.proceed(to: response)
+                    }
+                } catch {
+                    signin.failure(with: error)
+                }
+            }
+
+        }
+    func complete(credential: any ASAuthorizationCredential) async throws -> Response {
+            guard error == nil,
+                  let callbackURL = callbackURL
+            else {
+                self?.showError(error ?? SigninError.genericError(message: "Could not authenticate"),
+                                recoverable: true)
+                return
+            }
+
+            Task {
+                do {
+                    switch try await signin.flow.resume(with: callbackURL) {
+                    case .success(let token):
+                        signin.success(with: token)
+                    case .interactionRequired(let response):
+                        signin.proceed(to: response)
+                    }
+                } catch {
+                    signin.failure(with: error)
+                }
+            }
+
+        }
+    }
+}
+
+extension Signin: ASAuthorizationControllerPresentationContextProviding {
+    public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        navigationController?.view.window ?? UIWindow()
+    }
+}
+
+extension Signin: ASAuthorizationControllerDelegate {
+    public func authorizationController(controller: ASAuthorizationController,
+                                        didCompleteWithAuthorization authorization: ASAuthorization)
+    {
+        guard let passkeyContext = authorizationContext as? PasskeyAuthorizationContext,
+              passkeyContext.controller == controller
+        else {
+            return
+        }
+
+        Task { @MainActor in
+            do {
+                proceed(to: try await passkeyContext.complete(credential: authorization.credential))
+            } catch {
+                showError(error)
+            }
+            self.authorizationContext = nil
+        }
+    }
+
+    public func authorizationController(controller: ASAuthorizationController,
+                                        didCompleteWithError error: any Error)
+    {
+        guard let error = error as? ASAuthorizationError else {
+            print("Unexpected authorization error: \(error.localizedDescription)")
+
+            Task { @MainActor in
+                showError(error)
+            }
+            return
+        }
+
+        guard let passkeyContext = authorizationContext as? PasskeyAuthorizationContext
+        else {
+            return
+        }
+
+        if passkeyContext.controller == controller {
+            authorizationContext = nil
+        }
+
+        if error.code != .canceled {
+            Task { @MainActor in
+                showError(error)
             }
         }
     }

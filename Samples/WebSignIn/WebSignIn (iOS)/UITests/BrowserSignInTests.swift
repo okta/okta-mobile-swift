@@ -41,7 +41,30 @@ class BrowserSignInUITests: XCTestCase {
         signInScreen.isVisible()
     }
 
-    func testEphemeralLoginAndSignOut() throws {
+    func testCancelAndSignIn() throws {
+        // Open sign-in screen
+        signInScreen.isVisible()
+        signInScreen.setEphemeral(true)
+        signInScreen.login()
+
+        // Cancel sign-in
+        signInScreen.cancel()
+        signInScreen.isVisible()
+
+        // Sign-in
+        signInScreen.login(username: username, password: password)
+        profileScreen.wait()
+        save(screenshot: "Profile Screen")
+
+        XCTAssertEqual(profileScreen.valueLabel(for: .username).label, username)
+        XCTAssertEqual(profileScreen.valueLabel(for: .defaultCredential).label, "Yes")
+
+        profileScreen.signOut(.endSession)
+
+        signInScreen.isVisible()
+    }
+
+    func testEphemeralSignInAndSignOut() throws {
         signInScreen.isVisible()
         signInScreen.setEphemeral(true)
         signInScreen.login(username: username, password: password)
@@ -57,7 +80,7 @@ class BrowserSignInUITests: XCTestCase {
         signInScreen.isVisible()
     }
 
-    func testSharedLoginAndSignOut() throws {
+    func testSharedSignInAndSignOut() throws {
         signInScreen.isVisible()
         signInScreen.setEphemeral(false)
         signInScreen.login(username: username, password: password)

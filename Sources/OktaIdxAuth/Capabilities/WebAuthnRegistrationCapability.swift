@@ -47,10 +47,10 @@ public final class WebAuthnRegistrationCapability: Capability, Sendable, Equatab
     }
 
     /// The user verification preference indicated on the credential assertion request issued from the server.
-    public nonisolated let userVerificationPreference: String?
-    
+    public nonisolated let userVerificationPreferenceString: String?
+
     /// The attestation preference indicated on the credential assertion request issued from the server.
-    public nonisolated let attestationPreference: String?
+    public nonisolated let attestationPreferenceString: String?
     
     /// Completes the WebAuthn credential registration request by submitting the passkey authenticator's results to the server.
     /// - Parameters:
@@ -61,6 +61,7 @@ public final class WebAuthnRegistrationCapability: Capability, Sendable, Equatab
                          clientJSON: Data) async throws -> Response
     {
         guard let remediation,
+              remediation.type == .enrollAuthenticator,
               let attestationField = remediation.form[allFields: "credentials.attestation"],
               let clientDataField = remediation.form[allFields: "credentials.clientData"]
         else {
@@ -112,15 +113,15 @@ public final class WebAuthnRegistrationCapability: Capability, Sendable, Equatab
         if case let .object(authenticatorSelection) = json["authenticatorSelection"],
            case let .string(userVerification) = authenticatorSelection["userVerification"]
         {
-            userVerificationPreference = userVerification
+            userVerificationPreferenceString = userVerification
         } else {
-            userVerificationPreference = nil
+            userVerificationPreferenceString = nil
         }
 
         if case let .string(attestation) = json["attestation"] {
-            attestationPreference = attestation
+            attestationPreferenceString = attestation
         } else {
-            attestationPreference = nil
+            attestationPreferenceString = nil
         }
     }
 }
@@ -138,7 +139,41 @@ import AuthenticationServices
 
 @available(iOS 15.0, macCatalyst 15.0, macOS 12.0, tvOS 16.0, visionOS 1.0, *)
 extension WebAuthnRegistrationCapability {
-    /// Creates an Authentication Services WebAuthn credential registration request suitable to be presented to the user.
+    /// Creates a Passkey / WebAuthn credential registration request suitable to be presented to the user.
+    ///
+    /// The request object returned from this may be customized before presentation, or may be used as-is. For example:
+    ///
+    /// ```swift
+    /// if let remediation = response.remediations[.enrollAuthenticator],
+    ///    let capability = remediation.webAuthnRegistration
+    /// {
+    ///     let authController = ASAuthorizationController(authorizationRequests: [
+    ///         capability.createCredentialRegistrationRequest()
+    ///     ])
+    ///     authController.delegate = self
+    ///     authController.presentationContextProvider = self
+    ///     authController.performRequests()
+    /// }
+    /// ```
+    ///
+    /// > Note: Since Passkeys do not support WebAuthn authenticator attestation, the ``attestationPreference`` value is not supplied to this request.
+    /// - Returns: Configured credential registration request.
+    public nonisolated func createPlatformRegistrationRequest() -> ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+        let platformProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: relyingPartyIdentifier)
+        let request = platformProvider.createCredentialRegistrationRequest(challenge: challenge,
+                                                                           name: name,
+                                                                           userID: userId)
+        request.displayName = displayName
+
+        if let userVerificationPreferenceString {
+            request.userVerificationPreference = ASAuthorizationPublicKeyCredentialUserVerificationPreference(rawValue: userVerificationPreferenceString)
+        }
+
+        return request
+    }
+    
+    #if !os(tvOS) && !os(visionOS)
+    /// Creates a Security Key WebAuthn credential registration request suitable to be presented to the user.
     ///
     /// The request object returned from this may be customized before presentation, or may be used as-is. For example:
     ///
@@ -155,30 +190,42 @@ extension WebAuthnRegistrationCapability {
     /// }
     /// ```
     /// - Returns: Configured credential registration request.
-    public nonisolated func createCredentialRegistrationRequest() -> ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest {
-        let platformProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: relyingPartyIdentifier)
+    public nonisolated func createSecurityKeyRegistrationRequest() -> ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
+        let platformProvider = ASAuthorizationSecurityKeyPublicKeyCredentialProvider(relyingPartyIdentifier: relyingPartyIdentifier)
         let request = platformProvider.createCredentialRegistrationRequest(challenge: challenge,
+                                                                           displayName: displayName,
                                                                            name: name,
                                                                            userID: userId)
-        request.displayName = displayName
 
-        #if !os(tvOS)
-        if let attestationPreference {
-            request.attestationPreference = ASAuthorizationPublicKeyCredentialAttestationKind(rawValue: attestationPreference)
+        if case let .array(publicKeyCredParams) = rawActivationJSON["pubKeyCredParams"] {
+            request.credentialParameters = publicKeyCredParams
+                .compactMap { item in
+                    guard case let .object(item) = item,
+                          item["type"] == .string("public-key"),
+                          case let .number(alg) = item["alg"]
+                    else {
+                        return nil
+                    }
+                    return ASAuthorizationPublicKeyCredentialParameters(algorithm: ASCOSEAlgorithmIdentifier(rawValue: alg.intValue))
+                }
         }
-        #endif
 
-        if let userVerificationPreference {
-            request.userVerificationPreference = ASAuthorizationPublicKeyCredentialUserVerificationPreference(rawValue: userVerificationPreference)
+        if let attestationPreferenceString {
+            request.attestationPreference = ASAuthorizationPublicKeyCredentialAttestationKind(rawValue: attestationPreferenceString)
+        }
+
+        if let userVerificationPreferenceString {
+            request.userVerificationPreference = ASAuthorizationPublicKeyCredentialUserVerificationPreference(rawValue: userVerificationPreferenceString)
         }
 
         return request
     }
+    #endif
     
     /// Completes the WebAuthn credential registration request by submitting the passkey authenticator's results to the server.
     /// - Parameter credential: The Authorization Services credential registration response from the platform authenticator.
     /// - Returns: The ``Response`` for the next step of the authentication flow.
-    public func register(credential: ASAuthorizationPlatformPublicKeyCredentialRegistration) async throws -> Response {
+    public func register(credential: any ASAuthorizationPublicKeyCredentialRegistration) async throws -> Response {
         guard let attestation = credential.rawAttestationObject else {
             throw WebAuthnCapabilityError.unsupportedCredentialType
         }

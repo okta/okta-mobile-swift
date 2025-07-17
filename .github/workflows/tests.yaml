@@ -8,7 +8,6 @@ on:
   push:
     branches:
       - master
-      - release/*
   pull_request:
 
 env:
@@ -142,7 +141,7 @@ jobs:
         | Is a draft PR | ${draft_status} |
         | Merged to \`master\` | ${master_status} |
         | Commit tagged | ${tag_status} |
-        | Changed files | \`$(wc -l changes)\` changed |
+        | Changed files | $(cat changes | wc -l) files changed |
         | Has source changes | ${source_status} |
         | Documentation rebuild needed | ${doc_status} |
         | Has integration test secrets | ${secrets_status} |

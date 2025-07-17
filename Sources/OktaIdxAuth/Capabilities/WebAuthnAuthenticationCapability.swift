@@ -30,20 +30,24 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
     /// The authentication challenge data in the credential assertion request issued from the server.
     public nonisolated let challenge: Data
 
-    /// The user verification preference, if any, indicated in the credential assertion request issued from the server.
-    public nonisolated let userVerificationPreference: String?
-    
+    /// The user verification preference represented as its underlying string value, if any, indicated in the credential assertion request issued from the server.
+    public nonisolated let userVerificationPreferenceString: String?
+
     /// Completes a WebAuthn assertion challenge request by submitting the passkey authenticator's results to the server.
     /// - Parameters:
     ///   - authenticatorData: Authenticator data.
     ///   - clientData: Client data.
     ///   - signatureData: Signature data.
+    ///   - userHandle: Optional user handle, when used with an autofill UI challenge remediation.
     /// - Returns: The ``Response`` for the next step of the authentication flow.
     public func challenge(authenticatorData: Data,
                           clientData: Data,
-                          signatureData: Data) async throws -> Response
+                          signatureData: Data,
+                          userHandle: Data? = nil) async throws -> Response
     {
         guard let remediation,
+              remediation.type == .challengeAuthenticator ||
+                remediation.type == .challengeWebAuthnAutofillUIAuthenticator,
               let authenticatorDataField = remediation.form[allFields: "credentials.authenticatorData"],
               let clientDataField = remediation.form[allFields: "credentials.clientData"],
               let signatureDataField = remediation.form[allFields: "credentials.signatureData"]
@@ -54,6 +58,21 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
         authenticatorDataField.value = authenticatorData.base64EncodedString()
         clientDataField.value = clientData.base64EncodedString()
         signatureDataField.value = signatureData.base64EncodedString()
+
+        if let userHandle {
+            guard remediation.type == .challengeWebAuthnAutofillUIAuthenticator,
+                  let userHandleField = remediation.form[allFields: "credentials.userHandle"]
+            else {
+                throw WebAuthnCapabilityError.invalidRemediationForm
+            }
+
+            if let value = String(data: userHandle, encoding: .utf8) {
+                userHandleField.value = value
+            } else {
+                userHandleField.value = userHandle.base64EncodedString()
+            }
+        }
+
         return try await remediation.proceed()
     }
 
@@ -90,9 +109,9 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
                                                                      issuerURL: issuerURL)
 
         if case let .string(userVerification) = json["userVerification"] {
-            userVerificationPreference = userVerification
+            userVerificationPreferenceString = userVerification
         } else {
-            userVerificationPreference = nil
+            userVerificationPreferenceString = nil
         }
     }
 }
@@ -110,7 +129,7 @@ import AuthenticationServices
 
 @available(iOS 15.0, macCatalyst 15.0, macOS 12.0, tvOS 16.0, visionOS 1.0, *)
 extension WebAuthnAuthenticationCapability {
-    /// Creates an Authentication Services WebAuthn credential assertion request suitable to be presented to the user.
+    /// Creates Passkey / WebAuthn credential assertion request suitable to be presented to the user.
     ///
     /// The request object returned from this may be customized before presentation, or may be used as-is. For example:
     ///
@@ -127,21 +146,54 @@ extension WebAuthnAuthenticationCapability {
     /// }
     /// ```
     /// - Returns: Configured credential assertion request.
-    public nonisolated func createCredentialAssertionRequest() -> ASAuthorizationPlatformPublicKeyCredentialAssertionRequest {
+    public nonisolated func createPlatformCredentialAssertionRequest() -> ASAuthorizationPlatformPublicKeyCredentialAssertionRequest {
         let platformProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: relyingPartyIdentifier)
         let request = platformProvider.createCredentialAssertionRequest(challenge: challenge)
-
-        if let userVerificationPreference {
-            request.userVerificationPreference = ASAuthorizationPublicKeyCredentialUserVerificationPreference(rawValue: userVerificationPreference)
-        }
+        request.userVerificationPreference = userVerificationPreference
 
         return request
+    }
+
+    #if !os(tvOS) && !os(visionOS)
+    /// Creates Security Key / WebAuthn credential assertion request suitable to be presented to the user.
+    ///
+    /// The request object returned from this may be customized before presentation, or may be used as-is. For example:
+    ///
+    /// ```swift
+    /// if let remediation = response.remediations[.challengeAuthenticator],
+    ///    let capability = remediation.webAuthnAuthentication
+    /// {
+    ///     let authController = ASAuthorizationController(authorizationRequests: [
+    ///         capability.createCredentialAssertionRequest()
+    ///     ])
+    ///     authController.delegate = self
+    ///     authController.presentationContextProvider = self
+    ///     authController.performRequests()
+    /// }
+    /// ```
+    /// - Returns: Configured credential assertion request.
+    public nonisolated func createSecurityKeyCredentialAssertionRequest() -> ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
+        let platformProvider = ASAuthorizationSecurityKeyPublicKeyCredentialProvider(relyingPartyIdentifier: relyingPartyIdentifier)
+        let request = platformProvider.createCredentialAssertionRequest(challenge: challenge)
+        request.userVerificationPreference = userVerificationPreference
+
+        return request
+    }
+    #endif
+    
+    /// The user verification preference, if any, indicated in the credential assertion request issued from the server.
+    public nonisolated var userVerificationPreference: ASAuthorizationPublicKeyCredentialUserVerificationPreference {
+        guard let userVerificationPreferenceString else {
+            return .preferred
+        }
+
+        return ASAuthorizationPublicKeyCredentialUserVerificationPreference(rawValue: userVerificationPreferenceString)
     }
 
     /// Completes a WebAuthn assertion challenge request by submitting the passkey authenticator's results to the server.
     /// - Parameter credential: The Authorization Services credential assertion response from the platform authenticator.
     /// - Returns: The ``Response`` for the next step of the authentication flow.
-    public func challenge(credential: ASAuthorizationPlatformPublicKeyCredentialAssertion) async throws -> Response {
+    public func challenge(credential: any ASAuthorizationPublicKeyCredentialAssertion) async throws -> Response {
         guard let authenticatorData = credential.rawAuthenticatorData,
               let signatureData = credential.signature
         else {
@@ -149,7 +201,8 @@ extension WebAuthnAuthenticationCapability {
         }
         return try await challenge(authenticatorData: authenticatorData,
                                    clientData: credential.rawClientDataJSON,
-                                   signatureData: signatureData)
+                                   signatureData: signatureData,
+                                   userHandle: credential.userID)
     }
 }
 #endif

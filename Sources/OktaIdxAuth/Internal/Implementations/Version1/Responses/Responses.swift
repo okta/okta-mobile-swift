@@ -56,6 +56,7 @@ final class IonResponse: Sendable, Decodable, JSONDecodable, ReceivesIDXResponse
     let currentAuthenticatorEnrollment: IonObject<IonAuthenticator>?
     let currentAuthenticator: IonObject<IonAuthenticator>?
     let recoveryAuthenticator: IonObject<IonAuthenticator>?
+    let webauthnAutofillUIChallenge: IonObject<IonChallengeData>?
     let user: IonObject<IonUser>?
     let app: IonObject<IonApp>?
     let successWithInteractionCode: IonForm?
@@ -88,13 +89,17 @@ struct IonApp: Sendable, Decodable, ReceivesIDXResponse {
     let name: String
 }
 
+struct IonChallengeData: Sendable, Decodable, ReceivesIDXResponse {
+    let challengeData: JSON
+}
+
 struct IonAuthenticator: Sendable, Decodable, IDXIONRelatable, ReceivesIDXResponse {
     let displayName: String?
     let id: String?
     let type: Authenticator.Kind
     let key: String?
     let methods: [[String: String]]?
-    let settings: [String: JSON]?
+    let settings: JSON?
     let contextualData: [String: JSON]?
     let profile: [String: String]?
     let send: IonForm?

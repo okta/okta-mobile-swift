@@ -58,8 +58,8 @@ extension Signin {
                     return lhsValue == rhsValue
                 case (.numberChallenge(answer: let lhsValue), .numberChallenge(answer: let rhsValue)):
                     return lhsValue == rhsValue
-                case (.text(field: let lhsValue), .text(field: let rhsValue)):
-                    return lhsValue == rhsValue
+                case (.text(field: let lhsValue, options: let lhsOptions), .text(field: let rhsValue, options: let rhsOptions)):
+                    return lhsValue == rhsValue && lhsOptions == rhsOptions
                 case (.toggle(field: let lhsValue), .toggle(field: let rhsValue)):
                     return lhsValue == rhsValue
                 case (.option(field: let lhsValue, option: let lhsOption), .option(field: let rhsValue, option: let rhsOption)):
@@ -79,11 +79,17 @@ extension Signin {
             case image(_ image: UIImage)
             case message(style: IDXMessageTableViewCell.Style)
             case numberChallenge(answer: String)
-            case text(field: Remediation.Form.Field)
+            case text(field: Remediation.Form.Field, options: Signin.Row.TextFieldOptions)
             case toggle(field: Remediation.Form.Field)
             case option(field: Remediation.Form.Field, option: Remediation.Form.Field)
             case select(field: Remediation.Form.Field, values: [Remediation.Form.Field])
             case button(remediationOption: Remediation)
+        }
+
+        struct TextFieldOptions: Hashable, Equatable {
+            var textContentType: UITextContentType? = nil
+            var keyboardType: UIKeyboardType = .default
+            var passwordRules: UITextInputPasswordRules? = nil
         }
     }
     
@@ -107,7 +113,12 @@ extension Remediation.Form.Field {
     ///   - parent: Optional parent for this form value.
     ///   - delegate: The delegate to receive updates from this form row.
     /// - Returns: Array of row elements.
-    func remediationRow(parent: Form.Field? = nil, delegate: AnyObject & SigninRowDelegate) -> [Row] {
+    @MainActor
+    func remediationRow(response: Response,
+                        remediation: Remediation,
+                        parent: Form.Field? = nil,
+                        delegate: AnyObject & SigninRowDelegate) -> [Row]
+    {
         if !isMutable {
             if label != nil {
                 // Fields that are not "visible" don't mean they shouldn't be displayed, just that they
@@ -136,13 +147,18 @@ extension Remediation.Form.Field {
                        let form = option.form
                     {
                         rows.append(contentsOf: form.flatMap { nested in
-                            nested.remediationRow(delegate: delegate)
+                            nested.remediationRow(response: response,
+                                                  remediation: remediation,
+                                                  delegate: delegate)
                         })
                     }
                 }
             } else if let form = form {
                 rows.append(contentsOf: form.flatMap { nested in
-                    nested.remediationRow(parent: self, delegate: delegate)
+                    nested.remediationRow(response: response,
+                                          remediation: remediation,
+                                          parent: self,
+                                          delegate: delegate)
                 })
             }
             
@@ -153,10 +169,56 @@ extension Remediation.Form.Field {
                                 delegate: delegate))
             } else if let form = form {
                 rows.append(contentsOf: form.flatMap { formValue in
-                    formValue.remediationRow(parent: self, delegate: delegate)
+                    formValue.remediationRow(response: response,
+                                             remediation: remediation,
+                                             parent: self,
+                                             delegate: delegate)
                 })
             } else {
-                rows.append(Row(kind: .text(field: self),
+                var options = Signin.Row.TextFieldOptions()
+                switch name {
+                case "identifier":
+                    options.keyboardType = .emailAddress
+                    options.textContentType = .username
+
+                case "passcode":
+                    let authenticator = response.authenticators.first ?? authenticator
+                    switch authenticator?.type {
+                    case .password:
+                        if authenticator?.state == .enrolling ||
+                           remediation.type == .enrollProfile
+                        {
+                            options.textContentType = .newPassword
+                        } else {
+                            options.textContentType = .password
+                        }
+
+                        options.passwordRules = authenticator?.passwordSettings?.passwordRules
+
+                    default:
+                        options.textContentType = .oneTimeCode
+                    }
+
+                case "email":
+                    options.keyboardType = .emailAddress
+
+                    switch remediation.type {
+                    case .enrollProfile:
+                        options.textContentType = .username
+                    default:
+                        options.textContentType = .emailAddress
+                    }
+
+                case "firstName":
+                    options.textContentType = .givenName
+
+                case "lastName":
+                    options.textContentType = .familyName
+
+                default: break
+                }
+
+                rows.append(Row(kind: .text(field: self, options: options),
                                 parent: parent,
                                 delegate: delegate))
             }
@@ -272,6 +334,7 @@ extension Response {
     /// Converts the response to a series of remediation forms to display in the UI
     /// - Parameter delegate: A delegate object to receive updates as the form is changed.
     /// - Returns: Array of sections to be shown in the table view.
+    @MainActor
     func buildFormSnapshot(_ snapshot: inout NSDiffableDataSourceSnapshot<Signin.Section, Signin.Row>,
                            delegate: AnyObject & SigninRowDelegate)
     {
@@ -287,6 +350,12 @@ extension Response {
         }
         
         remediations.forEach { option in
+            // Autofill UI remediations are intended to be transparent to the user,
+            // so don't display any UI for them.
+            guard option.type != .challengeWebAuthnAutofillUIAuthenticator else {
+                return
+            }
+
             self.buildFormSnapshot(&snapshot, remediationOption: option, in: self, delegate: delegate)
         }
     }
@@ -296,6 +365,7 @@ extension Response {
     ///   - response: Response object that is the parent for this remediation option
     ///   - delegate: A delegate object to receive updates as the form is changed.
     /// - Returns: Array of sections to be shown in the table view.
+    @MainActor
     func buildFormSnapshot(_ snapshot: inout NSDiffableDataSourceSnapshot<Signin.Section, Signin.Row>,
                            remediationOption: Remediation,
                            in response: Response,
@@ -309,6 +379,7 @@ extension Response {
             rows.append(Row(kind: .title(remediationOption: remediationOption), parent: nil, delegate: nil))
         case 1:
             rows.append(Row(kind: .separator, parent: nil, delegate: nil))
+            rows.append(Row(kind: .title(remediationOption: remediationOption), parent: nil, delegate: nil))
         default: break
         }
         
@@ -346,7 +417,9 @@ extension Response {
         }
 
         rows.append(contentsOf: remediationOption.form.flatMap { nested in
-            nested.remediationRow(delegate: delegate)
+            nested.remediationRow(response: response,
+                                  remediation: remediationOption,
+                                  delegate: delegate)
         })
         
         // Don't show a remediation option for strictly-pollable remediations

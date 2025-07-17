@@ -56,6 +56,8 @@ class IDXResponseTypeTests: XCTestCase {
         XCTAssertEqual(RemediationType(string: "resend"), .resend)
         XCTAssertEqual(RemediationType(string: "cancel-polling"), .cancelPolling)
 
+        XCTAssertEqual(RemediationType(string: "challenge-webauthn-autofillui-authenticator"), .challengeWebAuthnAutofillUIAuthenticator)
+
         XCTAssertEqual(RemediationType(string: "something-invalid"), .unknown("something-invalid"))
     }
 }
