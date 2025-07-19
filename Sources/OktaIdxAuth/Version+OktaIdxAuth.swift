@@ -22,6 +22,6 @@ extension SDKVersion.Name {
 extension SDKVersion {
     @_documentation(visibility: private)
     public static let oktaIdx: SDKVersion? = {
-        register(.oktaIdx, version: "2.0.2")
+        register(.oktaIdx, version: "2.1.0")
     }()
 }

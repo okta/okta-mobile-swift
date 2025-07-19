@@ -14,36 +14,14 @@
 import UIKit
 import OktaIdxAuth
 
-extension ClientConfiguration {
-    var flow: InteractionCodeFlow {
-        InteractionCodeFlow(issuerURL: issuer,
-                            clientId: clientId,
-                            scope: scopes,
-                            redirectUri: redirectUri)
-    }
-}
-
 class ClientConfigurationViewController: UIViewController {
-    @IBOutlet weak var issuerField: UITextField!
-    @IBOutlet weak var clientIdField: UITextField!
-    @IBOutlet weak var scopesField: UITextField!
-    @IBOutlet weak var redirectField: UITextField!
     @IBOutlet weak var recoveryTokenField: UITextField!
     var configuration: ClientConfiguration? = ClientConfiguration.active
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        issuerField.text = configuration?.issuer.absoluteString
-        clientIdField.text = configuration?.clientId
-        scopesField.text = configuration?.scopes
-        redirectField.text = configuration?.redirectUri.absoluteString
         recoveryTokenField.text = configuration?.recoveryToken
-
-        issuerField.accessibilityIdentifier = "issuerField"
-        clientIdField.accessibilityIdentifier = "clientIdField"
-        scopesField.accessibilityIdentifier = "scopesField"
-        redirectField.accessibilityIdentifier = "redirectField"
         recoveryTokenField.accessibilityIdentifier = "recoveryTokenField"
 
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
@@ -54,35 +32,8 @@ class ClientConfigurationViewController: UIViewController {
     }
     
     @IBAction func doneAction(_ sender: Any) {
-        guard let issuerUrl = issuerField.text,
-              let clientId = clientIdField.text,
-              let scopes = scopesField.text,
-              let redirectUri = redirectField.text else
-        {
-            let alert = UIAlertController(title: "Invalid configuration",
-                                          message: nil,
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
-            return
-        }
-
-        do {
-            configuration = try ClientConfiguration(clientId: clientId,
-                                                    issuer: issuerUrl,
-                                                    redirectUri: redirectUri,
-                                                    scopes: scopes,
-                                                    recoveryToken: recoveryTokenField.text,
-                                                    shouldSave: true)
-            configuration?.save()
-            dismiss(animated: true)
-        } catch {
-            let alert = UIAlertController(title: "Configuration error",
-                                          message: error.localizedDescription,
-                                          preferredStyle: .alert)
-            alert.addAction(.init(title: "OK", style: .default))
-            present(alert, animated: true)
-        }
+        ClientConfiguration.active = ClientConfiguration(recoveryToken: recoveryTokenField.text)
+        dismiss(animated: true)
     }
     
     @objc func backgroundTapped() {
@@ -92,20 +43,7 @@ class ClientConfigurationViewController: UIViewController {
 
 extension ClientConfigurationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case issuerField:
-            clientIdField.becomeFirstResponder()
-        case clientIdField:
-            scopesField.becomeFirstResponder()
-        case scopesField:
-            redirectField.becomeFirstResponder()
-        case redirectField:
-            recoveryTokenField.becomeFirstResponder()
-        case recoveryTokenField:
-            recoveryTokenField.resignFirstResponder()
-
-        default: break
-        }
+        textField.resignFirstResponder()
         return false
     }
 }

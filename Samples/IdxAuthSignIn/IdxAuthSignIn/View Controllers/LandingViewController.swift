@@ -18,7 +18,18 @@ class LandingViewController: UIViewController {
     @IBOutlet weak private(set) var signInButton: SigninButton!
     @IBOutlet weak private(set) var footerView: UIView!
     @IBOutlet weak var configurationInfoLabel: UILabel!
-    private var signin: Signin?
+    private var signin: Signin? = {
+        let commandLineConfig = try? OAuth2Client.PropertyListConfiguration.commandLine
+        let plistConfig = try? OAuth2Client.PropertyListConfiguration()
+
+        guard let configuration = commandLineConfig ?? plistConfig,
+              let flow = try? InteractionCodeFlow(client: OAuth2Client(configuration))
+        else {
+            return nil
+        }
+
+        return Signin(using: flow)
+    }()
 
     var isSignInAvailable: Bool = false {
         didSet {
@@ -28,30 +39,13 @@ class LandingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let configuration = ClientConfiguration.active {
-            configurationUpdated(configuration.flow)
-        }
-        
-        NotificationCenter.default.addObserver(forName: .configurationChanged, object: nil, queue: .main) { (note) in
-            self.configurationUpdated(note.object as? InteractionCodeFlow)
-        }
-        
-        if !isSignInAvailable {
-            performSegue(withIdentifier: "ConfigureSegue", sender: nil)
-        }
-    }
-    
-    func configurationUpdated(_ flow: InteractionCodeFlow?) {
-        isSignInAvailable = flow != nil
-        if let configuration = flow {
+
+        if let configuration = signin?.flow.client.configuration {
             configurationInfoLabel.text = """
-            Client ID: \(configuration.client.configuration.clientId)
+            Client ID: \(configuration.clientId)
             """
-            signin = Signin(using: configuration)
         } else {
             configurationInfoLabel.text = "Please configure your client"
-            signin = nil
         }
     }
     

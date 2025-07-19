@@ -16,6 +16,8 @@ extension String {
     @_documentation(visibility: internal)
     public enum CaseStyle {
         case snakeCase
+        case camelCase
+        case pascalCase
     }
 
     #if COCOAPODS
@@ -48,13 +50,31 @@ extension String {
     public func convertedTo(style: CaseStyle, separator: Character = "_") -> String {
         switch style {
         case .snakeCase:
-            return convertToSnakeCase(value: self, separator: separator)
+            return convertToSnakeCase(value: self,
+                                      separator: separator)
+        case .camelCase:
+            return convertToCamelCase(value: self,
+                                      separator: separator)
+        case .pascalCase:
+            return convertToCamelCase(value: self,
+                                      capitalizeFirstComponent: true,
+                                      separator: separator)
         }
     }
     
     @_documentation(visibility: internal)
     @inlinable public var snakeCase: String {
         convertedTo(style: .snakeCase)
+    }
+
+    @_documentation(visibility: internal)
+    @inlinable public var camelCase: String {
+        convertedTo(style: .camelCase)
+    }
+
+    @_documentation(visibility: internal)
+    @inlinable public var pascalCase: String {
+        convertedTo(style: .pascalCase)
     }
 }
 
@@ -79,7 +99,28 @@ enum SnakeWordBoundaryType {
     }
 }
 
-@inlinable
+@usableFromInline
+func convertToCamelCase(value: String,
+                        capitalizeFirstComponent: Bool = false,
+                        separator: Character = "_") -> String
+{
+    var result = ""
+    
+    let components = value.split(separator: separator)
+    for index in 0..<components.count {
+        let component = String(components[index])
+        if index == 0 && !capitalizeFirstComponent {
+            result.append(component.lowercased())
+        } else {
+            let capitalizedComponent = component.prefix(1).uppercased() + component.dropFirst().lowercased()
+            result.append(capitalizedComponent)
+        }
+    }
+
+    return result
+}
+
+@usableFromInline
 func convertToSnakeCase(value: String, separator: Character = "_") -> String {
     var result = ""
 

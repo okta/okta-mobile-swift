@@ -381,7 +381,6 @@ jobs:
     if: ${{ !github.event.pull_request.draft && needs.Preflight.outputs.has_documentation_changes == 'true' }}
     runs-on: macos-15
     env:
-      ENABLE_DOC_GENERATION: YES
       DOCC_JSON_PRETTYPRINT: YES
       DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
       DESTINATION: "${{ matrix.destination }}"

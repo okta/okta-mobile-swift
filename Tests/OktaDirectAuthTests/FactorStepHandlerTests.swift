@@ -55,8 +55,10 @@ final class FactorStepHandlerTests: XCTestCase {
         let handler = try await factor.stepHandler(flow: flow,
                                                    openIdConfiguration: openIdConfiguration,
                                                    loginHint: loginHint)
-        let tokenStepHandler = try XCTUnwrap(handler as? TokenStepHandler)
-        let request = try XCTUnwrap(tokenStepHandler.request as? TokenRequest)
+        let tokenStepHandler = try XCTUnwrap(handler as? TokenStepHandler,
+                                             "Expected a TokenStepHandler")
+        let request = try XCTUnwrap(tokenStepHandler.request as? TokenRequest,
+                                    "Expected a TokenRequest")
         XCTAssertEqual(request.clientConfiguration.clientId, client.configuration.clientId)
         
         if let loginHint = loginHint {
@@ -118,7 +120,8 @@ final class FactorStepHandlerTests: XCTestCase {
         let handler = try await factor.stepHandler(flow: flow,
                                                    openIdConfiguration: openIdConfiguration,
                                                    loginHint: loginHint)
-        let tokenStepHandler = try XCTUnwrap(handler as? OOBStepHandler<T>)
+        let tokenStepHandler = try XCTUnwrap(handler as? OOBStepHandler<T>,
+                                             "Expected a OOBStepHandler of type \(type(of: factor))")
         if let loginHint = loginHint {
             XCTAssertEqual(tokenStepHandler.loginHint, loginHint)
         } else {
@@ -267,11 +270,13 @@ final class FactorStepHandlerTests: XCTestCase {
             return
         }
 
-        let tokenBody = try XCTUnwrap(urlSession.request(matching: "/token")?.bodyString)
+        let tokenBody = try XCTUnwrap(urlSession.request(matching: "/token")?.bodyString,
+                                      "Cannot get token request body")
         let tokenParams = tokenBody.urlFormDecoded()
         
         XCTAssertEqual(tokenParams["grant_type"],
-                       "urn:okta:params:oauth:grant-type:oob")
+                       "urn:okta:params:oauth:grant-type:oob",
+                       "The token grant_type should be oob")
     }
 
     func testPrimaryOOBBindingTransferFail() async throws {
