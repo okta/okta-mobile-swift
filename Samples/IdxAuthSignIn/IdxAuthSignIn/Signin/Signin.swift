@@ -28,7 +28,7 @@ public final class Signin: NSObject {
     private let storyboard: UIStoryboard
     private var completion: ((Result<Credential, Error>) -> Void)?
     private(set) var navigationController: UINavigationController?
-    private(set) var authorizationContext: AuthorizationContext?
+    private(set) var authorizationContext: (any AuthorizationContext)?
 
     internal let flow: InteractionCodeFlow
     
@@ -302,7 +302,6 @@ public final class Signin: NSObject {
 @MainActor
 protocol AuthorizationContext {
     associatedtype Controller
-    associatedtype ControllerResult
 
     var controller: Controller { get }
     nonisolated var mode: AuthorizationContextMode { get }
@@ -310,8 +309,6 @@ protocol AuthorizationContext {
 
     func presentIfNeeded(userInitiated: Bool)
     func cancel()
-
-    func complete(credential: ControllerResult) async throws -> Response
 }
 
 enum AuthorizationContextMode {
@@ -325,12 +322,8 @@ enum AuthorizationContextState {
 
 extension Signin {
     @MainActor
-    func authorizationContext(for response: Response) -> (any AuthorizationContext)? {
+    func authorizationContext(for response: Response, remediation: Remediation? = nil) -> (any AuthorizationContext)? {
         if let context = PasskeyAuthorizationContext(self, response: response) {
-            return context
-        }
-
-        if let context = WebAuthorizationContext(self, response: response) {
             return context
         }
 
@@ -454,110 +447,6 @@ extension Signin {
 
             state = .completed
             return response
-        }
-    }
-
-    @MainActor
-    final class WebAuthorizationContext: AuthorizationContext {
-        nonisolated let mode: AuthorizationContextMode = .userInitiated
-        private(set) var state: AuthorizationContextState = .pending
-        let controller: ASWebAuthenticationSession
-
-        init?(_ signin: Signin, remediation: Remediation) {
-            guard let socialAuth = remediation.socialIdp,
-                  let scheme = signin.flow.client.configuration.redirectUri?.scheme
-            else {
-                return nil
-            }
-
-            self.controller = ASWebAuthenticationSession(url: socialAuth.redirectUrl,
-                                                         callbackURLScheme: scheme)
-            { [weak self] (callbackURL, error) in
-                if let error {
-                    self.complete(error: error)
-                } else if let callbackURL {
-                    self.complete(url: callbackURL)
-                } else {
-                    self.complete(error: SigninError.genericError(message: "Could not authenticate"))
-                }
-            }
-
-            self.controller.presentationContextProvider = self
-            self.controller.prefersEphemeralWebBrowserSession = true
-        }
-
-        deinit {
-            if state == .presented {
-                controller.cancel()
-            }
-        }
-
-        func presentIfNeeded(userInitiated: Bool) {
-            guard state == .pending,
-                  userInitiated
-            else {
-                return
-            }
-
-            self.controller.start()
-
-            state = .presented
-        }
-
-        func cancel() {
-            guard state == .presented else {
-                return
-            }
-
-            controller.cancel()
-            state = .cancelled
-        }
-
-        func complete(error: Error) async throws -> Response {
-            guard error == nil,
-                  let callbackURL = callbackURL
-            else {
-                self?.showError(error ?? SigninError.genericError(message: "Could not authenticate"),
-                                recoverable: true)
-                return
-            }
-
-            Task {
-                do {
-                    switch try await signin.flow.resume(with: callbackURL) {
-                    case .success(let token):
-                        signin.success(with: token)
-                    case .interactionRequired(let response):
-                        signin.proceed(to: response)
-                    }
-                } catch {
-                    signin.failure(with: error)
-                }
-            }
-
-        }
-    func complete(credential: any ASAuthorizationCredential) async throws -> Response {
-            guard error == nil,
-                  let callbackURL = callbackURL
-            else {
-                self?.showError(error ?? SigninError.genericError(message: "Could not authenticate"),
-                                recoverable: true)
-                return
-            }
-
-            Task {
-                do {
-                    switch try await signin.flow.resume(with: callbackURL) {
-                    case .success(let token):
-                        signin.success(with: token)
-                    case .interactionRequired(let response):
-                        signin.proceed(to: response)
-                    }
-                } catch {
-                    signin.failure(with: error)
-                }
-            }
-
         }
     }
 }
