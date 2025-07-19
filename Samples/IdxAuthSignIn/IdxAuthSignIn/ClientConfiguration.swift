@@ -25,32 +25,5 @@ struct ClientConfiguration {
         self.recoveryToken = recoveryToken
     }
     
-    static var active: ClientConfiguration? = {
-        launchConfiguration
-    }()
-    
-    static var launchConfiguration: ClientConfiguration? {
-        let arguments = [
-            "--recoveryToken", "-t"
-        ]
-        
-        var recoveryToken: String?
-        var key: String?
-        for argument in CommandLine.arguments {
-            if arguments.contains(argument) {
-                key = argument
-                continue
-            }
-            
-            switch key {
-            case "--recoveryToken", "-t":
-                recoveryToken = argument
-                
-            default: break
-            }
-            key = nil
-        }
-        
-        return ClientConfiguration(recoveryToken: recoveryToken)
-    }
+    static var active: ClientConfiguration?
 }
