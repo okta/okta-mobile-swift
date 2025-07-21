@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = "OktaBrowserSignin"
     s.module_name      = "BrowserSignin"
-    s.version          = "2.0.2"
+    s.version          = "2.1.0"
     s.summary          = "Okta Browser Sign In UI"
     s.description      = <<-DESC
 Authenticate users using web-based OIDC.

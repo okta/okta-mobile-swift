@@ -16,12 +16,14 @@ The keys read from this property list file are:
 
  Key | Required | Description |
 ---|---|---
-`issuer` | ✔ | Issuer URL for the client.
-`clientId` | ✔ | Client ID for the Okta application.
-`scopes` | ✔ | Scopes the client is requesting.
-`redirectUri` | ✔  | Redirect URI for the Okta application.
-`logoutRedirectUri` | | Logout URI used for the Okta application.
+`issuer_url` | ✔ | Issuer URL for the client.
+`client_id` | ✔ | Client ID for the Okta application.
+`scope` | ✔ | Scopes the client is requesting.
+`redirect_uri` | ✔  | Redirect URI for the Okta application.
+`logout_redirect_uri` | | Logout URI used for the Okta application.
 Other... | | Any additional keys will be passed to the `additionalParameters` argument of the initializer.
+
+> Tip: These property-list configuration files may also define their keys using the "camelCase" notation for backwards compatibility to older versions of the SDK.
 
 Once this file is created, your application can use the default initializer:
 

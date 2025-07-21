@@ -14,7 +14,7 @@ import Foundation
 import AuthFoundation
 
 public enum WebAuthnCapabilityError: Error {
-    case missingUserData
+    case missingChallengeJson
     case missingRelyingPartyIdentifier
     case invalidRemediationForm
     case unsupportedCredentialType
@@ -99,7 +99,7 @@ public final class WebAuthnRegistrationCapability: Capability, Sendable, Equatab
               case let .string(name) = userObject["name"],
               case let .string(userID) = userObject["id"]
         else {
-            throw WebAuthnCapabilityError.missingUserData
+            throw WebAuthnCapabilityError.missingChallengeJson
         }
 
         self.rawActivationJSON = json

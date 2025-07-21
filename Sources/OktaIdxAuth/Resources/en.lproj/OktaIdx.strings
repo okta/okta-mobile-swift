@@ -5,3 +5,10 @@
 "missing_required_parameter" = "Required parameter \"%@\" missing.";
 "missing_remediation" = "Remediation option \"%@\" missing.";
 "response_validation_failed" = "Response validation failed: %@.";
+
+/* WebAuthnCapabilityError */
+
+"webauthn_missing_challenge_json" = "WebAuthn server challenge is missing required data.";
+"webauthn_missing_relying_party_identifier" = "WebAuthn server challenge is missing the relying party identifier.";
+"webauthn_invalid_remediation_form" = "The WebAuthn response remediation is invalid or is missing required form fields.";
+"webauthn_unsupported_credential_type" = "The user's WebAuthn credential response is unsupported.";

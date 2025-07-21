@@ -16,6 +16,8 @@ extension String {
     @_documentation(visibility: internal)
     public enum CaseStyle {
         case snakeCase
+        case camelCase
+        case pascalCase
     }
 
     #if COCOAPODS
@@ -48,13 +50,31 @@ extension String {
     public func convertedTo(style: CaseStyle, separator: Character = "_") -> String {
         switch style {
         case .snakeCase:
-            return convertToSnakeCase(value: self, separator: separator)
+            return convertToSnakeCase(value: self,
+                                      separator: separator)
+        case .camelCase:
+            return convertToCamelCase(value: self,
+                                      separator: separator)
+        case .pascalCase:
+            return convertToCamelCase(value: self,
+                                      capitalizeFirstComponent: true,
+                                      separator: separator)
         }
     }
     
     @_documentation(visibility: internal)
     @inlinable public var snakeCase: String {
         convertedTo(style: .snakeCase)
+    }
+
+    @_documentation(visibility: internal)
+    @inlinable public var camelCase: String {
+        convertedTo(style: .camelCase)
+    }
+
+    @_documentation(visibility: internal)
+    @inlinable public var pascalCase: String {
+        convertedTo(style: .pascalCase)
     }
 }
 
@@ -79,7 +99,44 @@ enum SnakeWordBoundaryType {
     }
 }
 
-@inlinable
+@usableFromInline
+func convertToCamelCase(value: String,
+                        capitalizeFirstComponent: Bool = false,
+                        separator: Character = "_") -> String
+{
+    var result = ""
+    
+    let words = value.split(separator: separator)
+    for index in 0..<words.count {
+        var word = String(words[index])
+        
+        // Upper-case the first character if needed
+        if index > 0 || capitalizeFirstComponent,
+           word.first?.isLowercase == true
+        {
+            let firstChar = word.removeFirst().uppercased()
+            word.insert(contentsOf: firstChar,
+                             at: word.startIndex)
+        }
+        
+        // Lower-case the first character if needed, ignoring acronyms
+        else if index == 0,
+                !capitalizeFirstComponent,
+                word.first?.isUppercase == true,
+                word.count == 1 || word[word.index(after: word.startIndex)].isLowercase
+        {
+            let firstChar = word.removeFirst().lowercased()
+            word.insert(contentsOf: firstChar,
+                             at: word.startIndex)
+        }
+
+        result.append(word)
+    }
+
+    return result
+}
+
+@usableFromInline
 func convertToSnakeCase(value: String, separator: Character = "_") -> String {
     var result = ""
 

@@ -20,6 +20,6 @@ extension SDKVersion.Name {
 extension SDKVersion {
     @_documentation(visibility: private)
     public static let oauth2: SDKVersion? = {
-        register(.oauth2, version: "2.0.2")
+        register(.oauth2, version: "2.1.0")
     }()
 }
