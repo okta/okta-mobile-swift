@@ -123,7 +123,7 @@ func convertToCamelCase(value: String,
         else if index == 0,
                 !capitalizeFirstComponent,
                 word.first?.isUppercase == true,
-                (word.count == 1 || word[word.index(after: word.startIndex)].isLowercase)
+                word.count == 1 || word[word.index(after: word.startIndex)].isLowercase
         {
             let firstChar = word.removeFirst().lowercased()
             word.insert(contentsOf: firstChar,

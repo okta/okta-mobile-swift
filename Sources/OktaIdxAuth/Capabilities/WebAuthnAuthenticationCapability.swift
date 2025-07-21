@@ -59,9 +59,10 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
         clientDataField.value = clientData.base64EncodedString()
         signatureDataField.value = signatureData.base64EncodedString()
 
-        if let userHandle {
-            guard remediation.type == .challengeWebAuthnAutofillUIAuthenticator,
-                  let userHandleField = remediation.form[allFields: "credentials.userHandle"]
+        if let userHandle,
+           remediation.type == .challengeWebAuthnAutofillUIAuthenticator
+        {
+            guard let userHandleField = remediation.form[allFields: "credentials.userHandle"]
             else {
                 throw WebAuthnCapabilityError.invalidRemediationForm
             }
@@ -100,7 +101,7 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
         guard case let .string(challengeString) = json["challenge"],
               let challenge = Data(base64Encoded: challengeString.base64URLDecoded)
         else {
-            throw WebAuthnCapabilityError.missingUserData
+            throw WebAuthnCapabilityError.missingChallengeJson
         }
 
         self.rawChallengeJSON = json
