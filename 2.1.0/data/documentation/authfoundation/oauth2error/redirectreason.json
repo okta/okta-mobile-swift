@@ -1,0 +1,431 @@
+{
+  "abstract" : [
+    {
+      "text" : "Describes the various reasons why a redirect URI may be invalid.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation11OAuth2ErrorO14RedirectReasonO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "RedirectReason"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "RedirectReason"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "OAuth2Error.RedirectReason"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "RedirectReason"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/10Foundation14LocalizedErrorP",
+        "doc:\/\/AuthFoundation\/s8CopyableP",
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/s5ErrorP",
+        "doc:\/\/AuthFoundation\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Enumeration-Cases",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/codeRequired",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/hostOrPath",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/invalid",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/queryArgument(_:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/scheme(_:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/state(_:)"
+      ],
+      "title" : "Enumeration Cases"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/oauth2error\/redirectreason"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/10Foundation14LocalizedErrorP": {
+  "identifier" : "doc:\/\/AuthFoundation\/10Foundation14LocalizedErrorP",
+  "title" : "Foundation.LocalizedError",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error": {
+  "abstract" : [
+    {
+      "text" : "Errors that may occur when interacting with OAuth2 endpoints.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Error"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Error"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Error",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/RedirectReason": {
+  "abstract" : [
+    {
+      "text" : "Describes the various reasons why a redirect URI may be invalid.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "RedirectReason"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "RedirectReason"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Error.RedirectReason",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/redirectreason"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/RedirectReason/codeRequired": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "codeRequired"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/codeRequired",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.RedirectReason.codeRequired",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/coderequired"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/RedirectReason/hostOrPath": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hostOrPath"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/hostOrPath",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.RedirectReason.hostOrPath",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/hostorpath"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/RedirectReason/invalid": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalid"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/invalid",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.RedirectReason.invalid",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/invalid"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/RedirectReason/queryArgument(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "queryArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/queryArgument(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.RedirectReason.queryArgument(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/queryargument(_:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/RedirectReason/scheme(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "scheme"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/scheme(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.RedirectReason.scheme(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/scheme(_:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/RedirectReason/state(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "state"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/RedirectReason\/state(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.RedirectReason.state(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/redirectreason\/state(_:)"
+},
+"doc://AuthFoundation/s5ErrorP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s5ErrorP",
+  "title" : "Swift.Error",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s8CopyableP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s8CopyableP",
+  "title" : "Swift.Copyable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s8SendableP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

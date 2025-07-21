@@ -1,0 +1,506 @@
+{
+  "abstract" : [
+    {
+      "text" : "This member contains the type of the public key credential the caller is referring to.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "OktaDirectAuth",
+    "externalID" : "s:14OktaDirectAuth8WebAuthnV22AuthenticatorTransportO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "AuthenticatorTransport"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaDirectAuth"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "AuthenticatorTransport"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "WebAuthn.AuthenticatorTransport"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "AuthenticatorTransport"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "https:\/\/www.w3.org\/TR\/webauthn\/#dom-publickeycredentialdescriptor-type",
+                  "isActive" : true,
+                  "type" : "reference"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/Se",
+        "doc:\/\/OktaDirectAuth\/SE",
+        "doc:\/\/OktaDirectAuth\/SQ",
+        "doc:\/\/OktaDirectAuth\/SH",
+        "doc:\/\/OktaDirectAuth\/SY",
+        "doc:\/\/OktaDirectAuth\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Enumeration-Cases",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/ble",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/hybrid",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/nfc",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/platform",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/smartCard",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/usb"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "anchor" : "Initializers",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/init(rawValue:)"
+      ],
+      "title" : "Initializers"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaDirectAuth/SE": {
+  "identifier" : "doc:\/\/OktaDirectAuth\/SE",
+  "title" : "Swift.Encodable",
+  "type" : "unresolvable"
+},
+"doc://OktaDirectAuth/SH": {
+  "identifier" : "doc:\/\/OktaDirectAuth\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://OktaDirectAuth/SQ": {
+  "identifier" : "doc:\/\/OktaDirectAuth\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://OktaDirectAuth/SY": {
+  "identifier" : "doc:\/\/OktaDirectAuth\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://OktaDirectAuth/Se": {
+  "identifier" : "doc:\/\/OktaDirectAuth\/Se",
+  "title" : "Swift.Decodable",
+  "type" : "unresolvable"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using Okta’s Direct Authentication API, enabling native sign-in experiences supporting Multi-Factor Authentication (MFA).",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaDirectAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn": {
+  "abstract" : [
+    {
+      "text" : "Exposes the types and classes used to authenticate using WebAuthn.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthn"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthn"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthn",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorTransport": {
+  "abstract" : [
+    {
+      "text" : "This member contains the type of the public key credential the caller is referring to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticatorTransport"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticatorTransport"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthn.AuthenticatorTransport",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorTransport/ble": {
+  "abstract" : [
+    {
+      "text" : "Indicates the respective authenticator can be contacted over Bluetooth Smart (Bluetooth Low Energy \/ BLE).",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ble"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/ble",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthn.AuthenticatorTransport.ble",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/ble"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorTransport/hybrid": {
+  "abstract" : [
+    {
+      "text" : "Indicates the respective authenticator can be contacted using a combination of (often separate) data-transport and proximity mechanisms. This supports, for example, authentication on a desktop computer using a smartphone.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hybrid"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/hybrid",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthn.AuthenticatorTransport.hybrid",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/hybrid"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorTransport/init(rawValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/init(rawValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(rawValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/init(rawvalue:)"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorTransport/nfc": {
+  "abstract" : [
+    {
+      "text" : "Indicates the respective authenticator can be contacted over Near Field Communication (NFC).",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nfc"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/nfc",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthn.AuthenticatorTransport.nfc",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/nfc"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorTransport/platform": {
+  "abstract" : [
+    {
+      "text" : "Indicates the respective authenticator is contacted using a client device-specific transport, i.e., it is a platform authenticator. These authenticators are not removable from the client device.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "platform"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/platform",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthn.AuthenticatorTransport.platform",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/platform"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorTransport/smartCard": {
+  "abstract" : [
+    {
+      "text" : "Indicates the respective authenticator can be contacted over ISO\/IEC 7816 smart card with contacts.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "smartCard"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/smartCard",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthn.AuthenticatorTransport.smartCard",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/smartcard"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorTransport/usb": {
+  "abstract" : [
+    {
+      "text" : "Indicates the respective authenticator can be contacted over removable USB",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "usb"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/usb",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthn.AuthenticatorTransport.usb",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/usb"
+},
+"doc://OktaDirectAuth/s8SendableP": {
+  "identifier" : "doc:\/\/OktaDirectAuth\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+},
+"https://www.w3.org/TR/webauthn/#dom-publickeycredentialdescriptor-type": {
+  "identifier" : "https:\/\/www.w3.org\/TR\/webauthn\/#dom-publickeycredentialdescriptor-type",
+  "title" : "W3C Reccomendation",
+  "titleInlineContent" : [
+    {
+      "text" : "W3C Reccomendation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/www.w3.org\/TR\/webauthn\/#dom-publickeycredentialdescriptor-type"
+}
+}
+}

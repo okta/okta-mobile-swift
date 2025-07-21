@@ -1,0 +1,452 @@
+{
+  "abstract" : [
+    {
+      "text" : "The intent of the authentication workflow, as returned from the server.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "OktaIdxAuth",
+    "externalID" : "s:11OktaIdxAuth8ResponseC6IntentO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Intent"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaIdxAuth"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Intent"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "Response.Intent"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Intent"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/SQ",
+        "doc:\/\/OktaIdxAuth\/SH",
+        "doc:\/\/OktaIdxAuth\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Enumeration-Cases",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/credentialEnrollment",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/credentialModify",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/credentialRecovery",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/credentialUnenrollment",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/enrollNewUser",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/login",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/unknown"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "anchor" : "Initializers",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/init(string:)"
+      ],
+      "title" : "Initializers"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaidxauth\/response\/intent-swift.enum"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaIdxAuth/SH": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/SQ": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaIdxAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response": {
+  "abstract" : [
+    {
+      "text" : "Describes the response from an Okta Identity Engine workflow stage.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Intent-swift.enum": {
+  "abstract" : [
+    {
+      "text" : "The intent of the authentication workflow, as returned from the server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Intent"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Intent"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response.Intent",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/intent-swift.enum"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Intent-swift.enum/credentialEnrollment": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "credentialEnrollment"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/credentialEnrollment",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Response.Intent.credentialEnrollment",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/intent-swift.enum\/credentialenrollment"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Intent-swift.enum/credentialModify": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "credentialModify"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/credentialModify",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Response.Intent.credentialModify",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/intent-swift.enum\/credentialmodify"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Intent-swift.enum/credentialRecovery": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "credentialRecovery"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/credentialRecovery",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Response.Intent.credentialRecovery",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/intent-swift.enum\/credentialrecovery"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Intent-swift.enum/credentialUnenrollment": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "credentialUnenrollment"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/credentialUnenrollment",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Response.Intent.credentialUnenrollment",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/intent-swift.enum\/credentialunenrollment"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Intent-swift.enum/enrollNewUser": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "enrollNewUser"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/enrollNewUser",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Response.Intent.enrollNewUser",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/intent-swift.enum\/enrollnewuser"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Intent-swift.enum/init(string:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "string"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/init(string:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(string:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/intent-swift.enum\/init(string:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Intent-swift.enum/login": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "login"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/login",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Response.Intent.login",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/intent-swift.enum\/login"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Intent-swift.enum/unknown": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "unknown"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Intent-swift.enum\/unknown",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Response.Intent.unknown",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/intent-swift.enum\/unknown"
+},
+"doc://OktaIdxAuth/s8SendableP": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}
