@@ -169,9 +169,9 @@ extension OAuth2Client {
         ///
         /// This will attempt to map values that define the configuration keys using the standard command-line long argument notation. For example, the following forms of arguments are supported:
         ///
-        /// ``bash
+        /// ```bash
         /// --issuerUrl=https://example.com --client-id=abcd123 --redirect_uri com.example:/ --scopes "openid profile"
-        /// ``
+        /// ```
         /// - Parameter arguments: Command-line argument array to process.
         @inlinable
         public init(commandLine arguments: [String]) throws {

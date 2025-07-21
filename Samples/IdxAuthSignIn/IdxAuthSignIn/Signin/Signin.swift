@@ -322,7 +322,7 @@ enum AuthorizationContextState {
 
 extension Signin {
     @MainActor
-    func authorizationContext(for response: Response, remediation: Remediation? = nil) -> (any AuthorizationContext)? {
+    func authorizationContext(for response: Response) -> (any AuthorizationContext)? {
         if let context = PasskeyAuthorizationContext(self, response: response) {
             return context
         }

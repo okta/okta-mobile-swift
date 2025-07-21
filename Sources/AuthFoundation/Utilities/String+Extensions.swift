@@ -106,15 +106,31 @@ func convertToCamelCase(value: String,
 {
     var result = ""
     
-    let components = value.split(separator: separator)
-    for index in 0..<components.count {
-        let component = String(components[index])
-        if index == 0 && !capitalizeFirstComponent {
-            result.append(component.lowercased())
-        } else {
-            let capitalizedComponent = component.prefix(1).uppercased() + component.dropFirst().lowercased()
-            result.append(capitalizedComponent)
+    let words = value.split(separator: separator)
+    for index in 0..<words.count {
+        var word = String(words[index])
+        
+        // Upper-case the first character if needed
+        if index > 0 || capitalizeFirstComponent,
+           word.first?.isLowercase == true
+        {
+            let firstChar = word.removeFirst().uppercased()
+            word.insert(contentsOf: firstChar,
+                             at: word.startIndex)
         }
+        
+        // Lower-case the first character if needed, ignoring acronyms
+        else if index == 0,
+                !capitalizeFirstComponent,
+                word.first?.isUppercase == true,
+                (word.count == 1 || word[word.index(after: word.startIndex)].isLowercase)
+        {
+            let firstChar = word.removeFirst().lowercased()
+            word.insert(contentsOf: firstChar,
+                             at: word.startIndex)
+        }
+
+        result.append(word)
     }
 
     return result
