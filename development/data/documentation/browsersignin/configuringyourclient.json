@@ -133,7 +133,7 @@
                 {
                   "inlineContent" : [
                     {
-                      "code" : "issuer",
+                      "code" : "issuer_url",
                       "type" : "codeVoice"
                     }
                   ],
@@ -168,7 +168,7 @@
                 {
                   "inlineContent" : [
                     {
-                      "code" : "clientId",
+                      "code" : "client_id",
                       "type" : "codeVoice"
                     }
                   ],
@@ -203,7 +203,7 @@
                 {
                   "inlineContent" : [
                     {
-                      "code" : "scopes",
+                      "code" : "scope",
                       "type" : "codeVoice"
                     }
                   ],
@@ -238,7 +238,7 @@
                 {
                   "inlineContent" : [
                     {
-                      "code" : "redirectUri",
+                      "code" : "redirect_uri",
                       "type" : "codeVoice"
                     }
                   ],
@@ -273,7 +273,7 @@
                 {
                   "inlineContent" : [
                     {
-                      "code" : "logoutRedirectUri",
+                      "code" : "logout_redirect_uri",
                       "type" : "codeVoice"
                     }
                   ],
@@ -342,6 +342,22 @@
             ]
           ],
           "type" : "table"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "These property-list configuration files may also define their keys using the “camelCase” notation for backwards compatibility to older versions of the SDK.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Tip",
+          "style" : "tip",
+          "type" : "aside"
         },
         {
           "inlineContent" : [

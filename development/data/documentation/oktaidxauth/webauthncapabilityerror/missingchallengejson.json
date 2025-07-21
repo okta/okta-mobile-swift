@@ -9,19 +9,64 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/Equatable-Implementations"
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/missingChallengeJson"
   },
-  "kind" : "article",
+  "kind" : "symbol",
   "metadata" : {
+    "externalID" : "s:11OktaIdxAuth23WebAuthnCapabilityErrorO20missingChallengeJsonyA2CmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "missingChallengeJson"
+      }
+    ],
     "modules" : [
       {
         "name" : "OktaIdxAuth"
       }
     ],
-    "role" : "collectionGroup",
-    "roleHeading" : "API Collection",
-    "title" : "Equatable Implementations"
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "WebAuthnCapabilityError.missingChallengeJson"
   },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "missingChallengeJson"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
   "schemaVersion" : {
     "major" : 0,
     "minor" : 3,
@@ -30,20 +75,10 @@
   "sections" : [
 
   ],
-  "topicSections" : [
-    {
-      "anchor" : "Operators",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/==(_:_:)"
-      ],
-      "title" : "Operators"
-    }
-  ],
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/oktaidxauth\/webauthncapabilityerror\/equatable-implementations"
+        "\/documentation\/oktaidxauth\/webauthncapabilityerror\/missingchallengejson"
       ],
       "traits" : [
         {
@@ -99,22 +134,14 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/==(_:_:)": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/missingChallengeJson": {
   "abstract" : [
 
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
+      "text" : "case"
     },
     {
       "kind" : "text",
@@ -122,46 +149,15 @@
     },
     {
       "kind" : "identifier",
-      "text" : "=="
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth23WebAuthnCapabilityErrorO",
-      "text" : "WebAuthnCapabilityError"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth23WebAuthnCapabilityErrorO",
-      "text" : "WebAuthnCapabilityError"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
+      "text" : "missingChallengeJson"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/==(_:_:)",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/missingChallengeJson",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "==(_:_:)",
+  "title" : "WebAuthnCapabilityError.missingChallengeJson",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/==(_:_:)"
+  "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/missingchallengejson"
 }
 }
 }

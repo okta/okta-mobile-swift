@@ -129,6 +129,8 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/init()",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/init(_:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/init(commandLine:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/init(plist:)"
       ],
       "title" : "Initializers"
@@ -146,6 +148,14 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/scope"
       ],
       "title" : "Instance Properties"
+    },
+    {
+      "anchor" : "Type-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/commandLine"
+      ],
+      "title" : "Type Properties"
     }
   ],
   "variants" : [
@@ -385,6 +395,77 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/clientid"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration/commandLine": {
+  "abstract" : [
+    {
+      "text" : "Returns a property list configuration from the current running application’s ",
+      "type" : "text"
+    },
+    {
+      "code" : "CommandLine.arguments",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " array, using the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/init(commandLine:)",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " initializer.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "commandLine"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC25PropertyListConfigurationV",
+      "text" : "PropertyListConfiguration"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/commandLine",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "commandLine",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/commandline"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration/init()": {
   "abstract" : [
     {
@@ -420,6 +501,96 @@
   "title" : "init()",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/init()"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration/init(_:)": {
+  "abstract" : [
+    {
+      "text" : "Initializer that reads a dictionary of keys\/values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "(["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "Any"
+    },
+    {
+      "kind" : "text",
+      "text" : "]) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/init(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/init(_:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration/init(commandLine:)": {
+  "abstract" : [
+    {
+      "text" : "Initializes the property list configuration using an array of command-line arguments.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "commandLine"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/init(commandLine:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(commandLine:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/init(commandline:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration/init(plist:)": {
   "abstract" : [

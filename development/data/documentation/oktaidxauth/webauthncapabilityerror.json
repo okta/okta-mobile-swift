@@ -75,6 +75,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/10Foundation14LocalizedErrorP",
+        "doc:\/\/OktaIdxAuth\/s8CopyableP",
         "doc:\/\/OktaIdxAuth\/SQ",
         "doc:\/\/OktaIdxAuth\/s5ErrorP",
         "doc:\/\/OktaIdxAuth\/SH",
@@ -99,11 +101,20 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/invalidRemediationForm",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/missingChallengeJson",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/missingRelyingPartyIdentifier",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/missingUserData",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/unsupportedCredentialType"
       ],
       "title" : "Enumeration Cases"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/Equatable-Implementations",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/LocalizedError-Implementations"
+      ],
+      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -120,6 +131,11 @@
   ]
 , 
 "references": {
+"doc://OktaIdxAuth/10Foundation14LocalizedErrorP": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/10Foundation14LocalizedErrorP",
+  "title" : "Foundation.LocalizedError",
+  "type" : "unresolvable"
+},
 "doc://OktaIdxAuth/SH": {
   "identifier" : "doc:\/\/OktaIdxAuth\/SH",
   "title" : "Swift.Hashable",
@@ -175,6 +191,28 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/equatable-implementations"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/LocalizedError-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/LocalizedError-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "LocalizedError Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/localizederror-implementations"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/invalidRemediationForm": {
   "abstract" : [
 
@@ -200,6 +238,31 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/invalidremediationform"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/missingChallengeJson": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "missingChallengeJson"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/missingChallengeJson",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthnCapabilityError.missingChallengeJson",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/missingchallengejson"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/missingRelyingPartyIdentifier": {
   "abstract" : [
 
@@ -224,31 +287,6 @@
   "title" : "WebAuthnCapabilityError.missingRelyingPartyIdentifier",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/missingrelyingpartyidentifier"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/missingUserData": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "case"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "missingUserData"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/missingUserData",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "WebAuthnCapabilityError.missingUserData",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/missinguserdata"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/unsupportedCredentialType": {
   "abstract" : [
@@ -278,6 +316,11 @@
 "doc://OktaIdxAuth/s5ErrorP": {
   "identifier" : "doc:\/\/OktaIdxAuth\/s5ErrorP",
   "title" : "Swift.Error",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/s8CopyableP": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/s8CopyableP",
+  "title" : "Swift.Copyable",
   "type" : "unresolvable"
 },
 "doc://OktaIdxAuth/s8SendableP": {

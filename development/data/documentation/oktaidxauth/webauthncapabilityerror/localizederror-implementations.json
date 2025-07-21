@@ -9,7 +9,7 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/Equatable-Implementations"
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/LocalizedError-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -20,7 +20,7 @@
     ],
     "role" : "collectionGroup",
     "roleHeading" : "API Collection",
-    "title" : "Equatable Implementations"
+    "title" : "LocalizedError Implementations"
   },
   "schemaVersion" : {
     "major" : 0,
@@ -32,18 +32,18 @@
   ],
   "topicSections" : [
     {
-      "anchor" : "Operators",
+      "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/==(_:_:)"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/errorDescription"
       ],
-      "title" : "Operators"
+      "title" : "Instance Properties"
     }
   ],
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/oktaidxauth\/webauthncapabilityerror\/equatable-implementations"
+        "\/documentation\/oktaidxauth\/webauthncapabilityerror\/localizederror-implementations"
       ],
       "traits" : [
         {
@@ -99,22 +99,14 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/==(_:_:)": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/WebAuthnCapabilityError/errorDescription": {
   "abstract" : [
 
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -122,46 +114,28 @@
     },
     {
       "kind" : "identifier",
-      "text" : "=="
+      "text" : "errorDescription"
     },
     {
       "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "text",
-      "text" : "("
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth23WebAuthnCapabilityErrorO",
-      "text" : "WebAuthnCapabilityError"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:11OktaIdxAuth23WebAuthnCapabilityErrorO",
-      "text" : "WebAuthnCapabilityError"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
+      "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/==(_:_:)",
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/WebAuthnCapabilityError\/errorDescription",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "==(_:_:)",
+  "title" : "errorDescription",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/==(_:_:)"
+  "url" : "\/documentation\/oktaidxauth\/webauthncapabilityerror\/errordescription"
 }
 }
 }
