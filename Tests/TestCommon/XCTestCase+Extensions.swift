@@ -106,91 +106,89 @@ public extension XCTest {
     }
 }
 
-public extension XCTestCase {
-    func mock<T: Decodable & JSONDecodable>(from bundle: Bundle,
-                 for filename: String,
-                 in folder: String? = nil) throws -> T
-    {
-        let data = try data(from: bundle, for: filename, in: folder)
-        let string = try XCTUnwrap(String(data: data, encoding: .utf8))
-        return try decode(type: T.self, string)
+public func mock<T: Decodable & JSONDecodable>(from bundle: Bundle,
+                for filename: String,
+                in folder: String? = nil) throws -> T
+{
+    let data = try data(from: bundle, for: filename, in: folder)
+    let string = try XCTUnwrap(String(data: data, encoding: .utf8))
+    return try decode(type: T.self, string)
+}
+
+public func data(for json: String) -> Data {
+    return json.data(using: .utf8)!
+}
+
+public func fileUrl(from bundle: Bundle, for filename: String, in folder: String? = nil) throws -> URL {
+    let file = (filename as NSString).deletingPathExtension
+    var fileExtension = (filename as NSString).pathExtension
+    if fileExtension == "" {
+        fileExtension = "json"
     }
     
-    func data(for json: String) -> Data {
-        return json.data(using: .utf8)!
+    guard let url = bundle.url(forResource: file,
+                                withExtension: fileExtension,
+                                subdirectory: folder)
+    else {
+        throw TestError.noBundleResourceFound(bundle: bundle, filename: filename, folder: folder)
     }
     
-    func fileUrl(from bundle: Bundle, for filename: String, in folder: String? = nil) throws -> URL {
-        let file = (filename as NSString).deletingPathExtension
-        var fileExtension = (filename as NSString).pathExtension
-        if fileExtension == "" {
-            fileExtension = "json"
-        }
-        
-        guard let url = bundle.url(forResource: file,
-                                   withExtension: fileExtension,
-                                   subdirectory: folder)
-        else {
-            throw TestError.noBundleResourceFound(bundle: bundle, filename: filename, folder: folder)
-        }
-        
-        return url
-    }
-    
-    func data(from bundle: Bundle, for filename: String, in folder: String? = nil) throws -> Data {
-        let url = try fileUrl(from: bundle, for: filename, in: folder)
-        return try data(for: url)
-    }
-    
-    func data(for file: URL) throws -> Data {
-        try Data(contentsOf: file)
-    }
-    
-    func decode<T>(type: T.Type, _ file: URL) throws -> T where T : Decodable & JSONDecodable {
-        let json = String(data: try data(for: file), encoding: .utf8)
-        return try decode(type: type, json!)
-    }
+    return url
+}
 
-    func decode<T>(type: T.Type, _ file: URL, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
-        let json = String(data: try data(for: file), encoding: .utf8)
-        try test(try decode(type: type, json!))
-    }
+public func data(from bundle: Bundle, for filename: String, in folder: String? = nil) throws -> Data {
+    let url = try fileUrl(from: bundle, for: filename, in: folder)
+    return try data(for: url)
+}
 
-    func decode<T>(type: T.Type, _ json: String) throws -> T where T : Decodable & JSONDecodable {
-        try decode(type: type, data(for: json))
-    }
+public func data(for file: URL) throws -> Data {
+    try Data(contentsOf: file)
+}
 
-    func decode<T>(type: T.Type, _ json: Data) throws -> T where T : Decodable & JSONDecodable {
-        try decode(type: type, decoder: T.jsonDecoder, json)
-    }
+public func decode<T>(type: T.Type, _ file: URL) throws -> T where T : Decodable & JSONDecodable {
+    let json = String(data: try data(for: file), encoding: .utf8)
+    return try decode(type: type, json!)
+}
 
-    func decode<T>(type: T.Type, _ json: String, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
-        try test(try decode(type: type, json))
-    }
+public func decode<T>(type: T.Type, _ file: URL, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
+    let json = String(data: try data(for: file), encoding: .utf8)
+    try test(try decode(type: type, json!))
+}
 
-    func decode<T>(type: T.Type, decoder: JSONDecoder, _ json: String) throws -> T where T : Decodable {
-        try decode(type: type, decoder: decoder, data(for: json))
-    }
+public func decode<T>(type: T.Type, _ json: String) throws -> T where T : Decodable & JSONDecodable {
+    try decode(type: type, data(for: json))
+}
 
-    func decode<T>(type: T.Type, decoder: JSONDecoder, _ json: Data) throws -> T where T : Decodable {
-        return try decoder.decode(T.self, from: json)
-    }
+public func decode<T>(type: T.Type, _ json: Data) throws -> T where T : Decodable & JSONDecodable {
+    try decode(type: type, decoder: T.jsonDecoder, json)
+}
 
-    func perform(queueCount: Int = ProcessInfo.processInfo.activeProcessorCount,
-                 iterationCount: Int = 4,
-                 timeout: TimeInterval = .standard,
-                 _ block: @Sendable @escaping () async throws -> Void) async rethrows
-    {
-        let operationCount = queueCount * iterationCount
+public func decode<T>(type: T.Type, _ json: String, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
+    try test(try decode(type: type, json))
+}
 
-        try await withThrowingTaskGroup(of: Void.self) { group in
-            for _ in 0..<operationCount {
-                group.addTask {
-                    try await block()
-                }
+public func decode<T>(type: T.Type, decoder: JSONDecoder, _ json: String) throws -> T where T : Decodable {
+    try decode(type: type, decoder: decoder, data(for: json))
+}
+
+public func decode<T>(type: T.Type, decoder: JSONDecoder, _ json: Data) throws -> T where T : Decodable {
+    return try decoder.decode(T.self, from: json)
+}
+
+public func performConcurrent(queueCount: Int = ProcessInfo.processInfo.activeProcessorCount,
+                              iterationCount: Int = 4,
+                              timeout: TimeInterval = .standard,
+                              _ block: @Sendable @escaping () async throws -> Void) async rethrows
+{
+    let operationCount = queueCount * iterationCount
+
+    try await withThrowingTaskGroup(of: Void.self) { group in
+        for _ in 0..<operationCount {
+            group.addTask {
+                try await block()
             }
-
-            try await group.waitForAll()
         }
+
+        try await group.waitForAll()
     }
 }

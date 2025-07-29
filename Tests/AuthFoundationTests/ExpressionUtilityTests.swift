@@ -10,7 +10,8 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
 
 @testable import AuthFoundation
 @testable import TestCommon
@@ -20,7 +21,9 @@ fileprivate enum ExpressionUtilityError: Error {
     case newError
 }
 
-final class ExpressionUtilityTests: XCTestCase {
+@Suite("Expression utility helper tests")
+struct ExpressionUtilityTests {
+    @Test("With expression, not throwing an error")
     func testWithExpressionNoThrow() async throws {
         nonisolated(unsafe) var successCalled = false
         nonisolated(unsafe) var failureCalled: Bool?
@@ -29,63 +32,69 @@ final class ExpressionUtilityTests: XCTestCase {
         let result = await withExpression {
             "Hello, World!"
         } success: { value in
-            XCTAssertEqual(value, "Hello, World!")
+            #expect(value == "Hello, World!")
             successCalled = true
         } failure: { error in
-            XCTAssertNil(error)
+            // This closure should not be called in the success case
             failureCalled = false
         } finally: {
             finallyCalled = true
         }
 
-        XCTAssertEqual(result, "Hello, World!")
-        XCTAssertTrue(successCalled)
-        XCTAssertNil(failureCalled)
-        XCTAssertTrue(finallyCalled)
+        #expect(result == "Hello, World!")
+        #expect(successCalled == true)
+        #expect(failureCalled == nil)
+        #expect(finallyCalled == true)
     }
 
+    @Test("With failing expression")
     func testWithFailingExpression() async throws {
         nonisolated(unsafe) var successCalled: Bool?
         nonisolated(unsafe) var failureCalled = false
         nonisolated(unsafe) var finallyCalled = false
 
-        let error = await XCTAssertThrowsErrorAsync(try await withExpression {
-            throw ExpressionUtilityError.genericError
-        } success: { value in
-            successCalled = true
-        } failure: { error in
-            XCTAssertEqual(error as? ExpressionUtilityError, .genericError)
-            failureCalled = true
-        } finally: {
-            finallyCalled = true
-        })
+        let error = await #expect(throws: ExpressionUtilityError.self) {
+            try await withExpression {
+                throw ExpressionUtilityError.genericError
+            } success: { value in
+                successCalled = true
+            } failure: { error in
+                #expect(error as? ExpressionUtilityError == .genericError)
+                failureCalled = true
+            } finally: {
+                finallyCalled = true
+            }
+        }
 
-        XCTAssertEqual(error as? ExpressionUtilityError, .genericError)
-        XCTAssertNil(successCalled)
-        XCTAssertTrue(failureCalled)
-        XCTAssertTrue(finallyCalled)
+        #expect(error == .genericError)
+        #expect(successCalled == nil)
+        #expect(failureCalled == true)
+        #expect(finallyCalled == true)
     }
 
+    @Test("With rethrowing expression")
     func testWithRethrowingExpression() async throws {
         nonisolated(unsafe) var successCalled: Bool?
         nonisolated(unsafe) var failureCalled = false
         nonisolated(unsafe) var finallyCalled = false
 
-        let error = await XCTAssertThrowsErrorAsync(try await withExpression {
-            throw ExpressionUtilityError.genericError
-        } success: { value in
-            successCalled = true
-        } failure: { error in
-            XCTAssertEqual(error as? ExpressionUtilityError, .genericError)
-            failureCalled = true
-            throw ExpressionUtilityError.newError
-        } finally: {
-            finallyCalled = true
-        })
+        let error = await #expect(throws: ExpressionUtilityError.self) {
+            try await withExpression {
+                throw ExpressionUtilityError.genericError
+            } success: { value in
+                successCalled = true
+            } failure: { error in
+                #expect(error as? ExpressionUtilityError == .genericError)
+                failureCalled = true
+                throw ExpressionUtilityError.newError
+            } finally: {
+                finallyCalled = true
+            }
+        }
 
-        XCTAssertEqual(error as? ExpressionUtilityError, .newError)
-        XCTAssertNil(successCalled)
-        XCTAssertTrue(failureCalled)
-        XCTAssertTrue(finallyCalled)
+        #expect(error == .newError)
+        #expect(successCalled == nil)
+        #expect(failureCalled == true)
+        #expect(finallyCalled == true)
     }
 }

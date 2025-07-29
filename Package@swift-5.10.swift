@@ -10,6 +10,7 @@ extension Array<SwiftSetting> {
         [
             .enableUpcomingFeature("ExistentialAny"),
             .enableUpcomingFeature("ForwardTrailingClosures"),
+            .enableExperimentalFeature("SwiftTesting"),
         ]
     }
 

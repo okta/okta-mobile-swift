@@ -10,60 +10,40 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
+
 @testable import TestCommon
 @testable import AuthFoundation
 
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
-final class OIDCLegacyMigratorTests: XCTestCase {
+@Suite("OIDC Legacy Migrator")
+struct OIDCLegacyMigratorTests {
     typealias LegacyOIDC = Migration.LegacyOIDC
     
-    var keychain: MockKeychain!
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "my-app:/")!
 
-    override func setUp() async throws {
-        keychain = MockKeychain()
-        Keychain.implementation.wrappedValue = keychain
-
-        await CredentialActor.run {
-            Credential.tokenStorage = MockTokenStorage()
-            Credential.credentialDataSource = MockCredentialDataSource()
-        }
-
-        await MainActor.run {
-            XCTAssertEqual(Migration.shared.registeredMigrators.count, 0)
-        }
-    }
-
-    override func tearDown() async throws {
-        Keychain.resetToDefault()
-        keychain = nil
-
-        Migration.shared.resetMigrators()
-
-        await CredentialActor.run {
-            TaskData.coordinator.resetToDefault()
-        }
-    }
-
+    @Test("Register", .migration, .mockKeychain, .credentialCoordinator)
     func testRegister() throws {
         LegacyOIDC.register(clientId: "clientId")
         
-        let migrator = try XCTUnwrap(Migration.shared.registeredMigrators.first(where: {
+        let migrator = try #require(Migration.shared.registeredMigrators.first(where: {
             $0 is LegacyOIDC
         }) as? LegacyOIDC)
         
-        XCTAssertEqual(migrator.clientId, "clientId")
-        XCTAssertNil(migrator.migrationItems)
+        #expect(migrator.clientId == "clientId")
+        #expect(migrator.migrationItems == nil)
     }
     
+    @Test("Needs migration status check", .migration, .mockKeychain, .credentialCoordinator)
     func testNeedsMigration() throws {
+        let keychain = try #require(Test.current?.mockKeychain)
         let migrator = LegacyOIDC(clientId: "clientId")
         
         // Test no credentials to migrate
         keychain.expect(noErr, result: [] as CFArray)
-        XCTAssertFalse(migrator.needsMigration)
+        #expect(!migrator.needsMigration)
         keychain.reset()
         
         // Test a non-matching credential
@@ -78,7 +58,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
                 "agrp": "com.okta.sample.app"
             ]
         ] as CFArray)
-        XCTAssertFalse(migrator.needsMigration)
+        #expect(!migrator.needsMigration)
         
         // Test a matching credential
         keychain.expect(noErr, result: [
@@ -92,7 +72,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
                 "agrp": "com.okta.sample.app"
             ]
         ] as CFArray)
-        XCTAssertTrue(migrator.needsMigration)
+        #expect(migrator.needsMigration)
 
         // Test that a clientId match counts as a match
         keychain.expect(noErr, result: [
@@ -106,61 +86,61 @@ final class OIDCLegacyMigratorTests: XCTestCase {
                 "agrp": "com.okta.sample.app"
             ]
         ] as CFArray)
-        XCTAssertTrue(migrator.needsMigration)
+        #expect(migrator.needsMigration)
     }
 
+    @Test("Migrate", .migration, .mockKeychain, .credentialCoordinator, .notificationCenter)
     func testMigrate() throws {
-        let notificationCenter = NotificationCenter()
-        try TaskData.$notificationCenter.withValue(notificationCenter) {
-            let notificationRecorder = NotificationRecorder(center: notificationCenter,
-                                                            observing: [.credentialMigrated])
-            let migrator = LegacyOIDC(clientId: "clientId")
-
-            // Note: This mock file was generated manually using the okta-oidc-ios package, archived, and base64-encoded.
-            let base64Data = try data(from: .module, for: "MockLegacyOIDCKeychainItem.data", in: "MockResponses")
-            let base64String = try XCTUnwrap(String(data: base64Data, encoding: .utf8))
-                .trimmingCharacters(in: .newlines)
-            let oidcData = try XCTUnwrap(Data(base64Encoded: base64String))
-
-            keychain.expect(noErr, result: [
-                [
-                    "svce": "",
-                    "acct": "0oathisistheaccount0",
-                    "class": "genp",
-                    "cdat": Date(),
-                    "mdat": Date(),
-                    "pdmn": "ak",
-                    "agrp": "com.okta.sample.app"
-                ]
-            ] as CFArray)
-
-            keychain.expect(noErr, result: [
+        let keychain = try #require(Test.current?.mockKeychain)
+        let notificationCenter = try #require(Test.current?.notificationCenter)
+        let notificationRecorder = NotificationRecorder(center: notificationCenter,
+                                                        observing: [.credentialMigrated])
+        let migrator = LegacyOIDC(clientId: "clientId")
+        
+        // Note: This mock file was generated manually using the okta-oidc-ios package, archived, and base64-encoded.
+        let base64Data = try data(from: .module, for: "MockLegacyOIDCKeychainItem.data", in: "MockResponses")
+        let base64String = try #require(String(data: base64Data, encoding: .utf8))
+            .trimmingCharacters(in: .newlines)
+        let oidcData = try #require(Data(base64Encoded: base64String))
+        
+        keychain.expect(noErr, result: [
+            [
                 "svce": "",
+                "acct": "0oathisistheaccount0",
                 "class": "genp",
                 "cdat": Date(),
                 "mdat": Date(),
                 "pdmn": "ak",
-                "agrp": "com.okta.sample.app",
-                "acct": "0oathisistheaccount0",
-                "v_Data": oidcData
-            ] as CFDictionary)
-
-            keychain.expect(noErr)
-
-            XCTAssertNoThrow(try migrator.migrate())
-
-            // Need to wait for the async notification dispatch
-            usleep(useconds_t(2000))
-
-            XCTAssertEqual(notificationRecorder.notifications.count, 1)
-
-            let credential = try XCTUnwrap(notificationRecorder.notifications.first?.object as? Credential)
-            XCTAssertEqual(credential.id, "0oathisistheaccount0")
-            XCTAssertEqual(credential.token.refreshToken, "therefreshtoken")
-            XCTAssertEqual(credential.token.context.clientSettings?["redirect_uri"], "com.example:/callback")
-            XCTAssertEqual(credential.token.context.configuration.baseURL.absoluteString, "https://example.com")
-            XCTAssertNotEqual(credential.token.context.configuration.clientId, "0oathisistheaccount0")
-        }
+                "agrp": "com.okta.sample.app"
+            ]
+        ] as CFArray)
+        
+        keychain.expect(noErr, result: [
+            "svce": "",
+            "class": "genp",
+            "cdat": Date(),
+            "mdat": Date(),
+            "pdmn": "ak",
+            "agrp": "com.okta.sample.app",
+            "acct": "0oathisistheaccount0",
+            "v_Data": oidcData
+        ] as CFDictionary)
+        
+        keychain.expect(noErr)
+        
+        try migrator.migrate()
+        
+        // Need to wait for the async notification dispatch
+        usleep(useconds_t(2000))
+        
+        #expect(notificationRecorder.notifications.count == 1)
+        
+        let credential = try #require(notificationRecorder.notifications.first?.object as? Credential)
+        #expect(credential.id == "0oathisistheaccount0")
+        #expect(credential.token.refreshToken == "therefreshtoken")
+        #expect(credential.token.context.clientSettings?["redirect_uri"] == "com.example:/callback")
+        #expect(credential.token.context.configuration.baseURL.absoluteString == "https://example.com")
+        #expect(credential.token.context.configuration.clientId != "0oathisistheaccount0")
     }
 }
 #endif

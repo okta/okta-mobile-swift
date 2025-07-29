@@ -11,12 +11,13 @@
 //
 
 import Foundation
-import XCTest
+import Testing
 
 @testable import TestCommon
 @testable import AuthFoundation
 
-final class DefaultJWKValidatorTests: XCTestCase {
+@Suite("Default JWK validator")
+struct DefaultJWKValidatorTests {
     let keySet = """
         {
             "keys" : [
@@ -31,30 +32,26 @@ final class DefaultJWKValidatorTests: XCTestCase {
             ]
          }
         """
-    var validator: DefaultJWKValidator!
 
-    override func setUpWithError() throws {
-        validator = DefaultJWKValidator()
-    }
-    
-    override func tearDownWithError() throws {
-        validator = nil
-    }
-    
+    @Test("Successful validation")
     func testValidator() throws {
         let keyData = data(for: keySet)
         let jwks = try JSONDecoder().decode(JWKS.self, from: keyData)
-
         let jwt = try JWT(String.mockIdToken)
+        let validator = DefaultJWKValidator()
 
-        #if os(Linux)
-        XCTAssertThrowsError(try validator.validate(token: jwt, using: jwks))
+        #if os(Linux) || os(Android)
+        let error = #expect(throws: JWTError.self) {
+            try validator.validate(token: jwt, using: jwks)
+        }
+        #expect(error == .signatureVerificationUnavailable)
         #else
-        XCTAssertNoThrow(try validator.validate(token: jwt, using: jwks))
+        try validator.validate(token: jwt, using: jwks)
         #endif
     }
     
     #if !os(Linux)
+    @Test("Invalid algorithm")
     func testInvalidAlgorithm() throws {
         let jwks = try JSONDecoder().decode(JWKS.self, from: data(for: """
             {
@@ -67,12 +64,16 @@ final class DefaultJWKValidatorTests: XCTestCase {
                 ]
              }
             """))
+
         let jwt = try JWT(String.mockIdToken)
-        XCTAssertThrowsError(try validator.validate(token: jwt, using: jwks)) { error in
-            XCTAssertEqual(error as? JWTError, JWTError.invalidKey)
+        let validator = DefaultJWKValidator()
+        let error = #expect(throws: JWTError.self) {
+            try validator.validate(token: jwt, using: jwks)
         }
+        #expect(error == .invalidKey)
     }
 
+    @Test("Invalid key ID")
     func testInvalidKey() throws {
         let jwks = try JSONDecoder().decode(JWKS.self, from: data(for: """
             {
@@ -87,11 +88,14 @@ final class DefaultJWKValidatorTests: XCTestCase {
              }
             """))
         let jwt = try JWT(String.mockIdToken)
-        XCTAssertThrowsError(try validator.validate(token: jwt, using: jwks)) { error in
-            XCTAssertEqual(error as? JWTError, JWTError.invalidKey)
+        let validator = DefaultJWKValidator()
+        let error = #expect(throws: JWTError.self) {
+            try validator.validate(token: jwt, using: jwks)
         }
+        #expect(error == .invalidKey)
     }
 
+    @Test("Error creating key")
     func testInvalidCannotCreateKey() throws {
         let jwks = try JSONDecoder().decode(JWKS.self, from: data(for: """
             {
@@ -108,13 +112,16 @@ final class DefaultJWKValidatorTests: XCTestCase {
              }
             """))
         let jwt = try JWT(String.mockIdToken)
-        XCTAssertThrowsError(try validator.validate(token: jwt, using: jwks)) { error in
-            XCTAssertEqual(error as? JWTError, JWTError.cannotCreateKey(
-                code: -50,
-                description: "The operation couldn’t be completed. (OSStatus error -50 - RSA public key creation from data failed)"))
+        let validator = DefaultJWKValidator()
+        let error = #expect(throws: JWTError.self) {
+            try validator.validate(token: jwt, using: jwks)
         }
+        #expect(error == .cannotCreateKey(
+            code: -50,
+            description: "The operation couldn’t be completed. (OSStatus error -50 - RSA public key creation from data failed)"))
     }
 
+    @Test("Unsupported signing algorithm")
     func testInvalidSigningAlgorithm() throws {
         let jwks = try JSONDecoder().decode(JWKS.self, from: data(for: """
             {
@@ -131,9 +138,11 @@ final class DefaultJWKValidatorTests: XCTestCase {
              }
             """))
         let jwt = try JWT(String.mockIdToken)
-        XCTAssertThrowsError(try validator.validate(token: jwt, using: jwks)) { error in
-            XCTAssertEqual(error as? JWTError, JWTError.invalidSigningAlgorithm)
+        let validator = DefaultJWKValidator()
+        let error = #expect(throws: JWTError.self) {
+            try validator.validate(token: jwt, using: jwks)
         }
+        #expect(error == .invalidSigningAlgorithm)
     }
 #endif
 }

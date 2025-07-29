@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 import FoundationNetworking
 #endif
 
@@ -127,7 +127,7 @@ public final class OAuth2Client: UsesDelegateCollection {
         }
 
         // Ensure the Credential Coordinator can monitor this client for token refresh changes.
-        TaskData.coordinator.observe(oauth2: self)
+        Credential.providers.coordinator.observe(oauth2: self)
     }
     
     /// Retrieves the org's OpenID configuration.
@@ -280,10 +280,8 @@ public final class OAuth2Client: UsesDelegateCollection {
         let token = response.result
         
         try await token.validate(using: self, with: request.tokenValidatorContext)
-        if let idToken = token.idToken,
-           try idToken.validate(using: try await jwks) == false
-        {
-            throw JWTError.signatureInvalid
+        if let idToken = token.idToken {
+            try idToken.validate(using: try await jwks)
         }
 
         return response
@@ -446,7 +444,7 @@ extension OAuth2Client: APIClient {
         if let jsonType = type as? any JSONDecodable.Type {
             jsonDecoder = jsonType.jsonDecoder
         } else {
-            jsonDecoder = defaultJSONDecoder
+            jsonDecoder = defaultJSONDecoder()
         }
         
         jsonDecoder.userInfo = info

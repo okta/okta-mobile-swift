@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 import FoundationNetworking
 #endif
 
@@ -33,8 +33,8 @@ public protocol TimeCoordinator: Sendable {
 extension Date {
     /// Allows a custom ``TimeCoordinator`` to be used to adjust dates and times for devices with incorrect times.
     public static var coordinator: any TimeCoordinator {
-        get { sharedTimeCoordinator.wrappedValue }
-        set { sharedTimeCoordinator.wrappedValue = newValue }
+        get { TaskData.sharedTimeCoordinator.wrappedValue }
+        set { TaskData.sharedTimeCoordinator.wrappedValue = newValue }
     }
     
     /// Returns the current coordinated date, adjusting the system clock to correct for clock skew.
@@ -48,13 +48,7 @@ extension Date {
     }
 }
 
-private let sharedTimeCoordinator = LockedValue<any TimeCoordinator>(DefaultTimeCoordinator())
-
 final class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
-    static func resetToDefault() {
-        Date.coordinator = DefaultTimeCoordinator()
-    }
-    
     private let lock = Lock()
     nonisolated(unsafe) private var _offset: TimeInterval
     private(set) var offset: TimeInterval {

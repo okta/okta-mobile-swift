@@ -17,7 +17,7 @@ import Foundation
 /// Instances of this protocol may be assigned to ``Token/idTokenValidator`` to override the mechanisms used to validate tokens.
 ///
 /// > Note: A default implementation will be automatically used if this value is not changed.
-public protocol IDTokenValidator {
+public protocol IDTokenValidator: Sendable {
     /// The time interval grace period that will be permitted when verifying the ``Token/issuedAt`` value.
     ///
     /// *Default:* 5 minutes.

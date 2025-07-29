@@ -10,8 +10,11 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
+
 @testable import AuthFoundation
+import TestCommon
 
 fileprivate actor CoalescedResultCounter {
     var indexes = [Int]()
@@ -26,7 +29,8 @@ fileprivate actor CoalescedResultCounter {
     }
 }
 
-final class CoalescedResultTests: XCTestCase {
+@Suite("Coalesced result async tests")
+struct CoalescedResultTests {
     struct Item: Equatable {
         static func == (lhs: CoalescedResultTests.Item, rhs: CoalescedResultTests.Item) -> Bool {
             lhs.result == rhs.result && lhs.index == rhs.index
@@ -36,6 +40,7 @@ final class CoalescedResultTests: XCTestCase {
         let index: Int
     }
 
+    @Test("Multiple results")
     func testMultipleResults() async throws {
         let coalesce = CoalescedResult<String>()
         let counter = CoalescedResultCounter()
@@ -53,58 +58,70 @@ final class CoalescedResultTests: XCTestCase {
             }
 
             for try await result in group {
-                XCTAssertEqual(result, "Success!")
+                #expect(result == "Success!")
             }
         }
 
         let indexes = await counter.indexes
         let invokedCount = await counter.invokedCount
-        XCTAssertEqual(indexes.sorted(), [1, 2, 3, 4, 5])
-        XCTAssertEqual(invokedCount, 1)
+        #expect(indexes.sorted() == [1, 2, 3, 4, 5])
+        #expect(invokedCount == 1)
     }
 
+    @Test("Concurrently performed under high load")
     func testPerformUnderHighLoad() async throws {
         let processorCount = ProcessInfo.processInfo.activeProcessorCount
         let parallelRequests = processorCount * 100
 
-        let expectation = XCTestExpectation(description: "Test should complete without deadlock")
-        expectation.expectedFulfillmentCount = parallelRequests
-
         let coalescedResult = CoalescedResult<Bool>()
-        XCTAssertNil(coalescedResult.value, "value should be initially nil")
+        #expect(coalescedResult.value == nil, "value should be initially nil")
 
+        let group = DispatchGroup()
         DispatchQueue.concurrentPerform(iterations: parallelRequests) { iteration in
+            group.enter()
             Task.detached {
                 let result = try await coalescedResult.perform {
                     try await Task.sleep(delay: 0.001)
                     return true
                 }
-                XCTAssertTrue(result, "Returned value should be now be true")
-                expectation.fulfill()
+                #expect(result, "Returned value should be now be true")
+                group.leave()
             }
         }
 
-        await fulfillment(of: [expectation], timeout: 10.0)
-        XCTAssertTrue(coalescedResult.value ?? false, "value should be now be true")
+        try await confirmation("Wait for the operations to complete") { confirm in
+            group.notify(queue: .main) {
+                confirm()
+            }
+            try await Task.sleep(delay: .long)
+        }
+        #expect(coalescedResult.value ?? false, "value should be now be true")
     }
 
-    func testNonisolatedPropertyDeadlockUnderHighLoad() {
+    @Test("Nonisolated property deadlock under high load")
+    func testNonisolatedPropertyDeadlockUnderHighLoad() async throws {
         let processorCount = ProcessInfo.processInfo.activeProcessorCount
         let parallelRequests = processorCount * 100
 
-        let expectation = XCTestExpectation(description: "Test should complete without deadlock")
-        expectation.expectedFulfillmentCount = parallelRequests
-
         let coalescedResult = CoalescedResult<Bool>()
+        #expect(coalescedResult.value == nil, "value should be initially nil")
+
+        let group = DispatchGroup()
         DispatchQueue.concurrentPerform(iterations: parallelRequests) { _ in
+            group.enter()
             let isActive = coalescedResult.isActive
-            XCTAssertFalse(isActive, "isActive should initially be false")
+            #expect(!isActive, "isActive should initially be false")
 
             let value = coalescedResult.value
-            XCTAssertNil(value, "value should initially be nil")
-            expectation.fulfill()
+            #expect(value == nil, "value should initially be nil")
+            group.leave()
         }
 
-        wait(for: [expectation], timeout: 10.0)
+        try await confirmation("Wait for the operations to complete") { confirm in
+            group.notify(queue: .main) {
+                confirm()
+            }
+            try await Task.sleep(delay: .long)
+        }
     }
 }

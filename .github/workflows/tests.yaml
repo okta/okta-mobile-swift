@@ -180,7 +180,7 @@ jobs:
       matrix:
         include:
         - swift_version: "5.10"
-          os: macos-14
+          os: macos-15
         - swift_version: "6.0"
           os: macos-15
         - swift_version: "6.1"
@@ -204,11 +204,11 @@ jobs:
     - name: Build
       run: |
         set -o pipefail
-        swift build --build-tests --verbose 2>&1 | tee -a .build/ci-logs/${LOG_NAME}-build.log | xcbeautify $XCBEAUTIFY_ARGS
+        swift build --build-tests $SWIFT_ARGUMENTS --verbose 2>&1 | tee -a .build/ci-logs/${LOG_NAME}-build.log | xcbeautify $XCBEAUTIFY_ARGS
     - name: Test
       run: |
         set -o pipefail
-        swift test --verbose 2>&1 | tee -a .build/ci-logs/${LOG_NAME}-test.log | xcbeautify $XCBEAUTIFY_ARGS
+        swift test $SWIFT_ARGUMENTS --verbose 2>&1 | tee -a .build/ci-logs/${LOG_NAME}-test.log | xcbeautify $XCBEAUTIFY_ARGS
     - name: Upload Logs
       if: failure()
       uses: actions/upload-artifact@v4

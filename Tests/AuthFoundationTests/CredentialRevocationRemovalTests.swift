@@ -10,48 +10,55 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
+
 @testable import TestCommon
 @testable import AuthFoundation
 
-final class CredentialInternalTests: XCTestCase {
+@Suite("Credential removal upon revocation")
+struct CredentialRevocationRemovalTests {
+    @Test("Remove when only an access token is present")
     @CredentialActor
     func testShouldRemoveWithOnlyAccessToken() async throws {
         let coordinator = MockCredentialCoordinator()
         let credential = coordinator.credential(with: [])
-        XCTAssertTrue(credential.shouldRemove(for: .all))
-        XCTAssertTrue(credential.shouldRemove(for: .accessToken))
-        XCTAssertFalse(credential.shouldRemove(for: .refreshToken))
-        XCTAssertFalse(credential.shouldRemove(for: .deviceSecret))
+        #expect(credential.shouldRemove(for: .all))
+        #expect(credential.shouldRemove(for: .accessToken))
+        #expect(!credential.shouldRemove(for: .refreshToken))
+        #expect(!credential.shouldRemove(for: .deviceSecret))
     }
 
+    @Test("Remove when access and refresh token are present")
     @CredentialActor
     func testShouldRemoveWithAccessAndRefreshToken() async throws {
         let coordinator = MockCredentialCoordinator()
         let credential = coordinator.credential(with: [.refreshToken])
-        XCTAssertTrue(credential.shouldRemove(for: .all))
-        XCTAssertFalse(credential.shouldRemove(for: .accessToken))
-        XCTAssertTrue(credential.shouldRemove(for: .refreshToken))
-        XCTAssertFalse(credential.shouldRemove(for: .deviceSecret))
+        #expect(credential.shouldRemove(for: .all))
+        #expect(!credential.shouldRemove(for: .accessToken))
+        #expect(credential.shouldRemove(for: .refreshToken))
+        #expect(!credential.shouldRemove(for: .deviceSecret))
     }
 
+    @Test("Remove when access and device token are present")
     @CredentialActor
     func testShouldRemoveWithAccessAndDeviceToken() async throws {
         let coordinator = MockCredentialCoordinator()
         let credential = coordinator.credential(with: [.deviceSecret])
-        XCTAssertTrue(credential.shouldRemove(for: .all))
-        XCTAssertTrue(credential.shouldRemove(for: .accessToken))
-        XCTAssertFalse(credential.shouldRemove(for: .refreshToken))
-        XCTAssertFalse(credential.shouldRemove(for: .deviceSecret))
+        #expect(credential.shouldRemove(for: .all))
+        #expect(credential.shouldRemove(for: .accessToken))
+        #expect(!credential.shouldRemove(for: .refreshToken))
+        #expect(!credential.shouldRemove(for: .deviceSecret))
     }
 
+    @Test("Remove when access, refresh and device token are present")
     @CredentialActor
     func testShouldRemoveWithAccessRefreshAndDeviceToken() async throws {
         let coordinator = MockCredentialCoordinator()
         let credential = coordinator.credential(with: [.refreshToken, .deviceSecret])
-        XCTAssertTrue(credential.shouldRemove(for: .all))
-        XCTAssertFalse(credential.shouldRemove(for: .accessToken))
-        XCTAssertTrue(credential.shouldRemove(for: .refreshToken))
-        XCTAssertFalse(credential.shouldRemove(for: .deviceSecret))
+        #expect(credential.shouldRemove(for: .all))
+        #expect(!credential.shouldRemove(for: .accessToken))
+        #expect(credential.shouldRemove(for: .refreshToken))
+        #expect(!credential.shouldRemove(for: .deviceSecret))
     }
 }

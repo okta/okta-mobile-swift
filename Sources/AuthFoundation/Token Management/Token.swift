@@ -19,30 +19,30 @@ public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer,
     /// The object used to ensure ID tokens are valid.
     public static var idTokenValidator: any IDTokenValidator {
         get {
-            lock.withLock { _idTokenValidator }
+            providers.idTokenValidator
         }
         set {
-            lock.withLock { _idTokenValidator = newValue }
+            providers.idTokenValidator = newValue
         }
     }
 
     /// The object used to ensure access tokens can be validated against its associated ID token.
     public static var accessTokenValidator: any TokenHashValidator  {
         get {
-            lock.withLock { _accessTokenValidator }
+            providers.accessTokenValidator
         }
         set {
-            lock.withLock { _accessTokenValidator = newValue }
+            providers.accessTokenValidator = newValue
         }
     }
 
     /// The object used to ensure device secrets are validated against its associated ID token.
     public static var deviceSecretValidator: any TokenHashValidator  {
         get {
-            lock.withLock { _deviceSecretValidator }
+            providers.deviceSecretValidator
         }
         set {
-            lock.withLock { _deviceSecretValidator = newValue }
+            providers.deviceSecretValidator = newValue
         }
     }
 
@@ -51,10 +51,10 @@ public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer,
     /// > Note: This property and interface is currently marked as internal, but may be exposed publicly in the future.
     static var exchangeCoordinator: any TokenExchangeCoordinator  {
         get {
-            lock.withLock { _exchangeCoordinator }
+            providers.exchangeCoordinator
         }
         set {
-            lock.withLock { _exchangeCoordinator = newValue }
+            providers.exchangeCoordinator = newValue
         }
     }
 
@@ -229,11 +229,64 @@ public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer,
     }
 
     // MARK: Private properties / methods
-    private static let lock = Lock()
-    nonisolated(unsafe) private static var _idTokenValidator: any IDTokenValidator = DefaultIDTokenValidator()
-    nonisolated(unsafe) private static var _accessTokenValidator: any TokenHashValidator = DefaultTokenHashValidator(hashKey: .accessToken)
-    nonisolated(unsafe) private static var _deviceSecretValidator: any TokenHashValidator = DefaultTokenHashValidator(hashKey: .deviceSecret)
-    nonisolated(unsafe) private static var _exchangeCoordinator: any TokenExchangeCoordinator = DefaultTokenExchangeCoordinator()
+    @TaskLocal static var providers: ProviderRegistry = ProviderRegistry()
+}
+
+extension Token {
+    final class ProviderRegistry: Sendable {
+        var idTokenValidator: any IDTokenValidator {
+            get {
+                lock.withLock { _idTokenValidator }
+            }
+            set {
+                lock.withLock { _idTokenValidator = newValue }
+            }
+        }
+
+        var accessTokenValidator: any TokenHashValidator  {
+            get {
+                lock.withLock { _accessTokenValidator }
+            }
+            set {
+                lock.withLock { _accessTokenValidator = newValue }
+            }
+        }
+
+        var deviceSecretValidator: any TokenHashValidator  {
+            get {
+                lock.withLock { _deviceSecretValidator }
+            }
+            set {
+                lock.withLock { _deviceSecretValidator = newValue }
+            }
+        }
+
+        var exchangeCoordinator: any TokenExchangeCoordinator  {
+            get {
+                lock.withLock { _exchangeCoordinator }
+            }
+            set {
+                lock.withLock { _exchangeCoordinator = newValue }
+            }
+        }
+        
+        init(idTokenValidator: any IDTokenValidator = DefaultIDTokenValidator(),
+             accessTokenValidator: any TokenHashValidator = DefaultTokenHashValidator(hashKey: .accessToken),
+             deviceSecretValidator: any TokenHashValidator = DefaultTokenHashValidator(hashKey: .deviceSecret),
+             exchangeCoordinator: any TokenExchangeCoordinator = DefaultTokenExchangeCoordinator())
+        {
+            _idTokenValidator = idTokenValidator
+            _accessTokenValidator = accessTokenValidator
+            _deviceSecretValidator = deviceSecretValidator
+            _exchangeCoordinator = exchangeCoordinator
+        }
+
+        private let lock = Lock()
+        nonisolated(unsafe) private var _idTokenValidator: any IDTokenValidator
+        nonisolated(unsafe) private var _accessTokenValidator: any TokenHashValidator
+        nonisolated(unsafe) private var _deviceSecretValidator: any TokenHashValidator
+        nonisolated(unsafe) private var _exchangeCoordinator: any TokenExchangeCoordinator
+    }
 }
 
 extension Token {

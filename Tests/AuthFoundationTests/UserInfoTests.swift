@@ -11,35 +11,38 @@
 //
 
 import Foundation
-import XCTest
+import Testing
 @testable import AuthFoundation
 import TestCommon
 
-final class UserInfoTests: XCTestCase {
+@Suite("UserInfo Tests")
+struct UserInfoTests {
     let userInfo = "{\"sub\":\"00u2q5p3acVOXoSc04w5\",\"name\":\"Arthur Dent\",\"profile\":\"\",\"locale\":\"UK\",\"email\":\"arthur.dent@example.com\",\"nickname\":\"Earthling\",\"preferred_username\":\"arthur.dent@example.com\",\"given_name\":\"Arthur\",\"middle_name\":\"Phillip\",\"family_name\":\"Dent\",\"zoneinfo\":\"America/Los_Angeles\",\"updated_at\":1645121903,\"email_verified\":true,\"address\":{\"street_address\":\"155 Country Lane\",\"locality\":\"Cottington\",\"region\":\"Cottingshire County\",\"country\":\"UK\"}}"
 
+    @Test("Initialize and test UserInfo from a JSON string")
     func testUserInfo() throws {
         let info = try JSONDecoder().decode(UserInfo.self, from: userInfo.data(using: .utf8)!)
 
-        XCTAssertEqual(info.subject, "00u2q5p3acVOXoSc04w5")
-        XCTAssertEqual(info.preferredUsername, "arthur.dent@example.com")
-        XCTAssertEqual(info[.name], "Arthur Dent")
-        XCTAssertEqual(info.userLocale, Locale(identifier: "UK"))
-        XCTAssertEqual(info.timeZone?.identifier, "America/Los_Angeles")
-        XCTAssertEqual(info.updatedAt?.timeIntervalSinceReferenceDate, 666814703)
-        XCTAssertTrue(info.emailVerified!)
-        XCTAssertEqual(info.address?["street_address"], "155 Country Lane")
+        #expect(info.subject == "00u2q5p3acVOXoSc04w5")
+        #expect(info.preferredUsername == "arthur.dent@example.com")
+        #expect(info[.name] == "Arthur Dent")
+        #expect(info.userLocale == Locale(identifier: "UK"))
+        #expect(info.timeZone?.identifier == "America/Los_Angeles")
+        #expect(info.updatedAt?.timeIntervalSinceReferenceDate == 666814703)
+        #expect(info.emailVerified == true)
+        #expect(info.address?["street_address"] as? String == "155 Country Lane")
         
         #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
         if #available(iOS 15, macCatalyst 15, macOS 12.0, tvOS 15, watchOS 8, *) {
             let formatter = PersonNameComponentsFormatter()
             formatter.style = .long
             formatter.locale = Locale(identifier: "UK")
-            XCTAssertEqual(formatter.string(from: info.nameComponents), "Arthur Phillip Dent Earthling")
+            #expect(formatter.string(from: info.nameComponents) == "Arthur Phillip Dent Earthling")
         }
         #endif
     }
 
+    @Test("UserInfo encoder/decoder")
     func testCoding() throws {
         let originalInfo = try UserInfo.jsonDecoder.decode(UserInfo.self, from: userInfo.data(using: .utf8)!)
 
@@ -47,18 +50,19 @@ final class UserInfoTests: XCTestCase {
         
         let info = try UserInfo.jsonDecoder.decode(UserInfo.self, from: data)
 
-        XCTAssertEqual(info.subject, "00u2q5p3acVOXoSc04w5")
-        XCTAssertEqual(info.preferredUsername, "arthur.dent@example.com")
-        XCTAssertEqual(info.givenName, "Arthur")
-        XCTAssertEqual(info.familyName, "Dent")
-        XCTAssertEqual(info[.name], "Arthur Dent")
-        XCTAssertEqual(info.userLocale, Locale(identifier: "UK"))
-        XCTAssertEqual(info.timeZone?.identifier, "America/Los_Angeles")
-        XCTAssertEqual(info.updatedAt?.timeIntervalSinceReferenceDate, 666814703)
-        XCTAssertTrue(info.emailVerified!)
-        XCTAssertEqual(info.address?["street_address"], "155 Country Lane")
+        #expect(info.subject == "00u2q5p3acVOXoSc04w5")
+        #expect(info.preferredUsername == "arthur.dent@example.com")
+        #expect(info.givenName == "Arthur")
+        #expect(info.familyName == "Dent")
+        #expect(info[.name] == "Arthur Dent")
+        #expect(info.userLocale == Locale(identifier: "UK"))
+        #expect(info.timeZone?.identifier == "America/Los_Angeles")
+        #expect(info.updatedAt?.timeIntervalSinceReferenceDate == 666814703)
+        #expect(info.emailVerified == true)
+        #expect(info.address?["street_address"] as? String == "155 Country Lane")
     }
     
+    @Test("Initialize UserInfo from a raw value")
     func testRawValueInitializer() throws {
         let data = [
             "sub":"ABC123",
@@ -66,13 +70,13 @@ final class UserInfoTests: XCTestCase {
         ]
         
         let info1 = UserInfo(data)
-        XCTAssertEqual(info1.subject, "ABC123")
-        XCTAssertEqual(info1.name, "Arthur Dent")
+        #expect(info1.subject == "ABC123")
+        #expect(info1.name == "Arthur Dent")
         
-        let info2 = try XCTUnwrap(UserInfo(data))
-        XCTAssertEqual(info2.subject, "ABC123")
-        XCTAssertEqual(info2.name, "Arthur Dent")
+        let info2 = UserInfo(data)
+        #expect(info2.subject == "ABC123")
+        #expect(info2.name == "Arthur Dent")
         
-        XCTAssertEqual(info1.allClaims.sorted(), info2.allClaims.sorted())
+        #expect(info1.allClaims.sorted() == info2.allClaims.sorted())
     }
 }

@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 import FoundationNetworking
 #endif
 

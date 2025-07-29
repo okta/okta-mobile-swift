@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 import FoundationNetworking
 #endif
 
@@ -28,14 +28,14 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
             assert(SDKVersion.authFoundation != nil)
 
             return withIsolationSync { @CredentialActor in
-                TaskData.coordinator.default
+                providers.coordinator.default
             }
         }
         set {
             assert(SDKVersion.authFoundation != nil)
 
             withIsolationSync { @CredentialActor in
-                TaskData.coordinator.default = newValue
+                providers.coordinator.default = newValue
             }
         }
     }
@@ -45,7 +45,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         assert(SDKVersion.authFoundation != nil)
 
         return withIsolationSync { @CredentialActor in
-            TaskData.coordinator.allIDs
+            providers.coordinator.allIDs
         } ?? []
     }
 
@@ -54,10 +54,10 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// This value may still be overridden by supplying an explicit `graceInterval` argument to the above methods.
     public static var refreshGraceInterval: TimeInterval {
         get {
-            lock.withLock { _refreshGraceInterval }
+            providers.refreshGraceInterval
         }
         set {
-            lock.withLock { _refreshGraceInterval = newValue }
+            providers.refreshGraceInterval = newValue
         }
     }
 
@@ -71,9 +71,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         assert(SDKVersion.authFoundation != nil)
 
         return try withIsolationSyncThrowing { @CredentialActor in
-            try TaskData.coordinator.with(id: id,
-                                          prompt: prompt,
-                                          authenticationContext: authenticationContext)
+            try providers.coordinator.with(id: id,
+                                                    prompt: prompt,
+                                                    authenticationContext: authenticationContext)
         }
     }
     
@@ -99,9 +99,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         assert(SDKVersion.authFoundation != nil)
 
         return try withIsolationSyncThrowing { @CredentialActor in
-            try TaskData.coordinator.find(where: expression,
-                                          prompt: prompt,
-                                          authenticationContext: authenticationContext)
+            try providers.coordinator.find(where: expression,
+                                                    prompt: prompt,
+                                                    authenticationContext: authenticationContext)
         }
     }
     
@@ -126,22 +126,22 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         assert(SDKVersion.authFoundation != nil)
 
         return try withIsolationSyncThrowing { @CredentialActor in
-            try TaskData.coordinator.store(token: token, tags: tags, security: options)
+            try providers.coordinator.store(token: token, tags: tags, security: options)
         }
     }
 
     /// Data source used for creating and managing the creation and caching of ``Credential`` instances.
     @CredentialActor
     public static var credentialDataSource: any CredentialDataSource {
-        get { TaskData.coordinator.credentialDataSource }
-        set { TaskData.coordinator.credentialDataSource = newValue }
+        get { providers.coordinator.credentialDataSource }
+        set { providers.coordinator.credentialDataSource = newValue }
     }
     
     /// Storage instance used to abstract the secure offline storage and retrieval of ``Token`` instances.
     @CredentialActor
     public static var tokenStorage: any TokenStorage {
-        get { TaskData.coordinator.tokenStorage }
-        set { TaskData.coordinator.tokenStorage = newValue }
+        get { providers.coordinator.tokenStorage }
+        set { providers.coordinator.tokenStorage = newValue }
     }
 
     public static func == (lhs: Credential, rhs: Credential) -> Bool {
@@ -309,7 +309,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         self.init(token: token,
                   oauth2: OAuth2Client(token.context.configuration,
                                        session: urlSession),
-                  coordinator: TaskData.coordinator)
+                  coordinator: Self.providers.coordinator)
     }
     
     /// Initializer that creates a credential for a given token, using a custom OAuth2Client instance.
@@ -326,7 +326,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         
         self.init(token: token,
                   oauth2: client,
-                  coordinator: TaskData.coordinator)
+                  coordinator: Self.providers.coordinator)
     }
     
     init(token: Token, oauth2 client: OAuth2Client, coordinator: any CredentialCoordinator) {
@@ -355,19 +355,12 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     }
     
     // MARK: Private properties
+    @TaskLocal static var providers: ProviderRegistry = ProviderRegistry()
     nonisolated(unsafe) weak var coordinator: (any CredentialCoordinator)?
-
-    @CredentialActor
-    static func resetToDefault() {
-        TaskData.coordinator.resetToDefault()
-    }
 
     nonisolated(unsafe) private var _token: Token
     let userInfoAction = CoalescedResult<UserInfo>(taskName: "UserInfo")
     let lock = Lock()
-
-    private static let lock = Lock()
-    nonisolated(unsafe) private static var _refreshGraceInterval: TimeInterval = 300
 
     nonisolated(unsafe) private var _metadata: Token.Metadata?
     var metadata: Token.Metadata {
@@ -477,6 +470,62 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
                 TaskData.notificationCenter.removeObserver(tokenObserver)
             }
         }
+    }
+}
+
+extension Credential {
+    final class ProviderRegistry: Sendable {
+        var coordinator: CredentialCoordinatorImpl {
+            get {
+                lock.withLock { _coordinator }
+            }
+            set {
+                lock.withLock { _coordinator = newValue }
+            }
+        }
+
+        var refreshGraceInterval: TimeInterval {
+            get {
+                lock.withLock { _refreshGraceInterval }
+            }
+            set {
+                lock.withLock { _refreshGraceInterval = newValue }
+            }
+        }
+        
+        @CredentialActor
+        func defaultCredentialDataSource() -> any CredentialDataSource {
+            _defaultCredentialDataSourceBlock()
+        }
+        
+        @CredentialActor
+        func defaultTokenStorage() -> any TokenStorage {
+            _defaultTokenStorageBlock()
+        }
+        
+        init(coordinator: CredentialCoordinatorImpl = .init(),
+             refreshGraceInterval: TimeInterval = 300,
+             defaultCredentialDataSource: (@CredentialActor @Sendable () -> any CredentialDataSource)? = nil,
+             defaultTokenStorage: (@CredentialActor @Sendable () -> any TokenStorage)? = nil)
+        {
+            _coordinator = coordinator
+            _refreshGraceInterval = refreshGraceInterval
+            _defaultCredentialDataSourceBlock = defaultCredentialDataSource ?? { DefaultCredentialDataSource()
+            }
+            _defaultTokenStorageBlock = defaultTokenStorage ?? {
+                #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
+                KeychainTokenStorage()
+                #else
+                UserDefaultsTokenStorage()
+                #endif
+            }
+        }
+
+        private let lock = Lock()
+        nonisolated(unsafe) private var _coordinator = CredentialCoordinatorImpl()
+        nonisolated(unsafe) private var _refreshGraceInterval: TimeInterval
+        private let _defaultCredentialDataSourceBlock: @CredentialActor @Sendable () -> any CredentialDataSource
+        private let _defaultTokenStorageBlock: @CredentialActor @Sendable () -> any TokenStorage
     }
 }
 

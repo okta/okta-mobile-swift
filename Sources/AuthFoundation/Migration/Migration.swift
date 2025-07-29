@@ -13,7 +13,7 @@
 import Foundation
 
 /// Namespace used for a variety of version migration agents.
-public final class Migration {
+public final class Migration: Sendable {
     /// Determines whether or not some user data needs to be migrated.
     ///
     /// This may be if a user has upgraded to a newer version of the SDK.
@@ -35,7 +35,7 @@ public final class Migration {
     }
 
     // MARK: Internal properties / methods
-    nonisolated(unsafe) static let shared = Migration()
+    @TaskLocal static var shared = Migration()
     nonisolated(unsafe) private(set) var registeredMigrators: [any SDKVersionMigrator]
 
     init(migrators: [any SDKVersionMigrator]? = nil) {

@@ -11,35 +11,38 @@
 //
 
 import Foundation
-import XCTest
+import Testing
 import TestCommon
 
 @testable import AuthFoundation
 
-final class JWKTests: XCTestCase {
-    func testKeySets() throws {
-        let keyData = try data(from: .module, for: "keys", in: "MockResponses")
+@Suite("JWK Tests")
+struct JWKTests {
+    @Test("Key Sets parsing and validation")
+    func keySets() throws {
+        let keyData = try data(from: Bundle.module, for: "keys", in: "MockResponses")
         let jwks = try JSONDecoder().decode(JWKS.self, from: keyData)
         
-        XCTAssertEqual(jwks.count, 1)
+        #expect(jwks.count == 1)
         
         let keyId = "k6HN2DKok-kExjJGBLqgzByMCnN1RvzEOA-1ukTjexA"
-        let key = try XCTUnwrap(jwks[keyId])
-        XCTAssertEqual(key.id, keyId)
-        XCTAssertEqual(key.type, .rsa)
-        XCTAssertEqual(key.algorithm, .rs256)
-        XCTAssertEqual(key.usage, .signature)
-        XCTAssertNotNil(key.rsaModulus)
-        XCTAssertEqual(key.rsaExponent, "AQAB")
+        let key = try #require(jwks[keyId])
+        #expect(key.id == keyId)
+        #expect(key.type == JWK.KeyType.rsa)
+        #expect(key.algorithm == JWK.Algorithm.rs256)
+        #expect(key.usage == JWK.Usage.signature)
+        #expect(key.rsaModulus != nil)
+        #expect(key.rsaExponent == "AQAB")
         
-        XCTAssertTrue(jwks[0] == key)
+        #expect(jwks[0] == key)
         
-        let data = try JSONEncoder().encode(jwks)
-        let decodedJwks = try JSONDecoder().decode(JWKS.self, from: data)
-        XCTAssertEqual(jwks, decodedJwks)
+        let encodedData = try JSONEncoder().encode(jwks)
+        let decodedJwks = try JSONDecoder().decode(JWKS.self, from: encodedData)
+        #expect(jwks == decodedJwks)
     }
     
-    func testDefaultRSAAlgorithmFallback() throws {
+    @Test("Default RSA Algorithm Fallback")
+    func defaultRSAAlgorithmFallback() throws {
         let keyData = data(for: """
             {
               "keys": [
@@ -55,19 +58,20 @@ final class JWKTests: XCTestCase {
             """)
         let jwks = try JSONDecoder().decode(JWKS.self, from: keyData)
         
-        XCTAssertEqual(jwks.count, 1)
+        #expect(jwks.count == 1)
         
         let keyId = "p014K-d3IwPWLc0od5LHM1s1u0YDqX4LIl1xg6ik3j4"
-        let key = try XCTUnwrap(jwks[keyId])
-        XCTAssertEqual(key.id, keyId)
-        XCTAssertEqual(key.type, .rsa)
-        XCTAssertEqual(key.algorithm, .rs256)
-        XCTAssertEqual(key.usage, .signature)
-        XCTAssertNotNil(key.rsaModulus)
-        XCTAssertEqual(key.rsaExponent, "AQAB")
+        let key = try #require(jwks[keyId])
+        #expect(key.id == keyId)
+        #expect(key.type == JWK.KeyType.rsa)
+        #expect(key.algorithm == JWK.Algorithm.rs256)
+        #expect(key.usage == JWK.Usage.signature)
+        #expect(key.rsaModulus != nil)
+        #expect(key.rsaExponent == "AQAB")
     }
     
-    func testJWSAndJWEKeys() throws {
+    @Test("JWS and JWE Keys")
+    func jWSAndJWEKeys() throws {
         let keyData = data(for: """
             {
                "keys" : [
@@ -103,8 +107,8 @@ final class JWKTests: XCTestCase {
         
         let jwks = try JSONDecoder().decode(JWKS.self, from: keyData)
         
-        XCTAssertEqual(jwks.count, 2)
-        XCTAssertEqual(jwks[0].algorithm, .rsaOAEP)
-        XCTAssertEqual(jwks[1].algorithm, .rs256)
+        #expect(jwks.count == 2)
+        #expect(jwks[0].algorithm == JWK.Algorithm.rsaOAEP)
+        #expect(jwks[1].algorithm == JWK.Algorithm.rs256)
     }
 }

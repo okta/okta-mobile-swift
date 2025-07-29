@@ -10,50 +10,58 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
+
 @testable import AuthFoundation
 
-final class APIContentTypeTests: XCTestCase {
+@Suite("APIContentType tests")
+struct APIContentTypeTests {
+    @Test("Raw value constructor")
     func testRawValueConstructor() {
-        XCTAssertEqual(APIContentType(rawValue: "application/json"), .json)
-        XCTAssertEqual(APIContentType(rawValue: "application/x-www-form-urlencoded"), .formEncoded)
-        XCTAssertEqual(APIContentType(rawValue: "application/ion+json"), .other("application/ion+json"))
+        #expect(APIContentType(rawValue: "application/json") == .json)
+        #expect(APIContentType(rawValue: "application/x-www-form-urlencoded") == .formEncoded)
+        #expect(APIContentType(rawValue: "application/ion+json") == .other("application/ion+json"))
     }
 
+    @Test("Raw value property")
     func testRawValue() {
-        XCTAssertEqual(APIContentType(rawValue: "application/json")?.rawValue,
+        #expect(APIContentType(rawValue: "application/json")?.rawValue ==
                        "application/json; charset=UTF-8")
-        XCTAssertEqual(APIContentType(rawValue: "application/json; charset=UTF-8")?.rawValue,
+        #expect(APIContentType(rawValue: "application/json; charset=UTF-8")?.rawValue ==
                        "application/json; charset=UTF-8")
-        XCTAssertEqual(APIContentType(rawValue: "application/json; okta-version=1.0.0")?.rawValue,
+        #expect(APIContentType(rawValue: "application/json; okta-version=1.0.0")?.rawValue ==
                        "application/json; okta-version=1.0.0")
 
-        XCTAssertEqual(APIContentType(rawValue: "application/x-www-form-urlencoded")?.rawValue,
+        #expect(APIContentType(rawValue: "application/x-www-form-urlencoded")?.rawValue ==
                        "application/x-www-form-urlencoded; charset=UTF-8")
-        XCTAssertEqual(APIContentType(rawValue: "application/x-www-form-urlencoded; charset=UTF-8")?.rawValue,
+        #expect(APIContentType(rawValue: "application/x-www-form-urlencoded; charset=UTF-8")?.rawValue ==
                        "application/x-www-form-urlencoded; charset=UTF-8")
     }
 
+    @Test("Underlying type")
     func testUnderlyingType() {
-        XCTAssertEqual(APIContentType(rawValue: "application/json")?.underlyingType, .json)
-        XCTAssertEqual(APIContentType(rawValue: "application/json; encoding=UTF-8")?.underlyingType, .json)
-        XCTAssertEqual(APIContentType(rawValue: "application/json; okta-version=1.0.0")?.underlyingType, .json)
+        #expect(APIContentType(rawValue: "application/json")?.underlyingType == .json)
+        #expect(APIContentType(rawValue: "application/json; encoding=UTF-8")?.underlyingType == .json)
+        #expect(APIContentType(rawValue: "application/json; okta-version=1.0.0")?.underlyingType == .json)
         
-        XCTAssertEqual(APIContentType(rawValue: "application/x-www-form-urlencoded")?.underlyingType, .formEncoded)
-        XCTAssertEqual(APIContentType(rawValue: "application/x-www-form-urlencoded; encoding=UTF-8")?.underlyingType, .formEncoded)
+        #expect(APIContentType(rawValue: "application/x-www-form-urlencoded")?.underlyingType == .formEncoded)
+        #expect(APIContentType(rawValue: "application/x-www-form-urlencoded; encoding=UTF-8")?.underlyingType == .formEncoded)
 
-        XCTAssertEqual(APIContentType(rawValue: "application/ion+json")?.underlyingType, .json)
+        #expect(APIContentType(rawValue: "application/ion+json")?.underlyingType == .json)
     }
     
+    @Test("JSON encoded data")
     func testJsonEncodedData() throws {
-        let data = try XCTUnwrap(APIContentType.json.encodedData(with: ["string": "value", "bool": true, "int": 6]))
-        XCTAssertEqual(String(data: data, encoding: .utf8),
+        let data = try #require(try APIContentType.json.encodedData(with: ["string": "value", "bool": true, "int": 6]))
+        #expect(String(data: data, encoding: .utf8) ==
                        "{\"bool\":true,\"int\":6,\"string\":\"value\"}")
     }
 
+    @Test("Form encoded data")
     func testFormEncodedData() throws {
-        let data = try XCTUnwrap(APIContentType.formEncoded.encodedData(with: ["string": "value", "bool": true, "int": 6]))
-        XCTAssertEqual(String(data: data, encoding: .utf8),
+        let data = try #require(try APIContentType.formEncoded.encodedData(with: ["string": "value", "bool": true, "int": 6]))
+        #expect(String(data: data, encoding: .utf8) ==
                        "bool=true&int=6&string=value")
     }
 }

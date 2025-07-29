@@ -10,81 +10,82 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
+
 @testable import AuthFoundation
 @testable import TestCommon
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 import FoundationNetworking
 #endif
 
-final class DefaultTimeCoordinatorTests: XCTestCase {
-    var coordinator: DefaultTimeCoordinator!
-    var client: MockApiClient!
-    let baseUrl = URL(string: "https://example.okta.com/oauth2/default")!
-    var configuration: OAuth2Client.Configuration!
-    let urlSession = URLSessionMock()
-
-    override func setUpWithError() throws {
-        coordinator = DefaultTimeCoordinator()
-        Date.coordinator = coordinator
-
-        configuration = OAuth2Client.Configuration(issuerURL: baseUrl,
-                                                   clientId: "clientid",
-                                                   scope: "openid")
+@Suite("Default time coordinator")
+struct DefaultTimeCoordinatorTests {
+    let client: MockApiClient
+    
+    init() throws {
+        let baseUrl = try #require(URL(string: "https://example.okta.com/oauth2/default"))
+        let configuration = OAuth2Client.Configuration(
+            issuerURL: baseUrl,
+            clientId: "clientid",
+            scope: "openid")
+        
         client = MockApiClient(configuration: configuration,
-                               session: urlSession,
                                baseURL: baseUrl)
     }
     
-    override func tearDownWithError() throws {
-        DefaultTimeCoordinator.resetToDefault()
-        coordinator = nil
-    }
-    
+    @Test("Date offset adjustments", .timeCoordinator)
     func testDateAdjustments() throws {
-        XCTAssertEqual(coordinator.offset, 0)
+        let coordinator = try #require(Date.coordinator as? DefaultTimeCoordinator)
+        #expect(coordinator.offset == 0)
 
         try sendRequest(offset: 1000, cachePolicy: .returnCacheDataElseLoad)
-        XCTAssertEqual(coordinator.offset, 0)
-        XCTAssertEqual(coordinator.now.timeIntervalSinceReferenceDate,
-                       Date().timeIntervalSinceReferenceDate,
-                       accuracy: 2)
+        #expect(coordinator.offset == 0)
+        #expect(coordinator
+            .now
+            .timeIntervalSinceReferenceDate
+            .is(Date().timeIntervalSinceReferenceDate, accuracy: 2))
 
         // Test negative clock drift (local clock is slower than the server)
         try sendRequest(offset: 1000, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
-        XCTAssertEqual(coordinator.offset, 1000, accuracy: 10)
-        XCTAssertEqual(coordinator.now.timeIntervalSinceReferenceDate,
-                       Date().timeIntervalSinceReferenceDate + 1000,
-                       accuracy: 10)
-        XCTAssertEqual(coordinator.date(from: Date(timeIntervalSinceNow: 500)).timeIntervalSinceReferenceDate,
-                       Date().timeIntervalSinceReferenceDate + 1500,
-                       accuracy: 2)
-
+        #expect(coordinator.offset.is(1000, accuracy: 1))
+        #expect(coordinator
+            .now
+            .timeIntervalSinceReferenceDate
+            .is(Date().timeIntervalSinceReferenceDate + 1000, accuracy: 10))
+        #expect(coordinator
+            .date(from: Date(timeIntervalSinceNow: 500))
+            .timeIntervalSinceReferenceDate
+            .is(Date().timeIntervalSinceReferenceDate + 1500, accuracy: 2))
+        
         // Test positive clock drift (local clock is faster than the server)
         try sendRequest(offset: -1000, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
-        XCTAssertEqual(coordinator.offset, -1000, accuracy: 10)
-        XCTAssertEqual(coordinator.now.timeIntervalSinceReferenceDate,
-                       Date().timeIntervalSinceReferenceDate - 1000,
-                       accuracy: 2)
-        XCTAssertEqual(coordinator.date(from: Date(timeIntervalSinceNow: 500)).timeIntervalSinceReferenceDate,
-                       Date().timeIntervalSinceReferenceDate - 500,
-                       accuracy: 2)
+        #expect(coordinator.offset.is(-1000, accuracy: 10))
+        #expect(coordinator
+            .now
+            .timeIntervalSinceReferenceDate
+            .is(Date().timeIntervalSinceReferenceDate - 1000, accuracy: 2))
+        #expect(coordinator
+            .date(from: Date(timeIntervalSinceNow: 500))
+            .timeIntervalSinceReferenceDate
+            .is(Date().timeIntervalSinceReferenceDate - 500, accuracy: 2))
     }
     
     func sendRequest(offset: TimeInterval, cachePolicy: URLRequest.CachePolicy) throws { 
         let newDate = Date(timeIntervalSinceNow: offset)
         let newDateString = httpDateFormatter.string(from: newDate)
         
-        let url = try XCTUnwrap(URL(string: "https://example.com/oauth2/v1/token"))
+        let url = try #require(URL(string: "https://example.com/oauth2/v1/token"))
         let request = URLRequest(url: url, cachePolicy: cachePolicy)
-        let response = try XCTUnwrap(HTTPURLResponse(url: url,
-                                                     statusCode: 200,
-                                                     httpVersion: "http/1.1",
-                                                     headerFields: [
+        let response = try #require(HTTPURLResponse(url: url,
+                                                    statusCode: 200,
+                                                    httpVersion: "http/1.1",
+                                                    headerFields: [
                                                         "Date": newDateString
-                                                     ]))
+                                                    ]))
         
+        let coordinator = try #require(Date.coordinator as? DefaultTimeCoordinator)
         coordinator.api(client: client, didSend: request, received: response)
     }
 }

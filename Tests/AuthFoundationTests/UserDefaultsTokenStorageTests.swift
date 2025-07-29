@@ -10,9 +10,11 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
-@testable import AuthFoundation
+import Testing
+import Foundation
 import TestCommon
+
+@testable import AuthFoundation
 
 #if swift(<6.0)
 extension UserDefaults: @unchecked Sendable {}
@@ -20,10 +22,8 @@ extension UserDefaults: @unchecked Sendable {}
 extension UserDefaults: @unchecked @retroactive Sendable {}
 #endif
 
-final class UserDefaultTokenStorageTests: XCTestCase {
-    var userDefaults: UserDefaults!
-    var storage: UserDefaultsTokenStorage!
-    
+@Suite("UserDefaults Token Storage Tests")
+class UserDefaultsTokenStorageTests {
     let token = try! Token(id: "TokenId",
                            issuedAt: Date(),
                            tokenType: "Bearer",
@@ -52,63 +52,89 @@ final class UserDefaultTokenStorageTests: XCTestCase {
                                                                           scope: "openid"),
                                                      clientSettings: nil))
 
-    override func setUp() async throws {
-        userDefaults = UserDefaults(suiteName: name)
+    let name: String
+    let userDefaults: UserDefaults
+    let storage: UserDefaultsTokenStorage
+
+    init() async throws {
+        name = "UserDefaultsTests.\(UUID().uuidString)"
+        userDefaults = try #require(UserDefaults(suiteName: name))
         userDefaults.removePersistentDomain(forName: name)
         storage = await UserDefaultsTokenStorage(userDefaults: userDefaults)
 
-        let tokenCount = await storage.allIDs.count
-        XCTAssertEqual(tokenCount, 0)
+        #expect(await storage.allIDs.count == 0)
     }
     
-    override func tearDown() async throws {
+    deinit {
         userDefaults.removePersistentDomain(forName: name)
-
-        userDefaults = nil
-        storage = nil
     }
-
+    
+    @Test("Default Token functionality")
     @CredentialActor
     func testDefaultToken() async throws {
+        let storage = storage
+        let token = token
+        let newToken = newToken
+        
         try storage.add(token: token, metadata: nil, security: [])
-        XCTAssertEqual(storage.allIDs.count, 1)
-        XCTAssertEqual(storage.defaultTokenID, token.id)
+        #expect(storage.allIDs.count == 1)
+        #expect(storage.defaultTokenID == token.id)
         
         try storage.setDefaultTokenID(nil)
-        XCTAssertNil(storage.defaultTokenID)
-        XCTAssertEqual(storage.allIDs.count, 1)
+        #expect(storage.defaultTokenID == nil)
+        #expect(storage.allIDs.count == 1)
    
-        XCTAssertThrowsError(try storage.add(token: token, metadata: nil, security: []))
-        XCTAssertEqual(storage.allIDs.count, 1)
+        #expect(throws: (any Error).self) {
+            try storage.add(token: token, metadata: nil, security: [])
+        }
+        #expect(storage.allIDs.count == 1)
         
-        XCTAssertNoThrow(try storage.replace(token: token.id, with: newToken, security: nil))
-        XCTAssertEqual(storage.allIDs.count, 1)
+        #expect(throws: Never.self) {
+            try storage.replace(token: token.id, with: newToken, security: nil)
+        }
+        #expect(storage.allIDs.count == 1)
 
-        XCTAssertNoThrow(try storage.remove(id: token.id))
-        XCTAssertEqual(storage.allIDs.count, 0)
+        #expect(throws: Never.self) {
+            try storage.remove(id: token.id)
+        }
+        #expect(storage.allIDs.count == 0)
 
-        XCTAssertNoThrow(try storage.remove(id: token.id))
-        XCTAssertEqual(storage.allIDs.count, 0)
+        #expect(throws: Never.self) {
+            try storage.remove(id: token.id)
+        }
+        #expect(storage.allIDs.count == 0)
     }
 
+    @Test("Implicit Default Token functionality")
     @CredentialActor
-    func testImplicitDefaultToken() async throws {
-        XCTAssertNil(storage.defaultTokenID)
+    func implicitDefaultToken() async throws {
+        let storage = storage
+        let token = token
         
-        XCTAssertNoThrow(try storage.add(token: token, metadata: nil, security: []))
-        XCTAssertEqual(storage.allIDs.count, 1)
+        #expect(storage.defaultTokenID == nil)
+        
+        #expect(throws: Never.self) {
+            try storage.add(token: token, metadata: nil, security: [])
+        }
+        #expect(storage.allIDs.count == 1)
 
-        XCTAssertEqual(storage.defaultTokenID, token.id)
+        #expect(storage.defaultTokenID == token.id)
     }
 
+    @Test("Remove Default Token functionality")
     @CredentialActor
-    func testRemoveDefaultToken() async throws {
+    func removeDefaultToken() async throws {
+        let storage = storage
+        let token = token
+        
         try storage.add(token: token, metadata: nil, security: [])
         try storage.setDefaultTokenID(token.id)
-        XCTAssertEqual(storage.allIDs.count, 1)
+        #expect(storage.allIDs.count == 1)
 
-        XCTAssertNoThrow(try storage.remove(id: token.id))
-        XCTAssertEqual(storage.allIDs.count, 0)
-        XCTAssertNil(storage.defaultTokenID)
+        #expect(throws: Never.self) {
+            try storage.remove(id: token.id)
+        }
+        #expect(storage.allIDs.count == 0)
+        #expect(storage.defaultTokenID == nil)
     }
 }

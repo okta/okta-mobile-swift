@@ -13,13 +13,14 @@
 import Foundation
 @testable import AuthFoundation
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 import FoundationNetworking
 #endif
 
 class MockApiClient: APIClient, @unchecked Sendable {
     var baseURL: URL
-    var session: any URLSessionProtocol
+    let mockSession: URLSessionMock
+    var session: any URLSessionProtocol { mockSession }
     let configuration: any APIClientConfiguration
     let shouldRetry: APIRetry?
     var allRequests: [URLRequest] = []
@@ -29,11 +30,12 @@ class MockApiClient: APIClient, @unchecked Sendable {
     var delegate: (any APIClientDelegate)?
     
     init(configuration: any APIClientConfiguration,
-         session: any URLSessionProtocol,
+         mockSession: URLSessionMock = .init(),
          baseURL: URL,
-         shouldRetry: APIRetry? = nil) {
+         shouldRetry: APIRetry? = nil)
+    {
         self.configuration = configuration
-        self.session = session
+        self.mockSession = mockSession
         self.baseURL = baseURL
         self.shouldRetry = shouldRetry
     }
@@ -48,7 +50,7 @@ class MockApiClient: APIClient, @unchecked Sendable {
         if let jsonType = type as? any JSONDecodable.Type {
             jsonDecoder = jsonType.jsonDecoder
         } else {
-            jsonDecoder = defaultJSONDecoder
+            jsonDecoder = defaultJSONDecoder()
         }
         
         jsonDecoder.userInfo = info

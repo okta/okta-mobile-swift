@@ -225,6 +225,8 @@ public actor DeviceAuthorizationFlow: AuthenticationFlow {
             lock.withLock { _slowDownInterval = newValue }
         }
     }
+
+    // TODO: Remove all `resetToDefault()` test functions
     static func resetToDefault() {
         slowDownInterval = 5.0
     }

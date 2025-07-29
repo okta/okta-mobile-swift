@@ -10,49 +10,31 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Testing
+import Foundation
+
 @testable import AuthFoundation
-import TestCommon
+@testable import TestCommon
 
-class MockTimeCoordinator: @unchecked Sendable, TimeCoordinator {
-    @LockedValue var offset: TimeInterval = 0.0
-
-    var now: Date {
-        Date(timeIntervalSinceNow: offset)
-    }
-    
-    func date(from date: Date) -> Date {
-        date.addingTimeInterval(offset)
-    }
-}
-
-final class TimeCoordinatorTests: XCTestCase {
-    var coordinator: MockTimeCoordinator!
-    
-    override func setUpWithError() throws {
-        coordinator = MockTimeCoordinator()
-        Date.coordinator = coordinator
-    }
-    
-    override func tearDownWithError() throws {
-        DefaultTimeCoordinator.resetToDefault()
-        coordinator = nil
-    }
-    
-    func testDateAdjustments() {
+@Suite("Time Coordination and Date Management")
+struct TimeCoordinatorTests {
+    @Test("Date adjustments with time offset coordination", .mockTimeCoordinator)
+    func testDateAdjustments() throws {
+        let coordinator = try #require(Date.coordinator as? MockTimeCoordinator)
         let date = Date()
         
-        XCTAssertEqual(date, date.coordinated)
+        #expect(date == date.coordinated)
         coordinator.offset = 300
-        XCTAssertNotEqual(date, date.coordinated)
-        XCTAssertEqual(date.coordinated.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate, 300)
+        #expect(date != date.coordinated)
+        #expect(date.coordinated.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate == 300)
         
-        XCTAssertGreaterThan(Date.nowCoordinated, Date())
+        #expect(Date.nowCoordinated > Date())
     }
     
-    func testDefaultTimeCoordinator() {
+    @Test("Default time coordinator behavior without offsets", .mockTimeCoordinator)
+    func testDefaultTimeCoordinator() throws {
         let date = Date()
         
-        XCTAssertEqual(date, date.coordinated)
+        #expect(date == date.coordinated)
     }
 }

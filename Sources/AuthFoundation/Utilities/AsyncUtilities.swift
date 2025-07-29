@@ -17,9 +17,6 @@ import Foundation
 /// This is primarily used by unit tests to ensure the consistent passage of shared framework objects to isolate tests.
 @_documentation(visibility: internal)
 public enum TaskData {
-    /// The shared Credential Coordinator implementation.
-    @TaskLocal static var coordinator: CredentialCoordinatorImpl = CredentialCoordinatorImpl()
-
     /// The NotificationCenter instance that should be used when posting or observing notifications.
     @TaskLocal public static var notificationCenter: NotificationCenter = .default
 
@@ -27,6 +24,9 @@ public enum TaskData {
     ///
     /// > Important: This is only used for testing, and should not be used in production.
     @TaskLocal static var timeIntervalToNanoseconds: Double = 1_000_000_000
+    
+    /// The storage reference containing the selected time coordinator.
+    @TaskLocal static var sharedTimeCoordinator: LockedValue<any TimeCoordinator> = .init(DefaultTimeCoordinator())
 }
 
 extension Task where Success == Never, Failure == Never {

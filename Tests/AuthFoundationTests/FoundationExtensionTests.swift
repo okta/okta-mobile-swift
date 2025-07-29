@@ -10,59 +10,60 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Testing
 
 @testable import AuthFoundation
-@testable import TestCommon
 
-final class FoundationExtensionTests: XCTestCase {
-    func testStringSnakeCase() throws {
-        XCTAssertEqual("clientId".snakeCase, "client_id")
-        XCTAssertEqual("clientId".camelCase, "clientId")
-        XCTAssertEqual("clientId".pascalCase, "ClientId")
+@Suite("Foundation Extensions")
+struct FoundationExtensionTests {
+    @Test("String case conversions")
+    func stringCaseConversions() throws {
+        #expect("clientId".snakeCase == "client_id")
+        #expect("clientId".camelCase == "clientId")
+        #expect("clientId".pascalCase == "ClientId")
 
-        XCTAssertEqual("theValue".snakeCase, "the_value")
-        XCTAssertEqual("theValue".camelCase, "theValue")
-        XCTAssertEqual("theValue".pascalCase, "TheValue")
+        #expect("theValue".snakeCase == "the_value")
+        #expect("theValue".camelCase == "theValue")
+        #expect("theValue".pascalCase == "TheValue")
 
-        XCTAssertEqual("Awesome".snakeCase, "awesome")
-        XCTAssertEqual("Awesome".camelCase, "awesome")
-        XCTAssertEqual("Awesome".pascalCase, "Awesome")
+        #expect("Awesome".snakeCase == "awesome")
+        #expect("Awesome".camelCase == "awesome")
+        #expect("Awesome".pascalCase == "Awesome")
 
-        XCTAssertEqual("version1Response".snakeCase, "version_1_response")
-        XCTAssertEqual("version1Response".camelCase, "version1Response")
-        XCTAssertEqual("version1Response".pascalCase, "Version1Response")
+        #expect("version1Response".snakeCase == "version_1_response")
+        #expect("version1Response".camelCase == "version1Response")
+        #expect("version1Response".pascalCase == "Version1Response")
 
-        XCTAssertEqual("Version1Response".snakeCase, "version_1_response")
-        XCTAssertEqual("Version1Response".camelCase, "version1Response")
-        XCTAssertEqual("Version1Response".pascalCase, "Version1Response")
+        #expect("Version1Response".snakeCase == "version_1_response")
+        #expect("Version1Response".camelCase == "version1Response")
+        #expect("Version1Response".pascalCase == "Version1Response")
 
-        XCTAssertEqual("this_is_snake_case".snakeCase, "this_is_snake_case")
-        XCTAssertEqual("this_is_snake_case".camelCase, "thisIsSnakeCase")
-        XCTAssertEqual("this_is_snake_case".pascalCase, "ThisIsSnakeCase")
+        #expect("this_is_snake_case".snakeCase == "this_is_snake_case")
+        #expect("this_is_snake_case".camelCase == "thisIsSnakeCase")
+        #expect("this_is_snake_case".pascalCase == "ThisIsSnakeCase")
 
-        XCTAssertEqual("__prefixedWithUnderscores".snakeCase, "__prefixed_with_underscores")
-        XCTAssertEqual("__prefixedWithUnderscores".camelCase, "prefixedWithUnderscores")
-        XCTAssertEqual("__prefixedWithUnderscores".pascalCase, "PrefixedWithUnderscores")
+        #expect("__prefixedWithUnderscores".snakeCase == "__prefixed_with_underscores")
+        #expect("__prefixedWithUnderscores".camelCase == "prefixedWithUnderscores")
+        #expect("__prefixedWithUnderscores".pascalCase == "PrefixedWithUnderscores")
 
-        XCTAssertEqual("isHTTPResponse".snakeCase, "is_http_response")
-        XCTAssertEqual("isHTTPResponse".camelCase, "isHTTPResponse")
-        XCTAssertEqual("isHTTPResponse".pascalCase, "IsHTTPResponse")
+        #expect("isHTTPResponse".snakeCase == "is_http_response")
+        #expect("isHTTPResponse".camelCase == "isHTTPResponse")
+        #expect("isHTTPResponse".pascalCase == "IsHTTPResponse")
 
-        XCTAssertEqual("is400HTTPResponse".snakeCase, "is_400_http_response")
-        XCTAssertEqual("is400HTTPResponse".camelCase, "is400HTTPResponse")
-        XCTAssertEqual("is400HTTPResponse".pascalCase, "Is400HTTPResponse")
+        #expect("is400HTTPResponse".snakeCase == "is_400_http_response")
+        #expect("is400HTTPResponse".camelCase == "is400HTTPResponse")
+        #expect("is400HTTPResponse".pascalCase == "Is400HTTPResponse")
 
-        XCTAssertEqual("isHTTP400Response".snakeCase, "is_http_400_response")
-        XCTAssertEqual("isHTTP400Response".camelCase, "isHTTP400Response")
-        XCTAssertEqual("isHTTP400Response".pascalCase, "IsHTTP400Response")
+        #expect("isHTTP400Response".snakeCase == "is_http_400_response")
+        #expect("isHTTP400Response".camelCase == "isHTTP400Response")
+        #expect("isHTTP400Response".pascalCase == "IsHTTP400Response")
 
-        XCTAssertEqual("URLSession".snakeCase, "url_session")
-        XCTAssertEqual("URLSession".camelCase, "URLSession")
-        XCTAssertEqual("URLSession".pascalCase, "URLSession")
+        #expect("URLSession".snakeCase == "url_session")
+        #expect("URLSession".camelCase == "URLSession")
+        #expect("URLSession".pascalCase == "URLSession")
 
-        XCTAssertEqual("HTTP".snakeCase, "http")
-        XCTAssertEqual("HTTP".camelCase, "HTTP")
-        XCTAssertEqual("HTTP".pascalCase, "HTTP")
+        #expect("HTTP".snakeCase == "http")
+        #expect("HTTP".camelCase == "HTTP")
+        #expect("HTTP".pascalCase == "HTTP")
     }
 }

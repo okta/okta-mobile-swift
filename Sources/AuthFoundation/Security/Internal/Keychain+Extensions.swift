@@ -78,7 +78,6 @@ extension KeychainGettable {
         var ref: AnyObject?
         let status = Keychain
             .implementation
-            .wrappedValue
             .copyItemMatching(cfQuery as CFDictionary, &ref)
 
         guard status == noErr else {
@@ -110,7 +109,6 @@ extension KeychainListable {
         var ref: CFTypeRef?
         let status = Keychain
             .implementation
-            .wrappedValue
             .copyItemMatching(cfQuery, &ref)
 
         guard status != errSecItemNotFound else {
@@ -158,7 +156,6 @@ extension KeychainUpdatable {
 
         let status = Keychain
             .implementation
-            .wrappedValue
             .updateItem(updateSearchQuery as CFDictionary, saveQuery as CFDictionary)
 
         if status == errSecItemNotFound {
@@ -177,7 +174,6 @@ extension KeychainDeletable {
     func performDelete() throws {
         let status = Keychain
             .implementation
-            .wrappedValue
             .deleteItem(deleteQuery as CFDictionary)
 
         if status == errSecItemNotFound {

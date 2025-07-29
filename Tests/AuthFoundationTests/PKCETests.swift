@@ -10,29 +10,33 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Testing
+import Foundation
 
 @testable import AuthFoundation
 
-final class PKCETests: XCTestCase {
+@Suite("PKCE Tests")
+struct PKCETests {
+    @Test("PKCE Constructor")
     func testPKCE() throws {
         guard let pkce = PKCE() else {
-            XCTFail("Unable to create PKCE")
+            Issue.record("Unable to create PKCE")
             return
         }
         
-        XCTAssertNotNil(pkce.codeVerifier)
+        #expect(!pkce.codeVerifier.isEmpty)
         
-        #if os(Linux)
-        XCTAssertEqual(pkce.codeVerifier, pkce.codeChallenge)
-        XCTAssertEqual(pkce.method, .plain)
+        #if os(Linux) || os(Android)
+        #expect(pkce.codeVerifier == pkce.codeChallenge)
+        #expect(pkce.method == .plain)
         #else
-        XCTAssertNotNil(pkce.codeChallenge)
-        XCTAssertEqual(pkce.method, .sha256)
+        #expect(!pkce.codeChallenge.isEmpty)
+        #expect(pkce.method == .sha256)
         #endif
     }
     
+    @Test("Test random data function")
     func testRandomData() throws {
-        XCTAssertEqual(Array<UInt8>.random(count: 5).count, 5)
+        #expect(Array<UInt8>.random(count: 5).count == 5)
     }
 }

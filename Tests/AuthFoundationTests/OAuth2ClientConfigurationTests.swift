@@ -10,71 +10,83 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
 @testable import TestCommon
 @testable import AuthFoundation
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 import FoundationNetworking
 #endif
 
-final class OAuth2ClientConfigurationTests: XCTestCase {
-    func testInitializers() throws {
-        var configuration: OAuth2Client.Configuration!
-        
-        // Tewst with a string literal scope
-        configuration = .init(issuerURL: URL(string: "https://example.com")!,
-                              clientId: "abcd123",
-                              scope: "openid profile",
-                              authentication: .none)
-        XCTAssertEqual(configuration.discoveryURL.absoluteString, "https://example.com/.well-known/openid-configuration")
-        XCTAssertEqual(configuration.scope, ["openid", "profile"])
-        XCTAssertEqual(configuration.parameters(for: .authorization)?.mapValues(\.stringValue), [
+@Suite("OAuth2 Client Configuration")
+struct OAuth2ClientConfigurationTests {
+    @Test("Initialize using a string literal scope")
+    func testStringLiteralInitializer() throws {
+        let configuration = OAuth2Client.Configuration(
+            issuerURL: URL(string: "https://example.com")!,
+            clientId: "abcd123",
+            scope: "openid profile",
+            authentication: .none)
+        #expect(configuration.discoveryURL.absoluteString == "https://example.com/.well-known/openid-configuration")
+        #expect(configuration.scope == ["openid", "profile"])
+        #expect(configuration.parameters(for: .authorization)?.mapValues(\.stringValue) == [
             "client_id": "abcd123",
             "scope": "openid profile",
         ])
-        
-        // Test with an array literal scope
-        configuration = .init(issuerURL: URL(string: "https://example.com/oauth2/default")!,
-                              clientId: "abcd123",
-                              scope: ["openid", "email"],
-                              redirectUri: URL(string: "com.example.app:/"),
-                              logoutRedirectUri: URL(string: "com.example.app:/logout"),
-                              authentication: .clientSecret("super_secret"))
-        XCTAssertEqual(configuration.discoveryURL.absoluteString, "https://example.com/oauth2/default/.well-known/openid-configuration")
-        XCTAssertEqual(configuration.scope, ["openid", "email"])
-        XCTAssertEqual(configuration.parameters(for: .authorization)?.mapValues(\.stringValue), [
+    }
+    
+    @Test("Initialize using an array literal scope")
+    func testArrayLiteralInitializer() throws {
+        let configuration = OAuth2Client.Configuration(
+            issuerURL: URL(string: "https://example.com/oauth2/default")!,
+            clientId: "abcd123",
+            scope: ["openid", "email"],
+            redirectUri: URL(string: "com.example.app:/"),
+            logoutRedirectUri: URL(string: "com.example.app:/logout"),
+            authentication: .clientSecret("super_secret"))
+        #expect(configuration.discoveryURL.absoluteString == "https://example.com/oauth2/default/.well-known/openid-configuration")
+        #expect(configuration.scope == ["openid", "email"])
+        #expect(configuration.parameters(for: .authorization)?.mapValues(\.stringValue) == [
             "client_id": "abcd123",
             "client_secret": "super_secret",
             "redirect_uri": "com.example.app:/",
             "scope": "openid email",
         ])
-
-        // Test with a string value scope
-        let scopeString = "openid profile"
-        configuration = .init(issuerURL: URL(string: "https://example.com")!,
-                              clientId: "abcd123",
-                              scope: scopeString,
-                              authentication: .none)
-        XCTAssertEqual(configuration.scope, ["openid", "profile"])
-
-        // Test with an array value scope
-        let scopeArray = ["openid", "email"]
-        configuration = .init(issuerURL: URL(string: "https://example.com")!,
-                              clientId: "abcd123",
-                              scope: scopeArray,
-                              authentication: .none)
-        XCTAssertEqual(configuration.scope, ["openid", "email"])
     }
     
-    func testConfiguration() throws {
-        XCTAssertNotEqual(try OAuth2Client.Configuration(domain: "example.com",
-                                                         clientId: "abc123",
-                                                         scope: "openid profile",
-                                                         authentication: .none),
-                          try OAuth2Client.Configuration(domain: "example.com",
-                                                         clientId: "abc123",
-                                                         scope: "openid profile",
-                                                         authentication: .clientSecret("supersecret")))
+    @Test("Initialize using a string value scope")
+    func testStringValueInitializer() throws {
+        let scopeString = "openid profile"
+        let configuration = OAuth2Client.Configuration(
+            issuerURL: URL(string: "https://example.com")!,
+            clientId: "abcd123",
+            scope: scopeString,
+            authentication: .none)
+        #expect(configuration.scope == ["openid", "profile"])
+    }
+    
+    @Test("Initialize using a array value scope")
+    func testArrayValueInitializer() throws {
+        let scopeArray = ["openid", "email"]
+        let configuration = OAuth2Client.Configuration(
+            issuerURL: URL(string: "https://example.com")!,
+            clientId: "abcd123",
+            scope: scopeArray,
+            authentication: .none)
+        #expect(configuration.scope == ["openid", "email"])
+    }
+    
+    @Test("Configuration equality comparing clent authentication methods")
+    func testConfigurationEquality() throws {
+        let clientA = try OAuth2Client.Configuration(domain: "example.com",
+                                                     clientId: "abc123",
+                                                     scope: "openid profile",
+                                                     authentication: .none)
+        let clientB = try OAuth2Client.Configuration(domain: "example.com",
+                                                     clientId: "abc123",
+                                                     scope: "openid profile",
+                                                     authentication: .clientSecret("supersecret"))
+        #expect(clientA != clientB)
     }
 }

@@ -10,24 +10,27 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
 @testable import AuthFoundation
 
-final class AuthenticationContextTests: XCTestCase {
+@Suite("Authentication context tests")
+struct AuthenticationContextTests {
+    @Test("Standard context functionality")
     func testStandardContext() throws {
         var context = StandardAuthenticationContext()
-        XCTAssertNil(context.acrValues)
-        XCTAssertNil(context.additionalParameters)
-        XCTAssertNil(context.persistValues)
+        #expect(context.acrValues == nil)
+        #expect(context.additionalParameters == nil)
+        #expect(context.persistValues == nil)
         for category in OAuth2APIRequestCategory.allCases {
-            XCTAssertNil(context.parameters(for: category))
+            #expect(context.parameters(for: category) == nil)
         }
         
         context.acrValues = ["urn:foo:bar", "urn:ietf:foo:bar"]
-        XCTAssertEqual(context.persistValues, [
+        #expect(context.persistValues == [
             "acr_values": "urn:foo:bar urn:ietf:foo:bar"
         ])
-        XCTAssertEqual(context.parameters(for: .authorization)?.mapValues(\.stringValue), [
+        #expect(context.parameters(for: .authorization)?.mapValues(\.stringValue) == [
             "acr_values": "urn:foo:bar urn:ietf:foo:bar"
         ])
 
@@ -35,36 +38,36 @@ final class AuthenticationContextTests: XCTestCase {
             "acr_values": "urn:foo:bar urn:ietf:foo:bar",
             "prompt": "none",
         ])
-        XCTAssertEqual(context.acrValues, [
+        #expect(context.acrValues == [
             "urn:foo:bar",
             "urn:ietf:foo:bar",
         ])
-        XCTAssertEqual(context.additionalParameters?.mapValues(\.stringValue), [
+        #expect(context.additionalParameters?.mapValues(\.stringValue) == [
             "prompt": "none"
         ])
-        XCTAssertEqual(context.persistValues, [
+        #expect(context.persistValues == [
             "acr_values": "urn:foo:bar urn:ietf:foo:bar",
         ])
-        XCTAssertEqual(context.parameters(for: .authorization)?.mapValues(\.stringValue), [
+        #expect(context.parameters(for: .authorization)?.mapValues(\.stringValue) == [
             "prompt": "none",
             "acr_values": "urn:foo:bar urn:ietf:foo:bar",
         ])
         
         for category in OAuth2APIRequestCategory.allCases {
             let parameters = context.parameters(for: category)
-            XCTAssertEqual(parameters?["prompt"]?.stringValue, "none")
+            #expect(parameters?["prompt"]?.stringValue == "none")
 
             if category == .authorization {
-                XCTAssertEqual(parameters?["acr_values"]?.stringValue, "urn:foo:bar urn:ietf:foo:bar")
+                #expect(parameters?["acr_values"]?.stringValue == "urn:foo:bar urn:ietf:foo:bar")
             }
         }
         
         context = .init(additionalParameters: ["acr_values": "foo"])
-        XCTAssertEqual(context.acrValues, ["foo"])
-        XCTAssertNil(context.additionalParameters)
+        #expect(context.acrValues == ["foo"])
+        #expect(context.additionalParameters == nil)
 
         context = .init()
-        XCTAssertNil(context.acrValues)
-        XCTAssertNil(context.additionalParameters)
+        #expect(context.acrValues == nil)
+        #expect(context.additionalParameters == nil)
     }
 }

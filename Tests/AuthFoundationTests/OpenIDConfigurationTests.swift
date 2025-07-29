@@ -10,11 +10,14 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Testing
+import Foundation
 @testable import TestCommon
 @testable import AuthFoundation
 
-final class OpenIDConfigurationTests: XCTestCase {
+@Suite("OpenID Configuration")
+struct OpenIDConfigurationTests {
+    @Test("Limited configuration")
     func testLimitedConfiguration() throws {
         let config = try decode(type: OpenIdConfiguration.self, """
         {
@@ -133,20 +136,21 @@ final class OpenIDConfigurationTests: XCTestCase {
            "userinfo_endpoint" : "https://example.okta.com/oauth2/v1/userinfo"
         }
         """)
+
+        #expect(config.issuer.absoluteString == "https://example.okta.com")
+        #expect(config.authorizationEndpoint.absoluteString == "https://example.okta.com/oauth2/v1/authorize")
+        #expect(config.endSessionEndpoint?.absoluteString == "https://example.okta.com/oauth2/v1/logout")
+        #expect(config.introspectionEndpoint?.absoluteString == "https://example.okta.com/oauth2/v1/introspect")
+        #expect(config.jwksUri.absoluteString == "https://example.okta.com/oauth2/v1/keys")
+        #expect(config.registrationEndpoint?.absoluteString == "https://example.okta.com/oauth2/v1/clients")
+        #expect(config.revocationEndpoint?.absoluteString == "https://example.okta.com/oauth2/v1/revoke")
+        #expect(config.tokenEndpoint.absoluteString == "https://example.okta.com/oauth2/v1/token")
+        #expect(config.userinfoEndpoint?.absoluteString == "https://example.okta.com/oauth2/v1/userinfo")
         
-        XCTAssertEqual(config.issuer.absoluteString, "https://example.okta.com")
-        XCTAssertEqual(config.authorizationEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/authorize")
-        XCTAssertEqual(config.endSessionEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/logout")
-        XCTAssertEqual(config.introspectionEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/introspect")
-        XCTAssertEqual(config.jwksUri.absoluteString, "https://example.okta.com/oauth2/v1/keys")
-        XCTAssertEqual(config.registrationEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/clients")
-        XCTAssertEqual(config.revocationEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/revoke")
-        XCTAssertEqual(config.tokenEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/token")
-        XCTAssertEqual(config.userinfoEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/userinfo")
-        
-        XCTAssertEqual(config.subjectTypesSupported.first, "public")
+        #expect(config.subjectTypesSupported.first == "public")
     }
     
+    @Test("Apple ID Configuration")
     func testAppleIdConfiguration() throws {
         let config = try decode(type: OpenIdConfiguration.self, """
         {
@@ -194,14 +198,14 @@ final class OpenIDConfigurationTests: XCTestCase {
         }
         """)
 
-        XCTAssertNil(config.endSessionEndpoint)
-        XCTAssertNil(config.introspectionEndpoint)
-        XCTAssertNil(config.registrationEndpoint)
-        XCTAssertNil(config.userinfoEndpoint)
+        #expect(config.endSessionEndpoint == nil)
+        #expect(config.introspectionEndpoint == nil)
+        #expect(config.registrationEndpoint == nil)
+        #expect(config.userinfoEndpoint == nil)
         
-        let claimsSupported = try XCTUnwrap(config.claimsSupported)
-        XCTAssertTrue(claimsSupported.contains(.custom("is_private_email")))
-        XCTAssertEqual(config.claimsSupported, [
+        let claimsSupported = try #require(config.claimsSupported)
+        #expect(claimsSupported.contains(.custom("is_private_email")))
+        #expect(claimsSupported == [
             .audience,
             .email,
             .emailVerified,
@@ -215,7 +219,7 @@ final class OpenIDConfigurationTests: XCTestCase {
             .subject,
             .custom("transfer_sub"),
         ])
-        XCTAssertEqual(config.claimsSupported, [
+        #expect(claimsSupported == [
             .audience,
             .email,
             .emailVerified,

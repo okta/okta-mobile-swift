@@ -13,7 +13,7 @@
 import Foundation
 import XCTest
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 import FoundationNetworking
 #endif
 
@@ -21,7 +21,7 @@ import FoundationNetworking
 
 class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
     var configuration: URLSessionConfiguration = .ephemeral
-    let queue = DispatchQueue(label: "URLSessionMock")
+    let queue = DispatchQueue(label: "URLSessionMock-\(UUID())")
     private let lock = Lock()
 
     enum Match {
@@ -67,15 +67,19 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
         }
     }
     
-    func request(matching match: Match) -> URLRequest? {
-        requests.first(where: { request in
+    func requests(matching match: Match) -> [URLRequest] {
+        requests.filter { request in
             switch match {
             case .url(let string):
                 return request.url?.absoluteString.localizedCaseInsensitiveContains(string) ?? false
             case .body(let string):
                 return request.bodyString?.localizedCaseInsensitiveContains(string) ?? false
             }
-        })
+        }
+    }
+
+    func request(matching match: Match) -> URLRequest? {
+        requests(matching: match).first
     }
 
     func request(matching string: String) -> URLRequest? {

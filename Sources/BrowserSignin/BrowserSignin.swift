@@ -289,6 +289,7 @@ public final class BrowserSignin {
     static var providerFactory: any BrowserSigninProviderFactory.Type = BrowserSignin.self
     
     // Used for testing only
+    // TODO: Remove all `resetToDefault()` test functions
     static func resetToDefault() {
         providerFactory = BrowserSignin.self
     }

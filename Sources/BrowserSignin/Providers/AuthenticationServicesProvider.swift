@@ -140,6 +140,7 @@ final class AuthenticationServicesProvider: NSObject, BrowserSigninProvider {
         }
     }
 
+    // TODO: Remove all `resetToDefault()` test functions
     static func resetToDefault() {
         lock.withLock {
             _authenticationSessionClass = ASWebAuthenticationSession.self

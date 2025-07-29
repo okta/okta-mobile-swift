@@ -17,7 +17,7 @@ import XCTest
 @testable import TestCommon
 #endif
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 import FoundationNetworking
 #endif
 
@@ -74,7 +74,7 @@ class IDXClientRequestTests: XCTestCase {
         XCTAssertEqual(data["client_id"], "clientId")
         XCTAssertEqual(data["scope"], "openid+profile")
         XCTAssertEqual(data["code_challenge"], pkce.codeChallenge)
-        #if os(Linux)
+        #if os(Linux) || os(Android)
         XCTAssertEqual(data["code_challenge_method"], "plain")
         #else
         XCTAssertEqual(data["code_challenge_method"], "S256")

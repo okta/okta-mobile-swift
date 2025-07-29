@@ -95,7 +95,7 @@ var package = Package(
                     resources: [.copy("MockResponses")],
                     swiftSettings: .testTarget),
     ],
-    swiftLanguageModes: [.v6]
+    swiftLanguageModes: [.v6, .v5]
 )
 
 #if canImport(UIKit) || canImport(AppKit)

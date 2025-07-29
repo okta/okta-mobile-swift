@@ -10,62 +10,68 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Testing
+import Foundation
 
 @testable import AuthFoundation
 @testable import TestCommon
 
-final class PropertyListConfigurationTests: XCTestCase {
+@Suite("Property List Configuration Tests")
+struct PropertyListConfigurationTests {
     typealias PropertyListConfiguration = OAuth2Client.PropertyListConfiguration
     typealias PropertyKey = PropertyListConfiguration.Key
 
-    func testPropertyListKeys() throws {
-        XCTAssertEqual(PropertyKey.issuerURL.rawValue, "issuer_url")
-        XCTAssertEqual(PropertyKey.issuerURL.matchingKeys, ["issuer_url", "issuerUrl", "IssuerUrl", "issuer"])
+    @Test("Property List Keys validation")
+    func propertyListKeys() throws {
+        #expect(PropertyKey.issuerURL.rawValue == "issuer_url")
+        #expect(PropertyKey.issuerURL.matchingKeys == ["issuer_url", "issuerUrl", "IssuerUrl", "issuer"])
 
-        XCTAssertEqual(PropertyKey.clientId.rawValue, "client_id")
-        XCTAssertEqual(PropertyKey.clientId.matchingKeys, ["client_id", "clientId", "ClientId"])
+        #expect(PropertyKey.clientId.rawValue == "client_id")
+        #expect(PropertyKey.clientId.matchingKeys == ["client_id", "clientId", "ClientId"])
         
-        XCTAssertEqual(PropertyKey.scope.rawValue, "scope")
-        XCTAssertEqual(PropertyKey.scope.matchingKeys, ["scope", "Scope", "scopes"])
+        #expect(PropertyKey.scope.rawValue == "scope")
+        #expect(PropertyKey.scope.matchingKeys == ["scope", "Scope", "scopes"])
 
-        XCTAssertEqual(PropertyKey.redirectUri.rawValue, "redirect_uri")
-        XCTAssertEqual(PropertyKey.redirectUri.matchingKeys, ["redirect_uri", "redirectUri", "RedirectUri"])
+        #expect(PropertyKey.redirectUri.rawValue == "redirect_uri")
+        #expect(PropertyKey.redirectUri.matchingKeys == ["redirect_uri", "redirectUri", "RedirectUri"])
 
-        XCTAssertEqual(PropertyKey.logoutRedirectUri.rawValue, "logout_redirect_uri")
-        XCTAssertEqual(PropertyKey.logoutRedirectUri.matchingKeys, ["logout_redirect_uri", "logoutRedirectUri", "LogoutRedirectUri"])
+        #expect(PropertyKey.logoutRedirectUri.rawValue == "logout_redirect_uri")
+        #expect(PropertyKey.logoutRedirectUri.matchingKeys == ["logout_redirect_uri", "logoutRedirectUri", "LogoutRedirectUri"])
 
-        XCTAssertEqual(PropertyKey.clientSecret.rawValue, "client_secret")
-        XCTAssertEqual(PropertyKey.clientSecret.matchingKeys, ["client_secret", "clientSecret", "ClientSecret"])
+        #expect(PropertyKey.clientSecret.rawValue == "client_secret")
+        #expect(PropertyKey.clientSecret.matchingKeys == ["client_secret", "clientSecret", "ClientSecret"])
     }
     
-    func testLegacyConfiguration() throws {
-        let url = try fileUrl(from: .module, for: "LegacyFormat.plist", in: "ConfigResources")
+    @Test("Legacy Configuration loading")
+    func legacyConfiguration() throws {
+        let url = try fileUrl(from: Bundle.module, for: "LegacyFormat.plist", in: "ConfigResources")
         let config = try PropertyListConfiguration(plist: url)
-        XCTAssertEqual(config.issuerURL.absoluteString, "https://myapp.example.com/oauth2/default")
-        XCTAssertEqual(config.clientId, "0oaasdf1234")
-        XCTAssertEqual(config.scope, ["openid", "profile", "offline_access"])
-        XCTAssertEqual(config.redirectUri?.absoluteString, "com.example:/callback")
-        XCTAssertEqual(config.logoutRedirectUri?.absoluteString, "com.example:/")
-        XCTAssertEqual(config.additionalParameters?.mapValues(\.stringValue), [
+        #expect(config.issuerURL.absoluteString == "https://myapp.example.com/oauth2/default")
+        #expect(config.clientId == "0oaasdf1234")
+        #expect(config.scope == ["openid", "profile", "offline_access"])
+        #expect(config.redirectUri?.absoluteString == "com.example:/callback")
+        #expect(config.logoutRedirectUri?.absoluteString == "com.example:/")
+        #expect(config.additionalParameters?.mapValues { param in param.stringValue } == [
             "custom": "value",
         ])
     }
 
-    func testSnakeCaseKeys() throws {
+    @Test("Snake Case Keys loading")
+    func snakeCaseKeys() throws {
         let url = try fileUrl(from: .module, for: "SnakeCaseKeys.plist", in: "ConfigResources")
         let config = try PropertyListConfiguration(plist: url)
-        XCTAssertEqual(config.issuerURL.absoluteString, "https://myapp.example.com/oauth2/default")
-        XCTAssertEqual(config.clientId, "0oaasdf1234")
-        XCTAssertEqual(config.scope, ["openid", "profile", "offline_access"])
-        XCTAssertEqual(config.redirectUri?.absoluteString, "com.example:/callback")
-        XCTAssertEqual(config.logoutRedirectUri?.absoluteString, "com.example:/")
-        XCTAssertEqual(config.additionalParameters?.mapValues(\.stringValue), [
+        #expect(config.issuerURL.absoluteString == "https://myapp.example.com/oauth2/default")
+        #expect(config.clientId == "0oaasdf1234")
+        #expect(config.scope == ["openid", "profile", "offline_access"])
+        #expect(config.redirectUri?.absoluteString == "com.example:/callback")
+        #expect(config.logoutRedirectUri?.absoluteString == "com.example:/")
+        #expect(config.additionalParameters?.mapValues { param in param.stringValue } == [
             "custom": "value",
         ])
     }
 
-    func testDictionaryValues() throws {
+    @Test("Dictionary Values configuration")
+    func dictionaryValues() throws {
         let config = try PropertyListConfiguration([
             "issuer_url": "https://myapp.example.com/oauth2/default",
             "clientId": "0oaasdf1234",
@@ -74,17 +80,18 @@ final class PropertyListConfigurationTests: XCTestCase {
             "logout_redirect_uri": "com.example:/",
             "custom": "value",
         ])
-        XCTAssertEqual(config.issuerURL.absoluteString, "https://myapp.example.com/oauth2/default")
-        XCTAssertEqual(config.clientId, "0oaasdf1234")
-        XCTAssertEqual(config.scope, ["openid", "profile", "offline_access"])
-        XCTAssertEqual(config.redirectUri?.absoluteString, "com.example:/callback")
-        XCTAssertEqual(config.logoutRedirectUri?.absoluteString, "com.example:/")
-        XCTAssertEqual(config.additionalParameters?.mapValues(\.stringValue), [
+        #expect(config.issuerURL.absoluteString == "https://myapp.example.com/oauth2/default")
+        #expect(config.clientId == "0oaasdf1234")
+        #expect(config.scope == ["openid", "profile", "offline_access"])
+        #expect(config.redirectUri?.absoluteString == "com.example:/callback")
+        #expect(config.logoutRedirectUri?.absoluteString == "com.example:/")
+        #expect(config.additionalParameters?.mapValues(\.stringValue) == [
             "custom": "value",
         ])
     }
     
-    func testCommandLineArguments() throws {
+    @Test("Command Line Arguments configuration")
+    func commandLineArguments() throws {
         let config = try PropertyListConfiguration(commandLine: [
             "--issuerUrl=https://myapp.example.com/oauth2/default",
             "--client-id=0oaasdf1234",
@@ -96,12 +103,12 @@ final class PropertyListConfigurationTests: XCTestCase {
             "openid profile offline_access",
             "--custom=value"
         ])
-        XCTAssertEqual(config.issuerURL.absoluteString, "https://myapp.example.com/oauth2/default")
-        XCTAssertEqual(config.clientId, "0oaasdf1234")
-        XCTAssertEqual(config.scope, ["openid", "profile", "offline_access"])
-        XCTAssertEqual(config.redirectUri?.absoluteString, "com.example:/callback")
-        XCTAssertEqual(config.logoutRedirectUri?.absoluteString, "com.example:/")
-        XCTAssertEqual(config.additionalParameters?.mapValues(\.stringValue), [
+        #expect(config.issuerURL.absoluteString == "https://myapp.example.com/oauth2/default")
+        #expect(config.clientId == "0oaasdf1234")
+        #expect(config.scope == ["openid", "profile", "offline_access"])
+        #expect(config.redirectUri?.absoluteString == "com.example:/callback")
+        #expect(config.logoutRedirectUri?.absoluteString == "com.example:/")
+        #expect(config.additionalParameters?.mapValues(\.stringValue) == [
             "custom": "value",
         ])
     }

@@ -13,6 +13,7 @@
 import Foundation
 
 extension Token {
+    // TODO: Remove all `resetToDefault()` test functions
     static func resetToDefault() {
         idTokenValidator = DefaultIDTokenValidator()
     }

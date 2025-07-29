@@ -16,7 +16,7 @@ import XCTest
 @testable import AuthFoundation
 @testable import OktaIdxAuth
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 import FoundationNetworking
 #endif
 

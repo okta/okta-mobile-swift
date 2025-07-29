@@ -13,6 +13,7 @@
 import Foundation
 import XCTest
 import AuthFoundation
+@testable import TestCommon
 
 extension XCTestCase {
     func openIdConfiguration(named: String = "openid-configuration") throws -> (OpenIdConfiguration, Data) {

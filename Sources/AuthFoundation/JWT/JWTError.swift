@@ -47,8 +47,11 @@ public enum JWTError: Error, Equatable {
     /// The nonce value does not match the value expected.
     case nonceMismatch
     
-    /// Cannot create a public key with the information supplied from the server.
+    /// Cannot create a public key.
     case cannotCreateKey(code: OSStatus, description: String?)
+    
+    /// Validating a signature failed.
+    case signatureVerificationFailed(code: OSStatus, description: String?)
     
     /// Invalid key data.
     case invalidKey
@@ -137,11 +140,20 @@ extension JWTError: LocalizedError {
                                      bundle: .authFoundation,
                                      comment: "")
 
-        case .cannotCreateKey:
-            return NSLocalizedString("jwt_cannot_create_key",
-                                     tableName: "AuthFoundation",
-                                     bundle: .authFoundation,
-                                     comment: "")
+        case .cannotCreateKey(code: _, description: let description):
+            if let description {
+                return String.localizedStringWithFormat(
+                    NSLocalizedString("jwt_cannot_create_key_description",
+                                      tableName: "AuthFoundation",
+                                      bundle: .authFoundation,
+                                      comment: ""),
+                    description)
+            } else {
+                return NSLocalizedString("jwt_cannot_create_key",
+                                         tableName: "AuthFoundation",
+                                         bundle: .authFoundation,
+                                         comment: "")
+            }
 
         case .invalidKey:
             return NSLocalizedString("jwt_invalid_key",
@@ -160,7 +172,22 @@ extension JWTError: LocalizedError {
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
-            
+
+        case .signatureVerificationFailed(code: _, description: let description):
+            if let description {
+                return String.localizedStringWithFormat(
+                    NSLocalizedString("jwt_signature_verification_failed_description",
+                                      tableName: "AuthFoundation",
+                                      bundle: .authFoundation,
+                                      comment: ""),
+                    description)
+            } else {
+                return NSLocalizedString("jwt_signature_verification_failed",
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
+                                  comment: "")
+            }
+
         case .unsupportedAlgorithm(let algorithm):
             return String.localizedStringWithFormat(
                 NSLocalizedString("jwt_unsupported_algorithm",

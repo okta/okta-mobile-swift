@@ -10,7 +10,9 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
+
 @testable import AuthFoundation
 
 class MockExpires: Expires {
@@ -18,28 +20,28 @@ class MockExpires: Expires {
     var issuedAt: Date?
 }
 
-final class ExpiresTests: XCTestCase {
+@Suite("Expires protocol tests")
+struct ExpiresTests {
     let expires = MockExpires()
     
-    override func setUpWithError() throws {
-        DefaultTimeCoordinator.resetToDefault()
-    }
-    
+    @Test("Null issue date")
     func testNullIssueDate() {
-        XCTAssertNil(expires.expiresAt)
-        XCTAssertFalse(expires.isExpired)
-        XCTAssertTrue(expires.isValid)
+        #expect(expires.expiresAt == nil)
+        #expect(!expires.isExpired)
+        #expect(expires.isValid)
     }
     
+    @Test("Valid time")
     func testValidTime() {
         expires.issuedAt = Date()
-        XCTAssertTrue(expires.isValid)
-        XCTAssertFalse(expires.isExpired)
+        #expect(expires.isValid)
+        #expect(!expires.isExpired)
     }
 
+    @Test("Expired time")
     func testExpiredTime() {
         expires.issuedAt = Date(timeIntervalSinceNow: -300)
-        XCTAssertFalse(expires.isValid)
-        XCTAssertTrue(expires.isExpired)
+        #expect(!expires.isValid)
+        #expect(expires.isExpired)
     }
 }

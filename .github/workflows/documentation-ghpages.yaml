@@ -49,9 +49,7 @@ jobs:
             --output-path "docs/$VERSION" \
             --include-extended-types \
             --symbol-graph-minimum-access-level public \
-            --experimental-skip-synthesized-symbols \
             --enable-experimental-combined-documentation \
-            --enable-experimental-mentioned-in \
             --enable-experimental-external-link-support \
             --enable-experimental-overloaded-symbol-presentation \
             $TARGET_LIST

@@ -27,9 +27,7 @@ struct MockIDTokenValidator: IDTokenValidator, Sendable {
 }
 
 struct MockJWKValidator: JWKValidator {
-    func validate(token: JWT, using keySet: JWKS) throws -> Bool {
-        true
-    }
+    func validate(token: JWT, using keySet: JWKS) throws {}
 }
 
 class ScenarioTests: XCTestCase {
