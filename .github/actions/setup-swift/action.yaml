@@ -32,8 +32,8 @@ runs:
               echo "SWIFT_ARGUMENTS=${swift_arguments}" >> $GITHUB_ENV
               echo "swift_arguments=${swift_arguments}" >> $GITHUB_OUTPUT
             else
-              echo "SWIFT_ARGUMENTS=" >> $GITHUB_ENV
-              echo "swift_arguments=" >> $GITHUB_OUTPUT
+              echo "SWIFT_ARGUMENTS=\"\"" >> $GITHUB_ENV
+              echo "swift_arguments=\"\"" >> $GITHUB_OUTPUT
             fi
 
             exit 0
@@ -60,4 +60,4 @@ runs:
         echo "${HOMEBREW_PREFIX}/sbin" >> $GITHUB_PATH
     - name: Get swift version
       shell: bash
-      run: swift --version
+      run: swift $SWIFT_ARGUMENTS --version
