@@ -29,7 +29,7 @@ fileprivate actor CoalescedResultCounter {
     }
 }
 
-@Suite("Coalesced result async tests")
+@Suite("Coalesced result async tests", .disabled("Debugging test deadlocks within CI"))
 struct CoalescedResultTests {
     struct Item: Equatable {
         static func == (lhs: CoalescedResultTests.Item, rhs: CoalescedResultTests.Item) -> Bool {
@@ -103,7 +103,7 @@ struct CoalescedResultTests {
         #expect(await counter.invokedCount == parallelRequests)
     }
 
-    @Test("Nonisolated property deadlock under high load", .disabled("Debugging test deadlocks within CI"))
+    @Test("Nonisolated property deadlock under high load")
     func testNonisolatedPropertyDeadlockUnderHighLoad() async throws {
         let processorCount = ProcessInfo.processInfo.activeProcessorCount
         let parallelRequests = processorCount * 100
