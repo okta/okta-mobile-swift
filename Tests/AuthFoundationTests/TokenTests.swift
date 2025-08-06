@@ -199,7 +199,7 @@ struct TokenTests {
         }
     }
 
-    @Test("Token creation from refresh token using callback API", .mockTokenValidator)
+    @Test("Token creation from refresh token using callback API", .mockTokenValidator, .mockJWKValidator)
     func testTokenFromRefreshToken() async throws {
         let client = try mockClient()
         
@@ -285,7 +285,7 @@ struct TokenTests {
         #expect(accessTokenValue == "the_access_token")
     }
     
-    @Test("Token creation from refresh token using async API", .mockTokenValidator)
+    @Test("Token creation from refresh token using async API", .mockTokenValidator, .mockJWKValidator)
     func testTokenFromRefreshTokenAsync() async throws {
         let client = try mockClient()
         let token = try await Token.from(refreshToken: "the_refresh_token", using: client)

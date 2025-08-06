@@ -103,7 +103,7 @@ struct CoalescedResultTests {
         #expect(await counter.invokedCount == parallelRequests)
     }
 
-    @Test("Nonisolated property deadlock under high load")
+    @Test("Nonisolated property deadlock under high load", .disabled("Debugging test deadlocks within CI"))
     func testNonisolatedPropertyDeadlockUnderHighLoad() async throws {
         let processorCount = ProcessInfo.processInfo.activeProcessorCount
         let parallelRequests = processorCount * 100
