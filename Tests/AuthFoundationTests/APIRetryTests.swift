@@ -16,7 +16,7 @@ import Testing
 @testable import AuthFoundation
 @testable import TestCommon
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 

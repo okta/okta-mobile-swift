@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(Linux) || os(Android)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 

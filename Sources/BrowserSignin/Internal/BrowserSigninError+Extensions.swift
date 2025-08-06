@@ -11,17 +11,25 @@
 //
 
 import Foundation
+
+#if canImport(AuthenticationServices)
 import AuthenticationServices
+#endif
 
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension BrowserSigninError: LocalizedError {
     init(_ error: any Error) {
         let nsError = error as NSError
+        #if canImport(AuthenticationServices)
         if nsError.domain == ASWebAuthenticationSessionErrorDomain,
            nsError.code == ASWebAuthenticationSessionError.canceledLogin.rawValue
         {
             self = .userCancelledLogin
-        } else if let error = error as? OAuth2Error {
+            return
+        }
+        #endif
+        
+        if let error = error as? OAuth2Error {
             self = .oauth2(error: error)
         } else if let error = error as? OAuth2ServerError {
             self = .serverError(error)

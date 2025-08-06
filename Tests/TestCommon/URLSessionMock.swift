@@ -13,7 +13,7 @@
 import Foundation
 import XCTest
 
-#if os(Linux) || os(Android)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 
