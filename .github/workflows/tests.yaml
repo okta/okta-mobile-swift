@@ -204,11 +204,11 @@ jobs:
     - name: Build
       run: |
         set -o pipefail
-        swift build --build-tests $SWIFT_ARGUMENTS --verbose 2>&1 | tee -a .build/ci-logs/${LOG_NAME}-build.log | xcbeautify $XCBEAUTIFY_ARGS
+        swift build --build-tests $SWIFT_ARGUMENTS
     - name: Test
       run: |
         set -o pipefail
-        swift test $SWIFT_ARGUMENTS --parallel --verbose 2>&1 | tee -a .build/ci-logs/${LOG_NAME}-test.log | xcbeautify $XCBEAUTIFY_ARGS
+        swift test $SWIFT_ARGUMENTS --skip-build --parallel
     - name: Upload Logs
       if: failure()
       uses: actions/upload-artifact@v4

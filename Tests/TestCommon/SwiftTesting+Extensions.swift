@@ -13,48 +13,55 @@
 import Foundation
 import Testing
 
+@inlinable
 public func repeatedlyConfirmClosure<R: Sendable, E: Error>(
     _ comment: Comment? = nil,
     closureCount: Int = 4,
     isolation: isolated (any Actor)? = #isolation,
     sourceLocation: SourceLocation = #_sourceLocation,
+    timeout: TimeInterval? = nil,
     _ body: @Sendable @escaping (Int, (@Sendable @escaping (Result<R, E>) -> Void)) -> Void) async throws -> [R]
 {
     try await confirmation(comment,
                            expectedCount: closureCount,
                            isolation: isolation,
                            sourceLocation: sourceLocation) { confirm in
-        try await withThrowingTaskGroup(of: R.self) { group in
-            for index in 1...closureCount {
-                group.addTask {
-                    try await withCheckedThrowingContinuation { continuation in
-                        body(index) { result in
-                            confirm()
-                            continuation.resume(with: result)
+        try await withTimeout(timeout) {
+            try await withThrowingTaskGroup(of: R.self) { group in
+                for index in 1...closureCount {
+                    group.addTask {
+                        try await withCheckedThrowingContinuation { continuation in
+                            body(index) { result in
+                                confirm()
+                                continuation.resume(with: result)
+                            }
                         }
                     }
                 }
+                
+                var results: [R] = []
+                for try await result in group {
+                    results.append(result)
+                }
+                return results
             }
-            
-            var results: [R] = []
-            for try await result in group {
-                results.append(result)
-            }
-            return results
         }
     }
 }
 
+@inlinable
 public func confirmClosure<R: Sendable, E: Error>(
     _ comment: Comment? = nil,
     isolation: isolated (any Actor)? = #isolation,
     sourceLocation: SourceLocation = #_sourceLocation,
+    timeout: TimeInterval? = nil,
     _ body: @Sendable @escaping ((@Sendable @escaping (Result<R, E>) -> Void)) -> Void) async throws -> R
 {
     try await confirmation(comment,
                            expectedCount: 1,
                            isolation: isolation,
-                           sourceLocation: sourceLocation) { confirm in
+                           sourceLocation: sourceLocation,
+                           timeout: timeout) { confirm in
         try await withCheckedThrowingContinuation { continuation in
             body { result in
                 confirm()
@@ -64,21 +71,72 @@ public func confirmClosure<R: Sendable, E: Error>(
     }
 }
 
+@inlinable
 public func confirmClosure<E: Error>(
     _ comment: Comment? = nil,
     isolation: isolated (any Actor)? = #isolation,
     sourceLocation: SourceLocation = #_sourceLocation,
+    timeout: TimeInterval? = nil,
     _ body: @Sendable @escaping ((@Sendable @escaping (Result<Void, E>) -> Void)) -> Void) async throws
 {
     try await confirmation(comment,
                            expectedCount: 1,
                            isolation: isolation,
-                           sourceLocation: sourceLocation) { confirm in
+                           sourceLocation: sourceLocation,
+                           timeout: timeout) { confirm in
         try await withCheckedThrowingContinuation { continuation in
             body { result in
                 confirm()
                 continuation.resume(with: result)
             }
         }
+    }
+}
+
+@inlinable
+public func confirmation<R: Sendable>(
+  _ comment: Comment? = nil,
+  expectedCount: Int = 1,
+  isolation: isolated (any Actor)? = #isolation,
+  sourceLocation: SourceLocation = #_sourceLocation,
+  timeout: TimeInterval? = nil,
+  _ body: @escaping @Sendable (Confirmation) async throws -> sending R
+) async throws -> R {
+  try await confirmation(
+    comment,
+    expectedCount: expectedCount ... expectedCount,
+    isolation: isolation,
+    sourceLocation: sourceLocation) { confirm in
+        try await withTimeout(.long) {
+            try await body(confirm)
+        }
+    }
+}
+
+@inlinable
+public func withTimeout<R: Sendable>(
+    _ timeout: TimeInterval?,
+    _ body: @escaping @Sendable () async throws -> sending R
+) async throws -> R {
+    guard let timeout else {
+        return try await body()
+    }
+    
+    return try await withThrowingTaskGroup(of: R.self) { taskGroup in
+        taskGroup.addTask {
+            try await body()
+        }
+        taskGroup.addTask {
+            try await Task.sleep(nanoseconds: UInt64(timeout * 1_000_000_000))
+            throw CancellationError()
+        }
+        
+        guard let result = try await taskGroup.next()
+        else {
+            throw CancellationError()
+        }
+        taskGroup.cancelAll()
+
+        return result
     }
 }

@@ -73,6 +73,7 @@ struct CoalescedResultTests {
         let processorCount = ProcessInfo.processInfo.activeProcessorCount
         let parallelRequests = processorCount * 100
 
+        let counter = CoalescedResultCounter()
         let coalescedResult = CoalescedResult<Bool>()
         #expect(coalescedResult.value == nil, "value should be initially nil")
 
@@ -82,20 +83,24 @@ struct CoalescedResultTests {
             Task.detached {
                 let result = try await coalescedResult.perform {
                     try await Task.sleep(delay: 0.001)
+                    await counter.add(iteration)
                     return true
                 }
                 #expect(result, "Returned value should be now be true")
+                await counter.invoke()
                 group.leave()
             }
         }
-
-        try await confirmation("Wait for the operations to complete") { confirm in
+        
+        try await confirmClosure("Wait for the operations to complete", timeout: .long)
+        { (confirm: @escaping @Sendable (Result<Void, any Error>) -> Void) in
             group.notify(queue: .main) {
-                confirm()
+                confirm(.success(()))
             }
-            try await Task.sleep(delay: .long)
         }
+        
         #expect(coalescedResult.value ?? false, "value should be now be true")
+        #expect(await counter.invokedCount == parallelRequests)
     }
 
     @Test("Nonisolated property deadlock under high load")
@@ -103,6 +108,7 @@ struct CoalescedResultTests {
         let processorCount = ProcessInfo.processInfo.activeProcessorCount
         let parallelRequests = processorCount * 100
 
+        let counter = CoalescedResultCounter()
         let coalescedResult = CoalescedResult<Bool>()
         #expect(coalescedResult.value == nil, "value should be initially nil")
 
@@ -114,14 +120,19 @@ struct CoalescedResultTests {
 
             let value = coalescedResult.value
             #expect(value == nil, "value should initially be nil")
-            group.leave()
+
+            Task {
+                await counter.invoke()
+                group.leave()
+            }
         }
 
-        try await confirmation("Wait for the operations to complete") { confirm in
+        try await confirmation("Wait for the operations to complete", timeout: .long) { confirm in
             group.notify(queue: .main) {
                 confirm()
             }
-            try await Task.sleep(delay: .long)
         }
+        
+        #expect(await counter.invokedCount == parallelRequests)
     }
 }
