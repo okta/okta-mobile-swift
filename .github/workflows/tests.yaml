@@ -200,7 +200,7 @@ jobs:
     - name: Build
       run: swift build --build-tests $SWIFT_ARGUMENTS
     - name: Test
-      run: swift test $SWIFT_ARGUMENTS --skip-build
+      run: swift test $SWIFT_ARGUMENTS --skip-build -vv -c debug --sanitize=thread
 
   Cocoapods:
     name: CocoaPods Build
