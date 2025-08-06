@@ -197,25 +197,10 @@ jobs:
     - uses: ./.github/actions/setup-swift
       with:
         swift-version: "${{ matrix.swift_version }}"
-    - name: Setup environment
-      run: |
-        mkdir -p .build/ci-logs
-        echo "XCBEAUTIFY_ARGS=--renderer github-actions --disable-logging" >> $GITHUB_ENV
     - name: Build
-      run: |
-        set -o pipefail
-        swift build --build-tests $SWIFT_ARGUMENTS
+      run: swift build --build-tests $SWIFT_ARGUMENTS
     - name: Test
-      run: |
-        set -o pipefail
-        swift test $SWIFT_ARGUMENTS --skip-build --parallel
-    - name: Upload Logs
-      if: failure()
-      uses: actions/upload-artifact@v4
-      with:
-        name: Logs-${{ env.LOG_NAME }}
-        path: |
-          .build/ci-logs/**
+      run: swift test $SWIFT_ARGUMENTS --skip-build
 
   Cocoapods:
     name: CocoaPods Build
