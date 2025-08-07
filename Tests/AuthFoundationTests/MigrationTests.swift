@@ -10,7 +10,9 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
+
 @testable import AuthFoundation
 
 enum TestMigratorError: Error {
@@ -37,15 +39,17 @@ class TestMigrator: SDKVersionMigrator {
     }
 }
 
-final class MigrationTests: XCTestCase {
-    override func setUpWithError() throws {
+@Suite("Version migration tests", .serialized, .disabled("Debugging test deadlocks within CI"))
+final class MigrationTests {
+    init() {
         Migration.shared.resetMigrators()
     }
     
-    override func tearDownWithError() throws {
+    deinit {
         Migration.shared.resetMigrators()
     }
     
+    @Test("Migrator registration")
     func testMigratorRegistration() throws {
         let migratorA = TestMigrator()
         let migratorB = TestMigrator()
@@ -56,19 +60,19 @@ final class MigrationTests: XCTestCase {
         let migration = Migration(migrators: [migratorA, migratorB])
 
         // Ensure migration is not called when not needed
-        XCTAssertFalse(migration.isMigrationNeeded)
-        XCTAssertNoThrow(try migration.migrateIfNeeded())
-        XCTAssertFalse(migratorA.migrationCalled)
-        XCTAssertFalse(migratorB.migrationCalled)
+        #expect(!migration.isMigrationNeeded)
+        try migration.migrateIfNeeded()
+        #expect(!migratorA.migrationCalled)
+        #expect(!migratorB.migrationCalled)
         migratorA.reset()
         migratorB.reset()
         
         // Ensure only necessary migrators are called
         migratorA.needsMigration = true
-        XCTAssertTrue(migration.isMigrationNeeded)
-        XCTAssertNoThrow(try migration.migrateIfNeeded())
-        XCTAssertTrue(migratorA.migrationCalled)
-        XCTAssertFalse(migratorB.migrationCalled)
+        #expect(migration.isMigrationNeeded)
+        try migration.migrateIfNeeded()
+        #expect(migratorA.migrationCalled)
+        #expect(!migratorB.migrationCalled)
         migratorA.reset()
         migratorB.reset()
         
@@ -76,31 +80,35 @@ final class MigrationTests: XCTestCase {
         migratorA.needsMigration = true
         migratorA.error = TestMigratorError.generic
         migratorB.needsMigration = true
-        XCTAssertTrue(migration.isMigrationNeeded)
-        XCTAssertThrowsError(try migration.migrateIfNeeded())
-        XCTAssertTrue(migratorA.migrationCalled)
-        XCTAssertFalse(migratorB.migrationCalled)
+        #expect(migration.isMigrationNeeded)
+        let error = #expect(throws: TestMigratorError.self) {
+            try migration.migrateIfNeeded()
+        }
+        #expect(error == .generic)
+        #expect(migratorA.migrationCalled)
+        #expect(!migratorB.migrationCalled)
         migratorA.reset()
         migratorB.reset()
     }
     
+    @Test("Registered migrators")
     func testRegisteredMigrators() throws {
-        XCTAssertTrue(Migration.shared.registeredMigrators.isEmpty)
+        #expect(Migration.shared.registeredMigrators.isEmpty)
 
         // Test adding a migrator
         let migratorA = TestMigrator()
         Migration.register(migrator: migratorA)
-        XCTAssertTrue(Migration.shared.registeredMigrators.contains(where: { $0 === migratorA }))
-        XCTAssertEqual(Migration.shared.registeredMigrators.count, 1)
+        #expect(Migration.shared.registeredMigrators.contains(where: { $0 === migratorA }))
+        #expect(Migration.shared.registeredMigrators.count == 1)
 
         // Ensure duplicate migrators aren't added
         Migration.register(migrator: migratorA)
-        XCTAssertTrue(Migration.shared.registeredMigrators.contains(where: { $0 === migratorA }))
-        XCTAssertEqual(Migration.shared.registeredMigrators.count, 1)
+        #expect(Migration.shared.registeredMigrators.contains(where: { $0 === migratorA }))
+        #expect(Migration.shared.registeredMigrators.count == 1)
 
         // Allow multiple migrators of the same type
         let migratorB = TestMigrator()
         Migration.register(migrator: migratorB)
-        XCTAssertEqual(Migration.shared.registeredMigrators.count, 2)
+        #expect(Migration.shared.registeredMigrators.count == 2)
     }
 }

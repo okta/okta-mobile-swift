@@ -87,11 +87,13 @@ extension JWK {
                                                                attributes as NSDictionary,
                                                                &errorRef)
             else {
-                let error = errorRef?.takeRetainedValue()
-                let desc = error != nil ? CFErrorCopyDescription(error) : nil
-                let code = error != nil ? CFErrorGetCode(error) : 0
-                throw JWTError.cannotCreateKey(code: OSStatus(code),
-                                               description: desc as String?)
+                if let error = errorRef?.takeRetainedValue() {
+                    let desc = CFErrorCopyDescription(error)
+                    throw JWTError.cannotCreateKey(code: OSStatus(CFErrorGetCode(error)),
+                                                   description: desc as String?)
+                } else {
+                    throw JWTError.cannotCreateKey(code: 0, description: nil)
+                }
             }
             
             return publicKey
@@ -110,7 +112,7 @@ extension JWK {
             let addStatus = SecItemAdd(addAttributes as CFDictionary, persistKey)
             guard addStatus == errSecSuccess || addStatus == errSecDuplicateItem else {
                 throw JWTError.cannotCreateKey(code: addStatus,
-                                                        description: nil)
+                                               description: nil)
             }
             
             let copyAttributes: [CFString: Any] = [
@@ -126,7 +128,7 @@ extension JWK {
             
             guard let publicKey = keyRef else {
                 throw JWTError.cannotCreateKey(code: copyStatus,
-                                                        description: nil)
+                                               description: nil)
             }
             
             // swiftlint:disable force_cast

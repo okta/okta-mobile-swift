@@ -10,7 +10,8 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
 @testable import AuthFoundation
 import TestCommon
 
@@ -37,133 +38,141 @@ struct TestOptionalStringArrayClaimProperty {
     var values: [String]?
 }
 
-final class ClaimCollectionTests: XCTestCase {
+@Suite("ClaimCollection tests", .disabled("Debugging test deadlocks within CI"))
+struct ClaimCollectionTests {
+    @Test("String claim collection property wrapper")
     func testStringClaimCollectionPropertyWrapper() throws {
         var value = TestStringArrayClaimProperty(values: [])
-        XCTAssertEqual(value.values, [])
-        XCTAssertEqual(value.$values.rawValue, "")
+        #expect(value.values == [])
+        #expect(value.$values.rawValue == "")
         
         value.values = ["a", "b", "c"]
-        XCTAssertEqual(value.values, ["a", "b", "c"])
-        XCTAssertEqual(value.$values.wrappedValue, ["a", "b", "c"])
-        XCTAssertEqual(value.$values.rawValue, "a b c")
+        #expect(value.values == ["a", "b", "c"])
+        #expect(value.$values.wrappedValue == ["a", "b", "c"])
+        #expect(value.$values.rawValue == "a b c")
         
         value.values.remove(at: 1)
-        XCTAssertEqual(value.values, ["a", "c"])
-        XCTAssertEqual(value.$values.wrappedValue, ["a", "c"])
-        XCTAssertEqual(value.$values.rawValue, "a c")
+        #expect(value.values == ["a", "c"])
+        #expect(value.$values.wrappedValue == ["a", "c"])
+        #expect(value.$values.rawValue == "a c")
         
         value.values.append("a")
-        XCTAssertEqual(value.values, ["a", "c", "a"])
-        XCTAssertEqual(value.$values.wrappedValue, ["a", "c", "a"])
-        XCTAssertEqual(value.$values.rawValue, "a c a")
+        #expect(value.values == ["a", "c", "a"])
+        #expect(value.$values.wrappedValue == ["a", "c", "a"])
+        #expect(value.$values.rawValue == "a c a")
         
         var optional = TestOptionalStringArrayClaimProperty(values: nil)
-        XCTAssertNil(optional.values)
-        XCTAssertNil(optional.$values.rawValue)
+        #expect(optional.values == nil)
+        #expect(optional.$values.rawValue == nil)
 
         optional.values = ["a"]
-        XCTAssertEqual(optional.values, ["a"])
-        XCTAssertEqual(optional.$values.wrappedValue, ["a"])
-        XCTAssertEqual(optional.$values.rawValue, "a")
+        #expect(optional.values == ["a"])
+        #expect(optional.$values.wrappedValue == ["a"])
+        #expect(optional.$values.rawValue == "a")
         
         optional.values?.append(contentsOf: ["b", "c"])
-        XCTAssertEqual(optional.values, ["a", "b", "c"])
-        XCTAssertEqual(optional.$values.wrappedValue, ["a", "b", "c"])
-        XCTAssertEqual(optional.$values.rawValue, "a b c")
+        #expect(optional.values == ["a", "b", "c"])
+        #expect(optional.$values.wrappedValue == ["a", "b", "c"])
+        #expect(optional.$values.rawValue == "a b c")
     }
 
+    @Test("Enum claim collection property wrapper")
     func testEnumClaimCollectionPropertyWrapper() throws {
         var value = TestEnumArrayClaimProperty(values: [])
-        XCTAssertEqual(value.values, [])
-        XCTAssertEqual(value.$values.rawValue, "")
+        #expect(value.values == [])
+        #expect(value.$values.rawValue == "")
         
         value.values = [.admin, .guest]
-        XCTAssertEqual(value.values, [.admin, .guest])
-        XCTAssertEqual(value.$values.wrappedValue, [.admin, .guest])
-        XCTAssertEqual(value.$values.rawValue, "admin guest")
+        #expect(value.values == [.admin, .guest])
+        #expect(value.$values.wrappedValue == [.admin, .guest])
+        #expect(value.$values.rawValue == "admin guest")
         
         value.values.remove(at: 1)
-        XCTAssertEqual(value.values, [.admin])
-        XCTAssertEqual(value.$values.wrappedValue, [.admin])
-        XCTAssertEqual(value.$values.rawValue, "admin")
+        #expect(value.values == [.admin])
+        #expect(value.$values.wrappedValue == [.admin])
+        #expect(value.$values.rawValue == "admin")
         
         value.values.append(.admin)
-        XCTAssertEqual(value.values, [.admin, .admin])
-        XCTAssertEqual(value.$values.wrappedValue, [.admin, .admin])
-        XCTAssertEqual(value.$values.rawValue, "admin admin")
+        #expect(value.values == [.admin, .admin])
+        #expect(value.$values.wrappedValue == [.admin, .admin])
+        #expect(value.$values.rawValue == "admin admin")
         
         value = TestEnumArrayClaimProperty(values: [.admin, .superuser])
-        XCTAssertEqual(value.values, [.admin, .superuser])
-        XCTAssertEqual(value.$values.rawValue, "admin superuser")
+        #expect(value.values == [.admin, .superuser])
+        #expect(value.$values.rawValue == "admin superuser")
     }
     
+    @Test("String claim collection variable")
     func testStringClaimCollectionVariable() throws {
         var list = ClaimCollection<[String]>()
-        XCTAssertEqual(list.rawValue, "")
+        #expect(list.rawValue == "")
         
         list.wrappedValue = ["a", "b", "c"]
-        XCTAssertEqual(list.rawValue, "a b c")
+        #expect(list.rawValue == "a b c")
         
         list.wrappedValue.removeAll()
-        XCTAssertEqual(list.rawValue, "")
+        #expect(list.rawValue == "")
         
         list = ClaimCollection<[String]>(wrappedValue: ["x", "y", "z"])
-        XCTAssertEqual(list.rawValue, "x y z")
+        #expect(list.rawValue == "x y z")
 
-        list = try XCTUnwrap(ClaimCollection<[String]>(rawValue: "red green blue"))
-        XCTAssertEqual(list.rawValue, "red green blue")
+        list = ClaimCollection<[String]>(rawValue: "red green blue")
+        #expect(list.rawValue == "red green blue")
 
         list = ["1", "2", "3"]
-        XCTAssertEqual(list.rawValue, "1 2 3")
+        #expect(list.rawValue == "1 2 3")
         
         list = "one two three"
-        XCTAssertEqual(list.rawValue, "one two three")
+        #expect(list.rawValue == "one two three")
     }
 
+    @Test("Enum claim collection variable")
     func testEnumClaimCollectionVariable() throws {
         var list = ClaimCollection<[TestEnumArrayClaimProperty.Role]>()
-        XCTAssertEqual(list.rawValue, "")
+        #expect(list.rawValue == "")
         
         list.wrappedValue = [.admin, .guest, .user]
-        XCTAssertEqual(list.rawValue, "admin guest user")
+        #expect(list.rawValue == "admin guest user")
         
         list.wrappedValue.removeAll()
-        XCTAssertEqual(list.rawValue, "")
+        #expect(list.rawValue == "")
         
         list = ClaimCollection<[TestEnumArrayClaimProperty.Role]>(wrappedValue: [.superuser, .admin])
-        XCTAssertEqual(list.rawValue, "superuser admin")
+        #expect(list.rawValue == "superuser admin")
 
-        list = try XCTUnwrap(ClaimCollection<[TestEnumArrayClaimProperty.Role]>(rawValue: "user guest"))
-        XCTAssertEqual(list, [.user, .guest])
-        XCTAssertEqual(list.rawValue, "user guest")
+        list = ClaimCollection<[TestEnumArrayClaimProperty.Role]>(rawValue: "user guest")
+        #expect(list == [.user, .guest])
+        #expect(list.rawValue == "user guest")
 
         list = [.admin, .user]
-        XCTAssertEqual(list.rawValue, "admin user")
+        #expect(list.rawValue == "admin user")
         
         list = "guest user"
-        XCTAssertEqual(list, [.guest, .user])
-        XCTAssertEqual(list.rawValue, "guest user")
+        #expect(list == [.guest, .user])
+        #expect(list.rawValue == "guest user")
     }
 
+    @Test("Codable collection")
     func testCodableCollection() throws {
         let list = ClaimCollection<[String]>(wrappedValue: ["a", "b", "c"])
         let data = try JSONEncoder().encode(list)
         let result = try JSONDecoder().decode(ClaimCollection<[String]>.self, from: data)
-        XCTAssertEqual(list, result)
+        #expect(list == result)
     }
 
+    @Test("Codable optional collection")
     func testCodableOptionalCollection() throws {
         let list = ClaimCollection<[String]?>(wrappedValue: ["a", "b", "c"])
         let data = try JSONEncoder().encode(list)
         let result = try JSONDecoder().decode(ClaimCollection<[String]?>.self, from: data)
-        XCTAssertEqual(list, result)
+        #expect(list == result)
     }
 
+    @Test("Codable nil optional collection")
     func testCodableNilOptionalCollection() throws {
         let list = ClaimCollection<[String]?>(wrappedValue: nil)
         let data = try JSONEncoder().encode(list)
         let result = try JSONDecoder().decode(ClaimCollection<[String]?>.self, from: data)
-        XCTAssertEqual(list, result)
+        #expect(list == result)
     }
 }

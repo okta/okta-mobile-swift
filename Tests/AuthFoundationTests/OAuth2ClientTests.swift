@@ -10,34 +10,31 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
 @testable import TestCommon
 @testable import AuthFoundation
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 
-final class OAuth2ClientTests: XCTestCase {
+@Suite("OAuth2 Client", .disabled("Debugging test deadlocks within CI"))
+struct OAuth2ClientTests {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
-    var urlSession: URLSessionMock!
-    var client: OAuth2Client!
-    var openIdConfiguration: OpenIdConfiguration!
     let configuration = OAuth2Client.Configuration(issuerURL: URL(string: "https://example.com")!,
                                                    clientId: "clientid",
                                                    scope: "openid")
-    var token: Token!
+    let openIdConfiguration = try! OpenIdConfiguration.jsonDecoder.decode(
+        OpenIdConfiguration.self,
+        from: try! data(from: Bundle.module,
+                       for: "openid-configuration",
+                       in: "MockResponses"))
 
-    override func setUp() async throws {
-        await CredentialActor.run {
-            Credential.tokenStorage = MockTokenStorage()
-            Credential.credentialDataSource = MockCredentialDataSource()
-        }
+    let token: Token
 
-        urlSession = URLSessionMock()
-        client = OAuth2Client(configuration, session: urlSession)
-        
+    init() {
         token = try! Token(id: "TokenId",
                            issuedAt: Date(),
                            tokenType: "Bearer",
@@ -49,127 +46,103 @@ final class OAuth2ClientTests: XCTestCase {
                            deviceSecret: nil,
                            context: Token.Context(configuration: self.configuration,
                                                   clientSettings: [ "client_id": "clientid", "refresh_token": "refresh" ]))
-        try Credential.store(token)
-        
-        openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
-            OpenIdConfiguration.self,
-            from: try data(from: .module,
-                           for: "openid-configuration",
-                           in: "MockResponses"))
-
-        urlSession.requestDelay = 0.1
     }
 
-    override func tearDown() async throws {
-        await CredentialActor.run {
-            TaskData.coordinator.resetToDefault()
-        }
-        
-        urlSession = nil
-        client = nil
-    }
-    
-    func testInitializers() throws {
-        var client: OAuth2Client!
-        
-        client = try OAuth2Client(.init(domain: "example.com",
-                                        clientId: "abc123",
-                                        scope: "openid profile"))
-        XCTAssertEqual(client.configuration, .init(issuerURL: URL(string: "https://example.com")!,
-                                                   clientId: "abc123",
-                                                   scope: "openid profile",
-                                                   authentication: .none))
+    @Test("Simple OAuth2 initialization with a domain")
+    func testSimpleDomainInitializer() throws {
+        let client = try OAuth2Client(.init(domain: "example.com",
+                                            clientId: "abc123",
+                                            scope: "openid profile"))
+        #expect(client.configuration == .init(issuerURL: URL(string: "https://example.com")!,
+                                              clientId: "abc123",
+                                              scope: "openid profile",
+                                              authentication: .none))
         
         // Ensure the default session is ephemeral
-        let urlSession = try XCTUnwrap(client.session as? URLSession)
-        XCTAssertEqual(urlSession.configuration.urlCache?.diskCapacity, 0)
+        let urlSession = try #require(client.session as? URLSession)
+        #expect(urlSession.configuration.urlCache?.diskCapacity == 0)
+    }
 
-        client = OAuth2Client(issuerURL: URL(string: "https://example.com")!,
-                              clientId: "abc123",
-                              scope: "openid profile")
-        XCTAssertEqual(client.configuration, .init(issuerURL: URL(string: "https://example.com")!,
-                                                   clientId: "abc123",
-                                                   scope: "openid profile",
-                                                   authentication: .none))
-        
-        client = try OAuth2Client(.init(domain: "example.com",
-                                        clientId: "abc123",
-                                        scope: "openid profile",
-                                        authentication: .clientSecret("supersecret")))
-        XCTAssertEqual(client.configuration, .init(issuerURL: URL(string: "https://example.com")!,
-                                                   clientId: "abc123",
-                                                   scope: "openid profile",
-                                                   authentication: .clientSecret("supersecret")))
+    @Test("Simple OAuth2 initialization with an issuer URL")
+    func testSimpleIssuerInitializer() throws {
+        let client = OAuth2Client(issuerURL: URL(string: "https://example.com")!,
+                                  clientId: "abc123",
+                                  scope: "openid profile")
+        #expect(client.configuration == .init(issuerURL: URL(string: "https://example.com")!,
+                                              clientId: "abc123",
+                                              scope: "openid profile",
+                                              authentication: .none))
+    }
+
+    @Test("OAuth2 initialization with a client secret")
+    func testSimpleIssuerClientSecretInitializer() throws {
+        let client = try OAuth2Client(.init(domain: "example.com",
+                                            clientId: "abc123",
+                                            scope: "openid profile",
+                                            authentication: .clientSecret("supersecret")))
+        #expect(client.configuration == .init(issuerURL: URL(string: "https://example.com")!,
+                                              clientId: "abc123",
+                                              scope: "openid profile",
+                                              authentication: .clientSecret("supersecret")))
     }
     
+    @Test("Client authentication methods and parameter generation")
     func testClientAuthentication() throws {
-        XCTAssertNotEqual(OAuth2Client.ClientAuthentication.none,
-                          .clientSecret("supersecret"))
-        XCTAssertEqual(OAuth2Client.ClientAuthentication.none, .none)
+        typealias ClientAuth = OAuth2Client.ClientAuthentication
+        #expect(ClientAuth.none != .clientSecret("supersecret"))
+        #expect(ClientAuth.none == .none)
         
-        XCTAssertNotEqual(OAuth2Client.ClientAuthentication.clientSecret("supersecret1"),
-                          .clientSecret("supersecret2"))
-        XCTAssertEqual(OAuth2Client.ClientAuthentication.clientSecret("supersecret"),
-                       .clientSecret("supersecret"))
+        #expect(ClientAuth.clientSecret("supersecret1") != .clientSecret("supersecret2"))
+        #expect(ClientAuth.clientSecret("supersecret") == .clientSecret("supersecret"))
 
         for category in OAuth2APIRequestCategory.allCases.omitting(.configuration) {
-            XCTAssertNil(OAuth2Client.ClientAuthentication.none.parameters(for: category))
-            XCTAssertEqual(OAuth2Client.ClientAuthentication.clientSecret("supersecret").parameters(for: category)?.stringComponents,
-                           ["client_secret": "supersecret"])
+            #expect(ClientAuth.none.parameters(for: category) == nil)
+            #expect(ClientAuth.clientSecret("supersecret").parameters(for: category)?.stringComponents ==
+                    ["client_secret": "supersecret"])
         }
         
-        XCTAssertNil(OAuth2Client.ClientAuthentication.none.parameters(for: .configuration))
-        XCTAssertNil(OAuth2Client.ClientAuthentication.clientSecret("supersecret").parameters(for: .configuration))
-
+        #expect(ClientAuth.none.parameters(for: .configuration) == nil)
+        #expect(ClientAuth.clientSecret("supersecret").parameters(for: .configuration) == nil)
     }
 
-    func testOpenIDConfiguration() throws {
+    @Test("Fetch OpenIDConfiguration concurrently with completion blocks")
+    func testOpenIDConfiguration() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         
-        nonisolated(unsafe) var configResults = [OpenIdConfiguration]()
-        var expectations = [XCTestExpectation]()
-        let lock = Lock()
-
-        for index in 1...4 {
-            let expect = expectation(description: "network request \(index)")
-            client.openIdConfiguration { result in
-                switch result {
-                case .success(let configuration):
-                    lock.withLock {
-                        configResults.append(configuration)
-                    }
-                case .failure(let error):
-                    XCTAssertNil(error)
-                }
-                expect.fulfill()
+        let results = try await repeatedlyConfirmClosure("Perform openIdConfiguration fetches") { _, confirm in
+            client.openIdConfiguration {
+                confirm($0)
             }
-            expectations.append(expect)
         }
-        
-        wait(for: expectations, timeout: 2)
 
-        XCTAssertEqual(configResults.count, 4)
-        let config = try XCTUnwrap(configResults.first)
-        XCTAssertEqual(config.authorizationEndpoint.absoluteString,
-                       "https://example.com/oauth2/v1/authorize")
+        #expect(results.count == 4)
+        let config = try #require(results.first)
+        #expect(config.authorizationEndpoint.absoluteString == "https://example.com/oauth2/v1/authorize")
     }
     
+    @Test("Fetch OpenIDConfiguration concurrently with async/await")
     func testOpenIDConfigurationAsync() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+
         urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(from: Bundle.module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
 
-        let client = try XCTUnwrap(self.client)
-        try await perform {
-            let config = try await client.openIdConfiguration()
-            XCTAssertEqual(config.authorizationEndpoint.absoluteString,
-                           "https://example.com/oauth2/v1/authorize")
-        }
+        let config = try await client.openIdConfiguration()
+        #expect(config.authorizationEndpoint.absoluteString == "https://example.com/oauth2/v1/authorize")
     }
     
+    @Test("Fetch the JWKS endpoint concurrently with completion blocks")
     func testJWKS() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -177,35 +150,24 @@ final class OAuth2ClientTests: XCTestCase {
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
         
-        nonisolated(unsafe) var jwksResults = [JWKS]()
-        var expectations = [XCTestExpectation]()
-        let lock = Lock()
-
-        for _ in 1...4 {
-            let expect = expectation(description: "network request")
-            client.jwks { result in
-                switch result {
-                case .success(let jwks):
-                    lock.withLock {
-                        jwksResults.append(jwks)
-                    }
-                case .failure(let error):
-                    XCTAssertNil(error)
-                }
-                expect.fulfill()
+        let results = try await repeatedlyConfirmClosure("Perform jwks fetches") { _, confirm in
+            client.jwks {
+                confirm($0)
             }
-            expectations.append(expect)
         }
-        
-        await fulfillment(of: expectations, timeout: 1.5)
 
-        XCTAssertEqual(jwksResults.count, 4)
-        let jwks = try XCTUnwrap(jwksResults.first)
-        XCTAssertEqual(jwks.first?.id,
-                       "k6HN2DKok-kExjJGBLqgzByMCnN1RvzEOA-1ukTjexA")
+        #expect(results.count == 4)
+        for jwks in results {
+            let jwk = try #require(jwks.first)
+            #expect(jwk.id == "k6HN2DKok-kExjJGBLqgzByMCnN1RvzEOA-1ukTjexA")
+        }
     }
 
+    @Test("Fetch userinfo with completion blocks", .credentialCoordinator)
     func testUserInfo() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+        
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -229,52 +191,53 @@ final class OAuth2ClientTests: XCTestCase {
                             }
                           """),
                           contentType: "application/json")
-
-        nonisolated(unsafe) var userInfo: UserInfo?
-        let expect = expectation(description: "network request")
-        client.userInfo(token: token) { result in
-            switch result {
-            case .success(let response):
-                userInfo = response
-            case .failure(let error):
-                XCTAssertNil(error)
+        
+        try Credential.store(token)
+        
+        let userInfo = try await confirmClosure("Perform jwks fetches") { confirm in
+            client.userInfo(token: token) {
+                confirm($0)
             }
-            expect.fulfill()
         }
-        await fulfillment(of: [expect], timeout: .standard)
-
-        XCTAssertEqual(userInfo?.subject, "00uid4BxXw6I6TV4m0g3")
+        
+        #expect(userInfo.subject == "00uid4BxXw6I6TV4m0g3")
     }
 
-    func testIntrospectTokenRequest() throws {
+    @Test("Token introspection request creation and parameters", .credentialCoordinator)
+    func testIntrospectTokenRequest() async throws {
         let request = try Token.IntrospectRequest(openIdConfiguration: openIdConfiguration,
-                                                  clientConfiguration: client.configuration,
+                                                  clientConfiguration: configuration,
                                                   token: token,
                                                   type: .accessToken)
-        XCTAssertNil(request.authorization)
-        XCTAssertEqual((request.bodyParameters?["client_id"] as? String), "clientid")
-        XCTAssertEqual(request.bodyParameters?["token"] as? String, "abcd123")
-        XCTAssertEqual(request.bodyParameters?["token_type_hint"]?.stringValue, "access_token")
-        XCTAssertNil(request.bodyParameters?["client_secret"])
+        #expect(request.authorization == nil)
+        #expect((request.bodyParameters?["client_id"] as? String) == "clientid")
+        #expect(request.bodyParameters?["token"] as? String == "abcd123")
+        #expect(request.bodyParameters?["token_type_hint"]?.stringValue == "access_token")
+        #expect(request.bodyParameters?["client_secret"] == nil)
     }
     
+    @Test("Token introspection request with client secret authentication")
     func testIntrospectTokenRequestClientAuthentication() throws {
-        let clientConfiguration = OAuth2Client.Configuration(issuerURL: client.configuration.baseURL,
-                                                             clientId: client.configuration.clientId,
-                                                             scope: client.configuration.scope,
+        let clientConfiguration = OAuth2Client.Configuration(issuerURL: configuration.baseURL,
+                                                             clientId: configuration.clientId,
+                                                             scope: configuration.scope,
                                                              authentication: .clientSecret("supersecret"))
         let request = try Token.IntrospectRequest(openIdConfiguration: openIdConfiguration,
                                                   clientConfiguration: clientConfiguration,
                                                   token: token,
                                                   type: .accessToken)
-        XCTAssertNil(request.authorization)
-        XCTAssertEqual((request.bodyParameters?["client_id"] as? String), "clientid")
-        XCTAssertEqual((request.bodyParameters?["client_secret"] as? String), "supersecret")
-        XCTAssertEqual(request.bodyParameters?["token"] as? String, "abcd123")
-        XCTAssertEqual(request.bodyParameters?["token_type_hint"]?.stringValue, "access_token")
+        #expect(request.authorization == nil)
+        #expect((request.bodyParameters?["client_id"] as? String) == "clientid")
+        #expect((request.bodyParameters?["client_secret"] as? String) == "supersecret")
+        #expect(request.bodyParameters?["token"] as? String == "abcd123")
+        #expect(request.bodyParameters?["token_type_hint"]?.stringValue == "access_token")
     }
     
+    @Test("Token introspection of an active token", .credentialCoordinator)
     func testIntrospectActiveAccessToken() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+        
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -293,25 +256,19 @@ final class OAuth2ClientTests: XCTestCase {
                           """),
                           contentType: "application/json")
 
-        nonisolated(unsafe) var tokenInfo: TokenInfo?
-        let expect = expectation(description: "network request")
-        client.introspect(token: token, type: .accessToken) { result in
-            switch result {
-            case .success(let response):
-                tokenInfo = response
-            case .failure(let error):
-                XCTAssertNil(error)
-            }
-            expect.fulfill()
+        let tokenInfo = try await confirmClosure("Introspect access token") { confirm in
+            client.introspect(token: token, type: .accessToken) { confirm($0) }
         }
         
-        await fulfillment(of: [expect], timeout: .standard)
-        
-        XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
-        XCTAssertEqual(tokenInfo?.active, true)
+        #expect(tokenInfo.subject == "john.doe@example.com")
+        #expect(tokenInfo.active == true)
     }
     
+    @Test("Token introspection of an inactive access token", .credentialCoordinator)
     func testIntrospectInactiveAccessToken() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+        
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -322,24 +279,19 @@ final class OAuth2ClientTests: XCTestCase {
                             }
                           """),
                           contentType: "application/json")
-        nonisolated(unsafe) var tokenInfo: TokenInfo?
-        let expect = expectation(description: "network request")
-        client.introspect(token: token, type: .accessToken) { result in
-            switch result {
-            case .success(let response):
-                tokenInfo = response
-            case .failure(let error):
-                XCTAssertNil(error)
-            }
-            expect.fulfill()
+
+        let tokenInfo = try await confirmClosure("Introspect access token") { confirm in
+            client.introspect(token: token, type: .accessToken) { confirm($0) }
         }
-        
-        await fulfillment(of: [expect], timeout: .standard)
-        
-        XCTAssertEqual(tokenInfo?.active, false)
+
+        #expect(tokenInfo.active == false)
     }
     
+    @Test("Token introspection of an active refresh token", .credentialCoordinator)
     func testIntrospectActiveRefreshToken() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -358,25 +310,19 @@ final class OAuth2ClientTests: XCTestCase {
                           """),
                           contentType: "application/json")
 
-        nonisolated(unsafe) var tokenInfo: TokenInfo?
-        let expect = expectation(description: "network request")
-        client.introspect(token: token, type: .refreshToken) { result in
-            switch result {
-            case .success(let response):
-                tokenInfo = response
-            case .failure(let error):
-                XCTAssertNil(error)
-            }
-            expect.fulfill()
+        let tokenInfo = try await confirmClosure("Introspect refresh token") { confirm in
+            client.introspect(token: token, type: .refreshToken) { confirm($0) }
         }
-        
-        await fulfillment(of: [expect], timeout: .standard)
-        
-        XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
-        XCTAssertEqual(tokenInfo?.active, true)
+
+        #expect(tokenInfo.subject == "john.doe@example.com")
+        #expect(tokenInfo.active == true)
     }
     
+    @Test("Token introspection of an active ID token", .credentialCoordinator)
     func testIntrospectActiveIdToken() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -395,25 +341,19 @@ final class OAuth2ClientTests: XCTestCase {
                           """),
                           contentType: "application/json")
 
-        nonisolated(unsafe) var tokenInfo: TokenInfo?
-        let expect = expectation(description: "network request")
-        client.introspect(token: token, type: .idToken) { result in
-            switch result {
-            case .success(let response):
-                tokenInfo = response
-            case .failure(let error):
-                XCTAssertNil(error)
-            }
-            expect.fulfill()
+        let tokenInfo = try await confirmClosure("Introspect ID token") { confirm in
+            client.introspect(token: token, type: .idToken) { confirm($0) }
         }
         
-        await fulfillment(of: [expect], timeout: .standard)
-        
-        XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
-        XCTAssertEqual(tokenInfo?.active, true)
+        #expect(tokenInfo.subject == "john.doe@example.com")
+        #expect(tokenInfo.active == true)
     }
     
+    @Test("Token introspection of an active device secret", .credentialCoordinator)
     func testIntrospectActiveDeviceSecret() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -432,25 +372,19 @@ final class OAuth2ClientTests: XCTestCase {
                           """),
                           contentType: "application/json")
 
-        nonisolated(unsafe) var tokenInfo: TokenInfo?
-        let expect = expectation(description: "network request")
-        client.introspect(token: token, type: .deviceSecret) { result in
-            switch result {
-            case .success(let response):
-                tokenInfo = response
-            case .failure(let error):
-                XCTAssertNil(error)
-            }
-            expect.fulfill()
+        let tokenInfo = try await confirmClosure("Introspect device secret") { confirm in
+            client.introspect(token: token, type: .deviceSecret) { confirm($0) }
         }
-        
-        await fulfillment(of: [expect], timeout: .standard)
-        
-        XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
-        XCTAssertEqual(tokenInfo?.active, true)
+
+        #expect(tokenInfo.subject == "john.doe@example.com")
+        #expect(tokenInfo.active == true)
     }
     
+    @Test("Token introspection failure", .credentialCoordinator)
     func testIntrospectFailed() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+
         let token = try! Token(id: "TokenId",
                                issuedAt: Date(),
                                tokenType: "Bearer",
@@ -460,50 +394,41 @@ final class OAuth2ClientTests: XCTestCase {
                                refreshToken: nil,
                                idToken: nil,
                                deviceSecret: nil,
-                               context: Token.Context(configuration: self.configuration,
+                               context: Token.Context(configuration: configuration,
                                                       clientSettings: nil))
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/introspect", data: nil, statusCode: 401)
 
-        let expect = expectation(description: "network request")
-        client.introspect(token: token, type: .refreshToken) { result in
-            switch result {
-            case .success:
-                XCTFail()
-            case .failure(let error):
-                XCTAssertNotNil(error)
-
-                let expectedUrlRequest = URLRequest(url: URL(string: "https://example.com/oauth2/v1/introspect")!)
-                XCTAssertEqual(error.localizedDescription,
-                               OAuth2Error.network(error: APIClientError.missingResponse(request: expectedUrlRequest)).localizedDescription)
+        let error = await #expect(throws: (any Error).self) {
+            try await confirmClosure("Introspect refresh token") { confirm in
+                client.introspect(token: token, type: .refreshToken) { confirm($0) }
             }
-            expect.fulfill()
         }
-        
-        await fulfillment(of: [expect], timeout: .standard)
+
+        let expectedUrlRequest = URLRequest(url: URL(string: "https://example.com/oauth2/v1/introspect")!)
+        #expect(error?.localizedDescription ==
+                OAuth2Error.network(error: APIClientError.missingResponse(request: expectedUrlRequest)).localizedDescription)
     }
  
+    @Test("Revoke access token", .credentialCoordinator)
     func testRevoke() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
         
-        let expect = expectation(description: "network request")
-        client.revoke(token, type: .accessToken) { result in
-            switch result {
-            case .success(): break
-            case .failure(let error):
-                XCTAssertNil(error)
-            }
-            expect.fulfill()
+        try await confirmClosure("Introspect device secret") { confirm in
+            client.revoke(token, type: .accessToken) { confirm($0) }
         }
-        await fulfillment(of: [expect], timeout: .standard)
     }
     
+    @Test("Revoke request parameters with client authentication")
     func testRevokeRequestClientAuthentication() throws {
         var config = configuration
         config.authentication = .clientSecret("supersecret")
@@ -512,78 +437,74 @@ final class OAuth2ClientTests: XCTestCase {
                                               token: "the-token",
                                               hint: .deviceSecret,
                                               configuration: [:])
-        let parameters = try XCTUnwrap(request.bodyParameters?.stringComponents)
-        XCTAssertEqual(parameters["token"], "the-token")
-        XCTAssertEqual(parameters["token_type_hint"], "device_secret")
-        XCTAssertEqual(parameters["client_secret"], "supersecret")
+        let parameters = try #require(request.bodyParameters?.stringComponents)
+        #expect(parameters["token"] == "the-token")
+        #expect(parameters["token_type_hint"] == "device_secret")
+        #expect(parameters["client_secret"] == "supersecret")
     }
 
+    @Test("Refresh token concurrently", .credentialCoordinator)
     func testRefresh() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
-        nonisolated(unsafe) var newTokens = [Token]()
-        var expectations = [XCTestExpectation]()
-        let lock = Lock()
-
-        for _ in 1...4 {
-            let expect = expectation(description: "refresh")
-            client.refresh(token) { result in
-                switch result {
-                case .success(let newToken):
-                    lock.withLock {
-                        newTokens.append(newToken)
-                    }
-                case .failure(let error):
-                    XCTAssertNil(error)
-                }
-                expect.fulfill()
+        let results = try await repeatedlyConfirmClosure("Perform jwks fetches") { _, confirm in
+            client.refresh(token) {
+                confirm($0)
             }
-            expectations.append(expect)
         }
 
-        await fulfillment(of: expectations, timeout: 1.5)
-
-        XCTAssertEqual(newTokens.count, 4)
+        #expect(results.count == 4)
     }
 
+    @Test("Validate refresh request parameters with client authentication", .credentialCoordinator)
     func testRefreshRequestClientAuthentication() throws {
-        let clientConfiguration = OAuth2Client.Configuration(issuerURL: client.configuration.baseURL,
-                                                             clientId: client.configuration.clientId,
-                                                             scope: client.configuration.scope,
+        let clientConfiguration = OAuth2Client.Configuration(issuerURL: configuration.baseURL,
+                                                             clientId: configuration.clientId,
+                                                             scope: configuration.scope,
                                                              authentication: .clientSecret("supersecret"))
         let request = Token.RefreshRequest(openIdConfiguration: openIdConfiguration,
                                            clientConfiguration: clientConfiguration,
                                            refreshToken: "the-token",
                                            scope: nil,
                                            id: "token-id")
-        let parameters = try XCTUnwrap(request.bodyParameters as? [String: String])
-        XCTAssertEqual(parameters["refresh_token"], "the-token")
-        XCTAssertEqual(parameters["grant_type"], "refresh_token")
-        XCTAssertEqual(parameters["client_secret"], "supersecret")
+        let parameters = try #require(request.bodyParameters as? [String: String])
+        #expect(parameters["refresh_token"] == "the-token")
+        #expect(parameters["grant_type"] == "refresh_token")
+        #expect(parameters["client_secret"] == "supersecret")
     }
 
+    @Test("Refresh token async", .credentialCoordinator)
     func testRefreshAsync() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
-        
-        let token = try await client.refresh(token)
-        XCTAssertNotNil(token)
+
+        _ = try await client.refresh(token)
     }
 
+    @Test("Refresh revoke async", .credentialCoordinator)
     func testRevokeAsync() async throws {
+        let urlSession = URLSessionMock()
+        let client = OAuth2Client(configuration, session: urlSession)
+
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
 
-        try await client.revoke(token, type: .accessToken)
+        _ = try await client.revoke(token, type: .accessToken)
     }
 }

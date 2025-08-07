@@ -25,6 +25,17 @@ runs:
             echo "Using Xcode ${xcode_version} for Swift ${{ inputs.swift-version }}"
             echo "DEVELOPER_DIR=${developer_dir}" >> $GITHUB_ENV
             echo "developer_dir=${developer_dir}" >> $GITHUB_OUTPUT
+
+            swift_arguments=$(yq ".swift[] | select(.version == \"${{inputs.swift-version}}\") | .swift_arguments" "${{inputs.version-manifest}}")
+            if [[ "$swift_arguments" -ne "null" ]]; then
+              echo "Requires the use of \"${swift_arguments}\" Swift arguments"
+              echo "SWIFT_ARGUMENTS=${swift_arguments}" >> $GITHUB_ENV
+              echo "swift_arguments=${swift_arguments}" >> $GITHUB_OUTPUT
+            else
+              echo "SWIFT_ARGUMENTS=" >> $GITHUB_ENV
+              echo "swift_arguments=" >> $GITHUB_OUTPUT
+            fi
+
             exit 0
           fi
         done

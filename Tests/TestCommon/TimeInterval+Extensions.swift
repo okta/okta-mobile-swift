@@ -17,6 +17,16 @@ public extension TimeInterval {
     static let short: Self = 1
     static let long: Self = 5
     static let veryLong: Self = 10
+    
+    func `is`(_ other: Self, accuracy: Self) -> Bool {
+        return abs(self - other) <= accuracy
+    }
+}
+
+public extension Int {
+    func `is`(_ other: Self, accuracy: Self) -> Bool {
+        return abs(self - other) <= accuracy
+    }
 }
 
 public extension DispatchTime {

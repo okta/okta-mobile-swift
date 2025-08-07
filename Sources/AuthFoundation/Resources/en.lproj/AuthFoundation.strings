@@ -54,9 +54,12 @@
 "jwt_issuedAt_time_exceeds_grace_interval" = "This token was issued at a time that exceeds the allowed grace jwt_interval.";
 "jwt_nonce_mismatch" = "The nonce value does not match the value expected.";
 "jwt_cannot_create_key" = "Cannot create a public key.";
+"jwt_cannot_create_key_description" = "Cannot create a public key: %@.";
 "jwt_invalid_key" = "Invalid key data.";
 "jwt_signature_invalid" = "Token signature is invalid.";
 "jwt_signature_verification_unavailable" = "Signature verification is unavailable on this platform.";
+"jwt_signature_verification_failed" = "Signature verification failed.";
+"jwt_signature_verification_failed_description" = "Signature verification failed: %@.";
 "jwt_unsupported_algorithm" = "Signing algorithm \"%@\" is unsupported.";
 "jwt_cannot_generate_hash" = "Cannot generate hash signature.";
 "jwt_exceeds_max_age" = "The token exceeds the supplied maximum age.";

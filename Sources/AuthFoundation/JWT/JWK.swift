@@ -24,24 +24,24 @@ public struct JWK: Sendable, Codable, Equatable, Identifiable, Hashable {
     
     /// The intended usage for this key.
     public let usage: Usage
-
+    
     /// The signing algorithm used with this key.
     public let algorithm: Algorithm?
-
+    
     /// The RSA modulus value.
     public let rsaModulus: String?
-
+    
     /// The RSA exponent value.
     public let rsaExponent: String?
-        
+    
     /// The validator instance used to perform verification steps on JWT tokens.
     ///
     /// A default implementation of ``JWKValidator`` is provided and will be used if this value is not changed.
     public static var validator: any JWKValidator {
-        get { lock.withLock { _validator } }
-        set { lock.withLock { _validator = newValue } }
+        get { providers.validator }
+        set { providers.validator = newValue }
     }
-
+    
     @_documentation(visibility: internal)
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -50,7 +50,7 @@ public struct JWK: Sendable, Codable, Equatable, Identifiable, Hashable {
         usage = try container.decode(Usage.self, forKey: .usage)
         rsaModulus = try container.decodeIfPresent(String.self, forKey: .rsaModulus)
         rsaExponent = try container.decodeIfPresent(String.self, forKey: .rsaExponent)
-
+        
         if let algorithm = try container.decodeIfPresent(JWK.Algorithm.self, forKey: .algorithm) {
             self.algorithm = algorithm
         } else if type == .rsa {
@@ -59,7 +59,7 @@ public struct JWK: Sendable, Codable, Equatable, Identifiable, Hashable {
             self.algorithm = nil
         }
     }
-
+    
     @_documentation(visibility: internal)
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -78,7 +78,7 @@ public struct JWK: Sendable, Codable, Equatable, Identifiable, Hashable {
         case algorithm = "alg"
         case rsaModulus = "n"
         case rsaExponent = "e"
-
+        
         // Currently unused coding keys.
         case keyOperations = "key_ops"
         case certificateUrl = "x5u"
@@ -106,11 +106,26 @@ public struct JWK: Sendable, Codable, Equatable, Identifiable, Hashable {
         case pbes2Count = "p2c"
     }
     
+    @TaskLocal static var providers: ProviderRegistry = ProviderRegistry()
+}
+
+extension JWK {
+    final class ProviderRegistry: Sendable {
+        var validator: any JWKValidator {
+            get { lock.withLock { _validator } }
+            set { lock.withLock { _validator = newValue } }
+        }
+        
+        init(validator: any JWKValidator = DefaultJWKValidator()) {
+            _validator = validator
+        }
+
+        private let lock = Lock()
+        nonisolated(unsafe) private var _validator: any JWKValidator
+    }
+
+    // TODO: Remove all `resetToDefault()` test functions
     static func resetToDefault() {
         validator = DefaultJWKValidator()
     }
-
-    // MARK: Private properties / methods
-    private static let lock = Lock()
-    nonisolated(unsafe) private static var _validator: any JWKValidator = DefaultJWKValidator()
 }

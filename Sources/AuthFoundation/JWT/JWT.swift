@@ -70,8 +70,8 @@ public struct JWT: RawRepresentable, Sendable, Codable, HasClaims, Expires {
     /// - Parameter keySet: JWK keyset which should be used to verify this token.
     /// - Returns: Returns whether or not signing passes for this token/key combination.
     /// - Throws: ``JWTError``
-    public func validate(using keySet: JWKS) throws -> Bool {
-        return try JWK.validator.validate(token: self, using: keySet)
+    public func validate(using keySet: JWKS) throws {
+        try JWK.validator.validate(token: self, using: keySet)
     }
     
     /// The header portion of the JWT token.

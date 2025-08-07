@@ -289,6 +289,7 @@ public final class BrowserSignin {
     static var providerFactory: any BrowserSigninProviderFactory.Type = BrowserSignin.self
     
     // Used for testing only
+    // TODO: Remove all `resetToDefault()` test functions
     static func resetToDefault() {
         providerFactory = BrowserSignin.self
     }
@@ -303,7 +304,11 @@ extension BrowserSignin: BrowserSigninProviderFactory {
         from window: BrowserSignin.WindowAnchor?,
         usesEphemeralSession: Bool = false) throws -> (any BrowserSigninProvider)?
     {
-        try AuthenticationServicesProvider(from: window, usesEphemeralSession: usesEphemeralSession)
+        #if canImport(AuthenticationServices)
+        return try AuthenticationServicesProvider(from: window, usesEphemeralSession: usesEphemeralSession)
+        #else
+        return nil
+        #endif
     }
 }
 

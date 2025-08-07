@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(Linux)
+#if os(Linux) || os(Android)
 public typealias OSStatus = Int32
 #endif
 
@@ -23,6 +23,6 @@ public typealias OSStatus = Int32
 /// > Note: A default implementation will be automatically used if this value is not changed.
 public protocol JWKValidator {
     /// Verifies the ``JWT`` signature using the supplied ``JWKS`` key set.
-    /// - Returns: Returns whether or not signing passes for this token/key combination.
-    func validate(token: JWT, using keySet: JWKS) throws -> Bool
+    /// - Throws: Error when signing fails for this token/key combination.
+    func validate(token: JWT, using keySet: JWKS) throws
 }

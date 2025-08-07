@@ -10,35 +10,38 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Testing
 @testable import AuthFoundation
 
-final class PercentEncodedQueryTests: XCTestCase {
-    func testAPIRequestQuery() {
+@Suite("Percent Encoded Query Tests")
+struct PercentEncodedQueryTests {
+    @Test("API Request Query encoding")
+    func apiRequestQuery() {
         var query = [String: (any APIRequestArgument)?]()
-        XCTAssertEqual(query.percentQueryEncoded, "")
+        #expect(query.percentQueryEncoded == "")
         
         query["firstName"] = "Jane"
-        XCTAssertEqual(query.percentQueryEncoded, "firstName=Jane")
+        #expect(query.percentQueryEncoded == "firstName=Jane")
         
         query["phoneNumber"] = "+15551234567"
-        XCTAssertEqual(query.percentQueryEncoded, "firstName=Jane&phoneNumber=%2B15551234567")
+        #expect(query.percentQueryEncoded == "firstName=Jane&phoneNumber=%2B15551234567")
         
         query["adjustment"] = "50%"
-        XCTAssertEqual(query.percentQueryEncoded, "adjustment=50%25&firstName=Jane&phoneNumber=%2B15551234567")
+        #expect(query.percentQueryEncoded == "adjustment=50%25&firstName=Jane&phoneNumber=%2B15551234567")
     }
     
-    func testPercentQueryEncoded() {
+    @Test("Percent Query encoding")
+    func percentQueryEncoded() {
         var query = [String: String]()
-        XCTAssertEqual(query.percentQueryEncoded, "")
+        #expect(query.percentQueryEncoded == "")
         
         query["name"] = "Jane Doe"
-        XCTAssertEqual(query.percentQueryEncoded, "name=Jane%20Doe")
+        #expect(query.percentQueryEncoded == "name=Jane%20Doe")
         
         query["phoneNumber"] = "+15551234567"
-        XCTAssertEqual(query.percentQueryEncoded, "name=Jane%20Doe&phoneNumber=%2B15551234567")
+        #expect(query.percentQueryEncoded == "name=Jane%20Doe&phoneNumber=%2B15551234567")
         
         query["adjustment"] = "50%"
-        XCTAssertEqual(query.percentQueryEncoded, "adjustment=50%25&name=Jane%20Doe&phoneNumber=%2B15551234567")
+        #expect(query.percentQueryEncoded == "adjustment=50%25&name=Jane%20Doe&phoneNumber=%2B15551234567")
     }
 }

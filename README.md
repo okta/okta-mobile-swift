@@ -38,6 +38,36 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 
 The latest release can always be found on the [releases page][github-releases].
 
+### Version Compatibility
+
+A variety of Swift versions and environments are supported, including:
+
+| Name | Version |
+| ---- | ------- |
+| [Xcode](#xcode) | 16.0 or later |
+| [Swift](#swift) | 5.10, 6.0+ |
+| [Swift Toolchain](#swift) | 6.0+ |
+| Environments | [Apple](#apple-platforms), [Linux](#linux) _(experimental)_ |
+
+> [!TIP]
+> For more information, please see the [SDK support policy details](#support-policy) below.
+
+### Supported Platforms 
+
+All Apple platform targets are supported, with every attempt made to avoid dropping older OS versions unneccessarily.
+
+| Platform    | Minimum Supported | Best-Effort |
+| ----------- | ----------------- | ----------- |
+| iOS         | 15.0              | 13.0        |
+| tvOS        | 15.0              | 13.0        |
+| watchOS     | 8.0               | 7.0         |
+| visionOS    | 1.0               | 1.0         |
+| macCatalyst | 15.0              | 13.0        |
+| macOS       | 12.0              | 10.15       |
+
+> [!TIP]
+> For more details, please read below on our [approach to Apple Platform version support](#apple-platforms).
+
 ## Need help?
 
 If you run into problems using the SDK, you can:
@@ -84,12 +114,14 @@ Several key features and capabilities are introduced with this library, with som
 | ------- |
 | Simple OIDC web-based sign in |
 | Credential management (secure storage, retrieval, etc) |
-| Multi-token handling (store and use tokens for multiple users, scopes, etc) |
+| Multi-user token handling (store and use tokens for multiple users, scopes, etc) |
 | Authorization Code Flow |
 | Native SSO / Token Exchange Flow |
 | Device Authorization Grant Flow |
 | JWT Authorization Grant Flow |
 | Resource Owner Flow |
+| Okta's DirectAuth Flow |
+| Okta's IDX InteractionCode Flow |
 | Simplified JWT parsing and handling |
 | Streamlined authorization of URLSession requests using credential tokens |
 | Many extension points for customizability, monitoring, and tracking |
@@ -430,26 +462,23 @@ This policy defines the extent of the support for Xcode, Swift, and platform (iO
 
 ### Xcode
 
-The only supported versions of Xcode are those that can be currently used to submit apps to the App Store. Once a Xcode version becomes unsupported, dropping support for it will not be considered a breaking change, and will be done in a minor release.
+Xcode 16 or later, as these are the [minimum requirements for submission to the Apple App Store][apple-app-store-requirements].
+
+Our support Only Xcode versions supported by the App Store supported versions of Xcode are those that can be currently used to submit apps to the App Store. Once a Xcode version becomes unsupported, dropping support for it will not be considered a breaking change, and will be done in a minor release.
 
 ### Swift
 
-The minimum supported Swift version is 5.10, which is the version shipped with the oldest-supported Xcode version. Once a Swift 5 minor becomes unsupported, dropping support for it will not be considered a breaking change, and will be done in a minor release.
+This library is designed for Swift 6 and above, with compatibility for Swift 5.10, though this requires the use of the Swift 6 Toolchain. The minimum supported Swift version is 5.10, which is the version shipped with the oldest-supported Xcode version. Once a Swift 5 minor becomes unsupported, dropping support for it will not be considered a breaking change, and will be done in a minor release.
 
 This library supports Swift 6, with full support for Strict Concurrency.
 
-### Platforms
+### Environments
+
+Though the primary target for this SDK is Apple and its various platforms, other deployment environments are supported in either a limited or experimental capacity.
+
+#### Apple Platforms
 
 Only the last 4 major platform versions are officially supported, unless there are platform limitations that limit our ability to support older versions.
-
-| Platform    | Supported | Best-Effort |
-| ----------- | --------- | ----------- |
-| iOS         | 15.0      | 13.0        |
-| tvOS        | 15.0      | 13.0        |
-| watchOS     | 8.0       | 7.0         |
-| visionOS    | 1.0       | 1.0         |
-| macCatalyst | 15.0      | 13.0        |
-| macOS       | 12.0      | 10.15       |
 
 Once a platform version becomes unsupported, dropping support for it will not be considered a breaking change and will be done in a minor release. For example, iOS 15 will cease to be supported when iOS 19 is released, and might be dropped in a minor release in the future.
 
@@ -457,11 +486,12 @@ In the case of macOS, the yearly named releases are considered a major platform 
 
 > *Note:* Older OS versions are supported in a best-effort manner. Unless there are API limitations that prevent the SDK from working effectively on older OS versions, the minimum requirements will not be changed.
 
-<details>
+#### Linux
 
-<summary>Linux Compatibility</summary>
+This SDK is tested with Ubuntu 24.04 to ensure compatibility with Linux environments, though it's important to note that only Swift 6.0 and above is supported there.
 
-Linux support is experimental. Compatibility with Linux considered is best-effort and is not officially supported. Ubuntu is included as a test target for all Continuous Integration tests, and every effort is taken to ensure its continued compatibility.
+> [!CAUTION]
+> Linux support is experimental. Compatibility with Linux considered is best-effort and is not officially supported at this time. Every effort is taken to ensure its continued compatibility, and Continuous Integration tests are used to assert that all tests pass before updates are merged.
 
 Some features are not yet supported in Linux, including but not limited to:
 
@@ -472,9 +502,7 @@ Some features are not yet supported in Linux, including but not limited to:
 | JWT Validation | The Linux-compatible crypto libraries have not yet been integrated into JWT validation |
 | PKCE | PKCE key and signature generation has not been implemented in Linux yet |
 
-</details>
-
-### Legacy SDK support
+### Legacy SDK version support
 
 The okta-oidc-ios SDK is considered legacy, and all new feature development is made to okta-mobile-swift.  The legacy SDKs only receive critical bug and security fixes, so it's advisable for developers to migrate to this new SDK.
 
@@ -532,3 +560,4 @@ We are happy to accept contributions and PRs! Please see the [contribution guide
 [okta-library-versioning]: https://developer.okta.com/code/library-versions
 [support-policy]: #support-policy
 [migration-1x]: MIGRATION.md#migrating-from-okta-client-sdk-1x
+[apple-app-store-requirements]: https://developer.apple.com/news/upcoming-requirements/?id=02212025a

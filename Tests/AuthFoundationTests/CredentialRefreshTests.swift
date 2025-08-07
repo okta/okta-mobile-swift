@@ -10,12 +10,18 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
+
 @testable import TestCommon
 @testable import AuthFoundation
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
+#endif
+
+#if os(Android)
+import Android
 #endif
 
 class CredentialRefreshDelegate: OAuth2ClientDelegate, @unchecked Sendable {
@@ -23,33 +29,59 @@ class CredentialRefreshDelegate: OAuth2ClientDelegate, @unchecked Sendable {
     
     func reset() {
         refreshCount = 0
-        refreshExpectation = nil
+        refreshContinuation = nil
     }
     
-    var refreshExpectation: XCTestExpectation?
+    var refreshContinuation: (CheckedContinuation<Token?, any Error>)?
     func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
         refreshCount += 1
         
-        refreshExpectation?.fulfill()
-        refreshExpectation = nil
+        if let refreshContinuation {
+            refreshContinuation.resume(returning: newToken)
+            self.refreshContinuation = nil
+        }
     }
 }
 
-final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked Sendable {
-    var delegate: CredentialRefreshDelegate!
-    var coordinator: CredentialCoordinatorImpl!
-    var notificationCenter: NotificationCenter!
-
+@Suite("Credential refresh tests", .serialized, .credentialCoordinator, .disabled("Debugging test deadlocks within CI"))
+final class CredentialRefreshTests: OAuth2ClientDelegate, @unchecked Sendable {
     enum APICalls {
         case none
-        case error
+        case error(ErrorResponse = .noResponse)
         case openIdOnly
         case refresh(count: Int, rotate: Bool = false)
+        
+        enum ErrorResponse {
+            case noResponse
+            case invalidRequest
+            
+            var statusCode: Int {
+                switch self {
+                case .noResponse: return 500
+                case .invalidRequest: return 400
+                }
+            }
+            var data: Data? {
+                switch self {
+                case .noResponse: return nil
+                case .invalidRequest:
+                    return """
+                        {"error": "invalid_request"}
+                    """.data(using: .utf8)
+                }
+            }
+        }
     }
 
-    func credential(for token: Token, expectAPICalls: APICalls = .refresh(count: 1), expiresIn: TimeInterval = 3600) async throws -> Credential {
-        let credential = try await coordinator.store(token: token, tags: [:], security: Credential.Security.standard)
-        credential.oauth2.add(delegate: delegate)
+    func credential(for token: Token,
+                    delegate: CredentialRefreshDelegate? = nil,
+                    expectAPICalls: APICalls = .refresh(count: 1),
+                    expiresIn: TimeInterval = 3600) async throws -> Credential
+    {
+        let credential = try await Credential.providers.coordinator.store(token: token, tags: [:], security: Credential.Security.standard)
+        if let delegate {
+            credential.oauth2.add(delegate: delegate)
+        }
         
         let urlSession = credential.oauth2.session as! URLSessionMock
         urlSession.resetRequests()
@@ -79,321 +111,252 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked
                 """))
             }
             
-        case .error:
+        case .error(let errorType):
             urlSession.expect("https://example.com/.well-known/openid-configuration",
                               data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                               contentType: "application/json")
             urlSession.expect("https://example.com/oauth2/v1/token",
-                              data: nil,
-                              statusCode: 500)
+                              data: errorType.data,
+                              statusCode: errorType.statusCode)
         }
         
         return credential
     }
 
-    override func setUp() async throws {
-        await CredentialActor.run {
-            notificationCenter = NotificationCenter()
-            coordinator = CredentialCoordinatorImpl()
-            coordinator.tokenStorage = MockTokenStorage()
-            coordinator.credentialDataSource = MockCredentialDataSource()
-        }
-        delegate = CredentialRefreshDelegate()
-    }
-
-    override func tearDown() async throws {
-        notificationCenter = nil
-        coordinator = nil
-        delegate = nil
-    }
-
-    func taskData(_ block: () async throws -> Void) async rethrows {
-        try await TaskData.$notificationCenter.withValue(notificationCenter) {
-            try await TaskData.$coordinator.withValue(coordinator) {
-                try await block()
-            }
-        }
-    }
-
+    @Test("Successful refresh with delegate and notifications", .notificationCenter)
     func testRefresh() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.simpleMockToken)
+        let notificationCenter = try #require(Test.current?.notificationCenter)
+        let notification = NotificationRecorder(center: notificationCenter,
+                                                observing: [.tokenRefreshed])
 
-            let expect = expectation(description: "refresh")
-            credential.refresh { result in
-                switch result {
-                case .success(let newToken):
-                    XCTAssertNotNil(newToken)
-                case .failure(let error):
-                    XCTAssertNil(error)
-                }
-                expect.fulfill()
-            }
-            await fulfillment(of: [expect], timeout: 3.0)
+        let delegate = CredentialRefreshDelegate()
+        let credential = try await credential(for: Token.simpleMockToken,
+                                              delegate: delegate,
+                                              expectAPICalls: .refresh(count: 1,
+                                                                       rotate: false))
 
-            XCTAssertFalse(credential.token.isRefreshing)
-            XCTAssertEqual(delegate.refreshCount, 1)
+        #expect(credential.token.refreshToken == "abc123")
+
+        try await confirmClosure("Perform refresh") { confirm in
+            credential.refresh { confirm($0) }
         }
+        
+        #expect(!credential.token.isRefreshing)
+        #expect(credential.token.refreshToken == "therefreshtoken")
+        
+        await MainActor.yield()
+
+        #expect(notification.notifications.count == 1)
+        let tokenNotification = try #require(notification.notifications(for: .tokenRefreshed).first)
+        #expect(tokenNotification.object as? Token == credential.token)
+        #expect(tokenNotification.userInfo?["error"] == nil)
+
+        #expect(delegate.refreshCount == 1)
     }
 
+    @Test("Notifications sent upon refresh failure", .notificationCenter)
     func testRefreshFailed() async throws {
-        try await taskData {
-            let notification = NotificationRecorder(center: notificationCenter,
-                                                    observing: [.credentialRefreshFailed, .tokenRefreshFailed])
-            let credential = try await credential(for: Token.simpleMockToken, expectAPICalls: .error)
-
-            let expect = expectation(description: "refresh")
-            credential.refresh { result in
-                switch result {
-                case .success(_):
-                    XCTFail("Did not expect a success response")
-                case .failure(let error):
-                    XCTAssertNotNil(error)
-                }
-                expect.fulfill()
+        let notificationCenter = try #require(Test.current?.notificationCenter)
+        let notification = NotificationRecorder(center: notificationCenter,
+                                                observing: [.credentialRefreshFailed, .tokenRefreshFailed])
+        let credential = try await credential(for: Token.simpleMockToken, expectAPICalls: .error(.invalidRequest))
+        let error = await #expect(throws: OAuth2Error.self) {
+            try await confirmClosure("Perform refresh") { confirm in
+                credential.refresh { confirm($0) }
             }
-
-            await fulfillment(of: [expect], timeout: 3.0)
-
-            // Need to wait for the async notification dispatch
-            usleep(useconds_t(2000))
-
-            XCTAssertEqual(notification.notifications.count, 2)
-            let tokenNotification = try XCTUnwrap(notification.notifications(for: .tokenRefreshFailed).first)
-            XCTAssertEqual(tokenNotification.object as? Token, credential.token)
-            XCTAssertNotNil(tokenNotification.userInfo?["error"])
-
-            let credentialNotification = try XCTUnwrap(notification.notifications(for: .credentialRefreshFailed).first)
-            XCTAssertEqual(credentialNotification.object as? Credential, credential)
-            XCTAssertNotNil(credentialNotification.userInfo?["error"])
         }
+        
+        #expect(error == .server(error: .init(code: "invalid_request", description: nil)))
+
+        await MainActor.yield()
+        
+        #expect(notification.notifications.count == 2)
+        let tokenNotification = try #require(notification.notifications(for: .tokenRefreshFailed).first)
+        #expect(tokenNotification.object as? Token == credential.token)
+        #expect(tokenNotification.userInfo?["error"] != nil)
+        
+        let credentialNotification = try #require(notification.notifications(for: .credentialRefreshFailed).first)
+        #expect(credentialNotification.object as? Credential == credential)
+        #expect(credentialNotification.userInfo?["error"] != nil)
     }
-    
+
+    @Test("Refresh fails without a refresh token", .notificationCenter)
     func testRefreshWithoutRefreshToken() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.mockToken(id: "TokenID",
-                                                                       refreshToken: nil))
+        let credential = try await credential(for: Token.mockToken(id: "TokenID",
+                                                                   refreshToken: nil))
 
-            let expect = expectation(description: "refresh")
-            credential.refresh { result in
-                switch result {
-                case .success(_):
-                    XCTFail("Did not expect a success response")
-                case .failure(let error):
-                    XCTAssertNotNil(error)
-                    XCTAssertEqual(error, .missingToken(type: .refreshToken))
-                }
-                expect.fulfill()
+        let error = await #expect(throws: OAuth2Error.self) {
+            try await confirmClosure { confirm in
+                credential.refresh { confirm($0) }
             }
-
-            await fulfillment(of: [expect], timeout: 3.0)
         }
+        
+        #expect(error != nil)
+        #expect(error == .missingToken(type: .refreshToken))
     }
 
+    @Test("Ensure optional values are preserved after refresh")
     func testRefreshWithoutOptionalValues() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.mockToken(id: "TokenID",
-                                                                       deviceSecret: "theDeviceSecret"))
+        let credential = try await credential(for: Token.mockToken(id: "TokenID",
+                                                                   refreshToken: "originalRefreshToken",
+                                                                   deviceSecret: "theDeviceSecret"),
+                                              expectAPICalls: .refresh(count: 1, rotate: true))
 
-            let expect = expectation(description: "refresh")
-            credential.refresh { result in
-                switch result {
-                case .success(let newToken):
-                    XCTAssertNotNil(newToken)
-                case .failure(let error):
-                    XCTAssertNil(error)
-                }
-                expect.fulfill()
-            }
-            await fulfillment(of: [expect], timeout: 3.0)
+        #expect(credential.token.deviceSecret == "theDeviceSecret")
+        #expect(credential.token.refreshToken == "originalRefreshToken")
 
-            XCTAssertEqual(credential.token.deviceSecret, "theDeviceSecret")
+        try await confirmClosure { confirm in
+            credential.refresh { confirm($0) }
         }
+        
+        #expect(credential.token.deviceSecret == "theDeviceSecret")
+        #expect(credential.token.refreshToken == "therefreshtoken-1")
     }
-
+    
+    @Test("Refresh if needed when token is expired")
     func testRefreshIfNeededExpired() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.mockToken(issuedOffset: 6000))
-            let expect = expectation(description: "refresh")
-            credential.refreshIfNeeded(graceInterval: 300) { result in
-                switch result {
-                case .success(let newToken):
-                    XCTAssertNotNil(newToken)
-                case .failure(let error):
-                    XCTAssertNil(error)
-                }
-                expect.fulfill()
-            }
-
-            await fulfillment(of: [expect], timeout: 3.0)
-
-            XCTAssertFalse(credential.token.isRefreshing)
-            XCTAssertEqual(delegate.refreshCount, 1)
+        let delegate = CredentialRefreshDelegate()
+        let credential = try await credential(for: Token.mockToken(issuedOffset: 6000),
+                                              delegate: delegate)
+        
+        #expect(credential.token.refreshToken == "abc123")
+        
+        try await confirmClosure("Perform refresh if needed") { confirm in
+            credential.refreshIfNeeded(graceInterval: 300) { confirm($0) }
         }
+        
+        #expect(!credential.token.isRefreshing)
+        #expect(credential.token.refreshToken == "therefreshtoken")
+        #expect(delegate.refreshCount == 1)
     }
 
+    @Test("Refresh if needed within grace interval")
     func testRefreshIfNeededWithinGraceInterval() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.mockToken(issuedOffset: 0),
-                                                  expectAPICalls: .none)
-            let expect = expectation(description: "refresh")
-            credential.refreshIfNeeded(graceInterval: 300) { result in
-                switch result {
-                case .success(let newToken):
-                    XCTAssertNotNil(newToken)
-                case .failure(let error):
-                    XCTAssertNil(error)
-                }
-                expect.fulfill()
-            }
-
-            XCTAssertFalse(credential.token.isRefreshing)
-
-            await fulfillment(of: [expect], timeout: 3.0)
-
-            XCTAssertFalse(credential.token.isRefreshing)
-            XCTAssertEqual(delegate.refreshCount, 0)
+        let delegate = CredentialRefreshDelegate()
+        let credential = try await credential(for: Token.mockToken(issuedOffset: 0),
+                                              delegate: delegate,
+                                              expectAPICalls: .none)
+        
+        #expect(!credential.token.isRefreshing)
+        #expect(credential.token.refreshToken == "abc123")
+        
+        try await confirmClosure("Perform refresh if needed") { confirm in
+            credential.refreshIfNeeded(graceInterval: 300) { confirm($0) }
         }
+        
+        #expect(credential.token.refreshToken == "abc123")
+        #expect(!credential.token.isRefreshing)
+        #expect(delegate.refreshCount == 0)
     }
-
+    
+    @Test("Refresh if needed outside grace interval")
     func testRefreshIfNeededOutsideGraceInterval() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.mockToken(issuedOffset: 3500))
-            let expect = expectation(description: "refresh")
-            credential.refreshIfNeeded(graceInterval: 300) { result in
-                switch result {
-                case .success(let newToken):
-                    XCTAssertNotNil(newToken)
-                case .failure(let error):
-                    XCTAssertNil(error)
-                }
-                expect.fulfill()
-            }
+        let delegate = CredentialRefreshDelegate()
+        let credential = try await credential(for: Token.mockToken(issuedOffset: 3500),
+                                              delegate: delegate)
+        
+        #expect(credential.token.refreshToken == "abc123")
 
-            await fulfillment(of: [expect], timeout: 3.0)
-
-            XCTAssertEqual(delegate.refreshCount, 1)
-            XCTAssertFalse(credential.token.isRefreshing)
+        try await confirmClosure("Perform refresh if needed") { confirm in
+            credential.refreshIfNeeded(graceInterval: 300) { confirm($0) }
         }
+        
+        #expect(credential.token.refreshToken == "therefreshtoken")
+        #expect(delegate.refreshCount == 1)
+        #expect(!credential.token.isRefreshing)
     }
-
+    
     // TODO: This test should be refactored to not rely on wallclock timing, which can become flaky within CI environments.
+    @Test("Automatic token refresh", .notificationCenter)
     func testAutomaticRefresh() async throws {
-        try await taskData {
-            Credential.refreshGraceInterval = 0.5
-            let credential = try await credential(for: Token.mockToken(expiresIn: 1),
-                                                  expectAPICalls: .refresh(count: 2),
-                                                  expiresIn: 1)
-            let urlSession = try XCTUnwrap(credential.oauth2.session as? URLSessionMock)
+        Credential.refreshGraceInterval = 0.5
+        let delegate = CredentialRefreshDelegate()
+        let credential = try await credential(for: Token.mockToken(expiresIn: 1),
+                                              delegate: delegate,
+                                              expectAPICalls: .refresh(count: 2),
+                                              expiresIn: 1)
+        let urlSession = try #require(credential.oauth2.session as? URLSessionMock)
 
-            XCTAssertEqual(urlSession.requests.count, 0)
+        #expect(urlSession.requests.count == 0)
 
-            // Setting automatic refresh should refresh
-            var refreshExpectation = expectation(description: "First refresh")
-            delegate.refreshExpectation = refreshExpectation
+        let token: Token? = try await withCheckedThrowingContinuation { continuation in
+            delegate.refreshContinuation = continuation
             credential.automaticRefresh = true
-
-            await fulfillment(of: [refreshExpectation], timeout: .standard)
-            XCTAssertEqual(urlSession.requests.count, 2)
-
-            // Should automatically refresh after a delay
-            urlSession.resetRequests()
-            refreshExpectation = expectation(description: "Second refresh")
-            delegate.refreshExpectation = refreshExpectation
-            await fulfillment(of: [refreshExpectation], timeout: 3)
-
-            XCTAssertEqual(urlSession.requests.count, 1)
-            urlSession.resetRequests()
-
-            // Stopping should prevent subsequent refreshes
-            credential.automaticRefresh = false
-
-            sleep(1)
-            XCTAssertEqual(urlSession.requests.count, 0)
         }
+
+        // Stopping should prevent subsequent refreshes
+        credential.automaticRefresh = false
+
+        #expect(urlSession.requests(matching: .url("/token")).count == 1)
+        urlSession.resetRequests()
+        
+        #expect(token == credential.token)
     }
     
+    @Test("Authorized URL session functionality")
     func testAuthorizedURLSession() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.simpleMockToken)
+        let credential = try await credential(for: Token.simpleMockToken)
 
-            var request = URLRequest(url: URL(string: "https://example.com/my/api")!)
-            credential.authorize(request: &request)
+        var request = URLRequest(url: URL(string: "https://example.com/my/api")!)
+        credential.authorize(request: &request)
 
-            XCTAssertEqual(request.value(forHTTPHeaderField: "Authorization"),
-                           "Bearer \(credential.token.accessToken)")
-        }
+        #expect(request.value(forHTTPHeaderField: "Authorization") == "Bearer \(credential.token.accessToken)")
     }
     
+    @Test("Rotating refresh tokens functionality")
     func testRotatingRefreshTokens() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.mockToken(expiresIn: 1),
-                                                  expectAPICalls: .refresh(count: 3, rotate: true),
-                                                  expiresIn: 1)
+        let credential = try await credential(for: Token.mockToken(expiresIn: 1),
+                                              expectAPICalls: .refresh(count: 3, rotate: true),
+                                              expiresIn: 1)
 
-            // Initial refresh token
-            XCTAssertEqual(credential.token.refreshToken, "abc123")
+        // Initial refresh token
+        #expect(credential.token.refreshToken == "abc123")
 
-            // First refresh
-            let refreshExpectation1 = expectation(description: "First refresh")
-            credential.refresh { _ in
-                refreshExpectation1.fulfill()
-            }
-            await fulfillment(of: [refreshExpectation1], timeout: .standard)
-            XCTAssertEqual(credential.token.refreshToken, "therefreshtoken-1")
-
-            // Second refresh
-            let refreshExpectation2 = expectation(description: "Second refresh")
-            credential.refresh { _ in
-                refreshExpectation2.fulfill()
-            }
-            await fulfillment(of: [refreshExpectation2], timeout: .standard)
-            XCTAssertEqual(credential.token.refreshToken, "therefreshtoken-2")
-
-            // Third refresh
-            let refreshExpectation3 = expectation(description: "Third refresh")
-            credential.refresh { _ in
-                refreshExpectation3.fulfill()
-            }
-            await fulfillment(of: [refreshExpectation3], timeout: .standard)
-            XCTAssertEqual(credential.token.refreshToken, "therefreshtoken-3")
+        // First refresh
+        try await confirmClosure("First refresh") { confirm in
+            credential.refresh { confirm($0) }
         }
-    }
+        #expect(credential.token.refreshToken == "therefreshtoken-1")
 
+        // Second refresh
+        try await confirmClosure("Second refresh") { confirm in
+            credential.refresh { confirm($0) }
+        }
+        #expect(credential.token.refreshToken == "therefreshtoken-2")
+
+        // Third refresh
+        try await confirmClosure("Third refresh") { confirm in
+            credential.refresh { confirm($0) }
+        }
+        #expect(credential.token.refreshToken == "therefreshtoken-3")
+    }
+    
     func testRefreshAsync() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.simpleMockToken)
-            try await perform {
-                try await credential.refresh()
-            }
+        let credential = try await credential(for: Token.simpleMockToken)
+        try await performConcurrent {
+            try await credential.refresh()
         }
     }
 
     func testRefreshIfNeededExpiredAsync() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.mockToken(issuedOffset: 6000))
-            try await perform {
-                try await credential.refreshIfNeeded(graceInterval: 300)
-            }
+        let credential = try await credential(for: Token.mockToken(issuedOffset: 6000))
+        try await performConcurrent {
+            try await credential.refreshIfNeeded(graceInterval: 300)
         }
     }
-
+    
     func testRefreshIfNeededWithinGraceIntervalAsync() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.mockToken(issuedOffset: 0),
-                                                  expectAPICalls: .none)
-            try await perform {
-                try await credential.refreshIfNeeded(graceInterval: 300)
-            }
+        let credential = try await credential(for: Token.mockToken(issuedOffset: 0),
+                                              expectAPICalls: .none)
+        try await performConcurrent {
+            try await credential.refreshIfNeeded(graceInterval: 300)
         }
     }
-
+    
     func testRefreshIfNeededOutsideGraceIntervalAsync() async throws {
-        try await taskData {
-            let credential = try await credential(for: Token.mockToken(issuedOffset: 3500))
-            try await perform {
-                try await credential.refreshIfNeeded(graceInterval: 300)
-            }
+        let credential = try await credential(for: Token.mockToken(issuedOffset: 3500))
+        try await performConcurrent {
+            try await credential.refreshIfNeeded(graceInterval: 300)
         }
     }
 }

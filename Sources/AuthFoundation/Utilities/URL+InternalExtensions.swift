@@ -18,7 +18,7 @@ extension URL {
     @inlinable
     func appendingComponent(_ component: String) -> URL {
         // swiftlint:disable force_unwrapping
-        #if os(Linux)
+        #if os(Linux) || os(Android)
         var components = URLComponents(url: self, resolvingAgainstBaseURL: true)!
         if !components.path.hasSuffix("/") {
             components.path.append("/")

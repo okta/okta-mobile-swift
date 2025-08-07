@@ -16,7 +16,7 @@ extension JWK {
     /// Attempts to verify the given token, using the appropriate signing algorithm described.
     /// - Parameter token: The ``JWT`` token to verify.
     /// - Returns: `true` if the token is properly signed.
-    public func verify(token: JWT) throws -> Bool {
+    public func verify(token: JWT) throws {
         #if canImport(CommonCrypto)
         guard let algorithm = algorithm else {
             throw JWTError.invalidSigningAlgorithm
@@ -26,7 +26,8 @@ extension JWK {
         
         let components = token.rawValue.components(separatedBy: ".")
         guard let data = components[0...1].joined(separator: ".").data(using: .ascii),
-              let signature = Data(base64Encoded: components[2].base64URLDecoded)
+              let signatureString = token.signature,
+              let signature = Data(base64Encoded: signatureString.base64URLDecoded)
         else {
             throw JWTError.badTokenStructure
         }
@@ -36,11 +37,20 @@ extension JWK {
             throw JWTError.invalidSigningAlgorithm
         }
 
-        return SecKeyVerifySignature(publicKey,
-                                     algorithm,
-                                     data as NSData,
-                                     signature as NSData,
-                                     nil)
+        var errorRef: Unmanaged<CFError>?
+        if !SecKeyVerifySignature(publicKey,
+                                  algorithm,
+                                  data as NSData,
+                                  signature as NSData,
+                                  &errorRef)
+        {
+            if let error = errorRef?.takeRetainedValue() {
+                throw JWTError.signatureVerificationFailed(code: OSStatus(CFErrorGetCode(error)),
+                                                           description: CFErrorCopyDescription(error) as String?)
+            } else {
+                throw JWTError.signatureVerificationFailed(code: 0, description: nil)
+            }
+        }
         #else
         throw JWTError.signatureVerificationUnavailable
         #endif

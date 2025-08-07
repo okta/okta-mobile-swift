@@ -11,6 +11,7 @@
 //
 
 import XCTest
+@testable import TestCommon
 @testable import OktaDirectAuth
 
 final class FactorPropertyTests: XCTestCase {

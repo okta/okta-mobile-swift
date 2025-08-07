@@ -10,40 +10,19 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
 
 @testable import TestCommon
 @testable import AuthFoundation
 
-final class CredentialLoadingTests: XCTestCase {
-    @CredentialActor
-    final class StorageContext {
-        let name: String
-        let userDefaults: UserDefaults
-        let storage: UserDefaultsTokenStorage
-        let coordinator: CredentialCoordinatorImpl
-
-        init(named storageName: String) {
-            name = storageName
-            userDefaults = UserDefaults(suiteName: storageName)!
-
-            storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
-            coordinator = CredentialCoordinatorImpl()
-            coordinator.tokenStorage = storage
-
-            userDefaults.removePersistentDomain(forName: storageName)
-        }
-
-        deinit {
-            userDefaults.removePersistentDomain(forName: name)
-        }
-    }
-
+@Suite("Credential Loading", .disabled("Debugging test deadlocks within CI"))
+struct CredentialLoadingTests {
+    @Test("Fetch tokens from storage", .credentialCoordinator(style: .userDefaultStorage))
     @CredentialActor
     func testFetchingTokens() async throws {
-        let context = StorageContext(named: name)
-        let coordinator = context.coordinator
-        let storage = context.storage
+        let coordinator = Credential.providers.coordinator
+        let storage = try #require(coordinator.tokenStorage as? UserDefaultsTokenStorage)
 
         let tokenA = Token.mockToken(id: "TokenA")
         let tokenB = Token.mockToken(id: "TokenB")
@@ -60,18 +39,18 @@ final class CredentialLoadingTests: XCTestCase {
         try storage.setMetadata(Token.Metadata(token: tokenC, tags: ["animal": "pig"]))
         try storage.setMetadata(Token.Metadata(token: tokenD, tags: ["animal": "emu"]))
 
-        XCTAssertEqual(try coordinator.with(id: "TokenA", prompt: nil, authenticationContext: nil)?.token, tokenA)
-        XCTAssertEqual(try coordinator.find(where: { meta in
+        #expect(try coordinator.with(id: "TokenA", prompt: nil, authenticationContext: nil)?.token == tokenA)
+        #expect(try coordinator.find(where: { meta in
             meta.tags["animal"] == "cat"
-        }).count, 1)
-        XCTAssertEqual(try coordinator.find(where: { meta in
+        }).count == 1)
+        #expect(try coordinator.find(where: { meta in
             meta.tags["animal"] == "cat"
-        }).first?.token, tokenA)
-        XCTAssertEqual(try coordinator.find(where: { meta in
+        }).first?.token == tokenA)
+        #expect(try coordinator.find(where: { meta in
             meta.tags.keys.contains("animal")
-        }).count, 4)
-        XCTAssertEqual(try coordinator.find(where: { meta in
+        }).count == 4)
+        #expect(try coordinator.find(where: { meta in
             meta[.name] == "Arthur Dent"
-        }).count, 4)
+        }).count == 4)
     }
 }

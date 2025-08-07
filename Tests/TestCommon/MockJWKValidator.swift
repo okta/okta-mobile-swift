@@ -21,12 +21,10 @@ extension JWT {
 
 struct MockJWKValidator: JWKValidator {
     var error: JWTError?
-    var result: Bool = true
     
-    func validate(token: JWT, using keySet: JWKS) throws -> Bool {
+    func validate(token: JWT, using keySet: JWKS) throws {
         if let error = error {
             throw error
         }
-        return result
     }
 }

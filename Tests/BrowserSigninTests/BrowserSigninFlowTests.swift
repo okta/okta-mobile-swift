@@ -11,6 +11,8 @@
 //
 
 import XCTest
+
+#if canImport(AuthenticationServices)
 import AuthenticationServices
 @testable import AuthFoundation
 @testable import TestCommon
@@ -136,3 +138,4 @@ class BrowserSigninFlowTests: XCTestCase {
         }
     }
 }
+#endif

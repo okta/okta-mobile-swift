@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 
@@ -29,7 +29,7 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
                 return credentialDataSource
             }
 
-            let result = Self.defaultCredentialDataSource()
+            let result = Credential.providers.defaultCredentialDataSource()
             _credentialDataSource = result
             _credentialDataSource?.delegate = self
             return result
@@ -47,7 +47,7 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
                 return tokenStorage
             }
 
-            let result = Self.defaultTokenStorage()
+            let result = Credential.providers.defaultTokenStorage()
             _tokenStorage = result
             _tokenStorage?.delegate = self
             return result
@@ -157,18 +157,6 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
         }
     }
 
-    static func defaultTokenStorage() -> any TokenStorage {
-        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
-        KeychainTokenStorage()
-        #else
-        UserDefaultsTokenStorage()
-        #endif
-    }
-    
-    static func defaultCredentialDataSource() -> any CredentialDataSource {
-        DefaultCredentialDataSource()
-    }
-    
     static func defaultCredential(tokenStorage: any TokenStorage,
                                   credentialDataSource: any CredentialDataSource,
                                   coordinator: any CredentialCoordinator) throws -> Credential?
@@ -185,12 +173,6 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
             return credentialDataSource.credential(for: token, coordinator: coordinator)
         }
         return nil
-    }
-
-    @CredentialActor
-    func resetToDefault() {
-        _tokenStorage = nil
-        _credentialDataSource = nil
     }
 
     nonisolated func observe(oauth2 client: OAuth2Client) {

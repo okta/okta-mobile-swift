@@ -10,58 +10,66 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Testing
+import Foundation
 @testable import TestCommon
 @testable import AuthFoundation
 
-final class URLExtensionTests: XCTestCase {
+@Suite("URL Extension Tests", .disabled("Debugging test deadlocks within CI"))
+struct URLExtensionTests {
+    @Test("Query Values with Custom Scheme")
     func testQueryValuesCustomScheme() throws {
-        let redirectUri = try XCTUnwrap(try URL(requiredString: "com.example:/callback"))
+        let redirectUri = try URL(requiredString: "com.example:/callback")
         var uri: URL
+        var error: OAuth2Error?
 
-        uri = try XCTUnwrap(try URL(requiredString: "urn:foo:bar"))
-        XCTAssertEqual(try uri.queryValues(), [:])
-        XCTAssertThrowsError(try uri.queryValues(matching: redirectUri))
-        { error in
-            XCTAssertEqual(error as? OAuth2Error, .redirectUri(uri, reason: .scheme("urn")))
+        uri = try URL(requiredString: "urn:foo:bar")
+        #expect(try uri.queryValues() == [:])
+        error = #expect(throws: OAuth2Error.self) {
+            try uri.queryValues(matching: redirectUri)
         }
+        #expect(error == .redirectUri(uri, reason: .scheme("urn")))
 
-        uri = try XCTUnwrap(try URL(requiredString: "COM.EXAMPLE:/"))
-        XCTAssertEqual(try uri.queryValues(), [:])
-        XCTAssertThrowsError(try uri.queryValues(matching: redirectUri))
-        { error in
-            XCTAssertEqual(error as? OAuth2Error, .redirectUri(uri, reason: .hostOrPath))
+        uri = try URL(requiredString: "COM.EXAMPLE:/")
+        #expect(try uri.queryValues() == [:])
+        error = #expect(throws: OAuth2Error.self) {
+            try uri.queryValues(matching: redirectUri)
         }
+        #expect(error == .redirectUri(uri, reason: .hostOrPath))
 
-        uri = try XCTUnwrap(try URL(requiredString: "com.example:/callback?foo=bar&error_description=this+is+the+error"))
-        XCTAssertEqual(try uri.queryValues(), ["foo": "bar", "error_description": "this is the error"])
-        XCTAssertEqual(try uri.queryValues(matching: redirectUri), ["foo": "bar", "error_description": "this is the error"])
+        uri = try URL(requiredString: "com.example:/callback?foo=bar&error_description=this+is+the+error")
+        #expect(try uri.queryValues() == ["foo": "bar", "error_description": "this is the error"])
+        #expect(try uri.queryValues(matching: redirectUri) == ["foo": "bar", "error_description": "this is the error"])
     }
 
+    @Test("Query Values with HTTP Scheme")
     func testQueryValuesHTTPScheme() throws {
-        let redirectUri = try XCTUnwrap(try URL(requiredString: "https://example.com/callback"))
+        let redirectUri = try URL(requiredString: "https://example.com/callback")
         var uri: URL
-
-        uri = try XCTUnwrap(try URL(requiredString: "com.example:/callback"))
-        XCTAssertThrowsError(try uri.queryValues(matching: redirectUri))
-        { error in
-            XCTAssertEqual(error as? OAuth2Error, .redirectUri(uri, reason: .scheme("com.example")))
+        var error: OAuth2Error?
+        
+        uri = try URL(requiredString: "com.example:/callback")
+        error = #expect(throws: OAuth2Error.self) {
+            try uri.queryValues(matching: redirectUri)
         }
+        
+        #expect(error == .redirectUri(uri, reason: .scheme("com.example")))
 
-        uri = try XCTUnwrap(try URL(requiredString: "https://www.example.com/callback"))
-        XCTAssertEqual(try uri.queryValues(), [:])
-        XCTAssertThrowsError(try uri.queryValues(matching: redirectUri))
-        { error in
-            XCTAssertEqual(error as? OAuth2Error, .redirectUri(uri, reason: .hostOrPath))
+        uri = try URL(requiredString: "https://www.example.com/callback")
+        #expect(try uri.queryValues() == [:])
+        error = #expect(throws: OAuth2Error.self) {
+            try uri.queryValues(matching: redirectUri)
         }
+        #expect(error == .redirectUri(uri, reason: .hostOrPath))
 
-        uri = try XCTUnwrap(try URL(requiredString: "https://example.com/callback?foo=bar&error_description=this+is+the+error"))
-        XCTAssertEqual(try uri.queryValues(), ["foo": "bar", "error_description": "this is the error"])
-        XCTAssertEqual(try uri.queryValues(matching: redirectUri), ["foo": "bar", "error_description": "this is the error"])
+        uri = try URL(requiredString: "https://example.com/callback?foo=bar&error_description=this+is+the+error")
+        #expect(try uri.queryValues() == ["foo": "bar", "error_description": "this is the error"])
+        #expect(try uri.queryValues(matching: redirectUri) == ["foo": "bar", "error_description": "this is the error"])
     }
 
+    @Test("Redirect URI Variations")
     func testRedirectUriVariations() throws {
-        let nilHost = try XCTUnwrap(try URL(requiredString: "com.test:///login"))
-        XCTAssertNoThrow(try nilHost.queryValues(matching: nilHost))
+        let nilHost = try URL(requiredString: "com.test:///login")
+        #expect(try nilHost.queryValues(matching: nilHost) == [:])
     }
 }

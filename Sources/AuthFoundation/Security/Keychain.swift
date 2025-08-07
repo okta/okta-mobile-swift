@@ -81,10 +81,10 @@ public struct Keychain {
                 cfDictionary.removeValue(forKey: kSecAttrAccessible as String)
             }
 
-            let implementation = Keychain.implementation.wrappedValue
+            let implementation = Keychain.implementation
 
             let deleteQuery = self.deleteQuery.filter { Keychain.compositePrimaryKeyAttributes.contains($0.key) }
-            implementation.deleteItem(deleteQuery as CFDictionary)
+            _ = implementation.deleteItem(deleteQuery as CFDictionary)
 
             var ref: AnyObject?
             let status = implementation.addItem(cfDictionary as CFDictionary, &ref)
@@ -384,10 +384,7 @@ public struct Keychain {
         }
     }
 
-    static let implementation = LockedValue<any KeychainProtocol>(KeychainImpl())
-    static func resetToDefault() {
-        implementation.wrappedValue = KeychainImpl()
-    }
+    @TaskLocal static var implementation: any KeychainProtocol = KeychainImpl()
 }
 
 #endif

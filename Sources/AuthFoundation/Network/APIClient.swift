@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 
@@ -151,8 +151,7 @@ extension APIClient {
     public var userAgent: String { SDKVersion.userAgent }
     
     public func error(from data: Data) -> (any Error)? {
-        defaultJSONDecoder.userInfo = [:]
-        return try? defaultJSONDecoder.decode(OktaAPIError.self, from: data)
+        try? defaultJSONDecoder().decode(OktaAPIError.self, from: data)
     }
     
     public func willSend(request: inout URLRequest) {}
@@ -341,9 +340,9 @@ let defaultJSONEncoder: JSONEncoder = {
     return encoder
 }()
 
-let defaultJSONDecoder: JSONDecoder = {
+func defaultJSONDecoder() -> JSONDecoder {
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .formatted(defaultIsoDateFormatter)
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     return decoder
-}()
+}

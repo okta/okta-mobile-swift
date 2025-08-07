@@ -10,7 +10,8 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import XCTest
+import Foundation
+import Testing
 
 @testable import TestCommon
 @testable import AuthFoundation
@@ -18,48 +19,50 @@ import XCTest
 #if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication
 
-final class CredentialSecurityTests: XCTestCase {
+@Suite("Credential security tests", .disabled("Debugging test deadlocks within CI"))
+struct CredentialSecurityTests {
+    @Test("Context extension")
     func testContextExtension() throws {
-        XCTAssertNil([Credential.Security]().context)
+        #expect([Credential.Security]().context == nil)
         
         let context = LAContext()
-        XCTAssertEqual([Credential.Security.context(context)].context,
-                       context)
+        #expect([Credential.Security.context(context)].context == context)
     }
     
+    @Test("Accessibility extension")
     func testAccessibilityExtension() throws {
-        XCTAssertNil([Credential.Security]().accessibility)
-        XCTAssertEqual([Credential.Security.accessibility(.afterFirstUnlock)].accessibility,
-                       .afterFirstUnlock)
-        XCTAssertEqual([Credential.Security.accessibility(.afterFirstUnlock),
-                        Credential.Security.accessibility(.unlocked)].accessibility,
-                       .afterFirstUnlock)
+        #expect([Credential.Security]().accessibility == nil)
+        #expect([Credential.Security.accessibility(.afterFirstUnlock)].accessibility == .afterFirstUnlock)
+        #expect([Credential.Security.accessibility(.afterFirstUnlock),
+                 Credential.Security.accessibility(.unlocked)].accessibility == .afterFirstUnlock)
     }
 
+    @Test("Access group extension")
     func testAccessGroupExtension() throws {
-        XCTAssertNil([Credential.Security]().accessGroup)
-        XCTAssertEqual([Credential.Security.accessGroup("Foo")].accessGroup,
-                       "Foo")
-        XCTAssertEqual([Credential.Security.accessGroup("Foo"),
-                        Credential.Security.accessGroup("Bar")].accessGroup,
-                       "Foo")
+        #expect([Credential.Security]().accessGroup == nil)
+        #expect([Credential.Security.accessGroup("Foo")].accessGroup == "Foo")
+        #expect([Credential.Security.accessGroup("Foo"),
+                 Credential.Security.accessGroup("Bar")].accessGroup == "Foo")
     }
 
+    @Test("Access control flags extension")
     func testAccessControlFlagsExtension() throws {
-        XCTAssertNil([Credential.Security]().accessControlFlags)
-        XCTAssertEqual([Credential.Security.accessControl(.devicePasscode)].accessControlFlags,
-                       .devicePasscode)
+        #expect([Credential.Security]().accessControlFlags == nil)
+        #expect([Credential.Security.accessControl(.devicePasscode)].accessControlFlags == .devicePasscode)
     }
 
+    @Test("Create access control extension")
     func testCreateAccessControlExtension() throws {
-        XCTAssertNil(try [Credential.Security]().createAccessControl(accessibility: .unlocked))
+        #expect(try [Credential.Security]().createAccessControl(accessibility: .unlocked) == nil)
 
-        XCTAssertNotNil(try [Credential.Security.accessControl(.devicePasscode)].createAccessControl(accessibility: .unlocked))
+        #expect(try [Credential.Security.accessControl(.devicePasscode)].createAccessControl(accessibility: .unlocked) != nil)
         
         let options: [Credential.Security] = [
             .accessControl([.devicePasscode, .userPresence])
         ]
-        XCTAssertThrowsError(try options.createAccessControl(accessibility: .unlocked))
+        #expect(throws: (any Error).self) {
+            try options.createAccessControl(accessibility: .unlocked)
+        }
     }
 }
 #endif

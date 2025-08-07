@@ -12,25 +12,18 @@
 
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
 
-import XCTest
+import Testing
+import Foundation
 @testable import AuthFoundation
 @testable import TestCommon
 
-final class KeychainTests: XCTestCase {
+@Suite("Keychain Tests", .disabled("Debugging test deadlocks within CI"))
+struct KeychainTests {
     let serviceName = (#file as NSString).lastPathComponent
-    var mock: MockKeychain!
     
-    override func setUp() {
-        mock = MockKeychain()
-        Keychain.implementation.wrappedValue = mock
-    }
-    
-    override func tearDownWithError() throws {
-        Keychain.resetToDefault()
-        mock = nil
-    }
-
+    @Test("Save new item", .mockKeychain)
     func testItemSave() throws {
+        let mock = try #require(Test.current?.mockKeychain)
         let genericData = "This is generic data".data(using: .utf8)!
         let value = "This is value data".data(using: .utf8)!
         let query = [
@@ -76,22 +69,26 @@ final class KeychainTests: XCTestCase {
                                  value: value)
         try item.save()
 
-        XCTAssertEqual(mock.operations[0], .init(action: .delete, query: [
+        #expect(mock.operations[0] == .init(action: .delete, query: [
             "acct": "testItemSave()",
             "class": "genp",
             "sync": 1,
             "svce": "KeychainTests.swift",
         ], attributes: nil))
-        XCTAssertEqual(mock.operations[1], .init(action: .add, query: query, attributes: nil))
+        #expect(mock.operations[1] == .init(action: .add, query: query, attributes: nil))
 
         // Test failed save
         mock.reset()
         mock.expect(errSecItemNotFound)
         mock.expect(errSecAuthFailed)
-        XCTAssertThrowsError(try item.save())
+        #expect(throws: (any Error).self) {
+            try item.save()
+        }
     }
     
+    @Test("Update an item without getting it first", .mockKeychain)
     func testItemUpdate() throws {
+        let mock = try #require(Test.current?.mockKeychain)
         let oldData = "Old value".data(using: .utf8)!
         let newData = "New value".data(using: .utf8)!
         
@@ -121,12 +118,14 @@ final class KeychainTests: XCTestCase {
                                     accessibility: .unlocked,
                                     value: newData)
 
-        XCTAssertNoThrow(try oldItem.update(newItem, authenticationContext: nil))
+        try oldItem.update(newItem, authenticationContext: nil)
 
-        XCTAssertEqual(mock.operations[0], .init(action: .update, query: query, attributes: attributes))
+        #expect(mock.operations[0] == .init(action: .update, query: query, attributes: attributes))
     }
 
+    @Test("Delete item without a search", .mockKeychain)
     func testItemDelete() throws {
+        let mock = try #require(Test.current?.mockKeychain)
         let genericData = "This is generic data".data(using: .utf8)!
         let value = "This is value data".data(using: .utf8)!
         let query = [
@@ -147,15 +146,19 @@ final class KeychainTests: XCTestCase {
                                  value: value)
         try item.delete()
         
-        XCTAssertEqual(mock.operations[0], .init(action: .delete, query: query, attributes: nil))
+        #expect(mock.operations[0] == .init(action: .delete, query: query, attributes: nil))
 
         // Test failed delete
         mock.reset()
         mock.expect(errSecItemNotFound)
-        XCTAssertThrowsError(try item.delete())
+        #expect(throws: (any Error).self) {
+            try item.delete()
+        }
     }
     
+    @Test("List search results", .mockKeychain)
     func testSearchList() throws {
+        let mock = try #require(Test.current?.mockKeychain)
         let result = [[
             "tomb": 0,
             "svce": "KeychainTests.swift",
@@ -184,17 +187,17 @@ final class KeychainTests: XCTestCase {
         // Delete all items matching a search
         try search.delete()
 
-        XCTAssertEqual(mock.operations[0], .init(action: .copy, query: [
+        #expect(mock.operations[0] == .init(action: .copy, query: [
             "acct": "testSearchList()",
             "class": "genp",
             "m_Limit": "m_LimitAll",
             "r_Attributes": 1,
             "r_Ref": 1,
         ], attributes: nil))
-        XCTAssertEqual(searchResults.first?.account, "testSearchList()")
+        #expect(searchResults.first?.account == "testSearchList()")
 
         // Check search result delete
-        XCTAssertEqual(mock.operations[1], .init(action: .delete, query: [
+        #expect(mock.operations[1] == .init(action: .delete, query: [
             "acct": "testSearchList()",
             "class": "genp",
             "svce": "KeychainTests.swift",
@@ -202,13 +205,15 @@ final class KeychainTests: XCTestCase {
         ] as CFDictionary, attributes: nil))
 
         // Check search delete
-        XCTAssertEqual(mock.operations[2], .init(action: .delete, query: [
+        #expect(mock.operations[2] == .init(action: .delete, query: [
             "acct": "testSearchList()",
             "class": "genp",
         ] as CFDictionary, attributes: nil))
     }
     
+    @Test("Get a single item from a search", .mockKeychain)
     func testSearchGet() throws {
+        let mock = try #require(Test.current?.mockKeychain)
         let value = "This is value data".data(using: .utf8)!
 
         var query: [String: Any] = [
@@ -246,12 +251,14 @@ final class KeychainTests: XCTestCase {
         
         query["u_OpPrompt"] = "UI Prompt"
 
-        XCTAssertEqual(mock.operations[0], .init(action: .copy, query: query as CFDictionary, attributes: nil))
-        XCTAssertEqual(searchResults.account, "testSearchGet()")
-        XCTAssertEqual(searchResults.value, value)
+        #expect(mock.operations[0] == .init(action: .copy, query: query as CFDictionary, attributes: nil))
+        #expect(searchResults.account == "testSearchGet()")
+        #expect(searchResults.value == value)
     }
 
+    @Test("Error while getting a search result", .mockKeychain)
     func testSearchError() throws {
+        let mock = try #require(Test.current?.mockKeychain)
         let result = [] as CFArray
         mock.expect(errSecItemNotFound, result: result)
 
@@ -260,51 +267,72 @@ final class KeychainTests: XCTestCase {
                                      accessGroup: nil)
         
         // Test item not found
-        XCTAssertThrowsError(try search.get())
+        #expect(throws: (any Error).self) {
+            try search.get()
+        }
 
         // Test generic error
         mock.expect(errSecAuthFailed, result: result)
-        XCTAssertThrowsError(try search.get())
+        #expect(throws: (any Error).self) {
+            try search.get()
+        }
         
         // Test invalid ref data
         mock.expect(noErr, result: result)
-        XCTAssertThrowsError(try search.get())
+        #expect(throws: (any Error).self) {
+            try search.get()
+        }
     }
     
+    @Test("Invalid item data", .mockKeychain)
     func testInvalidItemData() throws {
         // Test missing account
-        XCTAssertThrowsError(try Keychain.Item([:]))
+        #expect(throws: (any Error).self) {
+            try Keychain.Item([:])
+        }
         
         // Test missing value data
-        XCTAssertThrowsError(try Keychain.Item([
-            kSecAttrAccount as String: "TheAccountName"
-        ]))
+        #expect(throws: (any Error).self) {
+            try Keychain.Item([
+                kSecAttrAccount as String: "TheAccountName"
+            ])
+        }
 
         // Test invalid accessibility option
-        XCTAssertThrowsError(try Keychain.Item([
-            kSecAttrAccount as String: "TheAccountName",
-            kSecValueData as String: Data(),
-            kSecAttrAccessible as String: "WoofWoof!"
-        ]))
+        #expect(throws: (any Error).self) {
+            try Keychain.Item([
+                kSecAttrAccount as String: "TheAccountName",
+                kSecValueData as String: Data(),
+                kSecAttrAccessible as String: "WoofWoof!"
+            ])
+        }
     }
     
+    @Test("Invalid search result data", .mockKeychain)
     func testInvalidResultData() throws {
         // Test missing account
-        XCTAssertThrowsError(try Keychain.Search.Result([:]))
+        #expect(throws: (any Error).self) {
+            try Keychain.Search.Result([:])
+        }
         
         // Test missing creationDate
-        XCTAssertThrowsError(try Keychain.Search.Result([
-            kSecAttrAccount as String: "TheAccountName",
-            kSecAttrModificationDate as String: Date()
-        ]))
+        #expect(throws: (any Error).self) {
+            try Keychain.Search.Result([
+                kSecAttrAccount as String: "TheAccountName",
+                kSecAttrModificationDate as String: Date()
+            ])
+        }
 
         // Test missing creationDate
-        XCTAssertThrowsError(try Keychain.Search.Result([
-            kSecAttrAccount as String: "TheAccountName",
-            kSecAttrCreationDate as String: Date()
-        ]))
+        #expect(throws: (any Error).self) {
+            try Keychain.Search.Result([
+                kSecAttrAccount as String: "TheAccountName",
+                kSecAttrCreationDate as String: Date()
+            ])
+        }
     }
     
+    @Test("Test keychain search query", .mockKeychain)
     func testListQuery() throws {
         var search: Keychain.Search
         
@@ -312,7 +340,7 @@ final class KeychainTests: XCTestCase {
                                  service: serviceName,
                                  accessGroup: nil)
         
-        XCTAssertEqual(search.listQuery as NSDictionary, [
+        #expect(search.listQuery as NSDictionary == [
             "acct": "testListQuery()",
             "class": "genp",
             "m_Limit": "m_LimitAll",
@@ -325,7 +353,7 @@ final class KeychainTests: XCTestCase {
                                  service: nil,
                                  accessGroup: "my.access.group")
         
-        XCTAssertEqual(search.listQuery as NSDictionary, [
+        #expect(search.listQuery as NSDictionary == [
             "acct": "testListQuery()",
             "agrp": "my.access.group",
             "class": "genp",
@@ -335,6 +363,7 @@ final class KeychainTests: XCTestCase {
         ] as NSDictionary)
     }
     
+    @Test("Test keychain search result", .mockKeychain)
     func testSearchResult() throws {
         let result = try Keychain.Search.Result([
             kSecAttrAccount as String: "TheAccountName",
@@ -343,10 +372,12 @@ final class KeychainTests: XCTestCase {
             kSecAttrAccessible as String: "ak"
         ])
         
-        XCTAssertEqual(result.account, "TheAccountName")
+        #expect(result.account == "TheAccountName")
     }
 
+    @Test("Test search result, and getting an item from it", .mockKeychain)
     func testSearchResultGet() throws {
+        let mock = try #require(Test.current?.mockKeychain)
         let result = try Keychain.Search.Result([
             kSecAttrAccount as String: "TheAccountName",
             kSecAttrModificationDate as String: Date(),
@@ -371,7 +402,7 @@ final class KeychainTests: XCTestCase {
         ] as CFDictionary)
 
         let item = try result.get(prompt: "Why I need this")
-        XCTAssertEqual(mock.operations[0], .init(action: .copy, query: [
+        #expect(mock.operations[0] == .init(action: .copy, query: [
             "acct": "TheAccountName",
             "class": "genp",
             "m_Limit": "m_LimitOne",
@@ -380,11 +411,13 @@ final class KeychainTests: XCTestCase {
             "r_Ref": 1,
             "u_OpPrompt": "Why I need this"
         ] as CFDictionary, attributes: nil))
-        XCTAssertEqual(item.account, "TheAccountName")
-        XCTAssertEqual(item.value, "TestData".data(using: .utf8))
+        #expect(item.account == "TheAccountName")
+        #expect(item.value == "TestData".data(using: .utf8))
     }
 
+    @Test("Delete a search result item", .mockKeychain)
     func testSearchResultDelete() throws {
+        let mock = try #require(Test.current?.mockKeychain)
         let result = try Keychain.Search.Result([
             kSecAttrAccount as String: "TheAccountName",
             kSecAttrModificationDate as String: Date(),
@@ -395,13 +428,15 @@ final class KeychainTests: XCTestCase {
         mock.expect(noErr)
 
         try result.delete()
-        XCTAssertEqual(mock.operations[0], .init(action: .delete, query: [
+        #expect(mock.operations[0] == .init(action: .delete, query: [
             "acct": "TheAccountName",
             "class": "genp"
         ] as CFDictionary, attributes: nil))
     }
 
+    @Test("Update a search result item", .mockKeychain)
     func testSearchResultUpdate() throws {
+        let mock = try #require(Test.current?.mockKeychain)
         let result = try Keychain.Search.Result([
             kSecAttrAccount as String: "TheAccountName",
             kSecAttrModificationDate as String: Date(),
@@ -416,7 +451,7 @@ final class KeychainTests: XCTestCase {
                                     value: "New Value".data(using: .utf8)!)
 
         try result.update(newItem)
-        XCTAssertEqual(mock.operations[0], .init(action: .update, query: [
+        #expect(mock.operations[0] == .init(action: .update, query: [
             "acct": "TheAccountName",
             "class": "genp"
         ] as CFDictionary, attributes: [
