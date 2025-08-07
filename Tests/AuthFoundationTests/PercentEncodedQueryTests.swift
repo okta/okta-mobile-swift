@@ -13,7 +13,7 @@
 import Testing
 @testable import AuthFoundation
 
-@Suite("Percent Encoded Query Tests", .disabled("Debugging test deadlocks within CI"))
+@Suite("Percent Encoded Query Tests")
 struct PercentEncodedQueryTests {
     @Test("API Request Query encoding")
     func apiRequestQuery() {
