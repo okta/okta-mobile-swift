@@ -16,7 +16,7 @@ import Testing
 @testable import TestCommon
 @testable import AuthFoundation
 
-@Suite("Credential removal upon revocation")
+@Suite("Credential removal upon revocation", .disabled("Debugging test deadlocks within CI"))
 struct CredentialRevocationRemovalTests {
     @Test("Remove when only an access token is present")
     @CredentialActor

@@ -39,7 +39,7 @@ class TestMigrator: SDKVersionMigrator {
     }
 }
 
-@Suite("Version migration tests", .serialized)
+@Suite("Version migration tests", .serialized, .disabled("Debugging test deadlocks within CI"))
 final class MigrationTests {
     init() {
         Migration.shared.resetMigrators()

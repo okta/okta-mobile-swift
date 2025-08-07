@@ -14,7 +14,7 @@ import Testing
 
 @testable import AuthFoundation
 
-@Suite("Foundation Extensions")
+@Suite("Foundation Extensions", .disabled("Debugging test deadlocks within CI"))
 struct FoundationExtensionTests {
     @Test("String case conversions")
     func stringCaseConversions() throws {

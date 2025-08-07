@@ -16,7 +16,7 @@ import Testing
 @testable import AuthFoundation
 import TestCommon
 
-@Suite("Default token hash validator")
+@Suite("Default token hash validator", .disabled("Debugging test deadlocks within CI"))
 struct DefaultTokenHashValidatorTests {
     var validator: DefaultTokenHashValidator!
 

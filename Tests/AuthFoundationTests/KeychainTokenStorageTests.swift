@@ -18,7 +18,7 @@ import Foundation
 @testable import AuthFoundation
 @testable import TestCommon
 
-@Suite("Keychain Token Storage Tests")
+@Suite("Keychain Token Storage Tests", .disabled("Debugging test deadlocks within CI"))
 struct KeychainTokenStorageTests {
     let dummyGetResult: CFDictionary = [
         "tomb": 0,

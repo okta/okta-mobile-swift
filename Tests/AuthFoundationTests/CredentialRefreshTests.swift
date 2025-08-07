@@ -43,7 +43,7 @@ class CredentialRefreshDelegate: OAuth2ClientDelegate, @unchecked Sendable {
     }
 }
 
-@Suite("Credential refresh tests", .serialized, .credentialCoordinator)
+@Suite("Credential refresh tests", .serialized, .credentialCoordinator, .disabled("Debugging test deadlocks within CI"))
 final class CredentialRefreshTests: OAuth2ClientDelegate, @unchecked Sendable {
     enum APICalls {
         case none

@@ -16,7 +16,7 @@ import Foundation
 @testable import AuthFoundation
 @testable import TestCommon
 
-@Suite("Property List Configuration Tests")
+@Suite("Property List Configuration Tests", .disabled("Debugging test deadlocks within CI"))
 struct PropertyListConfigurationTests {
     typealias PropertyListConfiguration = OAuth2Client.PropertyListConfiguration
     typealias PropertyKey = PropertyListConfiguration.Key

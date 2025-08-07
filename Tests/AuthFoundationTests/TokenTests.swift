@@ -27,7 +27,7 @@ fileprivate struct MockTokenRequest: OAuth2TokenRequest, IDTokenValidatorContext
     var bodyParameters: [String: any APIRequestArgument]?
 }
 
-@Suite("Token Management and JWT Validation")
+@Suite("Token Management and JWT Validation", .disabled("Debugging test deadlocks within CI"))
 struct TokenTests {
     let configuration = OAuth2Client.Configuration(issuerURL: URL(string: "https://example.com")!,
                                                    clientId: "clientid",

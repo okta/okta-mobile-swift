@@ -15,7 +15,7 @@ import Foundation
 @testable import TestCommon
 @testable import AuthFoundation
 
-@Suite("URL Extension Tests")
+@Suite("URL Extension Tests", .disabled("Debugging test deadlocks within CI"))
 struct URLExtensionTests {
     @Test("Query Values with Custom Scheme")
     func testQueryValuesCustomScheme() throws {

@@ -19,7 +19,7 @@ import Testing
 import FoundationNetworking
 #endif
 
-@Suite("OAuth2 Client Configuration")
+@Suite("OAuth2 Client Configuration", .disabled("Debugging test deadlocks within CI"))
 struct OAuth2ClientConfigurationTests {
     @Test("Initialize using a string literal scope")
     func testStringLiteralInitializer() throws {

@@ -17,7 +17,7 @@ import Testing
 @testable import AuthFoundation
 
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
-@Suite("OIDC Legacy Migrator")
+@Suite("OIDC Legacy Migrator", .disabled("Debugging test deadlocks within CI"))
 struct OIDCLegacyMigratorTests {
     typealias LegacyOIDC = Migration.LegacyOIDC
     

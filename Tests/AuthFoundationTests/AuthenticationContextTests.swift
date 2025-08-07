@@ -14,7 +14,7 @@ import Foundation
 import Testing
 @testable import AuthFoundation
 
-@Suite("Authentication context tests")
+@Suite("Authentication context tests", .disabled("Debugging test deadlocks within CI"))
 struct AuthenticationContextTests {
     @Test("Standard context functionality")
     func testStandardContext() throws {

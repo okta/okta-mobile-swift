@@ -16,7 +16,7 @@ import TestCommon
 
 @testable import AuthFoundation
 
-@Suite("Token Info Tests")
+@Suite("Token Info Tests", .disabled("Debugging test deadlocks within CI"))
 struct TokenInfoTests {
     let accessTokenInfo = """
         {

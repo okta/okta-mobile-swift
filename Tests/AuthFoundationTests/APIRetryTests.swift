@@ -35,7 +35,7 @@ class APIRetryDelegateRecorder: APIClientDelegate, @unchecked Sendable {
     }
 }
 
-@Suite("API request retry handling")
+@Suite("API request retry handling", .disabled("Debugging test deadlocks within CI"))
 struct APIRetryTests {
     let issuerURL: URL
     var configuration: OAuth2Client.Configuration

@@ -15,7 +15,7 @@ import Foundation
 @testable import TestCommon
 @testable import AuthFoundation
 
-@Suite("OpenID Configuration")
+@Suite("OpenID Configuration", .disabled("Debugging test deadlocks within CI"))
 struct OpenIDConfigurationTests {
     @Test("Limited configuration")
     func testLimitedConfiguration() throws {

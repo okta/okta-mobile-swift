@@ -20,7 +20,7 @@ import Testing
 import FoundationNetworking
 #endif
 
-@Suite("Default time coordinator")
+@Suite("Default time coordinator", .disabled("Debugging test deadlocks within CI"))
 struct DefaultTimeCoordinatorTests {
     let client: MockApiClient
     

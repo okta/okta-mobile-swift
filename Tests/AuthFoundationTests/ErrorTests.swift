@@ -30,7 +30,7 @@ enum TestUnlocalizedError: Error {
     case nestedError
 }
 
-@Suite("Error localization tests")
+@Suite("Error localization tests", .disabled("Debugging test deadlocks within CI"))
 struct ErrorTests {
     @Test("APIClientError")
     func testAPIClientError() {

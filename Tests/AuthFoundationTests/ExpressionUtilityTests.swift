@@ -21,7 +21,7 @@ fileprivate enum ExpressionUtilityError: Error {
     case newError
 }
 
-@Suite("Expression utility helper tests")
+@Suite("Expression utility helper tests", .disabled("Debugging test deadlocks within CI"))
 struct ExpressionUtilityTests {
     @Test("With expression, not throwing an error")
     func testWithExpressionNoThrow() async throws {

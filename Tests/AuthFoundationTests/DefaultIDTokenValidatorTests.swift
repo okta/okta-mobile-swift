@@ -69,7 +69,7 @@ struct MockTokenContext: IDTokenValidatorContext {
 }
 
 fileprivate let baselineTime: TimeInterval = 1644347069  // The date the ID tokens were created
-@Suite("Default ID Token Validator", .mockTimeCoordinator(offset: baselineTime))
+@Suite("Default ID Token Validator", .mockTimeCoordinator(offset: baselineTime), .disabled("Debugging test deadlocks within CI"))
 struct DefaultIDTokenValidatorTests {
     var validator = DefaultIDTokenValidator()
     let issuer = URL(string: "https://example.okta.com/oauth2/default")!

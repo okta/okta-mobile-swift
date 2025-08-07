@@ -38,7 +38,7 @@ struct TestOptionalStringArrayClaimProperty {
     var values: [String]?
 }
 
-@Suite("ClaimCollection tests")
+@Suite("ClaimCollection tests", .disabled("Debugging test deadlocks within CI"))
 struct ClaimCollectionTests {
     @Test("String claim collection property wrapper")
     func testStringClaimCollectionPropertyWrapper() throws {

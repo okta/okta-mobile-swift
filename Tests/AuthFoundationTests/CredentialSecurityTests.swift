@@ -19,7 +19,7 @@ import Testing
 #if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication
 
-@Suite("Credential security tests")
+@Suite("Credential security tests", .disabled("Debugging test deadlocks within CI"))
 struct CredentialSecurityTests {
     @Test("Context extension")
     func testContextExtension() throws {

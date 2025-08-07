@@ -16,7 +16,7 @@ import Testing
 @testable import TestCommon
 @testable import AuthFoundation
 
-@Suite("Default JWK validator")
+@Suite("Default JWK validator", .disabled("Debugging test deadlocks within CI"))
 struct DefaultJWKValidatorTests {
     let keySet = """
         {

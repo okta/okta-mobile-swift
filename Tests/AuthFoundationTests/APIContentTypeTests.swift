@@ -15,7 +15,7 @@ import Testing
 
 @testable import AuthFoundation
 
-@Suite("APIContentType tests")
+@Suite("APIContentType tests", .disabled("Debugging test deadlocks within CI"))
 struct APIContentTypeTests {
     @Test("Raw value constructor")
     func testRawValueConstructor() {

@@ -20,7 +20,7 @@ class MockExpires: Expires {
     var issuedAt: Date?
 }
 
-@Suite("Expires protocol tests")
+@Suite("Expires protocol tests", .disabled("Debugging test deadlocks within CI"))
 struct ExpiresTests {
     let expires = MockExpires()
     

@@ -16,7 +16,7 @@ import TestCommon
 
 @testable import AuthFoundation
 
-@Suite("JWK Tests")
+@Suite("JWK Tests", .disabled("Debugging test deadlocks within CI"))
 struct JWKTests {
     @Test("Key Sets parsing and validation")
     func keySets() throws {

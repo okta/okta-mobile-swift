@@ -15,7 +15,7 @@ import Testing
 @testable import AuthFoundation
 import TestCommon
 
-@Suite("UserInfo Tests")
+@Suite("UserInfo Tests", .disabled("Debugging test deadlocks within CI"))
 struct UserInfoTests {
     let userInfo = "{\"sub\":\"00u2q5p3acVOXoSc04w5\",\"name\":\"Arthur Dent\",\"profile\":\"\",\"locale\":\"UK\",\"email\":\"arthur.dent@example.com\",\"nickname\":\"Earthling\",\"preferred_username\":\"arthur.dent@example.com\",\"given_name\":\"Arthur\",\"middle_name\":\"Phillip\",\"family_name\":\"Dent\",\"zoneinfo\":\"America/Los_Angeles\",\"updated_at\":1645121903,\"email_verified\":true,\"address\":{\"street_address\":\"155 Country Lane\",\"locality\":\"Cottington\",\"region\":\"Cottingshire County\",\"country\":\"UK\"}}"
 

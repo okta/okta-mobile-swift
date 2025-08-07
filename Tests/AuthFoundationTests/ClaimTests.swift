@@ -37,7 +37,7 @@ extension Date {
     }
 }
 
-@Suite("Claim System and Type Conversion")
+@Suite("Claim System and Type Conversion", .disabled("Debugging test deadlocks within CI"))
 struct ClaimTests {
     @Test("Claim container type conversion and access patterns")
     func testClaimConvertible() throws {

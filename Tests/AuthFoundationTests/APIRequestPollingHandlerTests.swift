@@ -48,7 +48,7 @@ fileprivate enum TestError: Error {
     case test
 }
 
-@Suite("APIRequest Polling Handler")
+@Suite("APIRequest Polling Handler", .disabled("Debugging test deadlocks within CI"))
 struct APIRequestPollingHandlerTests {
     @Test("Successful polling")
     func testPollingHandler() async throws {

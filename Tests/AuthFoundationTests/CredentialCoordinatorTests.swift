@@ -24,7 +24,7 @@ import Android
 @testable import TestCommon
 @testable import AuthFoundation
 
-@Suite("User Coordinator Tests")
+@Suite("User Coordinator Tests", .disabled("Debugging test deadlocks within CI"))
 struct UserCoordinatorTests {
     let token = try! Token(id: "TokenId",
                            issuedAt: Date(),

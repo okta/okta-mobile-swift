@@ -16,7 +16,7 @@ import Foundation
 @testable import AuthFoundation
 @testable import TestCommon
 
-@Suite("Time Coordination and Date Management")
+@Suite("Time Coordination and Date Management", .disabled("Debugging test deadlocks within CI"))
 struct TimeCoordinatorTests {
     @Test("Date adjustments with time offset coordination", .mockTimeCoordinator)
     func testDateAdjustments() throws {

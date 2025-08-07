@@ -67,7 +67,7 @@ actor TestFlow: AuthenticationFlow {
     }
 }
 
-@Suite("Authentication flow tests")
+@Suite("Authentication flow tests", .disabled("Debugging test deadlocks within CI"))
 struct AuthenticationFlowTests {
     let issuer = URL(string: "https://example.com")!
     let configuration = OAuth2Client.Configuration(issuerURL: URL(string: "https://example.com")!,

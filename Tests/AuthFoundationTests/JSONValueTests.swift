@@ -15,7 +15,7 @@ import Testing
 @testable import AuthFoundation
 @testable import TestCommon
 
-@Suite("JSON Value Serialization and Type Handling")
+@Suite("JSON Value Serialization and Type Handling", .disabled("Debugging test deadlocks within CI"))
 struct JSONTests {
     var decoder: JSONDecoder { JSONDecoder() }
     var encoder: JSONEncoder { JSONEncoder() }

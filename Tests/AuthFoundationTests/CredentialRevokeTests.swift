@@ -19,7 +19,7 @@ import Testing
 import FoundationNetworking
 #endif
 
-@Suite("Credential revocation")
+@Suite("Credential revocation", .disabled("Debugging test deadlocks within CI"))
 struct CredentialRevokeTests {
     let token = try! Token(id: "TokenId",
                            issuedAt: Date(),

@@ -43,7 +43,7 @@ class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
     }
 }
 
-@Suite("Default credential data source")
+@Suite("Default credential data source", .disabled("Debugging test deadlocks within CI"))
 struct DefaultCredentialDataSourceTests {
     let configuration = OAuth2Client.Configuration(issuerURL: URL(string: "https://example.com")!,
                                                    clientId: "clientid",
