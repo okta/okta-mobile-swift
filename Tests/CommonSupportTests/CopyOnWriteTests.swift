@@ -11,8 +11,9 @@
 //
 
 import Foundation
-import Testing
+
 @testable import CommonSupport
+import Testing
 
 fileprivate struct TestValue: Sendable, Equatable {
     var firstName: String
@@ -41,7 +42,7 @@ struct CopyOnWriteTests {
         #expect(value1 !== value2)
         
         let value3 = value2
-        _ = await Task.detached {
+        _ = await Task.detached { @Sendable [value2] in
             var value4 = value2
             #expect(value2 === value3)
             #expect(value2 === value4)
