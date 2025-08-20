@@ -229,21 +229,12 @@ jobs:
     strategy:
       matrix:
         include:
-        - destination: "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
-          xcode_version: "15.4"
-          os: macos-14-large
-        - destination: "platform=iOS Simulator,OS=18.2,name=iPhone 16 Pro Max"
-          xcode_version: "16.2"
-          os: macos-15
         - destination: "platform=iOS Simulator,OS=18.5,name=iPhone 16 Pro Max"
           xcode_version: "16.4"
           os: macos-15
         - destination: "platform=tvOS Simulator,OS=18.5,name=Apple TV"
           xcode_version: "16.4"
           os: macos-15
-        - destination: "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
-          xcode_version: "15.4"
-          os: macos-14
         - destination: "platform=visionOS Simulator,OS=2.5,name=Apple Vision Pro"
           xcode_version: "16.4"
           os: macos-15
