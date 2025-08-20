@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import CommonSupport
 
 /// An authentication flow class that implements the Resource Owner Flow exchange.
 ///

@@ -11,6 +11,7 @@
 //
 
 import Foundation
+@_exported import JSON
 
 /// Represents the contents of a JWT token, providing access to its payload contents.
 public struct JWT: RawRepresentable, Sendable, Codable, HasClaims, Expires {
@@ -93,13 +94,7 @@ public struct JWT: RawRepresentable, Sendable, Codable, HasClaims, Expires {
         else { throw JWTError.invalidBase64Encoding }
         
         self.header = try JSONDecoder().decode(JWT.Header.self, from: headerData)
-        guard let payload = try JSONSerialization.jsonObject(with: payloadData,
-                                                             options: []) as? [String: any Sendable]
-        else {
-            throw JWTError.badTokenStructure
-        }
-
-        self.payload = payload
+        self.payload = try JSON(payloadData)
 
         if components.count == 3 {
             self.signature = components[2]
@@ -107,10 +102,12 @@ public struct JWT: RawRepresentable, Sendable, Codable, HasClaims, Expires {
     }
     
     /// Raw paylaod of claims, as a dictionary representation.
-    public var payload: [String: any Sendable]
+    public var payload: JSON
     
     /// Signature of the JWT token.
     public var signature: String?
+
+    public var claimContent: [String: any Sendable] { payload.claimContent }
 
     static func tokenComponents(from token: String) -> [String] {
         token

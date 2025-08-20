@@ -39,7 +39,7 @@ struct ChallengeRequest: AuthenticationFlowRequest {
         self.challengeTypesSupported = challengeTypesSupported
     }
     
-    struct Response: Codable {
+    struct Response: Codable, JSONDecodable {
         let challengeType: GrantType
         let oobCode: String?
         let expiresIn: TimeInterval?
@@ -64,6 +64,12 @@ struct ChallengeRequest: AuthenticationFlowRequest {
                          channel: channel,
                          bindingMethod: bindingMethod,
                          bindingCode: bindingCode)
+        }
+        
+        static var jsonDecoder: JSONDecoder {
+            let result = JSONDecoder()
+            result.keyDecodingStrategy = .convertFromSnakeCase
+            return result
         }
     }
 }

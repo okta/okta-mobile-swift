@@ -10,8 +10,9 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import AuthFoundation
 import Foundation
+import AuthFoundation
+import CommonSupport
 
 /// An authentication flow class that implements the Token Exchange Flow.
 public actor TokenExchangeFlow: AuthenticationFlow {

@@ -15,6 +15,7 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OAuth2Auth
+import CommonSupport
 
 final class MockSessionTokenFlowURLExchange: SessionTokenFlowURLExchange {
     let scheme: String

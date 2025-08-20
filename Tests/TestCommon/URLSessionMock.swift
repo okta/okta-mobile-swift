@@ -12,6 +12,7 @@
 
 import Foundation
 import XCTest
+import CommonSupport
 
 #if os(Linux)
 import FoundationNetworking

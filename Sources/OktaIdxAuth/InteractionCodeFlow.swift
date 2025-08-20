@@ -12,6 +12,7 @@
 
 import Foundation
 @_exported import AuthFoundation
+import CommonSupport
 
 /// An authentication flow used to authenticate users using the Okta Identity Engine.
 ///

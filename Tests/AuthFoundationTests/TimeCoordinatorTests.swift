@@ -13,6 +13,7 @@
 import XCTest
 @testable import AuthFoundation
 import TestCommon
+import CommonSupport
 
 class MockTimeCoordinator: @unchecked Sendable, TimeCoordinator {
     @LockedValue var offset: TimeInterval = 0.0

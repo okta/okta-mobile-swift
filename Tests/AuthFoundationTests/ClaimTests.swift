@@ -24,7 +24,7 @@ struct TestClaims: HasClaims {
     }
 
     typealias ClaimType = TestClaim
-    let payload: [String: any Sendable]
+    let claimContent: [String: any Sendable]
 }
 
 extension Date {
@@ -40,7 +40,7 @@ final class ClaimTests: XCTestCase {
     func testClaimConvertible() throws {
         let date = try Date.nowTruncated()
         let dateString = ISO8601DateFormatter().string(from: date)
-        let container = TestClaims(payload: [
+        let container = TestClaims(claimContent: [
             "firstName": "Jane",
             "lastName": "Doe",
             "modifiedDate": dateString,

@@ -12,6 +12,7 @@
 
 import AuthFoundation
 import OAuth2Auth
+import CommonSupport
 
 #if canImport(AuthenticationServices)
 import AuthenticationServices

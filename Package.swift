@@ -39,7 +39,9 @@ var package = Package(
         .macCatalyst(.v13)
     ],
     products: [
-        .library(name: "AuthFoundation", targets: ["AuthFoundation"]),
+        .library(name: "CommonSupport", targets: ["CommonSupport"]),
+        .library(name: "JSON", targets: ["JSON"]),
+        .library(name: "AuthFoundation", targets: ["CommonSupport", "JSON", "AuthFoundation"]),
         .library(name: "OAuth2Auth", targets: ["OAuth2Auth"]),
         .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
         .library(name: "OktaIdxAuth", targets: ["OktaIdxAuth"])
@@ -48,8 +50,13 @@ var package = Package(
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.0")
     ],
     targets: [
+        .target(name: "CommonSupport",
+                swiftSettings: .libraryTarget),
+        .target(name: "JSON",
+                dependencies: ["CommonSupport"],
+                swiftSettings: .libraryTarget),
         .target(name: "AuthFoundation",
-                dependencies: [],
+                dependencies: ["CommonSupport", "JSON"],
                 resources: [.process("Resources")],
                 swiftSettings: .libraryTarget),
         .target(name: "OAuth2Auth",
@@ -75,6 +82,12 @@ var package = Package(
                 dependencies: ["AuthFoundation"],
                 path: "Tests/TestCommon",
                 swiftSettings: .testTarget),
+        .testTarget(name: "CommonSupportTests",
+                    dependencies: ["CommonSupport", "TestCommon"],
+                    swiftSettings: .testTarget),
+        .testTarget(name: "JSONTests",
+                    dependencies: ["JSON", "TestCommon"],
+                    swiftSettings: .testTarget),
         .testTarget(name: "AuthFoundationTests",
                     dependencies: ["AuthFoundation", "TestCommon"],
                     resources: [

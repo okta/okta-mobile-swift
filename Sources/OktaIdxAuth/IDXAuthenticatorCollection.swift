@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import CommonSupport
 
 extension Authenticator {
     /// Container that represents a collection of authenticators, providing conveniences for quickly accessing relevant objects.

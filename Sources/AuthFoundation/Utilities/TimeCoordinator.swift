@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 
 #if os(Linux)
 import FoundationNetworking

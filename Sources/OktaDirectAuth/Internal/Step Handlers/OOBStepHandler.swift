@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import CommonSupport
 
 final class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     let flow: DirectAuthenticationFlow

@@ -170,25 +170,19 @@ extension IonResponse {
 }
 
 extension PasswordSettingsCapability {
-    init?(with settings: JSON?) {
-        guard case let .object(settings) = settings,
-              let complexity = settings["complexity"]?.anyValue as? [String: Any]
+    init?(with settings: JSON.Value?) {
+        guard let complexity = settings?["complexity"]?.object
         else { return nil }
 
-        var daysToExpiry: Int?
-        if case let .number(daysToExpiryValue) = settings["daysToExpiry"] {
-            daysToExpiry = daysToExpiryValue.intValue
-        }
-
-        self.init(daysToExpiry: daysToExpiry ?? 0,
-                  minLength: complexity["minLength"] as? Int ?? 0,
-                  minLowerCase: complexity["minLowerCase"] as? Int ?? 0,
-                  minUpperCase: complexity["minUpperCase"] as? Int ?? 0,
-                  minNumber: complexity["minNumber"] as? Int ?? 0,
-                  minSymbol: complexity["minSymbol"] as? Int ?? 0,
-                  maxConsecutiveRepeatingCharacters: complexity["maxConsecutiveRepeatingCharacters"] as? Int ?? 0,
-                  excludeUsername: complexity["excludeUsername"] as? Bool ?? false,
-                  excludeAttributes: complexity["excludeAttributes"] as? [String] ?? [])
+        self.init(daysToExpiry: settings?["daysToExpiry"]?.int ?? 0,
+                  minLength: complexity["minLength"]?.int ?? 0,
+                  minLowerCase: complexity["minLowerCase"]?.int ?? 0,
+                  minUpperCase: complexity["minUpperCase"]?.int ?? 0,
+                  minNumber: complexity["minNumber"]?.int ?? 0,
+                  minSymbol: complexity["minSymbol"]?.int ?? 0,
+                  maxConsecutiveRepeatingCharacters: complexity["maxConsecutiveRepeatingCharacters"]?.int ?? 0,
+                  excludeUsername: complexity["excludeUsername"]?.bool ?? false,
+                  excludeAttributes: complexity["excludeAttributes"]?.array?.compactMap(\.string) ?? [])
     }
 }
 
@@ -312,8 +306,7 @@ extension PollCapability {
 
 extension NumberChallengeCapability {
     init?(flow: any InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
-        guard let answerJson = authenticators.compactMap(\.contextualData?["correctAnswer"]).first,
-              case let .string(answer) = answerJson
+        guard let answer = authenticators.compactMap(\.contextualData?["correctAnswer"]).first?.string
         else {
             return nil
         }
@@ -361,17 +354,17 @@ extension OTPCapability {
 
         guard let contextualData = authenticator.contextualData,
               case let .object(qrcode) = contextualData["qrcode"],
-              case let .string(method) = qrcode["method"],
+              let method = qrcode["method"]?.string,
               method == "embedded",
-              case let .string(mimeType) = qrcode["type"],
-              case let .string(href) = qrcode["href"],
+              let mimeType = qrcode["type"]?.string,
+              let href = qrcode["href"]?.string,
               let imageData = href.base64ImageData
         else {
             return nil
         }
         
         var sharedSecret: String?
-        if case let .string(value) = contextualData["sharedSecret"] {
+        if let value = contextualData["sharedSecret"]?.string {
             sharedSecret = value
         }
 
@@ -393,9 +386,9 @@ extension DuoCapability {
         let duoAuthenticators = authenticators.filter({ $0.type == .app && $0.key == "duo" })
         guard let authenticator = duoAuthenticators.first(where: { $0.contextualData != nil }),
               let contextualData = authenticator.contextualData,
-              case let .string(host) = contextualData["host"],
-              case let .string(signedToken) = contextualData["signedToken"],
-              case let .string(script) = contextualData["script"]
+              let host = contextualData["host"]?.string,
+              let signedToken = contextualData["signedToken"]?.string,
+              let script = contextualData["script"]?.string
         else {
             return nil
         }

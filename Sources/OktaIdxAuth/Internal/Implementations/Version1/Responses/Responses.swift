@@ -44,7 +44,7 @@ struct IDXError: Sendable, Codable {
     let interactionHandle: String
 }
 
-final class IonResponse: Sendable, Decodable, JSONDecodable, ReceivesIDXResponse {
+final class IonResponse: Sendable, Decodable, JSONDecodable, IDXResponse {
     let stateHandle: String?
     let version: String
     let expiresAt: Date?
@@ -63,44 +63,44 @@ final class IonResponse: Sendable, Decodable, JSONDecodable, ReceivesIDXResponse
     let cancel: IonForm?
 
     static var jsonDecoder: JSONDecoder {
-        idxResponseDecoder
+        idxResponseDecoder()
     }
 }
 
-struct IonObject<T: Sendable & Decodable>: Sendable, Decodable, ReceivesIDXResponse {
+struct IonObject<T: Sendable & Decodable>: Sendable, Decodable, IDXResponse {
     let type: String?
     let value: T
 }
 
-struct IonCollection<T: Sendable & Decodable>: Sendable, Decodable, ReceivesIDXResponse {
+struct IonCollection<T: Sendable & Decodable>: Sendable, Decodable, IDXResponse {
     let type: String?
     let value: [T]
 }
 
-struct IonUser: Sendable, Decodable, ReceivesIDXResponse {
+struct IonUser: Sendable, Decodable, IDXResponse {
     let id: String?
     let profile: [String: String?]?
     let identifier: String?
 }
 
-struct IonApp: Sendable, Decodable, ReceivesIDXResponse {
+struct IonApp: Sendable, Decodable, IDXResponse {
     let id: String
     let label: String
     let name: String
 }
 
-struct IonChallengeData: Sendable, Decodable, ReceivesIDXResponse {
-    let challengeData: JSON
+struct IonChallengeData: Sendable, Decodable, IDXResponse {
+    let challengeData: JSON.Value
 }
 
-struct IonAuthenticator: Sendable, Decodable, IDXIONRelatable, ReceivesIDXResponse {
+struct IonAuthenticator: Sendable, Decodable, IDXIONRelatable, IDXResponse {
     let displayName: String?
     let id: String?
     let type: Authenticator.Kind
     let key: String?
     let methods: [[String: String]]?
-    let settings: JSON?
-    let contextualData: [String: JSON]?
+    let settings: JSON.Value?
+    let contextualData: [String: JSON.Value]?
     let profile: [String: String]?
     let send: IonForm?
     let resend: IonForm?
@@ -111,7 +111,7 @@ struct IonAuthenticator: Sendable, Decodable, IDXIONRelatable, ReceivesIDXRespon
     var jsonPath: String?
 }
 
-struct IonForm: Sendable, Decodable, ReceivesIDXResponse {
+struct IonForm: Sendable, Decodable, IDXResponse {
     let rel: [String]?
     let name: String
     let method: APIRequestMethod
@@ -124,24 +124,24 @@ struct IonForm: Sendable, Decodable, ReceivesIDXResponse {
     let idp: [String: String]?
 }
 
-struct IonCompositeForm: Sendable, Decodable, ReceivesIDXResponse {
+struct IonCompositeForm: Sendable, Decodable, IDXResponse {
     let form: IonCompositeFormValue
 }
 
-struct IonCompositeFormValue: Sendable, Decodable, ReceivesIDXResponse {
+struct IonCompositeFormValue: Sendable, Decodable, IDXResponse {
     let value: [IonFormValue]
 }
 
-struct IonFormValue: Sendable, Decodable, ReceivesIDXResponse {
+struct IonFormValue: Sendable, Decodable, IDXResponse {
     enum Value: Sendable {
-        case json(JSON)
+        case json(JSON.Value)
         case compositeForm(IonCompositeForm)
     }
     let id: String?
     let name: String?
     let label: String?
     let type: String?
-    let value: JSON
+    let value: JSON.Value
     let valueAsCompositeForm: IonCompositeForm?
     let required: Bool?
     let secret: Bool?
@@ -172,7 +172,7 @@ struct IonFormValue: Sendable, Decodable, ReceivesIDXResponse {
         
         let formObj = try? container.decodeIfPresent(IonCompositeFormValue.self, forKey: .form)
         valueAsCompositeForm = try? container.decodeIfPresent(IonCompositeForm.self, forKey: .value)
-        value = try container.decodeIfPresent(JSON.self, forKey: .value) ?? .null
+        value = try container.decodeIfPresent(JSON.Value.self, forKey: .value) ?? .null
         
         if formObj == nil && valueAsCompositeForm != nil {
             form = valueAsCompositeForm?.form
@@ -182,7 +182,7 @@ struct IonFormValue: Sendable, Decodable, ReceivesIDXResponse {
     }
 }
 
-struct IonMessage: Sendable, Codable, ReceivesIDXResponse {
+struct IonMessage: Sendable, Codable, IDXResponse {
     let type: String
     let i18n: IonLocalization?
     let message: String
@@ -204,7 +204,7 @@ struct IonMessage: Sendable, Codable, ReceivesIDXResponse {
 }
 
 /// Internal OIE API v1.0.0 token response.
-final class IonToken: NSObject, Decodable, ReceivesIDXResponse {
+final class IonToken: NSObject, Decodable, IDXResponse {
     let tokenType: String
     let expiresIn: Int
     let accessToken: String

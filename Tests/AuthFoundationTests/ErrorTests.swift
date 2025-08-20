@@ -226,7 +226,7 @@ final class ErrorTests: XCTestCase {
                 "errorCauses": ["Cause"]
             }
         """.data(using: .utf8)!
-        let error = try defaultJSONDecoder.decode(OktaAPIError.self, from: json)
+        let error = try defaultJSONDecoder().decode(OktaAPIError.self, from: json)
         XCTAssertEqual(error.code, "Error")
         XCTAssertEqual(error.summary, "Summary")
         XCTAssertEqual(error.link, "Link")
@@ -241,7 +241,7 @@ final class ErrorTests: XCTestCase {
                 "errorDescription": "Description"
             }
         """.data(using: .utf8)!
-        let error = try defaultJSONDecoder.decode(OAuth2ServerError.self, from: json)
+        let error = try defaultJSONDecoder().decode(OAuth2ServerError.self, from: json)
         XCTAssertEqual(error.code, .invalidRequest)
         XCTAssertEqual(error.description, "Description")
         XCTAssertEqual(error.errorDescription, "Authentication error: Description (invalid_request).")

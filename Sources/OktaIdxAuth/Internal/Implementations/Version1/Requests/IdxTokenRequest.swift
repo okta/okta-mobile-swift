@@ -47,7 +47,7 @@ extension InteractionCodeFlow {
         let clientConfiguration: OAuth2Client.Configuration
         let additionalParameters: [String: any APIRequestArgument]?
         let context: Flow.Context
-        let formParameters: [String: any JSONRepresentable]
+        let formParameters: JSON
 
         init(openIdConfiguration: OpenIdConfiguration,
              clientConfiguration: OAuth2Client.Configuration,
@@ -66,16 +66,9 @@ extension InteractionCodeFlow {
             self.url = option.href
             self.httpMethod = option.method
             self.contentType = option.accepts
-            self.formParameters = option.form.allFields.reduce(into: [:]) { partialResult, field in
-                if let name = field.name,
-                   let value = field.value,
-                   value.json != .null
-                {
-                    partialResult[name] = value
-                }
-            }
+            self.formParameters = try option.form.formValue
 
-            if let clientId = formParameters["client_id"] as? String,
+            if let clientId = formParameters["client_id"]?.jsonValue.string,
                clientId != clientConfiguration.clientId
             {
                 throw InteractionCodeFlowError.invalidParameter(name: "client_id")
@@ -111,7 +104,7 @@ extension InteractionCodeFlow.SuccessResponseTokenRequest: OAuth2TokenRequest, A
         var result = additionalParameters ?? [:]
         result.merge(clientConfiguration.parameters(for: category))
         result.merge(context.parameters(for: category))
-        result.merge(formParameters.compactMapValues({ $0.json.anyValue as? (any APIRequestArgument) }))
+        result.merge(formParameters.anyValue as? [String: any APIRequestArgument])
         return result
     }
 }

@@ -14,29 +14,25 @@ import Foundation
 import AuthFoundation
 
 extension String {
-    static func relyingPartyIssuer(from json: JSON, issuerURL: URL) throws -> String {
+    static func relyingPartyIssuer(from json: JSON.Value, issuerURL: URL) throws -> String {
         // On registration requests, the server-supplied rpId value is within the `rp.id` path.
-        if case let .object(rp) = json["rp"],
-           case let .string(id) = rp["id"]
-        {
+        if let id = json["rp"]?["id"]?.string {
             return id
         }
 
         // On authentication requests, the server-supplied rpId value is in the root `rpId` property.
-        if case let .string(id) = json["rpId"] {
+        if let id = json["rpId"]?.string {
             return id
         }
 
         var hostURL: URL?
-        if case let .object(appidParent) = json["u2fParams"],
-           case let .string(appid) = appidParent["appid"],
+        if let appid = json["u2fParams"]?["appid"]?.string,
            let appUrl = URL(string: appid)
         {
             hostURL = appUrl
         }
 
-        else if case let .object(appidParent) = json["extensions"],
-                case let .string(appid) = appidParent["appid"],
+        else if let appid = json["extensions"]?["appid"]?.string,
                 let appUrl = URL(string: appid)
         {
             hostURL = appUrl

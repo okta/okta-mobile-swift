@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import CommonSupport
 
 /// Capability to access data related to Duo
 public final class DuoCapability: Capability, Sendable, Equatable, Hashable {

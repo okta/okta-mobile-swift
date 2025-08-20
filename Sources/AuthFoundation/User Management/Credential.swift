@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 
 #if os(Linux)
 import FoundationNetworking
@@ -178,7 +179,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         }
      
         metadata = try withIsolationSyncThrowing { @CredentialActor in
-            let metadata = Token.Metadata(token: self.token, tags: tags)
+            let metadata = try Token.Metadata(token: self.token, tags: tags)
             try coordinator.tokenStorage.setMetadata(metadata)
             return metadata
         }

@@ -11,12 +11,13 @@
 //
 
 import Foundation
+import AuthFoundation
 
 extension DeviceAuthorizationFlow {
     /// Represents the user verification response of the ``DeviceAuthorizationFlow`` authentication flow.
     ///
     /// The values contained within this verification object should be used to present the user with the code and URL to visit to authorize their device.
-    public struct Verification: Sendable, Decodable, Equatable, Expires {
+    public struct Verification: Sendable, Decodable, Equatable, Expires, JSONDecodable {
         let deviceCode: String
         var interval: TimeInterval
         
@@ -45,6 +46,13 @@ extension DeviceAuthorizationFlow {
             case interval
         }
         
+        @_documentation(visibility: internal)
+        public static var jsonDecoder: JSONDecoder {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return decoder
+        }
+
         @_documentation(visibility: internal)
         public init(from decoder: any Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
