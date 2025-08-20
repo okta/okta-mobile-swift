@@ -54,7 +54,7 @@ A variety of Swift versions and environments are supported, including:
 
 ### Supported Platforms 
 
-All Apple platform targets are supported, with every attempt made to avoid dropping older OS versions unneccessarily.
+All Apple platform targets are supported, with every attempt made to avoid dropping older OS versions unnecessarily.
 
 | Platform    | Minimum Supported | Best-Effort |
 | ----------- | ----------------- | ----------- |
@@ -464,7 +464,7 @@ This policy defines the extent of the support for Xcode, Swift, and platform (iO
 
 Xcode 16 or later, as these are the [minimum requirements for submission to the Apple App Store][apple-app-store-requirements].
 
-Our support Only Xcode versions supported by the App Store supported versions of Xcode are those that can be currently used to submit apps to the App Store. Once a Xcode version becomes unsupported, dropping support for it will not be considered a breaking change, and will be done in a minor release.
+We support only Xcode versions that are currently accepted for submissions to the Apple App Store. Once a version of Xcode is no longer supported for App Store submissions, dropping support for it will not be considered a breaking change and may be done in a minor release.
 
 ### Swift
 
