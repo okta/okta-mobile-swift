@@ -356,6 +356,8 @@
     {
       "anchor" : "Creating-a-flow",
       "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init()",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(plist:)",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(issuerURL:clientId:scope:supportedGrants:additionalParameters:)",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(client:supportedGrants:additionalParameters:)"
       ],
@@ -464,6 +466,10 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/APIClientDelegate-Implementations",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Actor-Implementations",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/AuthenticationFlow-Implementations",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/OAuth2ClientDelegate-Implementations",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/UsesDelegateCollection-Implementations"
       ],
       "title" : "Default Implementations"
@@ -767,6 +773,39 @@
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow"
 },
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/APIClientDelegate-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/APIClientDelegate-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "APIClientDelegate Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/apiclientdelegate-implementations"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Actor-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Actor-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Actor Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/actor-implementations"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/AuthenticationFlow-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/AuthenticationFlow-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "AuthenticationFlow Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/authenticationflow-implementations"
+},
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Context-swift.struct": {
   "abstract" : [
     {
@@ -936,6 +975,17 @@
   "title" : "DirectAuthenticationFlow.MFAContext",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/OAuth2ClientDelegate-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/OAuth2ClientDelegate-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "OAuth2ClientDelegate Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oauth2clientdelegate-implementations"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/OOBChannel": {
   "abstract" : [
@@ -1268,6 +1318,31 @@
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/delegatecollection"
 },
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/init()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init()",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init()"
+},
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/init(client:additionalParameters:)": {
   "abstract" : [
 
@@ -1554,6 +1629,48 @@
   "title" : "init(issuerURL:clientId:scope:supportedGrants:additionalParameters:)",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(issuerurl:clientid:scope:supportedgrants:additionalparameters:)"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/init(plist:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "plist"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(plist:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(plist:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(plist:)"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/isAuthenticating": {
   "abstract" : [

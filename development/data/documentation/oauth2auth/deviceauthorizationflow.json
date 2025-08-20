@@ -78,12 +78,6 @@
       "kind" : "declarations"
     },
     {
-      "kind" : "mentions",
-      "mentions" : [
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/IntroductionToAuthenticationFlows"
-      ]
-    },
-    {
       "content" : [
         {
           "anchor" : "overview",
@@ -290,7 +284,10 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/APIClientDelegate-Implementations",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Actor-Implementations",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/AuthenticationFlow-Implementations",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/OAuth2ClientDelegate-Implementations",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/UsesDelegateCollection-Implementations"
       ],
       "title" : "Default Implementations"
@@ -566,6 +563,28 @@
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow"
 },
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/APIClientDelegate-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/APIClientDelegate-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "APIClientDelegate Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/apiclientdelegate-implementations"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/Actor-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Actor-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Actor Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/actor-implementations"
+},
 "doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/AuthenticationFlow-Implementations": {
   "abstract" : [
 
@@ -610,6 +629,17 @@
   "title" : "DeviceAuthorizationFlow.Context",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/OAuth2ClientDelegate-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/OAuth2ClientDelegate-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "OAuth2ClientDelegate Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/oauth2clientdelegate-implementations"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/UsesDelegateCollection-Implementations": {
   "abstract" : [
@@ -1473,20 +1503,6 @@
   "title" : "DeviceAuthorizationFlowDelegate",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/deviceauthorizationflowdelegate"
-},
-"doc://OAuth2Auth/documentation/OAuth2Auth/IntroductionToAuthenticationFlows": {
-  "abstract" : [
-    {
-      "text" : "Create custom sign in experiences using OAuth2 authentication flows.",
-      "type" : "text"
-    }
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/IntroductionToAuthenticationFlows",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Introduction to Authentication Flows",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/introductiontoauthenticationflows"
 },
 "doc://OAuth2Auth/s8CopyableP": {
   "identifier" : "doc:\/\/OAuth2Auth\/s8CopyableP",

@@ -35,7 +35,10 @@
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/errorDescription"
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/errorDescription",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/failureReason",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/helpAnchor",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/recoverySuggestion"
       ],
       "title" : "Instance Properties"
     }
@@ -182,6 +185,120 @@
   "title" : "errorDescription",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/errordescription"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/failureReason": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "failureReason"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/failureReason",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "failureReason",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/failurereason"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/helpAnchor": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "helpAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/helpAnchor",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "helpAnchor",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/helpanchor"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/recoverySuggestion": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "recoverySuggestion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/recoverySuggestion",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "recoverySuggestion",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/recoverysuggestion"
 }
 }
 }

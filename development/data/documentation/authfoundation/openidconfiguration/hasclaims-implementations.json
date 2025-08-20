@@ -45,6 +45,7 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/value(for:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/value(for:)-3pi5y",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/value(for:)-3xrty",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/value(for:)-4ffat",
@@ -64,6 +65,7 @@
       "anchor" : "Subscripts",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/subscript(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/subscript(_:)-11eru",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/subscript(_:)-1cird",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/subscript(_:)-41yxk",
@@ -327,6 +329,47 @@
   "title" : "customClaims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration\/customclaims"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/subscript(_:)": {
+  "abstract" : [
+    {
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : "value type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "_"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/subscript(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/subscript(_:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/subscript(_:)-11eru": {
   "abstract" : [
@@ -717,6 +760,55 @@
   "title" : "subscript(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration\/subscript(_:)-ktt0"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/value(for:)": {
+  "abstract" : [
+    {
+      "text" : "Retrieve the optional value using a claim enum, converting to the requested ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/value(for:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/value(for:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/value(for:)-3pi5y": {
   "abstract" : [

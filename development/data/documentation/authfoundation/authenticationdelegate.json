@@ -508,8 +508,9 @@
       "type" : "text"
     },
     {
-      "code" : "JWT\/authenticationMethods",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
       "text" : ".",
@@ -576,6 +577,47 @@
   "title" : "GrantType",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
+  "abstract" : [
+    {
+      "text" : "The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationMethods"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation20AuthenticationMethodO",
+      "text" : "AuthenticationMethod"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationMethods",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [

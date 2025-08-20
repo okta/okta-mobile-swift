@@ -5,8 +5,9 @@
       "type" : "text"
     },
     {
-      "code" : "JWT\/authenticationMethods",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
       "text" : ".",
@@ -84,12 +85,6 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "mentions",
-      "mentions" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims"
-      ]
     }
   ],
   "relationshipsSections" : [
@@ -170,6 +165,15 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationMethod\/init(rawValue:)"
       ],
       "title" : "Initializers"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationMethod\/Equatable-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationMethod\/RawRepresentable-Implementations"
+      ],
+      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -411,8 +415,9 @@
       "type" : "text"
     },
     {
-      "code" : "JWT\/authenticationMethods",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
       "text" : ".",
@@ -445,6 +450,28 @@
   "title" : "AuthenticationMethod",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationmethod"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationMethod/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationMethod\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationmethod\/equatable-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationMethod/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationMethod\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationmethod\/rawrepresentable-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationMethod/facialRecognition": {
   "abstract" : [
@@ -1261,6 +1288,79 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/isclaim"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
+  "abstract" : [
+    {
+      "text" : "The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.",
+      "type" : "text"
+    }
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "ClaimType",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "JWTClaim",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationMethods"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation20AuthenticationMethodO",
+      "text" : "AuthenticationMethod"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationMethods",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
@@ -1500,20 +1600,6 @@
   "title" : "StandardAuthenticationContext",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/standardauthenticationcontext"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/WorkingWithClaims": {
-  "abstract" : [
-    {
-      "text" : "Using Claims on the various types included in OIDC and AuthFoundation.",
-      "type" : "text"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Working with Claims",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/workingwithclaims"
 },
 "doc://AuthFoundation/s8SendableP": {
   "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",

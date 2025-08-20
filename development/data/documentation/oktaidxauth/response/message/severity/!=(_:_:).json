@@ -17,9 +17,9 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Severity",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Severity\/Equatable-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Severity"
       ]
     ]
   },
@@ -213,6 +213,40 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response": {
+  "abstract" : [
+    {
+      "text" : "Describes the response from an Okta Identity Engine workflow stage.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message": {
   "abstract" : [
     {
@@ -342,17 +376,6 @@
   "title" : "!=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/response\/message\/severity\/!=(_:_:)"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Severity/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Severity\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/message\/severity\/equatable-implementations"
 }
 }
 }

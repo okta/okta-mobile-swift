@@ -86,12 +86,6 @@
       "kind" : "declarations"
     },
     {
-      "kind" : "mentions",
-      "mentions" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CustomizingNetworkRequests"
-      ]
-    },
-    {
       "content" : [
         {
           "anchor" : "overview",
@@ -563,7 +557,8 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/UsesDelegateCollection-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -826,8 +821,9 @@
       "type" : "text"
     },
     {
-      "code" : "JWT\/authenticationMethods",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
       "text" : ".",
@@ -1100,20 +1096,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credentialdatasource\/urlsession(for:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/CustomizingNetworkRequests": {
-  "abstract" : [
-    {
-      "text" : "Manage or monitor network requests sent by the Okta Mobile SDK.",
-      "type" : "text"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CustomizingNetworkRequests",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Customizing Network Requests",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/customizingnetworkrequests"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
   "abstract" : [
     {
@@ -1181,6 +1163,47 @@
   "title" : "JWKS",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
+  "abstract" : [
+    {
+      "text" : "The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationMethods"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation20AuthenticationMethodO",
+      "text" : "AuthenticationMethod"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationMethods",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
@@ -1407,6 +1430,17 @@
   "title" : "OAuth2Client.PropertyListConfigurationError",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfigurationerror"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/UsesDelegateCollection-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/UsesDelegateCollection-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "UsesDelegateCollection Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/usesdelegatecollection-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/additionalHttpHeaders": {
   "abstract" : [

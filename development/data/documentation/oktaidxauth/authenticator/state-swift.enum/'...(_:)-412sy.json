@@ -17,8 +17,8 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/State-swift.enum",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/State-swift.enum\/Comparable-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/State-swift.enum"
       ]
     ]
   },
@@ -105,6 +105,75 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/State-swift.enum\/...(_:)-4wdwr",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "static"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "func"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "identifier",
+                    "text" : "..."
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " ("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "minimum"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s16PartialRangeFromV",
+                    "text" : "PartialRangeFrom"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 0
+          },
           "platforms" : [
             "macOS"
           ],
@@ -131,13 +200,10 @@
             },
             {
               "kind" : "text",
-              "text" : " "
+              "text" : " ("
             },
             {
-              "kind" : "text",
-              "text" : "("
-            },
-            {
+              "highlight" : "changed",
               "kind" : "internalParam",
               "text" : "maximum"
             },
@@ -154,6 +220,7 @@
               "text" : ") -> "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:s19PartialRangeThroughV",
               "text" : "PartialRangeThrough"
@@ -211,6 +278,40 @@
   "title" : "OktaIdxAuth",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator": {
+  "abstract" : [
+    {
+      "text" : "Represents information describing the available authenticators and enrolled authenticators.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/State-swift.enum": {
   "abstract" : [
@@ -312,16 +413,71 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/state-swift.enum\/'...(_:)-412sy"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/State-swift.enum/Comparable-Implementations": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/State-swift.enum/...(_:)-4wdwr": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/State-swift.enum\/Comparable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Comparable Implementations",
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "..."
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s16PartialRangeFromV",
+      "text" : "PartialRangeFrom"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/State-swift.enum\/...(_:)-4wdwr",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "...(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/authenticator\/state-swift.enum\/comparable-implementations"
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/state-swift.enum\/'...(_:)-4wdwr"
 }
 }
 }

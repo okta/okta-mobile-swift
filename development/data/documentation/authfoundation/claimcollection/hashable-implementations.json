@@ -35,7 +35,8 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/hash(into:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/hash(into:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/hash(into:)-6j4f2"
       ],
       "title" : "Instance Methods"
     }
@@ -177,6 +178,91 @@
     },
     {
       "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/hash(into:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hash(into:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/hash(into:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/hash(into:)-6j4f2": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Container",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "ClaimCollectionContainer",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Container.Element",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hash"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "into"
+    },
+    {
+      "kind" : "text",
       "text" : ": "
     },
     {
@@ -197,12 +283,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/hash(into:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/hash(into:)-6j4f2",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hash(into:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcollection\/hash(into:)"
+  "url" : "\/documentation\/authfoundation\/claimcollection\/hash(into:)-6j4f2"
 }
 }
 }

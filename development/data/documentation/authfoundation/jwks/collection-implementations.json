@@ -85,6 +85,7 @@
       "anchor" : "Subscripts",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-28c77",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-4t0w0",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-5kdvj",
@@ -2709,6 +2710,67 @@
   "title" : "split(separator:maxSplits:omittingEmptySubsequences:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/split(separator:maxsplits:omittingemptysubsequences:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/subscript(_:)": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "SubSequence",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Slice<Self>",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "_"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/subscript(_:)-28c77": {
   "abstract" : [

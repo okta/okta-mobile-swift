@@ -17,8 +17,8 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Sequence-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection"
       ]
     ]
   },
@@ -147,6 +147,138 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/sorted(using:)-2d9w1",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "func"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "identifier",
+                    "text" : "sorted"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "kind" : "genericParameter",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "using"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> ["
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST7ElementQa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "] "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "where"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " : "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:10Foundation14SortComparatorP",
+                    "text" : "SortComparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ", "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST7ElementQa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " == "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:10Foundation14SortComparatorP8ComparedQa",
+                    "text" : "Compared"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 1
+          },
           "platforms" : [
             "macOS"
           ],
@@ -168,12 +300,18 @@
               "text" : "<"
             },
             {
+              "highlight" : "changed",
               "kind" : "genericParameter",
               "text" : "S"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : ", "
+              "text" : ","
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "genericParameter",
@@ -192,6 +330,7 @@
               "text" : " "
             },
             {
+              "highlight" : "changed",
               "kind" : "internalParam",
               "text" : "comparators"
             },
@@ -200,6 +339,7 @@
               "text" : ": "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "S"
             },
@@ -233,21 +373,29 @@
               "text" : " "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "S"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : " : "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:ST",
               "text" : "Sequence"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : ", "
+              "text" : ","
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "typeIdentifier",
@@ -267,29 +415,39 @@
               "text" : ", "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "Comparator"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : " == "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "S"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : "."
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:ST7ElementQa",
               "text" : "Element"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : ", "
+              "text" : ","
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "typeIdentifier",
@@ -363,6 +521,40 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator": {
+  "abstract" : [
+    {
+      "text" : "Represents information describing the available authenticators and enrolled authenticators.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection": {
   "abstract" : [
     {
@@ -397,16 +589,75 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/collection"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/Sequence-Implementations": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/sorted(using:)-2d9w1": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Sequence-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Sequence Implementations",
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sorted"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Comparator"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "using"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Comparator"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/sorted(using:)-2d9w1",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "sorted(using:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/authenticator\/collection\/sequence-implementations"
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/collection\/sorted(using:)-2d9w1"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/sorted(using:)-4envp": {
   "abstract" : [

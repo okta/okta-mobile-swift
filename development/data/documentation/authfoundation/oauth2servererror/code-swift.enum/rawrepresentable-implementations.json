@@ -36,6 +36,7 @@
       "anchor" : "Initializers",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/init(from:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/init(rawValue:)"
       ],
       "title" : "Initializers"
@@ -183,6 +184,96 @@
   "title" : "OAuth2ServerError.Code.RawValue",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/rawvalue-swift.typealias"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/init(from:)": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "String",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/init(from:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/init(from:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/init(rawValue:)": {
   "abstract" : [

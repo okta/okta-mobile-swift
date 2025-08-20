@@ -17,8 +17,8 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/User-swift.struct",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/User-swift.struct\/Equatable-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/User-swift.struct"
       ]
     ]
   },
@@ -212,6 +212,40 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response": {
+  "abstract" : [
+    {
+      "text" : "Describes the response from an Okta Identity Engine workflow stage.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/User-swift.struct": {
   "abstract" : [
     {
@@ -307,17 +341,6 @@
   "title" : "!=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/response\/user-swift.struct\/!=(_:_:)"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/User-swift.struct/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/User-swift.struct\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/user-swift.struct\/equatable-implementations"
 }
 }
 }

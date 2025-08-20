@@ -35,7 +35,10 @@
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/errorDescription"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/errorDescription",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/failureReason",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/helpAnchor",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/recoverySuggestion"
       ],
       "title" : "Instance Properties"
     }
@@ -139,6 +142,120 @@
   "title" : "errorDescription",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror\/errordescription"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError/failureReason": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "failureReason"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/failureReason",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "failureReason",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/failurereason"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError/helpAnchor": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "helpAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/helpAnchor",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "helpAnchor",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/helpanchor"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError/recoverySuggestion": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "recoverySuggestion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/recoverySuggestion",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "recoverySuggestion",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/recoverysuggestion"
 }
 }
 }

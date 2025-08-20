@@ -53,14 +53,15 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/elementsEqual(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/elementsEqual(_:by:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/enumerated()",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)-6fuaj",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)-r6z0",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/first(where:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/flatMap(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/flatMap(_:)-4liif",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/flatMap(_:)-6nmde",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/forEach(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/formatted(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/lexicographicallyPrecedes(_:by:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/map(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/map(_:)-6nupd",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/max(by:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/min(by:)",
@@ -70,6 +71,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/shuffled()",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/shuffled(using:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/sorted(by:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/sorted(using:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/sorted(using:)-4bnuh",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/sorted(using:)-984w9",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/starts(with:)",
@@ -899,87 +901,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/enumerated()"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/filter(_:)-6fuaj": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "filter"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation9PredicateV",
-      "text" : "Predicate"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:ST7ElementQa",
-      "text" : "Element"
-    },
-    {
-      "kind" : "text",
-      "text" : ">) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:ST7ElementQa",
-      "text" : "Element"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)-6fuaj",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "filter(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/filter(_:)-6fuaj"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/filter(_:)-r6z0": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/filter(_:)": {
   "abstract" : [
 
   ],
@@ -1060,12 +982,12 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)-r6z0",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "filter(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/filter(_:)-r6z0"
+  "url" : "\/documentation\/authfoundation\/jwks\/filter(_:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/first(where:)": {
   "abstract" : [
@@ -1162,6 +1084,43 @@
   "title" : "first(where:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/first(where:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/flatMap(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "flatMap"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "_"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/flatMap(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "flatMap(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/flatmap(_:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/flatMap(_:)-4liif": {
   "abstract" : [
@@ -1632,6 +1591,43 @@
   "title" : "lexicographicallyPrecedes(_:by:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/lexicographicallyprecedes(_:by:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/map(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "map"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "_"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/map(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "map(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/map(_:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/map(_:)-6nupd": {
   "abstract" : [
@@ -2519,6 +2515,43 @@
   "title" : "sorted(by:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/sorted(by:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/sorted(using:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sorted"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "using"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/sorted(using:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "sorted(using:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/sorted(using:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/sorted(using:)-4bnuh": {
   "abstract" : [

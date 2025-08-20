@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/RawRepresentable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection"
       ]
     ]
   },
@@ -129,6 +128,1361 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "String",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-3m0jf",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Bool",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-68s80",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Double",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-9ew2s",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Float",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-4n7dz",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Int",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-27ar3",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "UInt",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-4plb1",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Int8",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-5f8h6",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Int16",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-4rhvw",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Int32",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-1dbma",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "UInt8",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-23dvv",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Int128",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-9cijw",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "UInt16",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-1xe6t",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "UInt32",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-2zi2g",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "UInt64",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-5jdi9",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Self",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Decodable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "RawValue",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "UInt128",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-sjfj",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "from"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": any "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7DecoderP",
+                    "text" : "Decoder"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 9
+          },
           "platforms" : [
             "macOS"
           ],
@@ -246,17 +1600,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcollection"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/RawRepresentable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/RawRepresentable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "RawRepresentable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcollection\/rawrepresentable-implementations"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-18i21": {
   "abstract" : [
 
@@ -346,6 +1689,1356 @@
   "title" : "init(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-18i21"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-1dbma": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Int32",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-1dbma",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-1dbma"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-1xe6t": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "UInt16",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-1xe6t",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-1xe6t"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-23dvv": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "UInt8",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-23dvv",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-23dvv"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-27ar3": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Int",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-27ar3",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-27ar3"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-2zi2g": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "UInt32",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-2zi2g",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-2zi2g"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-3m0jf": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "String",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-3m0jf",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-3m0jf"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-4n7dz": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Float",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-4n7dz",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-4n7dz"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-4plb1": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "UInt",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-4plb1",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-4plb1"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-4rhvw": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Int16",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-4rhvw",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-4rhvw"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-5f8h6": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Int8",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-5f8h6",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-5f8h6"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-5jdi9": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "UInt64",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-5jdi9",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-5jdi9"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-68s80": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Bool",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-68s80",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-68s80"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-9cijw": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Int128",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-9cijw",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-9cijw"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-9ew2s": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Double",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-9ew2s",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-9ew2s"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(from:)-sjfj": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Decodable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "UInt128",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(from:)-sjfj",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(from:)-sjfj"
 }
 }
 }

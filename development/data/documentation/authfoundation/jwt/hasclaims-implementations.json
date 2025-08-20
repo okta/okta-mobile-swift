@@ -71,6 +71,7 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/value(for:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/value(for:)-1tkad",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/value(for:)-39wog",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/value(for:)-3ktvc",
@@ -90,6 +91,7 @@
       "anchor" : "Subscripts",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/subscript(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/subscript(_:)-3zfn",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/subscript(_:)-4wd5l",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/subscript(_:)-5jiej",
@@ -1892,6 +1894,47 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/subject"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/subscript(_:)": {
+  "abstract" : [
+    {
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : "value type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "_"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/subscript(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/subscript(_:)"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/subscript(_:)-3zfn": {
   "abstract" : [
     {
@@ -2500,6 +2543,55 @@
   "title" : "userLocale",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/userlocale"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/value(for:)": {
+  "abstract" : [
+    {
+      "text" : "Retrieve the optional value using a claim enum, converting to the requested ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/value(for:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/value(for:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/value(for:)-1tkad": {
   "abstract" : [

@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS"
       ]
     ]
   },
@@ -149,6 +148,150 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/map(_:)-7mmgz",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "func"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "identifier",
+                    "text" : "map"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "kind" : "genericParameter",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ", "
+                  },
+                  {
+                    "kind" : "genericParameter",
+                    "text" : "E"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "_"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "transform"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": ("
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST7ElementQa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "E"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "E"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> ["
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "] "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "where"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "E"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " : "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s5ErrorP",
+                    "text" : "Error"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 0
+          },
           "platforms" : [
             "macOS"
           ],
@@ -363,17 +506,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Sequence-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Sequence Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/sequence-implementations"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/map(_:)-6nupd": {
   "abstract" : [
 
@@ -483,6 +615,116 @@
   "title" : "map(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/map(_:)-6nupd"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/map(_:)-7mmgz": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "map"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "E"
+    },
+    {
+      "kind" : "text",
+      "text" : ">(("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "E"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "E"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/map(_:)-7mmgz",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "map(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/map(_:)-7mmgz"
 }
 }
 }

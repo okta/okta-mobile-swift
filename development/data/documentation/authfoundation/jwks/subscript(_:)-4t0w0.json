@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS"
       ]
     ]
   },
@@ -89,6 +88,436 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "SubSequence",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Slice<Self>",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-78ks6",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "bounds"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:Sn",
+                    "text" : "Range"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:Sl5IndexQa",
+                    "text" : "Index"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : ">"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s5SliceV",
+                    "text" : "Slice"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : ">"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1qepr",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "index"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
+                    "text" : "JWKS"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Index",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation4JWKSV5Indexa",
+                    "text" : "Index"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
+                    "text" : "JWKS"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Element",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation4JWKSV7Elementa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1lvoo",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "keyId"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:SS",
+                    "text" : "String"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation3JWKV",
+                    "text" : "JWK"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "?"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-28c77",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "subranges"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s8RangeSetV",
+                    "text" : "RangeSet"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:Sl5IndexQa",
+                    "text" : "Index"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : ">"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s18DiscontiguousSliceV",
+                    "text" : "DiscontiguousSlice"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : ">"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-5kdvj",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "x"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s15UnboundedRange_O",
+                    "text" : "UnboundedRange_"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "())"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "-> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:Sl11SubSequenceQa",
+                    "text" : "SubSequence"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 5
+          },
           "platforms" : [
             "macOS"
           ],
@@ -98,18 +527,26 @@
               "text" : "subscript"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : "<"
             },
             {
+              "highlight" : "changed",
               "kind" : "genericParameter",
               "text" : "R"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : ">("
+              "text" : ">"
             },
             {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "highlight" : "changed",
               "kind" : "internalParam",
               "text" : "r"
             },
@@ -118,6 +555,7 @@
               "text" : ": "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "R"
             },
@@ -126,14 +564,17 @@
               "text" : ") -> "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "Self"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : "."
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:Sl11SubSequenceQa",
               "text" : "SubSequence"
@@ -143,56 +584,69 @@
               "text" : " "
             },
             {
+              "highlight" : "changed",
               "kind" : "keyword",
               "text" : "where"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : " "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "R"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : " : "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SX",
               "text" : "RangeExpression"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : ", "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "Self"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : "."
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:Sl5IndexQa",
               "text" : "Index"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : " == "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "R"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : "."
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SX5BoundQa",
               "text" : "Bound"
@@ -251,6 +705,40 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
+  "abstract" : [
+    {
+      "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWK",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
   "abstract" : [
     {
@@ -285,16 +773,223 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Collection-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Element": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Collection Implementations",
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Element"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Element",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Element"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWKS.Element",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/collection-implementations"
+  "url" : "\/documentation\/authfoundation\/jwks\/element"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Index": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Index"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Index",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Index"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWKS.Index",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/index"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/subscript(_:)-1lvoo": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWKV",
+      "text" : "JWK"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1lvoo",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)-1lvoo"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/subscript(_:)-1qepr": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
+      "text" : "JWKS"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JWKSV5Indexa",
+      "text" : "Index"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
+      "text" : "JWKS"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JWKSV7Elementa",
+      "text" : "Element"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1qepr",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)-1qepr"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/subscript(_:)-28c77": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8RangeSetV",
+      "text" : "RangeSet"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sl5IndexQa",
+      "text" : "Index"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s18DiscontiguousSliceV",
+      "text" : "DiscontiguousSlice"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-28c77",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)-28c77"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/subscript(_:)-4t0w0": {
   "abstract" : [
@@ -345,6 +1040,145 @@
   "title" : "subscript(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)-4t0w0"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/subscript(_:)-5kdvj": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "(("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s15UnboundedRange_O",
+      "text" : "UnboundedRange_"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ()) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sl11SubSequenceQa",
+      "text" : "SubSequence"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-5kdvj",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)-5kdvj"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/subscript(_:)-78ks6": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "SubSequence",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Slice<Self>",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sn",
+      "text" : "Range"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sl5IndexQa",
+      "text" : "Index"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5SliceV",
+      "text" : "Slice"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-78ks6",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)-78ks6"
 }
 }
 }

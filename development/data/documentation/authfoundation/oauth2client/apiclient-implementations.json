@@ -35,7 +35,9 @@
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/baseURL"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/baseURL",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/requestIdHeader",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/userAgent"
       ],
       "title" : "Instance Properties"
     },
@@ -43,7 +45,9 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/error(from:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/error(from:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/send(_:parsing:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:rateLimit:)"
       ],
       "title" : "Instance Methods"
     }
@@ -204,6 +208,242 @@
   "title" : "error(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/error(from:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/requestIdHeader": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "requestIdHeader"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/requestIdHeader",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "requestIdHeader",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/requestidheader"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/send(_:parsing:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "send"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV",
+      "text" : "URLRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "parsing"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation17APIParsingContextP",
+      "text" : "APIParsingContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
+      "text" : "APIResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/send(_:parsing:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "send(_:parsing:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/send(_:parsing:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/shouldRetry(request:rateLimit:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldRetry"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "request"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV",
+      "text" : "URLRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rateLimit"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12APIRateLimitV",
+      "text" : "APIRateLimit"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8APIRetryO",
+      "text" : "APIRetry"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:rateLimit:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldRetry(request:rateLimit:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/shouldretry(request:ratelimit:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/userAgent": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userAgent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/userAgent",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "userAgent",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/useragent"
 }
 }
 }

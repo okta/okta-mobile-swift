@@ -28,8 +28,8 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/Sequence-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class"
       ]
     ]
   },
@@ -125,7 +125,15 @@
       }
     ],
     "platforms" : [
-
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "deprecatedAt" : "4.1",
+        "message" : "Please use compactMap(_:) for the case where closure returns an optional value",
+        "name" : "Swift",
+        "renamed" : "compactMap(_:)",
+        "unavailable" : false
+      }
     ],
     "role" : "symbol",
     "roleHeading" : "Instance Method",
@@ -139,6 +147,145 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/flatMap(_:)-3mqxr",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "func"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "identifier",
+                    "text" : "flatMap"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "genericParameter",
+                    "text" : "SegmentOfResult"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "_"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "transform"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": ("
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST7ElementQa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " -> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "SegmentOfResult"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "rethrows"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " -> ["
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "SegmentOfResult"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST7ElementQa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "] "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "keyword",
+                    "text" : "where"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "SegmentOfResult"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : " : "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST",
+                    "text" : "Sequence"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 1
+          },
           "platforms" : [
             "macOS"
           ],
@@ -160,6 +307,7 @@
               "text" : "<"
             },
             {
+              "highlight" : "changed",
               "kind" : "genericParameter",
               "text" : "ElementOfResult"
             },
@@ -209,12 +357,18 @@
               "text" : " -> "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "ElementOfResult"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : "?) "
+              "text" : "?"
+            },
+            {
+              "kind" : "text",
+              "text" : ") "
             },
             {
               "kind" : "keyword",
@@ -225,6 +379,7 @@
               "text" : " -> ["
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "ElementOfResult"
             },
@@ -274,6 +429,40 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation": {
+  "abstract" : [
+    {
+      "text" : "Describes choices the user can make to proceed through the authentication workflow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Remediation"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Remediation"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Remediation",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class": {
   "abstract" : [
     {
@@ -307,17 +496,6 @@
   "title" : "Remediation.Form",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class/Sequence-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/Sequence-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Sequence Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class\/sequence-implementations"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class/flatMap(_:)-22t5l": {
   "abstract" : [
@@ -405,6 +583,101 @@
   "title" : "flatMap(_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class\/flatmap(_:)-22t5l"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class/flatMap(_:)-3mqxr": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "flatMap"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "SegmentOfResult"
+    },
+    {
+      "kind" : "text",
+      "text" : ">(("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "SegmentOfResult"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "rethrows"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "SegmentOfResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/flatMap(_:)-3mqxr",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "flatMap(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class\/flatmap(_:)-3mqxr"
 }
 }
 }

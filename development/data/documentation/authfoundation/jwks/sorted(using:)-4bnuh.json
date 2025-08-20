@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS"
       ]
     ]
   },
@@ -147,6 +146,138 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/sorted(using:)-984w9",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "func"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "identifier",
+                    "text" : "sorted"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "kind" : "genericParameter",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "using"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> ["
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST7ElementQa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "] "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "where"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " : "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:10Foundation14SortComparatorP",
+                    "text" : "SortComparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ", "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST7ElementQa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " == "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:10Foundation14SortComparatorP8ComparedQa",
+                    "text" : "Compared"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 1
+          },
           "platforms" : [
             "macOS"
           ],
@@ -168,12 +299,18 @@
               "text" : "<"
             },
             {
+              "highlight" : "changed",
               "kind" : "genericParameter",
               "text" : "S"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : ", "
+              "text" : ","
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "genericParameter",
@@ -192,6 +329,7 @@
               "text" : " "
             },
             {
+              "highlight" : "changed",
               "kind" : "internalParam",
               "text" : "comparators"
             },
@@ -200,6 +338,7 @@
               "text" : ": "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "S"
             },
@@ -233,21 +372,29 @@
               "text" : " "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "S"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : " : "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:ST",
               "text" : "Sequence"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : ", "
+              "text" : ","
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "typeIdentifier",
@@ -267,29 +414,39 @@
               "text" : ", "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "Comparator"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : " == "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "S"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : "."
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:ST7ElementQa",
               "text" : "Element"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : ", "
+              "text" : ","
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "typeIdentifier",
@@ -397,17 +554,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Sequence-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Sequence Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/sequence-implementations"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/sorted(using:)-4bnuh": {
   "abstract" : [
 
@@ -485,6 +631,76 @@
   "title" : "sorted(using:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/sorted(using:)-4bnuh"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/sorted(using:)-984w9": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sorted"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Comparator"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "using"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Comparator"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/sorted(using:)-984w9",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "sorted(using:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/sorted(using:)-984w9"
 }
 }
 }

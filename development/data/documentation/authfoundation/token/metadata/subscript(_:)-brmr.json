@@ -19,8 +19,7 @@
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/HasClaims-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata"
       ]
     ]
   },
@@ -93,6 +92,509 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-4abyn",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "kind" : "genericParameter",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "claim"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+                    "text" : "ClaimType"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "?"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "where"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " : "
+                  },
+                  {
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation16ClaimConvertableP",
+                    "text" : "ClaimConvertable"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-2ptd1",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "kind" : "genericParameter",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "claim"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+                    "text" : "ClaimType"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "["
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:SS",
+                    "text" : "String"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : " :"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "]?"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "where"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " : "
+                  },
+                  {
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation16ClaimConvertableP",
+                    "text" : "ClaimConvertable"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-54wvv",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "kind" : "genericParameter",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "claim"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+                    "text" : "ClaimType"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "["
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "]?"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "where"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " : "
+                  },
+                  {
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation16ClaimConvertableP",
+                    "text" : "ClaimConvertable"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-4shhe",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "kind" : "genericParameter",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "key"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:SS",
+                    "text" : "String"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "?"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "where"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " : "
+                  },
+                  {
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation16ClaimConvertableP",
+                    "text" : "ClaimConvertable"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-7495b",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "subscript"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "kind" : "genericParameter",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">("
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "key"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:SS",
+                    "text" : "String"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "["
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "]?"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "where"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "T"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " : "
+                  },
+                  {
+                    "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:14AuthFoundation16ClaimConvertableP",
+                    "text" : "ClaimConvertable"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " { "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "get"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " }"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 4
+          },
           "platforms" : [
             "macOS"
           ],
@@ -114,6 +616,7 @@
               "text" : ">("
             },
             {
+              "highlight" : "changed",
               "kind" : "internalParam",
               "text" : "key"
             },
@@ -122,30 +625,47 @@
               "text" : ": "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SS",
               "text" : "String"
             },
             {
               "kind" : "text",
-              "text" : ") -> ["
+              "text" : ") -> "
             },
             {
+              "highlight" : "changed",
+              "kind" : "text",
+              "text" : "["
+            },
+            {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SS",
               "text" : "String"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : " : "
+              "text" : " :"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "typeIdentifier",
               "text" : "T"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : "]? "
+              "text" : "]?"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "keyword",
@@ -300,6 +820,41 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/ClaimType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation7IsClaimP",
+      "text" : "IsClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "ClaimType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/claimtype"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
     {
@@ -368,16 +923,328 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/HasClaims-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/subscript(_:)-2ptd1": {
   "abstract" : [
-
+    {
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : "value type.",
+      "type" : "text"
+    }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/HasClaims-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "HasClaims Implementations",
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-2ptd1",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/token\/metadata\/hasclaims-implementations"
+  "url" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-2ptd1"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/subscript(_:)-4abyn": {
+  "abstract" : [
+    {
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : "value type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-4abyn",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-4abyn"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/subscript(_:)-4shhe": {
+  "abstract" : [
+    {
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : "value type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-4shhe",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-4shhe"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/subscript(_:)-54wvv": {
+  "abstract" : [
+    {
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : "value type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-54wvv",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-54wvv"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/subscript(_:)-7495b": {
+  "abstract" : [
+    {
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : "value type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-7495b",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-7495b"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/subscript(_:)-brmr": {
   "abstract" : [

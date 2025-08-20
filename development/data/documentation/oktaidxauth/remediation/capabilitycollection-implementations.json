@@ -32,6 +32,14 @@
   ],
   "topicSections" : [
     {
+      "anchor" : "Instance-Methods",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/capabilities(of:)"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
       "anchor" : "Enumerations",
       "generated" : true,
       "identifiers" : [
@@ -187,6 +195,67 @@
   "title" : "Remediation.CapabilityType",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/capabilitytype"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/capabilities(of:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "capabilities"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "of"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ".Type) -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/capabilities(of:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "capabilities(of:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation\/capabilities(of:)"
 }
 }
 }

@@ -17,8 +17,9 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/Equatable-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection"
       ]
     ]
   },
@@ -212,6 +213,74 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response": {
+  "abstract" : [
+    {
+      "text" : "Describes the response from an Okta Identity Engine workflow stage.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message": {
+  "abstract" : [
+    {
+      "text" : "Represents messages sent from the server to indicate error or warning conditions related to responses or form values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Message"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Message"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response.Message",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/message"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection": {
   "abstract" : [
     {
@@ -307,17 +376,6 @@
   "title" : "!=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/response\/message\/collection\/!=(_:_:)"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/message\/collection\/equatable-implementations"
 }
 }
 }

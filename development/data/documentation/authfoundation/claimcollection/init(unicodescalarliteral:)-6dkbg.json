@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/ExpressibleByUnicodeScalarLiteral-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection"
       ]
     ]
   },
@@ -106,6 +105,92 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "ExtendedGraphemeClusterLiteralType",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Self.UnicodeScalarLiteralType",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(unicodeScalarLiteral:)-3m7b0",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "unicodeScalarLiteral"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "value"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s43ExpressibleByExtendedGraphemeClusterLiteralP0cdeF4TypeQa",
+                    "text" : "ExtendedGraphemeClusterLiteralType"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ")"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 1
+          },
           "platforms" : [
             "macOS"
           ],
@@ -135,6 +220,7 @@
               "text" : ": "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SS",
               "text" : "String"
@@ -219,16 +305,83 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcollection"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/ExpressibleByUnicodeScalarLiteral-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(unicodeScalarLiteral:)-3m7b0": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/ExpressibleByUnicodeScalarLiteral-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ExpressibleByUnicodeScalarLiteral Implementations",
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "ExtendedGraphemeClusterLiteralType",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Self.UnicodeScalarLiteralType",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "unicodeScalarLiteral"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s43ExpressibleByExtendedGraphemeClusterLiteralP0cdeF4TypeQa",
+      "text" : "ExtendedGraphemeClusterLiteralType"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(unicodeScalarLiteral:)-3m7b0",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(unicodeScalarLiteral:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcollection\/expressiblebyunicodescalarliteral-implementations"
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(unicodescalarliteral:)-3m7b0"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(unicodeScalarLiteral:)-6dkbg": {
   "abstract" : [

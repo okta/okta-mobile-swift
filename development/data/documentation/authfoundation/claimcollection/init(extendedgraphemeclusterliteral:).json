@@ -5,7 +5,7 @@
       "type" : "text"
     },
     {
-      "code" : "ExpressibleByExtendedGraphemeClusterLiteral.init(extendedGraphemeClusterLiteral:)",
+      "code" : "ExpressibleByStringLiteral.init(extendedGraphemeClusterLiteral:)",
       "type" : "codeVoice"
     },
     {
@@ -42,15 +42,15 @@
       ],
       "constraints" : [
         {
-          "code" : "Container",
+          "code" : "ExtendedGraphemeClusterLiteralType",
           "type" : "codeVoice"
         },
         {
-          "text" : " conforms to ",
+          "text" : " is ",
           "type" : "text"
         },
         {
-          "code" : "ClaimCollectionContainer",
+          "code" : "Self.StringLiteralType",
           "type" : "codeVoice"
         },
         {
@@ -59,8 +59,8 @@
         }
       ]
     },
-    "extendedModule" : "AuthFoundation",
-    "externalID" : "s:14AuthFoundation15ClaimCollectionV30extendedGraphemeClusterLiteralACyxGSS_tcfc",
+    "extendedModule" : "Swift",
+    "externalID" : "s:s26ExpressibleByStringLiteralPs0cD4TypeQz023ExtendedGraphemeClusterdE0RtzrlE08extendedghD0xAF_tcfc::SYNTHESIZED::s:14AuthFoundation15ClaimCollectionV::OverloadGroup",
     "fragments" : [
       {
         "kind" : "identifier",
@@ -76,21 +76,33 @@
       },
       {
         "kind" : "text",
-        "text" : ": "
-      },
-      {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:SS",
-        "text" : "String"
-      },
-      {
-        "kind" : "text",
-        "text" : ")"
+        "text" : ":)"
       }
     ],
     "modules" : [
       {
-        "name" : "AuthFoundation"
+        "name" : "AuthFoundation",
+        "relatedModules" : [
+          "Swift"
+        ]
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "keyword",
+        "text" : "init"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "extendedGraphemeClusterLiteral"
+      },
+      {
+        "kind" : "text",
+        "text" : ":)"
       }
     ],
     "role" : "symbol",
@@ -105,6 +117,82 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Container",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ClaimCollectionContainer",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(extendedGraphemeClusterLiteral:)-7srx5",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "extendedGraphemeClusterLiteral"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "value"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:SS",
+                    "text" : "String"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ")"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 0
+          },
           "platforms" : [
             "macOS"
           ],
@@ -134,9 +222,20 @@
               "text" : ": "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:SS",
-              "text" : "String"
+              "text" : "Self"
+            },
+            {
+              "highlight" : "changed",
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "highlight" : "changed",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s26ExpressibleByStringLiteralP0cD4TypeQa",
+              "text" : "StringLiteralType"
             },
             {
               "kind" : "text",
@@ -237,6 +336,85 @@
     ],
     "constraints" : [
       {
+        "code" : "ExtendedGraphemeClusterLiteralType",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Self.StringLiteralType",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "extendedGraphemeClusterLiteral"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(extendedGraphemeClusterLiteral:)",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "keyword",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "extendedGraphemeClusterLiteral"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "init(extendedGraphemeClusterLiteral:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(extendedgraphemeclusterliteral:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(extendedGraphemeClusterLiteral:)-7srx5": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
         "code" : "Container",
         "type" : "codeVoice"
       },
@@ -281,12 +459,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(extendedGraphemeClusterLiteral:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(extendedGraphemeClusterLiteral:)-7srx5",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(extendedGraphemeClusterLiteral:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcollection\/init(extendedgraphemeclusterliteral:)"
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(extendedgraphemeclusterliteral:)-7srx5"
 }
 }
 }

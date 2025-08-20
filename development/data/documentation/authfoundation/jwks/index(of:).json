@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS"
       ]
     ]
   },
@@ -131,7 +130,14 @@
       }
     ],
     "platforms" : [
-
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "deprecatedAt" : "5.0",
+        "name" : "Swift",
+        "renamed" : "firstIndex(of:)",
+        "unavailable" : false
+      }
     ],
     "role" : "symbol",
     "roleHeading" : "Instance Method",
@@ -290,17 +296,6 @@
   "title" : "JWKS",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Collection-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Collection Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/collection-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/index(of:)": {
   "abstract" : [

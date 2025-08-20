@@ -35,7 +35,9 @@
       "anchor" : "Initializers",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(extendedGraphemeClusterLiteral:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(extendedGraphemeClusterLiteral:)-7srx5",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(unicodeScalarLiteral:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(unicodeScalarLiteral:)-3m7b0"
       ],
       "title" : "Initializers"
     }
@@ -102,7 +104,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcollection"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(extendedGraphemeClusterLiteral:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(extendedGraphemeClusterLiteral:)-7srx5": {
   "abstract" : [
 
   ],
@@ -165,12 +167,169 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(extendedGraphemeClusterLiteral:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(extendedGraphemeClusterLiteral:)-7srx5",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(extendedGraphemeClusterLiteral:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcollection\/init(extendedgraphemeclusterliteral:)"
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(extendedgraphemeclusterliteral:)-7srx5"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(unicodeScalarLiteral:)": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "ExtendedGraphemeClusterLiteralType",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Self.UnicodeScalarLiteralType",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "unicodeScalarLiteral"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(unicodeScalarLiteral:)",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "keyword",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "unicodeScalarLiteral"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "init(unicodeScalarLiteral:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(unicodescalarliteral:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/init(unicodeScalarLiteral:)-3m7b0": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "ExtendedGraphemeClusterLiteralType",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Self.UnicodeScalarLiteralType",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "unicodeScalarLiteral"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s43ExpressibleByExtendedGraphemeClusterLiteralP0cdeF4TypeQa",
+      "text" : "ExtendedGraphemeClusterLiteralType"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/init(unicodeScalarLiteral:)-3m7b0",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(unicodeScalarLiteral:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/init(unicodescalarliteral:)-3m7b0"
 }
 }
 }

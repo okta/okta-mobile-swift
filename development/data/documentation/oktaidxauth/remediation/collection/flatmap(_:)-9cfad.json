@@ -29,8 +29,7 @@
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/Sequence-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection"
       ]
     ]
   },
@@ -126,7 +125,15 @@
       }
     ],
     "platforms" : [
-
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "deprecatedAt" : "4.1",
+        "message" : "Please use compactMap(_:) for the case where closure returns an optional value",
+        "name" : "Swift",
+        "renamed" : "compactMap(_:)",
+        "unavailable" : false
+      }
     ],
     "role" : "symbol",
     "roleHeading" : "Instance Method",
@@ -140,6 +147,145 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/flatMap(_:)-3meqj",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "func"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "identifier",
+                    "text" : "flatMap"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "genericParameter",
+                    "text" : "SegmentOfResult"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "_"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "transform"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": ("
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST7ElementQa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " -> "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "SegmentOfResult"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "rethrows"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " -> ["
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "SegmentOfResult"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST7ElementQa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "] "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "keyword",
+                    "text" : "where"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "SegmentOfResult"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : " : "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST",
+                    "text" : "Sequence"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 1
+          },
           "platforms" : [
             "macOS"
           ],
@@ -161,6 +307,7 @@
               "text" : "<"
             },
             {
+              "highlight" : "changed",
               "kind" : "genericParameter",
               "text" : "ElementOfResult"
             },
@@ -210,12 +357,18 @@
               "text" : " -> "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "ElementOfResult"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : "?) "
+              "text" : "?"
+            },
+            {
+              "kind" : "text",
+              "text" : ") "
             },
             {
               "kind" : "keyword",
@@ -226,6 +379,7 @@
               "text" : " -> ["
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "ElementOfResult"
             },
@@ -343,16 +497,100 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/collection"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Collection/Sequence-Implementations": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Collection/flatMap(_:)-3meqj": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/Sequence-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Sequence Implementations",
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "flatMap"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "SegmentOfResult"
+    },
+    {
+      "kind" : "text",
+      "text" : ">(("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "SegmentOfResult"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "rethrows"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "SegmentOfResult"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Collection\/flatMap(_:)-3meqj",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "flatMap(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/remediation\/collection\/sequence-implementations"
+  "url" : "\/documentation\/oktaidxauth\/remediation\/collection\/flatmap(_:)-3meqj"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Collection/flatMap(_:)-9cfad": {
   "abstract" : [

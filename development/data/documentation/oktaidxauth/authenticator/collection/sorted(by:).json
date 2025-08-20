@@ -17,8 +17,8 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Sequence-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection"
       ]
     ]
   },
@@ -306,6 +306,40 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator": {
+  "abstract" : [
+    {
+      "text" : "Represents information describing the available authenticators and enrolled authenticators.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection": {
   "abstract" : [
     {
@@ -339,17 +373,6 @@
   "title" : "Authenticator.Collection",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/collection"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/Sequence-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection\/Sequence-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Sequence Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/authenticator\/collection\/sequence-implementations"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection/sorted(by:)": {
   "abstract" : [

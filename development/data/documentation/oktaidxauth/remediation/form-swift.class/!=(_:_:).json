@@ -17,8 +17,8 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/Equatable-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class"
       ]
     ]
   },
@@ -212,6 +212,40 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation": {
+  "abstract" : [
+    {
+      "text" : "Describes choices the user can make to proceed through the authentication workflow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Remediation"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Remediation"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Remediation",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/remediation"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class": {
   "abstract" : [
     {
@@ -307,17 +341,6 @@
   "title" : "!=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class\/!=(_:_:)"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Remediation/Form-swift.class/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Remediation\/Form-swift.class\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/remediation\/form-swift.class\/equatable-implementations"
 }
 }
 }

@@ -17,8 +17,8 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Kind",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Kind\/RawRepresentable-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Kind"
       ]
     ]
   },
@@ -200,6 +200,40 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator": {
+  "abstract" : [
+    {
+      "text" : "Represents information describing the available authenticators and enrolled authenticators.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Kind": {
   "abstract" : [
     {
@@ -233,17 +267,6 @@
   "title" : "Authenticator.Kind",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/kind"
-},
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Kind/RawRepresentable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Kind\/RawRepresentable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "RawRepresentable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/authenticator\/kind\/rawrepresentable-implementations"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Kind/hashValue": {
   "abstract" : [

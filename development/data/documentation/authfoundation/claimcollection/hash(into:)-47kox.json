@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/RawRepresentable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection"
       ]
     ]
   },
@@ -141,6 +140,113 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "conformance" : {
+                  "availabilityPrefix" : [
+                    {
+                      "text" : "Available when",
+                      "type" : "text"
+                    }
+                  ],
+                  "conformancePrefix" : [
+                    {
+                      "text" : "Conforms when",
+                      "type" : "text"
+                    }
+                  ],
+                  "constraints" : [
+                    {
+                      "code" : "Container",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "ClaimCollectionContainer",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Container.Element",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " conforms to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Hashable",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ]
+                },
+                "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/hash(into:)-6j4f2",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "func"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "identifier",
+                    "text" : "hash"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "into"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "internalParam",
+                    "text" : "hasher"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "inout"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s6HasherV",
+                    "text" : "Hasher"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ")"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 1
+          },
           "platforms" : [
             "macOS"
           ],
@@ -270,17 +376,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcollection"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/RawRepresentable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/RawRepresentable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "RawRepresentable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcollection\/rawrepresentable-implementations"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/hash(into:)-47kox": {
   "abstract" : [
 
@@ -382,6 +477,108 @@
   "title" : "hash(into:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcollection\/hash(into:)-47kox"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection/hash(into:)-6j4f2": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Container",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "ClaimCollectionContainer",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Container.Element",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hash"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "into"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "inout"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6HasherV",
+      "text" : "Hasher"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection\/hash(into:)-6j4f2",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hash(into:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection\/hash(into:)-6j4f2"
 }
 }
 }

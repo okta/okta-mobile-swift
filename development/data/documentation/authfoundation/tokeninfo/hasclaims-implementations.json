@@ -71,6 +71,7 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/value(for:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/value(for:)-135ll",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/value(for:)-1xc6c",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/value(for:)-2npvk",
@@ -90,6 +91,7 @@
       "anchor" : "Subscripts",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)-22d5h",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)-3eurh",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)-5np5c",
@@ -1892,6 +1894,47 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/subject"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/subscript(_:)": {
+  "abstract" : [
+    {
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : "value type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "_"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/subscript(_:)"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/subscript(_:)-22d5h": {
   "abstract" : [
     {
@@ -2500,6 +2543,55 @@
   "title" : "userLocale",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/userlocale"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/value(for:)": {
+  "abstract" : [
+    {
+      "text" : "Retrieve the optional value using a claim enum, converting to the requested ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ":)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/value(for:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/value(for:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/value(for:)-135ll": {
   "abstract" : [

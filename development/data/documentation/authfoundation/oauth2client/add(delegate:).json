@@ -17,8 +17,7 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/UsesDelegateCollection-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client"
       ]
     ]
   },
@@ -140,12 +139,6 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "mentions",
-      "mentions" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CustomizingNetworkRequests"
-      ]
     }
   ],
   "schemaVersion" : {
@@ -184,20 +177,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/CustomizingNetworkRequests": {
-  "abstract" : [
-    {
-      "text" : "Manage or monitor network requests sent by the Okta Mobile SDK.",
-      "type" : "text"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CustomizingNetworkRequests",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Customizing Network Requests",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/customizingnetworkrequests"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
@@ -231,17 +210,6 @@
   "title" : "OAuth2Client",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/UsesDelegateCollection-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/UsesDelegateCollection-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "UsesDelegateCollection Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/usesdelegatecollection-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/add(delegate:)": {
   "abstract" : [

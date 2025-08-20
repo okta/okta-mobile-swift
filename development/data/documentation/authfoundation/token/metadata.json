@@ -80,12 +80,6 @@
       "kind" : "declarations"
     },
     {
-      "kind" : "mentions",
-      "mentions" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims"
-      ]
-    },
-    {
       "content" : [
         {
           "anchor" : "overview",
@@ -157,6 +151,14 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/ClaimType"
       ],
       "title" : "Type Aliases"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/HasClaims-Implementations"
+      ],
+      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -564,6 +566,17 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/claimtype"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/HasClaims-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/HasClaims-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "HasClaims Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/metadata\/hasclaims-implementations"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/id": {
   "abstract" : [
     {
@@ -700,20 +713,6 @@
   "title" : "tags",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/tags"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/WorkingWithClaims": {
-  "abstract" : [
-    {
-      "text" : "Using Claims on the various types included in OIDC and AuthFoundation.",
-      "type" : "text"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Working with Claims",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/workingwithclaims"
 },
 "doc://AuthFoundation/s8CopyableP": {
   "identifier" : "doc:\/\/AuthFoundation\/s8CopyableP",

@@ -371,6 +371,8 @@
       "anchor" : "Essentials",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init()",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(plist:)",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(client:additionalParameters:)",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)",
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/start(with:)",
@@ -554,6 +556,31 @@
   "title" : "context",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/context-swift.property"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/init()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init()",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/init()"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/init(client:additionalParameters:)": {
   "abstract" : [
@@ -768,6 +795,48 @@
   "title" : "init(issuerURL:clientId:scope:redirectUri:additionalParameters:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/init(issuerurl:clientid:scope:redirecturi:additionalparameters:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/init(plist:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "plist"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/InteractionCodeFlow\/init(plist:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(plist:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/interactioncodeflow\/init(plist:)"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/InteractionCodeFlow/resume()": {
   "abstract" : [

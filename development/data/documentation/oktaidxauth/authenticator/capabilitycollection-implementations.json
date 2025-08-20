@@ -32,6 +32,14 @@
   ],
   "topicSections" : [
     {
+      "anchor" : "Instance-Methods",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/capabilities(of:)"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
       "anchor" : "Enumerations",
       "generated" : true,
       "identifiers" : [
@@ -153,6 +161,67 @@
   "title" : "Authenticator.CapabilityType",
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/authenticator\/capabilitytype"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/capabilities(of:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "capabilities"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "of"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ".Type) -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/capabilities(of:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "capabilities(of:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/capabilities(of:)"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Capability": {
   "abstract" : [

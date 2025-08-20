@@ -17,8 +17,9 @@
     "paths" : [
       [
         "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection",
-        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/Sequence-Implementations"
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection"
       ]
     ]
   },
@@ -147,6 +148,138 @@
           "languages" : [
             "swift"
           ],
+          "otherDeclarations" : {
+            "declarations" : [
+              {
+                "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/sorted(using:)-1ealu",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "func"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "identifier",
+                    "text" : "sorted"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "<"
+                  },
+                  {
+                    "kind" : "genericParameter",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ">("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "using"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") -> ["
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST7ElementQa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "] "
+                  },
+                  {
+                    "kind" : "keyword",
+                    "text" : "where"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " : "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:10Foundation14SortComparatorP",
+                    "text" : "SortComparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ", "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Self"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:ST7ElementQa",
+                    "text" : "Element"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " == "
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "text" : "Comparator"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:10Foundation14SortComparatorP8ComparedQa",
+                    "text" : "Compared"
+                  }
+                ]
+              }
+            ],
+            "displayIndex" : 1
+          },
           "platforms" : [
             "macOS"
           ],
@@ -168,12 +301,18 @@
               "text" : "<"
             },
             {
+              "highlight" : "changed",
               "kind" : "genericParameter",
               "text" : "S"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : ", "
+              "text" : ","
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "genericParameter",
@@ -192,6 +331,7 @@
               "text" : " "
             },
             {
+              "highlight" : "changed",
               "kind" : "internalParam",
               "text" : "comparators"
             },
@@ -200,6 +340,7 @@
               "text" : ": "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "S"
             },
@@ -233,21 +374,29 @@
               "text" : " "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "S"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : " : "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:ST",
               "text" : "Sequence"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : ", "
+              "text" : ","
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "typeIdentifier",
@@ -267,29 +416,39 @@
               "text" : ", "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "Comparator"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : " == "
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "text" : "S"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
               "text" : "."
             },
             {
+              "highlight" : "changed",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:ST7ElementQa",
               "text" : "Element"
             },
             {
+              "highlight" : "changed",
               "kind" : "text",
-              "text" : ", "
+              "text" : ","
+            },
+            {
+              "kind" : "text",
+              "text" : " "
             },
             {
               "kind" : "typeIdentifier",
@@ -363,6 +522,74 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth"
 },
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response": {
+  "abstract" : [
+    {
+      "text" : "Describes the response from an Okta Identity Engine workflow stage.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Response"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message": {
+  "abstract" : [
+    {
+      "text" : "Represents messages sent from the server to indicate error or warning conditions related to responses or form values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Message"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Message"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Response.Message",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/response\/message"
+},
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection": {
   "abstract" : [
     {
@@ -397,16 +624,75 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaidxauth\/response\/message\/collection"
 },
-"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection/Sequence-Implementations": {
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection/sorted(using:)-1ealu": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/Sequence-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Sequence Implementations",
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sorted"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Comparator"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "using"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Comparator"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Response\/Message\/Collection\/sorted(using:)-1ealu",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "sorted(using:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaidxauth\/response\/message\/collection\/sequence-implementations"
+  "url" : "\/documentation\/oktaidxauth\/response\/message\/collection\/sorted(using:)-1ealu"
 },
 "doc://OktaIdxAuth/documentation/OktaIdxAuth/Response/Message/Collection/sorted(using:)-8lavq": {
   "abstract" : [
