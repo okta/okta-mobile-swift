@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import CommonSupport
 
 /// Describes choices the user can make to proceed through the authentication workflow.
 public final class Remediation: Sendable, Equatable, Hashable {

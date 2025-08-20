@@ -51,7 +51,7 @@ class IDXRemediationParameterTests: XCTestCase {
         identifier.value = "test@example.com"
         rememberMe.value = true
 
-        let result = try remediationOption.form.formValues()
+        let result = try remediationOption.form.formValue
         XCTAssertEqual(result["stateHandle"], "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
         XCTAssertEqual(result["identifier"], "test@example.com")
         XCTAssertEqual(result["rememberMe"], true)
@@ -75,7 +75,7 @@ class IDXRemediationParameterTests: XCTestCase {
 
         passcode.value = "password"
 
-        let result = try remediationOption.form.formValues()
+        let result = try remediationOption.form.formValue
         XCTAssertEqual(result["stateHandle"], "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
         XCTAssertEqual(result["credentials"]?["passcode"], "password")
         XCTAssertEqual(result["credentials"], .object(["passcode": "password"]))
@@ -99,7 +99,7 @@ class IDXRemediationParameterTests: XCTestCase {
 
         authenticator.selectedOption = emailOption
 
-        let result = try remediationOption.form.formValues()
+        let result = try remediationOption.form.formValue
         XCTAssertEqual(result["stateHandle"], "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
         XCTAssertEqual(result["authenticator"]?["id"], "aut3jya5v1oIgaLuV0g7")
         XCTAssertEqual(result["authenticator"]?["methodType"], "email")
@@ -128,7 +128,7 @@ class IDXRemediationParameterTests: XCTestCase {
         methodType.selectedOption = smsType
         phoneNumber.value = "5551234567"
 
-        let result = try remediationOption.form.formValues()
+        let result = try remediationOption.form.formValue
         XCTAssertEqual(result["stateHandle"], "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
         XCTAssertEqual(result["authenticator"]?["id"], "aut3jya5v26pKeUb30g7")
         XCTAssertEqual(result["authenticator"]?["methodType"], "sms")

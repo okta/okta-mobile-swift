@@ -111,7 +111,8 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
                 "expires_in": 600
             }
         """)
-        let context = try defaultJSONDecoder.decode(DeviceAuthorizationFlow.Verification.self, from: data)
+        let jsonDecoder = DeviceAuthorizationFlow.Verification.jsonDecoder
+        let context = try jsonDecoder.decode(DeviceAuthorizationFlow.Verification.self, from: data)
 
         XCTAssertEqual(context.deviceCode, "1a521d9f-0922-4e6d-8db9-8b654297435a")
         XCTAssertEqual(context.userCode, "GDLMZQCT")

@@ -11,6 +11,7 @@
 //
 
 import Foundation
+@_exported import JSON
 
 /// Describes the configuration of an OpenID server.
 ///
@@ -19,17 +20,15 @@ public struct OpenIdConfiguration: Sendable, Codable, JSONClaimContainer {
     public typealias ClaimType = ProviderMetadata
     
     /// The raw payload of provider metadata claims returned from the OpenID Provider.
-    public var payload: [String: any Sendable] { jsonPayload.jsonValue.anyValue as? [String: any Sendable] ?? [:] }
+    public var payload: [String: any Sendable] { json.claimContent }
 
-    let jsonPayload: AnyJSON
+    public let json: JSON
 
     @_documentation(visibility: internal)
-    public init(from decoder: any Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let json = try container.decode(JSON.self)
-        jsonPayload = .init(json)
-        
-        let payload = json.anyValue as? [String: any Sendable] ?? [:]
+    public init(_ json: JSON) throws {
+        self.json = json
+
+        let payload = json.claimContent
         issuer = try ProviderMetadata.value(.issuer, in: payload)
         authorizationEndpoint = try ProviderMetadata.value(.authorizationEndpoint, in: payload)
         tokenEndpoint = try ProviderMetadata.value(.tokenEndpoint, in: payload)

@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import CommonSupport
 
 extension Response.Message {
     /// Represents a collection of messages.

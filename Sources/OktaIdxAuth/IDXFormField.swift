@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import CommonSupport
 
 extension Remediation.Form {
     /// Describes an individual field within a form, used to collect and submit information from the user to proceed through the authentication workflow.
@@ -37,19 +38,19 @@ extension Remediation.Form {
         public let type: String?
         
         /// The value to send, if a default is provided from the Identity Engine.
-        public var value: (any JSONRepresentable)? {
+        public var value: (any JSONPrimitiveConvertible)? {
             get {
                 lock.withLock {
-                    guard let value = _value.anyValue else {
+                    guard let value = _value.primitive else {
                         return nil
                     }
-                    return value as? any JSONRepresentable
+                    return value.anyValue as? any JSONPrimitiveConvertible
                 }
             }
             set {
                 guard isMutable else { return }
                 lock.withLock {
-                    _value = newValue?.json ?? .null
+                    _value = newValue?.jsonValue ?? .null
                 }
             }
         }
@@ -116,7 +117,7 @@ extension Remediation.Form {
             if !lhs.isMutable,
                !rhs.isMutable
             {
-                return (lhs.value ?? JSON.null).json == (rhs.value ?? JSON.null).json
+                return lhs.value?.jsonValue == rhs.value?.jsonValue
             }
 
             return true
@@ -152,7 +153,7 @@ extension Remediation.Form {
         }
 
         // MARK: - Private
-        nonisolated(unsafe) private var _value: JSON
+        nonisolated(unsafe) private var _value: JSON.Value
         nonisolated(unsafe) private var _hasVisibleFields: Bool?
         nonisolated(unsafe) private var _isSelectedOption: Bool
         nonisolated(unsafe) private weak var _authenticator: Authenticator?
@@ -189,7 +190,7 @@ extension Remediation.Form {
         internal init(name: String? = nil,
                       label: String? = nil,
                       type: String? = nil,
-                      value: JSON = .null,
+                      value: JSON.Value = .null,
                       visible: Bool,
                       mutable: Bool,
                       required: Bool,

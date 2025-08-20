@@ -13,6 +13,7 @@
 import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
+import CommonSupport
 
 #if os(Linux)
 import FoundationNetworking

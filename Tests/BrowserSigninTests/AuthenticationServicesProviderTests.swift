@@ -18,6 +18,7 @@ import XCTest
 @testable import OAuth2Auth
 @testable import BrowserSignin
 import AuthenticationServices
+import CommonSupport
 
 class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, AuthenticationServicesProviderSession {
     let url: URL

@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 
 /// Namespace used for a variety of version migration agents.
 public final class Migration {

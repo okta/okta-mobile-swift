@@ -14,11 +14,23 @@ import Foundation
 
 public protocol JSONDecodable {
     static var jsonDecoder: JSONDecoder { get }
+    
+    init(_ data: Data, userInfo: [CodingUserInfoKey: any Sendable]?) throws
 }
 
 extension JSONDecodable {
     @_documentation(visibility: internal)
-    public static var jsonDecoder: JSONDecoder { defaultJsonDecoder }
+    public static var jsonDecoder: JSONDecoder { JSONDecoder() }
 }
 
-fileprivate let defaultJsonDecoder = JSONDecoder()
+extension JSONDecodable where Self: Decodable {
+    @_documentation(visibility: internal)
+    public init(_ data: Data, userInfo: [CodingUserInfoKey: any Sendable]? = nil) throws {
+        let decoder = Self.jsonDecoder
+        if let userInfo = userInfo {
+            decoder.userInfo = userInfo
+        }
+        
+        self = try decoder.decode(Self.self, from: data)
+    }
+}

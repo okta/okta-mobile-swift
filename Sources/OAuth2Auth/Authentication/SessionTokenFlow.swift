@@ -13,6 +13,7 @@
 #if canImport(UIKit) || canImport(AppKit)
 import Foundation
 import AuthFoundation
+import CommonSupport
 
 /// An authentication flow class that exchanges a Session Token for access tokens.
 ///

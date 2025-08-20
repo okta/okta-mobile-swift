@@ -26,7 +26,7 @@ public protocol HasClaims {
     /// Raw payload of claims, as a dictionary representation.
     ///
     /// Types conforming to this protocol must return the raw payload of claim values. The convenience functions used for loading and converting claims are made available through extensions to this protocol.
-    var payload: [String: any Sendable] { get }
+    var claimContent: [String: any Sendable] { get }
 }
 
 public extension HasClaims {
@@ -34,14 +34,14 @@ public extension HasClaims {
     ///
     /// > Note: This will only return the list of official claims defined in the ``ClaimType`` enum corresponding to this claim container. For custom claims, please see the ``customClaims`` property.
     var claims: [ClaimType] {
-        payload.keys.compactMap { ClaimType(rawValue: $0) }
+        claimContent.keys.compactMap { ClaimType(rawValue: $0) }
     }
     
     /// Returns the collection of custom claims this object contains.
     ///
     /// Unlike the ``claims`` property, this returns values as strings.
     var customClaims: [String] {
-        payload.keys.filter { ClaimType(rawValue: $0) == nil }
+        claimContent.keys.filter { ClaimType(rawValue: $0) == nil }
     }
 
     /// All claims, across both standard ``claims`` and ``customClaims``.

@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import CommonSupport
 
 /// Delegate protocol used by ``DirectAuthenticationFlow``.
 ///
