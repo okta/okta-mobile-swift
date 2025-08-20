@@ -111,6 +111,18 @@ var package = Package(
     swiftLanguageModes: [.v5, .v6]
 )
 
+// Ensure the `TestScoping` feature is available when builds are made with older versions of Swift.
+// This is included by default within Swift 6.1, or Xcode 16.3+, so this allows these test features
+// to be backported to older compiler versions.
+#if swift(<6.1) || !canImport(Testing)
+package.dependencies.append(.package(url: "https://github.com/apple/swift-testing", from: "6.1.1"))
+for target in package.targets {
+    if target.name.contains(/Test/) {
+        target.dependencies.append(.product(name: "Testing", package: "swift-testing"))
+    }
+}
+#endif
+
 #if canImport(AuthenticationServices) && canImport(UIKit) || canImport(AppKit)
 package.targets.append(contentsOf: [
     .target(name: "BrowserSignin",
