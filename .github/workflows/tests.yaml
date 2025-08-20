@@ -229,7 +229,7 @@ jobs:
     strategy:
       matrix:
         include:
-        - destination: "platform=iOS Simulator,OS=18.6,name=iPhone 16 Pro Max"
+        - destination: "platform=iOS Simulator,OS=18.5,name=iPhone 16 Pro Max"
           xcode_version: "16.4"
           os: macos-15
         - destination: "platform=tvOS Simulator,OS=18.5,name=Apple TV"
