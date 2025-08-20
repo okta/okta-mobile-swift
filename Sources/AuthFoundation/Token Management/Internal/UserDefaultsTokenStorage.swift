@@ -88,8 +88,14 @@ final class UserDefaultsTokenStorage: TokenStorage {
         return token
     }
     
-    func add(token: Token, metadata: Token.Metadata?, security: [Credential.Security]) throws {
-        let metadata = metadata ?? Token.Metadata(token: token, tags: [:])
+    func add(token: Token, metadata tokenMetadata: Token.Metadata?, security: [Credential.Security]) throws {
+        let metadata: Token.Metadata
+        if let tokenMetadata {
+            metadata = tokenMetadata
+        } else {
+            metadata = try Token.Metadata(token: token, tags: [:])
+        }
+        
         guard token.id == metadata.id else {
             throw CredentialError.metadataConsistency
         }

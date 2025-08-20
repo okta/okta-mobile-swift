@@ -17,6 +17,7 @@ import CommonSupport
 #endif
 
 @testable import AuthFoundation
+import CommonSupport
 
 class MockTokenStorage: @unchecked Sendable, TokenStorage {
     @LockedValue var error: (any Error)?
@@ -42,8 +43,14 @@ class MockTokenStorage: @unchecked Sendable, TokenStorage {
     private var allTokens: [String:(Token,[Credential.Security])] = [:]
     private var metadata: [String:Token.Metadata] = [:]
     
-    func add(token: Token, metadata: Token.Metadata?, security: [Credential.Security]) throws {
-        let metadata = metadata ?? Token.Metadata(token: token, tags: [:])
+    func add(token: Token, metadata tokenMetadata: Token.Metadata?, security: [Credential.Security]) throws {
+        let metadata: Token.Metadata
+        if let tokenMetadata {
+            metadata = tokenMetadata
+        } else {
+            metadata = try Token.Metadata(token: token, tags: [:])
+        }
+
         if let error = error {
             throw error
         }

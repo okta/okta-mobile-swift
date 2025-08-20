@@ -12,6 +12,7 @@
 
 import Foundation
 import XCTest
+import CommonSupport
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking

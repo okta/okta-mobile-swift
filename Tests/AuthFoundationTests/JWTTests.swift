@@ -46,7 +46,7 @@ final class JWTTests: XCTestCase {
         ])
         
         XCTAssertEqual(token.customClaims, [])
-        XCTAssertEqual(token.payload.reduce(into: [String:String](), { partialResult, item in
+        XCTAssertEqual(token.claimContent.reduce(into: [String:String](), { partialResult, item in
             guard let value = item.value as? String else { return }
             partialResult[item.key] = value
         }), [
@@ -58,18 +58,20 @@ final class JWTTests: XCTestCase {
             "iss": "https://example.com/oauth2/default"
         ])
         
-        XCTAssertEqual(token.payload.reduce(into: [String:Array<String>](), { partialResult, item in
+        XCTAssertEqual(token.claimContent.reduce(into: [String:Array<String>](), { partialResult, item in
             guard let value = item.value as? Array<String> else { return }
             partialResult[item.key] = value
         }), [
             "scp": ["offline_access", "profile", "openid"]
         ])
 
-        XCTAssertEqual(token.payload.reduce(into: [String:Bool](), { partialResult, item in
-            guard let value = item.value as? Bool else { return }
+        XCTAssertEqual(token.claimContent.reduce(into: [String: Int](), { partialResult, item in
+            guard let value = item.value as? Int else { return }
             partialResult[item.key] = value
         }), [
-            "ver": true
+            "exp": 1642536162,
+            "iat": 1642532562,
+            "ver": 1
         ])
     }
 

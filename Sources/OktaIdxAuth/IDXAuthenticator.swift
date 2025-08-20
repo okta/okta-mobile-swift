@@ -42,7 +42,7 @@ public final class Authenticator: Sendable, Equatable, Hashable {
     public let capabilities: [CapabilityType]
     
     /// Additional context data associated with this authenticator.
-    public let context: [String: JSON]?
+    public let context: [String: JSON.Value]?
 
     @_documentation(visibility: internal)
     public static func == (lhs: Authenticator, rhs: Authenticator) -> Bool {
@@ -75,7 +75,7 @@ public final class Authenticator: Sendable, Equatable, Hashable {
          type: Authenticator.Kind,
          key: String?,
          methods: [[String: String]]?,
-         contextualData: [String: JSON]?,
+         contextualData: [String: JSON.Value]?,
          capabilities: [any Capability])
     {
         self.flow = flow

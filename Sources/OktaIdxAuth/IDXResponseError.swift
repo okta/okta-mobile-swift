@@ -31,7 +31,7 @@ public struct IDXServerError: Error, LocalizedError {
 protocol ReturnsIDXError: APIParsingContext {}
 extension ReturnsIDXError {
     func error(from data: Data) -> (any Error)? {
-        guard let response = try? idxResponseDecoder.decode(IonResponse.self, from: data),
+        guard let response = try? idxResponseDecoder().decode(IonResponse.self, from: data),
               let message = response.messages?.value.first
         else {
             return nil

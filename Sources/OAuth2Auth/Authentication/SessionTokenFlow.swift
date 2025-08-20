@@ -13,6 +13,7 @@
 #if canImport(UIKit) || canImport(AppKit)
 import Foundation
 import AuthFoundation
+import CommonSupport
 
 #if !COCOAPODS
 import CommonSupport

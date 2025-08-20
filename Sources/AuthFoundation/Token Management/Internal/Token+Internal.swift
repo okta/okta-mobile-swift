@@ -26,10 +26,10 @@ extension Token {
         let newPayload = try Token
             .exchangeCoordinator
             .merge(token,
-                   payload: token.payload,
-                   with: payload)
+                   payload: token.claimContent,
+                   with: claimContent)
         
-        let oldJSON = jsonPayload.jsonValue
+        let oldJSON = json
         let newJSON = try JSON(newPayload)
         
         if oldJSON != newJSON {

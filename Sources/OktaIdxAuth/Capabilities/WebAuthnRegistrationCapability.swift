@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import CommonSupport
 
 #if !COCOAPODS
 import CommonSupport
@@ -31,7 +32,7 @@ public enum WebAuthnCapabilityError: Error {
 ///
 /// Once the platform authenticator has completed creating an attestation response, the resulting data can be supplied to the ``register(attestation:clientJSON:)`` function to validate the results with the server. Alternatively the ``register(credential:)``
 public final class WebAuthnRegistrationCapability: Capability, Sendable, Equatable, Hashable {
-    nonisolated let rawActivationJSON: JSON
+    nonisolated let rawActivationJSON: JSON.Value
     
     /// The challenge data indicated on the credential assertion request issued from the server.
     public nonisolated let challenge: Data
@@ -96,13 +97,12 @@ public final class WebAuthnRegistrationCapability: Capability, Sendable, Equatab
     private let lock = Lock()
     nonisolated(unsafe) private weak var _remediation: Remediation?
     nonisolated(unsafe) var _relyingPartyIdentifier: String
-    internal init(issuerURL: URL, rawActivationJSON json: JSON) throws {
-        guard case let .string(challengeString) = json["challenge"],
+    internal init(issuerURL: URL, rawActivationJSON json: JSON.Value) throws {
+        guard let challengeString = json["challenge"]?.string,
               let challenge = Data(base64Encoded: challengeString.base64URLDecoded),
-              case let .object(userObject) = json["user"],
-              case let .string(displayName) = userObject["displayName"],
-              case let .string(name) = userObject["name"],
-              case let .string(userID) = userObject["id"]
+              let displayName = json["user"]?["displayName"]?.string,
+              let name = json["user"]?["name"]?.string,
+              let userID = json["user"]?["id"]?.string
         else {
             throw WebAuthnCapabilityError.missingChallengeJson
         }
@@ -115,15 +115,14 @@ public final class WebAuthnRegistrationCapability: Capability, Sendable, Equatab
         self._relyingPartyIdentifier = try String.relyingPartyIssuer(from: json,
                                                                      issuerURL: issuerURL)
 
-        if case let .object(authenticatorSelection) = json["authenticatorSelection"],
-           case let .string(userVerification) = authenticatorSelection["userVerification"]
+        if let userVerification = json["authenticatorSelection"]?["userVerification"]?.string
         {
             userVerificationPreferenceString = userVerification
         } else {
             userVerificationPreferenceString = nil
         }
 
-        if case let .string(attestation) = json["attestation"] {
+        if let attestation = json["attestation"]?.string {
             attestationPreferenceString = attestation
         } else {
             attestationPreferenceString = nil
@@ -204,14 +203,10 @@ extension WebAuthnRegistrationCapability {
 
         if case let .array(publicKeyCredParams) = rawActivationJSON["pubKeyCredParams"] {
             request.credentialParameters = publicKeyCredParams
-                .compactMap { item in
-                    guard case let .object(item) = item,
-                          item["type"] == .string("public-key"),
-                          case let .number(alg) = item["alg"]
-                    else {
-                        return nil
-                    }
-                    return ASAuthorizationPublicKeyCredentialParameters(algorithm: ASCOSEAlgorithmIdentifier(rawValue: alg.intValue))
+                .filter { $0["type"] == "public-key" }
+                .compactMap { $0["alg"]?.int }
+                .map {
+                    ASAuthorizationPublicKeyCredentialParameters(algorithm: ASCOSEAlgorithmIdentifier(rawValue: $0))
                 }
         }
 

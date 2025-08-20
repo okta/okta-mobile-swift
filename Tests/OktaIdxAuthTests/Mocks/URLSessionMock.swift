@@ -12,6 +12,7 @@
 
 import Foundation
 import XCTest
+import CommonSupport
 
 #if !COCOAPODS
 import CommonSupport
@@ -29,7 +30,7 @@ extension Response {
                         data: Data) throws -> Response
     {
         do {
-            let response = try InteractionCodeFlow.IntrospectRequest.jsonDecoder.decode(IonResponse.self, from: data)
+            let response = try IonResponse.jsonDecoder.decode(IonResponse.self, from: data)
             return try Response(flow: flow, ion: response)
         } catch {
             print("Error decoding JSON: \(error)")
