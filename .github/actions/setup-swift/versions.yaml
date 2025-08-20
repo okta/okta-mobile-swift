@@ -1,7 +1,9 @@
 swift:
+  # Swift 5.10 mode within the 6.x toolchain, since Xcode 15.4 is no longer supported by Apple on the App Store
   - version: "5.10"
+    swift_arguments: "-Xswiftc -swift-version -Xswiftc 5"
     xcode_versions: 
-      - "15.4"
+      - "16.4"
   - version: "6.0"
     xcode_versions: 
       - "16.0"

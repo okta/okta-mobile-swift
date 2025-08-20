@@ -95,10 +95,10 @@ var package = Package(
                     resources: [.copy("MockResponses")],
                     swiftSettings: .testTarget),
     ],
-    swiftLanguageModes: [.v6]
+    swiftLanguageModes: [.v5, .v6]
 )
 
-#if canImport(UIKit) || canImport(AppKit)
+#if canImport(AuthenticationServices) && canImport(UIKit) || canImport(AppKit)
 package.targets.append(contentsOf: [
     .target(name: "BrowserSignin",
             dependencies: [
