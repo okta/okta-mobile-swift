@@ -11,7 +11,10 @@
 //
 
 import Foundation
+
+#if !COCOAPODS
 import CommonSupport
+#endif
 
 #if canImport(UIKit)
 import UIKit

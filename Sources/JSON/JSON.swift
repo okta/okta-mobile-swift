@@ -11,7 +11,10 @@
 //
 
 import Foundation
+
+#if !COCOAPODS
 import CommonSupport
+#endif
 
 public enum JSONError: Error, Sendable, Hashable, Equatable {
     case invalidUTF8String

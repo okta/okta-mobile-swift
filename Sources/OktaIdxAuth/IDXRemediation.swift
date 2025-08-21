@@ -12,7 +12,10 @@
 
 import Foundation
 import AuthFoundation
+
+#if !COCOAPODS
 import CommonSupport
+#endif
 
 /// Describes choices the user can make to proceed through the authentication workflow.
 public final class Remediation: Sendable, Equatable, Hashable {
