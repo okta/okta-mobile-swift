@@ -25,22 +25,22 @@ extension Token {
         /// Developer-assigned tags.
         public let tags: [String: String]
         
-        /// The raw JSON content of the claim payload for this token.
-        public let payload: JSON
+        /// The raw contents of the claim payload for this token.
+        public let payload: [String: any Sendable]
         
-        @_documentation(visibility: internal)
-        public var claimContent: [String: any Sendable] { payload.claimContent }
-
+        private let payloadData: Data?
         init(token: Token, tags: [String: String]) throws {
             self.id = token.id
             self.tags = tags
-            self.payload = token.idToken?.payload ?? JSON(.object([:]))
+            self.payload = token.idToken?.body.payload ?? [:]
+            self.payloadData = try token.idToken?.body.data
         }
         
         init(id: String) {
             self.id = id
             self.tags = [:]
-            self.payload = JSON(.object([:]))
+            self.payload = [:]
+            self.payloadData = nil
         }
     }
 }
@@ -55,14 +55,16 @@ extension Token.Metadata: Codable {
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        if let jsonData = try container.decodeIfPresent(Data.self, forKey: .payload) {
-            self.payload = try JSON(jsonData)
-        } else {
-            self.payload = JSON(.object([:]))
-        }
-        
+        self.payloadData = try container.decodeIfPresent(Data.self, forKey: .payload)
         self.id = try container.decode(String.self, forKey: .id)
         self.tags = try container.decode([String: String].self, forKey: .tags)
+        
+        if let data = self.payloadData {
+            self.payload = try JSON(data).payload
+        } else {
+            self.payload = [:]
+
+        }
     }
     
     @_documentation(visibility: internal)
@@ -70,7 +72,7 @@ extension Token.Metadata: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(tags, forKey: .tags)
-        try container.encode(try payload.data, forKey: .payload)
+        try container.encode(payloadData, forKey: .payload)
     }
     
     enum CodingKeys: String, CodingKey {

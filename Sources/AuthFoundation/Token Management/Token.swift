@@ -100,7 +100,7 @@ public struct Token: Sendable, Codable, Equatable, Hashable, HasClaims, Expires 
     
     /// The claim payload container for this token
     @_documentation(visibility: internal)
-    public var claimContent: [String: any Sendable] { json.claimContent }
+    public var payload: [String: any Sendable] { json.payload }
 
     /// Indicates whether or not the token is being refreshed.
     public var isRefreshing: Bool {
@@ -204,7 +204,7 @@ public struct Token: Sendable, Codable, Equatable, Hashable, HasClaims, Expires 
         }
         
         // Ensure an access token is provided.
-        if let value: String = TokenClaim.optionalValue(.accessToken, in: json.claimContent) {
+        if let value: String = TokenClaim.optionalValue(.accessToken, in: json.payload) {
             accessToken = value
         }
         
@@ -221,8 +221,8 @@ public struct Token: Sendable, Codable, Equatable, Hashable, HasClaims, Expires 
             throw ClaimError.missingRequiredValue(key: TokenClaim.accessToken.rawValue)
         }
 
-        tokenType = try TokenClaim.value(.tokenType, in: json.claimContent)
-        expiresIn = try TokenClaim.value(.expiresIn, in: json.claimContent)
+        tokenType = try TokenClaim.value(.tokenType, in: json.payload)
+        expiresIn = try TokenClaim.value(.expiresIn, in: json.payload)
     }
     
     public func encode(to encoder: any Encoder) throws {

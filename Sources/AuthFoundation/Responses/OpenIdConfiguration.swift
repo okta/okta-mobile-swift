@@ -23,7 +23,7 @@ public struct OpenIdConfiguration: Sendable, Codable, JSONClaimContainer {
     public typealias ClaimType = ProviderMetadata
     
     /// The raw payload of provider metadata claims returned from the OpenID Provider.
-    public var payload: [String: any Sendable] { json.claimContent }
+    public var payload: [String: any Sendable] { json.payload }
 
     public let json: JSON
 
@@ -31,7 +31,7 @@ public struct OpenIdConfiguration: Sendable, Codable, JSONClaimContainer {
     public init(_ json: JSON) throws {
         self.json = json
 
-        let payload = json.claimContent
+        let payload = json.payload
         issuer = try ProviderMetadata.value(.issuer, in: payload)
         authorizationEndpoint = try ProviderMetadata.value(.authorizationEndpoint, in: payload)
         tokenEndpoint = try ProviderMetadata.value(.tokenEndpoint, in: payload)
