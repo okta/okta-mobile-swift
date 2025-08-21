@@ -11,7 +11,10 @@
 //
 
 import Foundation
+
+#if !COCOAPODS
 @_exported import JSON
+#endif
 
 #if !COCOAPODS
 import JSON

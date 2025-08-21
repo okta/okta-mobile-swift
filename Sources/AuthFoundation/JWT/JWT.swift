@@ -11,7 +11,10 @@
 //
 
 import Foundation
+
+#if !COCOAPODS
 @_exported import JSON
+#endif
 
 /// Represents the contents of a JWT token, providing access to its payload contents.
 public struct JWT: RawRepresentable, Sendable, Codable, HasClaims, Expires {

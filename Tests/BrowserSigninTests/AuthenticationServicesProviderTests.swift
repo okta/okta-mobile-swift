@@ -23,7 +23,10 @@ import CommonSupport
 @testable import OAuth2Auth
 @testable import BrowserSignin
 import AuthenticationServices
+
+#if !COCOAPODS
 import CommonSupport
+#endif
 
 class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, AuthenticationServicesProviderSession {
     let url: URL

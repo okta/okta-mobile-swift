@@ -14,7 +14,10 @@ import XCTest
 
 @testable import TestCommon
 @testable import AuthFoundation
+
+#if !COCOAPODS
 import CommonSupport
+#endif
 
 #if !COCOAPODS
 import CommonSupport
