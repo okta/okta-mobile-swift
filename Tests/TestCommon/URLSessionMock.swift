@@ -123,25 +123,22 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
         let call = call(for: request.url!.absoluteString)
         requests.append(request)
         
-        return try await withCheckedThrowingContinuation { continuation in
-            Task {
-                if let delay = requestDelay {
-                    try await Task.sleep(delay: delay)
-                }
-                
-                guard let data = call?.data,
-                      let response = call?.response
-                else {
-                    if let error = call?.error {
-                        continuation.resume(throwing: error)
-                    } else {
-                        continuation.resume(throwing: APIClientError.missingResponse(request: request))
-                    }
-                    return
-                }
-
-                continuation.resume(returning: (data, response))
+        return try await Task.detached {
+            if let delay = self.requestDelay {
+                try await Task.sleep(delay: delay)
             }
-        }
+            
+            guard let data = call?.data,
+                  let response = call?.response
+            else {
+                if let error = call?.error {
+                    throw error
+                } else {
+                    throw APIClientError.missingResponse(request: request)
+                }
+            }
+            
+            return (data, response)
+        }.value
     }
 }
