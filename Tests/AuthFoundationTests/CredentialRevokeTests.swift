@@ -87,22 +87,14 @@ final class CredentialTests: XCTestCase {
         }
         await fulfillment(of: [expect], timeout: .standard)
 
-        let requests: [String: URLRequest] = urlSession.requests.reduce(into: [:]) { partialResult, request in
-            guard let url = request.url,
-                  url.absoluteString.starts(with: "https://example.com/oauth2/v1/revoke"),
-                  let tokenType = request.bodyString?.urlFormDecoded()["token_type_hint"]
-            else {
-                return
-            }
-            
-            partialResult[tokenType] = request
-        }
-        
-        XCTAssertEqual(try XCTUnwrap(requests["access_token"]).bodyString,
+        let accessTokenRevokeRequest = urlSession.request(matching: .body("token_type_hint=access_token"))
+        let refreshTokenRevokeRequest = urlSession.request(matching: .body("token_type_hint=refresh_token"))
+        let deviceSecretRevokeRequest = urlSession.request(matching: .body("token_type_hint=device_secret"))
+        XCTAssertEqual(try XCTUnwrap(accessTokenRevokeRequest?.bodyString),
                        "client_id=clientid&token=abcd123&token_type_hint=access_token")
-        XCTAssertEqual(try XCTUnwrap(requests["refresh_token"]).bodyString,
+        XCTAssertEqual(try XCTUnwrap(refreshTokenRevokeRequest?.bodyString),
                        "client_id=clientid&token=refresh123&token_type_hint=refresh_token")
-        XCTAssertEqual(try XCTUnwrap(requests["device_secret"]).bodyString,
+        XCTAssertEqual(try XCTUnwrap(deviceSecretRevokeRequest?.bodyString),
                        "client_id=clientid&token=device123&token_type_hint=device_secret")
 
         await CredentialActor.run {
