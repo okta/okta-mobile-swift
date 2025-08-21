@@ -127,6 +127,7 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
 
         let _ = try await flow.start(with: tokens)
+        await MainActor.yield()
         
         XCTAssertFalse(flow.isAuthenticating)
 
