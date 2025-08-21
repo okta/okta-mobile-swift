@@ -42,6 +42,6 @@ extension JSONClaimContainer where Self: Decodable {
 
 extension JSONClaimContainer {
     /// The raw payload of provider metadata claims from the JSON object.
-    public var claimContent: [String: any Sendable] { json.claimContent }
+    public var payload: [String: any Sendable] { json.payload }
 }
 

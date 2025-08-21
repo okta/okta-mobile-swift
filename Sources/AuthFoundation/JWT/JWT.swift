@@ -97,7 +97,7 @@ public struct JWT: RawRepresentable, Sendable, Codable, HasClaims, Expires {
         else { throw JWTError.invalidBase64Encoding }
         
         self.header = try JSONDecoder().decode(JWT.Header.self, from: headerData)
-        self.payload = try JSON(payloadData)
+        self.body = try JSON(payloadData)
 
         if components.count == 3 {
             self.signature = components[2]
@@ -105,12 +105,12 @@ public struct JWT: RawRepresentable, Sendable, Codable, HasClaims, Expires {
     }
     
     /// Raw paylaod of claims, as a dictionary representation.
-    public var payload: JSON
+    public var body: JSON
     
     /// Signature of the JWT token.
     public var signature: String?
 
-    public var claimContent: [String: any Sendable] { payload.claimContent }
+    public var payload: [String: any Sendable] { body.payload }
 
     static func tokenComponents(from token: String) -> [String] {
         token

@@ -13,7 +13,7 @@
 import Foundation
 
 extension JSON {
-    var claimContent: [String: any Sendable] {
+    var payload: [String: any Sendable] {
         get {
             value.anyValue as? [String: any Sendable] ?? [:]
         }

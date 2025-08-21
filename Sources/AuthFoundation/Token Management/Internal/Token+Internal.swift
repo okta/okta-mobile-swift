@@ -22,8 +22,8 @@ extension Token {
         let newPayload = try Token
             .exchangeCoordinator
             .merge(token,
-                   payload: token.claimContent,
-                   with: claimContent)
+                   payload: token.payload,
+                   with: payload)
         
         let oldJSON = json
         let newJSON = try JSON(newPayload)
