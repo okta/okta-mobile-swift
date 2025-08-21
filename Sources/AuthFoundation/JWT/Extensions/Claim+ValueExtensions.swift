@@ -19,7 +19,7 @@ public extension HasClaims {
     ///   - key: String payload key name.
     /// - Returns: Value converted to the requested type.
     func value<T: ClaimConvertable>(for key: String) throws -> T  {
-        guard let value = T.convert(from: claimContent[key])
+        guard let value = T.convert(from: payload[key])
         else {
             throw ClaimError.missingRequiredValue(key: key)
         }
@@ -39,7 +39,7 @@ public extension HasClaims {
     ///   - key: String payload key name.
     /// - Returns: Optional value converted to the requested type.
     func value<T: ClaimConvertable>(for key: String) -> T?  {
-        T.convert(from: claimContent[key])
+        T.convert(from: payload[key])
     }
 
     /// Retrieve the optional value using a claim enum, converting to the requested ``ClaimConvertable`` type.
@@ -60,13 +60,13 @@ public extension HasClaims {
     /// - Returns: Value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for key: String) throws -> [T] {
         if T.self == String.self,
-           let value = claimContent[key] as? String,
+           let value = payload[key] as? String,
            let result = value.whitespaceSeparated as? [T]
         {
             return result
         }
 
-        guard let array = claimContent[key] as? [any ClaimConvertable]
+        guard let array = payload[key] as? [any ClaimConvertable]
         else {
             throw ClaimError.missingRequiredValue(key: key)
         }
@@ -90,12 +90,12 @@ public extension HasClaims {
     /// - Returns: Optional value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for key: String) -> [T]? {
         if T.self == String.self,
-           let value = claimContent[key] as? String
+           let value = payload[key] as? String
         {
             return value.whitespaceSeparated as? [T]
         }
         
-        let array = claimContent[key] as? [any ClaimConvertable]
+        let array = payload[key] as? [any ClaimConvertable]
         return array?.compactMap { T.convert(from: $0) }
     }
 
@@ -115,7 +115,7 @@ public extension HasClaims {
     /// - Parameter key: String payload key name.
     /// - Returns: Value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for key: String) throws -> [String: T] {
-        guard let dictionary = claimContent[key] as? [String: any ClaimConvertable]
+        guard let dictionary = payload[key] as? [String: any ClaimConvertable]
         else {
             throw ClaimError.missingRequiredValue(key: key)
         }
@@ -134,7 +134,7 @@ public extension HasClaims {
     /// - Parameter key: String payload key name.
     /// - Returns: Optional value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for key: String) -> [String: T]? {
-        let dictionary = claimContent[key] as? [String: any ClaimConvertable]
+        let dictionary = payload[key] as? [String: any ClaimConvertable]
         return dictionary?.compactMapValues { T.convert(from: $0) }
     }
 
