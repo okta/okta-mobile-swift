@@ -129,7 +129,6 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
         
         return try await withCheckedThrowingContinuation { continuation in
             Task {
-                await MainActor.yield()
                 if let delay = requestDelay {
                     try await Task.sleep(delay: delay)
                 }
@@ -148,6 +147,18 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
 
                 continuation.resume(returning: (data, response))
             }
-        }
+            
+            guard let data = call?.data,
+                  let response = call?.response
+            else {
+                if let error = call?.error {
+                    throw error
+                } else {
+                    throw APIClientError.missingResponse(request: request)
+                }
+            }
+            
+            return (data, response)
+        }.value
     }
 }
