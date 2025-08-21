@@ -12,7 +12,10 @@
 
 import Foundation
 @_exported import AuthFoundation
+
+#if !COCOAPODS
 import CommonSupport
+#endif
 
 /// An authentication flow used to authenticate users using the Okta Identity Engine.
 ///

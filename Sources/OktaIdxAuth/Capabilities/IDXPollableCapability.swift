@@ -12,7 +12,10 @@
 
 import Foundation
 import AuthFoundation
+
+#if !COCOAPODS
 import CommonSupport
+#endif
 
 /// Capability for authentiators or remedations to be polled to determine out-of-band actions taken by the user.
 public final class PollCapability: Capability, Sendable, Equatable, Hashable {
