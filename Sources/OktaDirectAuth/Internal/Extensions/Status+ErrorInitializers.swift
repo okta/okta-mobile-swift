@@ -64,11 +64,11 @@ extension DirectAuthenticationFlow.Status {
     init?(_ error: OAuth2ServerError) throws {
         switch error.code {
         case .mfaRequired:
-            guard let mfaToken = error.additionalValues["mfaToken"] as? String else {
+            guard let mfaToken = error.additionalValues["mfa_token"] as? String else {
                 throw OAuth2Error.missingOAuth2ResponseKey("mfa_token")
             }
 
-            let supportedTypes = error.additionalValues["supportedChallengeTypes"] as? String
+            let supportedTypes = error.additionalValues["supported_challenge_types"] as? String
             self = .mfaRequired(.init(supportedChallengeTypes: try .from(string: supportedTypes),
                                       mfaToken: mfaToken))
 
