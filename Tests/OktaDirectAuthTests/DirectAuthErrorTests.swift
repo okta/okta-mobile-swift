@@ -58,7 +58,7 @@ final class DirectAuthErrorTests: XCTestCase {
         let serverError = try defaultJSONDecoder().decode(OAuth2ServerError.self, from: """
             {
                 "error": "access_denied",
-                "errorDescription": "You do not have access"
+                "error_description": "You do not have access"
             }
             """.data(using: .utf8)!)
         XCTAssertEqual(DirectAuthenticationFlowError(APIClientError.httpError(serverError)),
