@@ -140,7 +140,7 @@ final class CredentialTests: XCTestCase {
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: data(for: """
-                                        {"error": "invalid_token", "errorDescription": "Invalid token"}
+                                        {"error": "invalid_token", "error_description": "Invalid token"}
                                     """),
                           statusCode: 400,
                           contentType: "application/json")
@@ -242,7 +242,7 @@ final class CredentialTests: XCTestCase {
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: data(for: """
-                                        {"error": "invalid_token", "errorDescription": "Invalid token"}
+                                        {"error": "invalid_token", "error_description": "Invalid token"}
                                     """),
                           statusCode: 400,
                           contentType: "application/json")

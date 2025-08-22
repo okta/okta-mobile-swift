@@ -238,7 +238,7 @@ final class ErrorTests: XCTestCase {
         let json = """
             {
                 "error": "invalid_request",
-                "errorDescription": "Description"
+                "error_description": "Description"
             }
         """.data(using: .utf8)!
         let error = try defaultJSONDecoder().decode(OAuth2ServerError.self, from: json)
