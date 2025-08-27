@@ -39,9 +39,10 @@ var package = Package(
         .macCatalyst(.v13)
     ],
     products: [
-        .library(name: "CommonSupport", targets: ["CommonSupport"]),
-        .library(name: "JSON", targets: ["JSON"]),
-        .library(name: "AuthFoundation", targets: ["CommonSupport", "JSON", "AuthFoundation"]),
+        .library(name: "_CommonSupport", targets: ["CommonSupport"]),
+        .library(name: "_CryptoSupport", targets: ["CryptoSupport"]),
+        .library(name: "_JSON", targets: ["JSON"]),
+        .library(name: "AuthFoundation", targets: ["CommonSupport", "CryptoSupport", "JSON", "AuthFoundation"]),
         .library(name: "OAuth2Auth", targets: ["OAuth2Auth"]),
         .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
         .library(name: "OktaIdxAuth", targets: ["OktaIdxAuth"])
@@ -51,6 +52,9 @@ var package = Package(
     ],
     targets: [
         .target(name: "CommonSupport",
+                swiftSettings: .libraryTarget),
+        .target(name: "CryptoSupport",
+                dependencies: ["CommonSupport"],
                 swiftSettings: .libraryTarget),
         .target(name: "JSON",
                 dependencies: ["CommonSupport"],
@@ -84,6 +88,9 @@ var package = Package(
                 swiftSettings: .testTarget),
         .testTarget(name: "CommonSupportTests",
                     dependencies: ["CommonSupport", "TestCommon"],
+                    swiftSettings: .testTarget),
+        .testTarget(name: "CryptoSupportTests",
+                    dependencies: ["CryptoSupport", "TestCommon"],
                     swiftSettings: .testTarget),
         .testTarget(name: "JSONTests",
                     dependencies: ["JSON", "TestCommon"],
@@ -139,4 +146,29 @@ package.targets.append(contentsOf: [
 package.products.append(
     .library(name: "BrowserSignin", targets: ["BrowserSignin"])
 )
+#endif
+
+// CryptoKit support on supported platforms
+#if canImport(Darwin) || os(Linux)
+var cryptoKitSupport: Target = .target(name: "_CryptoKitSupport",
+                                        dependencies: ["CryptoSupport"],
+                                       swiftSettings: .libraryTarget)
+#if !canImport(CryptoKit)
+package.dependencies.append(.package(url: "https://github.com/apple/swift-crypto", from: "3.14.0"))
+cryptoKitSupport.dependencies.append(.product(name: "Crypto", package: "swift-crypto"))
+cryptoKitSupport.dependencies.append(.product(name: "_CryptoExtras", package: "swift-crypto"))
+#endif
+
+package.targets.append(contentsOf: [
+    cryptoKitSupport,
+    .testTarget(name: "_CryptoKitSupportTests",
+                dependencies: ["_CryptoKitSupport", "TestCommon"],
+                swiftSettings: .testTarget)
+])
+
+if let authFoundationIndex = package.targets.firstIndex(where: { $0.name == "AuthFoundation" }) {
+    let authFoundation = package.targets[authFoundationIndex]
+    authFoundation.dependencies.append("_CryptoKitSupport")
+    package.targets[authFoundationIndex] = authFoundation
+}
 #endif
