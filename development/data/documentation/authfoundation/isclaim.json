@@ -87,8 +87,26 @@
             },
             {
               "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SH",
+              "text" : "Hashable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SY",
               "text" : "RawRepresentable"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             },
             {
               "kind" : "text",
@@ -133,7 +151,10 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/SY"
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SH",
+        "doc:\/\/AuthFoundation\/SY",
+        "doc:\/\/AuthFoundation\/s8SendableP"
       ],
       "kind" : "relationships",
       "title" : "Inherits From",
@@ -196,6 +217,16 @@
   ]
 , 
 "references": {
+"doc://AuthFoundation/SH": {
+  "identifier" : "doc:\/\/AuthFoundation\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
 "doc://AuthFoundation/SY": {
   "identifier" : "doc:\/\/AuthFoundation\/SY",
   "title" : "Swift.RawRepresentable",
@@ -966,6 +997,11 @@
   "title" : "Working with Claims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/workingwithclaims"
+},
+"doc://AuthFoundation/s8SendableP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
 }
 }
 }

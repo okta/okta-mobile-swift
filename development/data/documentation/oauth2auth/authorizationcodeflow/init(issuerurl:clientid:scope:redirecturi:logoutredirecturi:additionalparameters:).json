@@ -1,25 +1,25 @@
 {
   "abstract" : [
     {
-      "text" : "Initializes a web authentication session using the supplied client credentials.",
+      "text" : "Convenience initializer to construct an authentication flow from variables.",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
-        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin"
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)"
+    "url" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:13BrowserSigninAAC9issuerURL8clientId5scope11redirectUri014logoutRedirectI020additionalParametersAB10Foundation0D0V_SS04AuthN015ClaimCollectionVySaySSGGA2KSgSDySSAL18APIRequestArgument_pGSgtcfc",
+    "externalID" : "s:10OAuth2Auth21AuthorizationCodeFlowC9issuerURL8clientId5scope11redirectUri014logoutRedirectL020additionalParametersAC10Foundation0G0V_SS0bQ015ClaimCollectionVySaySSGGA2LSgSDySSAM18APIRequestArgument_pGSgtcfc",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -160,51 +160,7 @@
     ],
     "modules" : [
       {
-        "name" : "BrowserSignin"
-      }
-    ],
-    "platforms" : [
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "13.0",
-        "name" : "iOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "13.0",
-        "name" : "Mac Catalyst",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "10.15",
-        "name" : "macOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "16.0",
-        "name" : "tvOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "1.0",
-        "name" : "visionOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "7.0",
-        "name" : "watchOS",
-        "unavailable" : false
+        "name" : "OAuth2Auth"
       }
     ],
     "role" : "symbol",
@@ -223,19 +179,6 @@
             "macOS"
           ],
           "tokens" : [
-            {
-              "kind" : "attribute",
-              "text" : "@"
-            },
-            {
-              "kind" : "attribute",
-              "preciseIdentifier" : "s:ScM",
-              "text" : "MainActor"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
             {
               "kind" : "keyword",
               "text" : "convenience"
@@ -295,6 +238,7 @@
               "text" : ": "
             },
             {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
               "text" : "ClaimCollection"
@@ -364,6 +308,7 @@
               "text" : " : any "
             },
             {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
               "text" : "APIRequestArgument"
@@ -385,7 +330,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The URL for the OAuth2 issuer.",
+                  "text" : "The issuer URL.",
                   "type" : "text"
                 }
               ],
@@ -399,7 +344,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The client’s ID.",
+                  "text" : "The client ID.",
                   "type" : "text"
                 }
               ],
@@ -413,7 +358,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The scopes the client is requesting.",
+                  "text" : "The scopes to request.",
                   "type" : "text"
                 }
               ],
@@ -427,7 +372,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The redirect URI for the configured client.",
+                  "text" : "The redirect URI for the client.",
                   "type" : "text"
                 }
               ],
@@ -455,7 +400,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Optional parameters to add to the authorization query string.",
+                  "text" : "Optional additional query string parameters you would like to supply to the authorization server.",
                   "type" : "text"
                 }
               ],
@@ -475,22 +420,10 @@
   "sections" : [
 
   ],
-  "seeAlsoSections" : [
-    {
-      "anchor" : "Initializers",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init()",
-        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(plist:)",
-        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(loginFlow:logoutFlow:)"
-      ],
-      "title" : "Initializers"
-    }
-  ],
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/browsersignin\/browsersignin\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:additionalparameters:)"
+        "\/documentation\/oauth2auth\/authorizationcodeflow\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:additionalparameters:)"
       ],
       "traits" : [
         {
@@ -501,31 +434,44 @@
   ]
 , 
 "references": {
-"doc://BrowserSignin/documentation/BrowserSignin": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequestArgument": {
   "abstract" : [
     {
-      "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
+      "text" : "Defines an argument to an ",
       "type" : "text"
-    }
-  ],
-  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
-  "kind" : "symbol",
-  "role" : "collection",
-  "title" : "BrowserSignin",
-  "type" : "topic",
-  "url" : "\/documentation\/browsersignin"
-},
-"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin": {
-  "abstract" : [
+    },
     {
-      "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ". Used within ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " and ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "protocol"
     },
     {
       "kind" : "text",
@@ -533,70 +479,145 @@
     },
     {
       "kind" : "identifier",
-      "text" : "BrowserSignin"
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
     }
   ],
-  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIRequestArgument",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequestargument"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection": {
+  "abstract" : [
+    {
+      "text" : "Indicates a special type of claim whose value is interchangable between a whitespace-separated value, or an array of values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "attribute",
+      "text" : "@propertyWrapper"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Container"
+    },
+    {
+      "kind" : "text",
+      "text" : "> "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "where"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Container"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "ClaimCollectionContainer"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ClaimCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth": {
+  "abstract" : [
+    {
+      "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OAuth2Auth",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "actor"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "BrowserSignin"
+      "text" : "AuthorizationCodeFlow"
     }
   ],
   "role" : "symbol",
-  "title" : "BrowserSignin",
+  "title" : "AuthorizationCodeFlow",
   "type" : "topic",
-  "url" : "\/documentation\/browsersignin\/browsersignin"
+  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow"
 },
-"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/init()": {
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)": {
   "abstract" : [
     {
-      "text" : "Initializes a web authentiation session using client credentials defined within the application’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "Okta.plist",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " file.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init()",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init()",
-  "type" : "topic",
-  "url" : "\/documentation\/browsersignin\/browsersignin\/init()"
-},
-"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)": {
-  "abstract" : [
-    {
-      "text" : "Initializes a web authentication session using the supplied client credentials.",
+      "text" : "Convenience initializer to construct an authentication flow from variables.",
       "type" : "text"
     }
   ],
@@ -738,123 +759,12 @@
       "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)",
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/browsersignin\/browsersignin\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:additionalparameters:)"
-},
-"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/init(loginFlow:logoutFlow:)": {
-  "abstract" : [
-    {
-      "text" : "Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "loginFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OAuth2Auth21AuthorizationCodeFlowC",
-      "text" : "AuthorizationCodeFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "logoutFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
-      "text" : "SessionLogoutFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "?)"
-    }
-  ],
-  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(loginFlow:logoutFlow:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(loginFlow:logoutFlow:)",
-  "type" : "topic",
-  "url" : "\/documentation\/browsersignin\/browsersignin\/init(loginflow:logoutflow:)"
-},
-"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/init(plist:)": {
-  "abstract" : [
-    {
-      "text" : "Initializes a web authentication session using client credentials defined within the provided file URL.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "plist"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/init(plist:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(plist:)",
-  "type" : "topic",
-  "url" : "\/documentation\/browsersignin\/browsersignin\/init(plist:)"
+  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:additionalparameters:)"
 }
 }
 }

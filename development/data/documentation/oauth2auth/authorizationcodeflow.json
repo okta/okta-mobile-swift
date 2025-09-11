@@ -215,7 +215,7 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/init(client:additionalParameters:)",
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)"
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)"
       ],
       "title" : "Initializers"
     },
@@ -920,7 +920,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/init(client:additionalparameters:)"
 },
-"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)": {
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Convenience initializer to construct an authentication flow from variables.",
@@ -1023,6 +1023,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "logoutRedirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "additionalParameters"
     },
     {
@@ -1048,12 +1065,12 @@
       "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)",
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(issuerURL:clientId:scope:redirectUri:additionalParameters:)",
+  "title" : "init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/init(issuerurl:clientid:scope:redirecturi:additionalparameters:)"
+  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:additionalparameters:)"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/isAuthenticating": {
   "abstract" : [

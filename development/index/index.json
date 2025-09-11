@@ -5632,6 +5632,11 @@
                         "type" : "groupMarker"
                       },
                       {
+                        "path" : "\/documentation\/authfoundation\/jwtclaim\/hashvalue",
+                        "title" : "var hashValue: Int",
+                        "type" : "property"
+                      },
+                      {
                         "path" : "\/documentation\/authfoundation\/jwtclaim\/rawvalue-swift.property",
                         "title" : "var rawValue: String",
                         "type" : "property"
@@ -5643,6 +5648,11 @@
                       {
                         "path" : "\/documentation\/authfoundation\/jwtclaim\/encode(to:)",
                         "title" : "func encode(to: any Encoder) throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/jwtclaim\/hash(into:)",
+                        "title" : "func hash(into: inout Hasher)",
                         "type" : "method"
                       },
                       {
@@ -7466,13 +7476,13 @@
                             "type" : "method"
                           },
                           {
-                            "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
-                            "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
+                            "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-4xpk5",
+                            "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
                             "type" : "method"
                           },
                           {
-                            "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-4xpk5",
-                            "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
+                            "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
+                            "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
                             "type" : "method"
                           }
                         ],
@@ -7905,12 +7915,12 @@
                       {
                         "children" : [
                           {
-                            "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-3d3te",
+                            "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-44rkc",
                             "title" : "var acceptsType: APIContentType?",
                             "type" : "property"
                           },
                           {
-                            "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-44rkc",
+                            "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-3d3te",
                             "title" : "var acceptsType: APIContentType?",
                             "type" : "property"
                           }
@@ -7964,12 +7974,12 @@
                       {
                         "children" : [
                           {
-                            "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-824pc",
+                            "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-96qjt",
                             "title" : "var contentType: APIContentType?",
                             "type" : "property"
                           },
                           {
-                            "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-96qjt",
+                            "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-824pc",
                             "title" : "var contentType: APIContentType?",
                             "type" : "property"
                           }
@@ -8086,12 +8096,12 @@
                       {
                         "children" : [
                           {
-                            "path" : "\/documentation\/authfoundation\/apirequest\/body()-2spui",
+                            "path" : "\/documentation\/authfoundation\/apirequest\/body()-8cybb",
                             "title" : "func body() throws -> Data?",
                             "type" : "method"
                           },
                           {
-                            "path" : "\/documentation\/authfoundation\/apirequest\/body()-8cybb",
+                            "path" : "\/documentation\/authfoundation\/apirequest\/body()-2spui",
                             "title" : "func body() throws -> Data?",
                             "type" : "method"
                           },
@@ -19753,8 +19763,8 @@
                     "type" : "init"
                   },
                   {
-                    "path" : "\/documentation\/oauth2auth\/authorizationcodeflow\/init(issuerurl:clientid:scope:redirecturi:additionalparameters:)",
-                    "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, redirectUri: URL, additionalParameters: [String : any APIRequestArgument]?)",
+                    "path" : "\/documentation\/oauth2auth\/authorizationcodeflow\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:additionalparameters:)",
+                    "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, redirectUri: URL, logoutRedirectUri: URL?, additionalParameters: [String : any APIRequestArgument]?)",
                     "type" : "init"
                   },
                   {
@@ -24211,7 +24221,7 @@
                   },
                   {
                     "path" : "\/documentation\/browsersignin\/browsersignin\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:additionalparameters:)",
-                    "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, redirectUri: URL, logoutRedirectUri: URL?, additionalParameters: [String : any APIRequestArgument]?) throws",
+                    "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, redirectUri: URL, logoutRedirectUri: URL?, additionalParameters: [String : any APIRequestArgument]?)",
                     "type" : "init"
                   },
                   {
