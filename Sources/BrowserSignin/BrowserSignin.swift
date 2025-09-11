@@ -225,14 +225,25 @@ public final class BrowserSignin {
                             scope: ClaimCollection<[String]>,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
-                            additionalParameters: [String: any APIRequestArgument]? = nil) throws
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        let client = OAuth2Client(issuerURL: issuerURL,
-                                  clientId: clientId,
-                                  scope: scope,
-                                  redirectUri: redirectUri,
-                                  logoutRedirectUri: logoutRedirectUri)
-        try self.init(client: client, additionalParameters: additionalParameters)
+        let loginFlow = AuthorizationCodeFlow(issuerURL: issuerURL,
+                                              clientId: clientId,
+                                              scope: scope,
+                                              redirectUri: redirectUri,
+                                              logoutRedirectUri: logoutRedirectUri,
+                                              additionalParameters: additionalParameters)
+        let client = loginFlow.client
+
+        let logoutFlow: SessionLogoutFlow?
+        if client.configuration.logoutRedirectUri != nil {
+            logoutFlow = SessionLogoutFlow(client: client,
+                                           additionalParameters: additionalParameters)
+        } else {
+            logoutFlow = nil
+        }
+
+        self.init(loginFlow: loginFlow, logoutFlow: logoutFlow)
     }
     
     @_documentation(visibility: private)
@@ -241,34 +252,29 @@ public final class BrowserSignin {
                             scope: some WhitespaceSeparated,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
-                            additionalParameters: [String: any APIRequestArgument]? = nil) throws
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        let client = OAuth2Client(issuerURL: issuerURL,
-                                  clientId: clientId,
-                                  scope: scope,
-                                  redirectUri: redirectUri,
-                                  logoutRedirectUri: logoutRedirectUri)
-        try self.init(client: client, additionalParameters: additionalParameters)
+        self.init(issuerURL: issuerURL,
+                  clientId: clientId,
+                  scope: .init(wrappedValue: scope.whitespaceSeparated),
+                  redirectUri: redirectUri,
+                  logoutRedirectUri: logoutRedirectUri,
+                  additionalParameters: additionalParameters)
     }
     
     convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
-        try self.init(client: OAuth2Client(config),
-                      additionalParameters: config.additionalParameters)
-    }
-    
-    convenience init(client: OAuth2Client, additionalParameters: [String: any APIRequestArgument]?) throws {
+        let client = try OAuth2Client(config)
         let loginFlow = try AuthorizationCodeFlow(client: client,
-                                                  additionalParameters: additionalParameters)
+                                                  additionalParameters: config.additionalParameters)
         let logoutFlow: SessionLogoutFlow?
         if client.configuration.logoutRedirectUri != nil {
             logoutFlow = SessionLogoutFlow(client: client,
-                                           additionalParameters: additionalParameters)
+                                           additionalParameters: config.additionalParameters)
         } else {
             logoutFlow = nil
         }
         
         self.init(loginFlow: loginFlow, logoutFlow: logoutFlow)
-
     }
 
     /// Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.
