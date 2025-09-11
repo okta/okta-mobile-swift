@@ -22,7 +22,7 @@ class BrowserSigninInitializerTests: XCTestCase {
     private let logoutRedirectUri = URL(string: "com.example:/logout")!
 
     func testInitializer() async throws {
-        let auth = try await BrowserSignin(
+        let auth = await BrowserSignin(
             issuerURL: issuer,
             clientId: "client_id",
             scope: "openid profile",

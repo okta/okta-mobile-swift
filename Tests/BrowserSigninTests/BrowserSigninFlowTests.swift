@@ -59,8 +59,9 @@ class BrowserSigninFlowTests: XCTestCase {
 
     @MainActor
     func testStart() async throws {
-        let webAuth = try BrowserSignin(client: client,
-                                            additionalParameters: ["testName": name])
+        let loginFlow = try AuthorizationCodeFlow(client: client,
+                                                  additionalParameters: ["testName": name])
+        let webAuth = BrowserSignin(loginFlow: loginFlow, logoutFlow: nil)
 
         try await BrowserSigninProviderFactoryMock.register(
             result: .success(URL(string: "com.example:/callback?state=qwe&code=the_auth_code")!),
@@ -87,8 +88,11 @@ class BrowserSigninFlowTests: XCTestCase {
 
     @MainActor
     func testLogout() async throws {
-        let webAuth = try BrowserSignin(client: client,
-                                            additionalParameters: ["testName": name])
+        let loginFlow = try AuthorizationCodeFlow(client: client,
+                                                  additionalParameters: ["testName": name])
+        let logoutFlow = SessionLogoutFlow(client: loginFlow.client,
+                                           additionalParameters: loginFlow.additionalParameters)
+        let webAuth = BrowserSignin(loginFlow: loginFlow, logoutFlow: logoutFlow)
 
         try await BrowserSigninProviderFactoryMock.register(
             result: .success(URL(string: "com.example:/logout?state=qwe")!),
@@ -114,9 +118,9 @@ class BrowserSigninFlowTests: XCTestCase {
     }
     
     func testCancel() async throws {
-        let webAuth = try await BrowserSignin(
-            client: client,
-            additionalParameters: ["testName": name])
+        let loginFlow = try AuthorizationCodeFlow(client: client,
+                                                  additionalParameters: ["testName": name])
+        let webAuth = await BrowserSignin(loginFlow: loginFlow, logoutFlow: nil)
 
         try await BrowserSigninProviderFactoryMock.register(
             result: .failure(NSError(domain: ASWebAuthenticationSessionErrorDomain,

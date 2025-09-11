@@ -88,18 +88,21 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
     ///   - clientId: The client ID.
     ///   - scope: The scopes to request.
     ///   - redirectUri: The redirect URI for the client.
+    ///   - logoutRedirectUri: The logout URI for the client, if applicable.
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
     @inlinable
     public init(issuerURL: URL,
                 clientId: String,
                 scope: ClaimCollection<[String]>,
                 redirectUri: URL,
+                logoutRedirectUri: URL? = nil,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(verifiedClient: OAuth2Client(issuerURL: issuerURL,
                                                clientId: clientId,
                                                scope: scope,
-                                               redirectUri: redirectUri),
+                                               redirectUri: redirectUri,
+                                               logoutRedirectUri: logoutRedirectUri),
                   additionalParameters: additionalParameters)
     }
     
@@ -109,12 +112,14 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
                 clientId: String,
                 scope: some WhitespaceSeparated,
                 redirectUri: URL,
+                logoutRedirectUri: URL? = nil,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(verifiedClient: OAuth2Client(issuerURL: issuerURL,
                                                clientId: clientId,
                                                scope: .init(wrappedValue: scope.whitespaceSeparated),
-                                               redirectUri: redirectUri),
+                                               redirectUri: redirectUri,
+                                               logoutRedirectUri: logoutRedirectUri),
                   additionalParameters: additionalParameters)
     }
 

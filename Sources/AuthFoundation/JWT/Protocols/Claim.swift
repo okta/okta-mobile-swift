@@ -13,7 +13,7 @@
 import Foundation
 
 /// Indicates a type that can be used as an enum value for the ``HasClaims/ClaimType`` associated type.
-public protocol IsClaim: RawRepresentable<String> {}
+public protocol IsClaim: RawRepresentable<String>, Sendable, Hashable, Equatable {}
 
 /// Used by classes that contains OAuth2 claims.
 ///
