@@ -1,0 +1,104 @@
+{
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaClient\/documentation"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "role" : "collection",
+    "roleHeading" : "Package",
+    "title" : "OktaClient"
+  },
+  "references" : {
+    "doc:\/\/AuthFoundation\/documentation\/AuthFoundation" : {
+      "abstract" : [
+        {
+          "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+          "type" : "text"
+        }
+      ],
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+      "kind" : "symbol",
+      "role" : "collection",
+      "title" : "AuthFoundation",
+      "type" : "topic",
+      "url" : "\/documentation\/authfoundation"
+    },
+    "doc:\/\/BrowserSignin\/documentation\/BrowserSignin" : {
+      "abstract" : [
+        {
+          "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
+          "type" : "text"
+        }
+      ],
+      "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
+      "kind" : "symbol",
+      "role" : "collection",
+      "title" : "BrowserSignin",
+      "type" : "topic",
+      "url" : "\/documentation\/browsersignin"
+    },
+    "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth" : {
+      "abstract" : [
+        {
+          "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
+          "type" : "text"
+        }
+      ],
+      "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+      "kind" : "symbol",
+      "role" : "collection",
+      "title" : "OAuth2Auth",
+      "type" : "topic",
+      "url" : "\/documentation\/oauth2auth"
+    },
+    "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth" : {
+      "abstract" : [
+        {
+          "text" : "Authenticate users using Okta’s Direct Authentication API, enabling native sign-in experiences supporting Multi-Factor Authentication (MFA).",
+          "type" : "text"
+        }
+      ],
+      "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+      "kind" : "symbol",
+      "role" : "collection",
+      "title" : "OktaDirectAuth",
+      "type" : "topic",
+      "url" : "\/documentation\/oktadirectauth"
+    },
+    "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth" : {
+      "abstract" : [
+        {
+          "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+          "type" : "text"
+        }
+      ],
+      "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+      "kind" : "symbol",
+      "role" : "collection",
+      "title" : "OktaIdxAuth",
+      "type" : "topic",
+      "url" : "\/documentation\/oktaidxauth"
+    }
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth"
+      ]
+    }
+  ],
+  "topicSectionsStyle" : "detailedGrid"
+}
