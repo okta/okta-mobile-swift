@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'OktaIdxAuth'
-    s.version          = '2.1.0'
+    s.version          = '2.1.1'
     s.summary          = 'SDK to easily integrate the Okta Identity Engine'
     s.description      = <<-DESC
 Integrate your native app with Okta using the Okta Identity Engine library.
