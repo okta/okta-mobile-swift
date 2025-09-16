@@ -30,7 +30,7 @@ public enum BrowserSigninError: Error {
     case noAuthenticatorProviderResonse
     case serverError(_ error: OAuth2ServerError)
     case invalidRedirectScheme(_ scheme: String?)
-    case userCancelledLogin
+    case userCancelledLogin(_ reason: String? = nil)
     case missingIdToken
     case oauth2(error: OAuth2Error)
     case generic(error: any Error)
