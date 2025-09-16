@@ -18,7 +18,7 @@ extension BrowserSignin {
     /// Protocol used to represent a specific provider type for use in presenting a browser.
     ///
     /// > Important: The default implementation will use the most appropriate browser session for use when authenticating. This facility should only be used when a built-in browser capability is unavailable in your target environment.
-    nonisolated public protocol Provider: Sendable {
+    public protocol Provider: Sendable {
         /// Used by ``BrowserSignin`` when it determines a browser should be presented to the user.
         /// - Parameters:
         ///   - authorizeUrl: Authorization URL to open within the browser.
@@ -33,7 +33,7 @@ extension BrowserSignin {
     /// Protocol used to customize the presentation of the browser sign in interface.
     ///
     /// > Important: The default implementation will use the most appropriate browser session for use when authenticating. This facility should only be used when a built-in browser capability is unavailable in your target environment.
-    nonisolated public protocol ProviderFactory: Sendable {
+    public protocol ProviderFactory: Sendable {
         /// Creates an object conforming to ``BrowserSignin/Provider`` for use in presenting a browser to the user when they are signing in.
         /// - Parameters:
         ///   - browserSignin: The ``BrowserSignin`` instance triggering this operation.
