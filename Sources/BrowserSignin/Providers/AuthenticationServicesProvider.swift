@@ -51,14 +51,7 @@ extension ASWebAuthenticationSession: @retroactive @unchecked Sendable, Authenti
 #endif
 
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
-protocol BrowserSigninProviderFactory: Sendable {
-    static func createWebAuthenticationProvider(for webAuth: BrowserSignin,
-                                                from window: BrowserSignin.WindowAnchor?,
-                                                usesEphemeralSession: Bool) async throws -> (any BrowserSigninProvider)?
-}
-
-@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
-final class AuthenticationServicesProvider: NSObject, BrowserSigninProvider {
+final class AuthenticationServicesProvider: NSObject, BrowserSignin.Provider {
     private(set) var authenticationSession: (any AuthenticationServicesProviderSession)? {
         get {
             lock.withLock { _authenticationSession }

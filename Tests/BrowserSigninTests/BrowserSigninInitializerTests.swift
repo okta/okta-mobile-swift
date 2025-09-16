@@ -30,12 +30,12 @@ class BrowserSigninInitializerTests: XCTestCase {
             logoutRedirectUri: logoutRedirectUri,
             additionalParameters: ["foo": "bar"])
 
-        let signInFlowClient = await auth.signInFlow.client
-        let signOutFlowClient = await auth.signOutFlow?.client
+        let signInFlowClient = auth.signInFlow.client
+        let signOutFlowClient = auth.signOutFlow?.client
         XCTAssertEqual(signInFlowClient.configuration.clientId, "client_id")
         XCTAssertEqual(signInFlowClient.configuration.scope, ["openid", "profile"])
         XCTAssertTrue(signInFlowClient === signOutFlowClient)
-        try await XCTAssertEqualAsync(await auth.signInFlow.additionalParameters?.stringComponents, ["foo": "bar"])
-        try await XCTAssertEqualAsync(await auth.signOutFlow?.additionalParameters?.stringComponents, ["foo": "bar"])
+        XCTAssertEqual(auth.signInFlow.additionalParameters?.stringComponents, ["foo": "bar"])
+        XCTAssertEqual(auth.signOutFlow?.additionalParameters?.stringComponents, ["foo": "bar"])
     }
 }

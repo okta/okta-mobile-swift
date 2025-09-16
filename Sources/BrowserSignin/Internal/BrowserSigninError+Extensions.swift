@@ -127,7 +127,8 @@ extension BrowserSigninError: Equatable {
         case (.noSignOutFlowProvided, .noSignOutFlowProvided): return true
         case (.cannotStartBrowserSession, .cannotStartBrowserSession): return true
         case (.cannotComposeAuthenticationURL, .cannotComposeAuthenticationURL): return true
-        case (.userCancelledLogin, .userCancelledLogin): return true
+        case (.userCancelledLogin(let lhs), .userCancelledLogin(let rhs)):
+            return lhs == rhs
         case (.noAuthenticatorProviderResonse, .noAuthenticatorProviderResonse): return true
         case (.missingIdToken, .missingIdToken): return true
         case (.authenticationProvider(error: let lhsValue), .authenticationProvider(error: let rhsValue)):

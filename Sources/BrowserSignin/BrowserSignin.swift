@@ -65,6 +65,13 @@ public final class BrowserSignin {
     public typealias WindowAnchor = Void
     #endif
     
+    public struct Option: Sendable, OptionSet {
+        public let rawValue: Int
+        public init(rawValue: Int) { self.rawValue = rawValue }
+
+        public static let ephemeralSession = Option(rawValue: 1 << 0)
+    }
+
     /// Active / default shared instance of the ``BrowserSignin`` session.
     ///
     /// This convenience property can be used in one of two ways:
@@ -85,16 +92,26 @@ public final class BrowserSignin {
             return result
         }
     }
-    
+
     /// The underlying OAuth2 flow that implements the authentication behavior.
-    public let signInFlow: AuthorizationCodeFlow
+    nonisolated public let signInFlow: AuthorizationCodeFlow
     
     /// The underlying OAuth2 flow that implements the session logout behaviour.
-    public let signOutFlow: SessionLogoutFlow?
+    nonisolated public let signOutFlow: SessionLogoutFlow?
+
+    /// Used to control the options which dictates the presentation and behavior of the sign in session.
+    public var options: Option = []
     
     /// Indicates whether or not the developer prefers an ephemeral browser session, or if the user's browser state should be shared with the system browser.
-    public var ephemeralSession: Bool = false
-    
+    public var ephemeralSession: Bool {
+        get {
+            options.contains(.ephemeralSession)
+        }
+        set {
+            options.insert(.ephemeralSession)
+        }
+    }
+
     /// Starts sign-in using the configured client.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
@@ -117,7 +134,7 @@ public final class BrowserSignin {
         guard let provider = try await Self.providerFactory.createWebAuthenticationProvider(
             for: self,
             from: window,
-            usesEphemeralSession: ephemeralSession)
+            options: options)
         else {
             throw BrowserSigninError.noCompatibleAuthenticationProviders
         }
@@ -184,7 +201,7 @@ public final class BrowserSignin {
         guard let provider = try await Self.providerFactory.createWebAuthenticationProvider(
             for: self,
             from: window,
-            usesEphemeralSession: ephemeralSession)
+            options: options)
         else {
             throw BrowserSigninError.noCompatibleAuthenticationProviders
         }
@@ -294,26 +311,30 @@ public final class BrowserSignin {
         BrowserSignin.shared = self
     }
     
+    /// Used to assign a custom ``BrowserSignin/ProviderFactory``.
+    ///
+    /// > Important: The default implementation will use the most appropriate browser session for use when authenticating. This facility should only be used when a built-in browser capability is unavailable in your target environment.
+    public static var providerFactory: any BrowserSignin.ProviderFactory.Type = BrowserSignin.self
+
     // MARK: Internal members
     private static var _shared: BrowserSignin?
-    static var providerFactory: any BrowserSigninProviderFactory.Type = BrowserSignin.self
     
     // Used for testing only
     static func resetToDefault() {
         providerFactory = BrowserSignin.self
     }
     
-    var provider: (any BrowserSigninProvider)?
+    var provider: (any BrowserSignin.Provider)?
 }
 
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
-extension BrowserSignin: BrowserSigninProviderFactory {
-    nonisolated static func createWebAuthenticationProvider(
+extension BrowserSignin: BrowserSignin.ProviderFactory {
+    public nonisolated static func createWebAuthenticationProvider(
         for webAuth: BrowserSignin,
         from window: BrowserSignin.WindowAnchor?,
-        usesEphemeralSession: Bool = false) throws -> (any BrowserSigninProvider)?
+        options: Option) throws -> (any BrowserSignin.Provider)?
     {
-        try AuthenticationServicesProvider(from: window, usesEphemeralSession: usesEphemeralSession)
+        try AuthenticationServicesProvider(from: window, usesEphemeralSession: options.contains(.ephemeralSession))
     }
 }
 
