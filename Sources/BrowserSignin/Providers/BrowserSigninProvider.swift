@@ -18,3 +18,10 @@ protocol BrowserSigninProvider: Sendable {
     func open(authorizeUrl: URL, redirectUri: URL) async throws -> URL
     func cancel()
 }
+
+@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
+protocol BrowserSigninProviderFactory: Sendable {
+    static func createWebAuthenticationProvider(for webAuth: BrowserSignin,
+                                                from window: BrowserSignin.WindowAnchor?,
+                                                usesEphemeralSession: Bool) async throws -> (any BrowserSigninProvider)?
+}
