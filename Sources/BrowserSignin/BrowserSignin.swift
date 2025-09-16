@@ -344,7 +344,11 @@ extension BrowserSignin: BrowserSignin.ProviderFactory {
         from window: BrowserSignin.WindowAnchor?,
         options: Option) throws -> (any BrowserSignin.Provider)?
     {
+        #if canImport(AuthenticationServices)
         try AuthenticationServicesProvider(from: window, usesEphemeralSession: options.contains(.ephemeralSession))
+        #else
+        return nil
+        #endif
     }
 }
 
