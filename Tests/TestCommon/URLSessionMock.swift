@@ -14,7 +14,7 @@ import Foundation
 import XCTest
 import CommonSupport
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 

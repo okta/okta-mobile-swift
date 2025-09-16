@@ -17,7 +17,7 @@ import XCTest
 @testable import TestCommon
 #endif
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 

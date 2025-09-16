@@ -12,7 +12,7 @@
 
 import XCTest
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 
