@@ -19,6 +19,9 @@ import AuthenticationServices
 @available(iOS 12.0, macCatalyst 13.0, macOS 10.15, tvOS 16.0, visionOS 1.0, watchOS 6.2, *)
 protocol AuthenticationServicesProviderSession: NSObjectProtocol, Sendable {
     init(url URL: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler)
+    
+    @available(iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
+    init(url URL: URL, callback: ASWebAuthenticationSession.Callback, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler)
 
     @available(iOS 13.4, macCatalyst 13.4, macOS 10.15.4, watchOS 6.2, visionOS 1.0, tvOS 16.0, *)
     var canStart: Bool { get }
@@ -73,18 +76,42 @@ final class AuthenticationServicesProvider: NSObject, BrowserSigninProvider {
         
         super.init()
     }
-
+    
+    func createSession(authorizeUrl url: URL, callbackURL: URL, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> (any AuthenticationServicesProviderSession) {
+        if #available(iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *) {
+            if let scheme = callbackURL.scheme {
+                let callback: ASWebAuthenticationSession.Callback?
+                if scheme == "https",
+                   let host = callbackURL.host
+                {
+                    callback = .https(host: host, path: callbackURL.path)
+                } else {
+                    callback = .customScheme(scheme)
+                }
+                
+                if let callback {
+                    return Self.authenticationSessionClass.init(
+                        url: url,
+                        callback: callback,
+                        completionHandler: completionHandler)
+                }
+            }
+        }
+        
+        return Self.authenticationSessionClass.init(
+            url: url,
+            callbackURLScheme: callbackURL.scheme,
+            completionHandler: completionHandler)
+    }
+    
     @MainActor
     func open(authorizeUrl: URL, redirectUri: URL) async throws -> URL {
         return try await withCheckedThrowingContinuation { continuation in
-            let session = Self.authenticationSessionClass.init(
-                url: authorizeUrl,
-                callbackURLScheme: redirectUri.scheme,
-                completionHandler: { url, error in
-                    continuation.resume(with: self.process(redirectUri: redirectUri,
-                                                           url: url,
-                                                           error: error))
-                })
+            let session = createSession(authorizeUrl: authorizeUrl, callbackURL: redirectUri) { url, error in
+                continuation.resume(with: self.process(redirectUri: redirectUri,
+                                                       url: url,
+                                                       error: error))
+            }
             
             #if !os(watchOS) && !os(tvOS)
             session.presentationContextProvider = self
