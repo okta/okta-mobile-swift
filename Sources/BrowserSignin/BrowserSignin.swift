@@ -49,7 +49,11 @@ public enum BrowserSigninError: Error {
 ///
 /// To customize the authentication flow, please read more about the underlying OAuth2 client within the OAuth2Auth library, and how that relates to the ``signInFlow`` or ``signOutFlow`` properties.
 ///
-///  > Important: If your application targets iOS 9.x-10.x, you should add the redirect URI for your client configuration to your app's supported URL schemes.  This is because users on devices older than iOS 11 will be prompted to sign in using `SFSafariViewController`, which does not allow your application to detect the final token redirect.
+///  ## Redirect URI Support
+///
+///  This library supports both custom URIs and HTTPS redirect URLs on supporting platforms and iOS versions. This requires that your application is configured to use associated domains, with the application's identifier included in the associated domain's `webcredentials` list.
+///
+///  > Note: The use of HTTPS addresses within the redirect callback URI is limited by the availability of support within ASWebAuthenticationSession, which currently requires a minimum of iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, or visionOS 1.1.
 @MainActor
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 public final class BrowserSignin {
