@@ -143,12 +143,30 @@ final class RequestTests: XCTestCase {
                                                        scope: "openid profile"),
                             context: .init(),
                             mfaToken: "abcd123",
+                            channel: nil,
                             challengeTypesSupported: [.password, .oob])
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
                         "mfa_token": "abcd123",
                         "challenge_types_supported": "password urn:okta:params:oauth:grant-type:oob"
+                       ])
+
+        // Channel Hint
+        request = try .init(openIdConfiguration: openIdConfiguration,
+                            clientConfiguration: .init(issuerURL: issuer,
+                                                       clientId: "theClientId",
+                                                       scope: "openid profile"),
+                            context: .init(),
+                            mfaToken: "abcd123",
+                            channel: .push,
+                            challengeTypesSupported: [.oobMFA])
+        XCTAssertEqual(request.bodyParameters?.stringComponents,
+                       [
+                        "client_id": "theClientId",
+                        "mfa_token": "abcd123",
+                        "channel_hint": "push",
+                        "challenge_types_supported": "http://auth0.com/oauth/grant-type/mfa-oob"
                        ])
 
         // Client Secret authentication
@@ -159,6 +177,7 @@ final class RequestTests: XCTestCase {
                                                        authentication: .clientSecret("supersecret")),
                             context: .init(),
                             mfaToken: "abcd123",
+                            channel: nil,
                             challengeTypesSupported: [.password, .oob])
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
