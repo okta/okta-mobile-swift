@@ -128,6 +128,7 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
                     try await Task.sleep(delay: delay)
                 }
                 
+                await MainActor.yield()
                 guard let data = call?.data,
                       let response = call?.response
                 else {
