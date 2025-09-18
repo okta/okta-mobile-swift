@@ -20,12 +20,14 @@ struct ChallengeRequest: AuthenticationFlowRequest {
     let clientConfiguration: OAuth2Client.Configuration
     let context: Flow.Context
     let mfaToken: String
+    let channel: DirectAuthenticationFlow.OOBChannel?
     let challengeTypesSupported: [GrantType]
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
          context: DirectAuthenticationFlow.Context,
          mfaToken: String,
+         channel: DirectAuthenticationFlow.OOBChannel?,
          challengeTypesSupported: [GrantType]) throws
     {
         guard let url = openIdConfiguration.challengeEndpoint else {
@@ -36,6 +38,7 @@ struct ChallengeRequest: AuthenticationFlowRequest {
         self.clientConfiguration = clientConfiguration
         self.context = context
         self.mfaToken = mfaToken
+        self.channel = channel
         self.challengeTypesSupported = challengeTypesSupported
     }
     
@@ -85,6 +88,10 @@ extension ChallengeRequest: APIRequest, APIRequestBody {
         
         if result["client_id"] == nil {
             result["client_id"] = clientConfiguration.clientId
+        }
+
+        if let channel {
+            result["channel_hint"] = channel
         }
 
         return result
