@@ -1,9 +1,9 @@
 {
   "includedArchiveIdentifiers" : [
     "AuthFoundation",
+    "OktaDirectAuth",
     "OktaIdxAuth",
     "OAuth2Auth",
-    "OktaDirectAuth",
     "BrowserSignin"
   ],
   "interfaceLanguages" : {
@@ -7471,13 +7471,13 @@
                       {
                         "children" : [
                           {
-                            "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
-                            "title" : "func didSend(request: URLRequest, received: APIClientError)",
+                            "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-4xpk5",
+                            "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
                             "type" : "method"
                           },
                           {
-                            "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-4xpk5",
-                            "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
+                            "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
+                            "title" : "func didSend(request: URLRequest, received: APIClientError)",
                             "type" : "method"
                           },
                           {
@@ -8096,7 +8096,7 @@
                       {
                         "children" : [
                           {
-                            "path" : "\/documentation\/authfoundation\/apirequest\/body()-8cybb",
+                            "path" : "\/documentation\/authfoundation\/apirequest\/body()-6rb14",
                             "title" : "func body() throws -> Data?",
                             "type" : "method"
                           },
@@ -8106,7 +8106,7 @@
                             "type" : "method"
                           },
                           {
-                            "path" : "\/documentation\/authfoundation\/apirequest\/body()-6rb14",
+                            "path" : "\/documentation\/authfoundation\/apirequest\/body()-8cybb",
                             "title" : "func body() throws -> Data?",
                             "type" : "method"
                           }
@@ -10492,6 +10492,1900 @@
             ],
             "path" : "\/documentation\/authfoundation",
             "title" : "AuthFoundation",
+            "type" : "module"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Essentials",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Creating a flow",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init()",
+                    "title" : "init() throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(plist:)",
+                    "title" : "init(plist: URL) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(issuerurl:clientid:scope:supportedgrants:additionalparameters:)",
+                    "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, supportedGrants: [GrantType], additionalParameters: [String : any APIRequestArgument]?)",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(client:supportedgrants:additionalparameters:)",
+                    "title" : "init(client: OAuth2Client, supportedGrants: [GrantType], additionalParameters: [String : any APIRequestArgument]?)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Starting MFA or signing in with 1FA",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:context:)",
+                    "title" : "func start(String, with: DirectAuthenticationFlow.PrimaryFactor, context: DirectAuthenticationFlow.Context) async throws -> DirectAuthenticationFlow.Status",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:context:completion:)",
+                    "title" : "func start(String, with: DirectAuthenticationFlow.PrimaryFactor, context: DirectAuthenticationFlow.Context, completion: (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)",
+                    "type" : "method"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/oob(channel:)",
+                        "title" : "case oob(channel: DirectAuthenticationFlow.OOBChannel)",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/otp(code:)",
+                        "title" : "case otp(code: String)",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/password(_:)",
+                        "title" : "case password(String)",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/webauthn",
+                        "title" : "case webAuthn",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor",
+                    "title" : "DirectAuthenticationFlow.PrimaryFactor",
+                    "type" : "enum"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/push",
+                        "title" : "case push",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/sms",
+                        "title" : "case sms",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/voice",
+                        "title" : "case voice",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(rawvalue:)",
+                        "title" : "init?(rawValue: String)",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Initializers",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(from:)",
+                            "title" : "init(from: any Decoder) throws",
+                            "type" : "init"
+                          },
+                          {
+                            "title" : "Instance Properties",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hashvalue",
+                            "title" : "var hashValue: Int",
+                            "type" : "property"
+                          },
+                          {
+                            "title" : "Instance Methods",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/encode(to:)",
+                            "title" : "func encode(to: any Encoder) throws",
+                            "type" : "method"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hash(into:)",
+                            "title" : "func hash(into: inout Hasher)",
+                            "type" : "method"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/rawrepresentable-implementations",
+                        "title" : "RawRepresentable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel",
+                    "title" : "DirectAuthenticationFlow.OOBChannel",
+                    "type" : "enum"
+                  },
+                  {
+                    "title" : "Resuming sign in with MFA",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/oob(channel:)",
+                        "title" : "case oob(channel: DirectAuthenticationFlow.OOBChannel)",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/otp(code:)",
+                        "title" : "case otp(code: String)",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/webauthn",
+                        "title" : "case webAuthn",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor",
+                    "title" : "DirectAuthenticationFlow.SecondaryFactor",
+                    "type" : "enum"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/push",
+                        "title" : "case push",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/sms",
+                        "title" : "case sms",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/voice",
+                        "title" : "case voice",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(rawvalue:)",
+                        "title" : "init?(rawValue: String)",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Initializers",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(from:)",
+                            "title" : "init(from: any Decoder) throws",
+                            "type" : "init"
+                          },
+                          {
+                            "title" : "Instance Properties",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hashvalue",
+                            "title" : "var hashValue: Int",
+                            "type" : "property"
+                          },
+                          {
+                            "title" : "Instance Methods",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/encode(to:)",
+                            "title" : "func encode(to: any Encoder) throws",
+                            "type" : "method"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hash(into:)",
+                            "title" : "func hash(into: inout Hasher)",
+                            "type" : "method"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/rawrepresentable-implementations",
+                        "title" : "RawRepresentable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel",
+                    "title" : "DirectAuthenticationFlow.OOBChannel",
+                    "type" : "enum"
+                  },
+                  {
+                    "title" : "Continuing authenticating a factor",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/prompt(code:)",
+                        "title" : "case prompt(code: String)",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/transfer",
+                        "title" : "case transfer",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/webauthn(response:)",
+                        "title" : "case webAuthn(response: WebAuthn.AuthenticatorAssertionResponse)",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor",
+                    "title" : "DirectAuthenticationFlow.ContinuationFactor",
+                    "type" : "enum"
+                  },
+                  {
+                    "title" : "Sign in responses",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/continuation(_:)",
+                        "title" : "case continuation(DirectAuthenticationFlow.ContinuationType)",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/mfarequired(_:)",
+                        "title" : "case mfaRequired(DirectAuthenticationFlow.MFAContext)",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/success(_:)",
+                        "title" : "case success(Token)",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/==(_:_:)",
+                            "title" : "static func == (DirectAuthenticationFlow.Status, DirectAuthenticationFlow.Status) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status",
+                    "title" : "DirectAuthenticationFlow.Status",
+                    "type" : "enum"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext\/supportedchallengetypes",
+                        "title" : "let supportedChallengeTypes: [GrantType]?",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext",
+                    "title" : "DirectAuthenticationFlow.MFAContext",
+                    "type" : "struct"
+                  },
+                  {
+                    "title" : "Flow configuration values",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/client",
+                    "title" : "let client: OAuth2Client",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/supportedgranttypes",
+                    "title" : "let supportedGrantTypes: [GrantType]",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Responding to changes",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/delegatecollection",
+                    "title" : "let delegateCollection: DelegateCollection<any DirectAuthenticationFlowDelegate>",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/isauthenticating",
+                    "title" : "var isAuthenticating: Bool",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Resetting a flow",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/reset()",
+                    "title" : "func reset()",
+                    "type" : "method"
+                  },
+                  {
+                    "title" : "Structures",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/init(acrvalues:intent:)",
+                        "title" : "init(acrValues: ClaimCollection<[String]?>, intent: DirectAuthenticationFlow.Intent)",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/acrvalues",
+                        "title" : "var acrValues: [String]?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/currentstatus",
+                        "title" : "var currentStatus: DirectAuthenticationFlow.Status?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/intent",
+                        "title" : "var intent: DirectAuthenticationFlow.Intent",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct",
+                    "title" : "DirectAuthenticationFlow.Context",
+                    "type" : "struct"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(client:additionalparameters:)",
+                    "title" : "init(client: OAuth2Client, additionalParameters: [String : any APIRequestArgument]?) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/additionalparameters",
+                    "title" : "let additionalParameters: [String : any APIRequestArgument]?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.property",
+                    "title" : "var context: DirectAuthenticationFlow.Context?",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(with:)",
+                    "title" : "func resume(with:)",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(with:completion:)",
+                    "title" : "func resume(with:completion:)",
+                    "type" : "method"
+                  },
+                  {
+                    "title" : "Enumerations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Structures",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Default Implementations",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "children" : [
+                              {
+                                "title" : "Operators",
+                                "type" : "groupMarker"
+                              },
+                              {
+                                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/bindingcontext\/!=(_:_:)",
+                                "title" : "static func != (Self, Self) -> Bool",
+                                "type" : "op"
+                              }
+                            ],
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/bindingcontext\/equatable-implementations",
+                            "title" : "Equatable Implementations",
+                            "type" : "symbol"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/bindingcontext",
+                        "title" : "DirectAuthenticationFlow.ContinuationType.BindingContext",
+                        "type" : "struct"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Instance Properties",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthncontext\/request",
+                            "title" : "let request: WebAuthn.CredentialRequestOptions",
+                            "type" : "property"
+                          },
+                          {
+                            "title" : "Default Implementations",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "children" : [
+                              {
+                                "title" : "Operators",
+                                "type" : "groupMarker"
+                              },
+                              {
+                                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthncontext\/!=(_:_:)",
+                                "title" : "static func != (Self, Self) -> Bool",
+                                "type" : "op"
+                              }
+                            ],
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthncontext\/equatable-implementations",
+                            "title" : "Equatable Implementations",
+                            "type" : "symbol"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthncontext",
+                        "title" : "DirectAuthenticationFlow.ContinuationType.WebAuthnContext",
+                        "type" : "struct"
+                      },
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/prompt(_:)",
+                        "title" : "case prompt(DirectAuthenticationFlow.ContinuationType.BindingContext)",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/transfer(_:code:)",
+                        "title" : "case transfer(DirectAuthenticationFlow.ContinuationType.BindingContext, code: String)",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthn(_:)",
+                        "title" : "case webAuthn(DirectAuthenticationFlow.ContinuationType.WebAuthnContext)",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/==(_:_:)",
+                            "title" : "static func == (DirectAuthenticationFlow.ContinuationType, DirectAuthenticationFlow.ContinuationType) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype",
+                    "title" : "DirectAuthenticationFlow.ContinuationType",
+                    "type" : "enum"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/recovery",
+                        "title" : "case recovery",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/signin",
+                        "title" : "case signIn",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/init(rawvalue:)",
+                        "title" : "init?(rawValue: String)",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Initializers",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/init(from:)",
+                            "title" : "init(from: any Decoder) throws",
+                            "type" : "init"
+                          },
+                          {
+                            "title" : "Instance Properties",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/hashvalue",
+                            "title" : "var hashValue: Int",
+                            "type" : "property"
+                          },
+                          {
+                            "title" : "Instance Methods",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/encode(to:)",
+                            "title" : "func encode(to: any Encoder) throws",
+                            "type" : "method"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/hash(into:)",
+                            "title" : "func hash(into: inout Hasher)",
+                            "type" : "method"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/rawrepresentable-implementations",
+                        "title" : "RawRepresentable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent",
+                    "title" : "DirectAuthenticationFlow.Intent",
+                    "type" : "enum"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:didsend:received:)",
+                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:didsend:received:requestid:ratelimit:)",
+                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:shouldretry:)",
+                        "title" : "func api(client: any APIClient, shouldRetry: URLRequest) -> APIRetry",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:willsend:)",
+                        "title" : "func api(client: any APIClient, willSend: inout URLRequest)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/apiclientdelegate-implementations",
+                    "title" : "APIClientDelegate Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/assertisolated(_:file:line:)",
+                        "title" : "func assertIsolated(@autoclosure () -> String, file: StaticString, line: UInt)",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/assumeisolated(_:file:line:)",
+                        "title" : "func assumeIsolated<T>((isolated Self) throws -> T, file: StaticString, line: UInt) rethrows -> T",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/preconditionisolated(_:file:line:)",
+                        "title" : "func preconditionIsolated(@autoclosure () -> String, file: StaticString, line: UInt)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/actor-implementations",
+                    "title" : "Actor Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init()",
+                        "title" : "init() throws",
+                        "type" : "init"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(plist:)",
+                        "title" : "init(plist: URL) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/reset(completion:)",
+                        "title" : "func reset(completion: () -> Void)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/authenticationflow-implementations",
+                    "title" : "AuthenticationFlow Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oauth(client:didrefresh:replacedwith:)",
+                        "title" : "func oauth(client: OAuth2Client, didRefresh: Token, replacedWith: Token?)",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oauth(client:willrefresh:)",
+                        "title" : "func oauth(client: OAuth2Client, willRefresh: Token)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oauth2clientdelegate-implementations",
+                    "title" : "OAuth2ClientDelegate Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/add(delegate:)",
+                        "title" : "func add(delegate: Self.Delegate)",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/remove(delegate:)",
+                        "title" : "func remove(delegate: Self.Delegate)",
+                        "type" : "method"
+                      },
+                      {
+                        "title" : "Type Aliases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/delegate",
+                        "title" : "DirectAuthenticationFlow.Delegate",
+                        "type" : "typealias"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/usesdelegatecollection-implementations",
+                    "title" : "UsesDelegateCollection Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow",
+                "title" : "DirectAuthenticationFlow",
+                "type" : "class"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowdelegate\/authentication(flow:received:)",
+                    "title" : "func authentication<Flow>(flow: Flow, received: DirectAuthenticationFlow.Status)",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowdelegate",
+                "title" : "DirectAuthenticationFlowDelegate",
+                "type" : "protocol"
+              },
+              {
+                "title" : "Structures",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Structures",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/init(clientdatajson:authenticatordata:signature:userhandle:)",
+                        "title" : "init(clientDataJSON: String, authenticatorData: String, signature: String, userHandle: String?)",
+                        "type" : "init"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/init(from:)",
+                        "title" : "init(from: any Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/authenticatordata",
+                        "title" : "let authenticatorData: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/clientdatajson",
+                        "title" : "let clientDataJSON: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/signature",
+                        "title" : "let signature: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/userhandle",
+                        "title" : "let userHandle: String?",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse",
+                    "title" : "WebAuthn.AuthenticatorAssertionResponse",
+                    "type" : "struct"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Structures",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Initializers",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/init(from:)",
+                            "title" : "init(from: any Decoder) throws",
+                            "type" : "init"
+                          },
+                          {
+                            "title" : "Instance Properties",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/credentialid",
+                            "title" : "let credentialId: String",
+                            "type" : "property"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/displayname",
+                            "title" : "let displayName: String",
+                            "type" : "property"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/profile",
+                            "title" : "let profile: [String : String]",
+                            "type" : "property"
+                          },
+                          {
+                            "title" : "Default Implementations",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "children" : [
+                              {
+                                "title" : "Operators",
+                                "type" : "groupMarker"
+                              },
+                              {
+                                "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/!=(_:_:)",
+                                "title" : "static func != (Self, Self) -> Bool",
+                                "type" : "op"
+                              }
+                            ],
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/equatable-implementations",
+                            "title" : "Equatable Implementations",
+                            "type" : "symbol"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment",
+                        "title" : "WebAuthn.CredentialRequestOptions.AuthenticatorEnrollment",
+                        "type" : "struct"
+                      },
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/init(from:)",
+                        "title" : "init(from: any Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollments",
+                        "title" : "let authenticatorEnrollments: [WebAuthn.CredentialRequestOptions.AuthenticatorEnrollment]?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/publickey",
+                        "title" : "let publicKey: WebAuthn.PublicKeyCredentialRequestOptions",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Type Properties",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/jsondecoder",
+                            "title" : "static let jsonDecoder: JSONDecoder",
+                            "type" : "property"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/jsondecodable-implementations",
+                        "title" : "JSONDecodable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions",
+                    "title" : "WebAuthn.CredentialRequestOptions",
+                    "type" : "struct"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/init(from:)",
+                        "title" : "init(from: any Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/id",
+                        "title" : "let id: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/transports",
+                        "title" : "let transports: [WebAuthn.AuthenticatorTransport]?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/type",
+                        "title" : "let type: WebAuthn.PublicKeyCredentialType",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor",
+                    "title" : "WebAuthn.PublicKeyCredentialDescriptor",
+                    "type" : "struct"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/allowcredentials",
+                        "title" : "let allowCredentials: [WebAuthn.PublicKeyCredentialDescriptor]?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/challenge",
+                        "title" : "let challenge: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/extensions",
+                        "title" : "let extensions: [String : JSON]?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/hints",
+                        "title" : "let hints: [WebAuthn.PublicKeyCredentialHints]?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/rpid",
+                        "title" : "var rpID: String?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/timeout",
+                        "title" : "let timeout: TimeInterval?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/userverification",
+                        "title" : "let userVerification: WebAuthn.UserVerificationRequirement?",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions",
+                    "title" : "WebAuthn.PublicKeyCredentialRequestOptions",
+                    "type" : "struct"
+                  },
+                  {
+                    "title" : "Enumerations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/ble",
+                        "title" : "case ble",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/hybrid",
+                        "title" : "case hybrid",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/nfc",
+                        "title" : "case nfc",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/platform",
+                        "title" : "case platform",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/smartcard",
+                        "title" : "case smartCard",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/usb",
+                        "title" : "case usb",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/init(rawvalue:)",
+                        "title" : "init?(rawValue: String)",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Initializers",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/init(from:)",
+                            "title" : "init(from: any Decoder) throws",
+                            "type" : "init"
+                          },
+                          {
+                            "title" : "Instance Properties",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/hashvalue",
+                            "title" : "var hashValue: Int",
+                            "type" : "property"
+                          },
+                          {
+                            "title" : "Instance Methods",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/encode(to:)",
+                            "title" : "func encode(to: any Encoder) throws",
+                            "type" : "method"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/hash(into:)",
+                            "title" : "func hash(into: inout Hasher)",
+                            "type" : "method"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/rawrepresentable-implementations",
+                        "title" : "RawRepresentable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport",
+                    "title" : "WebAuthn.AuthenticatorTransport",
+                    "type" : "enum"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/clientdevice",
+                        "title" : "case clientDevice",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/hybrid",
+                        "title" : "case hybrid",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/securitykey",
+                        "title" : "case securityKey",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/init(rawvalue:)",
+                        "title" : "init?(rawValue: String)",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Initializers",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/init(from:)",
+                            "title" : "init(from: any Decoder) throws",
+                            "type" : "init"
+                          },
+                          {
+                            "title" : "Instance Properties",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/hashvalue",
+                            "title" : "var hashValue: Int",
+                            "type" : "property"
+                          },
+                          {
+                            "title" : "Instance Methods",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/encode(to:)",
+                            "title" : "func encode(to: any Encoder) throws",
+                            "type" : "method"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/hash(into:)",
+                            "title" : "func hash(into: inout Hasher)",
+                            "type" : "method"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/rawrepresentable-implementations",
+                        "title" : "RawRepresentable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints",
+                    "title" : "WebAuthn.PublicKeyCredentialHints",
+                    "type" : "enum"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/publickey",
+                        "title" : "case publicKey",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/init(rawvalue:)",
+                        "title" : "init?(rawValue: String)",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Initializers",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/init(from:)",
+                            "title" : "init(from: any Decoder) throws",
+                            "type" : "init"
+                          },
+                          {
+                            "title" : "Instance Properties",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/hashvalue",
+                            "title" : "var hashValue: Int",
+                            "type" : "property"
+                          },
+                          {
+                            "title" : "Instance Methods",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/encode(to:)",
+                            "title" : "func encode(to: any Encoder) throws",
+                            "type" : "method"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/hash(into:)",
+                            "title" : "func hash(into: inout Hasher)",
+                            "type" : "method"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/rawrepresentable-implementations",
+                        "title" : "RawRepresentable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype",
+                    "title" : "WebAuthn.PublicKeyCredentialType",
+                    "type" : "enum"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Enumeration Cases",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/discouraged",
+                        "title" : "case discouraged",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/preferred",
+                        "title" : "case preferred",
+                        "type" : "case"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/required",
+                        "title" : "case required",
+                        "type" : "case"
+                      },
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/init(rawvalue:)",
+                        "title" : "init?(rawValue: String)",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Default Implementations",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Operators",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/!=(_:_:)",
+                            "title" : "static func != (Self, Self) -> Bool",
+                            "type" : "op"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/equatable-implementations",
+                        "title" : "Equatable Implementations",
+                        "type" : "symbol"
+                      },
+                      {
+                        "children" : [
+                          {
+                            "title" : "Initializers",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/init(from:)",
+                            "title" : "init(from: any Decoder) throws",
+                            "type" : "init"
+                          },
+                          {
+                            "title" : "Instance Properties",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/hashvalue",
+                            "title" : "var hashValue: Int",
+                            "type" : "property"
+                          },
+                          {
+                            "title" : "Instance Methods",
+                            "type" : "groupMarker"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/encode(to:)",
+                            "title" : "func encode(to: any Encoder) throws",
+                            "type" : "method"
+                          },
+                          {
+                            "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/hash(into:)",
+                            "title" : "func hash(into: inout Hasher)",
+                            "type" : "method"
+                          }
+                        ],
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/rawrepresentable-implementations",
+                        "title" : "RawRepresentable Implementations",
+                        "type" : "symbol"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement",
+                    "title" : "WebAuthn.UserVerificationRequirement",
+                    "type" : "enum"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/webauthn",
+                "title" : "WebAuthn",
+                "type" : "struct"
+              },
+              {
+                "title" : "Enumerations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/bindingcodemissing",
+                    "title" : "case bindingCodeMissing",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/flownotstarted",
+                    "title" : "case flowNotStarted",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/inconsistentcontextstate",
+                    "title" : "case inconsistentContextState",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/invalidcontinuationcontext",
+                    "title" : "case invalidContinuationContext",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/missingarguments(_:)",
+                    "title" : "case missingArguments([String])",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/network(error:)",
+                    "title" : "case network(error: APIClientError)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/oauth2(error:)",
+                    "title" : "case oauth2(error: OAuth2Error)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/other(error:)",
+                    "title" : "case other(error: any Error)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/pollingtimeoutexceeded",
+                    "title" : "case pollingTimeoutExceeded",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/server(error:)",
+                    "title" : "case server(error: OAuth2ServerError)",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/==(_:_:)",
+                        "title" : "static func == (DirectAuthenticationFlowError, DirectAuthenticationFlowError) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/localizeddescription",
+                        "title" : "var localizedDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/error-implementations",
+                    "title" : "Error Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/errordescription",
+                        "title" : "var errorDescription: String?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/failurereason",
+                        "title" : "var failureReason: String?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/helpanchor",
+                        "title" : "var helpAnchor: String?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/recoverysuggestion",
+                        "title" : "var recoverySuggestion: String?",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/localizederror-implementations",
+                    "title" : "LocalizedError Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror",
+                "title" : "DirectAuthenticationFlowError",
+                "type" : "enum"
+              },
+              {
+                "title" : "Extended Modules",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Extended Classes",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/authfoundation\/oauth2client\/directauthenticationflow(supportedgrants:additionalparameters:)",
+                        "title" : "func directAuthenticationFlow(supportedGrants: [GrantType], additionalParameters: [String : String]?) -> DirectAuthenticationFlow",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/authfoundation\/oauth2client",
+                    "title" : "OAuth2Client",
+                    "type" : "extension"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/authfoundation",
+                "title" : "AuthFoundation",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Extended Structures",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Type Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/swift\/array\/directauth",
+                        "title" : "static var directAuth: [GrantType]",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/swift\/array",
+                    "title" : "Array",
+                    "type" : "extension"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/swift",
+                "title" : "Swift",
+                "type" : "extension"
+              }
+            ],
+            "path" : "\/documentation\/oktadirectauth",
+            "title" : "OktaDirectAuth",
             "type" : "module"
           },
           {
@@ -22282,1900 +24176,6 @@
             ],
             "path" : "\/documentation\/oauth2auth",
             "title" : "OAuth2Auth",
-            "type" : "module"
-          },
-          {
-            "children" : [
-              {
-                "title" : "Essentials",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Creating a flow",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init()",
-                    "title" : "init() throws",
-                    "type" : "init"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(plist:)",
-                    "title" : "init(plist: URL) throws",
-                    "type" : "init"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(issuerurl:clientid:scope:supportedgrants:additionalparameters:)",
-                    "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, supportedGrants: [GrantType], additionalParameters: [String : any APIRequestArgument]?)",
-                    "type" : "init"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(client:supportedgrants:additionalparameters:)",
-                    "title" : "init(client: OAuth2Client, supportedGrants: [GrantType], additionalParameters: [String : any APIRequestArgument]?)",
-                    "type" : "init"
-                  },
-                  {
-                    "title" : "Starting MFA or signing in with 1FA",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:context:)",
-                    "title" : "func start(String, with: DirectAuthenticationFlow.PrimaryFactor, context: DirectAuthenticationFlow.Context) async throws -> DirectAuthenticationFlow.Status",
-                    "type" : "method"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:context:completion:)",
-                    "title" : "func start(String, with: DirectAuthenticationFlow.PrimaryFactor, context: DirectAuthenticationFlow.Context, completion: (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)",
-                    "type" : "method"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/oob(channel:)",
-                        "title" : "case oob(channel: DirectAuthenticationFlow.OOBChannel)",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/otp(code:)",
-                        "title" : "case otp(code: String)",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/password(_:)",
-                        "title" : "case password(String)",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/webauthn",
-                        "title" : "case webAuthn",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor",
-                    "title" : "DirectAuthenticationFlow.PrimaryFactor",
-                    "type" : "enum"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/push",
-                        "title" : "case push",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/sms",
-                        "title" : "case sms",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/voice",
-                        "title" : "case voice",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(rawvalue:)",
-                        "title" : "init?(rawValue: String)",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Initializers",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(from:)",
-                            "title" : "init(from: any Decoder) throws",
-                            "type" : "init"
-                          },
-                          {
-                            "title" : "Instance Properties",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hashvalue",
-                            "title" : "var hashValue: Int",
-                            "type" : "property"
-                          },
-                          {
-                            "title" : "Instance Methods",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/encode(to:)",
-                            "title" : "func encode(to: any Encoder) throws",
-                            "type" : "method"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hash(into:)",
-                            "title" : "func hash(into: inout Hasher)",
-                            "type" : "method"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/rawrepresentable-implementations",
-                        "title" : "RawRepresentable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel",
-                    "title" : "DirectAuthenticationFlow.OOBChannel",
-                    "type" : "enum"
-                  },
-                  {
-                    "title" : "Resuming sign in with MFA",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/oob(channel:)",
-                        "title" : "case oob(channel: DirectAuthenticationFlow.OOBChannel)",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/otp(code:)",
-                        "title" : "case otp(code: String)",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/webauthn",
-                        "title" : "case webAuthn",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor",
-                    "title" : "DirectAuthenticationFlow.SecondaryFactor",
-                    "type" : "enum"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/push",
-                        "title" : "case push",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/sms",
-                        "title" : "case sms",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/voice",
-                        "title" : "case voice",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(rawvalue:)",
-                        "title" : "init?(rawValue: String)",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Initializers",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(from:)",
-                            "title" : "init(from: any Decoder) throws",
-                            "type" : "init"
-                          },
-                          {
-                            "title" : "Instance Properties",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hashvalue",
-                            "title" : "var hashValue: Int",
-                            "type" : "property"
-                          },
-                          {
-                            "title" : "Instance Methods",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/encode(to:)",
-                            "title" : "func encode(to: any Encoder) throws",
-                            "type" : "method"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hash(into:)",
-                            "title" : "func hash(into: inout Hasher)",
-                            "type" : "method"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/rawrepresentable-implementations",
-                        "title" : "RawRepresentable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel",
-                    "title" : "DirectAuthenticationFlow.OOBChannel",
-                    "type" : "enum"
-                  },
-                  {
-                    "title" : "Continuing authenticating a factor",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/prompt(code:)",
-                        "title" : "case prompt(code: String)",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/transfer",
-                        "title" : "case transfer",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/webauthn(response:)",
-                        "title" : "case webAuthn(response: WebAuthn.AuthenticatorAssertionResponse)",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor",
-                    "title" : "DirectAuthenticationFlow.ContinuationFactor",
-                    "type" : "enum"
-                  },
-                  {
-                    "title" : "Sign in responses",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/continuation(_:)",
-                        "title" : "case continuation(DirectAuthenticationFlow.ContinuationType)",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/mfarequired(_:)",
-                        "title" : "case mfaRequired(DirectAuthenticationFlow.MFAContext)",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/success(_:)",
-                        "title" : "case success(Token)",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/==(_:_:)",
-                            "title" : "static func == (DirectAuthenticationFlow.Status, DirectAuthenticationFlow.Status) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status",
-                    "title" : "DirectAuthenticationFlow.Status",
-                    "type" : "enum"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext\/supportedchallengetypes",
-                        "title" : "let supportedChallengeTypes: [GrantType]?",
-                        "type" : "property"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext",
-                    "title" : "DirectAuthenticationFlow.MFAContext",
-                    "type" : "struct"
-                  },
-                  {
-                    "title" : "Flow configuration values",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/client",
-                    "title" : "let client: OAuth2Client",
-                    "type" : "property"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/supportedgranttypes",
-                    "title" : "let supportedGrantTypes: [GrantType]",
-                    "type" : "property"
-                  },
-                  {
-                    "title" : "Responding to changes",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/delegatecollection",
-                    "title" : "let delegateCollection: DelegateCollection<any DirectAuthenticationFlowDelegate>",
-                    "type" : "property"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/isauthenticating",
-                    "title" : "var isAuthenticating: Bool",
-                    "type" : "property"
-                  },
-                  {
-                    "title" : "Resetting a flow",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/reset()",
-                    "title" : "func reset()",
-                    "type" : "method"
-                  },
-                  {
-                    "title" : "Structures",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/init(acrvalues:intent:)",
-                        "title" : "init(acrValues: ClaimCollection<[String]?>, intent: DirectAuthenticationFlow.Intent)",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Instance Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/acrvalues",
-                        "title" : "var acrValues: [String]?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/currentstatus",
-                        "title" : "var currentStatus: DirectAuthenticationFlow.Status?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/intent",
-                        "title" : "var intent: DirectAuthenticationFlow.Intent",
-                        "type" : "property"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct",
-                    "title" : "DirectAuthenticationFlow.Context",
-                    "type" : "struct"
-                  },
-                  {
-                    "title" : "Initializers",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(client:additionalparameters:)",
-                    "title" : "init(client: OAuth2Client, additionalParameters: [String : any APIRequestArgument]?) throws",
-                    "type" : "init"
-                  },
-                  {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/additionalparameters",
-                    "title" : "let additionalParameters: [String : any APIRequestArgument]?",
-                    "type" : "property"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.property",
-                    "title" : "var context: DirectAuthenticationFlow.Context?",
-                    "type" : "property"
-                  },
-                  {
-                    "title" : "Instance Methods",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(with:)",
-                    "title" : "func resume(with:)",
-                    "type" : "method"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(with:completion:)",
-                    "title" : "func resume(with:completion:)",
-                    "type" : "method"
-                  },
-                  {
-                    "title" : "Enumerations",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Structures",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Default Implementations",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "children" : [
-                              {
-                                "title" : "Operators",
-                                "type" : "groupMarker"
-                              },
-                              {
-                                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/bindingcontext\/!=(_:_:)",
-                                "title" : "static func != (Self, Self) -> Bool",
-                                "type" : "op"
-                              }
-                            ],
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/bindingcontext\/equatable-implementations",
-                            "title" : "Equatable Implementations",
-                            "type" : "symbol"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/bindingcontext",
-                        "title" : "DirectAuthenticationFlow.ContinuationType.BindingContext",
-                        "type" : "struct"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Instance Properties",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthncontext\/request",
-                            "title" : "let request: WebAuthn.CredentialRequestOptions",
-                            "type" : "property"
-                          },
-                          {
-                            "title" : "Default Implementations",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "children" : [
-                              {
-                                "title" : "Operators",
-                                "type" : "groupMarker"
-                              },
-                              {
-                                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthncontext\/!=(_:_:)",
-                                "title" : "static func != (Self, Self) -> Bool",
-                                "type" : "op"
-                              }
-                            ],
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthncontext\/equatable-implementations",
-                            "title" : "Equatable Implementations",
-                            "type" : "symbol"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthncontext",
-                        "title" : "DirectAuthenticationFlow.ContinuationType.WebAuthnContext",
-                        "type" : "struct"
-                      },
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/prompt(_:)",
-                        "title" : "case prompt(DirectAuthenticationFlow.ContinuationType.BindingContext)",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/transfer(_:code:)",
-                        "title" : "case transfer(DirectAuthenticationFlow.ContinuationType.BindingContext, code: String)",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthn(_:)",
-                        "title" : "case webAuthn(DirectAuthenticationFlow.ContinuationType.WebAuthnContext)",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/==(_:_:)",
-                            "title" : "static func == (DirectAuthenticationFlow.ContinuationType, DirectAuthenticationFlow.ContinuationType) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype",
-                    "title" : "DirectAuthenticationFlow.ContinuationType",
-                    "type" : "enum"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/recovery",
-                        "title" : "case recovery",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/signin",
-                        "title" : "case signIn",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/init(rawvalue:)",
-                        "title" : "init?(rawValue: String)",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Initializers",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/init(from:)",
-                            "title" : "init(from: any Decoder) throws",
-                            "type" : "init"
-                          },
-                          {
-                            "title" : "Instance Properties",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/hashvalue",
-                            "title" : "var hashValue: Int",
-                            "type" : "property"
-                          },
-                          {
-                            "title" : "Instance Methods",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/encode(to:)",
-                            "title" : "func encode(to: any Encoder) throws",
-                            "type" : "method"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/hash(into:)",
-                            "title" : "func hash(into: inout Hasher)",
-                            "type" : "method"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/rawrepresentable-implementations",
-                        "title" : "RawRepresentable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent",
-                    "title" : "DirectAuthenticationFlow.Intent",
-                    "type" : "enum"
-                  },
-                  {
-                    "title" : "Default Implementations",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Methods",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:didsend:received:)",
-                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:didsend:received:requestid:ratelimit:)",
-                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:shouldretry:)",
-                        "title" : "func api(client: any APIClient, shouldRetry: URLRequest) -> APIRetry",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:willsend:)",
-                        "title" : "func api(client: any APIClient, willSend: inout URLRequest)",
-                        "type" : "method"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/apiclientdelegate-implementations",
-                    "title" : "APIClientDelegate Implementations",
-                    "type" : "symbol"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Methods",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/assertisolated(_:file:line:)",
-                        "title" : "func assertIsolated(@autoclosure () -> String, file: StaticString, line: UInt)",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/assumeisolated(_:file:line:)",
-                        "title" : "func assumeIsolated<T>((isolated Self) throws -> T, file: StaticString, line: UInt) rethrows -> T",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/preconditionisolated(_:file:line:)",
-                        "title" : "func preconditionIsolated(@autoclosure () -> String, file: StaticString, line: UInt)",
-                        "type" : "method"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/actor-implementations",
-                    "title" : "Actor Implementations",
-                    "type" : "symbol"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init()",
-                        "title" : "init() throws",
-                        "type" : "init"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(plist:)",
-                        "title" : "init(plist: URL) throws",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Instance Methods",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/reset(completion:)",
-                        "title" : "func reset(completion: () -> Void)",
-                        "type" : "method"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/authenticationflow-implementations",
-                    "title" : "AuthenticationFlow Implementations",
-                    "type" : "symbol"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Methods",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oauth(client:didrefresh:replacedwith:)",
-                        "title" : "func oauth(client: OAuth2Client, didRefresh: Token, replacedWith: Token?)",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oauth(client:willrefresh:)",
-                        "title" : "func oauth(client: OAuth2Client, willRefresh: Token)",
-                        "type" : "method"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oauth2clientdelegate-implementations",
-                    "title" : "OAuth2ClientDelegate Implementations",
-                    "type" : "symbol"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Methods",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/add(delegate:)",
-                        "title" : "func add(delegate: Self.Delegate)",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/remove(delegate:)",
-                        "title" : "func remove(delegate: Self.Delegate)",
-                        "type" : "method"
-                      },
-                      {
-                        "title" : "Type Aliases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/delegate",
-                        "title" : "DirectAuthenticationFlow.Delegate",
-                        "type" : "typealias"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/usesdelegatecollection-implementations",
-                    "title" : "UsesDelegateCollection Implementations",
-                    "type" : "symbol"
-                  }
-                ],
-                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow",
-                "title" : "DirectAuthenticationFlow",
-                "type" : "class"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Instance Methods",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowdelegate\/authentication(flow:received:)",
-                    "title" : "func authentication<Flow>(flow: Flow, received: DirectAuthenticationFlow.Status)",
-                    "type" : "method"
-                  }
-                ],
-                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowdelegate",
-                "title" : "DirectAuthenticationFlowDelegate",
-                "type" : "protocol"
-              },
-              {
-                "title" : "Structures",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Structures",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/init(clientdatajson:authenticatordata:signature:userhandle:)",
-                        "title" : "init(clientDataJSON: String, authenticatorData: String, signature: String, userHandle: String?)",
-                        "type" : "init"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/init(from:)",
-                        "title" : "init(from: any Decoder) throws",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Instance Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/authenticatordata",
-                        "title" : "let authenticatorData: String",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/clientdatajson",
-                        "title" : "let clientDataJSON: String",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/signature",
-                        "title" : "let signature: String",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/userhandle",
-                        "title" : "let userHandle: String?",
-                        "type" : "property"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse",
-                    "title" : "WebAuthn.AuthenticatorAssertionResponse",
-                    "type" : "struct"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Structures",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Initializers",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/init(from:)",
-                            "title" : "init(from: any Decoder) throws",
-                            "type" : "init"
-                          },
-                          {
-                            "title" : "Instance Properties",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/credentialid",
-                            "title" : "let credentialId: String",
-                            "type" : "property"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/displayname",
-                            "title" : "let displayName: String",
-                            "type" : "property"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/profile",
-                            "title" : "let profile: [String : String]",
-                            "type" : "property"
-                          },
-                          {
-                            "title" : "Default Implementations",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "children" : [
-                              {
-                                "title" : "Operators",
-                                "type" : "groupMarker"
-                              },
-                              {
-                                "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/!=(_:_:)",
-                                "title" : "static func != (Self, Self) -> Bool",
-                                "type" : "op"
-                              }
-                            ],
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/equatable-implementations",
-                            "title" : "Equatable Implementations",
-                            "type" : "symbol"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment",
-                        "title" : "WebAuthn.CredentialRequestOptions.AuthenticatorEnrollment",
-                        "type" : "struct"
-                      },
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/init(from:)",
-                        "title" : "init(from: any Decoder) throws",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Instance Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollments",
-                        "title" : "let authenticatorEnrollments: [WebAuthn.CredentialRequestOptions.AuthenticatorEnrollment]?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/publickey",
-                        "title" : "let publicKey: WebAuthn.PublicKeyCredentialRequestOptions",
-                        "type" : "property"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Type Properties",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/jsondecoder",
-                            "title" : "static let jsonDecoder: JSONDecoder",
-                            "type" : "property"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/jsondecodable-implementations",
-                        "title" : "JSONDecodable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions",
-                    "title" : "WebAuthn.CredentialRequestOptions",
-                    "type" : "struct"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/init(from:)",
-                        "title" : "init(from: any Decoder) throws",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Instance Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/id",
-                        "title" : "let id: String",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/transports",
-                        "title" : "let transports: [WebAuthn.AuthenticatorTransport]?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/type",
-                        "title" : "let type: WebAuthn.PublicKeyCredentialType",
-                        "type" : "property"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor",
-                    "title" : "WebAuthn.PublicKeyCredentialDescriptor",
-                    "type" : "struct"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/allowcredentials",
-                        "title" : "let allowCredentials: [WebAuthn.PublicKeyCredentialDescriptor]?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/challenge",
-                        "title" : "let challenge: String",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/extensions",
-                        "title" : "let extensions: [String : JSON]?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/hints",
-                        "title" : "let hints: [WebAuthn.PublicKeyCredentialHints]?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/rpid",
-                        "title" : "var rpID: String?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/timeout",
-                        "title" : "let timeout: TimeInterval?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/userverification",
-                        "title" : "let userVerification: WebAuthn.UserVerificationRequirement?",
-                        "type" : "property"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions",
-                    "title" : "WebAuthn.PublicKeyCredentialRequestOptions",
-                    "type" : "struct"
-                  },
-                  {
-                    "title" : "Enumerations",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/ble",
-                        "title" : "case ble",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/hybrid",
-                        "title" : "case hybrid",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/nfc",
-                        "title" : "case nfc",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/platform",
-                        "title" : "case platform",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/smartcard",
-                        "title" : "case smartCard",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/usb",
-                        "title" : "case usb",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/init(rawvalue:)",
-                        "title" : "init?(rawValue: String)",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Initializers",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/init(from:)",
-                            "title" : "init(from: any Decoder) throws",
-                            "type" : "init"
-                          },
-                          {
-                            "title" : "Instance Properties",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/hashvalue",
-                            "title" : "var hashValue: Int",
-                            "type" : "property"
-                          },
-                          {
-                            "title" : "Instance Methods",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/encode(to:)",
-                            "title" : "func encode(to: any Encoder) throws",
-                            "type" : "method"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/hash(into:)",
-                            "title" : "func hash(into: inout Hasher)",
-                            "type" : "method"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/rawrepresentable-implementations",
-                        "title" : "RawRepresentable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport",
-                    "title" : "WebAuthn.AuthenticatorTransport",
-                    "type" : "enum"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/clientdevice",
-                        "title" : "case clientDevice",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/hybrid",
-                        "title" : "case hybrid",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/securitykey",
-                        "title" : "case securityKey",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/init(rawvalue:)",
-                        "title" : "init?(rawValue: String)",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Initializers",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/init(from:)",
-                            "title" : "init(from: any Decoder) throws",
-                            "type" : "init"
-                          },
-                          {
-                            "title" : "Instance Properties",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/hashvalue",
-                            "title" : "var hashValue: Int",
-                            "type" : "property"
-                          },
-                          {
-                            "title" : "Instance Methods",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/encode(to:)",
-                            "title" : "func encode(to: any Encoder) throws",
-                            "type" : "method"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/hash(into:)",
-                            "title" : "func hash(into: inout Hasher)",
-                            "type" : "method"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/rawrepresentable-implementations",
-                        "title" : "RawRepresentable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints",
-                    "title" : "WebAuthn.PublicKeyCredentialHints",
-                    "type" : "enum"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/publickey",
-                        "title" : "case publicKey",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/init(rawvalue:)",
-                        "title" : "init?(rawValue: String)",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Initializers",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/init(from:)",
-                            "title" : "init(from: any Decoder) throws",
-                            "type" : "init"
-                          },
-                          {
-                            "title" : "Instance Properties",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/hashvalue",
-                            "title" : "var hashValue: Int",
-                            "type" : "property"
-                          },
-                          {
-                            "title" : "Instance Methods",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/encode(to:)",
-                            "title" : "func encode(to: any Encoder) throws",
-                            "type" : "method"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/hash(into:)",
-                            "title" : "func hash(into: inout Hasher)",
-                            "type" : "method"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/rawrepresentable-implementations",
-                        "title" : "RawRepresentable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype",
-                    "title" : "WebAuthn.PublicKeyCredentialType",
-                    "type" : "enum"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/discouraged",
-                        "title" : "case discouraged",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/preferred",
-                        "title" : "case preferred",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/required",
-                        "title" : "case required",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/init(rawvalue:)",
-                        "title" : "init?(rawValue: String)",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Initializers",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/init(from:)",
-                            "title" : "init(from: any Decoder) throws",
-                            "type" : "init"
-                          },
-                          {
-                            "title" : "Instance Properties",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/hashvalue",
-                            "title" : "var hashValue: Int",
-                            "type" : "property"
-                          },
-                          {
-                            "title" : "Instance Methods",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/encode(to:)",
-                            "title" : "func encode(to: any Encoder) throws",
-                            "type" : "method"
-                          },
-                          {
-                            "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/hash(into:)",
-                            "title" : "func hash(into: inout Hasher)",
-                            "type" : "method"
-                          }
-                        ],
-                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/rawrepresentable-implementations",
-                        "title" : "RawRepresentable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement",
-                    "title" : "WebAuthn.UserVerificationRequirement",
-                    "type" : "enum"
-                  }
-                ],
-                "path" : "\/documentation\/oktadirectauth\/webauthn",
-                "title" : "WebAuthn",
-                "type" : "struct"
-              },
-              {
-                "title" : "Enumerations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Enumeration Cases",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/bindingcodemissing",
-                    "title" : "case bindingCodeMissing",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/flownotstarted",
-                    "title" : "case flowNotStarted",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/inconsistentcontextstate",
-                    "title" : "case inconsistentContextState",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/invalidcontinuationcontext",
-                    "title" : "case invalidContinuationContext",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/missingarguments(_:)",
-                    "title" : "case missingArguments([String])",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/network(error:)",
-                    "title" : "case network(error: APIClientError)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/oauth2(error:)",
-                    "title" : "case oauth2(error: OAuth2Error)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/other(error:)",
-                    "title" : "case other(error: any Error)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/pollingtimeoutexceeded",
-                    "title" : "case pollingTimeoutExceeded",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/server(error:)",
-                    "title" : "case server(error: OAuth2ServerError)",
-                    "type" : "case"
-                  },
-                  {
-                    "title" : "Default Implementations",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Operators",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/!=(_:_:)",
-                        "title" : "static func != (Self, Self) -> Bool",
-                        "type" : "op"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/==(_:_:)",
-                        "title" : "static func == (DirectAuthenticationFlowError, DirectAuthenticationFlowError) -> Bool",
-                        "type" : "op"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/equatable-implementations",
-                    "title" : "Equatable Implementations",
-                    "type" : "symbol"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/localizeddescription",
-                        "title" : "var localizedDescription: String",
-                        "type" : "property"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/error-implementations",
-                    "title" : "Error Implementations",
-                    "type" : "symbol"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/errordescription",
-                        "title" : "var errorDescription: String?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/failurereason",
-                        "title" : "var failureReason: String?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/helpanchor",
-                        "title" : "var helpAnchor: String?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/recoverysuggestion",
-                        "title" : "var recoverySuggestion: String?",
-                        "type" : "property"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/localizederror-implementations",
-                    "title" : "LocalizedError Implementations",
-                    "type" : "symbol"
-                  }
-                ],
-                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror",
-                "title" : "DirectAuthenticationFlowError",
-                "type" : "enum"
-              },
-              {
-                "title" : "Extended Modules",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Extended Classes",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Methods",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/authfoundation\/oauth2client\/directauthenticationflow(supportedgrants:additionalparameters:)",
-                        "title" : "func directAuthenticationFlow(supportedGrants: [GrantType], additionalParameters: [String : String]?) -> DirectAuthenticationFlow",
-                        "type" : "method"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/authfoundation\/oauth2client",
-                    "title" : "OAuth2Client",
-                    "type" : "extension"
-                  }
-                ],
-                "path" : "\/documentation\/oktadirectauth\/authfoundation",
-                "title" : "AuthFoundation",
-                "type" : "extension"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Extended Structures",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Type Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/oktadirectauth\/swift\/array\/directauth",
-                        "title" : "static var directAuth: [GrantType]",
-                        "type" : "property"
-                      }
-                    ],
-                    "path" : "\/documentation\/oktadirectauth\/swift\/array",
-                    "title" : "Array",
-                    "type" : "extension"
-                  }
-                ],
-                "path" : "\/documentation\/oktadirectauth\/swift",
-                "title" : "Swift",
-                "type" : "extension"
-              }
-            ],
-            "path" : "\/documentation\/oktadirectauth",
-            "title" : "OktaDirectAuth",
             "type" : "module"
           },
           {
