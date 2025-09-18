@@ -11,7 +11,7 @@
 //
 
 import Foundation
-import Testing
+import XCTest
 import CommonSupport
 @testable import JSON
 
@@ -21,26 +21,25 @@ fileprivate struct TestCodable: Codable {
     let commentCount: Int
 }
 
-struct JSONTests {
-    @Test("Mutating object values")
+final class JSONTests: XCTestCase {
     func testObjectMutation() throws {
         var json = JSON([:])
-        #expect(json.value == .object([:]))
-        #expect(json.representation == .json(.object([:])))
+        XCTAssertEqual(json.value, .object([:]))
+        XCTAssertEqual(json.representation, .json(.object([:])))
         
         json["name"] = "alex"
-        #expect(json.value == .object([
+        XCTAssertEqual(json.value, .object([
             "name": JSON.Value.primitive(.string("alex")),
         ]))
         
         json["isEngineer"] = true
-        #expect(json.value == .object([
+        XCTAssertEqual(json.value, .object([
             "name": JSON.Value.primitive(.string("alex")),
             "isEngineer": JSON.Value.primitive(.bool(true)),
         ]))
         
         json["tags"] = ["swift", "employee"]
-        #expect(json.value == .object([
+        XCTAssertEqual(json.value, .object([
             "name": JSON.Value.primitive(.string("alex")),
             "isEngineer": JSON.Value.primitive(.bool(true)),
             "tags": JSON.Value.array([.primitive(.string("swift")),
@@ -48,14 +47,14 @@ struct JSONTests {
         ]))
         
         json["tags"]?.array?.append("colleague")
-        #expect(json.value == .object([
+        XCTAssertEqual(json.value, .object([
             "name": JSON.Value.primitive(.string("alex")),
             "isEngineer": JSON.Value.primitive(.bool(true)),
             "tags": JSON.Value.array([.primitive(.string("swift")),
                                       .primitive(.string("employee")),
                                       .primitive(.string("colleague"))]),
         ]))
-        #expect(json.object == [
+        XCTAssertEqual(json.object, [
             "name": JSON.Value.primitive(.string("alex")),
             "isEngineer": JSON.Value.primitive(.bool(true)),
             "tags": JSON.Value.array([.primitive(.string("swift")),
@@ -64,32 +63,30 @@ struct JSONTests {
         ])
 
         json["isEngineer"] = nil
-        #expect(json["isEngineer"] == .null)
+        XCTAssertEqual(json["isEngineer"], .null)
 
         json.value = .array([1, 2, 3])
-        #expect(json.value == .array([.primitive(1), .primitive(2), .primitive(3)]))
+        XCTAssertEqual(json.value, .array([.primitive(1), .primitive(2), .primitive(3)]))
     }
     
-    @Test("Mutating array values")
     func testArrayMutation() throws {
         var json = JSON([])
-        #expect(json.value == .array([]))
-        #expect(json.representation == .json(.array([])))
+        XCTAssertEqual(json.value, .array([]))
+        XCTAssertEqual(json.representation, .json(.array([])))
         
         json.value.array?.append(1)
-        #expect(json[0] == .primitive(.int(1)))
+        XCTAssertEqual(json[0], .primitive(.int(1)))
 
         json[0] = "Apple"
-        #expect(json[0] == .primitive(.string("Apple")))
+        XCTAssertEqual(json[0], .primitive(.string("Apple")))
         
-        #expect(json.array == ["Apple"])
-        #expect(json.object == nil)
+        XCTAssertEqual(json.array, ["Apple"])
+        XCTAssertNil(json.object)
         
         json[0] = nil
-        #expect(json[0] == .null)
+        XCTAssertEqual(json[0], .null)
     }
     
-    @Test("Subscripts")
     func testSubscripts() throws {
         let json = try JSON("""
             {
@@ -109,228 +106,230 @@ struct JSONTests {
             }
         """)
         
-        #expect(json["rp"]?["name"] == "example-org-name")
-        #expect(json["pubKeyCredParams"]?[0]?["alg"] == -7)
-        #expect(json["pubKeyCredParams"]?.array?.first?["alg"] == -7)
+        XCTAssertEqual(json["rp"]?["name"], "example-org-name")
+        XCTAssertEqual(json["pubKeyCredParams"]?[0]?["alg"], -7)
+        XCTAssertEqual(json["pubKeyCredParams"]?.array?.first?["alg"], -7)
     }
     
-    @Test("JSON initializers")
     func testInitializers() throws {
         var json: JSON
         
         // JSON data initialization
         json = try JSON(Data("{\"name\":\"alex\"}".utf8))
-        #expect(json.value == ["name": "alex"])
+        XCTAssertEqual(json.value, ["name": "alex"])
         
         // JSON string initialization
         json = try JSON("{\"name\":\"zaphod\"}")
-        #expect(json.value == ["name": "zaphod"])
+        XCTAssertEqual(json.value, ["name": "zaphod"])
         
         // JSON `Value` initialization (non-throwing)
         json = JSON(.object(["name": "arthur"]))
-        #expect(json.value == ["name": "arthur"])
+        XCTAssertEqual(json.value, ["name": "arthur"])
         
         // JSON `Any` initialization
         json = try JSON(["name": "trillian"])
-        #expect(json.value == ["name": "trillian"])
+        XCTAssertEqual(json.value, ["name": "trillian"])
         
         // JSON map values from `Any`
         json = try JSON([1, 2, 3, 4])
-        #expect(json.value == [1, 2, 3, 4])
+        XCTAssertEqual(json.value, [1, 2, 3, 4])
         
         // JSON initialization via `Codable`
         let codableObject = TestCodable(firstName: "Alex", lastName: "Nachbaur", commentCount: 15)
         json = try JSON(codableObject)
-        #expect(json.value == .object([
+        XCTAssertEqual(json.value, .object([
             "firstName": "Alex",
             "lastName": "Nachbaur",
             "commentCount": 15,
         ]))
         
-        #expect(throws: (any Error).self) {
-            try JSON("this is a string")
-        }
+        XCTAssertThrowsError(try JSON("this is a string"))
         
-        var error = #expect(throws: JSONError.self) {
-            try JSON(1234)
+        var error: (any Error)?
+        do {
+            _ = try JSON(1234)
+        } catch let e {
+            error = e
         }
-        #expect(error == .unsupportedRootValue)
+        XCTAssertEqual(error as? JSONError, .unsupportedRootValue)
         
-        error = #expect(throws: JSONError.self) {
-            try JSON(3.15)
+        error = nil
+        do {
+            _ = try JSON(3.15)
+        } catch let e {
+            error = e
         }
-        #expect(error == .unsupportedRootValue)
+        XCTAssertEqual(error as? JSONError, .unsupportedRootValue)
         
-        error = #expect(throws: JSONError.self) {
-            try JSON(true)
+        error = nil
+        do {
+            _ = try JSON(true)
+        } catch let e {
+            error = e
         }
-        #expect(error == .unsupportedRootValue)
+        XCTAssertEqual(error as? JSONError, .unsupportedRootValue)
     }
     
-    @Test("Primitive initializers")
     func testPrimitiveInitializers() throws {
-        #expect(JSON.Primitive.string("String value") == "String value")
-        #expect(JSON.Primitive.int(1234) == 1234)
-        #expect(JSON.Primitive.double(3.14) == 3.14)
-        #expect(JSON.Primitive.bool(true) == true)
-        #expect(JSON.Primitive.init(nilLiteral: ()) == nil)
+        XCTAssertEqual(JSON.Primitive.string("String value"), "String value")
+        XCTAssertEqual(JSON.Primitive.int(1234), 1234)
+        XCTAssertEqual(JSON.Primitive.double(3.14), 3.14)
+        XCTAssertEqual(JSON.Primitive.bool(true), true)
+        XCTAssertEqual(JSON.Primitive.init(nilLiteral: ()), nil)
         
-        #expect(true.primitive == JSON.Primitive.bool(true))
-        #expect("Hello, world!".primitive == JSON.Primitive.string("Hello, world!"))
-        #expect(42.primitive == JSON.Primitive.int(42))
-        #expect(3.15.primitive == JSON.Primitive.double(3.15))
-        #expect(JSON.Primitive.bool(true).primitive == .bool(true))
+        XCTAssertEqual(true.primitive, JSON.Primitive.bool(true))
+        XCTAssertEqual("Hello, world!".primitive, JSON.Primitive.string("Hello, world!"))
+        XCTAssertEqual(42.primitive, JSON.Primitive.int(42))
+        XCTAssertEqual(3.15.primitive, JSON.Primitive.double(3.15))
+        XCTAssertEqual(JSON.Primitive.bool(true).primitive, .bool(true))
         
         let value = NSNull()
-        #expect(value.primitive == JSON.Primitive.null)
+        XCTAssertEqual(value.primitive, JSON.Primitive.null)
     }
     
-    @Test("Value initializers")
     func testValueInitializers() throws {
-        #expect(JSON.Value.primitive(.string("String value")) == "String value")
-        #expect(JSON.Value.primitive(.int(1234)) == 1234)
-        #expect(JSON.Value.primitive(.double(3.14)) == 3.14)
-        #expect(JSON.Value.primitive(.bool(true)) == true)
-        #expect(JSON.Value.primitive(.init(nilLiteral: ())) == nil)
-        #expect(JSON.Value.array([
+        XCTAssertEqual(JSON.Value.primitive(.string("String value")), "String value")
+        XCTAssertEqual(JSON.Value.primitive(.int(1234)), 1234)
+        XCTAssertEqual(JSON.Value.primitive(.double(3.14)), 3.14)
+        XCTAssertEqual(JSON.Value.primitive(.bool(true)), true)
+        XCTAssertEqual(JSON.Value.primitive(.init(nilLiteral: ())), nil)
+        XCTAssertEqual(JSON.Value.array([
             .primitive(.string("Foo")),
             .primitive("Bar"),
-        ]) == ["Foo", "Bar"])
-        #expect(JSON.Value.object([
+        ]), ["Foo", "Bar"])
+        XCTAssertEqual(JSON.Value.object([
             "Foo": .primitive(.string("Bar")),
-        ]) == ["Foo": "Bar"])
+        ]), ["Foo": "Bar"])
 
         
-        #expect(true.jsonValue == JSON.Value.primitive(.bool(true)))
-        #expect("Hello, world!".jsonValue == JSON.Value.primitive(.string("Hello, world!")))
-        #expect(42.jsonValue == JSON.Value.primitive(.int(42)))
-        #expect(3.15.jsonValue == JSON.Value.primitive(.double(3.15)))
-        #expect(JSON.Primitive.bool(true).jsonValue == .primitive(.bool(true)))
-        #expect(JSON.Value.primitive(.bool(true)).jsonValue == .primitive(.bool(true)))
+        XCTAssertEqual(true.jsonValue, JSON.Value.primitive(.bool(true)))
+        XCTAssertEqual("Hello, world!".jsonValue, JSON.Value.primitive(.string("Hello, world!")))
+        XCTAssertEqual(42.jsonValue, JSON.Value.primitive(.int(42)))
+        XCTAssertEqual(3.15.jsonValue, JSON.Value.primitive(.double(3.15)))
+        XCTAssertEqual(JSON.Primitive.bool(true).jsonValue, .primitive(.bool(true)))
+        XCTAssertEqual(JSON.Value.primitive(.bool(true)).jsonValue, .primitive(.bool(true)))
 
         let value = NSNull()
-        #expect(value.jsonValue == JSON.Value.null)
+        XCTAssertEqual(value.jsonValue, JSON.Value.null)
     }
     
-    @Test("Value accessors")
     func testValueAccessors() throws {
         var value: JSON.Value = .null
-        #expect(value.isNull)
-        #expect(value == .null)
+        XCTAssertTrue(value.isNull)
+        XCTAssertEqual(value, .null)
 
         value.string = "Hello, world!"
-        #expect(value == .primitive(.string("Hello, world!")))
-        #expect(value.string == "Hello, world!")
-        #expect(value.array == nil)
-        #expect(value.object == nil)
+        XCTAssertEqual(value, .primitive(.string("Hello, world!")))
+        XCTAssertEqual(value.string, "Hello, world!")
+        XCTAssertNil(value.array)
+        XCTAssertNil(value.object)
 
         value.string = nil
-        #expect(value.string == nil)
-        #expect(value == .null)
+        XCTAssertNil(value.string)
+        XCTAssertEqual(value, .null)
         
         value.int = 42
-        #expect(value == .primitive(.int(42)))
-        #expect(value.int == 42)
-        #expect(value.array == nil)
-        #expect(value.object == nil)
+        XCTAssertEqual(value, .primitive(.int(42)))
+        XCTAssertEqual(value.int, 42)
+        XCTAssertNil(value.array)
+        XCTAssertNil(value.object)
         value.int = nil
-        #expect(value.int == nil)
+        XCTAssertNil(value.int)
 
         value.double = 3.15
-        #expect(value == .primitive(.double(3.15)))
-        #expect(value.double == 3.15)
-        #expect(value.int == nil)
-        #expect(value.array == nil)
-        #expect(value.object == nil)
+        XCTAssertEqual(value, .primitive(.double(3.15)))
+        XCTAssertEqual(value.double, 3.15)
+        XCTAssertNil(value.int)
+        XCTAssertNil(value.array)
+        XCTAssertNil(value.object)
         value.double = nil
-        #expect(value.double == nil)
+        XCTAssertNil(value.double)
 
         value.bool = true
-        #expect(value == .primitive(.bool(true)))
-        #expect(value.bool == true)
-        #expect(value.int == nil)
-        #expect(value.double == nil)
-        #expect(value.array == nil)
-        #expect(value.object == nil)
+        XCTAssertEqual(value, .primitive(.bool(true)))
+        XCTAssertEqual(value.bool, true)
+        XCTAssertNil(value.int)
+        XCTAssertNil(value.double)
+        XCTAssertNil(value.array)
+        XCTAssertNil(value.object)
         value.bool = nil
-        #expect(value.bool == nil)
+        XCTAssertNil(value.bool)
         
         value.array = [1, 2, 3]
-        #expect(value == .array([
+        XCTAssertEqual(value, .array([
             .primitive(.int(1)),
             .primitive(.int(2)),
             .primitive(.int(3)),
         ]))
-        #expect(value.array == [1, 2, 3])
-        #expect(value.int == nil)
-        #expect(value.double == nil)
+        XCTAssertEqual(value.array, [1, 2, 3])
+        XCTAssertNil(value.int)
+        XCTAssertNil(value.double)
         
         value.array = nil
-        #expect(value.array == nil)
+        XCTAssertNil(value.array)
         
         value.anyValue = "Hello, world!"
-        #expect(value == .primitive(.string("Hello, world!")))
-        #expect(value.anyValue as? String == "Hello, world!")
-        #expect(value.string == "Hello, world!")
-        #expect(value.int == nil)
-        #expect(value.double == nil)
-        #expect(value.bool == nil)
-        #expect(value.array == nil)
-        #expect(value.object == nil)
+        XCTAssertEqual(value, .primitive(.string("Hello, world!")))
+        XCTAssertEqual(value.anyValue as? String, "Hello, world!")
+        XCTAssertEqual(value.string, "Hello, world!")
+        XCTAssertNil(value.int)
+        XCTAssertNil(value.double)
+        XCTAssertNil(value.bool)
+        XCTAssertNil(value.array)
+        XCTAssertNil(value.object)
 
         value.anyValue = ["Hello, world!"]
-        #expect(value == .array([.primitive(.string("Hello, world!"))]))
-        #expect(value.anyValue as? [String] == ["Hello, world!"])
-        #expect(value.array == ["Hello, world!"])
-        #expect(value.int == nil)
-        #expect(value.double == nil)
-        #expect(value.bool == nil)
-        #expect(value.object == nil)
+        XCTAssertEqual(value, .array([.primitive(.string("Hello, world!"))]))
+        XCTAssertEqual(value.anyValue as? [String], ["Hello, world!"])
+        XCTAssertEqual(value.array, ["Hello, world!"])
+        XCTAssertNil(value.int)
+        XCTAssertNil(value.double)
+        XCTAssertNil(value.bool)
+        XCTAssertNil(value.object)
         
         value.anyValue = JSON.Primitive.string("Hello, world!")
-        #expect(value.string == "Hello, world!")
+        XCTAssertEqual(value.string, "Hello, world!")
 
         value.anyValue = JSON.Value.primitive(.string("Hello, world!"))
-        #expect(value.string == "Hello, world!")
+        XCTAssertEqual(value.string, "Hello, world!")
     }
     
-    @Test("Storage representation")
     func testRepresentation() throws {
         let data = Data("{\"name\":\"zaphod\"}".utf8)
         
         var json = try JSON(data)
         var json2 = json
-        #expect(json.storage === json2.storage)
-        #expect(try json.data == Data("""
+        XCTAssertTrue(json.storage === json2.storage)
+        XCTAssertEqual(try json.data, Data("""
             {"name":"zaphod"}
             """.utf8))
         
-        #expect(json.storage.value.representation == .data(data))
-        #expect(json.storage.value.value == .object([
+        XCTAssertEqual(json.storage.value.representation, .data(data))
+        XCTAssertEqual(json.storage.value.value, .object([
             "name": JSON.Value.primitive(.string("zaphod")),
         ]))
 
         json["isActive"] = true
-        #expect(json.storage.value.representation == .json(.object([
+        XCTAssertEqual(json.storage.value.representation, .json(.object([
             "name": JSON.Value.primitive(.string("zaphod")),
             "isActive": JSON.Value.primitive(.bool(true))
         ])))
-        #expect(json.storage.value.value == .object([
+        XCTAssertEqual(json.storage.value.value, .object([
             "name": JSON.Value.primitive(.string("zaphod")),
             "isActive": JSON.Value.primitive(.bool(true))
         ]))
-        #expect(json.storage !== json2.storage)
+        XCTAssertFalse(json.storage === json2.storage)
 
         let encodedData: Data = try json.encode()
-        #expect(json.storage.value.representation == .data(encodedData))
+        XCTAssertEqual(json.storage.value.representation, .data(encodedData))
 
-        #expect(try json.encode() == """
+        XCTAssertEqual(try json.encode(), """
             {"isActive":true,"name":"zaphod"}
             """)
         
         // Test implicit rendering of `value` representations
         json2["name"] = "arthur"
-        #expect(try json2.data == Data("""
+        XCTAssertEqual(try json2.data, Data("""
             {"name":"arthur"}
             """.utf8))
     }
