@@ -65,11 +65,15 @@ public final class BrowserSignin {
     public typealias WindowAnchor = Void
     #endif
     
+    /// Defines the options used to control the behavior of the browser and its presentation.
     public struct Option: Sendable, OptionSet {
         public let rawValue: Int
         public init(rawValue: Int) { self.rawValue = rawValue }
-
+        
+        #if canImport(AuthenticationServices)
+        /// Requests that the browser utilizes an ephemeral session, which does not persist cookies or other browser storage between launches.
         public static let ephemeralSession = Option(rawValue: 1 << 0)
+        #endif
     }
 
     /// Active / default shared instance of the ``BrowserSignin`` session.
@@ -102,6 +106,7 @@ public final class BrowserSignin {
     /// Used to control the options which dictates the presentation and behavior of the sign in session.
     public var options: Option = []
     
+    #if canImport(AuthenticationServices)
     /// Indicates whether or not the developer prefers an ephemeral browser session, or if the user's browser state should be shared with the system browser.
     public var ephemeralSession: Bool {
         get {
@@ -111,6 +116,7 @@ public final class BrowserSignin {
             options.insert(.ephemeralSession)
         }
     }
+    #endif
 
     /// Starts sign-in using the configured client.
     /// - Parameters:
