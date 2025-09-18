@@ -105,9 +105,9 @@ class IDXClientV1ResponseTests: XCTestCase {
         XCTAssertNotNil(obj.form)
         XCTAssertEqual(obj.form.value.count, 2)
         XCTAssertEqual(obj.form.value[0].name, "id")
-        XCTAssertEqual(obj.form.value[0].value, .string("someCode"))
+        XCTAssertEqual(obj.form.value[0].value, "someCode")
         XCTAssertEqual(obj.form.value[1].name, "methodType")
-        XCTAssertEqual(obj.form.value[1].value, .number(1))
+        XCTAssertEqual(obj.form.value[1].value, 1)
     }
     
     func testFormValueWithLabel() throws {
@@ -144,7 +144,7 @@ class IDXClientV1ResponseTests: XCTestCase {
         XCTAssertNotNil(obj)
         XCTAssertEqual(obj.name, "stateHandle")
         XCTAssertNil(obj.label)
-        XCTAssertEqual(obj.value, .string("theStateHandle"))
+        XCTAssertEqual(obj.value, "theStateHandle")
         XCTAssertTrue(obj.required!)
         XCTAssertFalse(obj.visible!)
         XCTAssertFalse(obj.secret!)

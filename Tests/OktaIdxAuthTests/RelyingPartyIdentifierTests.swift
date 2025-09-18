@@ -29,7 +29,7 @@ class RelyingPartyIdentifierTests: XCTestCase {
             }
             """))
 
-        XCTAssertEqual(try String.relyingPartyIssuer(from: json, issuerURL: issuerURL),
+        XCTAssertEqual(try String.relyingPartyIssuer(from: json.value, issuerURL: issuerURL),
                        "root.example.com")
     }
 
@@ -44,7 +44,7 @@ class RelyingPartyIdentifierTests: XCTestCase {
             }
             """))
 
-        XCTAssertEqual(try String.relyingPartyIssuer(from: json, issuerURL: issuerURL),
+        XCTAssertEqual(try String.relyingPartyIssuer(from: json.value, issuerURL: issuerURL),
                        "rpId.example.com")
     }
 
@@ -61,7 +61,7 @@ class RelyingPartyIdentifierTests: XCTestCase {
             }
             """))
 
-        XCTAssertEqual(try String.relyingPartyIssuer(from: json, issuerURL: issuerURL),
+        XCTAssertEqual(try String.relyingPartyIssuer(from: json.value, issuerURL: issuerURL),
                        "u2f.example.com")
     }
 
@@ -78,7 +78,7 @@ class RelyingPartyIdentifierTests: XCTestCase {
             }
             """))
 
-        XCTAssertEqual(try String.relyingPartyIssuer(from: json, issuerURL: issuerURL),
+        XCTAssertEqual(try String.relyingPartyIssuer(from: json.value, issuerURL: issuerURL),
                        "ext.example.com")
     }
 
@@ -92,7 +92,7 @@ class RelyingPartyIdentifierTests: XCTestCase {
             }
             """))
 
-        XCTAssertEqual(try String.relyingPartyIssuer(from: json, issuerURL: issuerURL),
+        XCTAssertEqual(try String.relyingPartyIssuer(from: json.value, issuerURL: issuerURL),
                        "issuer.example.com")
     }
 
@@ -106,6 +106,6 @@ class RelyingPartyIdentifierTests: XCTestCase {
             }
             """))
 
-        XCTAssertThrowsError(try String.relyingPartyIssuer(from: json, issuerURL: issuerURL))
+        XCTAssertThrowsError(try String.relyingPartyIssuer(from: json.value, issuerURL: issuerURL))
     }
 }

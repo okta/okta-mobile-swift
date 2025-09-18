@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 final class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     let flow: DirectAuthenticationFlow
     let openIdConfiguration: OpenIdConfiguration
@@ -103,6 +107,7 @@ final class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                                            clientConfiguration: flow.client.configuration,
                                            context: context,
                                            mfaToken: mfaToken,
+                                           channel: channel,
                                            challengeTypesSupported: [grantType])
         let response = try await request.send(to: flow.client)
         guard let oobResponse = response.result.oobResponse else {

@@ -12,7 +12,11 @@
 
 import Foundation
 
-#if os(Linux)
+#if !COCOAPODS
+import CommonSupport
+#endif
+
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 

@@ -12,10 +12,10 @@
 
 import Foundation
 
-final class BackgroundTask {
-    let name: String?
+public final class BackgroundTask {
+    public let name: String?
 
-    init(named name: String? = nil) {
+    public init(named name: String? = nil) {
         self.name = name
         setup()
     }

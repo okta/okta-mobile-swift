@@ -12,6 +12,7 @@
 
 import Foundation
 @testable import AuthFoundation
+import CommonSupport
 
 class MockTokenHashValidator: @unchecked Sendable, TokenHashValidator {
     @LockedValue

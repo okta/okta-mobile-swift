@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 #if canImport(Security)
 #if compiler(<6.0)
 import Security

@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 extension Response {
     /// Represents messages sent from the server to indicate error or warning conditions related to responses or form values.
     public final class Message: Sendable, Equatable, Hashable {

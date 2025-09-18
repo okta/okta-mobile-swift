@@ -45,7 +45,7 @@ extension InteractionCodeFlow {
     }
 }
 
-extension InteractionCodeFlow.IntrospectRequest: APIRequest, APIRequestBody, ReceivesIDXResponse, ReturnsIDXError {
+extension InteractionCodeFlow.IntrospectRequest: APIRequest, APIRequestBody, ReturnsIDXError {
     typealias ResponseType = IonResponse
     
     var httpMethod: APIRequestMethod { .post }

@@ -13,7 +13,7 @@
 import Foundation
 @testable import AuthFoundation
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 
@@ -48,7 +48,7 @@ class MockApiClient: APIClient, @unchecked Sendable {
         if let jsonType = type as? any JSONDecodable.Type {
             jsonDecoder = jsonType.jsonDecoder
         } else {
-            jsonDecoder = defaultJSONDecoder
+            jsonDecoder = defaultJSONDecoder()
         }
         
         jsonDecoder.userInfo = info

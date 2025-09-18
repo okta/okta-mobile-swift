@@ -18,7 +18,7 @@ extension Token {
         var id: String = decoder.userInfo[.tokenId] as? String ?? UUID().uuidString
         var issuedAt: Date = Date.nowCoordinated
         var context: Context? = decoder.userInfo[.tokenContext] as? Token.Context
-        var json: AnyJSON
+        var json: JSON
         
         // Initialize defaults supplied from the decoder's userInfo dictionary
         if let userInfoId = decoder.userInfo[.tokenId] as? String {
@@ -68,9 +68,9 @@ extension Token {
                 payload[.deviceSecret] = deviceSecret
             }
 
-            json = .init(try JSON(payload.reduce(into: [String: Any]()) { result, item in
+            json = try JSON(payload.reduce(into: [String: Any]()) { result, item in
                 result[item.key.rawValue] = item.value
-            }))
+            })
         }
 
         // Attempt to decode V2 token data
@@ -87,13 +87,12 @@ extension Token {
                 issuedAt = try container.decode(Date.self, forKey: .issuedAt)
             }
             
-            json = .init(try container.decode(String.self, forKey: .rawValue))
+            json = try container.decode(JSON.self, forKey: .rawValue)
         }
         
         // Attempt to decode JSON data
         else {
-            let container = try decoder.singleValueContainer()
-            json = .init(try container.decode(JSON.self))
+            json = try JSON(from: decoder)
         }
         
         guard let context = context else {
@@ -146,6 +145,6 @@ extension Token {
         try self.init(id: id,
                       issuedAt: issuedAt,
                       context: context,
-                      json: .init(json))
+                      json: json)
     }
 }

@@ -13,13 +13,17 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 /// Capability for authenticating a user with an existing WebAuthn credential.
 ///
 /// This represents the authentication portion of WebAuthn sign-in, and is used to complete a WebAuthn or Passkey authentication request. The properties exposed here may be used individually, or the ``createCredentialAssertionRequest()`` convenience function may be used to produce a request suitable for presentation to the user.
 ///
 /// Once the platform authenticator has completed creating an assertion response, the resulting data can be supplied to the ``challenge(authenticatorData:clientData:signatureData:)`` function to validate the results with the server. Alternatively the ``challenge(credential:)`` convenience function may be used with the passkey authenticator assertion response.
 public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equatable, Hashable {
-    nonisolated let rawChallengeJSON: JSON
+    nonisolated let rawChallengeJSON: JSON.Value
     
     /// The relying party identifier indicated on the credential assertion request issued from the server.
     public nonisolated var relyingPartyIdentifier: String {
@@ -97,8 +101,8 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
     private let lock = Lock()
     nonisolated(unsafe) private weak var _remediation: Remediation?
     nonisolated(unsafe) var _relyingPartyIdentifier: String
-    internal init(issuerURL: URL, rawChallengeJSON json: JSON) throws {
-        guard case let .string(challengeString) = json["challenge"],
+    internal init(issuerURL: URL, rawChallengeJSON json: JSON.Value) throws {
+        guard let challengeString = json["challenge"]?.string,
               let challenge = Data(base64Encoded: challengeString.base64URLDecoded)
         else {
             throw WebAuthnCapabilityError.missingChallengeJson
@@ -109,7 +113,7 @@ public final class WebAuthnAuthenticationCapability: Capability, Sendable, Equat
         self._relyingPartyIdentifier = try String.relyingPartyIssuer(from: json,
                                                                      issuerURL: issuerURL)
 
-        if case let .string(userVerification) = json["userVerification"] {
+        if let userVerification = json["userVerification"]?.string {
             userVerificationPreferenceString = userVerification
         } else {
             userVerificationPreferenceString = nil

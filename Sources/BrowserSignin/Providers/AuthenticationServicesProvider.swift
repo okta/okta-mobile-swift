@@ -11,10 +11,14 @@
 //
 
 import AuthFoundation
-import OAuth2Auth
 
 #if canImport(AuthenticationServices)
 import AuthenticationServices
+import OAuth2Auth
+
+#if !COCOAPODS
+import CommonSupport
+#endif
 
 @available(iOS 12.0, macCatalyst 13.0, macOS 10.15, tvOS 16.0, visionOS 1.0, watchOS 6.2, *)
 protocol AuthenticationServicesProviderSession: NSObjectProtocol, Sendable {
@@ -46,13 +50,6 @@ extension ASWebAuthenticationSession: @unchecked Sendable, AuthenticationService
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension ASWebAuthenticationSession: @retroactive @unchecked Sendable, AuthenticationServicesProviderSession {}
 #endif
-
-@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
-protocol BrowserSigninProviderFactory: Sendable {
-    static func createWebAuthenticationProvider(for webAuth: BrowserSignin,
-                                                from window: BrowserSignin.WindowAnchor?,
-                                                usesEphemeralSession: Bool) async throws -> (any BrowserSigninProvider)?
-}
 
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 final class AuthenticationServicesProvider: NSObject, BrowserSigninProvider {
