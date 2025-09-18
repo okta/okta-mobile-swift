@@ -13,51 +13,49 @@
 import Foundation
 
 @testable import CommonSupport
-import Testing
+import XCTest
 
 fileprivate struct TestValue: Sendable, Equatable {
     var firstName: String
     var lastName: String
 }
 
-@Suite("Copy-on-write")
-struct CopyOnWriteTests {
-    @Test("Copied objects share storage")
+final class CopyOnWriteTests: XCTestCase {
     func testCopiedObjects() async throws {
         var value1 = CopyOnWrite<TestValue>(.init(firstName: "Jane", lastName: "Doe"))
-        #expect(value1.value.firstName == "Jane")
+        XCTAssertEqual(value1.value.firstName, "Jane")
         
         var value2 = value1
-        #expect(value2.value.firstName == "Jane")
-        #expect(value1 === value2)
-        #expect(value1.value == value2.value)
+        XCTAssertEqual(value2.value.firstName, "Jane")
+        XCTAssertTrue(value1 === value2)
+        XCTAssertEqual(value1.value, value2.value)
         
         value1.value.firstName = "John"
-        #expect(value1.value.firstName == "John")
-        #expect(value1 !== value2)
-        #expect(value1.value != value2.value)
+        XCTAssertEqual(value1.value.firstName, "John")
+        XCTAssertFalse(value1 === value2)
+        XCTAssertNotEqual(value1.value, value2.value)
         
         value1.value.firstName = "Jane"
-        #expect(value2.value.firstName == "Jane")
-        #expect(value1 !== value2)
+        XCTAssertEqual(value2.value.firstName, "Jane")
+        XCTAssertFalse(value1 === value2)
         
         let value3 = value2
         _ = await Task.detached { @Sendable [value2] in
             var value4 = value2
-            #expect(value2 === value3)
-            #expect(value2 === value4)
+            XCTAssertTrue(value2 === value3)
+            XCTAssertTrue(value2 === value4)
 
             value4.value.lastName = "Smith"
-            #expect(value4.value.lastName == "Smith")
-            #expect(value2 === value3)
-            #expect(value2 !== value4)
+            XCTAssertEqual(value4.value.lastName, "Smith")
+            XCTAssertTrue(value2 === value3)
+            XCTAssertFalse(value2 === value4)
         }.result
 
-        #expect(value2 === value3)
+        XCTAssertTrue(value2 === value3)
         value2.modify { value in
             value.lastName = "Beuller"
         }
-        #expect(value2.value.lastName == "Beuller")
-        #expect(value2 !== value3)
+        XCTAssertEqual(value2.value.lastName, "Beuller")
+        XCTAssertFalse(value2 === value3)
     }
 }
