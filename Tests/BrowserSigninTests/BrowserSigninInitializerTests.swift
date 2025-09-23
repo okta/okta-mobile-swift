@@ -21,6 +21,16 @@ class BrowserSigninInitializerTests: XCTestCase {
     private let redirectUri = URL(string: "com.example:/callback")!
     private let logoutRedirectUri = URL(string: "com.example:/logout")!
 
+    override func setUp() async throws {
+        await MainActor.run {
+            BrowserSignin.providerFactory = BrowserSigninProviderFactoryMock.self
+        }
+    }
+
+    override func tearDown() async throws {
+        await BrowserSignin.resetToDefault()
+    }
+
     func testInitializer() async throws {
         let auth = await BrowserSignin(
             issuerURL: issuer,
@@ -37,5 +47,28 @@ class BrowserSigninInitializerTests: XCTestCase {
         XCTAssertTrue(signInFlowClient === signOutFlowClient)
         XCTAssertEqual(auth.signInFlow.additionalParameters?.stringComponents, ["foo": "bar"])
         XCTAssertEqual(auth.signOutFlow?.additionalParameters?.stringComponents, ["foo": "bar"])
+    }
+
+    @MainActor
+    func testOptions() async throws {
+        let auth = BrowserSignin(
+            issuerURL: issuer,
+            clientId: "client_id",
+            scope: "openid profile",
+            redirectUri: redirectUri)
+
+        XCTAssertEqual(auth.options, [])
+        
+        auth.ephemeralSession = true
+        XCTAssertEqual(auth.options, [.ephemeralSession])
+        XCTAssertTrue(auth.ephemeralSession)
+
+        auth.ephemeralSession = false
+        XCTAssertEqual(auth.options, [])
+        XCTAssertFalse(auth.ephemeralSession)
+
+        auth.options = [.ephemeralSession]
+        XCTAssertEqual(auth.options, [.ephemeralSession])
+        XCTAssertTrue(auth.ephemeralSession)
     }
 }

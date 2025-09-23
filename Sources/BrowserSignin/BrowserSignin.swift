@@ -113,7 +113,11 @@ public final class BrowserSignin {
             options.contains(.ephemeralSession)
         }
         set {
-            options.insert(.ephemeralSession)
+            if newValue {
+                options.insert(.ephemeralSession)
+            } else {
+                options.remove(.ephemeralSession)
+            }
         }
     }
     #endif
