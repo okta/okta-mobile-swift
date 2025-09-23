@@ -221,27 +221,42 @@
           "type" : "paragraph"
         },
         {
+          "anchor" : "Redirect-URI-Support",
+          "level" : 2,
+          "text" : "Redirect URI Support",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This library supports both custom URIs and HTTPS redirect URLs on supporting platforms and iOS versions. This requires that your application is configured to use associated domains, with the application’s identifier included in the associated domain’s ",
+              "type" : "text"
+            },
+            {
+              "code" : "webcredentials",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " list.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
           "content" : [
             {
               "inlineContent" : [
                 {
-                  "text" : "If your application targets iOS 9.x-10.x, you should add the redirect URI for your client configuration to your app’s supported URL schemes.  This is because users on devices older than iOS 11 will be prompted to sign in using ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "SFSafariViewController",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ", which does not allow your application to detect the final token redirect.",
+                  "text" : "The use of HTTPS addresses within the redirect callback URI is limited by the availability of support within ASWebAuthenticationSession, which currently requires a minimum of iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, or visionOS 1.1.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "name" : "Important",
-          "style" : "important",
+          "name" : "Note",
+          "style" : "note",
           "type" : "aside"
         }
       ],
@@ -251,6 +266,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/ProviderFactory-swift.protocol",
+        "doc:\/\/BrowserSignin\/s8CopyableP",
         "doc:\/\/BrowserSignin\/s8SendableP"
       ],
       "kind" : "relationships",
@@ -364,6 +381,31 @@
       "title" : "Customizing OAuth2 Flows"
     },
     {
+      "anchor" : "Protocols",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/ProviderFactory-swift.protocol"
+      ],
+      "title" : "Protocols"
+    },
+    {
+      "anchor" : "Structures",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option"
+      ],
+      "title" : "Structures"
+    },
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/options"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
@@ -378,6 +420,22 @@
         "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/WindowAnchor"
       ],
       "title" : "Type Aliases"
+    },
+    {
+      "anchor" : "Type-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/providerFactory-swift.type.property"
+      ],
+      "title" : "Type Properties"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/ProviderFactory-Implementations"
+      ],
+      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -441,6 +499,119 @@
   "title" : "BrowserSignin",
   "type" : "topic",
   "url" : "\/documentation\/browsersignin\/browsersignin"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option": {
+  "abstract" : [
+    {
+      "text" : "Defines the options used to control the behavior of the browser and its presentation.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Option"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Option"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSignin.Option",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Provider": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to represent a specific provider type for use in presenting a browser.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Provider"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Provider"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSignin.Provider",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/provider"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/ProviderFactory-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/ProviderFactory-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "ProviderFactory Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/providerfactory-implementations"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/ProviderFactory-swift.protocol": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to customize the presentation of the browser sign in interface.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ProviderFactory"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/ProviderFactory-swift.protocol",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ProviderFactory"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSignin.ProviderFactory",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/providerfactory-swift.protocol"
 },
 "doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/WindowAnchor": {
   "abstract" : [
@@ -852,6 +1023,119 @@
   "title" : "init(plist:)",
   "type" : "topic",
   "url" : "\/documentation\/browsersignin\/browsersignin\/init(plist:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/options": {
+  "abstract" : [
+    {
+      "text" : "Used to control the options which dictates the presentation and behavior of the sign in session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "options"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC",
+      "text" : "BrowserSignin"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC6OptionV",
+      "text" : "Option"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/options",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "options",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/options"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/providerFactory-swift.type.property": {
+  "abstract" : [
+    {
+      "text" : "Used to assign a custom ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/ProviderFactory-swift.protocol",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "providerFactory"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC",
+      "text" : "BrowserSignin"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSigninAAC15ProviderFactoryP",
+      "text" : "ProviderFactory"
+    },
+    {
+      "kind" : "text",
+      "text" : ".Type"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/providerFactory-swift.type.property",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "providerFactory",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/providerfactory-swift.type.property"
 },
 "doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/shared": {
   "abstract" : [
@@ -2032,6 +2316,11 @@
   "title" : "How To Sign Out",
   "type" : "topic",
   "url" : "\/documentation\/browsersignin\/howtosignout"
+},
+"doc://BrowserSignin/s8CopyableP": {
+  "identifier" : "doc:\/\/BrowserSignin\/s8CopyableP",
+  "title" : "Swift.Copyable",
+  "type" : "unresolvable"
 },
 "doc://BrowserSignin/s8SendableP": {
   "identifier" : "doc:\/\/BrowserSignin\/s8SendableP",

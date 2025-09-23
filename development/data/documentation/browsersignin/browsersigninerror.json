@@ -111,7 +111,7 @@
         "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noSignOutFlowProvided",
         "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/oauth2(error:)",
         "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/serverError(_:)",
-        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/userCancelledLogin"
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/userCancelledLogin(_:)"
       ],
       "title" : "Enumeration Cases"
     },
@@ -638,7 +638,7 @@
   "type" : "topic",
   "url" : "\/documentation\/browsersignin\/browsersigninerror\/servererror(_:)"
 },
-"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/userCancelledLogin": {
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/userCancelledLogin(_:)": {
   "abstract" : [
 
   ],
@@ -654,14 +654,27 @@
     {
       "kind" : "identifier",
       "text" : "userCancelledLogin"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/userCancelledLogin",
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/userCancelledLogin(_:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "BrowserSigninError.userCancelledLogin",
+  "title" : "BrowserSigninError.userCancelledLogin(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/browsersignin\/browsersigninerror\/usercancelledlogin"
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/usercancelledlogin(_:)"
 },
 "doc://BrowserSignin/s5ErrorP": {
   "identifier" : "doc:\/\/BrowserSignin\/s5ErrorP",
