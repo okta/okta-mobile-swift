@@ -129,7 +129,7 @@ class BrowserSigninFlowTests: XCTestCase {
             for: webAuth)
 
         let error = try await XCTAssertThrowsErrorAsync(await webAuth.signIn(from: nil, context: .init(state: "qwe")))
-        XCTAssertEqual(error as? BrowserSigninError, .userCancelledLogin)
+        XCTAssertEqual(error as? BrowserSigninError, .userCancelledLogin())
 
         let optionalProvider = await BrowserSigninProviderFactoryMock.provider(for: webAuth)
         let provider = try XCTUnwrap(optionalProvider)

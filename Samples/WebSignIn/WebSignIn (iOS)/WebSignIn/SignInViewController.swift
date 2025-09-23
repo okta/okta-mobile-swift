@@ -54,6 +54,7 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func signIn(_ sender: Any) {
+        signInButton.isEnabled = false
         let window = viewIfLoaded?.window
         auth?.signIn(from: window) { result in
             switch result {
@@ -71,6 +72,10 @@ class SignInViewController: UIViewController {
                 self.dismiss(animated: true)
             case .failure(let error):
                 self.show(error: error)
+            }
+            
+            Task { @MainActor in
+                self.signInButton.isEnabled = true
             }
         }
     }

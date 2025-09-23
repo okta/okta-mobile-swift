@@ -15,10 +15,9 @@ import XCTest
 @testable import OAuth2Auth
 @testable import BrowserSignin
 
-@MainActor
-struct BrowserSigninProviderFactoryMock: BrowserSigninProviderFactory {
-    private static var results: [String: Result<URL, any Error>?] = [:]
-    private static var providers: [String: BrowserSigninProviderMock] = [:]
+struct BrowserSigninProviderFactoryMock: BrowserSignin.ProviderFactory {
+    nonisolated(unsafe) private static var results: [String: Result<URL, any Error>?] = [:]
+    nonisolated(unsafe) private static var providers: [String: BrowserSigninProviderMock] = [:]
     
     enum TestError: Error {
         case invalidTestName
@@ -42,11 +41,11 @@ struct BrowserSigninProviderFactoryMock: BrowserSigninProviderFactory {
         return providers[testName]
     }
     
-    static func createWebAuthenticationProvider(for webAuth: BrowserSignin,
+    static func createWebAuthenticationProvider(for browserSignin: BrowserSignin,
                                                 from window: BrowserSignin.WindowAnchor?,
-                                                usesEphemeralSession: Bool) async -> (any BrowserSigninProvider)?
+                                                options: BrowserSignin.Option) async throws -> (any BrowserSignin.Provider)?
     {
-        let testName = webAuth.signInFlow.additionalParameters?["testName"] as? String
+        let testName = browserSignin.signInFlow.additionalParameters?["testName"] as? String
 
         var result: Result<URL, any Error>?
         if let testName,
@@ -56,8 +55,8 @@ struct BrowserSigninProviderFactoryMock: BrowserSigninProviderFactory {
         }
 
         let provider = BrowserSigninProviderMock(from: window,
-                                                     usesEphemeralSession: usesEphemeralSession,
-                                                     result: result)
+                                                 usesEphemeralSession: options.contains(.ephemeralSession),
+                                                 result: result)
         if let testName {
             providers[testName] = provider
         }
@@ -66,7 +65,7 @@ struct BrowserSigninProviderFactoryMock: BrowserSigninProviderFactory {
     }
 }
 
-class BrowserSigninProviderMock: @unchecked Sendable, BrowserSigninProvider {
+class BrowserSigninProviderMock: @unchecked Sendable, BrowserSignin.Provider {
     let anchor: BrowserSignin.WindowAnchor?
     let usesEphemeralSession: Bool
     
@@ -93,7 +92,7 @@ class BrowserSigninProviderMock: @unchecked Sendable, BrowserSigninProvider {
             return url
         case .failure(let error):
             let error = BrowserSigninError(error)
-            if error == .userCancelledLogin {
+            if error == .userCancelledLogin() {
                 state = .cancelled
             }
             throw error

@@ -22,6 +22,7 @@ import AuthenticationServices
 class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, AuthenticationServicesProviderSession {
     let url: URL
     let callbackURLScheme: String?
+    let callback: (any Equatable)?
     let completionHandler: ASWebAuthenticationSession.CompletionHandler
     var state: State = .initialized
     
@@ -35,9 +36,18 @@ class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, 
     required init(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) {
         self.url = url
         self.callbackURLScheme = callbackURLScheme
+        self.callback = nil
         self.completionHandler = completionHandler
     }
     
+    @available(iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
+    required init(url: URL, callback: ASWebAuthenticationSession.Callback, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) {
+        self.url = url
+        self.callback = callback
+        self.callbackURLScheme = nil
+        self.completionHandler = completionHandler
+    }
+
     var presentationContextProvider: (any ASWebAuthenticationPresentationContextProviding)?
     var prefersEphemeralWebBrowserSession = false
     
@@ -127,7 +137,7 @@ class AuthenticationServicesProviderTests: XCTestCase {
         MockAuthenticationServicesProviderSession.result.wrappedValue = .failure(error)
         let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
         
-        XCTAssertEqual(response as? BrowserSigninError, .userCancelledLogin)
+        XCTAssertEqual(response as? BrowserSigninError, .userCancelledLogin(nil))
         XCTAssertNil(provider.authenticationSession)
     }
 

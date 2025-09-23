@@ -28,6 +28,14 @@ struct SignInView: View {
     @State var signInError: (any Error)?
     @State var hasError: Bool = false
     @State var clientId: String?
+    @State var state: SignInState = .unconfigured
+    
+    enum SignInState: Sendable {
+        case unconfigured
+        case ready
+        case signingIn
+        case signedIn
+    }
 
     init(signedIn: Binding<Bool>) {
         self._signedIn = signedIn
@@ -46,6 +54,7 @@ struct SignInView: View {
             
             Button("Sign In") {
                 guard let auth = BrowserSignin.shared else { return }
+                state = .signingIn
                 auth.ephemeralSession = ephemeralSession
                 Task {
                     do {
@@ -58,7 +67,7 @@ struct SignInView: View {
                     }
                 }
             }
-            .disabled(clientId == nil)
+            .disabled(state != .ready)
             .alert(isPresented: $hasError) {
                 Alert(
                     title: Text("Error"),
@@ -78,8 +87,9 @@ struct SignInView: View {
                     .padding()
             }
             .onAppear {
-                Task {
-                    clientId = await BrowserSignin.shared?.signInFlow.client.configuration.clientId
+                if let configuration = BrowserSignin.shared?.signInFlow.client.configuration {
+                    clientId = configuration.clientId
+                    state = .ready
                 }
             }
         }
@@ -93,9 +103,11 @@ struct SignInView: View {
             let token = try await auth.signIn(from: ASPresentationAnchor())
             try Credential.store(token)
             signedIn = true
+            state = .signedIn
         } catch {
             signInError = error
             signedIn = false
+            state = .ready
         }
     }
 }
