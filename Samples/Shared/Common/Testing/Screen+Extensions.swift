@@ -71,10 +71,10 @@ extension WebLogin where Self: Screen {
                 _ = app.keyboards.firstMatch.waitForExistence(timeout: .standard)
                 
                 if !fieldValue.isEmpty {
-                    usleep(useconds_t(1000)) // Wait for the field to be selected
+                    Thread.sleep(forTimeInterval: 0.1) // Wait for the field to be selected
                     field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
                     field.typeText("")
-                    usleep(useconds_t(500))
+                    Thread.sleep(forTimeInterval: 0.05)
                 }
                 
                 field.typeText(username)
@@ -143,7 +143,7 @@ extension WebLogin where Self: Screen {
             // Dismiss the password save reminder keyboard view in iOS 18+
             if app.otherElements["SFAutoFillInputView"].buttons["Not Now"].exists {
                 app.otherElements["SFAutoFillInputView"].buttons["Not Now"].tap()
-                usleep(useconds_t(500)) // Wait for the keyboard animation, since XCTest won't
+                Thread.sleep(forTimeInterval: 0.1) // Wait for the keyboard animation, since XCTest won't
                 field.tap()
                 _ = app.keyboards.firstMatch.waitForExistence(timeout: .standard)
             }

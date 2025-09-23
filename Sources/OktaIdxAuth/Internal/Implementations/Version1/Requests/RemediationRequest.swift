@@ -13,7 +13,7 @@
 import Foundation
 import AuthFoundation
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 

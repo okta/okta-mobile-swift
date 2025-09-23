@@ -12,7 +12,7 @@
 
 import XCTest
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 
@@ -108,7 +108,7 @@ final class UserCoordinatorTests: XCTestCase {
                                                 observing: [.defaultCredentialChanged])
 
             let credential = try TaskData.coordinator.store(token: token, tags: [:], security: [])
-            usleep(useconds_t(2000))
+            try await Task.sleep(delay: 0.02)
             await MainActor.run {
                 XCTAssertEqual(recorder.notifications.count, 1)
                 XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
@@ -117,7 +117,7 @@ final class UserCoordinatorTests: XCTestCase {
             }
 
             TaskData.coordinator.default = nil
-            usleep(useconds_t(2000))
+            try await Task.sleep(delay: 0.02)
             await MainActor.run {
                 XCTAssertEqual(recorder.notifications.count, 1)
                 XCTAssertNil(recorder.notifications.first?.object)
