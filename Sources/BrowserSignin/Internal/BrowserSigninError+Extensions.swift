@@ -20,7 +20,7 @@ extension BrowserSigninError: LocalizedError {
         if nsError.domain == ASWebAuthenticationSessionErrorDomain,
            nsError.code == ASWebAuthenticationSessionError.canceledLogin.rawValue
         {
-            self = .userCancelledLogin
+            self = .userCancelledLogin(nsError.localizedFailureReason)
         } else if let error = error as? OAuth2Error {
             self = .oauth2(error: error)
         } else if let error = error as? OAuth2ServerError {
@@ -65,11 +65,20 @@ extension BrowserSigninError: LocalizedError {
                                             bundle: .browserSignin,
                                             comment: ""))
             
-        case .userCancelledLogin:
-            return NSLocalizedString("user_cancelled_login_description",
-                                     tableName: "BrowserSignin",
-                                     bundle: .browserSignin,
-                                     comment: "")
+        case .userCancelledLogin(let reason):
+            if let reason {
+                return String.localizedStringWithFormat(
+                    NSLocalizedString("user_cancelled_login_reason_description",
+                                      tableName: "BrowserSignin",
+                                      bundle: .browserSignin,
+                                      comment: ""),
+                    reason)
+            } else {
+                return NSLocalizedString("user_cancelled_login_description",
+                                         tableName: "BrowserSignin",
+                                         bundle: .browserSignin,
+                                         comment: "")
+            }
             
         case .missingIdToken:
             return NSLocalizedString("missing_id_token_description",
@@ -118,7 +127,8 @@ extension BrowserSigninError: Equatable {
         case (.noSignOutFlowProvided, .noSignOutFlowProvided): return true
         case (.cannotStartBrowserSession, .cannotStartBrowserSession): return true
         case (.cannotComposeAuthenticationURL, .cannotComposeAuthenticationURL): return true
-        case (.userCancelledLogin, .userCancelledLogin): return true
+        case (.userCancelledLogin(let lhs), .userCancelledLogin(let rhs)):
+            return lhs == rhs
         case (.noAuthenticatorProviderResonse, .noAuthenticatorProviderResonse): return true
         case (.missingIdToken, .missingIdToken): return true
         case (.authenticationProvider(error: let lhsValue), .authenticationProvider(error: let rhsValue)):

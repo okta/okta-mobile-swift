@@ -124,6 +124,7 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
         
         return try await withCheckedThrowingContinuation { continuation in
             Task {
+                await MainActor.yield()
                 if let delay = requestDelay {
                     try await Task.sleep(delay: delay)
                 }
