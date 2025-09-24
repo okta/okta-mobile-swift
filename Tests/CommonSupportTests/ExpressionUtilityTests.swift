@@ -12,7 +12,10 @@
 
 import XCTest
 
+#if !COCOAPODS
 @testable import CommonSupport
+#endif
+
 @testable import TestCommon
 
 fileprivate enum ExpressionUtilityError: Error {

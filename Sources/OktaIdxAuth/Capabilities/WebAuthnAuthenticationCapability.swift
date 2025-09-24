@@ -11,8 +11,11 @@
 //
 
 import Foundation
-import CommonSupport
 import AuthFoundation
+
+#if !COCOAPODS
+import CommonSupport
+#endif
 
 /// Capability for authenticating a user with an existing WebAuthn credential.
 ///

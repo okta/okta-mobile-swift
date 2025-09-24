@@ -11,8 +11,11 @@
 //
 
 import Foundation
-import CommonSupport
 import AuthFoundation
+
+#if !COCOAPODS
+import CommonSupport
+#endif
 
 extension Remediation.Form {
     /// Describes an individual field within a form, used to collect and submit information from the user to proceed through the authentication workflow.

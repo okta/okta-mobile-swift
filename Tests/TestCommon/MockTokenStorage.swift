@@ -11,7 +11,11 @@
 //
 
 import Foundation
+
+#if !COCOAPODS
 import CommonSupport
+#endif
+
 @testable import AuthFoundation
 
 class MockTokenStorage: @unchecked Sendable, TokenStorage {

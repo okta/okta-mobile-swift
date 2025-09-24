@@ -11,7 +11,10 @@
 //
 
 import Foundation
+
+#if !COCOAPODS
 import CommonSupport
+#endif
 
 /// Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.
 ///

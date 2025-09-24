@@ -11,8 +11,11 @@
 //
 
 import Foundation
-import CommonSupport
 import AuthFoundation
+
+#if !COCOAPODS
+import CommonSupport
+#endif
 
 public enum WebAuthnCapabilityError: Error {
     case missingChallengeJson

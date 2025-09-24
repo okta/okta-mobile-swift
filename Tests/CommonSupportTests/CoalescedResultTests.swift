@@ -11,7 +11,10 @@
 //
 
 import XCTest
+
+#if !COCOAPODS
 @testable import CommonSupport
+#endif
 
 fileprivate actor CoalescedResultCounter {
     var indexes = [Int]()

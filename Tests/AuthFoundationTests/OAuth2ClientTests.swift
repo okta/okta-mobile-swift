@@ -11,9 +11,13 @@
 //
 
 import XCTest
-import CommonSupport
+
 @testable import TestCommon
 @testable import AuthFoundation
+
+#if !COCOAPODS
+import CommonSupport
+#endif
 
 #if canImport(FoundationNetworking)
 import FoundationNetworking

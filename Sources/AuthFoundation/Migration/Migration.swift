@@ -11,7 +11,10 @@
 //
 
 import Foundation
+
+#if !COCOAPODS
 import CommonSupport
+#endif
 
 /// Namespace used for a variety of version migration agents.
 public final class Migration {

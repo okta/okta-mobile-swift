@@ -11,8 +11,11 @@
 //
 
 import Foundation
-import CommonSupport
 import AuthFoundation
+
+#if !COCOAPODS
+import CommonSupport
+#endif
 
 final class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     let flow: DirectAuthenticationFlow

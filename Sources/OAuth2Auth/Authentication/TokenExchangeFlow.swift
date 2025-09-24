@@ -11,8 +11,11 @@
 //
 
 import Foundation
-import CommonSupport
 import AuthFoundation
+
+#if !COCOAPODS
+import CommonSupport
+#endif
 
 /// An authentication flow class that implements the Token Exchange Flow.
 public actor TokenExchangeFlow: AuthenticationFlow {

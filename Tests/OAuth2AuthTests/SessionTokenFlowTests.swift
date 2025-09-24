@@ -12,7 +12,11 @@
 
 #if canImport(UIKit) || canImport(AppKit)
 import XCTest
+
+#if !COCOAPODS
 import CommonSupport
+#endif
+
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OAuth2Auth

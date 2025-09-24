@@ -11,8 +11,11 @@
 //
 
 import Foundation
-import CommonSupport
 import AuthFoundation
+
+#if !COCOAPODS
+import CommonSupport
+#endif
 
 extension Authenticator {
     /// Container that represents a collection of authenticators, providing conveniences for quickly accessing relevant objects.

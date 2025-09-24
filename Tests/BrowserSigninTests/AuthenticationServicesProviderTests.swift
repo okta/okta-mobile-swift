@@ -13,7 +13,11 @@
 #if canImport(AuthenticationServices)
 
 import XCTest
+
+#if !COCOAPODS
 import CommonSupport
+#endif
+
 @testable import AuthFoundation
 @testable import TestCommon
 @testable import OAuth2Auth
