@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 
 #if canImport(Security)
 #if compiler(<6.0)

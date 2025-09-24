@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
 

@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 
 extension Response {
     /// Represents messages sent from the server to indicate error or warning conditions related to responses or form values.

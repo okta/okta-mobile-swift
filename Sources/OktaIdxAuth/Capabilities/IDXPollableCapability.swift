@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 import AuthFoundation
 
 /// Capability for authentiators or remedations to be polled to determine out-of-band actions taken by the user.

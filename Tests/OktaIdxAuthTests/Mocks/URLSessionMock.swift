@@ -13,6 +13,7 @@
 import Foundation
 import XCTest
 
+import CommonSupport
 @testable import AuthFoundation
 @testable import OktaIdxAuth
 

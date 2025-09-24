@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 import AuthFoundation
 
 /// Capability to access data related to Duo

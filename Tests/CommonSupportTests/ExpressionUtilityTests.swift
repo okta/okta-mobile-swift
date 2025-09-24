@@ -12,7 +12,7 @@
 
 import XCTest
 
-@testable import AuthFoundation
+@testable import CommonSupport
 @testable import TestCommon
 
 fileprivate enum ExpressionUtilityError: Error {

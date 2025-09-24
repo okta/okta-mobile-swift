@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 
 /// Indicates the class contains a collection of delegates, and the necessary convenience functions to add and remove delegates from the collection.
 public protocol UsesDelegateCollection {

@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 
 public enum JSONError: Error {
     case cannotDecode(value: (any Sendable)?)

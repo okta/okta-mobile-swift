@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 import AuthFoundation
 
 final class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {

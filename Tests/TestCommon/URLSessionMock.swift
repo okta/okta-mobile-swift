@@ -17,6 +17,7 @@ import XCTest
 import FoundationNetworking
 #endif
 
+import CommonSupport
 @testable import AuthFoundation
 
 class URLSessionMock: URLSessionProtocol, @unchecked Sendable {

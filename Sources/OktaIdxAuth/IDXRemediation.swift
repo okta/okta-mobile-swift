@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 import AuthFoundation
 
 /// Describes choices the user can make to proceed through the authentication workflow.

@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 import AuthFoundation
 
 /// An authentication flow class that implements the JWT Authorization Bearer Flow, for authenticating users using JWTs signed by a trusted key.

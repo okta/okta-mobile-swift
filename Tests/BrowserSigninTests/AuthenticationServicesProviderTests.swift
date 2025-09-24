@@ -13,6 +13,7 @@
 #if canImport(AuthenticationServices)
 
 import XCTest
+import CommonSupport
 @testable import AuthFoundation
 @testable import TestCommon
 @testable import OAuth2Auth

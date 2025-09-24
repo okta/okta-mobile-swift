@@ -12,6 +12,7 @@
 
 #if canImport(UIKit) || canImport(AppKit)
 import XCTest
+import CommonSupport
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OAuth2Auth

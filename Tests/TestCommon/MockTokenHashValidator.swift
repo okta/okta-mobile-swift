@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 @testable import AuthFoundation
 
 class MockTokenHashValidator: @unchecked Sendable, TokenHashValidator {

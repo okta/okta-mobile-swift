@@ -19,6 +19,7 @@
 #if DEBUG && canImport(OSLog)
 import Foundation
 import OSLog
+import CommonSupport
 
 #if compiler(<6.0)
 extension OSLog: @unchecked Sendable {}

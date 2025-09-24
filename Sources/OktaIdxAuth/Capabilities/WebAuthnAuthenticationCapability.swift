@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import CommonSupport
 import AuthFoundation
 
 /// Capability for authenticating a user with an existing WebAuthn credential.
