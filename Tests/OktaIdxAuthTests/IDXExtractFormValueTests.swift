@@ -13,6 +13,10 @@
 import XCTest
 @testable import OktaIdxAuth
 
+#if !COCOAPODS
+import JSON
+#endif
+
 class IDXExtractFormValueTests: XCTestCase {
     typealias Form = Remediation.Form
 

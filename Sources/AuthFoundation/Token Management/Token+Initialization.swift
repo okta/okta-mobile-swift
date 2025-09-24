@@ -11,7 +11,10 @@
 //
 
 import Foundation
+
+#if !COCOAPODS
 import JSON
+#endif
 
 extension Token {
     public init(from decoder: any Decoder) throws {

@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if !COCOAPODS
+import JSON
+#endif
+
 /// Represents information describing the available authenticators and enrolled authenticators.
 ///
 /// Instances of this class are used to identify the type of authenticator, or factor, that is associated with a user. These may be associated with form fields (for example, when selecting an authenticator to verify or to enrol in), with a ``Remediation`` (when challenging an authenticator for a verification code), or with an overall ``Response`` to indicate which authenticators have been enrolled, are being enrolled.
