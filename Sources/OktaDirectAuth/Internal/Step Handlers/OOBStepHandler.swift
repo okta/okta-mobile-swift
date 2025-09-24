@@ -11,7 +11,6 @@
 //
 
 import Foundation
-import CommonSupport
 import AuthFoundation
 
 #if !COCOAPODS

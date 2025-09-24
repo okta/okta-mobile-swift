@@ -11,7 +11,6 @@
 //
 
 import XCTest
-import CommonSupport
 @testable import AuthFoundation
 import TestCommon
 

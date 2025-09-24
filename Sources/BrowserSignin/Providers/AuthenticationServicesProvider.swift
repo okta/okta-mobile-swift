@@ -11,7 +11,6 @@
 //
 
 import AuthFoundation
-import CommonSupport
 import OAuth2Auth
 
 #if !COCOAPODS
