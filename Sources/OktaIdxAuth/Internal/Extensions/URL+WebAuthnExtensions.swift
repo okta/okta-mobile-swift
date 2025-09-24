@@ -12,7 +12,10 @@
 
 import Foundation
 import AuthFoundation
+
+#if !COCOAPODS
 import JSON
+#endif
 
 extension String {
     static func relyingPartyIssuer(from json: JSON, issuerURL: URL) throws -> String {

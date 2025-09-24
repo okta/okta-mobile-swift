@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import JSON
+#endif
+
 protocol ReferencesParent: AnyObject {
     func assign<ParentType>(parent: ParentType?)
 }

@@ -11,7 +11,10 @@
 //
 
 import Foundation
+
+#if !COCOAPODS
 import JSON
+#endif
 
 /// Describes the configuration of an OpenID server.
 ///

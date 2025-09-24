@@ -12,10 +12,10 @@
 
 import Foundation
 import AuthFoundation
-import JSON
 
 #if !COCOAPODS
 import CommonSupport
+import JSON
 #endif
 
 public enum WebAuthnCapabilityError: Error {

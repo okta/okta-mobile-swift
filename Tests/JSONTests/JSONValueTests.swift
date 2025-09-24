@@ -11,7 +11,10 @@
  */
 
 import XCTest
+
+#if !COCOAPODS
 @testable import JSON
+#endif
 
 class JSONTests: XCTestCase {
     let decoder = JSONDecoder()

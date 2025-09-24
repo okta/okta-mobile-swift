@@ -15,6 +15,7 @@ import XCTest
 
 #if SWIFT_PACKAGE
 @testable import TestCommon
+import JSON
 #endif
 
 #if canImport(AuthenticationServices) && !os(watchOS)
