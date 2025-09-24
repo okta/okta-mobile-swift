@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import JSON
 
 extension Token {
     /// When refreshing a token, not all values are always returned, especially the refresh token or device secret.

@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import JSON
 
 /// Describes the configuration of an OpenID server.
 ///

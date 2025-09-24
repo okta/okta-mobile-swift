@@ -40,7 +40,8 @@ var package = Package(
     ],
     products: [
         .library(name: "CommonSupport", targets: ["CommonSupport"]),
-        .library(name: "AuthFoundation", targets: ["CommonSupport", "AuthFoundation"]),
+        .library(name: "JSON", targets: ["JSON"]),
+        .library(name: "AuthFoundation", targets: ["CommonSupport", "JSON", "AuthFoundation"]),
         .library(name: "OAuth2Auth", targets: ["OAuth2Auth"]),
         .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
         .library(name: "OktaIdxAuth", targets: ["OktaIdxAuth"])
@@ -51,8 +52,11 @@ var package = Package(
     targets: [
         .target(name: "CommonSupport",
                 swiftSettings: .libraryTarget),
-        .target(name: "AuthFoundation",
+        .target(name: "JSON",
                 dependencies: ["CommonSupport"],
+                swiftSettings: .libraryTarget),
+        .target(name: "AuthFoundation",
+                dependencies: ["CommonSupport", "JSON"],
                 resources: [.process("Resources")],
                 swiftSettings: .libraryTarget),
         .target(name: "OAuth2Auth",
@@ -80,6 +84,9 @@ var package = Package(
                 swiftSettings: .testTarget),
         .testTarget(name: "CommonSupportTests",
                     dependencies: ["CommonSupport", "TestCommon"],
+                    swiftSettings: .testTarget),
+        .testTarget(name: "JSONTests",
+                    dependencies: ["JSON", "TestCommon"],
                     swiftSettings: .testTarget),
         .testTarget(name: "AuthFoundationTests",
                     dependencies: ["AuthFoundation", "TestCommon"],

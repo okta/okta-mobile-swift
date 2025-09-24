@@ -14,6 +14,7 @@ import Foundation
 
 #if !COCOAPODS
 import CommonSupport
+import JSON
 #endif
 
 #if !COCOAPODS

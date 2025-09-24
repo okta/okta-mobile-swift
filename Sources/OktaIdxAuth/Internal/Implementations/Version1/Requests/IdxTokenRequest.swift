@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import JSON
 
 extension InteractionCodeFlow {
     struct TokenRequest: AuthenticationFlowRequest {
