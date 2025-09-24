@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import JSON
 
 extension String {
     static func relyingPartyIssuer(from json: JSON, issuerURL: URL) throws -> String {

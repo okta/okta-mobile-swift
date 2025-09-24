@@ -14,6 +14,7 @@ import Foundation
 
 #if !COCOAPODS
 import CommonSupport
+import JSON
 #endif
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.

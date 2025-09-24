@@ -15,6 +15,7 @@ import AuthFoundation
 
 #if !COCOAPODS
 import CommonSupport
+import JSON
 #endif
 
 /// Capability for authenticating a user with an existing WebAuthn credential.

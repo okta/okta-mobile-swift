@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+@_exported import JSON
 
 #if !COCOAPODS
 import CommonSupport

@@ -11,6 +11,7 @@
 //
 
 import XCTest
+import JSON
 @testable import AuthFoundation
 @testable import TestCommon
 

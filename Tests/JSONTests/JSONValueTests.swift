@@ -11,7 +11,7 @@
  */
 
 import XCTest
-@testable import AuthFoundation
+@testable import JSON
 
 class JSONTests: XCTestCase {
     let decoder = JSONDecoder()
@@ -156,10 +156,7 @@ class JSONTests: XCTestCase {
     }
     
     func testConversions() throws {
-        let json = try decoder.decode(JSON.self,
-                                        from: try data(from: .module,
-                                                       for: "openid-configuration",
-                                                       in: "MockResponses"))
+        let json = try decoder.decode(JSON.self, from: Data(openidConfigurationJSONString.utf8))
         let object = try XCTUnwrap(json.anyValue as? [String: Any])
         let array = try XCTUnwrap(object["claims_supported"] as? [String])
         

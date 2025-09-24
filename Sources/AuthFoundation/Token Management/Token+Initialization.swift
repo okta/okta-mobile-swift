@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import JSON
 
 extension Token {
     public init(from decoder: any Decoder) throws {

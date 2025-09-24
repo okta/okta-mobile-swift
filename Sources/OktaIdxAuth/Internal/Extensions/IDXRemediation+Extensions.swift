@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import JSON
 
 extension Remediation {
     func apiRequest() throws -> InteractionCodeFlow.RemediationRequest {
