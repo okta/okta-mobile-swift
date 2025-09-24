@@ -16,10 +16,6 @@ import Foundation
 import CommonSupport
 #endif
 
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 /// Indicates the class contains a collection of delegates, and the necessary convenience functions to add and remove delegates from the collection.
 public protocol UsesDelegateCollection {
     associatedtype Delegate

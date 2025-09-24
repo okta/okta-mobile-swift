@@ -17,7 +17,6 @@ import CommonSupport
 #endif
 
 @testable import AuthFoundation
-import CommonSupport
 
 class MockTokenStorage: @unchecked Sendable, TokenStorage {
     @LockedValue var error: (any Error)?

@@ -16,10 +16,6 @@ import Foundation
 import CommonSupport
 #endif
 
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 #if canImport(UIKit)
 import UIKit
 #endif
@@ -33,16 +29,12 @@ import Android
 #endif
 
 private let deviceModel: String = {
-    #if os(Darwin)
     var system = utsname()
     uname(&system)
     let model = withUnsafePointer(to: &system.machine.0) { ptr in
         return String(cString: ptr)
     }
     return model
-    #else
-    return "Unknown"
-    #endif
 }()
 
 private let systemName: String = {
@@ -56,10 +48,10 @@ private let systemName: String = {
         return "tvOS"
     #elseif os(macOS)
         return "macOS"
-    #elseif os(Linux)
-        return "linux"
     #elseif os(Android)
         return "android"
+    #elseif os(Linux)
+        return "linux"
     #endif
 }()
 

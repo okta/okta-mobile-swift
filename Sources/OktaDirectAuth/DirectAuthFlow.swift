@@ -17,10 +17,6 @@ import AuthFoundation
 import CommonSupport
 #endif
 
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 /// Delegate protocol used by ``DirectAuthenticationFlow``.
 ///
 /// This extends the parent protocol `AuthenticationDelegate`.

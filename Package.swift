@@ -46,9 +46,9 @@ var package = Package(
         .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
         .library(name: "OktaIdxAuth", targets: ["OktaIdxAuth"])
     ],
-    // dependencies: [
-    //     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.0")
-    // ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.0")
+    ],
     targets: [
         .target(name: "CommonSupport",
                 swiftSettings: .libraryTarget),

@@ -24,10 +24,6 @@ import CommonSupport
 @testable import BrowserSignin
 import AuthenticationServices
 
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, AuthenticationServicesProviderSession {
     let url: URL
     let callbackURLScheme: String?

@@ -20,10 +20,6 @@ import CommonSupport
 import AuthenticationServices
 import OAuth2Auth
 
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 @available(iOS 12.0, macCatalyst 13.0, macOS 10.15, tvOS 16.0, visionOS 1.0, watchOS 6.2, *)
 protocol AuthenticationServicesProviderSession: NSObjectProtocol, Sendable {
     init(url URL: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler)

@@ -18,11 +18,6 @@
 
 #if DEBUG && canImport(OSLog)
 import Foundation
-
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 import OSLog
 
 #if !COCOAPODS

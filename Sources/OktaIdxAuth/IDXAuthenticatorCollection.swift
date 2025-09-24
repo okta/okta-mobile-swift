@@ -17,10 +17,6 @@ import AuthFoundation
 import CommonSupport
 #endif
 
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 extension Authenticator {
     /// Container that represents a collection of authenticators, providing conveniences for quickly accessing relevant objects.
     public final class Collection: Sendable, Equatable, Hashable {

@@ -12,7 +12,6 @@
 
 import Foundation
 import XCTest
-import CommonSupport
 
 #if !COCOAPODS
 import CommonSupport

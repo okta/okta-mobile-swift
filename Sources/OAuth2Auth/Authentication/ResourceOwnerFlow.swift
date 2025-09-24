@@ -17,10 +17,6 @@ import AuthFoundation
 import CommonSupport
 #endif
 
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 /// An authentication flow class that implements the Resource Owner Flow exchange.
 ///
 /// This simple authentication flow permits a suer to authenticate using a simple username and password. As such, the configuration is straightforward.
