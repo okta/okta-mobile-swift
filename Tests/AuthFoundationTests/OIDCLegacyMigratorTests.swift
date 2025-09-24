@@ -150,7 +150,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
             XCTAssertNoThrow(try migrator.migrate())
 
             // Need to wait for the async notification dispatch
-            usleep(useconds_t(2000))
+            Thread.sleep(forTimeInterval: 0.02)
 
             XCTAssertEqual(notificationRecorder.notifications.count, 1)
 

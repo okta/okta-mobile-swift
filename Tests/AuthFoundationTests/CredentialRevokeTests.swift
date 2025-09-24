@@ -14,7 +14,7 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 
