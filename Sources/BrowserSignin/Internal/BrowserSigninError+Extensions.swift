@@ -25,7 +25,11 @@ extension BrowserSigninError: LocalizedError {
            nsError.code == ASWebAuthenticationSessionError.canceledLogin.rawValue
         {
             self = .userCancelledLogin(nsError.localizedFailureReason)
-        } else if let error = error as? OAuth2Error {
+            return
+        }
+        #endif
+        
+        if let error = error as? OAuth2Error {
             self = .oauth2(error: error)
         } else if let error = error as? OAuth2ServerError {
             self = .serverError(error)
