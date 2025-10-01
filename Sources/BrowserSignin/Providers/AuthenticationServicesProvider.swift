@@ -147,7 +147,7 @@ final class AuthenticationServicesProvider: NSObject, BrowserSignin.Provider {
         }
         
         guard let url = url else {
-            return .failure(BrowserSigninError.noAuthenticatorProviderResonse)
+            return .failure(BrowserSigninError.noAuthenticatorProviderResponse)
         }
         
         return .success(url)

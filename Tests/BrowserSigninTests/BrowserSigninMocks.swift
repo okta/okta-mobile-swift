@@ -97,7 +97,7 @@ class BrowserSigninProviderMock: @unchecked Sendable, BrowserSignin.Provider {
             }
             throw error
         case nil:
-            throw BrowserSigninError.noAuthenticatorProviderResonse
+            throw BrowserSigninError.noAuthenticatorProviderResponse
         }
     }
     

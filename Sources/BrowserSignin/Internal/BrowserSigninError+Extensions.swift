@@ -13,11 +13,12 @@
 import Foundation
 import AuthenticationServices
 
-@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension BrowserSigninError: LocalizedError {
     init(_ error: any Error) {
         let nsError = error as NSError
-        if nsError.domain == ASWebAuthenticationSessionErrorDomain,
+        
+        if #available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *),
+           nsError.domain == ASWebAuthenticationSessionErrorDomain,
            nsError.code == ASWebAuthenticationSessionError.canceledLogin.rawValue
         {
             self = .userCancelledLogin(nsError.localizedFailureReason)
@@ -105,7 +106,7 @@ extension BrowserSigninError: LocalizedError {
                                   comment: ""),
                 errorString)
 
-        case .noAuthenticatorProviderResonse:
+        case .noAuthenticatorProviderResponse:
             return NSLocalizedString("no_authenticator_provider_response",
                                      tableName: "BrowserSignin",
                                      bundle: .browserSignin,
@@ -113,9 +114,15 @@ extension BrowserSigninError: LocalizedError {
         case .genericError(message: let message):
             return message
         case .noSignOutFlowProvided:
-            return "FOO"
+            return NSLocalizedString("no_signout_flow_provided",
+                                     tableName: "BrowserSignin",
+                                     bundle: .browserSignin,
+                                     comment: "No signout flow provided")
         case .cannotStartBrowserSession:
-            return "FOO"
+            return NSLocalizedString("cannot_start_browser_session",
+                                     tableName: "BrowserSignin",
+                                     bundle: .browserSignin,
+                                     comment: "Cannot start browser session")
         }
     }
 }
@@ -129,7 +136,7 @@ extension BrowserSigninError: Equatable {
         case (.cannotComposeAuthenticationURL, .cannotComposeAuthenticationURL): return true
         case (.userCancelledLogin(let lhs), .userCancelledLogin(let rhs)):
             return lhs == rhs
-        case (.noAuthenticatorProviderResonse, .noAuthenticatorProviderResonse): return true
+        case (.noAuthenticatorProviderResponse, .noAuthenticatorProviderResponse): return true
         case (.missingIdToken, .missingIdToken): return true
         case (.authenticationProvider(error: let lhsValue), .authenticationProvider(error: let rhsValue)):
             return lhsValue as NSError == rhsValue as NSError
