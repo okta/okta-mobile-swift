@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "OktaClient"
-    s.version      = "2.1.1"
+    s.version      = "2.1.2"
     s.summary      = "Secure client authentication, request authorization, and user management capabilities for Swift."
     s.description  = <<-DESC
 Provides a modularized set of libraries that provide the building blocks and convenience features used to authenticate users, manage the lifecycle and storage of tokens and user credentials, and provide a base for other libraries and applications to build upon.
