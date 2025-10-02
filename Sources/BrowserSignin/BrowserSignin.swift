@@ -140,14 +140,10 @@ public final class BrowserSignin {
         }
 
         async let authorizeUrl = signInFlow.start(with: context)
-        guard let provider = try await Self.providerFactory.createWebAuthenticationProvider(
+        let provider = try await Self.providerFactory.createWebAuthenticationProvider(
             for: self,
             from: window,
             options: options)
-        else {
-            throw BrowserSigninError.noCompatibleAuthenticationProviders
-        }
-        
         self.provider = provider
         
         let url = try await provider.open(authorizeUrl: authorizeUrl,
@@ -207,13 +203,10 @@ public final class BrowserSignin {
         }
 
         async let authorizeUrl = signOutFlow.start(with: context)
-        guard let provider = try await Self.providerFactory.createWebAuthenticationProvider(
+        let provider = try await Self.providerFactory.createWebAuthenticationProvider(
             for: self,
             from: window,
             options: options)
-        else {
-            throw BrowserSigninError.noCompatibleAuthenticationProviders
-        }
 
         self.provider = provider
         defer { self.provider = nil }
@@ -340,13 +333,13 @@ extension BrowserSignin: BrowserSignin.ProviderFactory {
     public nonisolated static func createWebAuthenticationProvider(
         for webAuth: BrowserSignin,
         from window: BrowserSignin.WindowAnchor?,
-        options: Option) throws -> (any BrowserSignin.Provider)?
+        options: Option) throws -> any BrowserSignin.Provider
     {
         if #available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *) {
             return try AuthenticationServicesProvider(from: window, usesEphemeralSession: options.contains(.ephemeralSession))
-        } else {
-            return nil
         }
+
+        throw BrowserSigninError.noCompatibleAuthenticationProviders
     }
 }
 
