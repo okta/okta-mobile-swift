@@ -11,7 +11,10 @@
 //
 
 import XCTest
-@testable import AuthFoundation
+
+#if !COCOAPODS
+@testable import CommonSupport
+#endif
 
 fileprivate actor CoalescedResultCounter {
     var indexes = [Int]()
@@ -76,7 +79,7 @@ final class CoalescedResultTests: XCTestCase {
         DispatchQueue.concurrentPerform(iterations: parallelRequests) { iteration in
             Task.detached {
                 let result = try await coalescedResult.perform {
-                    try await Task.sleep(delay: 0.001)
+                    try await Task.sleep(nanoseconds: UInt64(0.001 * 1_000_000_000.0))
                     return true
                 }
                 XCTAssertTrue(result, "Returned value should be now be true")

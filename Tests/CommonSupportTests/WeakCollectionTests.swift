@@ -11,7 +11,10 @@
 //
 
 import XCTest
-@testable import AuthFoundation
+
+#if !COCOAPODS
+@testable import CommonSupport
+#endif
 
 final class WeakCollectionTests: XCTestCase {
     class Thing: Equatable, Hashable {

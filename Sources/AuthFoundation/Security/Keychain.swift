@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || (swift(>=5.10) && os(visionOS))
 
 #if canImport(LocalAuthentication) && !os(tvOS)

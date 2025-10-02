@@ -13,6 +13,10 @@
 import AuthFoundation
 import OAuth2Auth
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 #if canImport(AuthenticationServices)
 import AuthenticationServices
 

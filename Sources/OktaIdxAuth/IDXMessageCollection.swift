@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 extension Response.Message {
     /// Represents a collection of messages.
     public final class Collection: Sendable, Equatable, Hashable {

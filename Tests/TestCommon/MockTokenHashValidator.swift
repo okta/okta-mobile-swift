@@ -11,6 +11,11 @@
 //
 
 import Foundation
+
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 @testable import AuthFoundation
 
 class MockTokenHashValidator: @unchecked Sendable, TokenHashValidator {

@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 /// Capability to access data related to Duo
 public final class DuoCapability: Capability, Sendable, Equatable, Hashable {
     public let host: String

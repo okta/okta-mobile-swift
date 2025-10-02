@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 /// Capability for authenticating a user with an existing WebAuthn credential.
 ///
 /// This represents the authentication portion of WebAuthn sign-in, and is used to complete a WebAuthn or Passkey authentication request. The properties exposed here may be used individually, or the ``createCredentialAssertionRequest()`` convenience function may be used to produce a request suitable for presentation to the user.

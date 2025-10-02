@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 /// The delegate of a ``SessionLogoutFlow`` may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the logout flow during logout session.
 ///
 /// This protocol extends the basic ``LogoutFlowDelegate`` which all logout flows support.

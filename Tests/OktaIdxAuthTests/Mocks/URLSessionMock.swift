@@ -13,6 +13,10 @@
 import Foundation
 import XCTest
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 @testable import AuthFoundation
 @testable import OktaIdxAuth
 

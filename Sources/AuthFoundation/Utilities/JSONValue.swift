@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 public enum JSONError: Error {
     case cannotDecode(value: (any Sendable)?)
     case invalidContentEncoding

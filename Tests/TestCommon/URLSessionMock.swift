@@ -17,6 +17,10 @@ import XCTest
 import FoundationNetworking
 #endif
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 @testable import AuthFoundation
 
 class URLSessionMock: URLSessionProtocol, @unchecked Sendable {

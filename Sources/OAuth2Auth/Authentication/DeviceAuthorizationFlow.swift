@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 /// The delegate of ``DeviceAuthorizationFlow`` may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication.
 ///
 /// This protocol extends the basic `AuthenticationDelegate` which all authentication flows support.
