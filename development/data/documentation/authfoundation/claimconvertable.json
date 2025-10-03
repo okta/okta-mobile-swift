@@ -138,9 +138,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONRepresentable",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
       ],
@@ -184,49 +181,6 @@
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/AnyJSON": {
-  "abstract" : [
-    {
-      "text" : "Efficiently represents ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " values, and exchanges between its String or Data representations.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AnyJSON"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AnyJSON"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AnyJSON",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/anyjson"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationMethod": {
   "abstract" : [
@@ -609,48 +563,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/isclaim"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JSON": {
-  "abstract" : [
-    {
-      "text" : "Represent mixed JSON values as instances of ",
-      "type" : "text"
-    },
-    {
-      "code" : "Any",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "JSON"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "JSON"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "JSON",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/json"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer": {
   "abstract" : [
     {
@@ -684,40 +596,6 @@
   "title" : "JSONClaimContainer",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsonclaimcontainer"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JSONRepresentable": {
-  "abstract" : [
-    {
-      "text" : "Represents types that are interoperable or usable with JSON.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "JSONRepresentable"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONRepresentable",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "JSONRepresentable"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "JSONRepresentable",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jsonrepresentable"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [

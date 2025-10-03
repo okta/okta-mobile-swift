@@ -1,0 +1,325 @@
+{
+  "abstract" : [
+    {
+      "text" : "Represents types that are interoperable or usable with JSON.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/JSON\/documentation\/JSON"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/JSON\/documentation\/JSON\/JSONRepresentable"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:4JSON17JSONRepresentableP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "JSONRepresentable"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "JSON"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "JSONRepresentable"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "JSONRepresentable"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "JSONRepresentable"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/JSON\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/Array",
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/Bool",
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/Dictionary",
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/Double",
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/Float",
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/Int",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON",
+        "doc:\/\/JSON\/documentation\/JSON\/Foundation\/NSNull",
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/Optional",
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/String"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/JSON\/documentation\/JSON\/JSONRepresentable\/json"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/json\/jsonrepresentable"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://JSON/documentation/JSON": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "JSON",
+  "type" : "topic",
+  "url" : "\/documentation\/json"
+},
+"doc://JSON/documentation/JSON/Foundation/NSNull": {
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Foundation\/NSNull",
+  "title" : "NSNull",
+  "type" : "unresolvable"
+},
+"doc://JSON/documentation/JSON/JSON": {
+  "abstract" : [
+    {
+      "text" : "Represent mixed JSON values as instances of ",
+      "type" : "text"
+    },
+    {
+      "code" : "Any",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json"
+},
+"doc://JSON/documentation/JSON/JSONRepresentable": {
+  "abstract" : [
+    {
+      "text" : "Represents types that are interoperable or usable with JSON.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONRepresentable"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONRepresentable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONRepresentable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONRepresentable",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonrepresentable"
+},
+"doc://JSON/documentation/JSON/JSONRepresentable/json": {
+  "abstract" : [
+    {
+      "text" : "Returns the JSON representation for this object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "json"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAO",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONRepresentable\/json",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "json",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonrepresentable\/json"
+},
+"doc://JSON/documentation/JSON/Swift/Array": {
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/Array",
+  "title" : "Array",
+  "type" : "unresolvable"
+},
+"doc://JSON/documentation/JSON/Swift/Bool": {
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/Bool",
+  "title" : "Bool",
+  "type" : "unresolvable"
+},
+"doc://JSON/documentation/JSON/Swift/Dictionary": {
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/Dictionary",
+  "title" : "Dictionary",
+  "type" : "unresolvable"
+},
+"doc://JSON/documentation/JSON/Swift/Double": {
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/Double",
+  "title" : "Double",
+  "type" : "unresolvable"
+},
+"doc://JSON/documentation/JSON/Swift/Float": {
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/Float",
+  "title" : "Float",
+  "type" : "unresolvable"
+},
+"doc://JSON/documentation/JSON/Swift/Int": {
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/Int",
+  "title" : "Int",
+  "type" : "unresolvable"
+},
+"doc://JSON/documentation/JSON/Swift/Optional": {
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/Optional",
+  "title" : "Optional",
+  "type" : "unresolvable"
+},
+"doc://JSON/documentation/JSON/Swift/String": {
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/String",
+  "title" : "String",
+  "type" : "unresolvable"
+},
+"doc://JSON/s8SendableP": {
+  "identifier" : "doc:\/\/JSON\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}
