@@ -16,7 +16,7 @@ extension Token {
     /// Describes the metadata associated with a token.
     ///
     /// This is used when storing tags and claims associated with tokens, as well as through the ``Credential/find(where:prompt:authenticationContext:)`` method.
-    public struct Metadata: Sendable, JSONClaimContainer {
+    public struct Metadata: Sendable, HasClaims {
         public typealias ClaimType = JWTClaim
 
         /// The unique ID for the token.
@@ -27,30 +27,13 @@ extension Token {
         
         /// The raw contents of the claim payload for this token.
         public let payload: [String: any Sendable]
-
+        
         private let payloadData: Data?
-        init(token: Token, tags: [String: String]) {
+        init(token: Token, tags: [String: String]) throws {
             self.id = token.id
             self.tags = tags
-            
-            var payload = [String: any Sendable]()
-            var payloadData: Data?
-            
-            if let idToken = token.idToken {
-                let tokenComponents = JWT.tokenComponents(from: idToken.rawValue)
-                if tokenComponents.count == 3 {
-                   payloadData = Data(base64Encoded: tokenComponents[1])
-                }
-            }
-            
-            if let payloadData = payloadData,
-               let payloadInfo = try? JSONSerialization.jsonObject(with: payloadData) as? [String: any Sendable]
-            {
-                payload = payloadInfo
-            }
-            
-            self.payload = payload
-            self.payloadData = payloadData
+            self.payload = token.idToken?.body.payload ?? [:]
+            self.payloadData = try token.idToken?.body.data
         }
         
         init(id: String) {
@@ -76,12 +59,11 @@ extension Token.Metadata: Codable {
         self.id = try container.decode(String.self, forKey: .id)
         self.tags = try container.decode([String: String].self, forKey: .tags)
         
-        if let data = self.payloadData,
-           let payload = try JSONSerialization.jsonObject(with: data) as? [String: any Sendable]
-        {
-            self.payload = payload
+        if let data = self.payloadData {
+            self.payload = try JSON(data).payload
         } else {
             self.payload = [:]
+
         }
     }
     

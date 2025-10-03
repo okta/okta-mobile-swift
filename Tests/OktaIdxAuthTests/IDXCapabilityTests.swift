@@ -75,7 +75,7 @@ class IDXCapabilityTests: XCTestCase {
     }
 
     func testPasswordSettingsCapability() async throws {
-        var capability = try XCTUnwrap(PasswordSettingsCapability(with: try JSON(data(for: """
+        var capability = try XCTUnwrap(PasswordSettingsCapability(with: try JSON("""
             {
               "complexity": {
                 "minLength": 8,
@@ -88,7 +88,7 @@ class IDXCapabilityTests: XCTestCase {
                 "maxConsecutiveRepeatingCharacters": 3
               }
              }
-            """))))
+            """).value))
 
         #if canImport(UIKit) && !os(watchOS)
         var passwordRulesDescription = await capability.passwordRules.passwordRulesDescriptor

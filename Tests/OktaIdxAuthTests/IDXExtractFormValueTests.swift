@@ -29,7 +29,7 @@ class IDXExtractFormValueTests: XCTestCase {
                        required: true,
                        secret: false)
         ]))
-        let result = try form.formValues()
+        let result = try form.formValue
         XCTAssertEqual(result, [
             "stateHandle": "abcEasyAs123"
         ])
@@ -50,7 +50,7 @@ class IDXExtractFormValueTests: XCTestCase {
                       secret: false)
         ]))
         form["identifier"]?.value = "me@example.com"
-        let result = try form.formValues()
+        let result = try form.formValue
         XCTAssertEqual(result, [
             "stateHandle": "abcEasyAs123",
             "identifier": "me@example.com"
@@ -82,7 +82,7 @@ class IDXExtractFormValueTests: XCTestCase {
         ]))
         form["credentials.passcode"]?.value = "password"
         
-        let result = try form.formValues()
+        let result = try form.formValue
         XCTAssertEqual(result["stateHandle"], "abcEasyAs123")
         XCTAssertEqual(result["credentials"], .object(["passcode": "password"]))
     }
@@ -124,12 +124,12 @@ class IDXExtractFormValueTests: XCTestCase {
         ]))
         form["authenticator"]?.selectedOption = nestedForm
         
-        let result = try form.formValues()
+        let result = try form.formValue
         XCTAssertEqual(result["stateHandle"], "abcEasyAs123")
-        XCTAssertEqual(result["authenticator"], JSON.object([
+        XCTAssertEqual(result["authenticator"], [
             "id": "idvalue",
             "methodType": "security_question"
-        ]))
+        ])
     }
 
     func testNestedWithNestedDefaultsAndValues() throws {
@@ -190,12 +190,12 @@ class IDXExtractFormValueTests: XCTestCase {
         nestedForm.form?["methodType"]?.selectedOption = smsOption
         nestedForm.form?["phoneNumber"]?.value = "+1 123-555-1234"
         
-        let result = try form.formValues()
+        let result = try form.formValue
         XCTAssertEqual(result["stateHandle"], "abcEasyAs123")
-        XCTAssertEqual(result["authenticator"], JSON.object([
+        XCTAssertEqual(result["authenticator"], [
             "id": "idvalue",
             "methodType": "sms",
             "phoneNumber": "+1 123-555-1234"
-        ]))
+        ])
     }
 }

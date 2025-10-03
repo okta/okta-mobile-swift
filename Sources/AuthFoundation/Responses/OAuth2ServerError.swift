@@ -88,7 +88,7 @@ public struct OAuth2ServerError: Decodable, Error, LocalizedError, Equatable {
     
     enum CodingKeys: String, CodingKey, CaseIterable {
         case code = "error"
-        case description = "errorDescription"
+        case description = "error_description"
     }
 }
 

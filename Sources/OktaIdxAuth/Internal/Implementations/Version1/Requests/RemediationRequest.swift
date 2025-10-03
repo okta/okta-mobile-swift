@@ -26,14 +26,14 @@ extension InteractionCodeFlow {
     }
 }
 
-extension InteractionCodeFlow.RemediationRequest: APIRequest, ReceivesIDXResponse, ReturnsIDXError {
+extension InteractionCodeFlow.RemediationRequest: APIRequest, ReturnsIDXError {
     typealias ResponseType = IonResponse
     
     init(remediation option: Remediation) throws {
         self.url = option.href
         self.httpMethod = option.method
         self.contentType = option.accepts
-        self.bodyParameters = try option.form.formValues().json.anyValue as? [String: any Sendable]
+        self.bodyParameters = try option.form.formValue.anyValue as? [String: any Sendable]
     }
     
     var acceptsType: APIContentType? { .ionJson }

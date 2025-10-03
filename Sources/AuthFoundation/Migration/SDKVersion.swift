@@ -16,10 +16,6 @@ import Foundation
 import CommonSupport
 #endif
 
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 #if canImport(UIKit)
 import UIKit
 #endif
@@ -52,10 +48,10 @@ private let systemName: String = {
         return "tvOS"
     #elseif os(macOS)
         return "macOS"
-    #elseif os(Linux)
-        return "linux"
     #elseif os(Android)
         return "android"
+    #elseif os(Linux)
+        return "linux"
     #endif
 }()
 

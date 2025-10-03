@@ -13,7 +13,7 @@
 import Foundation
 import AuthFoundation
 
-protocol ReceivesIDXResponse: JSONDecodable {}
+protocol IDXResponse: JSONDecodable {}
 
 extension DateFormatter {
     static let idxDateFormatter: DateFormatter = {
@@ -26,15 +26,15 @@ extension DateFormatter {
     }()
 }
 
-let idxResponseDecoder: JSONDecoder = {
+func idxResponseDecoder() -> JSONDecoder {
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     decoder.dateDecodingStrategy = .formatted(DateFormatter.idxDateFormatter)
     return decoder
-}()
+}
 
-extension ReceivesIDXResponse {
+extension IDXResponse {
     static var jsonDecoder: JSONDecoder {
-        idxResponseDecoder
+        idxResponseDecoder()
     }
 }

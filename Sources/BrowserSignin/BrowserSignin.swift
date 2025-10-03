@@ -335,9 +335,11 @@ extension BrowserSignin: BrowserSignin.ProviderFactory {
         from window: BrowserSignin.WindowAnchor?,
         options: Option) throws -> any BrowserSignin.Provider
     {
+        #if canImport(AuthenticationServices)
         if #available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *) {
             return try AuthenticationServicesProvider(from: window, usesEphemeralSession: options.contains(.ephemeralSession))
         }
+        #endif
 
         throw BrowserSigninError.noCompatibleAuthenticationProviders
     }

@@ -13,7 +13,7 @@
 import Foundation
 import AuthFoundation
 
-struct OOBResponse: Codable, Equatable, HasTokenParameters {
+struct OOBResponse: Codable, Equatable, HasTokenParameters, JSONDecodable {
     let oobCode: String
     let expiresIn: TimeInterval
     let interval: TimeInterval?
@@ -34,6 +34,12 @@ struct OOBResponse: Codable, Equatable, HasTokenParameters {
         ["oob_code": oobCode]
     }
     
+    static var jsonDecoder: JSONDecoder {
+        let result = JSONDecoder()
+        result.keyDecodingStrategy = .convertFromSnakeCase
+        return result
+    }
+
     static func == (lhs: OOBResponse, rhs: OOBResponse) -> Bool {
         let tolerance: TimeInterval = 0.000001
         

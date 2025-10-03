@@ -65,11 +65,13 @@ final class JWTTests: XCTestCase {
             "scp": ["offline_access", "profile", "openid"]
         ])
 
-        XCTAssertEqual(token.payload.reduce(into: [String:Bool](), { partialResult, item in
-            guard let value = item.value as? Bool else { return }
+        XCTAssertEqual(token.payload.reduce(into: [String: Int](), { partialResult, item in
+            guard let value = item.value as? Int else { return }
             partialResult[item.key] = value
         }), [
-            "ver": true
+            "exp": 1642536162,
+            "iat": 1642532562,
+            "ver": 1
         ])
     }
 

@@ -15,40 +15,33 @@ import Foundation
 /// Protocol used to define shared behavior when an object can contain claims.
 ///
 /// > Note: This does not apply to JWT, which while it contains claims, it has a different format which includes headers and signatures.
-public protocol JSONClaimContainer: HasClaims, JSONDecodable {}
+public protocol JSONClaimContainer: HasClaims, JSONDecodable {
+    var json: JSON { get }
+    
+    init(_ json: JSON) throws
+}
 
 extension JSONClaimContainer {
-    static func decodePayload(from decoder: any Decoder) throws -> [String: any Sendable] {
-        let container = try decoder.container(keyedBy: JSONCodingKeys.self)
-        return try container.decode([String: any Sendable].self)
-    }
-
-    static func encodePayload(_ object: any HasClaims & Codable, to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: JSONCodingKeys.self)
-        try object.payload
-            .compactMap { (key: String, value: Any) in
-                guard let key = JSONCodingKeys(stringValue: key) else { return nil }
-                return (key, value)
-            }
-            .forEach { (key: JSONCodingKeys, value: Any) in
-                if let value = value as? Bool {
-                    try container.encode(value, forKey: key)
-                } else if let value = value as? String {
-                    try container.encode(value, forKey: key)
-                } else if let value = value as? Int {
-                    try container.encode(value, forKey: key)
-                } else if let value = value as? Double {
-                    try container.encode(value, forKey: key)
-                } else if let value = value as? [String: String] {
-                    try container.encode(value, forKey: key)
-                }
-            }
+    @_documentation(visibility: internal)
+    public init(_ data: Data) throws {
+        try self.init(try JSON(data))
     }
 }
 
-@_documentation(visibility: private)
-extension JSONClaimContainer where Self: Codable {
+extension JSONClaimContainer where Self: Decodable {
+    @_documentation(visibility: internal)
+    public init(from decoder: any Decoder) throws {
+        try self.init(try JSON(from: decoder))
+    }
+    
+    @_documentation(visibility: internal)
     public func encode(to encoder: any Encoder) throws {
-        try Self.encodePayload(self, to: encoder)
+        try json.encode(to: encoder)
     }
 }
+
+extension JSONClaimContainer {
+    /// The raw payload of provider metadata claims from the JSON object.
+    public var payload: [String: any Sendable] { json.payload }
+}
+

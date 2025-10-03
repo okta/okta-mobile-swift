@@ -20,18 +20,17 @@ import Foundation
 public struct TokenInfo: Sendable, Codable, JSONClaimContainer {
     public typealias ClaimType = JWTClaim
     
-    public let payload: [String: any Sendable]
+    public let json: JSON
 
     @_documentation(visibility: internal)
-    public init(_ info: [String: any Sendable]) {
-        self.payload = info
+    public init(_ json: JSON) {
+        self.json = json
     }
     
-    @_documentation(visibility: internal)
-    public init(from decoder: any Decoder) throws {
-        self.init(try Self.decodePayload(from: decoder))
+    public func encode(to encoder: any Encoder) throws {
+        try json.encode(to: encoder)
     }
-    
+
     /// Indicates if this token is active.
     public var active: Bool? { self["active"] }
 

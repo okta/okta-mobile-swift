@@ -308,7 +308,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked
             // Stopping should prevent subsequent refreshes
             credential.automaticRefresh = false
 
-            try await Task.sleep(delay: 1)
+            try await Task.sleep(delay: 1.0)
             XCTAssertEqual(urlSession.requests.count, 0)
         }
     }

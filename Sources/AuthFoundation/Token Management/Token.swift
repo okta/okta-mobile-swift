@@ -14,15 +14,11 @@ import Foundation
 
 #if !COCOAPODS
 import CommonSupport
-import JSON
-#endif
-
-#if !COCOAPODS
-import CommonSupport
+@_exported import JSON
 #endif
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
-public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer, Expires {
+public struct Token: Sendable, Codable, Equatable, Hashable, HasClaims, Expires {
     public typealias ClaimType = TokenClaim
 
     /// The object used to ensure ID tokens are valid.
@@ -103,14 +99,15 @@ public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer,
     public var issuedTokenType: String? { self[.issuedTokenType] }
     
     /// The claim payload container for this token
-    public var payload: [String: any Sendable] { jsonPayload.jsonValue.anyValue as? [String: any Sendable] ?? [:] }
+    @_documentation(visibility: internal)
+    public var payload: [String: any Sendable] { json.payload }
 
     /// Indicates whether or not the token is being refreshed.
     public var isRefreshing: Bool {
         refreshAction.isActive
     }
     
-    let jsonPayload: AnyJSON
+    public let json: JSON
     internal let refreshAction: CoalescedResult<Token>
 
     /// Return the relevant token string for the given type.
@@ -192,23 +189,22 @@ public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer,
     init(id: String,
          issuedAt: Date,
          context: Context,
-         json: AnyJSON) throws
+         json: JSON) throws
     {
         self.id = id
         self.issuedAt = issuedAt
         self.context = context
-        self.jsonPayload = json
+        self.json = json
         self.refreshAction = .init(taskName: "Refresh Token \(id)")
         
-        let payload = json.jsonValue.anyValue as? [String: any Sendable] ?? [:]
-        if let value = payload[TokenClaim.idToken.rawValue] as? String {
+        if let value = json[TokenClaim.idToken.rawValue]?.string {
             idToken = try JWT(value)
         } else {
             idToken = nil
         }
         
         // Ensure an access token is provided.
-        if let value: String = TokenClaim.optionalValue(.accessToken, in: payload) {
+        if let value: String = TokenClaim.optionalValue(.accessToken, in: json.payload) {
             accessToken = value
         }
         
@@ -225,8 +221,8 @@ public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer,
             throw ClaimError.missingRequiredValue(key: TokenClaim.accessToken.rawValue)
         }
 
-        tokenType = try TokenClaim.value(.tokenType, in: payload)
-        expiresIn = try TokenClaim.value(.expiresIn, in: payload)
+        tokenType = try TokenClaim.value(.tokenType, in: json.payload)
+        expiresIn = try TokenClaim.value(.expiresIn, in: json.payload)
     }
     
     public func encode(to encoder: any Encoder) throws {
@@ -234,7 +230,7 @@ public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer,
         try container.encode(id, forKey: .id)
         try container.encodeIfPresent(issuedAt, forKey: .issuedAt)
         try container.encode(context, forKey: .context)
-        try container.encode(jsonPayload.stringValue, forKey: .rawValue)
+        try container.encode(json, forKey: .rawValue)
     }
 
     // MARK: Private properties / methods

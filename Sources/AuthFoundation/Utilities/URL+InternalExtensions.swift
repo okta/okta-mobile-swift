@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 extension URL {
     // Workaround to address a known bug with URL.appendingPathComponent on Linux.
     // https://github.com/apple/swift-corelibs-foundation/issues/4849
