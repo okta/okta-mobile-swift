@@ -131,20 +131,21 @@ class URLSessionMock: URLSessionProtocol, @unchecked Sendable {
                 if let delay = requestDelay {
                     try await Task.sleep(delay: delay)
                 }
-                
-                await MainActor.yield()
-                guard let data = call?.data,
-                      let response = call?.response
-                else {
-                    if let error = call?.error {
-                        continuation.resume(throwing: error)
-                    } else {
-                        continuation.resume(throwing: APIClientError.missingResponse(request: request))
-                    }
-                    return
-                }
 
-                continuation.resume(returning: (data, response))
+                queue.sync {
+                    guard let data = call?.data,
+                          let response = call?.response
+                    else {
+                        if let error = call?.error {
+                            continuation.resume(throwing: error)
+                        } else {
+                            continuation.resume(throwing: APIClientError.missingResponse(request: request))
+                        }
+                        return
+                    }
+
+                    continuation.resume(returning: (data, response))
+                }
             }
         }
     }

@@ -16,6 +16,10 @@ import AuthFoundation
 import CommonSupport
 #endif
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 #if canImport(AuthenticationServices)
 import AuthenticationServices
 import OAuth2Auth
@@ -147,7 +151,7 @@ final class AuthenticationServicesProvider: NSObject, BrowserSignin.Provider {
         }
         
         guard let url = url else {
-            return .failure(BrowserSigninError.noAuthenticatorProviderResonse)
+            return .failure(BrowserSigninError.noAuthenticatorProviderResponse)
         }
         
         return .success(url)

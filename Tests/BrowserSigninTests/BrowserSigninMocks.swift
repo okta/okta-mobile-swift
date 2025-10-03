@@ -43,7 +43,7 @@ struct BrowserSigninProviderFactoryMock: BrowserSignin.ProviderFactory {
     
     static func createWebAuthenticationProvider(for browserSignin: BrowserSignin,
                                                 from window: BrowserSignin.WindowAnchor?,
-                                                options: BrowserSignin.Option) async throws -> (any BrowserSignin.Provider)?
+                                                options: BrowserSignin.Option) async throws -> any BrowserSignin.Provider
     {
         let testName = browserSignin.signInFlow.additionalParameters?["testName"] as? String
 
@@ -97,7 +97,7 @@ class BrowserSigninProviderMock: @unchecked Sendable, BrowserSignin.Provider {
             }
             throw error
         case nil:
-            throw BrowserSigninError.noAuthenticatorProviderResonse
+            throw BrowserSigninError.noAuthenticatorProviderResponse
         }
     }
     

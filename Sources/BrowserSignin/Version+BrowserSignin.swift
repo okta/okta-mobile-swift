@@ -21,6 +21,6 @@ extension SDKVersion.Name {
 extension SDKVersion {
     @_documentation(visibility: private)
     public static let browserSignin: SDKVersion? = {
-        register(.browserSignin, version: "2.1.1")
+        register(.browserSignin, version: "2.1.2")
     }()
 }
