@@ -29,7 +29,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:13BrowserSigninAAC15ProviderFactoryP023createWebAuthenticationC03for4from7optionsAB0C0_pSgAB_So8NSWindowCSgAB6OptionVtYaKFZ",
+    "externalID" : "s:13BrowserSigninAAC15ProviderFactoryP023createWebAuthenticationC03for4from7optionsAB0C0_pAB_So8NSWindowCSgAB6OptionVtYaKFZ",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -138,7 +138,7 @@
       },
       {
         "kind" : "text",
-        "text" : " -> (any "
+        "text" : " -> any "
       },
       {
         "kind" : "typeIdentifier",
@@ -153,10 +153,6 @@
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:13BrowserSigninAAC8ProviderP",
         "text" : "Provider"
-      },
-      {
-        "kind" : "text",
-        "text" : ")?"
       }
     ],
     "modules" : [
@@ -317,7 +313,7 @@
             },
             {
               "kind" : "text",
-              "text" : " -> (any "
+              "text" : " -> any "
             },
             {
               "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
@@ -334,10 +330,6 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:13BrowserSigninAAC8ProviderP",
               "text" : "Provider"
-            },
-            {
-              "kind" : "text",
-              "text" : ")?"
             }
           ]
         }
@@ -433,6 +425,42 @@
             }
           ],
           "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noCompatibleAuthenticationProviders",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : " if no provider could be found.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Throws",
+          "style" : "note",
+          "type" : "aside"
         }
       ],
       "kind" : "content"
@@ -734,7 +762,7 @@
     },
     {
       "kind" : "text",
-      "text" : " -> (any "
+      "text" : " -> any "
     },
     {
       "kind" : "typeIdentifier",
@@ -749,10 +777,6 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:13BrowserSigninAAC8ProviderP",
       "text" : "Provider"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?"
     }
   ],
   "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/ProviderFactory-swift.protocol\/createWebAuthenticationProvider(for:from:options:)",
@@ -793,6 +817,31 @@
   "title" : "BrowserSignin.WindowAnchor",
   "type" : "topic",
   "url" : "\/documentation\/browsersignin\/browsersignin\/windowanchor"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/noCompatibleAuthenticationProviders": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "noCompatibleAuthenticationProviders"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noCompatibleAuthenticationProviders",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.noCompatibleAuthenticationProviders",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/nocompatibleauthenticationproviders"
 }
 }
 }

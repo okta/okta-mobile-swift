@@ -28,7 +28,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "BrowserSignin",
-    "externalID" : "s:13BrowserSigninAAC31createWebAuthenticationProvider3for4from7optionsAB0F0_pSgAB_So8NSWindowCSgAB6OptionVtKFZ",
+    "externalID" : "s:13BrowserSigninAAC31createWebAuthenticationProvider3for4from7optionsAB0F0_pAB_So8NSWindowCSgAB6OptionVtKFZ",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -129,7 +129,7 @@
       },
       {
         "kind" : "text",
-        "text" : " -> (any "
+        "text" : " -> any "
       },
       {
         "kind" : "typeIdentifier",
@@ -144,59 +144,11 @@
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:13BrowserSigninAAC8ProviderP",
         "text" : "Provider"
-      },
-      {
-        "kind" : "text",
-        "text" : ")?"
       }
     ],
     "modules" : [
       {
         "name" : "BrowserSignin"
-      }
-    ],
-    "platforms" : [
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "13.0",
-        "name" : "iOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "13.0",
-        "name" : "Mac Catalyst",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "10.15",
-        "name" : "macOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "16.0",
-        "name" : "tvOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "1.0",
-        "name" : "visionOS",
-        "unavailable" : false
-      },
-      {
-        "beta" : false,
-        "deprecated" : false,
-        "introducedAt" : "7.0",
-        "name" : "watchOS",
-        "unavailable" : false
       }
     ],
     "role" : "symbol",
@@ -343,7 +295,7 @@
             },
             {
               "kind" : "text",
-              "text" : " -> (any "
+              "text" : " -> any "
             },
             {
               "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
@@ -360,10 +312,6 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:13BrowserSigninAAC8ProviderP",
               "text" : "Provider"
-            },
-            {
-              "kind" : "text",
-              "text" : ")?"
             }
           ]
         }
@@ -644,7 +592,7 @@
     },
     {
       "kind" : "text",
-      "text" : " -> (any "
+      "text" : " -> any "
     },
     {
       "kind" : "typeIdentifier",
@@ -659,10 +607,6 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:13BrowserSigninAAC8ProviderP",
       "text" : "Provider"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?"
     }
   ],
   "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/createWebAuthenticationProvider(for:from:options:)",

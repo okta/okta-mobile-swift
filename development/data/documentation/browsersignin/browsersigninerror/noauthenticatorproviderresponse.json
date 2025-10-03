@@ -3,21 +3,21 @@
     "paths" : [
       [
         "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
-        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin"
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/WindowAnchor"
+    "url" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noAuthenticatorProviderResponse"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:13BrowserSigninAAC12WindowAnchora",
+    "externalID" : "s:13BrowserSignin0aB5ErrorO31noAuthenticatorProviderResponseyA2CmF",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "typealias"
+        "text" : "case"
       },
       {
         "kind" : "text",
@@ -25,7 +25,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "WindowAnchor"
+        "text" : "noAuthenticatorProviderResponse"
       }
     ],
     "modules" : [
@@ -33,16 +33,10 @@
         "name" : "BrowserSignin"
       }
     ],
-    "navigatorTitle" : [
-      {
-        "kind" : "identifier",
-        "text" : "WindowAnchor"
-      }
-    ],
     "role" : "symbol",
-    "roleHeading" : "Type Alias",
-    "symbolKind" : "typealias",
-    "title" : "BrowserSignin.WindowAnchor"
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "BrowserSigninError.noAuthenticatorProviderResponse"
   },
   "primaryContentSections" : [
     {
@@ -57,7 +51,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "typealias"
+              "text" : "case"
             },
             {
               "kind" : "text",
@@ -65,16 +59,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "WindowAnchor"
-            },
-            {
-              "kind" : "text",
-              "text" : " = "
-            },
-            {
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "c:objc(cs)NSWindow",
-              "text" : "NSWindow"
+              "text" : "noAuthenticatorProviderResponse"
             }
           ]
         }
@@ -93,7 +78,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/browsersignin\/browsersignin\/windowanchor"
+        "\/documentation\/browsersignin\/browsersigninerror\/noauthenticatorproviderresponse"
       ],
       "traits" : [
         {
@@ -118,48 +103,14 @@
   "type" : "topic",
   "url" : "\/documentation\/browsersignin"
 },
-"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin": {
-  "abstract" : [
-    {
-      "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "BrowserSignin"
-    }
-  ],
-  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "BrowserSignin"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "BrowserSignin",
-  "type" : "topic",
-  "url" : "\/documentation\/browsersignin\/browsersignin"
-},
-"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/WindowAnchor": {
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError": {
   "abstract" : [
 
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "typealias"
+      "text" : "enum"
     },
     {
       "kind" : "text",
@@ -167,21 +118,46 @@
     },
     {
       "kind" : "identifier",
-      "text" : "WindowAnchor"
+      "text" : "BrowserSigninError"
     }
   ],
-  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/WindowAnchor",
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "WindowAnchor"
+      "text" : "BrowserSigninError"
     }
   ],
   "role" : "symbol",
-  "title" : "BrowserSignin.WindowAnchor",
+  "title" : "BrowserSigninError",
   "type" : "topic",
-  "url" : "\/documentation\/browsersignin\/browsersignin\/windowanchor"
+  "url" : "\/documentation\/browsersignin\/browsersigninerror"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSigninError/noAuthenticatorProviderResponse": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "noAuthenticatorProviderResponse"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noAuthenticatorProviderResponse",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "BrowserSigninError.noAuthenticatorProviderResponse",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersigninerror\/noauthenticatorproviderresponse"
 }
 }
 }
