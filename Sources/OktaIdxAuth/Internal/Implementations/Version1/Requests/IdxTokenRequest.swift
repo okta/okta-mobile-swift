@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import JSON
+#endif
+
 extension InteractionCodeFlow {
     struct TokenRequest: AuthenticationFlowRequest {
         typealias Flow = InteractionCodeFlow

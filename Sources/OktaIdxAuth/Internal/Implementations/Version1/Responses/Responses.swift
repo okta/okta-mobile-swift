@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import JSON
+#endif
+
 enum IDXIONObjectType: Sendable {
     case Link
 }

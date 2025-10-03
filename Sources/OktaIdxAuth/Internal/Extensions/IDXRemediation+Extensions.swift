@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import JSON
+#endif
+
 extension Remediation {
     func apiRequest() throws -> InteractionCodeFlow.RemediationRequest {
         // Inform any capabilities associated with this remediation that it will proceed.

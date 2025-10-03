@@ -16,6 +16,10 @@ import Foundation
 import CommonSupport
 #endif
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 /// A common delegate protocol that all authentication flows should support.
 public protocol AuthenticationDelegate: AnyObject {
     /// Sent when an authentication session starts.

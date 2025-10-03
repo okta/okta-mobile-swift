@@ -11,6 +11,11 @@
 //
 
 import XCTest
+
+#if !COCOAPODS
+import JSON
+#endif
+
 @testable import AuthFoundation
 @testable import TestCommon
 

@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import JSON
+#endif
+
 extension String {
     static func relyingPartyIssuer(from json: JSON, issuerURL: URL) throws -> String {
         // On registration requests, the server-supplied rpId value is within the `rp.id` path.

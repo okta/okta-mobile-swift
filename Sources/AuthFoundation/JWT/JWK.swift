@@ -16,6 +16,10 @@ import Foundation
 import CommonSupport
 #endif
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 /// Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.
 ///
 /// > Warning: At this time, this class only supports RSA Public Keys.

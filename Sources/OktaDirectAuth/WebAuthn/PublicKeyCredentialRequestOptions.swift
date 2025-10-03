@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if !COCOAPODS
+import JSON
+#endif
+
 extension WebAuthn {
     /**
      The PublicKeyCredentialRequestOptions dictionary supplies get() with the data it needs to generate an assertion. Its challenge member MUST be present, while its other members are OPTIONAL.

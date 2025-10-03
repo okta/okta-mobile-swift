@@ -15,6 +15,7 @@ import AuthFoundation
 
 #if !COCOAPODS
 import CommonSupport
+import JSON
 #endif
 
 extension Remediation.Form {

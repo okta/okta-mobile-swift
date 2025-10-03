@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if !COCOAPODS
+import JSON
+#endif
+
 /// Describes the configuration of an OpenID server.
 ///
 /// The values exposed from this configuration are typically used during authentication, or when querying a server for its capabilities. This type uses ``HasClaims`` to represent the various provider metadata (represented as ``OpenIdConfiguration/ProviderMetadata``) for returning the full contents of the server's configuration. For more information, please see the ``HasClaims`` documentation.

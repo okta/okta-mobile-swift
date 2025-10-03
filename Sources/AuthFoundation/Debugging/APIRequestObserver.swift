@@ -24,6 +24,10 @@ import OSLog
 import CommonSupport
 #endif
 
+#if !COCOAPODS
+import CommonSupport
+#endif
+
 #if compiler(<6.0)
 extension OSLog: @unchecked Sendable {}
 #endif
