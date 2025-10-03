@@ -27,7 +27,7 @@ public enum BrowserSigninError: Error {
     case cannotStartBrowserSession
     case cannotComposeAuthenticationURL
     case authenticationProvider(error: any Error)
-    case noAuthenticatorProviderResonse
+    case noAuthenticatorProviderResponse
     case serverError(_ error: OAuth2ServerError)
     case invalidRedirectScheme(_ scheme: String?)
     case userCancelledLogin(_ reason: String? = nil)
@@ -55,7 +55,6 @@ public enum BrowserSigninError: Error {
 ///
 ///  > Note: The use of HTTPS addresses within the redirect callback URI is limited by the availability of support within ASWebAuthenticationSession, which currently requires a minimum of iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, or visionOS 1.1.
 @MainActor
-@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 public final class BrowserSignin {
     #if os(macOS)
     public typealias WindowAnchor = NSWindow
@@ -141,14 +140,10 @@ public final class BrowserSignin {
         }
 
         async let authorizeUrl = signInFlow.start(with: context)
-        guard let provider = try await Self.providerFactory.createWebAuthenticationProvider(
+        let provider = try await Self.providerFactory.createWebAuthenticationProvider(
             for: self,
             from: window,
             options: options)
-        else {
-            throw BrowserSigninError.noCompatibleAuthenticationProviders
-        }
-        
         self.provider = provider
         
         let url = try await provider.open(authorizeUrl: authorizeUrl,
@@ -208,13 +203,10 @@ public final class BrowserSignin {
         }
 
         async let authorizeUrl = signOutFlow.start(with: context)
-        guard let provider = try await Self.providerFactory.createWebAuthenticationProvider(
+        let provider = try await Self.providerFactory.createWebAuthenticationProvider(
             for: self,
             from: window,
             options: options)
-        else {
-            throw BrowserSigninError.noCompatibleAuthenticationProviders
-        }
 
         self.provider = provider
         defer { self.provider = nil }
@@ -337,18 +329,20 @@ public final class BrowserSignin {
     var provider: (any BrowserSignin.Provider)?
 }
 
-@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension BrowserSignin: BrowserSignin.ProviderFactory {
     public nonisolated static func createWebAuthenticationProvider(
         for webAuth: BrowserSignin,
         from window: BrowserSignin.WindowAnchor?,
-        options: Option) throws -> (any BrowserSignin.Provider)?
+        options: Option) throws -> any BrowserSignin.Provider
     {
-        try AuthenticationServicesProvider(from: window, usesEphemeralSession: options.contains(.ephemeralSession))
+        if #available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *) {
+            return try AuthenticationServicesProvider(from: window, usesEphemeralSession: options.contains(.ephemeralSession))
+        }
+
+        throw BrowserSigninError.noCompatibleAuthenticationProviders
     }
 }
 
-@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension BrowserSignin {
     /// Asynchronously initiates authentication from the given window.
     /// - Parameters:
