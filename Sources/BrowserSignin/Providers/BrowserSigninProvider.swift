@@ -40,9 +40,10 @@ extension BrowserSignin {
         ///   - window: The window anchor the sign-in is initiated from.
         ///   - options: The options used to control the sign in provider's behavior.
         /// - Returns: ``BrowserSignin/Provider`` that is capable of signing in, or `nil` if browser sign in is unsupported on this platform.
+        /// - Throws: ``BrowserSigninError/noCompatibleAuthenticationProviders`` if no provider could be found.
         nonisolated static func createWebAuthenticationProvider(
             for browserSignin: BrowserSignin,
             from window: BrowserSignin.WindowAnchor?,
-            options: BrowserSignin.Option) async throws -> (any Provider)?
+            options: BrowserSignin.Option) async throws -> any Provider
     }
 }
