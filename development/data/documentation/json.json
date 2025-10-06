@@ -33,29 +33,41 @@
   ],
   "topicSections" : [
     {
-      "anchor" : "Classes",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/JSON\/documentation\/JSON\/AnyJSON"
-      ],
-      "title" : "Classes"
-    },
-    {
       "anchor" : "Protocols",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/JSON\/documentation\/JSON\/JSONRepresentable"
+        "doc:\/\/JSON\/documentation\/JSON\/JSONObjectRepresentable",
+        "doc:\/\/JSON\/documentation\/JSON\/JSONPrimitiveConvertible",
+        "doc:\/\/JSON\/documentation\/JSON\/JSONRootValue",
+        "doc:\/\/JSON\/documentation\/JSON\/JSONValueConvertible",
+        "doc:\/\/JSON\/documentation\/JSON\/JSONValueRepresentable"
       ],
       "title" : "Protocols"
+    },
+    {
+      "anchor" : "Structures",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/JSON\/documentation\/JSON\/JSON"
+      ],
+      "title" : "Structures"
     },
     {
       "anchor" : "Enumerations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/JSON\/documentation\/JSON\/JSON",
         "doc:\/\/JSON\/documentation\/JSON\/JSONError"
       ],
       "title" : "Enumerations"
+    },
+    {
+      "anchor" : "Extended-Modules",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/JSON\/documentation\/JSON\/Foundation",
+        "doc:\/\/JSON\/documentation\/JSON\/Swift"
+      ],
+      "title" : "Extended Modules"
     }
   ],
   "variants" : [
@@ -83,68 +95,28 @@
   "type" : "topic",
   "url" : "\/documentation\/json"
 },
-"doc://JSON/documentation/JSON/AnyJSON": {
+"doc://JSON/documentation/JSON/Foundation": {
   "abstract" : [
-    {
-      "text" : "Efficiently represents ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " values, and exchanges between its String or Data representations.",
-      "type" : "text"
-    }
+
   ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AnyJSON"
-    }
-  ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/AnyJSON",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Foundation",
   "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AnyJSON"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AnyJSON",
+  "role" : "collection",
+  "title" : "Foundation",
   "type" : "topic",
-  "url" : "\/documentation\/json\/anyjson"
+  "url" : "\/documentation\/json\/foundation"
 },
 "doc://JSON/documentation/JSON/JSON": {
   "abstract" : [
     {
-      "text" : "Represent mixed JSON values as instances of ",
-      "type" : "text"
-    },
-    {
-      "code" : "Any",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "text" : "Mutable value type representing JSON and its contents in a type-safe and performant way.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "enum"
+      "text" : "struct"
     },
     {
       "kind" : "text",
@@ -167,6 +139,92 @@
   "title" : "JSON",
   "type" : "topic",
   "url" : "\/documentation\/json\/json"
+},
+"doc://JSON/documentation/JSON/JSON/Primitive": {
+  "abstract" : [
+    {
+      "text" : "Represents a primitive value (aka “leaf node”) within a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Primitive"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Primitive",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Primitive"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON.Primitive",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/primitive"
+},
+"doc://JSON/documentation/JSON/JSON/Value-swift.enum": {
+  "abstract" : [
+    {
+      "text" : "Represents a value within a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Value-swift.enum",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Value"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON.Value",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/value-swift.enum"
 },
 "doc://JSON/documentation/JSON/JSONError": {
   "abstract" : [
@@ -199,10 +257,19 @@
   "type" : "topic",
   "url" : "\/documentation\/json\/jsonerror"
 },
-"doc://JSON/documentation/JSON/JSONRepresentable": {
+"doc://JSON/documentation/JSON/JSONObjectRepresentable": {
   "abstract" : [
     {
-      "text" : "Represents types that are interoperable or usable with JSON.",
+      "text" : "Represents ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object value types that can be represented as Swift Foundation types.",
       "type" : "text"
     }
   ],
@@ -217,21 +284,204 @@
     },
     {
       "kind" : "identifier",
-      "text" : "JSONRepresentable"
+      "text" : "JSONObjectRepresentable"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONRepresentable",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONObjectRepresentable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "JSONRepresentable"
+      "text" : "JSONObjectRepresentable"
     }
   ],
   "role" : "symbol",
-  "title" : "JSONRepresentable",
+  "title" : "JSONObjectRepresentable",
   "type" : "topic",
-  "url" : "\/documentation\/json\/jsonrepresentable"
+  "url" : "\/documentation\/json\/jsonobjectrepresentable"
+},
+"doc://JSON/documentation/JSON/JSONPrimitiveConvertible": {
+  "abstract" : [
+    {
+      "text" : "Represents types whose values can be converted to a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Primitive",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONPrimitiveConvertible"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONPrimitiveConvertible",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONPrimitiveConvertible"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONPrimitiveConvertible",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonprimitiveconvertible"
+},
+"doc://JSON/documentation/JSON/JSONRootValue": {
+  "abstract" : [
+    {
+      "text" : "Represents types whose value can be used as the root of a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONRootValue"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONRootValue",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONRootValue"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONRootValue",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonrootvalue"
+},
+"doc://JSON/documentation/JSON/JSONValueConvertible": {
+  "abstract" : [
+    {
+      "text" : "Represents types whose values can be converted to a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Value-swift.enum",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONValueConvertible"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONValueConvertible",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONValueConvertible"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONValueConvertible",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonvalueconvertible"
+},
+"doc://JSON/documentation/JSON/JSONValueRepresentable": {
+  "abstract" : [
+    {
+      "text" : "Represents ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " primitive value types that can be represented as Swift Foundation types.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONValueRepresentable"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONValueRepresentable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONValueRepresentable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONValueRepresentable",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonvaluerepresentable"
+},
+"doc://JSON/documentation/JSON/Swift": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Swift",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/swift"
 }
 }
 }

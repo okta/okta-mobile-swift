@@ -138,8 +138,6 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo"
       ],
@@ -173,6 +171,24 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
       ],
       "title" : "JWT and Token Verification"
+    }
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Initializers",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer\/init(_:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer\/json"
+      ],
+      "title" : "Instance Properties"
     }
   ],
   "variants" : [
@@ -460,6 +476,76 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsonclaimcontainer"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer/init(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer\/init(_:)",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "init(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonclaimcontainer\/init(_:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer/json": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "json"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer\/json",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "json",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonclaimcontainer\/json"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JSONDecodable": {
   "abstract" : [
 
@@ -660,74 +746,6 @@
   "title" : "OpenIdConfiguration",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Token": {
-  "abstract" : [
-    {
-      "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Token"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Token"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Token",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/token"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata": {
-  "abstract" : [
-    {
-      "text" : "Describes the metadata associated with a token.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Metadata"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Metadata"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Token.Metadata",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/token\/metadata"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo": {
   "abstract" : [

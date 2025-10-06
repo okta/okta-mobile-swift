@@ -35,7 +35,8 @@
       "anchor" : "Operators",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/!=(_:_:)"
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/!=(_:_:)",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/==(_:_:)"
       ],
       "title" : "Operators"
     }
@@ -68,22 +69,14 @@
 "doc://JSON/documentation/JSON/JSON": {
   "abstract" : [
     {
-      "text" : "Represent mixed JSON values as instances of ",
-      "type" : "text"
-    },
-    {
-      "code" : "Any",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "text" : "Mutable value type representing JSON and its contents in a type-safe and performant way.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "enum"
+      "text" : "struct"
     },
     {
       "kind" : "text",
@@ -168,6 +161,70 @@
   "title" : "!=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/json\/json\/!=(_:_:)"
+},
+"doc://JSON/documentation/JSON/JSON/==(_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "=="
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/==(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "==(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/==(_:_:)"
 }
 }
 }

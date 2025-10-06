@@ -175,10 +175,18 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/active",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/payload",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/json",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/username"
       ],
       "title" : "Instance Properties"
+    },
+    {
+      "anchor" : "Instance-Methods",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/encode(to:)"
+      ],
+      "title" : "Instance Methods"
     },
     {
       "anchor" : "Type-Aliases",
@@ -192,7 +200,8 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/JSONClaimContainer-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -478,6 +487,17 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/JSONClaimContainer-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/JSONClaimContainer-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "JSONClaimContainer Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/jsonclaimcontainer-implementations"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/active": {
   "abstract" : [
     {
@@ -519,7 +539,57 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/active"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/payload": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/encode(to:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "encode"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "to"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7EncoderP",
+      "text" : "Encoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/encode(to:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "encode(to:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/encode(to:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/json": {
   "abstract" : [
 
   ],
@@ -534,37 +604,24 @@
     },
     {
       "kind" : "identifier",
-      "text" : "payload"
+      "text" : "json"
     },
     {
       "kind" : "text",
-      "text" : ": ["
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s8SendableP",
-      "text" : "Sendable"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/payload",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/json",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "payload",
+  "title" : "json",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/tokeninfo\/payload"
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/json"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/username": {
   "abstract" : [

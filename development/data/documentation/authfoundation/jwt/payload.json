@@ -1,7 +1,15 @@
 {
   "abstract" : [
     {
-      "text" : "Raw paylaod of claims, as a dictionary representation.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "HasClaims.payload",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -109,7 +117,15 @@
             },
             {
               "kind" : "text",
-              "text" : "]"
+              "text" : "] { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
             }
           ]
         }
@@ -189,10 +205,7 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/payload": {
   "abstract" : [
-    {
-      "text" : "Raw paylaod of claims, as a dictionary representation.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {

@@ -1,7 +1,24 @@
 {
   "abstract" : [
     {
-      "text" : "Initializes a JSON object from a variety of supported types.",
+      "text" : "Initializes a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object from a JSON-formatted ",
+      "type" : "text"
+    },
+    {
+      "code" : "Data",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " value.",
       "type" : "text"
     }
   ],
@@ -19,7 +36,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:4JSONAAOyABs8Sendable_pSgKcfc::OverloadGroup",
+    "externalID" : "s:4JSONAAVyAB10Foundation4DataVKcfc::OverloadGroup",
     "fragments" : [
       {
         "kind" : "identifier",
@@ -76,7 +93,7 @@
           "otherDeclarations" : {
             "declarations" : [
               {
-                "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-16b3u",
+                "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-4mq1j",
                 "tokens" : [
                   {
                     "kind" : "keyword",
@@ -93,53 +110,11 @@
                   {
                     "kind" : "text",
                     "text" : " "
-                  },
-                  {
-                    "kind" : "internalParam",
-                    "text" : "value"
-                  },
-                  {
-                    "kind" : "text",
-                    "text" : ": "
                   },
                   {
                     "highlight" : "changed",
-                    "kind" : "typeIdentifier",
-                    "preciseIdentifier" : "s:10Foundation4DataV",
-                    "text" : "Data"
-                  },
-                  {
-                    "kind" : "text",
-                    "text" : ") "
-                  },
-                  {
-                    "kind" : "keyword",
-                    "text" : "throws"
-                  }
-                ]
-              },
-              {
-                "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-44ebn",
-                "tokens" : [
-                  {
-                    "kind" : "keyword",
-                    "text" : "init"
-                  },
-                  {
-                    "kind" : "text",
-                    "text" : "("
-                  },
-                  {
-                    "kind" : "externalParam",
-                    "text" : "_"
-                  },
-                  {
-                    "kind" : "text",
-                    "text" : " "
-                  },
-                  {
                     "kind" : "internalParam",
-                    "text" : "value"
+                    "text" : "string"
                   },
                   {
                     "kind" : "text",
@@ -156,13 +131,14 @@
                     "text" : ") "
                   },
                   {
+                    "highlight" : "changed",
                     "kind" : "keyword",
                     "text" : "throws"
                   }
                 ]
               },
               {
-                "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-6kfxs",
+                "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-3yhia",
                 "tokens" : [
                   {
                     "kind" : "keyword",
@@ -181,6 +157,195 @@
                     "text" : " "
                   },
                   {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "value"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "keyword",
+                    "text" : "Any"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-35cj0",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "_"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "value"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:4JSONAAV",
+                    "text" : "JSON"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ")"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-3t9am",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "_"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "value"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:4JSONAAV",
+                    "text" : "JSON"
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "."
+                  },
+                  {
+                    "highlight" : "changed",
+                    "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Value-swift.enum",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:4JSONAAV5ValueO",
+                    "text" : "Value"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ")"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-rbhw",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "_"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "internalParam",
+                    "text" : "value"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ": "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "text",
+                    "text" : "any "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "typeIdentifier",
+                    "preciseIdentifier" : "s:s7Codablea",
+                    "text" : "Codable"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : ") "
+                  },
+                  {
+                    "highlight" : "changed",
+                    "kind" : "keyword",
+                    "text" : "throws"
+                  }
+                ]
+              },
+              {
+                "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-6xts4",
+                "tokens" : [
+                  {
+                    "kind" : "keyword",
+                    "text" : "init"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : "("
+                  },
+                  {
+                    "kind" : "externalParam",
+                    "text" : "_"
+                  },
+                  {
+                    "kind" : "text",
+                    "text" : " "
+                  },
+                  {
+                    "highlight" : "changed",
                     "kind" : "internalParam",
                     "text" : "value"
                   },
@@ -200,17 +365,14 @@
                   },
                   {
                     "highlight" : "changed",
+                    "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONRootValue",
                     "kind" : "typeIdentifier",
-                    "preciseIdentifier" : "s:SE",
-                    "text" : "Encodable"
+                    "preciseIdentifier" : "s:4JSON13JSONRootValueP",
+                    "text" : "JSONRootValue"
                   },
                   {
                     "kind" : "text",
-                    "text" : ") "
-                  },
-                  {
-                    "kind" : "keyword",
-                    "text" : "throws"
+                    "text" : ")"
                   }
                 ]
               }
@@ -238,8 +400,9 @@
               "text" : " "
             },
             {
+              "highlight" : "changed",
               "kind" : "internalParam",
-              "text" : "value"
+              "text" : "data"
             },
             {
               "kind" : "text",
@@ -247,25 +410,16 @@
             },
             {
               "highlight" : "changed",
-              "kind" : "text",
-              "text" : "(any "
-            },
-            {
-              "highlight" : "changed",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:s8SendableP",
-              "text" : "Sendable"
-            },
-            {
-              "highlight" : "changed",
-              "kind" : "text",
-              "text" : ")?"
+              "preciseIdentifier" : "s:10Foundation4DataV",
+              "text" : "Data"
             },
             {
               "kind" : "text",
               "text" : ") "
             },
             {
+              "highlight" : "changed",
               "kind" : "keyword",
               "text" : "throws"
             }
@@ -273,25 +427,6 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Value to represent as a JSON stru ture.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "value"
-        }
-      ]
     }
   ],
   "schemaVersion" : {
@@ -330,22 +465,14 @@
 "doc://JSON/documentation/JSON/JSON": {
   "abstract" : [
     {
-      "text" : "Represent mixed JSON values as instances of ",
-      "type" : "text"
-    },
-    {
-      "code" : "Any",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "text" : "Mutable value type representing JSON and its contents in a type-safe and performant way.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "enum"
+      "text" : "struct"
     },
     {
       "kind" : "text",
@@ -369,10 +496,70 @@
   "type" : "topic",
   "url" : "\/documentation\/json\/json"
 },
+"doc://JSON/documentation/JSON/JSON/Value-swift.enum": {
+  "abstract" : [
+    {
+      "text" : "Represents a value within a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Value-swift.enum",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Value"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON.Value",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/value-swift.enum"
+},
 "doc://JSON/documentation/JSON/JSON/init(_:)": {
   "abstract" : [
     {
-      "text" : "Initializes a JSON object from a variety of supported types.",
+      "text" : "Initializes a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object from a JSON-formatted ",
+      "type" : "text"
+    },
+    {
+      "code" : "Data",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " value.",
       "type" : "text"
     }
   ],
@@ -419,10 +606,19 @@
   "type" : "topic",
   "url" : "\/documentation\/json\/json\/init(_:)"
 },
-"doc://JSON/documentation/JSON/JSON/init(_:)-16b3u": {
+"doc://JSON/documentation/JSON/JSON/init(_:)-35cj0": {
   "abstract" : [
     {
-      "text" : "Initializes a JSON object from its data representation.",
+      "text" : "Initializes a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object from another JSON instance.",
       "type" : "text"
     }
   ],
@@ -437,8 +633,125 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation4DataV",
-      "text" : "Data"
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-35cj0",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/init(_:)-35cj0"
+},
+"doc://JSON/documentation/JSON/JSON/init(_:)-3t9am": {
+  "abstract" : [
+    {
+      "text" : "Initializes a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object from a valid ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Value-swift.enum",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV5ValueO",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-3t9am",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/init(_:)-3t9am"
+},
+"doc://JSON/documentation/JSON/JSON/init(_:)-3yhia": {
+  "abstract" : [
+    {
+      "text" : "Attempts to initialize a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object from an ",
+      "type" : "text"
+    },
+    {
+      "code" : "Any",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " value that consists of objects capable of being parsed by ",
+      "type" : "text"
+    },
+    {
+      "code" : "JSONSerialization",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "keyword",
+      "text" : "Any"
     },
     {
       "kind" : "text",
@@ -449,17 +762,26 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-16b3u",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-3yhia",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/json\/json\/init(_:)-16b3u"
+  "url" : "\/documentation\/json\/json\/init(_:)-3yhia"
 },
-"doc://JSON/documentation/JSON/JSON/init(_:)-44ebn": {
+"doc://JSON/documentation/JSON/JSON/init(_:)-4mq1j": {
   "abstract" : [
     {
-      "text" : "Initializes a JSON object from its string representation.",
+      "text" : "Initializes a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object from a JSON-formatted string.",
       "type" : "text"
     }
   ],
@@ -486,17 +808,26 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-44ebn",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-4mq1j",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/json\/json\/init(_:)-44ebn"
+  "url" : "\/documentation\/json\/json\/init(_:)-4mq1j"
 },
-"doc://JSON/documentation/JSON/JSON/init(_:)-6kfxs": {
+"doc://JSON/documentation/JSON/JSON/init(_:)-6xts4": {
   "abstract" : [
     {
-      "text" : "Initializes a JSON object from an encodable object representation.",
+      "text" : "Initializes a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object from internal types known to be supported by JSON.",
       "type" : "text"
     }
   ],
@@ -519,8 +850,58 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SE",
-      "text" : "Encodable"
+      "preciseIdentifier" : "s:4JSON13JSONRootValueP",
+      "text" : "JSONRootValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-6xts4",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/init(_:)-6xts4"
+},
+"doc://JSON/documentation/JSON/JSON/init(_:)-rbhw": {
+  "abstract" : [
+    {
+      "text" : "Initializes a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object from any object that conforms to ",
+      "type" : "text"
+    },
+    {
+      "code" : "Codable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "(any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7Codablea",
+      "text" : "Codable"
     },
     {
       "kind" : "text",
@@ -531,12 +912,55 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-6kfxs",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)-rbhw",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/json\/json\/init(_:)-6kfxs"
+  "url" : "\/documentation\/json\/json\/init(_:)-rbhw"
+},
+"doc://JSON/documentation/JSON/JSONRootValue": {
+  "abstract" : [
+    {
+      "text" : "Represents types whose value can be used as the root of a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONRootValue"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONRootValue",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONRootValue"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONRootValue",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonrootvalue"
 }
 }
 }

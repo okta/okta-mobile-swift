@@ -5,6 +5,15 @@
       "type" : "text"
     }
   ],
+  "defaultImplementationsSections" : [
+    {
+      "anchor" : "HasClaims-Implementations",
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/payload-1gbw8"
+      ],
+      "title" : "HasClaims Implementations"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -223,6 +232,7 @@
       "type" : "text"
     }
   ],
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -266,6 +276,56 @@
   "title" : "payload",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/payload"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/payload-1gbw8": {
+  "abstract" : [
+    {
+      "text" : "The raw payload of provider metadata claims from the JSON object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "payload"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/payload-1gbw8",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "payload",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/payload-1gbw8"
 }
 }
 }

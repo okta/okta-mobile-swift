@@ -75,7 +75,9 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/JSON\/SQ",
         "doc:\/\/JSON\/s5ErrorP",
+        "doc:\/\/JSON\/SH",
         "doc:\/\/JSON\/s8SendableP"
       ],
       "kind" : "relationships",
@@ -93,13 +95,20 @@
   ],
   "topicSections" : [
     {
+      "anchor" : "Operators",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/JSON\/documentation\/JSON\/JSONError\/==(_:_:)"
+      ],
+      "title" : "Operators"
+    },
+    {
       "anchor" : "Enumeration-Cases",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/JSON\/documentation\/JSON\/JSONError\/arrayExpected",
-        "doc:\/\/JSON\/documentation\/JSON\/JSONError\/cannotDecode(value:)",
-        "doc:\/\/JSON\/documentation\/JSON\/JSONError\/invalidContentEncoding",
-        "doc:\/\/JSON\/documentation\/JSON\/JSONError\/objectExpected"
+        "doc:\/\/JSON\/documentation\/JSON\/JSONError\/invalidJSONValue",
+        "doc:\/\/JSON\/documentation\/JSON\/JSONError\/invalidUTF8String",
+        "doc:\/\/JSON\/documentation\/JSON\/JSONError\/unsupportedRootValue"
       ],
       "title" : "Enumeration Cases"
     },
@@ -107,6 +116,7 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/JSON\/documentation\/JSON\/JSONError\/Equatable-Implementations",
         "doc:\/\/JSON\/documentation\/JSON\/JSONError\/Error-Implementations"
       ],
       "title" : "Default Implementations"
@@ -126,6 +136,16 @@
   ]
 , 
 "references": {
+"doc://JSON/SH": {
+  "identifier" : "doc:\/\/JSON\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://JSON/SQ": {
+  "identifier" : "doc:\/\/JSON\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
 "doc://JSON/documentation/JSON": {
   "abstract" : [
 
@@ -168,6 +188,81 @@
   "type" : "topic",
   "url" : "\/documentation\/json\/jsonerror"
 },
+"doc://JSON/documentation/JSON/JSONError/==(_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "=="
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSON9JSONErrorO",
+      "text" : "JSONError"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSON9JSONErrorO",
+      "text" : "JSONError"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONError\/==(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "==(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonerror\/==(_:_:)"
+},
+"doc://JSON/documentation/JSON/JSONError/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONError\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonerror\/equatable-implementations"
+},
 "doc://JSON/documentation/JSON/JSONError/Error-Implementations": {
   "abstract" : [
 
@@ -179,7 +274,7 @@
   "type" : "topic",
   "url" : "\/documentation\/json\/jsonerror\/error-implementations"
 },
-"doc://JSON/documentation/JSON/JSONError/arrayExpected": {
+"doc://JSON/documentation/JSON/JSONError/invalidJSONValue": {
   "abstract" : [
 
   ],
@@ -194,17 +289,17 @@
     },
     {
       "kind" : "identifier",
-      "text" : "arrayExpected"
+      "text" : "invalidJSONValue"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONError\/arrayExpected",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONError\/invalidJSONValue",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "JSONError.arrayExpected",
+  "title" : "JSONError.invalidJSONValue",
   "type" : "topic",
-  "url" : "\/documentation\/json\/jsonerror\/arrayexpected"
+  "url" : "\/documentation\/json\/jsonerror\/invalidjsonvalue"
 },
-"doc://JSON/documentation/JSON/JSONError/cannotDecode(value:)": {
+"doc://JSON/documentation/JSON/JSONError/invalidUTF8String": {
   "abstract" : [
 
   ],
@@ -219,38 +314,17 @@
     },
     {
       "kind" : "identifier",
-      "text" : "cannotDecode"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "value"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s8SendableP",
-      "text" : "Sendable"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?)"
+      "text" : "invalidUTF8String"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONError\/cannotDecode(value:)",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONError\/invalidUTF8String",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "JSONError.cannotDecode(value:)",
+  "title" : "JSONError.invalidUTF8String",
   "type" : "topic",
-  "url" : "\/documentation\/json\/jsonerror\/cannotdecode(value:)"
+  "url" : "\/documentation\/json\/jsonerror\/invalidutf8string"
 },
-"doc://JSON/documentation/JSON/JSONError/invalidContentEncoding": {
+"doc://JSON/documentation/JSON/JSONError/unsupportedRootValue": {
   "abstract" : [
 
   ],
@@ -265,40 +339,15 @@
     },
     {
       "kind" : "identifier",
-      "text" : "invalidContentEncoding"
+      "text" : "unsupportedRootValue"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONError\/invalidContentEncoding",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONError\/unsupportedRootValue",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "JSONError.invalidContentEncoding",
+  "title" : "JSONError.unsupportedRootValue",
   "type" : "topic",
-  "url" : "\/documentation\/json\/jsonerror\/invalidcontentencoding"
-},
-"doc://JSON/documentation/JSON/JSONError/objectExpected": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "case"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "objectExpected"
-    }
-  ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONError\/objectExpected",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "JSONError.objectExpected",
-  "type" : "topic",
-  "url" : "\/documentation\/json\/jsonerror\/objectexpected"
+  "url" : "\/documentation\/json\/jsonerror\/unsupportedrootvalue"
 },
 "doc://JSON/s5ErrorP": {
   "identifier" : "doc:\/\/JSON\/s5ErrorP",

@@ -1,15 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Represent mixed JSON values as instances of ",
-      "type" : "text"
-    },
-    {
-      "code" : "Any",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "text" : "Mutable value type representing JSON and its contents in a type-safe and performant way.",
       "type" : "text"
     }
   ],
@@ -26,11 +18,11 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:4JSONAAO",
+    "externalID" : "s:4JSONAAV",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "enum"
+        "text" : "struct"
       },
       {
         "kind" : "text",
@@ -53,8 +45,8 @@
       }
     ],
     "role" : "symbol",
-    "roleHeading" : "Enumeration",
-    "symbolKind" : "enum",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
     "title" : "JSON"
   },
   "primaryContentSections" : [
@@ -70,7 +62,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "enum"
+              "text" : "struct"
             },
             {
               "kind" : "text",
@@ -84,25 +76,65 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "JSON data may be imported from multiple sources, be it Data, String, an alread-parsed JSON object consisting of ",
+              "type" : "text"
+            },
+            {
+              "code" : "Any",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " values, or an object conforming to ",
+              "type" : "text"
+            },
+            {
+              "code" : "Codable",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". Transforming data between these states, and dealing with error conditions every time, can be cumbersome.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This also supports mutation of JSON values, including the ability to regenerate the resulting JSON string notation, while maintaining performance through the use of the “Copy on Write” pattern.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/JSON\/documentation\/JSON\/JSONRepresentable",
+        "doc:\/\/JSON\/documentation\/JSON\/JSONObjectRepresentable",
+        "doc:\/\/JSON\/documentation\/JSON\/JSONValueRepresentable",
         "doc:\/\/JSON\/s8CopyableP",
         "doc:\/\/JSON\/s28CustomDebugStringConvertibleP",
-        "doc:\/\/JSON\/s23CustomStringConvertibleP",
         "doc:\/\/JSON\/Se",
         "doc:\/\/JSON\/SE",
         "doc:\/\/JSON\/SQ",
-        "doc:\/\/JSON\/s27ExpressibleByBooleanLiteralP",
-        "doc:\/\/JSON\/s43ExpressibleByExtendedGraphemeClusterLiteralP",
-        "doc:\/\/JSON\/s25ExpressibleByFloatLiteralP",
-        "doc:\/\/JSON\/s27ExpressibleByIntegerLiteralP",
-        "doc:\/\/JSON\/s23ExpressibleByNilLiteralP",
-        "doc:\/\/JSON\/s26ExpressibleByStringLiteralP",
-        "doc:\/\/JSON\/s33ExpressibleByUnicodeScalarLiteralP",
+        "doc:\/\/JSON\/s25ExpressibleByArrayLiteralP",
+        "doc:\/\/JSON\/s30ExpressibleByDictionaryLiteralP",
         "doc:\/\/JSON\/SH",
         "doc:\/\/JSON\/s8SendableP"
       ],
@@ -121,23 +153,20 @@
   ],
   "topicSections" : [
     {
-      "anchor" : "Enumeration-Cases",
+      "anchor" : "Operators",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/array(_:)",
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/bool(_:)",
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/null",
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/number(_:)",
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/object(_:)",
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/string(_:)"
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/+(_:_:)",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/+=(_:_:)"
       ],
-      "title" : "Enumeration Cases"
+      "title" : "Operators"
     },
     {
       "anchor" : "Initializers",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)"
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(_:)",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(from:)"
       ],
       "title" : "Initializers"
     },
@@ -145,7 +174,9 @@
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/anyValue"
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/data",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/representation-swift.property",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/value-swift.property"
       ],
       "title" : "Instance Properties"
     },
@@ -153,8 +184,9 @@
       "anchor" : "Instance-Methods",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/value(at:)",
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/value(forKey:)"
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/encode()",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/encode(to:)",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/hash(into:)"
       ],
       "title" : "Instance Methods"
     },
@@ -167,12 +199,24 @@
       "title" : "Subscripts"
     },
     {
+      "anchor" : "Enumerations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/Primitive",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/Representation-swift.enum"
+      ],
+      "title" : "Enumerations"
+    },
+    {
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/CustomDebugStringConvertible-Implementations",
         "doc:\/\/JSON\/documentation\/JSON\/JSON\/Equatable-Implementations",
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/ExpressibleByExtendedGraphemeClusterLiteral-Implementations",
-        "doc:\/\/JSON\/documentation\/JSON\/JSON\/ExpressibleByStringLiteral-Implementations"
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/ExpressibleByArrayLiteral-Implementations",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/ExpressibleByDictionaryLiteral-Implementations",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/JSONObjectRepresentable-Implementations",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/JSONValueRepresentable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -225,22 +269,14 @@
 "doc://JSON/documentation/JSON/JSON": {
   "abstract" : [
     {
-      "text" : "Represent mixed JSON values as instances of ",
-      "type" : "text"
-    },
-    {
-      "code" : "Any",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "text" : "Mutable value type representing JSON and its contents in a type-safe and performant way.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "enum"
+      "text" : "struct"
     },
     {
       "kind" : "text",
@@ -264,6 +300,148 @@
   "type" : "topic",
   "url" : "\/documentation\/json\/json"
 },
+"doc://JSON/documentation/JSON/JSON/+(_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "+"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/+(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "+(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/+(_:_:)"
+},
+"doc://JSON/documentation/JSON/JSON/+=(_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "+="
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "keyword",
+      "text" : "inout"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/+=(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "+=(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/+=(_:_:)"
+},
+"doc://JSON/documentation/JSON/JSON/CustomDebugStringConvertible-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/CustomDebugStringConvertible-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "CustomDebugStringConvertible Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/customdebugstringconvertible-implementations"
+},
 "doc://JSON/documentation/JSON/JSON/Equatable-Implementations": {
   "abstract" : [
 
@@ -275,36 +453,187 @@
   "type" : "topic",
   "url" : "\/documentation\/json\/json\/equatable-implementations"
 },
-"doc://JSON/documentation/JSON/JSON/ExpressibleByExtendedGraphemeClusterLiteral-Implementations": {
+"doc://JSON/documentation/JSON/JSON/ExpressibleByArrayLiteral-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/ExpressibleByExtendedGraphemeClusterLiteral-Implementations",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/ExpressibleByArrayLiteral-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
-  "title" : "ExpressibleByExtendedGraphemeClusterLiteral Implementations",
+  "title" : "ExpressibleByArrayLiteral Implementations",
   "type" : "topic",
-  "url" : "\/documentation\/json\/json\/expressiblebyextendedgraphemeclusterliteral-implementations"
+  "url" : "\/documentation\/json\/json\/expressiblebyarrayliteral-implementations"
 },
-"doc://JSON/documentation/JSON/JSON/ExpressibleByStringLiteral-Implementations": {
+"doc://JSON/documentation/JSON/JSON/ExpressibleByDictionaryLiteral-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/ExpressibleByStringLiteral-Implementations",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/ExpressibleByDictionaryLiteral-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
-  "title" : "ExpressibleByStringLiteral Implementations",
+  "title" : "ExpressibleByDictionaryLiteral Implementations",
   "type" : "topic",
-  "url" : "\/documentation\/json\/json\/expressiblebystringliteral-implementations"
+  "url" : "\/documentation\/json\/json\/expressiblebydictionaryliteral-implementations"
 },
-"doc://JSON/documentation/JSON/JSON/anyValue": {
+"doc://JSON/documentation/JSON/JSON/JSONObjectRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/JSONObjectRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "JSONObjectRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/jsonobjectrepresentable-implementations"
+},
+"doc://JSON/documentation/JSON/JSON/JSONValueRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/JSONValueRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "JSONValueRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/jsonvaluerepresentable-implementations"
+},
+"doc://JSON/documentation/JSON/JSON/Primitive": {
   "abstract" : [
     {
-      "text" : "Returns the value as an instance of ",
+      "text" : "Represents a primitive value (aka “leaf node”) within a ",
       "type" : "text"
     },
     {
-      "code" : "Any",
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Primitive"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Primitive",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Primitive"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON.Primitive",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/primitive"
+},
+"doc://JSON/documentation/JSON/JSON/Representation-swift.enum": {
+  "abstract" : [
+    {
+      "text" : "Indicates the underlying representation used to initialize this ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Representation"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Representation-swift.enum",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Representation"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON.Representation",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/representation-swift.enum"
+},
+"doc://JSON/documentation/JSON/JSON/Value-swift.enum": {
+  "abstract" : [
+    {
+      "text" : "Represents a value within a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Value-swift.enum",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Value"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON.Value",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/value-swift.enum"
+},
+"doc://JSON/documentation/JSON/JSON/data": {
+  "abstract" : [
+    {
+      "text" : "Renders the JSON object as ",
+      "type" : "text"
+    },
+    {
+      "code" : "Data",
       "type" : "codeVoice"
     },
     {
@@ -323,7 +652,140 @@
     },
     {
       "kind" : "identifier",
-      "text" : "anyValue"
+      "text" : "data"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/data",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "data",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/data"
+},
+"doc://JSON/documentation/JSON/JSON/encode()": {
+  "abstract" : [
+    {
+      "text" : "Encodes the current ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " values as a JSON data value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "encode"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/encode()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "encode()",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/encode()"
+},
+"doc://JSON/documentation/JSON/JSON/encode(to:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "encode"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "to"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7EncoderP",
+      "text" : "Encoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/encode(to:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "encode(to:)",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/encode(to:)"
+},
+"doc://JSON/documentation/JSON/JSON/hash(into:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hash"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "into"
     },
     {
       "kind" : "text",
@@ -331,106 +793,50 @@
     },
     {
       "kind" : "keyword",
-      "text" : "Any"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/anyValue",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "anyValue",
-  "type" : "topic",
-  "url" : "\/documentation\/json\/json\/anyvalue"
-},
-"doc://JSON/documentation/JSON/JSON/array(_:)": {
-  "abstract" : [
-    {
-      "text" : "Array JSON key value, containing its own nested JSON values.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "case"
+      "text" : "inout"
     },
     {
       "kind" : "text",
       "text" : " "
     },
     {
-      "kind" : "identifier",
-      "text" : "array"
-    },
-    {
-      "kind" : "text",
-      "text" : "(["
-    },
-    {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:4JSONAAO",
-      "text" : "JSON"
-    },
-    {
-      "kind" : "text",
-      "text" : "])"
-    }
-  ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/array(_:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "JSON.array(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/json\/json\/array(_:)"
-},
-"doc://JSON/documentation/JSON/JSON/bool(_:)": {
-  "abstract" : [
-    {
-      "text" : "Boolean JSON key value.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "case"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "bool"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
+      "preciseIdentifier" : "s:s6HasherV",
+      "text" : "Hasher"
     },
     {
       "kind" : "text",
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/bool(_:)",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/hash(into:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "JSON.bool(_:)",
+  "title" : "hash(into:)",
   "type" : "topic",
-  "url" : "\/documentation\/json\/json\/bool(_:)"
+  "url" : "\/documentation\/json\/json\/hash(into:)"
 },
 "doc://JSON/documentation/JSON/JSON/init(_:)": {
   "abstract" : [
     {
-      "text" : "Initializes a JSON object from a variety of supported types.",
+      "text" : "Initializes a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object from a JSON-formatted ",
+      "type" : "text"
+    },
+    {
+      "code" : "Data",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " value.",
       "type" : "text"
     }
   ],
@@ -477,86 +883,87 @@
   "type" : "topic",
   "url" : "\/documentation\/json\/json\/init(_:)"
 },
-"doc://JSON/documentation/JSON/JSON/null": {
+"doc://JSON/documentation/JSON/JSON/init(from:)": {
   "abstract" : [
     {
-      "text" : "Null JSON key value.",
+      "text" : "Initializes a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object from within an existing ",
+      "type" : "text"
+    },
+    {
+      "code" : "Decoder",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "init(from:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " function.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
-      "kind" : "keyword",
-      "text" : "case"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
       "kind" : "identifier",
-      "text" : "null"
-    }
-  ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/null",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "JSON.null",
-  "type" : "topic",
-  "url" : "\/documentation\/json\/json\/null"
-},
-"doc://JSON/documentation/JSON/JSON/number(_:)": {
-  "abstract" : [
-    {
-      "text" : "Number JSON key value.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "case"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "number"
+      "text" : "init"
     },
     {
       "kind" : "text",
       "text" : "("
     },
     {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSNumber",
-      "text" : "NSNumber"
+      "kind" : "externalParam",
+      "text" : "from"
     },
     {
       "kind" : "text",
-      "text" : ")"
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/number(_:)",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "JSON.number(_:)",
+  "title" : "init(from:)",
   "type" : "topic",
-  "url" : "\/documentation\/json\/json\/number(_:)"
+  "url" : "\/documentation\/json\/json\/init(from:)"
 },
-"doc://JSON/documentation/JSON/JSON/object(_:)": {
+"doc://JSON/documentation/JSON/JSON/representation-swift.property": {
   "abstract" : [
     {
-      "text" : "Object JSON key value, containing its own nested key\/value pairs.",
+      "text" : "Indicates the current representation the JSON value is stored as.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "case"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -564,93 +971,37 @@
     },
     {
       "kind" : "identifier",
-      "text" : "object"
+      "text" : "representation"
     },
     {
       "kind" : "text",
-      "text" : "(["
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:4JSONAAO",
+      "preciseIdentifier" : "s:4JSONAAV",
       "text" : "JSON"
     },
     {
       "kind" : "text",
-      "text" : "])"
-    }
-  ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/object(_:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "JSON.object(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/json\/json\/object(_:)"
-},
-"doc://JSON/documentation/JSON/JSON/string(_:)": {
-  "abstract" : [
-    {
-      "text" : "String JSON key value.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "case"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "string"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
+      "text" : "."
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
+      "preciseIdentifier" : "s:4JSONAAV14RepresentationO",
+      "text" : "Representation"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/string(_:)",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/representation-swift.property",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "JSON.string(_:)",
+  "title" : "representation",
   "type" : "topic",
-  "url" : "\/documentation\/json\/json\/string(_:)"
+  "url" : "\/documentation\/json\/json\/representation-swift.property"
 },
 "doc://JSON/documentation/JSON/JSON/subscript(_:)": {
   "abstract" : [
-    {
-      "text" : "Returns the array value at the given index, or ",
-      "type" : "text"
-    },
-    {
-      "code" : "nil",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " if the object is not an array.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -677,17 +1028,26 @@
   "type" : "topic",
   "url" : "\/documentation\/json\/json\/subscript(_:)"
 },
-"doc://JSON/documentation/JSON/JSON/value(at:)": {
+"doc://JSON/documentation/JSON/JSON/value-swift.property": {
   "abstract" : [
     {
-      "text" : "Returns the specified value from a JSON array.",
+      "text" : "The ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Value-swift.enum",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " that constitutes the root of this JSON object.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "func"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -699,112 +1059,43 @@
     },
     {
       "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "at"
-    },
-    {
-      "kind" : "text",
       "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
     },
     {
       "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
+      "text" : "."
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:4JSONAAO",
-      "text" : "JSON"
+      "preciseIdentifier" : "s:4JSONAAV5ValueO",
+      "text" : "Value"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/value(at:)",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/value-swift.property",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "value(at:)",
+  "title" : "value",
   "type" : "topic",
-  "url" : "\/documentation\/json\/json\/value(at:)"
+  "url" : "\/documentation\/json\/json\/value-swift.property"
 },
-"doc://JSON/documentation/JSON/JSON/value(forKey:)": {
+"doc://JSON/documentation/JSON/JSONObjectRepresentable": {
   "abstract" : [
     {
-      "text" : "Returns the object value for the given key, if the receiver is an object.",
+      "text" : "Represents ",
       "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
     },
     {
-      "kind" : "text",
-      "text" : " "
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
-      "kind" : "identifier",
-      "text" : "value"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "forKey"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:4JSONAAO",
-      "text" : "JSON"
-    }
-  ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/value(forKey:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "value(forKey:)",
-  "type" : "topic",
-  "url" : "\/documentation\/json\/json\/value(forkey:)"
-},
-"doc://JSON/documentation/JSON/JSONRepresentable": {
-  "abstract" : [
-    {
-      "text" : "Represents types that are interoperable or usable with JSON.",
+      "text" : " object value types that can be represented as Swift Foundation types.",
       "type" : "text"
     }
   ],
@@ -819,50 +1110,68 @@
     },
     {
       "kind" : "identifier",
-      "text" : "JSONRepresentable"
+      "text" : "JSONObjectRepresentable"
     }
   ],
-  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONRepresentable",
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONObjectRepresentable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "JSONRepresentable"
+      "text" : "JSONObjectRepresentable"
     }
   ],
   "role" : "symbol",
-  "title" : "JSONRepresentable",
+  "title" : "JSONObjectRepresentable",
   "type" : "topic",
-  "url" : "\/documentation\/json\/jsonrepresentable"
+  "url" : "\/documentation\/json\/jsonobjectrepresentable"
 },
-"doc://JSON/s23CustomStringConvertibleP": {
-  "identifier" : "doc:\/\/JSON\/s23CustomStringConvertibleP",
-  "title" : "Swift.CustomStringConvertible",
-  "type" : "unresolvable"
+"doc://JSON/documentation/JSON/JSONValueRepresentable": {
+  "abstract" : [
+    {
+      "text" : "Represents ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " primitive value types that can be represented as Swift Foundation types.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONValueRepresentable"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONValueRepresentable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONValueRepresentable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONValueRepresentable",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonvaluerepresentable"
 },
-"doc://JSON/s23ExpressibleByNilLiteralP": {
-  "identifier" : "doc:\/\/JSON\/s23ExpressibleByNilLiteralP",
-  "title" : "Swift.ExpressibleByNilLiteral",
-  "type" : "unresolvable"
-},
-"doc://JSON/s25ExpressibleByFloatLiteralP": {
-  "identifier" : "doc:\/\/JSON\/s25ExpressibleByFloatLiteralP",
-  "title" : "Swift.ExpressibleByFloatLiteral",
-  "type" : "unresolvable"
-},
-"doc://JSON/s26ExpressibleByStringLiteralP": {
-  "identifier" : "doc:\/\/JSON\/s26ExpressibleByStringLiteralP",
-  "title" : "Swift.ExpressibleByStringLiteral",
-  "type" : "unresolvable"
-},
-"doc://JSON/s27ExpressibleByBooleanLiteralP": {
-  "identifier" : "doc:\/\/JSON\/s27ExpressibleByBooleanLiteralP",
-  "title" : "Swift.ExpressibleByBooleanLiteral",
-  "type" : "unresolvable"
-},
-"doc://JSON/s27ExpressibleByIntegerLiteralP": {
-  "identifier" : "doc:\/\/JSON\/s27ExpressibleByIntegerLiteralP",
-  "title" : "Swift.ExpressibleByIntegerLiteral",
+"doc://JSON/s25ExpressibleByArrayLiteralP": {
+  "identifier" : "doc:\/\/JSON\/s25ExpressibleByArrayLiteralP",
+  "title" : "Swift.ExpressibleByArrayLiteral",
   "type" : "unresolvable"
 },
 "doc://JSON/s28CustomDebugStringConvertibleP": {
@@ -870,14 +1179,9 @@
   "title" : "Swift.CustomDebugStringConvertible",
   "type" : "unresolvable"
 },
-"doc://JSON/s33ExpressibleByUnicodeScalarLiteralP": {
-  "identifier" : "doc:\/\/JSON\/s33ExpressibleByUnicodeScalarLiteralP",
-  "title" : "Swift.ExpressibleByUnicodeScalarLiteral",
-  "type" : "unresolvable"
-},
-"doc://JSON/s43ExpressibleByExtendedGraphemeClusterLiteralP": {
-  "identifier" : "doc:\/\/JSON\/s43ExpressibleByExtendedGraphemeClusterLiteralP",
-  "title" : "Swift.ExpressibleByExtendedGraphemeClusterLiteral",
+"doc://JSON/s30ExpressibleByDictionaryLiteralP": {
+  "identifier" : "doc:\/\/JSON\/s30ExpressibleByDictionaryLiteralP",
+  "title" : "Swift.ExpressibleByDictionaryLiteral",
   "type" : "unresolvable"
 },
 "doc://JSON/s8CopyableP": {

@@ -28,7 +28,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "Swift",
-    "externalID" : "s:SQsE2neoiySbx_xtFZ::SYNTHESIZED::s:4JSONAAO",
+    "externalID" : "s:SQsE2neoiySbx_xtFZ::SYNTHESIZED::s:4JSONAAV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -211,22 +211,14 @@
 "doc://JSON/documentation/JSON/JSON": {
   "abstract" : [
     {
-      "text" : "Represent mixed JSON values as instances of ",
-      "type" : "text"
-    },
-    {
-      "code" : "Any",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "text" : "Mutable value type representing JSON and its contents in a type-safe and performant way.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "enum"
+      "text" : "struct"
     },
     {
       "kind" : "text",

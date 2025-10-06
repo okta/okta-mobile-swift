@@ -1,15 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Inherited from ",
-      "type" : "text"
-    },
-    {
-      "code" : "HasClaims.payload",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : "The raw payload of provider metadata claims from the JSON object.",
       "type" : "text"
     }
   ],
@@ -27,11 +19,12 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14AuthFoundation9TokenInfoV7payloadSDySSs8Sendable_pGvp",
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation18JSONClaimContainerPAAE7payloadSDySSs8Sendable_pGvp::SYNTHESIZED::s:14AuthFoundation9TokenInfoV",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "let"
+        "text" : "var"
       },
       {
         "kind" : "text",
@@ -87,7 +80,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "let"
+              "text" : "var"
             },
             {
               "kind" : "text",
@@ -117,7 +110,15 @@
             },
             {
               "kind" : "text",
-              "text" : "]"
+              "text" : "] { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
             }
           ]
         }
@@ -197,12 +198,15 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/payload": {
   "abstract" : [
-
+    {
+      "text" : "The raw payload of provider metadata claims from the JSON object.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",

@@ -170,18 +170,10 @@
   ],
   "topicSections" : [
     {
-      "anchor" : "Initializers",
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/init(_:)"
-      ],
-      "title" : "Initializers"
-    },
-    {
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/payload"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/json"
       ],
       "title" : "Instance Properties"
     },
@@ -197,7 +189,8 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/HasClaims-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/HasClaims-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/JSONClaimContainer-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -517,46 +510,18 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/userinfo\/hasclaims-implementations"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/init(_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/JSONClaimContainer-Implementations": {
   "abstract" : [
 
   ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "(["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s8SendableP",
-      "text" : "Sendable"
-    },
-    {
-      "kind" : "text",
-      "text" : "])"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/init(_:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/JSONClaimContainer-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "JSONClaimContainer Implementations",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/userinfo\/init(_:)"
+  "url" : "\/documentation\/authfoundation\/userinfo\/jsonclaimcontainer-implementations"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/payload": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/json": {
   "abstract" : [
 
   ],
@@ -571,37 +536,24 @@
     },
     {
       "kind" : "identifier",
-      "text" : "payload"
+      "text" : "json"
     },
     {
       "kind" : "text",
-      "text" : ": ["
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s8SendableP",
-      "text" : "Sendable"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/payload",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/json",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "payload",
+  "title" : "json",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/userinfo\/payload"
+  "url" : "\/documentation\/authfoundation\/userinfo\/json"
 },
 "doc://AuthFoundation/s8SendableP": {
   "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",

@@ -390,6 +390,7 @@
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/audience",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationContext",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/body",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/expirationTime",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/expiresIn",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/header-swift.property",
@@ -1401,6 +1402,43 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/authenticationcontext"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/body": {
+  "abstract" : [
+    {
+      "text" : "Raw paylaod of claims, as a dictionary representation.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "body"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/body",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "body",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/body"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/expirationTime": {
   "abstract" : [
     {
@@ -1737,10 +1775,7 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/payload": {
   "abstract" : [
-    {
-      "text" : "Raw paylaod of claims, as a dictionary representation.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {

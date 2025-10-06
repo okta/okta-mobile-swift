@@ -1,11 +1,11 @@
 {
   "abstract" : [
     {
-      "text" : "Returns the value as an instance of ",
+      "text" : "Inherited from ",
       "type" : "text"
     },
     {
-      "code" : "Any",
+      "code" : "JSONValueRepresentable.anyValue",
       "type" : "codeVoice"
     },
     {
@@ -27,7 +27,8 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:4JSONAAO8anyValueypSgvp",
+    "extendedModule" : "JSON",
+    "externalID" : "s:4JSONAAV8anyValues8Sendable_pSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -43,15 +44,16 @@
       },
       {
         "kind" : "text",
-        "text" : ": "
+        "text" : ": (any "
       },
       {
-        "kind" : "keyword",
-        "text" : "Any"
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s8SendableP",
+        "text" : "Sendable"
       },
       {
         "kind" : "text",
-        "text" : "?"
+        "text" : ")?"
       }
     ],
     "modules" : [
@@ -89,19 +91,28 @@
             },
             {
               "kind" : "text",
-              "text" : ": "
+              "text" : ": (any "
             },
             {
-              "kind" : "keyword",
-              "text" : "Any"
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
             },
             {
               "kind" : "text",
-              "text" : "? { "
+              "text" : ")? { "
             },
             {
               "kind" : "keyword",
               "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "set"
             },
             {
               "kind" : "text",
@@ -149,22 +160,14 @@
 "doc://JSON/documentation/JSON/JSON": {
   "abstract" : [
     {
-      "text" : "Represent mixed JSON values as instances of ",
-      "type" : "text"
-    },
-    {
-      "code" : "Any",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "text" : "Mutable value type representing JSON and its contents in a type-safe and performant way.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "enum"
+      "text" : "struct"
     },
     {
       "kind" : "text",
@@ -190,18 +193,7 @@
 },
 "doc://JSON/documentation/JSON/JSON/anyValue": {
   "abstract" : [
-    {
-      "text" : "Returns the value as an instance of ",
-      "type" : "text"
-    },
-    {
-      "code" : "Any",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -218,15 +210,16 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": (any "
     },
     {
-      "kind" : "keyword",
-      "text" : "Any"
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
     },
     {
       "kind" : "text",
-      "text" : "?"
+      "text" : ")?"
     }
   ],
   "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/anyValue",
