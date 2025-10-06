@@ -16,10 +16,6 @@ import Foundation
 import CommonSupport
 #endif
 
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 /// Namespace used for a variety of version migration agents.
 public final class Migration {
     /// Determines whether or not some user data needs to be migrated.

@@ -16,10 +16,6 @@ import Foundation
 import CommonSupport
 #endif
 
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
@@ -450,16 +446,17 @@ extension OAuth2Client: APIClient {
                                                 clientSettings: clientSettings)
         }
         
-        let jsonDecoder: JSONDecoder
         if let jsonType = type as? any JSONDecodable.Type {
-            jsonDecoder = jsonType.jsonDecoder
+            guard let result = try jsonType.init(data, userInfo: info) as? T
+            else {
+                throw APIClientError.invalidResponse
+            }
+            return result
         } else {
-            jsonDecoder = defaultJSONDecoder
+            let jsonDecoder = defaultJSONDecoder()
+            jsonDecoder.userInfo = info
+            return try jsonDecoder.decode(type, from: data)
         }
-        
-        jsonDecoder.userInfo = info
-        
-        return try jsonDecoder.decode(type, from: data)
     }
     
     @_documentation(visibility: private)

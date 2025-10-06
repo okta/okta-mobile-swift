@@ -306,7 +306,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         mock.expect(errSecSuccess, result: [dummyGetResult] as CFArray)
         mock.expect(noErr)
         
-        let metadata = Token.Metadata(token: token, tags: ["foo": "bar"])
+        let metadata = try Token.Metadata(token: token, tags: ["foo": "bar"])
         try await storage.setMetadata(metadata)
 
         let updateOperation = try XCTUnwrap(mock.operations[1])

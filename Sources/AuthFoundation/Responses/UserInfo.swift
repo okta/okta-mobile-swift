@@ -20,15 +20,16 @@ import Foundation
 public struct UserInfo: Sendable, Codable, JSONClaimContainer {
     public typealias ClaimType = JWTClaim
 
-    public let payload: [String: any Sendable]
-    
-    public init(_ info: [String: any Sendable]) {
-        self.payload = info
-    }
+    public let json: JSON
     
     @_documentation(visibility: internal)
-    public init(from decoder: any Decoder) throws {
-        self.init(try Self.decodePayload(from: decoder))
+    public init(_ info: [String: any Sendable]) throws {
+        self.json = try JSON(info)
+    }
+
+    @_documentation(visibility: internal)
+    public init(_ json: JSON) throws {
+        self.json = json
     }
 }
 

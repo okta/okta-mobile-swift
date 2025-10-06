@@ -29,7 +29,7 @@ extension Token {
                    payload: token.payload,
                    with: payload)
         
-        let oldJSON = jsonPayload.jsonValue
+        let oldJSON = json
         let newJSON = try JSON(newPayload)
         
         if oldJSON != newJSON {

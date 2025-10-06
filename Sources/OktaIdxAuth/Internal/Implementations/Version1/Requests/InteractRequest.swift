@@ -38,7 +38,7 @@ extension InteractionCodeFlow {
             self.context = context
         }
 
-        struct Response: Codable, ReceivesIDXResponse {
+        struct Response: Codable, IDXResponse {
             let interactionHandle: String
         }
     }

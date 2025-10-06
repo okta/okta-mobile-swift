@@ -264,6 +264,7 @@ final class FactorStepHandlerTests: XCTestCase {
             flow: flow,
             openIdConfiguration: openIdConfiguration)
         let resumeStatus = try await flow.process(stepHandler: resumeHandler)
+        await MainActor.yield()
 
         guard case .success(_) = resumeStatus else {
             XCTFail("Did not receive token")

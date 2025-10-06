@@ -12,20 +12,83 @@
 
 import Foundation
 
+extension JSON {
+    var payload: [String: any Sendable] {
+        get {
+            value.anyValue as? [String: any Sendable] ?? [:]
+        }
+        set { value.anyValue = newValue }
+    }
+}
+
 @_documentation(visibility: private)
 extension String: ClaimConvertable {}
 
 @_documentation(visibility: private)
-extension Bool: ClaimConvertable {}
+extension Bool: ClaimConvertable {
+    public static func convert(from value: Any?) -> Self? {
+        if let value = value as? Bool {
+            return value
+        }
+        
+        if let value = value as? Int,
+           value == 0 || value == 1
+        {
+            return value == 1
+        }
+        
+        return nil
+    }
+}
 
 @_documentation(visibility: private)
-extension Int: ClaimConvertable {}
+extension Int: ClaimConvertable {
+    public static func convert(from value: Any?) -> Self? {
+        if let value = value as? Int {
+            return value
+        }
+        
+        if let value = value as? Double {
+            return Int(value)
+        }
+        
+        return nil
+    }
+}
 
 @_documentation(visibility: private)
-extension Double: ClaimConvertable {}
+extension Double: ClaimConvertable {
+    public static func convert(from value: Any?) -> Self? {
+        if let value = value as? Double {
+            return value
+        }
+        
+        if let value = value as? Int {
+            return Double(value)
+        }
+
+        return nil
+    }
+}
 
 @_documentation(visibility: private)
-extension Float: ClaimConvertable {}
+extension Float: ClaimConvertable {
+    public static func convert(from value: Any?) -> Self? {
+        if let value = value as? Float {
+            return value
+        }
+        
+        if let value = value as? Double {
+            return Float(value)
+        }
+
+        if let value = value as? Int {
+            return Float(value)
+        }
+
+        return nil
+    }
+}
 
 @_documentation(visibility: private)
 extension JWTClaim: ClaimConvertable {}

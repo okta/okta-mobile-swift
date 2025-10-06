@@ -16,10 +16,6 @@ import Foundation
 import CommonSupport
 #endif
 
-#if !COCOAPODS
-import CommonSupport
-#endif
-
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif

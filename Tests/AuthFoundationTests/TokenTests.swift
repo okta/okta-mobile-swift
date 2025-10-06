@@ -94,7 +94,7 @@ final class TokenTests: XCTestCase {
          }
         """)
         
-        let decoder = defaultJSONDecoder
+        let decoder = defaultJSONDecoder()
         decoder.userInfo = [
             .apiClientConfiguration: configuration,
         ]
@@ -126,7 +126,7 @@ final class TokenTests: XCTestCase {
     }
 
     func testTokenNilContext() throws {
-        let decoder = defaultJSONDecoder
+        let decoder = defaultJSONDecoder()
         decoder.userInfo = [:]
         
         XCTAssertThrowsError(try decoder.decode(Token.self,
@@ -136,7 +136,7 @@ final class TokenTests: XCTestCase {
     }
     
     func testMFAAttestationToken() throws {
-        let decoder = defaultJSONDecoder
+        let decoder = defaultJSONDecoder()
         decoder.userInfo = [
             .apiClientConfiguration: configuration,
             .clientSettings: [
@@ -152,7 +152,7 @@ final class TokenTests: XCTestCase {
     }
     
     func testMFAAttestationTokenFailed() throws {
-        let decoder = defaultJSONDecoder
+        let decoder = defaultJSONDecoder()
         decoder.userInfo = [
             .apiClientConfiguration: configuration,
         ]
@@ -225,12 +225,12 @@ final class TokenTests: XCTestCase {
                                                                  redirectUri: URL(string: "com.example:/callback"),
                                                                  authentication: .none),
                                             clientSettings: nil))
-        XCTAssertEqual(token.jsonPayload.jsonValue, try JSON([
+        XCTAssertEqual(token.json, try JSON([
             "scope": "profile offline_access openid",
             "access_token": JWT.mockAccessToken,
             "token_type": "Bearer",
             "id_token": JWT.mockIDToken,
-            "expires_in": 3600,
+            "expires_in": 3600.0,
             "refresh_token": "refresh-kl2QWaYgyHaLkCdc6exjsowP9KUTW1ilAWC",
             "device_secret":"device_lh4nMHgcUWLJIVgkcbQwnnSI2F8JMwNshLoa",
         ]))

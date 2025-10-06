@@ -62,8 +62,14 @@ final class KeychainTokenStorage: TokenStorage {
         }
     }
     
-    func add(token: Token, metadata: Token.Metadata?, security: [Credential.Security]) throws {
-        let metadata = metadata ?? Token.Metadata(token: token, tags: [:])
+    func add(token: Token, metadata tokenMetadata: Token.Metadata?, security: [Credential.Security]) throws {
+        let metadata: Token.Metadata
+        if let tokenMetadata {
+            metadata = tokenMetadata
+        } else {
+            metadata = try Token.Metadata(token: token, tags: [:])
+        }
+        
         guard token.id == metadata.id else {
             throw CredentialError.metadataConsistency
         }
@@ -141,7 +147,7 @@ final class KeychainTokenStorage: TokenStorage {
         let token = try Token(id: id,
                               issuedAt: token.issuedAt ?? .nowCoordinated,
                               context: token.context,
-                              json: token.jsonPayload)
+                              json: token.json)
         
         let data = try encoder.encode(token)
         let accessibility = security?.accessibility ?? oldResult.accessibility ?? .afterFirstUnlock
