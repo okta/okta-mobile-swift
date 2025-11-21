@@ -117,6 +117,7 @@ class BrowserSigninFlowTests: XCTestCase {
         XCTAssertEqual(redirectUri.absoluteString, "com.example:/logout")
     }
     
+    @available(iOS 12.0, macCatalyst 13.0, macOS 10.15, tvOS 16.0, visionOS 1.0, watchOS 6.2, *)
     func testCancel() async throws {
         let loginFlow = try AuthorizationCodeFlow(client: client,
                                                   additionalParameters: ["testName": name])
@@ -129,7 +130,7 @@ class BrowserSigninFlowTests: XCTestCase {
             for: webAuth)
 
         let error = try await XCTAssertThrowsErrorAsync(await webAuth.signIn(from: nil, context: .init(state: "qwe")))
-        XCTAssertEqual(error as? BrowserSigninError, .userCancelledLogin)
+        XCTAssertEqual(error as? BrowserSigninError, .userCancelledLogin())
 
         let optionalProvider = await BrowserSigninProviderFactoryMock.provider(for: webAuth)
         let provider = try XCTUnwrap(optionalProvider)

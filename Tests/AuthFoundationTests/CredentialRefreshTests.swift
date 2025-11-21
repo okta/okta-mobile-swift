@@ -14,7 +14,7 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 
@@ -156,7 +156,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked
             await fulfillment(of: [expect], timeout: 3.0)
 
             // Need to wait for the async notification dispatch
-            usleep(useconds_t(2000))
+            try await Task.sleep(delay: 0.02)
 
             XCTAssertEqual(notification.notifications.count, 2)
             let tokenNotification = try XCTUnwrap(notification.notifications(for: .tokenRefreshFailed).first)
@@ -308,7 +308,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate, @unchecked
             // Stopping should prevent subsequent refreshes
             credential.automaticRefresh = false
 
-            sleep(1)
+            try await Task.sleep(delay: 1)
             XCTAssertEqual(urlSession.requests.count, 0)
         }
     }

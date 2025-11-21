@@ -27,10 +27,10 @@ public enum BrowserSigninError: Error {
     case cannotStartBrowserSession
     case cannotComposeAuthenticationURL
     case authenticationProvider(error: any Error)
-    case noAuthenticatorProviderResonse
+    case noAuthenticatorProviderResponse
     case serverError(_ error: OAuth2ServerError)
     case invalidRedirectScheme(_ scheme: String?)
-    case userCancelledLogin
+    case userCancelledLogin(_ reason: String? = nil)
     case missingIdToken
     case oauth2(error: OAuth2Error)
     case generic(error: any Error)
@@ -49,9 +49,16 @@ public enum BrowserSigninError: Error {
 ///
 /// To customize the authentication flow, please read more about the underlying OAuth2 client within the OAuth2Auth library, and how that relates to the ``signInFlow`` or ``signOutFlow`` properties.
 ///
-///  > Important: If your application targets iOS 9.x-10.x, you should add the redirect URI for your client configuration to your app's supported URL schemes.  This is because users on devices older than iOS 11 will be prompted to sign in using `SFSafariViewController`, which does not allow your application to detect the final token redirect.
+///  ## Redirect URI Support
+///
+///  This library supports both custom URIs and HTTPS redirect URLs on supporting platforms and versions. The use of an `https://` redirect URI is recommended, but this requires that [your application is configured to use associated domains](https://developer.apple.com/documentation/Xcode/supporting-associated-domains). This involves:
+///
+///  1. Including the redirect URI's domain in your application's [Associated Domains capability](https://developer.apple.com/documentation/xcode/configuring-an-associated-domain) as a `webcredential`.
+///  2. Ensuring the application identifier (i.e. `<TEAM_ID>.<BUNDLE_ID>`) is included in the `webcredentials` list on that domain's `/.well-known/apple-app-site-association` well-known URI. For more information on how to update this in your Okta OAuth2 client configuration, see the [Customize associated domains developer guide ](https://developer.okta.com/docs/guides/custom-well-known-uri/main/) document for more details.
+///  3. Change the `redirect_uri` value used in your client configuration to the `https` URL configured within your OAuth2 client configuration.
+///
+///  > Note: The use of HTTPS addresses within the redirect callback URI is limited by the availability of support within ASWebAuthenticationSession, which currently requires a minimum of iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, or visionOS 1.1.
 @MainActor
-@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 public final class BrowserSignin {
     #if os(macOS)
     public typealias WindowAnchor = NSWindow
@@ -61,6 +68,17 @@ public final class BrowserSignin {
     public typealias WindowAnchor = Void
     #endif
     
+    /// Defines the options used to control the behavior of the browser and its presentation.
+    public struct Option: Sendable, OptionSet {
+        public let rawValue: Int
+        public init(rawValue: Int) { self.rawValue = rawValue }
+        
+        #if canImport(AuthenticationServices)
+        /// Requests that the browser utilizes an ephemeral session, which does not persist cookies or other browser storage between launches.
+        public static let ephemeralSession = Option(rawValue: 1 << 0)
+        #endif
+    }
+
     /// Active / default shared instance of the ``BrowserSignin`` session.
     ///
     /// This convenience property can be used in one of two ways:
@@ -81,16 +99,32 @@ public final class BrowserSignin {
             return result
         }
     }
-    
+
     /// The underlying OAuth2 flow that implements the authentication behavior.
-    public let signInFlow: AuthorizationCodeFlow
+    nonisolated public let signInFlow: AuthorizationCodeFlow
     
     /// The underlying OAuth2 flow that implements the session logout behaviour.
-    public let signOutFlow: SessionLogoutFlow?
+    nonisolated public let signOutFlow: SessionLogoutFlow?
+
+    /// Used to control the options which dictates the presentation and behavior of the sign in session.
+    public var options: Option = []
     
+    #if canImport(AuthenticationServices)
     /// Indicates whether or not the developer prefers an ephemeral browser session, or if the user's browser state should be shared with the system browser.
-    public var ephemeralSession: Bool = false
-    
+    public var ephemeralSession: Bool {
+        get {
+            options.contains(.ephemeralSession)
+        }
+        set {
+            if newValue {
+                options.insert(.ephemeralSession)
+            } else {
+                options.remove(.ephemeralSession)
+            }
+        }
+    }
+    #endif
+
     /// Starts sign-in using the configured client.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
@@ -110,14 +144,10 @@ public final class BrowserSignin {
         }
 
         async let authorizeUrl = signInFlow.start(with: context)
-        guard let provider = try await Self.providerFactory.createWebAuthenticationProvider(
+        let provider = try await Self.providerFactory.createWebAuthenticationProvider(
             for: self,
             from: window,
-            usesEphemeralSession: ephemeralSession)
-        else {
-            throw BrowserSigninError.noCompatibleAuthenticationProviders
-        }
-        
+            options: options)
         self.provider = provider
         
         let url = try await provider.open(authorizeUrl: authorizeUrl,
@@ -177,13 +207,10 @@ public final class BrowserSignin {
         }
 
         async let authorizeUrl = signOutFlow.start(with: context)
-        guard let provider = try await Self.providerFactory.createWebAuthenticationProvider(
+        let provider = try await Self.providerFactory.createWebAuthenticationProvider(
             for: self,
             from: window,
-            usesEphemeralSession: ephemeralSession)
-        else {
-            throw BrowserSigninError.noCompatibleAuthenticationProviders
-        }
+            options: options)
 
         self.provider = provider
         defer { self.provider = nil }
@@ -290,30 +317,36 @@ public final class BrowserSignin {
         BrowserSignin.shared = self
     }
     
+    /// Used to assign a custom ``BrowserSignin/ProviderFactory``.
+    ///
+    /// > Important: The default implementation will use the most appropriate browser session for use when authenticating. This facility should only be used when a built-in browser capability is unavailable in your target environment.
+    public static var providerFactory: any BrowserSignin.ProviderFactory.Type = BrowserSignin.self
+
     // MARK: Internal members
     private static var _shared: BrowserSignin?
-    static var providerFactory: any BrowserSigninProviderFactory.Type = BrowserSignin.self
     
     // Used for testing only
     static func resetToDefault() {
         providerFactory = BrowserSignin.self
     }
     
-    var provider: (any BrowserSigninProvider)?
+    var provider: (any BrowserSignin.Provider)?
 }
 
-@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
-extension BrowserSignin: BrowserSigninProviderFactory {
-    nonisolated static func createWebAuthenticationProvider(
+extension BrowserSignin: BrowserSignin.ProviderFactory {
+    public nonisolated static func createWebAuthenticationProvider(
         for webAuth: BrowserSignin,
         from window: BrowserSignin.WindowAnchor?,
-        usesEphemeralSession: Bool = false) throws -> (any BrowserSigninProvider)?
+        options: Option) throws -> any BrowserSignin.Provider
     {
-        try AuthenticationServicesProvider(from: window, usesEphemeralSession: usesEphemeralSession)
+        if #available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *) {
+            return try AuthenticationServicesProvider(from: window, usesEphemeralSession: options.contains(.ephemeralSession))
+        }
+
+        throw BrowserSigninError.noCompatibleAuthenticationProviders
     }
 }
 
-@available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 extension BrowserSignin {
     /// Asynchronously initiates authentication from the given window.
     /// - Parameters:

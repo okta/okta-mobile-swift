@@ -20,6 +20,10 @@ import UIKit
 import WatchKit
 #endif
 
+#if canImport(Android)
+import Android
+#endif
+
 private let deviceModel: String = {
     var system = utsname()
     uname(&system)
@@ -42,6 +46,8 @@ private let systemName: String = {
         return "macOS"
     #elseif os(Linux)
         return "linux"
+    #elseif os(Android)
+        return "android"
     #endif
 }()
 

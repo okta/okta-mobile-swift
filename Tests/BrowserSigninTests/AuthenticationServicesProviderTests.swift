@@ -19,9 +19,11 @@ import XCTest
 @testable import BrowserSignin
 import AuthenticationServices
 
+@available(iOS 12.0, macCatalyst 13.0, macOS 10.15, tvOS 16.0, visionOS 1.0, watchOS 6.2, *)
 class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, AuthenticationServicesProviderSession {
     let url: URL
     let callbackURLScheme: String?
+    let callback: (any Equatable)?
     let completionHandler: ASWebAuthenticationSession.CompletionHandler
     var state: State = .initialized
     
@@ -35,12 +37,24 @@ class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, 
     required init(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) {
         self.url = url
         self.callbackURLScheme = callbackURLScheme
+        self.callback = nil
         self.completionHandler = completionHandler
     }
     
+    @available(iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, visionOS 1.1, *)
+    required init(url: URL, callback: ASWebAuthenticationSession.Callback, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) {
+        self.url = url
+        self.callback = callback
+        self.callbackURLScheme = nil
+        self.completionHandler = completionHandler
+    }
+
+    #if os(iOS) || os(macOS) || os(visionOS) || targetEnvironment(macCatalyst)
     var presentationContextProvider: (any ASWebAuthenticationPresentationContextProviding)?
+    #endif
+
     var prefersEphemeralWebBrowserSession = false
-    
+
     var canStart: Bool = true
 
     func start() -> Bool {
@@ -68,7 +82,7 @@ class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, 
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 12.0, macCatalyst 13.0, macOS 10.15, tvOS 16.0, visionOS 1.0, watchOS 6.2, *)
 class AuthenticationServicesProviderTests: XCTestCase {
     var provider: AuthenticationServicesProvider!
     let authorizeUrl = URL(string: "https://example.okta.com/oauth2/v1/authorize?client_id=clientId&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
@@ -127,7 +141,7 @@ class AuthenticationServicesProviderTests: XCTestCase {
         MockAuthenticationServicesProviderSession.result.wrappedValue = .failure(error)
         let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
         
-        XCTAssertEqual(response as? BrowserSigninError, .userCancelledLogin)
+        XCTAssertEqual(response as? BrowserSigninError, .userCancelledLogin(nil))
         XCTAssertNil(provider.authenticationSession)
     }
 
@@ -138,7 +152,7 @@ class AuthenticationServicesProviderTests: XCTestCase {
         MockAuthenticationServicesProviderSession.result.wrappedValue = nil
         let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
         
-        XCTAssertEqual(response as? BrowserSigninError, .noAuthenticatorProviderResonse)
+        XCTAssertEqual(response as? BrowserSigninError, .noAuthenticatorProviderResponse)
         XCTAssertNil(provider.authenticationSession)
     }
 }

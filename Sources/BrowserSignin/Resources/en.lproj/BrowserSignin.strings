@@ -4,8 +4,11 @@
 "authentication_provider_error" = "Could not set up a provider for handling web authentication.";
 "invalid_redirect_scheme_description" = "Cannot resume sign in with an invalid URL scheme: %@.";
 "user_cancelled_login_description" = "Authentication cancelled by the user.";
+"user_cancelled_login_reason_description" = "Authentication cancelled by the user: %@.";
 "generic_description" = "Authentication error: %@";
 "unknown_error_message" = "Unknown error";
 "no_scheme_defined" = "No URL scheme defined";
 "missing_id_token_description" = "Missing ID Token";
 "no_authenticator_provider_response" = "Authentication session returned neither a URL or an error";
+"no_signout_flow_provided" = "No sign out flow available";
+"cannot_start_browser_session" = "Cannot open a browser session";
