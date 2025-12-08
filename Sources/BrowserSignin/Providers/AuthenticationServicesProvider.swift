@@ -105,9 +105,15 @@ final class AuthenticationServicesProvider: NSObject, BrowserSignin.Provider {
     func open(authorizeUrl: URL, redirectUri: URL) async throws -> URL {
         return try await withCheckedThrowingContinuation { continuation in
             let session = createSession(authorizeUrl: authorizeUrl, callbackURL: redirectUri) { url, error in
-                continuation.resume(with: self.process(redirectUri: redirectUri,
-                                                       url: url,
-                                                       error: error))
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+
+                    continuation.resume(with: self.process(redirectUri: redirectUri,
+                                                           url: url,
+                                                           error: error))
+                }
             }
             
             #if !os(watchOS) && !os(tvOS)
