@@ -101,9 +101,15 @@ final class AuthenticationServicesProvider: NSObject, BrowserSignin.Provider {
     func open(authorizeUrl: URL, redirectUri: URL) async throws -> URL {
         return try await withCheckedThrowingContinuation { continuation in
             let session = createSession(authorizeUrl: authorizeUrl, callbackURL: redirectUri) { url, error in
-                continuation.resume(with: self.process(redirectUri: redirectUri,
-                                                       url: url,
-                                                       error: error))
+                guard self.shouldProcessContinuation() else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    continuation.resume(with: self.process(redirectUri: redirectUri,
+                                                           url: url,
+                                                           error: error))
+                }
             }
             
             #if !os(watchOS) && !os(tvOS)
@@ -131,6 +137,19 @@ final class AuthenticationServicesProvider: NSObject, BrowserSignin.Provider {
         authenticationSession?.cancel()
         #endif
         authenticationSession = nil
+    }
+    
+    func shouldProcessContinuation() -> Bool {
+        lock.withLock {
+            guard _authenticationSession != nil,
+                  !_hasProcessedContinuation
+            else {
+                return false
+            }
+            
+            _hasProcessedContinuation = true
+            return true
+        }
     }
     
     func process(redirectUri: URL, url: URL?, error: (any Error)?) -> Result<URL, any Error> {
@@ -178,6 +197,7 @@ final class AuthenticationServicesProvider: NSObject, BrowserSignin.Provider {
 
     nonisolated(unsafe) private static var _authenticationSessionClass: any AuthenticationServicesProviderSession.Type = ASWebAuthenticationSession.self
     nonisolated(unsafe) private var _authenticationSession: (any AuthenticationServicesProviderSession)?
+    nonisolated(unsafe) private var _hasProcessedContinuation: Bool = false
 }
 
 // Work around a bug in Swift 5.10 that ignores `nonisolated(unsafe)` on mutable stored properties.

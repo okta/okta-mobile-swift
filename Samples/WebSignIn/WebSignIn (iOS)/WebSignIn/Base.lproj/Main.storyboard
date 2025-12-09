@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IiQ-U1-iKI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IiQ-U1-iKI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have an account?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYK-wq-WOb">
-                                <rect key="frame" x="77" y="208" width="260.5" height="41"/>
+                                <rect key="frame" x="77" y="266" width="260.5" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="oZI-Lq-sTN">
-                                <rect key="frame" x="168" y="273" width="78" height="34.5"/>
+                                <rect key="frame" x="168" y="331" width="78" height="34.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="sign_in_button"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Sign In"/>
@@ -32,44 +32,69 @@
                                     <action selector="signIn:" destination="oA1-3v-UXn" eventType="touchUpInside" id="iUT-F4-Vn1"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="hng-Fi-9UO">
-                                <rect key="frame" x="162.5" y="839.5" width="89" height="14.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="hng-Fi-9UO">
+                                <rect key="frame" x="98" y="705.5" width="218" height="114.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8a-Qh-1W8">
-                                        <rect key="frame" x="0.0" y="0.0" width="52" height="14.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTg-J0-M7a">
-                                        <rect key="frame" x="58" y="0.0" width="31" height="14.5"/>
-                                        <accessibility key="accessibilityConfiguration" identifier="client_id_label"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="gMW-B0-lKN">
-                                <rect key="frame" x="104" y="784" width="206" height="31"/>
-                                <subviews>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="I1r-V4-AlX">
-                                        <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
-                                        <accessibility key="accessibilityConfiguration" identifier="ephemeral_switch"/>
-                                        <connections>
-                                            <action selector="ephemeralSwitchChanged:" destination="oA1-3v-UXn" eventType="valueChanged" id="lM4-Ft-TgJ"/>
-                                        </connections>
-                                    </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ephemeral Session" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxo-tt-mvD">
-                                        <rect key="frame" x="61" y="0.0" width="145" height="31"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6IX-2p-kID">
+                                        <rect key="frame" x="0.0" y="0.0" width="218" height="68"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="psI-Gg-den">
+                                                <rect key="frame" x="0.0" y="0.0" width="218" height="28"/>
+                                                <subviews>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="d4r-7Z-kWf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="63" height="28"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="ephemeral_switch"/>
+                                                        <connections>
+                                                            <action selector="ephemeralSwitchChanged:" destination="oA1-3v-UXn" eventType="valueChanged" id="NeM-nv-VoG"/>
+                                                        </connections>
+                                                    </switch>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ephemeral Session" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hf-7Y-P2B">
+                                                        <rect key="frame" x="73" y="0.0" width="145" height="28"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="gMW-B0-lKN">
+                                                <rect key="frame" x="0.0" y="40" width="196" height="28"/>
+                                                <subviews>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="I1r-V4-AlX">
+                                                        <rect key="frame" x="0.0" y="0.0" width="63" height="28"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="ephemeral_switch"/>
+                                                    </switch>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use async/await" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxo-tt-mvD">
+                                                        <rect key="frame" x="73" y="0.0" width="123" height="28"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="JbE-SN-Xpz">
+                                        <rect key="frame" x="64.5" y="100" width="89" height="14.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8a-Qh-1W8">
+                                                <rect key="frame" x="0.0" y="0.0" width="52" height="14.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTg-J0-M7a">
+                                                <rect key="frame" x="58" y="0.0" width="31" height="14.5"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="client_id_label"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J00-k3-8JA">
-                                <rect key="frame" x="92" y="349" width="230" height="34.5"/>
+                                <rect key="frame" x="92" y="407" width="230" height="34.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Sign In with a refresh token"/>
                                 <connections>
@@ -83,21 +108,22 @@
                             <constraint firstItem="qYK-wq-WOb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="scU-IK-zcF" secondAttribute="leading" constant="24" id="4pH-hB-1Uh"/>
                             <constraint firstItem="J00-k3-8JA" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="6Lo-iS-Ndj"/>
                             <constraint firstItem="J00-k3-8JA" firstAttribute="top" secondItem="oZI-Lq-sTN" secondAttribute="bottom" constant="41.5" id="I2Z-ed-3hL"/>
+                            <constraint firstItem="hng-Fi-9UO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="scU-IK-zcF" secondAttribute="leading" constant="16" id="Y6W-gD-gtU"/>
                             <constraint firstItem="qYK-wq-WOb" firstAttribute="top" secondItem="scU-IK-zcF" secondAttribute="top" constant="64" id="YdN-DH-IkO"/>
                             <constraint firstItem="scU-IK-zcF" firstAttribute="bottom" secondItem="hng-Fi-9UO" secondAttribute="bottom" constant="8" id="Zdh-VZ-cU8"/>
                             <constraint firstItem="oZI-Lq-sTN" firstAttribute="top" secondItem="qYK-wq-WOb" secondAttribute="bottom" constant="24" id="chr-S3-jUS"/>
                             <constraint firstItem="scU-IK-zcF" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qYK-wq-WOb" secondAttribute="trailing" constant="24" id="ed4-06-RkB"/>
-                            <constraint firstItem="hng-Fi-9UO" firstAttribute="top" secondItem="gMW-B0-lKN" secondAttribute="bottom" constant="24.5" id="fSB-9c-gpm"/>
+                            <constraint firstItem="scU-IK-zcF" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hng-Fi-9UO" secondAttribute="trailing" constant="16" id="heP-ws-E5k"/>
                             <constraint firstItem="qYK-wq-WOb" firstAttribute="centerX" secondItem="Nag-m8-t7U" secondAttribute="centerX" id="q0b-YF-Fgb"/>
                             <constraint firstItem="oZI-Lq-sTN" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="rfI-AL-eou"/>
                             <constraint firstItem="hng-Fi-9UO" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="si6-UB-1Qd"/>
-                            <constraint firstItem="gMW-B0-lKN" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="uo0-8F-5DO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Okta Web Sign In" id="tjy-j0-hZu"/>
                     <connections>
+                        <outlet property="asyncAwaitSwitch" destination="I1r-V4-AlX" id="EG9-1a-VSs"/>
                         <outlet property="clientIdLabel" destination="QTg-J0-M7a" id="0fx-Sg-j1e"/>
-                        <outlet property="ephemeralSwitch" destination="I1r-V4-AlX" id="ROu-9q-YiV"/>
+                        <outlet property="ephemeralSwitch" destination="d4r-7Z-kWf" id="1Xx-Xt-GjD"/>
                         <outlet property="signInButton" destination="oZI-Lq-sTN" id="FOW-Tb-nBB"/>
                         <outlet property="signInWithRefreshButton" destination="J00-k3-8JA" id="dbJ-iJ-n3e"/>
                     </connections>
@@ -111,7 +137,7 @@
             <objects>
                 <navigationController storyboardIdentifier="SignIn" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="IiQ-U1-iKI" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="2cG-tS-WJT">
-                        <rect key="frame" x="0.0" y="48" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="96" width="414" height="106"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
