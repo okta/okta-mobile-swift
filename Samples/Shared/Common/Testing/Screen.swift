@@ -57,26 +57,52 @@ extension Screen {
         return false
     }
     
+    private func _dismissSafariKeyboardIfPresent() -> Bool {
+        let safariViewServiceApp = XCUIApplication(bundleIdentifier: "com.apple.SafariViewService")
+        guard safariViewServiceApp.state == .runningForeground else {
+            return false
+        }
+        
+        let button = safariViewServiceApp.buttons["selected"].firstMatch
+        if button.isHittable {
+            button.tap()
+            return true
+        }
+        
+        return false
+    }
+    
+    private func _dismissAppKeyboardIfPresent() -> Bool {
+        guard app.keyboards.element(boundBy: 0).exists else {
+            return false
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            app.keyboards.buttons["Hide keyboard"].tap()
+            return true
+        } else {
+            app.toolbars.buttons["Done"].tap()
+            return true
+        }
+    }
+    
+    private func _dismissKeyboardUsingToolbarButton() -> Bool {
+        let doneButton = app.toolbars.matching(identifier: "Toolbar").buttons["Done"]
+        if doneButton.exists {
+            doneButton.tap()
+            return true
+        }
+        return false
+    }
+
     @discardableResult
     func dismissKeyboard() -> Bool {
         #if os(tvOS)
         // TODO: Update this in the future to select the appropriately named button.
         XCUIRemote.shared.press(.select)
-        #else
-        let doneButton = app.toolbars.matching(identifier: "Toolbar").buttons["Done"]
-        if app.keyboards.element(boundBy: 0).exists {
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                app.keyboards.buttons["Hide keyboard"].tap()
-                return true
-            } else {
-                app.toolbars.buttons["Done"].tap()
-                return true
-            }
-        } else if doneButton.exists {
-            doneButton.tap()
-            return true
-        }
-        #endif
         return false
+        #else
+        return _dismissSafariKeyboardIfPresent() || _dismissKeyboardUsingToolbarButton() || _dismissAppKeyboardIfPresent()
+        #endif
     }
 }

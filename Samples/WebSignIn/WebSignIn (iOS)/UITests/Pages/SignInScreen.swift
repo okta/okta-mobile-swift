@@ -18,6 +18,7 @@ class SignInScreen: Screen, WebLogin {
     let testCase: XCTestCase
     
     lazy var ephemeralSwitch = app.switches["ephemeral_switch"]
+    lazy var asyncAwaitSwitch = app.switches["async_switch"]
     lazy var signInButton = app.buttons["sign_in_button"]
     lazy var clientIdLabel = app.buttons["client_id_label"]
 
