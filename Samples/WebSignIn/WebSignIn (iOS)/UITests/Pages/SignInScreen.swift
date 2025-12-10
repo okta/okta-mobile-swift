@@ -18,13 +18,24 @@ class SignInScreen: Screen, WebLogin {
     let testCase: XCTestCase
     
     lazy var ephemeralSwitch = app.switches["ephemeral_switch"]
+    lazy var asyncAwaitSwitch = app.switches["async_switch"]
     lazy var signInButton = app.buttons["sign_in_button"]
     lazy var clientIdLabel = app.buttons["client_id_label"]
 
     init(_ testCase: XCTestCase) {
         self.testCase = testCase
     }
-    
+
+    var usesAsyncAwait: Bool {
+        asyncAwaitSwitch.isOn ?? false
+    }
+
+    func setUsesAsyncAwait(_ enabled: Bool) {
+        if asyncAwaitSwitch.isOn != enabled {
+            asyncAwaitSwitch.tap()
+        }
+    }
+
     func isVisible(timeout: TimeInterval = 3) {
         XCTAssertTrue(app.staticTexts["Okta Web Sign In"].waitForExistence(timeout: timeout))
         XCTAssertFalse(app.staticTexts["Not configured"].exists)
