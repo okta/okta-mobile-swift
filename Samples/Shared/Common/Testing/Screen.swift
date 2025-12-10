@@ -57,16 +57,19 @@ extension Screen {
         return false
     }
     
+    #if !os(tvOS)
     private func _dismissSafariKeyboardIfPresent() -> Bool {
         let safariViewServiceApp = XCUIApplication(bundleIdentifier: "com.apple.SafariViewService")
         guard safariViewServiceApp.state == .runningForeground else {
             return false
         }
         
-        let button = safariViewServiceApp.buttons["selected"].firstMatch
-        if button.isHittable {
-            button.tap()
-            return true
+        for name in ["selected", "Done"] {
+            let button = safariViewServiceApp.buttons[name].firstMatch
+            if button.isHittable {
+                button.tap()
+                return true
+            }
         }
         
         return false
@@ -94,6 +97,7 @@ extension Screen {
         }
         return false
     }
+    #endif
 
     @discardableResult
     func dismissKeyboard() -> Bool {

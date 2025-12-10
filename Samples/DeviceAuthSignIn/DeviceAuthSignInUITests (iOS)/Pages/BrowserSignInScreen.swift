@@ -21,6 +21,7 @@ class BrowserSignInScreen: Screen, WebLogin {
     lazy var codeLabel = app.staticTexts["code_label"]
     lazy var openBrowserButton = app.buttons["open_browser_button"]
     lazy var ephemeralSwitch = app.switches["ephemeral_switch"]
+    lazy var asyncAwaitSwitch = app.switches["async_switch"]
     lazy var signInButton = app.buttons["sign_in_button"]
 
     init(_ testCase: XCTestCase) {
