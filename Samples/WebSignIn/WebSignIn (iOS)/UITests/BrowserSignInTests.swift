@@ -67,6 +67,23 @@ class BrowserSignInUITests: XCTestCase {
     func testEphemeralSignInAndSignOut() throws {
         signInScreen.isVisible()
         signInScreen.setEphemeral(true)
+        signInScreen.setUsesAsyncAwait(true)
+        signInScreen.login(username: username, password: password)
+
+        profileScreen.wait()
+        save(screenshot: "Profile Screen")
+                
+        XCTAssertEqual(profileScreen.valueLabel(for: .username).label, username)
+        XCTAssertEqual(profileScreen.valueLabel(for: .defaultCredential).label, "Yes")
+        
+        profileScreen.signOut(.endSession)
+        
+        signInScreen.isVisible()
+    }
+
+    func testEphemeralSignInAndSignOutWithAsyncAwait() throws {
+        signInScreen.isVisible()
+        signInScreen.setEphemeral(true)
         signInScreen.login(username: username, password: password)
 
         profileScreen.wait()

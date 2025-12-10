@@ -25,7 +25,17 @@ class SignInScreen: Screen, WebLogin {
     init(_ testCase: XCTestCase) {
         self.testCase = testCase
     }
-    
+
+    var usesAsyncAwait: Bool {
+        asyncAwaitSwitch.isOn ?? false
+    }
+
+    func setUsesAsyncAwait(_ enabled: Bool) {
+        if asyncAwaitSwitch.isOn != enabled {
+            asyncAwaitSwitch.tap()
+        }
+    }
+
     func isVisible(timeout: TimeInterval = 3) {
         XCTAssertTrue(app.staticTexts["Okta Web Sign In"].waitForExistence(timeout: timeout))
         XCTAssertFalse(app.staticTexts["Not configured"].exists)

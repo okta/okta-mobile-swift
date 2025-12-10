@@ -16,12 +16,9 @@ import XCTest
 protocol WebLogin {
     var signInButton: XCUIElement { get }
     var ephemeralSwitch: XCUIElement { get }
-    var asyncAwaitSwitch: XCUIElement { get }
     var isEphemeral: Bool { get }
-    var usesAsyncAwait: Bool { get }
     
     func setEphemeral(_ enabled: Bool)
-    func setUsesAsyncAwait(_ enabled: Bool)
     func login(username: String?, password: String?)
     func cancel()
 }
@@ -30,22 +27,12 @@ extension WebLogin {
     var isEphemeral: Bool {
         ephemeralSwitch.isOn ?? false
     }
-    
-    var usesAsyncAwait: Bool {
-        asyncAwaitSwitch.isOn ?? false
-    }
 }
 
 extension WebLogin where Self: Screen {
     func setEphemeral(_ enabled: Bool) {
         if ephemeralSwitch.isOn != enabled {
             ephemeralSwitch.tap()
-        }
-    }
-    
-    func setUsesAsyncAwait(_ enabled: Bool) {
-        if asyncAwaitSwitch.isOn != enabled {
-            asyncAwaitSwitch.tap()
         }
     }
     
