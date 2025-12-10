@@ -33,6 +33,7 @@ class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, 
     var state: State = .initialized
     
     static let result: LockedValue<Result<URL, any Error>?> = nil
+    static let duplicateResult: LockedValue<Result<URL, any Error>?> = nil
     static let startResult: LockedValue<Bool> = true
 
     enum State {
@@ -61,6 +62,17 @@ class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, 
     var prefersEphemeralWebBrowserSession = false
 
     var canStart: Bool = true
+    
+    func send(result: Result<URL, any Error>?) {
+        switch result {
+        case .success(let url):
+            self.completionHandler(url, nil)
+        case .failure(let error):
+            self.completionHandler(nil, error)
+        case nil:
+            self.completionHandler(nil, nil)
+        }
+    }
 
     func start() -> Bool {
         state = .started
@@ -69,13 +81,10 @@ class MockAuthenticationServicesProviderSession: NSObject, @unchecked Sendable, 
         Task { @MainActor in
             try? await Task.sleep(delay: 0.5)
 
-            switch result {
-            case .success(let url):
-                self.completionHandler(url, nil)
-            case .failure(let error):
-                self.completionHandler(nil, error)
-            case nil:
-                self.completionHandler(nil, nil)
+            send(result: result)
+            
+            if let duplicateResult = Self.duplicateResult.wrappedValue {
+                send(result: duplicateResult)
             }
         }
 
@@ -144,6 +153,22 @@ class AuthenticationServicesProviderTests: XCTestCase {
                             userInfo: nil)
 
         MockAuthenticationServicesProviderSession.result.wrappedValue = .failure(error)
+        let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
+        
+        XCTAssertEqual(response as? BrowserSigninError, .userCancelledLogin(nil))
+        XCTAssertNil(provider.authenticationSession)
+    }
+    
+    func testRepeatedCallbacks() async throws {
+        let authorizeUrl = try XCTUnwrap(authorizeUrl)
+        let redirectUri = try XCTUnwrap(redirectUri)
+        let error = NSError(domain: ASWebAuthenticationSessionErrorDomain,
+                            code: ASWebAuthenticationSessionError.canceledLogin.rawValue,
+                            userInfo: nil)
+
+        MockAuthenticationServicesProviderSession.result.wrappedValue = .failure(error)
+        MockAuthenticationServicesProviderSession.duplicateResult.wrappedValue = .failure(error)
+
         let response = await XCTAssertThrowsErrorAsync(try await provider.open(authorizeUrl: authorizeUrl, redirectUri: redirectUri))
         
         XCTAssertEqual(response as? BrowserSigninError, .userCancelledLogin(nil))

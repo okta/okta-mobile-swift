@@ -19,3 +19,8 @@ typealias WebAuthentication = BrowserSignin
 @available(*, deprecated, renamed: "BrowserSigninError")
 @available(iOS 13.0, macOS 10.15, tvOS 16.0, watchOS 7.0, visionOS 1.0, macCatalyst 13.0, *)
 typealias WebAuthenticationError = BrowserSigninError
+
+extension BrowserSigninError {
+    @available(*, deprecated, renamed: "noAuthenticatorProviderResponse")
+    public static let noAuthenticatorProviderResonse = Self.noAuthenticatorProviderResponse
+}
