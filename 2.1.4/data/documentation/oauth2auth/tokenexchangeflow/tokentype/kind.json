@@ -1,0 +1,463 @@
+{
+  "abstract" : [
+    {
+      "text" : "Describes specific token used by ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10OAuth2Auth17TokenExchangeFlowC0C4TypeO4KindO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Kind"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OAuth2Auth"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Kind"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "TokenExchangeFlow.TokenType.Kind"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Kind"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/OAuth2Auth\/SQ",
+        "doc:\/\/OAuth2Auth\/SH",
+        "doc:\/\/OAuth2Auth\/SY",
+        "doc:\/\/OAuth2Auth\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Enumeration-Cases",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/accessToken",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/deviceSecret",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/idToken",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/refreshToken"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "anchor" : "Initializers",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/init(rawValue:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/Equatable-Implementations",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/RawRepresentable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oauth2auth\/tokenexchangeflow\/tokentype\/kind"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OAuth2Auth/SH": {
+  "identifier" : "doc:\/\/OAuth2Auth\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://OAuth2Auth/SQ": {
+  "identifier" : "doc:\/\/OAuth2Auth\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://OAuth2Auth/SY": {
+  "identifier" : "doc:\/\/OAuth2Auth\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth": {
+  "abstract" : [
+    {
+      "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OAuth2Auth",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Token Exchange Flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "actor"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenExchangeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenExchangeFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/TokenType": {
+  "abstract" : [
+    {
+      "text" : "Types specify token’s identity.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenType"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/tokentype"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/TokenType/Kind": {
+  "abstract" : [
+    {
+      "text" : "Describes specific token used by ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType.Kind",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/tokentype\/kind"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/TokenType/Kind/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/tokentype\/kind\/equatable-implementations"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/TokenType/Kind/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/tokentype\/kind\/rawrepresentable-implementations"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/TokenType/Kind/accessToken": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "accessToken"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/accessToken",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType.Kind.accessToken",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/tokentype\/kind\/accesstoken"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/TokenType/Kind/deviceSecret": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "deviceSecret"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/deviceSecret",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType.Kind.deviceSecret",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/tokentype\/kind\/devicesecret"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/TokenType/Kind/idToken": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "idToken"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/idToken",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType.Kind.idToken",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/tokentype\/kind\/idtoken"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/TokenType/Kind/init(rawValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/init(rawValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(rawValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/tokentype\/kind\/init(rawvalue:)"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/TokenType/Kind/refreshToken": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "refreshToken"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/TokenType\/Kind\/refreshToken",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType.Kind.refreshToken",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/tokentype\/kind\/refreshtoken"
+},
+"doc://OAuth2Auth/s8SendableP": {
+  "identifier" : "doc:\/\/OAuth2Auth\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}
