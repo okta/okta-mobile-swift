@@ -78,6 +78,7 @@ extension WebLogin where Self: Screen {
                 }
                 
                 field.typeText(username)
+                dismissKeyboard()
             }
 
             tapKeyboardNextOrGo()
@@ -149,6 +150,7 @@ extension WebLogin where Self: Screen {
             }
 
             field.typeText(password)
+            dismissKeyboard()
 
             tapKeyboardNextOrGo()
 

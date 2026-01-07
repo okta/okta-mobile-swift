@@ -52,6 +52,8 @@ private let systemName: String = {
         return "android"
     #elseif os(Linux)
         return "linux"
+    #elseif os(Android)
+        return "android"
     #endif
 }()
 

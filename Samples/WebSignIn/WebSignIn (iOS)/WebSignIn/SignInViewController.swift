@@ -17,6 +17,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signInWithRefreshButton: UIButton!
     @IBOutlet weak var ephemeralSwitch: UISwitch!
+    @IBOutlet weak var asyncAwaitSwitch: UISwitch!
     @IBOutlet weak var clientIdLabel: UILabel!
 
     let auth = BrowserSignin.shared
@@ -31,6 +32,7 @@ class SignInViewController: UIViewController {
             signInButton.isEnabled = false
             signInWithRefreshButton.isEnabled = false
             ephemeralSwitch.isEnabled = false
+            asyncAwaitSwitch.isEnabled = false
         }
     }
     
@@ -55,6 +57,15 @@ class SignInViewController: UIViewController {
 
     @IBAction func signIn(_ sender: Any) {
         signInButton.isEnabled = false
+        
+        if asyncAwaitSwitch.isOn {
+            signInWithAsyncAwait()
+        } else {
+            signInWithCompletion()
+        }
+    }
+    
+    func signInWithCompletion() {
         let window = viewIfLoaded?.window
         auth?.signIn(from: window) { result in
             switch result {
@@ -76,6 +87,35 @@ class SignInViewController: UIViewController {
             
             Task { @MainActor in
                 self.signInButton.isEnabled = true
+            }
+        }
+    }
+    
+    func signInWithAsyncAwait() {
+        guard let auth else { return }
+        signInButton.isEnabled = false
+        
+        Task { @MainActor in
+            defer {
+                self.signInButton.isEnabled = true
+            }
+            
+            do {
+                let token = try await auth.signIn()
+
+                do {
+                    try Credential.store(token)
+                    
+                    // This saves the device secret in a place accessible by the SingleSignOn sample application.
+                    try Keychain.saveDeviceSSO(token)
+                } catch {
+                    show(error: error)
+                    return
+                }
+
+                self.dismiss(animated: true)
+            } catch {
+                self.show(error: error)
             }
         }
     }

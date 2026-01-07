@@ -51,9 +51,15 @@ public enum BrowserSigninError: Error {
 ///
 ///  ## Redirect URI Support
 ///
-///  This library supports both custom URIs and HTTPS redirect URLs on supporting platforms and iOS versions. This requires that your application is configured to use associated domains, with the application's identifier included in the associated domain's `webcredentials` list.
+///  This library supports both custom URIs and HTTPS redirect URLs on supporting platforms and versions. The use of an `https://` redirect URI is recommended, but this requires that [your application is configured to use associated domains](https://developer.apple.com/documentation/Xcode/supporting-associated-domains).
 ///
-///  > Note: The use of HTTPS addresses within the redirect callback URI is limited by the availability of support within ASWebAuthenticationSession, which currently requires a minimum of iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, or visionOS 1.1.
+///  Ensure that you do the following:
+///
+///  * Include the domain of the redirect URI as a `webcredential` in your app's [associated domains capability](https://developer.apple.com/documentation/xcode/configuring-an-associated-domain).
+///  * Ensure that the app identifier (that is, the `<TEAM_ID>.<BUNDLE_ID>`) is included in the `webcredentials` list on that domain's `/.well-known/apple-app-site-association` well-known URI. See [Customize associated domains developer guide ](https://developer.okta.com/docs/guides/custom-well-known-uri/main/) to update `webcredentials` in your Okta OAuth2 client configuration.
+///  * Change the `redirect_uri` value used in your client configuration to the `https` URL configured within your OAuth2 client configuration.
+///
+///  > Note: The use of HTTPS addresses within the redirect callback URI is limited by the availability of support within ASWebAuthenticationSession. The session requires a minimum of iOS v17.4, macOS v14.4, watchOS v10.4, tvOS v17.4, or visionOS v1.1.
 @MainActor
 public final class BrowserSignin {
     #if os(macOS)
