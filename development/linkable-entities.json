@@ -3,50 +3,6 @@
     "availableLanguages" : [
       "swift"
     ],
-    "kind" : "org.swift.docc.kind.module",
-    "language" : "swift",
-    "path" : "\/documentation\/commonsupport",
-    "referenceURL" : "doc:\/\/CommonSupport\/documentation\/CommonSupport",
-    "title" : "CommonSupport",
-    "usr" : "CommonSupport"
-  },
-  {
-    "availableLanguages" : [
-      "swift"
-    ],
-    "fragments" : [
-      {
-        "kind" : "keyword",
-        "text" : "final"
-      },
-      {
-        "kind" : "text",
-        "text" : " "
-      },
-      {
-        "kind" : "keyword",
-        "text" : "class"
-      },
-      {
-        "kind" : "text",
-        "text" : " "
-      },
-      {
-        "kind" : "identifier",
-        "text" : "BackgroundTask"
-      }
-    ],
-    "kind" : "org.swift.docc.kind.class",
-    "language" : "swift",
-    "path" : "\/documentation\/commonsupport\/backgroundtask",
-    "referenceURL" : "doc:\/\/CommonSupport\/documentation\/CommonSupport\/BackgroundTask",
-    "title" : "BackgroundTask",
-    "usr" : "s:13CommonSupport14BackgroundTaskC"
-  },
-  {
-    "availableLanguages" : [
-      "swift"
-    ],
     "fragments" : [
       {
         "kind" : "keyword",
@@ -85,12 +41,27 @@
     "availableLanguages" : [
       "swift"
     ],
-    "kind" : "org.swift.docc.kind.extendedModule",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "extension"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:ScM",
+        "text" : "MainActor"
+      }
+    ],
+    "kind" : "org.swift.docc.kind.extendedClass",
     "language" : "swift",
-    "path" : "\/documentation\/commonsupport\/_concurrency",
-    "referenceURL" : "doc:\/\/CommonSupport\/documentation\/CommonSupport\/_Concurrency",
-    "title" : "_Concurrency",
-    "usr" : "s:m:s:e:s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
+    "path" : "\/documentation\/commonsupport\/_concurrency\/mainactor",
+    "referenceURL" : "doc:\/\/CommonSupport\/documentation\/CommonSupport\/_Concurrency\/MainActor",
+    "title" : "MainActor",
+    "usr" : "s:e:s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
   },
   {
     "availableLanguages" : [
@@ -142,27 +113,56 @@
     "availableLanguages" : [
       "swift"
     ],
+    "kind" : "org.swift.docc.kind.extendedModule",
+    "language" : "swift",
+    "path" : "\/documentation\/commonsupport\/_concurrency",
+    "referenceURL" : "doc:\/\/CommonSupport\/documentation\/CommonSupport\/_Concurrency",
+    "title" : "_Concurrency",
+    "usr" : "s:m:s:e:s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
+  },
+  {
+    "availableLanguages" : [
+      "swift"
+    ],
+    "kind" : "org.swift.docc.kind.module",
+    "language" : "swift",
+    "path" : "\/documentation\/commonsupport",
+    "referenceURL" : "doc:\/\/CommonSupport\/documentation\/CommonSupport",
+    "title" : "CommonSupport",
+    "usr" : "CommonSupport"
+  },
+  {
+    "availableLanguages" : [
+      "swift"
+    ],
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "extension"
+        "text" : "final"
       },
       {
         "kind" : "text",
         "text" : " "
       },
       {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:ScM",
-        "text" : "MainActor"
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "BackgroundTask"
       }
     ],
-    "kind" : "org.swift.docc.kind.extendedClass",
+    "kind" : "org.swift.docc.kind.class",
     "language" : "swift",
-    "path" : "\/documentation\/commonsupport\/_concurrency\/mainactor",
-    "referenceURL" : "doc:\/\/CommonSupport\/documentation\/CommonSupport\/_Concurrency\/MainActor",
-    "title" : "MainActor",
-    "usr" : "s:e:s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
+    "path" : "\/documentation\/commonsupport\/backgroundtask",
+    "referenceURL" : "doc:\/\/CommonSupport\/documentation\/CommonSupport\/BackgroundTask",
+    "title" : "BackgroundTask",
+    "usr" : "s:13CommonSupport14BackgroundTaskC"
   },
   {
     "availableLanguages" : [

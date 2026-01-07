@@ -185,26 +185,162 @@
         {
           "inlineContent" : [
             {
-              "text" : "This library supports both custom URIs and HTTPS redirect URLs on supporting platforms and iOS versions. This requires that your application is configured to use associated domains, with the application’s identifier included in the associated domain’s ",
+              "text" : "This library supports both custom URIs and HTTPS redirect URLs on supporting platforms and versions. The use of an ",
               "type" : "text"
             },
             {
-              "code" : "webcredentials",
+              "code" : "https:\/\/",
               "type" : "codeVoice"
             },
             {
-              "text" : " list.",
+              "text" : " redirect URI is recommended, but this requires that ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.apple.com\/documentation\/Xcode\/supporting-associated-domains",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
               "type" : "text"
             }
           ],
           "type" : "paragraph"
         },
         {
+          "inlineContent" : [
+            {
+              "text" : "Ensure that you do the following:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Include the domain of the redirect URI as a ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "webcredential",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " in your app’s ",
+                      "type" : "text"
+                    },
+                    {
+                      "identifier" : "https:\/\/developer.apple.com\/documentation\/xcode\/configuring-an-associated-domain",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : ".",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Ensure that the app identifier (that is, the ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "<TEAM_ID>.<BUNDLE_ID>",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ") is included in the ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "webcredentials",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " list on that domain’s ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "\/.well-known\/apple-app-site-association",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " well-known URI. See ",
+                      "type" : "text"
+                    },
+                    {
+                      "identifier" : "https:\/\/developer.okta.com\/docs\/guides\/custom-well-known-uri\/main\/",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : " to update ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "webcredentials",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " in your Okta OAuth2 client configuration.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Change the ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "redirect_uri",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " value used in your client configuration to the ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "https",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " URL configured within your OAuth2 client configuration.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
           "content" : [
             {
               "inlineContent" : [
                 {
-                  "text" : "The use of HTTPS addresses within the redirect callback URI is limited by the availability of support within ASWebAuthenticationSession, which currently requires a minimum of iOS 17.4, macOS 14.4, watchOS 10.4, tvOS 17.4, or visionOS 1.1.",
+                  "text" : "The use of HTTPS addresses within the redirect callback URI is limited by the availability of support within ASWebAuthenticationSession. The session requires a minimum of iOS v17.4, macOS v14.4, watchOS v10.4, tvOS v17.4, or visionOS v1.1.",
                   "type" : "text"
                 }
               ],
@@ -2282,6 +2418,42 @@
   "identifier" : "doc:\/\/BrowserSignin\/s8SendableP",
   "title" : "Swift.Sendable",
   "type" : "unresolvable"
+},
+"https://developer.apple.com/documentation/Xcode/supporting-associated-domains": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/Xcode\/supporting-associated-domains",
+  "title" : "your application is configured to use associated domains",
+  "titleInlineContent" : [
+    {
+      "text" : "your application is configured to use associated domains",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/Xcode\/supporting-associated-domains"
+},
+"https://developer.apple.com/documentation/xcode/configuring-an-associated-domain": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/xcode\/configuring-an-associated-domain",
+  "title" : "associated domains capability",
+  "titleInlineContent" : [
+    {
+      "text" : "associated domains capability",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/xcode\/configuring-an-associated-domain"
+},
+"https://developer.okta.com/docs/guides/custom-well-known-uri/main/": {
+  "identifier" : "https:\/\/developer.okta.com\/docs\/guides\/custom-well-known-uri\/main\/",
+  "title" : "Customize associated domains developer guide ",
+  "titleInlineContent" : [
+    {
+      "text" : "Customize associated domains developer guide ",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.okta.com\/docs\/guides\/custom-well-known-uri\/main\/"
 }
 }
 }

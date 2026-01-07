@@ -13,11 +13,20 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:13BrowserSignin0aB5ErrorO30noAuthenticatorProviderResonseyA2CmF",
+    "extendedModule" : "BrowserSignin",
+    "externalID" : "s:13BrowserSignin0aB5ErrorO30noAuthenticatorProviderResonseACvpZ",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "case"
+        "text" : "static"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "let"
       },
       {
         "kind" : "text",
@@ -26,6 +35,15 @@
       {
         "kind" : "identifier",
         "text" : "noAuthenticatorProviderResonse"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:13BrowserSignin0aB5ErrorO",
+        "text" : "BrowserSigninError"
       }
     ],
     "modules" : [
@@ -33,10 +51,18 @@
         "name" : "BrowserSignin"
       }
     ],
+    "platforms" : [
+      {
+        "beta" : false,
+        "deprecated" : true,
+        "renamed" : "noAuthenticatorProviderResponse",
+        "unavailable" : false
+      }
+    ],
     "role" : "symbol",
-    "roleHeading" : "Case",
-    "symbolKind" : "case",
-    "title" : "BrowserSigninError.noAuthenticatorProviderResonse"
+    "roleHeading" : "Type Property",
+    "symbolKind" : "property",
+    "title" : "noAuthenticatorProviderResonse"
   },
   "primaryContentSections" : [
     {
@@ -51,7 +77,15 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "case"
+              "text" : "static"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "let"
             },
             {
               "kind" : "text",
@@ -60,6 +94,16 @@
             {
               "kind" : "identifier",
               "text" : "noAuthenticatorProviderResonse"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:13BrowserSignin0aB5ErrorO",
+              "text" : "BrowserSigninError"
             }
           ]
         }
@@ -138,10 +182,19 @@
   "abstract" : [
 
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "case"
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
     },
     {
       "kind" : "text",
@@ -150,12 +203,21 @@
     {
       "kind" : "identifier",
       "text" : "noAuthenticatorProviderResonse"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:13BrowserSignin0aB5ErrorO",
+      "text" : "BrowserSigninError"
     }
   ],
   "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSigninError\/noAuthenticatorProviderResonse",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "BrowserSigninError.noAuthenticatorProviderResonse",
+  "title" : "noAuthenticatorProviderResonse",
   "type" : "topic",
   "url" : "\/documentation\/browsersignin\/browsersigninerror\/noauthenticatorproviderresonse"
 }
