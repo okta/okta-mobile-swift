@@ -42,11 +42,15 @@ var package = Package(
         .library(name: "CommonSupport", targets: ["CommonSupport"]),
         .library(name: "JSON", targets: ["JSON"]),
         .library(name: "AuthFoundation", targets: ["CommonSupport", "JSON", "AuthFoundation"]),
+        .library(name: "MyAccountManagement", targets: ["MyAccountManagement"]),
         .library(name: "OAuth2Auth", targets: ["OAuth2Auth"]),
         .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
         .library(name: "OktaIdxAuth", targets: ["OktaIdxAuth"])
     ],
     dependencies: [
+        .package(url: "https://github.com/apple/swift-openapi-generator", from: "1.6.0"),
+        .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.7.0"),
+        .package(url: "https://github.com/apple/swift-openapi-urlsession", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.0")
     ],
     targets: [
@@ -77,6 +81,17 @@ var package = Package(
                 ],
                 resources: [.process("Resources")],
                 swiftSettings: .libraryTarget),
+        .target(name: "MyAccountManagement",
+                dependencies: [
+                    .target(name: "AuthFoundation"),
+                    .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
+                    .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
+                ],
+                resources: [.process("Resources")],
+                swiftSettings: .libraryTarget,
+                plugins: [
+                    .plugin(name: "OpenAPIGenerator", package: "swift-openapi-generator"),
+                ]),
     ] + [
         .target(name: "TestCommon",
                 dependencies: ["AuthFoundation"],
@@ -105,6 +120,10 @@ var package = Package(
                     swiftSettings: .testTarget),
         .testTarget(name: "OktaIdxAuthTests",
                     dependencies: ["OktaIdxAuth", "TestCommon"],
+                    resources: [.copy("MockResponses")],
+                    swiftSettings: .testTarget),
+        .testTarget(name: "MyAccountManagementTests",
+                    dependencies: ["MyAccountManagement", "TestCommon"],
                     resources: [.copy("MockResponses")],
                     swiftSettings: .testTarget),
     ],

@@ -1,0 +1,3570 @@
+openapi: 3.0.3
+info:
+  title: MyAccount Management
+  version: 2025.11.0
+  description: |-
+    APIs for managing a user's own emails, phones, profile, and app authenticators.
+    > **Note:** The MyAccount API doesn't support [delegated authentication](https://help.okta.com/okta_help.htm?id=ext_Security_Authentication).
+  termsOfService: https://developer.okta.com/terms/
+  contact:
+    name: Okta Developer Team
+    url: https://developer.okta.com/
+    email: devex-public@okta.com
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: logo.svg
+    backgroundColor: transparent
+    altText: Okta Developer
+servers:
+  - url: https://{yourOktaDomain}
+    variables:
+      yourOktaDomain:
+        default: subdomain.okta.com
+        description: The domain of your organization. This can be an official Okta domain (for example, `okta.com` or `oktapreview.com`) or one of your configured custom domains.
+tags:
+  - name: AppAuthenticator
+    x-displayName: App Authenticators
+    description: |
+      The MyAccount App Authenticators API provides operations to enroll, update, and delete an app authenticator. The API also allows users to view and verify pending notification challenges. The API only supports custom authenticators. See the [Custom authenticator integration guide](https://developer.okta.com/docs/guides/authenticators-custom-authenticator/android/main/).
+
+      ### API versioning
+      A valid API version in the `Accept` header is required to access the API. Current version: `1.0.0`
+      ```json
+      Accept: application/json; okta-version=1.0.0
+      ```
+    x-okta-lifecycle:
+      lifecycle: GA
+      isGenerallyAvailable: false
+      SKUs: []
+  - name: Authenticators
+    description: |
+      <x-lifecycle-container><x-lifecycle class="oie"></x-lifecycle></x-lifecycle-container>The MyAccount Authenticators API provides operations to list all available authenticators and enrollments.
+
+      ### API versioning
+      A valid API version in the `Accept` header is required to access the API. Current version: `1.0.0`
+      ```json
+      Accept: application/json; okta-version=1.0.0
+      ```
+    x-okta-lifecycle:
+      lifecycle: LIMITED_GA
+      isGenerallyAvailable: false
+      SKUs:
+        - Okta Identity Engine
+  - name: Email
+    description: |
+      The MyAccount Email API provides operations to enroll, update, and delete emails. The API also provides utilities to create, view, and answer verification challenges.
+
+      > **Note:** The Okta account management policy doesn't support the MyAccount Email API. See [Configure an Okta account management policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/).
+
+      ### API versioning
+      A valid API version in the `Accept` header is required to access the API. Current version: `1.0.0`
+      ```json
+      Accept: application/json; okta-version=1.0.0
+      ```
+  - name: OktaApplications
+    x-displayName: Okta Applications
+    description: |
+      <x-lifecycle-container><x-lifecycle class="oie"></x-lifecycle></x-lifecycle-container>The MyAccount Profile API provides operations to view the Okta apps list. Okta creates and maintains Okta apps, or first-party apps, for example, the Admin Console and End-User Dashboard.
+
+      ### API versioning
+      A valid API version in the `Accept` header is required to access the API. Current version: `1.0.0`
+      ```json
+      Accept: application/json; okta-version=1.0.0
+      ```
+    x-okta-lifecycle:
+      lifecycle: LIMITED_GA
+      isGenerallyAvailable: false
+      SKUs:
+        - Okta Identity Engine
+  - name: Organization
+    description: |
+      <x-lifecycle-container><x-lifecycle class="oie"></x-lifecycle></x-lifecycle-container>The MyAccount Profile API provides operations to view org details.
+
+      ### API versioning
+      A valid API version in the `Accept` header is required to access the API. Current version: `1.0.0`
+      ```json
+      Accept: application/json; okta-version=1.0.0
+      ```
+    x-okta-lifecycle:
+      lifecycle: LIMITED_GA
+      isGenerallyAvailable: false
+      SKUs:
+        - Okta Identity Engine
+  - name: Password
+    description: |
+      The MyAccount Password API provides operations to enroll, update, and delete passwords.
+
+      > **Note:** The Okta account management policy doesn't support the MyAccount Password API. See [Configure an Okta account management policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/).
+
+      ### API versioning
+      A valid API version in the `Accept` header is required to access the API. Current version: `1.0.0`
+      ```json
+      Accept: application/json; okta-version=1.0.0
+      ```
+  - name: Phone
+    description: |
+      The MyAccount Phone API provides operations to enroll, update, and delete phone numbers. The API also provides utilities to create, view, and answer verification challenges.
+
+      > **Note:** The Okta account management policy doesn't support the MyAccount Phone API. See [Configure an Okta account management policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/).
+
+      ### API versioning
+      A valid API version in the `Accept` header is required to access the API. Current version: `1.0.0`
+      ```json
+      Accept: application/json; okta-version=1.0.0
+      ```
+  - name: Profile
+    description: |
+      The MyAccount Profile API provides operations to enroll and update profile fields. The API also allows viewing of all allowed profile fields.
+
+      ### API versioning
+      A valid API version in the `Accept` header is required to access the API. Current version: `1.0.0`
+      ```json
+      Accept: application/json; okta-version=1.0.0
+      ```
+  - name: Sessions
+    x-displayName: Sessions
+    description: |
+      The MyAccount Sessions API provides operations to manage sessions.
+
+      See [sessions](/openapi/okta-management/management/tag/Session/) for more information.
+
+      ### API versioning
+      A valid API version in the `Accept` header is required to access the API. Current version: `1.0.0`
+      ```json
+      Accept: application/json; okta-version=1.0.0
+      ```
+    x-okta-lifecycle:
+      lifecycle: GA
+      isGenerallyAvailable: true
+  - name: WebAuthn
+    description: |
+      The MyAccount WebAuthn API provides operations to enroll, list, and delete WebAuthn enrollments.
+
+      The registration for a WebAuthn authenticator (also known as the "attestation ceremony") involves a challenge request and response. When you enroll a WebAuthn authenticator, use the following endpoints in this order:
+
+      1. [Start a WebAuthn enrollment](https://developer.okta.com/docs/api/openapi/okta-myaccount/myaccount/tag/WebAuthn/#tag/WebAuthn/operation/startWebAuthnEnrollment). This endpoint returns a random challenge and other data from the Relying Party (RP).
+      1. [Create a WebAuthn enrollment](https://developer.okta.com/docs/api/openapi/okta-myaccount/myaccount/tag/WebAuthn/#tag/WebAuthn/operation/createWebAuthnEnrollment). This endpoint creates and sends a signed response that contains the challenge and other data from the RP.
+
+      ### API versioning
+      A valid API version in the `Accept` header is required to access the API. Current version: `1.0.0`
+      ```json
+      Accept: application/json; okta-version=1.0.0
+      ```
+    x-okta-lifecycle:
+      lifecycle: GA
+      isGenerallyAvailable: false
+      SKUs: []
+externalDocs:
+  description: Find more info here
+  url: https://developer.okta.com
+paths:
+  /idp/myaccount/app-authenticators:
+    post:
+      summary: Create an App Authenticator Enrollment
+      description: |-
+        Creates an app authenticator enrollment
+
+        > **Note:** The `okta.myAccount.appAuthenticator.manage` scope always enforces the Okta account management policy, regardless of whether end users have selected Keep me signed in (KMSI). This means that your Okta account management policy always applies to app authenticators that are created with this scope.
+      operationId: createAppAuthenticatorEnrollment
+      requestBody:
+        content:
+          application/json, okta-version=1.0.0:
+            schema:
+              $ref: '#/components/schemas/AppAuthenticatorEnrollmentRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/AppAuthenticatorEnrollment'
+        '400':
+          description: Bad Request
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access Denied
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error406'
+      security:
+        - oauth2:
+            - okta.myAccount.appAuthenticator.manage
+      tags:
+        - AppAuthenticator
+      x-okta-lifecycle:
+        lifecycle: LIMITED_GA
+        isGenerallyAvailable: false
+        SKUs:
+          - Okta Identity Engine
+  /idp/myaccount/app-authenticators/challenge/{challengeId}/verify:
+    x-okta-lifecycle:
+      lifecycle: LIMITED_GA
+      isGenerallyAvailable: false
+      SKUs:
+        - Okta Identity Engine
+    parameters:
+      - $ref: '#/components/parameters/appAuthenticatorChallengeId'
+    post:
+      summary: Verify a Push Notification Challenge Response from the App Authenticator
+      description: Verifies a push notification challenge from the app authenticator
+      operationId: verifyAppAuthenticatorPushNotificationChallenge
+      requestBody:
+        content:
+          application/json;okta-version=1.0.0:
+            schema:
+              $ref: '#/components/schemas/PushNotificationVerification'
+      responses:
+        '200':
+          description: Verification Success
+        '204':
+          description: User denied challenge attempt
+        '400':
+          description: Bad Request
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security: []
+      tags:
+        - AppAuthenticator
+  /idp/myaccount/app-authenticators/{enrollmentId}:
+    parameters:
+      - $ref: '#/components/parameters/appAuthenticatorEnrollmentId'
+    patch:
+      summary: Update an App Authenticator Enrollment
+      description: |-
+        Updates an app authenticator enrollment
+
+        The following update operations are allowed:
+        * Update the user verification key
+        * Remove the user verification key
+        * Update the push token
+        * Update the push method transaction types
+
+        For more information, see [Access token management](https://developer.okta.com/docs/guides/authenticators-custom-authenticator/android/main/#access-token-management) in the Custom authenticator integration guide.
+
+        > **Note:** The following higher risk update operations require a stronger `okta.myAccount.appAuthenticator.manage` scope:
+        > * Update the user verification key
+        > * Remove the user verification key
+      operationId: updateAppAuthenticatorEnrollment
+      requestBody:
+        content:
+          application/merge-patch+json;okta-version=1.0.0:
+            schema:
+              $ref: '#/components/schemas/UpdateAppAuthenticatorEnrollmentRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/AppAuthenticatorEnrollment'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access Denied
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error406'
+      security:
+        - oauth2:
+            - okta.myAccount.appAuthenticator.maintenance.manage
+      tags:
+        - AppAuthenticator
+      x-okta-lifecycle:
+        lifecycle: LIMITED_GA
+        isGenerallyAvailable: false
+        SKUs:
+          - Okta Identity Engine
+    delete:
+      summary: Delete an App Authenticator Enrollment
+      description: Deletes an app authenticator enrollment
+      operationId: deleteAppAuthenticatorEnrollment
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access Denied
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error406'
+      security:
+        - oauth2:
+            - okta.myAccount.appAuthenticator.manage
+      tags:
+        - AppAuthenticator
+      x-okta-lifecycle:
+        lifecycle: LIMITED_GA
+        isGenerallyAvailable: false
+        SKUs:
+          - Okta Identity Engine
+  /idp/myaccount/app-authenticators/{enrollmentId}/push/notifications:
+    parameters:
+      - $ref: '#/components/parameters/appAuthenticatorEnrollmentId'
+    get:
+      summary: List all pending Push Notification Challenges
+      description: Lists all pending push notification challenges
+      operationId: listAppAuthenticatorPendingPushNotificationChallenges
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PushNotificationChallenge'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.appAuthenticator.maintenance.read
+      tags:
+        - AppAuthenticator
+      x-okta-lifecycle:
+        lifecycle: LIMITED_GA
+        isGenerallyAvailable: false
+        SKUs:
+          - Okta Identity Engine
+  /idp/myaccount/authenticators:
+    x-okta-lifecycle:
+      lifecycle: LIMITED_GA
+      isGenerallyAvailable: false
+      SKUs:
+        - Okta Identity Engine
+    get:
+      summary: List all Authenticators
+      description: |
+        Lists all of the authenticators for the current user
+      operationId: listAuthenticators
+      parameters:
+        - $ref: '#/components/parameters/queryExpandAuthenticator'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListAuthenticatorsResponse'
+        '403':
+          $ref: '#/components/responses/ErrorAccessDenied403'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+        '429':
+          $ref: '#/components/responses/ErrorTooManyRequests429'
+      security:
+        - oauth2:
+            - okta.myAccount.authenticators.read
+      tags:
+        - Authenticators
+  /idp/myaccount/authenticators/{authenticatorId}:
+    parameters:
+      - $ref: '#/components/parameters/pathAuthenticatorId'
+    get:
+      summary: Retrieve an Authenticator
+      description: |
+        Retrieves an authenticator by `authenticatorId`
+      operationId: getAuthenticator
+      parameters:
+        - $ref: '#/components/parameters/queryExpandAuthenticator'
+      responses:
+        '200':
+          $ref: '#/components/responses/AuthenticatorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorAccessDenied403'
+        '404':
+          $ref: '#/components/responses/ErrorResourceNotFound404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+        '429':
+          $ref: '#/components/responses/ErrorTooManyRequests429'
+      security:
+        - oauth2:
+            - okta.myAccount.authenticators.read
+      tags:
+        - Authenticators
+      x-okta-lifecycle:
+        lifecycle: LIMITED_GA
+        isGenerallyAvailable: false
+        SKUs:
+          - Okta Identity Engine
+  /idp/myaccount/authenticators/{authenticatorId}/enrollments:
+    parameters:
+      - $ref: '#/components/parameters/pathAuthenticatorId'
+    get:
+      summary: List all Enrollments
+      description: |
+        Lists all enrollments the current user has for an authenticator
+      operationId: listEnrollments
+      responses:
+        '200':
+          $ref: '#/components/responses/ListEnrollmentsResponse'
+        '403':
+          $ref: '#/components/responses/ErrorAccessDenied403'
+        '404':
+          $ref: '#/components/responses/ErrorResourceNotFound404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+        '429':
+          $ref: '#/components/responses/ErrorTooManyRequests429'
+      security:
+        - oauth2:
+            - okta.myAccount.authenticators.read
+      tags:
+        - Authenticators
+      x-okta-lifecycle:
+        lifecycle: LIMITED_GA
+        isGenerallyAvailable: false
+        SKUs:
+          - Okta Identity Engine
+  /idp/myaccount/authenticators/{authenticatorId}/enrollments/{enrollmentId}:
+    parameters:
+      - $ref: '#/components/parameters/pathAuthenticatorId'
+      - $ref: '#/components/parameters/pathEnrollmentId'
+    get:
+      summary: Retrieve an Enrollment
+      description: |
+        Retrieves an enrollment by `enrollmentId`
+      operationId: getEnrollment
+      responses:
+        '200':
+          $ref: '#/components/responses/EnrollmentResponse'
+        '403':
+          $ref: '#/components/responses/ErrorAccessDenied403'
+        '404':
+          $ref: '#/components/responses/ErrorResourceNotFound404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+        '429':
+          $ref: '#/components/responses/ErrorTooManyRequests429'
+      security:
+        - oauth2:
+            - okta.myAccount.authenticators.read
+      tags:
+        - Authenticators
+      x-okta-lifecycle:
+        lifecycle: LIMITED_GA
+        isGenerallyAvailable: false
+        SKUs:
+          - Okta Identity Engine
+    patch:
+      summary: Update an enrollment
+      description: |
+        Updates an authenticator enrollment by `enrollmentId`.
+        The following update operations are allowed:
+        * Update the enrollment nickname
+        * Remove the enrollment nickname
+      operationId: updateEnrollment
+      requestBody:
+        content:
+          application/merge-patch+json;okta-version=1.0.0:
+            schema:
+              $ref: '#/components/schemas/UpdateAuthenticatorEnrollmentRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/AuthenticatorEnrollment'
+        '401':
+          description: Unauthorized
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access Denied
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '406':
+          description: Not Acceptable (missing header)
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - oauth2:
+            - okta.myAccount.authenticators.manage
+      tags:
+        - Authenticators
+      x-okta-lifecycle:
+        lifecycle: LIMITED_GA
+        isGenerallyAvailable: false
+        SKUs:
+          - Okta Identity Engine
+  /idp/myaccount/emails:
+    get:
+      summary: List all Emails
+      description: |
+        Lists all of the current user's email information: a collection of links for each email that describe the acceptable operations
+      operationId: listEmails
+      responses:
+        '200':
+          $ref: '#/components/responses/Email-Array-Response'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.email.read
+      tags:
+        - Email
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+    post:
+      summary: Create an Email
+      description: |
+        Creates a primary or secondary email address for the user's account. The new email address has an `UNVERIFIED` status.
+      operationId: createEmail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: object
+                  description: Defines the email address on the profile
+                  required:
+                    - email
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      writeOnly: true
+                sendEmail:
+                  type: boolean
+                  default: true
+                  description: Specifies whether Okta or the application sends an email to the end user
+                state:
+                  type: string
+                  description: |
+                    Any application state that the client wishes to persist across the email challenge flow, and receive at the callback URL. Define the callback URL in the OIDC app configuration. This parameter proves to the client that the email link is verified.
+                  writeOnly: true
+                role:
+                  type: string
+                  enum:
+                    - PRIMARY
+                    - SECONDARY
+                  writeOnly: true
+              required:
+                - profile
+        description: New email
+      responses:
+        '201':
+          $ref: '#/components/responses/Unverified-Email-Response'
+        '400':
+          $ref: '#/components/responses/Error-InvalidEmail-Response-400'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '403':
+          $ref: '#/components/responses/Error-Email-Response-403'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+        '409':
+          $ref: '#/components/responses/Error-EmailConflict-Response-409'
+      security:
+        - oauth2:
+            - okta.myAccount.email.manage
+      tags:
+        - Email
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/emails/{id}:
+    parameters:
+      - schema:
+          type: string
+        description: |
+          The email ID
+          Use `GET /idp/myaccount/emails` or `POST /idp/myaccount/emails` operations to obtain the email ID when adding a new email address.
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Retrieve an Email
+      description: 'Retrieves the current user''s email information by ID: a collection of links that describe the acceptable email operations'
+      operationId: getEmail
+      responses:
+        '200':
+          $ref: '#/components/responses/Verified-Email-Response'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.email.read
+      tags:
+        - Email
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+    delete:
+      summary: Delete an Email
+      description: |
+        Deletes the current user's email information by ID. You can only delete unverified primary and secondary emails.
+      operationId: deleteEmail
+      parameters: []
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json;okta-version=1.0.0: {}
+        '400':
+          $ref: '#/components/responses/Error-InvalidEmailDeletion-400'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '404':
+          $ref: '#/components/responses/Error-EmailResourceNotFound-Response-404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.email.manage
+      tags:
+        - Email
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/emails/{id}/challenge:
+    parameters:
+      - schema:
+          type: string
+        description: |-
+          The email ID
+
+          Use the `GET /idp/myaccount/emails` or `POST /idp/myaccount/emails` operations when adding a new email address.
+        name: id
+        in: path
+        required: true
+    post:
+      summary: Send an Email Challenge
+      description: |-
+        Sends a \"Confirm email address change\" email to the user with a one-time passcode for verification.
+        Also, the user receives a \"Notice of pending email address change\" email. After the challenge is verified, the email becomes active.
+      operationId: sendEmailChallenge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: string
+                  writeOnly: true
+                  description: (Optional) The state parameter that contains the state of the client
+              required:
+                - state
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The email ID of the caller
+                    minLength: 1
+                  status:
+                    type: string
+                    description: The challenge status of the caller's email
+                    enum:
+                      - VERIFIED
+                      - UNVERIFIED
+                    minLength: 1
+                  expiresAt:
+                    type: string
+                    description: The time when the challenge expires. A challenge has a lifetime of five minutes.
+                    minLength: 1
+                  profile:
+                    type: object
+                    description: Defines the email address on the profile
+                    required:
+                      - email
+                    properties:
+                      email:
+                        type: string
+                        description: The email address on the profile
+                        minLength: 1
+                  _links:
+                    type: object
+                    description: Discoverable resources related to the caller's email challenge
+                    required:
+                      - verify
+                      - poll
+                    properties:
+                      verify:
+                        type: object
+                        description: Link to the resource (verify)
+                        required:
+                          - href
+                          - hints
+                        properties:
+                          href:
+                            type: string
+                            description: Link URI
+                            minLength: 1
+                          hints:
+                            type: object
+                            description: Describes the allowed HTTP verbs for the `href`
+                            required:
+                              - allow
+                            properties:
+                              allow:
+                                type: array
+                                items:
+                                  type: string
+                                  enum:
+                                    - POST
+                      poll:
+                        type: object
+                        description: Link to the resource (poll)
+                        required:
+                          - href
+                          - hints
+                        properties:
+                          href:
+                            type: string
+                            description: Link URI
+                            minLength: 1
+                          hints:
+                            type: object
+                            description: Describes the allowed HTTP verbs for the `href`
+                            required:
+                              - allow
+                            properties:
+                              allow:
+                                type: array
+                                items:
+                                  type: string
+                                  enum:
+                                    - GET
+                required:
+                  - id
+                  - status
+                  - expiresAt
+                  - profile
+                  - _links
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '403':
+          $ref: '#/components/responses/Error-Email-Response-403'
+        '404':
+          $ref: '#/components/responses/Error-EmailResourceNotFound-Response-404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.email.manage
+      tags:
+        - Email
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/emails/{id}/challenge/{challengeId}:
+    parameters:
+      - schema:
+          type: string
+        description: |-
+          The email ID
+
+          Use the `GET /idp/myaccount/emails` or `POST /idp/myaccount/emails` operations to obtain the ID when adding a new email address.
+        name: id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: challengeId
+        description: |-
+          The `challengeId` of the email
+
+          Use the `POST /idp/myaccount/emails/{id}/challenge/` operation to obtain the `challengeId` when creating a new challenge.
+        in: path
+        required: true
+    get:
+      summary: Poll the Challenge for Email Magic Link
+      description: Polls for the email challenge's status
+      operationId: pollChallengeForEmailMagicLink
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The email ID
+                    minLength: 1
+                  status:
+                    type: string
+                    description: The challenge status of the caller's email
+                    minLength: 1
+                    enum:
+                      - VERIFIED
+                      - UNVERIFIED
+                  expiresAt:
+                    type: string
+                    description: The time at which the challenge expires. The lifetime of a challenge is five minutes.
+                    minLength: 1
+                  profile:
+                    type: object
+                    description: Defines the email address on the profile
+                    required:
+                      - email
+                    properties:
+                      email:
+                        type: string
+                        description: The email address on the profile
+                        minLength: 1
+                  _links:
+                    type: object
+                    description: Discoverable resources related to the poll for the email challenge's status
+                    required:
+                      - verify
+                      - poll
+                    properties:
+                      verify:
+                        type: object
+                        description: Link to the resource (verify)
+                        required:
+                          - href
+                          - hints
+                        properties:
+                          href:
+                            type: string
+                            description: Link URI
+                            minLength: 1
+                          hints:
+                            type: object
+                            description: Describes the allowed HTTP verbs for the `href`
+                            required:
+                              - allow
+                            properties:
+                              allow:
+                                type: array
+                                items:
+                                  type: string
+                                  enum:
+                                    - DELETE
+                                    - GET
+                                    - POST
+                                    - PUT
+                      poll:
+                        type: object
+                        description: Link to the resource (poll)
+                        required:
+                          - href
+                          - hints
+                        properties:
+                          href:
+                            type: string
+                            description: Link URI
+                            minLength: 1
+                          hints:
+                            type: object
+                            description: Describes the allowed HTTP verbs for the `href`
+                            required:
+                              - allow
+                            properties:
+                              allow:
+                                type: array
+                                items:
+                                  type: string
+                                  enum:
+                                    - DELETE
+                                    - GET
+                                    - POST
+                                    - PUT
+                required:
+                  - id
+                  - status
+                  - expiresAt
+                  - profile
+                  - _links
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '404':
+          $ref: '#/components/responses/Error-EmailChallengeResourceNotFound-Response-404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.email.read
+      tags:
+        - Email
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/emails/{id}/challenge/{challengeId}/verify:
+    parameters:
+      - schema:
+          type: string
+        description: |
+          The email ID
+          Use `GET /idp/myaccount/emails` or `POST /idp/myaccount/emails` operations to obtain the email ID when adding a new email address.
+        name: id
+        in: path
+        required: true
+      - schema:
+          type: string
+        description: |
+          The `challengeId` of the email
+          Use the `POST /idp/myaccount/emails/{id}/challenge` operation to obtain the `challengeId` when creating a new challenge.
+        name: challengeId
+        in: path
+        required: true
+    post:
+      summary: Verify an Email OTP
+      description: |
+        Verifies the email challenge with the code that the user receives from the \"Confirm email address change\" email. Once verified, the email is active.
+      operationId: verifyEmailOtp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                verificationCode:
+                  type: string
+                  format: password
+                  writeOnly: true
+                  description: A six-digit verification code sent to the user in the "Confirm email address change" email
+              required:
+                - verificationCode
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;okta-version=1.0.0: {}
+        '401':
+          $ref: '#/components/responses/Error-VerifyPhoneEmail-Response-401'
+        '403':
+          $ref: '#/components/responses/Error-Email-Response-403'
+        '404':
+          $ref: '#/components/responses/Error-EmailChallengeResourceNotFound-Response-404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.email.manage
+      tags:
+        - Email
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/okta-applications:
+    x-okta-lifecycle:
+      lifecycle: LIMITED_GA
+      isGenerallyAvailable: false
+      SKUs:
+        - Okta Identity Engine
+    get:
+      summary: List all Okta Apps
+      description: |
+        Lists all of the current user's Okta apps
+      operationId: listOktaApplications
+      responses:
+        '200':
+          $ref: '#/components/responses/OktaApplicationsResponse'
+        '400':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.oktaApplications.read
+      tags:
+        - OktaApplications
+  /idp/myaccount/organization:
+    x-okta-lifecycle:
+      lifecycle: LIMITED_GA
+      isGenerallyAvailable: false
+      SKUs:
+        - Okta Identity Engine
+    get:
+      summary: Retrieve the Org Details
+      description: |
+        Retrieves the org details
+      operationId: getOrganization
+      responses:
+        '200':
+          $ref: '#/components/responses/OrganizationResponse'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.organization.read
+      tags:
+        - Organization
+  /idp/myaccount/password:
+    get:
+      summary: Retrieve a Password
+      description: |
+        Retrieves the current user's password status
+        > **Note:** This request only returns information about the password, not the password itself.
+      operationId: getPassword
+      responses:
+        '200':
+          $ref: '#/components/responses/Password-Enrolled-Response'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.password.read
+      tags:
+        - Password
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+    post:
+      summary: Create a Password
+      description: Creates and enrolls a password for the current user
+      operationId: createPassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: object
+                  description: Defines the password on the profile
+                  required:
+                    - password
+                  properties:
+                    password:
+                      type: string
+                      writeOnly: true
+              required:
+                - profile
+        description: New password
+      responses:
+        '201':
+          $ref: '#/components/responses/Password-Enrolled-Response'
+        '400':
+          $ref: '#/components/responses/Error-InvalidPassword-Reponse-400'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '403':
+          $ref: '#/components/responses/Error-PasswordConflict-Response-409'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.password.manage
+      tags:
+        - Password
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+    put:
+      summary: Replace a Password
+      description: |-
+        Replaces the password for the current user by resetting it. A password reset doesn't require the user to know the existing password.
+        > **Note:** Azure Active Directory (AD) users don't have permission to reset passwords by default. You need to configure this permission through your AD instance. If you don't have this permission as an AD user, use the [Update a Password](https://developer.okta.com/docs/api/openapi/okta-myaccount/myaccount/tag/Password/#tag/Password/operation/updatePassword) operation.
+      operationId: replacePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: object
+                  description: Defines the password on the profile
+                  required:
+                    - password
+                  properties:
+                    password:
+                      type: string
+                      writeOnly: true
+              required:
+                - profile
+        description: New password
+      responses:
+        '201':
+          $ref: '#/components/responses/Password-Enrolled-Response'
+        '400':
+          $ref: '#/components/responses/Error-InvalidPassword-Reponse-400'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '403':
+          $ref: '#/components/responses/Error-Email-Response-403'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.password.manage
+      tags:
+        - Password
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+    delete:
+      summary: Delete a Password
+      description: |
+        Deletes the current user's enrolled password
+      operationId: deletePassword
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json;okta-version=1.0.0: {}
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '404':
+          $ref: '#/components/responses/Error-PasswordResourceNotFound-Response-404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.password.manage
+      tags:
+        - Password
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/password/change-password:
+    x-okta-lifecycle:
+      lifecycle: EA
+      isGenerallyAvailable: false
+      SKUs:
+        - Okta Identity Engine
+    post:
+      summary: Update a Password
+      description: Updates a password. The user needs to know the current password to change it.
+      operationId: updatePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                oldPassword:
+                  type: string
+                newPassword:
+                  type: string
+              required:
+                - oldPassword
+                - newPassword
+        description: New password
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/Error-InvalidPassword-Reponse-400'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '403':
+          $ref: '#/components/responses/Error-PasswordChangeForbidden-Response-403'
+      security:
+        - oauth2:
+            - okta.myAccount.password.manage
+      tags:
+        - Password
+  /idp/myaccount/password/complexity-requirements:
+    x-okta-lifecycle:
+      lifecycle: EA
+      isGenerallyAvailable: false
+      SKUs:
+        - Okta Identity Engine
+    get:
+      summary: Retrieve the Password Complexity Requirements
+      description: Retrieves the password complexity requirements for the current user
+      operationId: getPasswordRequirements
+      responses:
+        '200':
+          $ref: '#/components/responses/PasswordRequirements-Retrieval-Response'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+      security:
+        - oauth2:
+            - okta.myAccount.password.read
+      tags:
+        - Password
+  /idp/myaccount/phones:
+    get:
+      summary: List all Phones
+      description: Lists the current user's phone information for all phones. Includes a collection of links for each phone describing the acceptable operations.
+      operationId: listPhones
+      responses:
+        '200':
+          $ref: '#/components/responses/Phone-Array-Response'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.phone.read
+      tags:
+        - Phone
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+    post:
+      summary: Create a Phone
+      description: Creates an `UNVERIFIED` status phone for either the SMS or CALL method to the user's MyAccount setting
+      operationId: createPhone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: object
+                  description: Defines the phone number on the profile
+                  properties:
+                    phoneNumber:
+                      type: string
+                      description: The newly added phone number
+                sendCode:
+                  type: boolean
+                  default: true
+                  description: Whether to send a challenge to the newly added phone
+                method:
+                  type: string
+                  enum:
+                    - SMS
+                    - CALL
+                  writeOnly: true
+                  description: The method of the challenge sent to the newly added phone. Applicable when sendCode is true.
+              required:
+                - profile
+      responses:
+        '201':
+          $ref: '#/components/responses/Unverified-Phone-Response'
+        '400':
+          $ref: '#/components/responses/Error-Create-Phone-Response-400'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '403':
+          $ref: '#/components/responses/Error-CreateChallengeVerify-Phone-Response-403'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+        '409':
+          $ref: '#/components/responses/Error-PhoneNumberExists-Response-409'
+        '500':
+          $ref: '#/components/responses/Error-FailedToSendOutOfBandChallenge-Response-500'
+      security:
+        - oauth2:
+            - okta.myAccount.phone.manage
+      tags:
+        - Phone
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/phones/{id}:
+    parameters:
+      - schema:
+          type: string
+        description: The ID of the phone. Obtain the ID of the phone through `GET /idp/myaccount/phones` or `POST /idp/myaccount/phones` when adding a new phone.
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Retrieve a Phone
+      description: Retrieves the current user's phone information by ID. Along with a collection of links describing the operations that can be performed to the phone.
+      operationId: getPhone
+      responses:
+        '200':
+          $ref: '#/components/responses/Verified-Phone-Response'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '404':
+          $ref: '#/components/responses/Error-InvalidFactorId-Response-404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.phone.read
+      tags:
+        - Phone
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+    delete:
+      summary: Delete a Phone
+      description: Deletes the current user's phone information by ID
+      operationId: deletePhone
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json;okta-version=1.0.0: {}
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '403':
+          $ref: '#/components/responses/Error-Delete-Phone-Response-403'
+        '404':
+          $ref: '#/components/responses/Error-InvalidFactorId-Response-404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.phone.manage
+      tags:
+        - Phone
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/phones/{id}/challenge:
+    parameters:
+      - schema:
+          type: string
+          description: ID of the phone. Obtain the ID of the phone through `GET /idp/myaccount/phones` or `POST /idp/myaccount/phones` when adding a new phone.
+        name: id
+        in: path
+        required: true
+    post:
+      summary: Send a Phone Challenge
+      description: |-
+        Sends a phone challenge using one of two methods: `SMS` or `CALL`. This request can also handle a resend challenge (retry).
+
+        Upon a successful challenge, the user receives a verification code by `SMS` or `CALL`. Send a `POST` request to the `/idp/myaccount/phones/{id}/verify` endpoint to use the verification code to verify the phone number. The verification code expires in five minutes.
+
+        > **Notes:**
+        > * Sending requests to the `/idp/myaccount/phones/{id}/challenge` endpoint more often than once every 30 seconds, or at a rate that exceeds the rate limit rule configured by the admin, returns a 429 (Too Many Requests) error.
+      operationId: sendPhoneChallenge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                method:
+                  type: string
+                  description: The method with which the challenge should be sent
+                  enum:
+                    - SMS
+                    - CALL
+                  writeOnly: true
+                retry:
+                  type: boolean
+                  description: Indicates whether this is a normal challenge or retry
+                  default: false
+              required:
+                - method
+      responses:
+        '200':
+          $ref: '#/components/responses/Challenged-Phone-Response'
+        '400':
+          $ref: '#/components/responses/Error-Challenge-Phone-Response-400'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '403':
+          $ref: '#/components/responses/Error-CreateChallengeVerify-Phone-Response-403'
+        '404':
+          $ref: '#/components/responses/Error-InvalidFactorId-Response-404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+        '500':
+          $ref: '#/components/responses/Error-FailedToSendOutOfBandChallenge-Response-500'
+      security:
+        - oauth2:
+            - okta.myAccount.phone.manage
+      tags:
+        - Phone
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/phones/{id}/verify:
+    parameters:
+      - schema:
+          type: string
+          description: The phone ID. Obtain the ID of the phone through `GET /idp/myaccount/phones` or `POST /idp/myaccount/phones` when adding a new phone.
+        name: id
+        in: path
+        required: true
+    post:
+      summary: Verify a Phone Challenge
+      description: |-
+        Verifies the phone number with the verification code that the user receives through `SMS` or `CALL`. The phone number is active upon a successful verification.
+
+        > **Notes:**
+        > * Sending requests to the `/idp/myaccount/phones/{id}/verify` endpoint at a rate that exceeds the rate limit rule configured by the admin returns a 429 (Too Many Requests) error.
+      operationId: verifyPhoneChallenge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                verificationCode:
+                  type: string
+                  format: password
+                  description: A six-digit verification code that the user receives through SMS or CALL
+                  writeOnly: true
+              required:
+                - verificationCode
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json;okta-version=1.0.0: {}
+        '400':
+          $ref: '#/components/responses/Error-Verify-Phone-Response-400'
+        '401':
+          $ref: '#/components/responses/Error-VerifyPhoneEmail-Response-401'
+        '403':
+          $ref: '#/components/responses/Error-CreateChallengeVerify-Phone-Response-403'
+        '404':
+          $ref: '#/components/responses/Error-InvalidFactorId-Response-404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+        '409':
+          $ref: '#/components/responses/Error-InvalidTransaction-Response-409'
+      security:
+        - oauth2:
+            - okta.myAccount.phone.manage
+      tags:
+        - Phone
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/profile:
+    get:
+      summary: Retrieve my Profile
+      description: Retrieves the caller's Okta user profile, without attributes excluded by the [Get my user profile schema](/openapi/okta-myaccount/myaccount/tag/Profile/#tag/Profile/operation/getProfileSchema)
+      operationId: getProfile
+      responses:
+        '200':
+          description: OK
+          $ref: '#/components/responses/Profile-Retrieval-Response'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.profile.read
+      tags:
+        - Profile
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+    put:
+      summary: Replace my User Profile
+      description: |-
+        Replaces the caller's user profile
+
+        > **Notes:**
+        > * This API differs from the the existing [Users API](https://developer.okta.com/docs/reference/api/users/) in that only the PUT operation is supported.  Partial updates (PATCH requests) aren't available. All values returned by fetching a user profile must pass to the MyAccount API, or the update doesn't pass validation. This applies even if the omitted schema property is optional. To ensure an optional property passes, enter a value of 'null'.
+        > * The Okta account management policy doesn't support PUT requests to the `/idp/myaccount/profile` endpoint. See [Configure an Okta account management policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/).
+      operationId: replaceProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: object
+                  description: The properties defined in the schema
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '400':
+          $ref: '#/components/responses/Error-UpdateProfile-Response-400'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.profile.manage
+      tags:
+        - Profile
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/profile/schema:
+    get:
+      summary: Retrieve my Profile Schema
+      description: |-
+        Retrieves the appropriate user profile schema for the caller's [user type](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/)
+
+        > **Note:** If a property's value isn't visible to an end user (because it's hidden or [sensitive](https://help.okta.com/okta_help.htm?id=ext-hide-sensitive-attributes)), then the property's definition is also hidden in the output of the MyAccount API.
+      operationId: getProfileSchema
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Schema'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.profile.read
+      tags:
+        - Profile
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: true
+  /idp/myaccount/sessions:
+    x-okta-lifecycle:
+      lifecycle: GA
+      isGenerallyAvailable: true
+    delete:
+      summary: Delete all Sessions
+      description: |
+        Deletes all sessions. Revokes all active identity provider sessions of the user. This forces the user to authenticate on the next operation. Also revokes OpenID Connect and OAuth refresh and access tokens issued to the user.
+      operationId: deleteSessions
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '406':
+          description: Not Acceptable
+          content:
+            application/json;okta-version=1.0.0:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - oauth2:
+            - okta.myAccount.sessions.manage
+      tags:
+        - Sessions
+  /idp/myaccount/webauthn:
+    get:
+      summary: List all WebAuthn enrollments
+      description: |
+        Lists all of the specified user's WebAuthn enrollments
+      operationId: listWebAuthn
+      responses:
+        '200':
+          $ref: '#/components/responses/WebAuthn-Enrollment-Array-Response'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.webauthn.read
+      tags:
+        - WebAuthn
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: false
+        SKUs: []
+    post:
+      summary: Create a WebAuthn enrollment
+      description: |
+        Creates a WebAuthn enrollment. Before using this endpoint, ensure that you've used the [Start a WebAuthn enrollment](https://developer.okta.com/docs/api/openapi/okta-myaccount/myaccount/tag/WebAuthn/#tag/WebAuthn/operation/startWebAuthnEnrollment) endpoint first.
+      operationId: createWebAuthnEnrollment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebAuthnRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/WebAuthn-Enrollment-Response'
+        '400':
+          $ref: '#/components/responses/Error-Create-WebAuthn-Response-400'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '404':
+          $ref: '#/components/responses/ErrorResourceNotFound404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.webauthn.manage
+      tags:
+        - WebAuthn
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: false
+        SKUs: []
+  /idp/myaccount/webauthn/registration:
+    post:
+      summary: Start a WebAuthn enrollment
+      description: |
+        Starts the enrollment process for a WebAuthn authenticator. Complete the enrollment process by using the [Create a WebAuthn enrollment](https://developer.okta.com/docs/api/openapi/okta-myaccount/myaccount/tag/WebAuthn/#tag/WebAuthn/operation/createWebAuthnEnrollment) endpoint.
+
+        Do not supply a request body for this operation. To start the enrollment process, send a `POST` request to the `/idp/myaccount/webauthn/registration` endpoint. The response contains the challenge and options for the WebAuthn credential creation.
+      operationId: startWebAuthnEnrollment
+      requestBody:
+        content:
+          application/json: {}
+      responses:
+        '200':
+          $ref: '#/components/responses/WebAuthn-GetRegistrationOptionsAndChallenge-Response'
+        '400':
+          $ref: '#/components/responses/Error-Create-WebAuthn-Response-400'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '403':
+          $ref: '#/components/responses/Error-WebAuthn-Response-403'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.webauthn.manage
+      tags:
+        - WebAuthn
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: false
+        SKUs: []
+  /idp/myaccount/webauthn/{id}:
+    parameters:
+      - $ref: '#/components/parameters/webauthnEnrollmentId'
+    get:
+      summary: Retrieve a WebAuthn enrollment
+      description: Retrieves a WebAuthn enrollment
+      operationId: getWebAuthn
+      responses:
+        '200':
+          $ref: '#/components/responses/WebAuthn-Enrollment-Response'
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '404':
+          $ref: '#/components/responses/ErrorResourceNotFound404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.webauthn.read
+      tags:
+        - WebAuthn
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: false
+        SKUs: []
+    delete:
+      summary: Delete a WebAuthn enrollment
+      description: Deletes a specified WebAuthn enrollment
+      operationId: deleteWebAuthn
+      parameters: []
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json;okta-version=1.0.0: {}
+        '401':
+          $ref: '#/components/responses/Error-IdpMyAccountNotEnabled-Response-401'
+        '404':
+          $ref: '#/components/responses/ErrorResourceNotFound404'
+        '406':
+          $ref: '#/components/responses/ErrorNotAcceptable406'
+      security:
+        - oauth2:
+            - okta.myAccount.webauthn.manage
+      tags:
+        - WebAuthn
+      x-okta-lifecycle:
+        lifecycle: GA
+        isGenerallyAvailable: false
+        SKUs: []
+components:
+  parameters:
+    appAuthenticatorChallengeId:
+      name: challengeId
+      in: path
+      required: true
+      description: Id of the challenge associated with the app authenticator
+      schema:
+        type: string
+    appAuthenticatorEnrollmentId:
+      name: enrollmentId
+      in: path
+      required: true
+      description: Id of the user's app authenticator enrollment
+      schema:
+        type: string
+    pathAuthenticatorId:
+      name: authenticatorId
+      in: path
+      required: true
+      description: '`id` of the authenticator'
+      schema:
+        type: string
+    pathEnrollmentId:
+      name: enrollmentId
+      in: path
+      required: true
+      description: '`id` of the authenticator enrollment'
+      schema:
+        type: string
+    queryExpandAuthenticator:
+      name: expand
+      in: query
+      description: Includes associated authenticator details in the `_embedded` attribute
+      schema:
+        type: string
+        enum:
+          - enrollments
+          - requirements
+        x-enumDescriptions:
+          enrollments: Returns the list of authenticator enrollments associated with the authenticator
+          requirements: Returns the list of password requirements associated with the authenticator
+    webauthnEnrollmentId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the WebAuthn enrollment
+      schema:
+        type: string
+  responses:
+    ErrorAccessDenied403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ErrorResourceNotFound404:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ErrorNotAcceptable406:
+      description: Not Acceptable (missing header)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error406'
+    ErrorTooManyRequests429:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ListAuthenticatorsResponse:
+      description: Authenticators
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Authenticator'
+    AuthenticatorResponse:
+      description: Authenticator
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Authenticator'
+    ListEnrollmentsResponse:
+      description: Enrollments
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AuthenticatorEnrollment'
+    EnrollmentResponse:
+      description: Enrollment
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticatorEnrollment'
+    Verified-Email-Response:
+      description: Example response
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Email'
+    OktaApplicationsResponse:
+      description: Example response
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/OktaApplication'
+    OrganizationResponse:
+      description: Example response
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Organization'
+    Unverified-Email-Response:
+      description: Example response
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Email'
+    Email-Array-Response:
+      description: Example response
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Email'
+    Phone-Array-Response:
+      description: Example response
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Phone'
+    Unverified-Phone-Response:
+      description: Example response
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Phone'
+    Verified-Phone-Response:
+      description: Example response
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Phone'
+    Challenged-Phone-Response:
+      description: Example response after challenging a phone
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            type: object
+            properties:
+              _links:
+                type: object
+                description: Discoverable resources related to the phone challenge
+                properties:
+                  verify:
+                    type: object
+                    description: Link to the resource (verify)
+                    required:
+                      - href
+                      - hints
+                    properties:
+                      href:
+                        type: string
+                        description: Link URI
+                        minLength: 1
+                      hints:
+                        type: object
+                        description: Describes the allowed HTTP verbs for the `href`
+                        required:
+                          - allow
+                        properties:
+                          allow:
+                            type: array
+                            items:
+                              type: string
+                              enum:
+                                - GET
+    Password-Enrolled-Response:
+      description: Example response
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/PasswordResponse'
+    PasswordRequirements-Retrieval-Response:
+      description: Example response
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/PasswordResponse'
+    Profile-Retrieval-Response:
+      description: Example response
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Profile'
+    Error-InvalidFactorId-Response-404:
+      description: Not Found
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-FailedToSendOutOfBandChallenge-Response-500:
+      description: Internal Server Error
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-InvalidTransaction-Response-409:
+      description: Conflict
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-UpdateProfile-Response-400:
+      description: Bad Request
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-PhoneNumberExists-Response-409:
+      description: Conflict
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-InvalidEmailDeletion-400:
+      description: Bad Request
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-InvalidEmail-Response-400:
+      description: Bad Request
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-EmailConflict-Response-409:
+      description: Conflict
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-EmailResourceNotFound-Response-404:
+      description: Not Found
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-EmailChallengeResourceNotFound-Response-404:
+      description: Not Found
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-Email-Response-403:
+      description: Forbidden
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-Create-Phone-Response-400:
+      description: Bad Request
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-Challenge-Phone-Response-400:
+      description: Bad Request
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-Verify-Phone-Response-400:
+      description: Bad Request
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-IdpMyAccountNotEnabled-Response-401:
+      description: Unauthorized
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-VerifyPhoneEmail-Response-401:
+      description: Unauthorized
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-CreateChallengeVerify-Phone-Response-403:
+      description: Forbidden
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-Delete-Phone-Response-403:
+      description: Forbidden
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-InvalidPassword-Reponse-400:
+      description: Bad Request
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-PasswordChangeForbidden-Response-403:
+      description: Forbidden
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-PasswordConflict-Response-409:
+      description: Conflict
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-PasswordResourceNotFound-Response-404:
+      description: Not Found
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    WebAuthn-Enrollment-Response:
+      description: Success
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/WebAuthn'
+    WebAuthn-Enrollment-Array-Response:
+      description: Success
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/WebAuthn'
+    WebAuthn-GetRegistrationOptionsAndChallenge-Response:
+      description: Success
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/WebAuthnRegistrationOptions'
+    Error-WebAuthn-Response-403:
+      description: Forbidden
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error-Create-WebAuthn-Response-400:
+      description: Bad Request
+      content:
+        application/json;okta-version=1.0.0:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AppAuthenticatorEnrollment:
+      description: App authenticator enrollment object
+      type: object
+      properties:
+        authenticatorId:
+          type: string
+          readOnly: true
+        createdDate:
+          type: string
+          format: date-time
+          readOnly: true
+        device:
+          type: object
+          properties:
+            id:
+              type: string
+            status:
+              type: string
+              enum:
+                - ACTIVE
+            createdDate:
+              type: string
+              format: date-time
+            lastUpdated:
+              type: string
+              format: date-time
+            clientInstanceId:
+              type: string
+          readOnly: true
+        id:
+          type: string
+          readOnly: true
+        lastUpdated:
+          type: string
+          format: date-time
+          readOnly: true
+        links:
+          type: object
+          description: Discoverable resources related to the app authenticator
+          properties:
+            self:
+              type: object
+              description: Link to the resource (app authenticator)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  minLength: 1
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - PATCH
+                          - DELETE
+          readOnly: true
+        methods:
+          type: object
+          properties:
+            push:
+              type: object
+              properties:
+                id:
+                  type: string
+                createdDate:
+                  type: string
+                  format: date-time
+                lastUpdated:
+                  type: string
+                  format: date-time
+                links:
+                  type: object
+                  properties:
+                    pending:
+                      type: object
+                      properties:
+                        href:
+                          type: string
+                          minLength: 1
+                        hints:
+                          type: object
+                          properties:
+                            allow:
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - GET
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+            username:
+              type: string
+          readOnly: true
+    AppAuthenticatorEnrollmentRequest:
+      description: App authenticator enrollment request
+      type: object
+      properties:
+        authenticatorId:
+          type: string
+        device:
+          type: object
+          properties:
+            secureHardwarePresent:
+              type: boolean
+              description: Indicates if the device is equipped with TPM storage for storing signing keys
+            clientInstanceKey:
+              $ref: '#/components/schemas/KeyObject'
+              description: A public key in Json Web Keys format that is not tied to a user. It can be used to identify a device across orgs.
+            osVersion:
+              type: string
+            clientInstanceBundleId:
+              type: string
+            platform:
+              type: string
+              enum:
+                - ANDROID
+                - IOS
+            manufacturer:
+              type: string
+            deviceAttestation:
+              type: object
+            clientInstanceVersion:
+              type: string
+            clientInstanceDeviceSdkVersion:
+              type: string
+            model:
+              type: string
+            displayName:
+              type: string
+              description: The device's display name
+            udid:
+              type: string
+          required:
+            - clientInstanceKey
+            - clientInstanceBundleId
+            - clientInstanceVersion
+            - clientInstanceDeviceSdkVersion
+            - osVersion
+            - platform
+            - displayName
+        methods:
+          type: object
+          required:
+            - push
+          properties:
+            push:
+              type: object
+              required:
+                - pushToken
+                - keys
+              properties:
+                apsEnvironment:
+                  type: string
+                  description: Target APS type that application registers to. Required for iOS enrollments.
+                  enum:
+                    - PRODUCTION
+                    - DEVELOPMENT
+                pushToken:
+                  type: string
+                keys:
+                  type: object
+                  required:
+                    - proofOfPossession
+                  properties:
+                    proofOfPossession:
+                      $ref: '#/components/schemas/KeyObject'
+                    userVerification:
+                      $ref: '#/components/schemas/KeyObject'
+                    capabilities:
+                      $ref: '#/components/schemas/AppAuthenticatorMethodCapabilities'
+      required:
+        - authenticatorId
+        - device
+        - methods
+    AppAuthenticatorMethodCapabilities:
+      type: object
+      properties:
+        transactionTypes:
+          type: array
+          items:
+            type: string
+            enum:
+              - LOGIN
+              - CIBA
+    Authenticator:
+      description: A specific authenticator of the current user
+      type: object
+      properties:
+        enrollable:
+          type: boolean
+          description: Whether the authenticator allows new enrollments
+          readOnly: true
+        id:
+          type: string
+          description: The unique identifier of the authenticator
+          readOnly: true
+        key:
+          $ref: '#/components/schemas/AuthenticatorKey'
+        logo:
+          type: object
+          readOnly: true
+          properties:
+            uri:
+              type: string
+              description: The URI of the custom authenticator logo
+              readOnly: true
+        name:
+          type: string
+          description: The display name of the authenticator
+          readOnly: true
+        _embedded:
+          type: object
+          readOnly: true
+          properties:
+            enrollments:
+              type: array
+              items:
+                $ref: '#/components/schemas/AuthenticatorEnrollment'
+        _links:
+          type: object
+          readOnly: true
+          properties:
+            self:
+              $ref: '#/components/schemas/HrefObject'
+            enroll:
+              $ref: '#/components/schemas/HrefObject'
+            enrollments:
+              $ref: '#/components/schemas/HrefObject'
+    AuthenticatorEnrollment:
+      description: Authenticator enrollment of the current user
+      type: object
+      properties:
+        canChangePassword:
+          type: boolean
+          description: Whether the user has permission to perform a password change operation as determined by their password policy
+          readOnly: true
+        canReset:
+          type: boolean
+          description: Whether the authenticator enrollment can be reset
+          readOnly: true
+          deprecated: true
+        canResetPassword:
+          type: boolean
+          description: Whether the user has permission to perform a password reset operation, as determined by their password policy and password source. If `canResetPassword` is false, the [`modify`](https://developer.okta.com/docs/api/openapi/okta-myaccount/myaccount/tag/Authenticators/#tag/Authenticators/operation/listAuthenticators!c=200&path=_embedded/enrollments/_links/modify&t=response) object isn't returned in the `_links` object.
+        canUnenroll:
+          type: boolean
+          description: Whether the authenticator can be unenrolled
+          readOnly: true
+        created:
+          type: string
+          description: The date when the authenticator enrollment was created
+          readOnly: true
+        id:
+          type: string
+          description: The unique identifier of the authenticator enrollment
+          readOnly: true
+        lastChallenged:
+          type: string
+          description: The date when the authenticator enrollment was last challenged
+          readOnly: true
+        name:
+          type: string
+          description: The display name of the authenticator enrollment
+        nickname:
+          type: string
+          description: A customizable name for the authenticator enrollment
+        profile:
+          type: object
+          description: The fields specific to an authenticator enrollment that may not be common across all authenticators
+          readOnly: true
+        _links:
+          type: object
+          readOnly: true
+          properties:
+            self:
+              $ref: '#/components/schemas/HrefObject'
+            authenticator:
+              $ref: '#/components/schemas/HrefObject'
+            modify:
+              $ref: '#/components/schemas/HrefObject'
+            unenroll:
+              $ref: '#/components/schemas/HrefObject'
+    AuthenticatorKey:
+      description: An Okta server key that identifies the authenticator
+      type: string
+      enum:
+        - custom_app
+        - custom_otp
+        - duo
+        - external_idp
+        - google_otp
+        - okta_email
+        - okta_password
+        - okta_verify
+        - onprem_mfa
+        - phone_number
+        - rsa_token
+        - security_question
+        - symantec_vip
+        - webauthn
+        - yubikey_token
+      readOnly: true
+    CreateWebAuthnRequest:
+      type: object
+      properties:
+        attestation:
+          type: string
+          description: JSON-serialized data that contains the authenticator data and attestation statement
+        clientData:
+          type: string
+          description: JSON-serialized data that's passed to the WebAuthn authenticator by the client to generate the WebAuthn credentials
+        clientExtensions:
+          type: string
+          description: JSON-serialized data that contains [authenticator extensions](https://www.w3.org/TR/webauthn-2/#sctn-extensions)
+        transports:
+          type: string
+          description: JSON-serialized data that contains the transport values that the authenticator is believed to support
+      required:
+        - clientData
+        - attestation
+    Email:
+      description: Email object
+      type: object
+      properties:
+        id:
+          type: string
+          description: The email ID of the caller
+          minLength: 1
+          readOnly: true
+        profile:
+          type: object
+          description: Defines the email address on the profile
+          required:
+            - email
+          properties:
+            email:
+              type: string
+              description: Email address of the user
+              minLength: 1
+        roles:
+          type: array
+          description: Defines the role of the email
+          items:
+            type: string
+            enum:
+              - PRIMARY
+              - SECONDARY
+        status:
+          type: string
+          description: The email status of the caller
+          minLength: 1
+          readOnly: true
+          enum:
+            - VERIFIED
+            - UNVERIFIED
+        _links:
+          type: object
+          description: Discoverable resources related to the caller's email
+          properties:
+            self:
+              type: object
+              description: Link to the resource (self)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  minLength: 1
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - GET
+                          - DELETE
+                          - PUT
+            challenge:
+              type: object
+              description: Link to the resource (challenge)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  minLength: 1
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - DELETE
+                          - GET
+                          - POST
+                          - PUT
+            verify:
+              type: object
+              description: Link to the resource (verify)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  minLength: 1
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - DELETE
+                          - GET
+                          - POST
+                          - PUT
+            poll:
+              type: object
+              description: Link to the resource (poll)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  minLength: 1
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - DELETE
+                          - GET
+                          - POST
+                          - PUT
+      required:
+        - id
+        - status
+        - profile
+        - roles
+    Error:
+      description: Standard API error object
+      type: object
+      properties:
+        errorCauses:
+          type: array
+          description: (Optional) Further information about what caused this error
+          items:
+            type: object
+            properties:
+              errorSummary:
+                type: string
+                description: A natural language explanation of the error
+                readOnly: true
+        errorCode:
+          type: string
+          description: A code that is associated with this error type
+          readOnly: true
+        errorId:
+          type: string
+          description: A unique identifier for this error. This can be used by Okta Support to help with troubleshooting.
+          readOnly: true
+        errorLink:
+          type: string
+          description: A link to documentation with a more detailed explanation of the error (not yet implemented and is currently the same value as the 'errorCode')
+          readOnly: true
+        errorSummary:
+          type: string
+          description: A natural language explanation of the error
+          readOnly: true
+    Error406:
+      description: Not Acceptable error object
+      type: object
+      properties:
+        errorCauses:
+          type: string
+          description: Missing or incorrect `Accept` header
+          readOnly: true
+        errorCode:
+          type: string
+          description: E0000149
+          readOnly: true
+        errorId:
+          type: string
+          description: A unique identifier for this error. This can be used by Okta Support to help with troubleshooting.
+          readOnly: true
+        errorLink:
+          type: string
+          description: E0000149
+          readOnly: true
+        errorSummary:
+          type: string
+          description: The HTTP request is not acceptable
+          readOnly: true
+    HrefObject:
+      title: Link object
+      type: object
+      properties:
+        hints:
+          type: object
+          description: Describes allowed HTTP verbs for the `href`
+          properties:
+            allow:
+              type: array
+              items:
+                $ref: '#/components/schemas/HttpMethod'
+        href:
+          type: string
+          description: Link URI
+        name:
+          type: string
+          description: Link name
+        type:
+          type: string
+          description: The media type of the link. If omitted, it is implicitly `application/json`.
+      required:
+        - href
+      readOnly: true
+    HttpMethod:
+      type: string
+      enum:
+        - DELETE
+        - GET
+        - POST
+        - PUT
+    KeyEC:
+      type: object
+      properties:
+        crv:
+          type: string
+          enum:
+            - P-256
+        kid:
+          type: string
+          description: The unique identifier of the key
+        kty:
+          type: string
+          enum:
+            - EC
+          description: The type of public key
+        okta:kpr:
+          type: string
+          enum:
+            - HARDWARE
+            - SOFTWARE
+        x:
+          type: string
+          description: The public x coordinate for the elliptic curve point
+        'y':
+          type: string
+          description: The public y coordinate for the elliptic curve point
+      required:
+        - x
+        - 'y'
+        - kty
+        - okta:kpr
+        - crv
+        - kid
+    KeyObject:
+      oneOf:
+        - $ref: '#/components/schemas/KeyEC'
+        - $ref: '#/components/schemas/KeyRSA'
+      type: object
+    KeyRSA:
+      type: object
+      properties:
+        e:
+          type: string
+          description: The key exponent of a RSA key
+        kid:
+          type: string
+          description: The unique identifier of the key
+        kty:
+          type: string
+          enum:
+            - RSA
+          description: The type of public key
+        'n':
+          type: string
+          description: The modulus of the RSA key
+        okta:kpr:
+          type: string
+          enum:
+            - HARDWARE
+            - SOFTWARE
+      required:
+        - 'n'
+        - e
+        - kty
+        - okta:kpr
+        - kid
+    OktaApplication:
+      description: Okta apps list
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The display name of the app
+          minLength: 1
+          readOnly: true
+        id:
+          type: string
+          description: The `client_id` of the app
+          minLength: 1
+          readOnly: true
+        name:
+          type: string
+          description: The name of the app
+          minLength: 1
+          readOnly: true
+    Organization:
+      description: Org object
+      type: object
+      properties:
+        helpLink:
+          type: string
+          description: The URL of the org's help resources
+          readOnly: true
+        name:
+          type: string
+          description: The name of the org
+          minLength: 1
+          readOnly: true
+        supportEmail:
+          type: string
+          description: The email address of the org support contact
+          readOnly: true
+        url:
+          type: string
+          description: The URL of the org
+          minLength: 1
+          readOnly: true
+        _links:
+          type: object
+          description: Discoverable resources related to the org
+          properties:
+            self:
+              type: object
+              description: Link to the resource (self)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  minLength: 1
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - GET
+    PasswordResponse:
+      description: Password response object
+      type: object
+      properties:
+        created:
+          type: string
+          description: If password is `ACTIVE`, returns the date when password was first enrolled
+        id:
+          type: string
+          minLength: 1
+          readOnly: true
+        lastUpdated:
+          type: string
+          description: If password is `ACTIVE`, returns the date when password was last updated
+        status:
+          type: string
+          description: '`ACTIVE`, `EXPIRED`, `SUSPENDED`, `NOT_ENROLLED`'
+        _links:
+          type: object
+          description: Discoverable resources related to the password
+          properties:
+            self:
+              type: object
+              description: Link to the resource (self)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  minLength: 1
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - DELETE
+                          - GET
+                          - PUT
+    Phone:
+      description: Phone object
+      type: object
+      properties:
+        id:
+          type: string
+          description: The phone ID of the caller
+          minLength: 1
+          readOnly: true
+        profile:
+          type: object
+          description: Defines the phone number on the profile
+          required:
+            - phoneNumber
+          properties:
+            phoneNumber:
+              type: string
+              description: The phone number on the profile
+              minLength: 1
+        status:
+          type: string
+          description: The phone status of the caller
+          enum:
+            - VERIFIED
+            - UNVERIFIED
+          minLength: 1
+          readOnly: true
+        _links:
+          type: object
+          description: Discoverable resources related to the caller's phone
+          properties:
+            self:
+              type: object
+              description: Link to the resource (self)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  minLength: 1
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - GET
+                          - DELETE
+                          - PUT
+            challenge:
+              type: object
+              description: Link to the resource (challenge)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  minLength: 1
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - DELETE
+                          - GET
+                          - POST
+                          - PUT
+            verify:
+              type: object
+              description: Link to the resource (verify)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  minLength: 1
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - DELETE
+                          - GET
+                          - POST
+                          - PUT
+      required:
+        - id
+        - status
+        - profile
+    Profile:
+      description: Profile object based on the user's directory profile schema (based on UD)
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: The timestamp of the creation of the caller's account
+          format: date-time
+          readOnly: true
+        modifiedAt:
+          type: string
+          description: The timestamp of the last update to the caller's account
+          format: date-time
+          readOnly: true
+        profile:
+          type: object
+          description: The properties defined in the [user profile schema](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Schema/)
+        _links:
+          type: object
+          properties:
+            self:
+              type: object
+              description: Link to the resource (self)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  format: uri
+                  readOnly: true
+            describedBy:
+              type: object
+              description: Link to the resource (describedBy)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  format: uri
+                  readOnly: true
+    PushNotificationChallenge:
+      description: Push notification challenge request object for an app authenticator
+      type: object
+      properties:
+        challenge:
+          type: string
+          description: |
+            JWT issued by Okta at the time of challenging for a push notification.
+
+            This based64-encoded JWT consists of a [JWT header](/openapi/okta-myaccount/myaccount/tag/AppAuthenticator/#tag/AppAuthenticator/schema/PushNotificationChallengeRequestJwtHeader)
+            and a [JWT payload](/openapi/okta-myaccount/myaccount/tag/AppAuthenticator/#tag/AppAuthenticator/schema/PushNotificationChallengeRequestJwt).
+        payloadVersion:
+          type: string
+          enum:
+            - IDXv1
+    PushNotificationChallengeRequestJwt:
+      x-tags:
+        - AppAuthenticator
+      description: JSON Web Token payload constructed by Okta for the push notification challenge request JWT
+      type: object
+      properties:
+        appInstanceName:
+          type: string
+          description: Friendly name of the application for the authentication request
+        aud:
+          type: string
+          description: Audience (maps to the application ID)
+        authenticatorEnrollmentId:
+          type: string
+          description: ID of the app authenticator enrollment
+        authorizationServerId:
+          type: string
+          description: ID of the authorization server that signed the challenge request
+        challengeContext:
+          type: object
+          properties:
+            clientOS:
+              type: string
+              description: OS of the client making the request
+            clientLocation:
+              type: string
+              description: Location of the request
+            transactionTime:
+              type: string
+              description: Time the challenge request was created
+            transactionType:
+              type: string
+              description: Indicates if the request is CIBA or LOGIN
+              enum:
+                - CIBA
+                - LOGIN
+            bindingMessage:
+              type: string
+              description: If `transactionType` is CIBA, this message must be shown to the user
+        exp:
+          type: string
+          description: Expiration time of token (UNIX timestamp)
+        iat:
+          type: string
+          description: Issuing time of token (UNIX timestamp)
+        iss:
+          type: string
+          description: Issuer (maps to the org URL)
+        jti:
+          type: string
+          description: Token ID (matches `transactionId`)
+        method:
+          type: string
+          description: Method type requested for the response
+          enum:
+            - push
+        methodEnrollmentId:
+          type: string
+          description: ID of the push method enrollment
+        nonce:
+          type: string
+          description: Randomly generated nonce value
+        orgId:
+          type: string
+          description: ID of the organization
+        signals:
+          type: array
+          description: Array of string values describing client signals requested for collection
+        transactionId:
+          type: string
+          description: Transaction ID (matches the `challengeId` path parameter)
+        userId:
+          type: string
+          description: ID of the user being challenged
+        userMediation:
+          type: string
+          description: Indicates if user mediation is required
+          enum:
+            - NONE
+            - OPTIONAL
+            - REQUIRED
+          x-enumDescriptions:
+            NONE: User interaction isn't required by the client during authentication.
+            OPTIONAL: The client can decide to interact with the user or not.
+            REQUIRED: The client must interact with the user. If a biometrics prompt occurs during user verification, additional consent prompt isn't shown by the client.
+        userVerification:
+          type: string
+          description: Indicates if user verification (biometrics) is used in the response
+          enum:
+            - NONE
+            - DISCOURAGED
+            - PREFERRED
+            - REQUIRED
+          x-enumDescriptions:
+            NONE: The client doesn't require any user verification as part of the authentication flow.
+            DISCOURAGED: The client prefers a proof of possession flow without user interaction. However, the client can prompt for user verification if it allows for a better user experience.
+            PREFERRED: Client user verification prompt is preferred. If the user verification key is unavailable, the client can use the proof of possession. In this situation, Okta recommends that the client send UV_TEMPORARILY_UNAVAILABLE or UV_PERMANENTLY_UNAVAILABLE in the challenge response's `userConsent` field.
+            REQUIRED: The client must prompt for user verification and otherwise fail silently without user interaction.
+        ver:
+          type: integer
+          description: 'Version of the JWT (supported value: 0)'
+        verificationUri:
+          type: string
+          description: The expected endpoint posted by the client for the challenge response
+    PushNotificationChallengeRequestJwtHeader:
+      x-tags:
+        - AppAuthenticator
+      description: JSON Web Token header used for the push notification challenge request JWT
+      type: object
+      properties:
+        alg:
+          type: string
+          description: Signing algorithm used
+        kid:
+          type: string
+          description: Signing key ID that matches the key ID used by the authorization server
+        typ:
+          type: string
+          description: Type of token
+          enum:
+            - okta-pushbind+jwt
+    PushNotificationChallengeResponseJwt:
+      x-tags:
+        - AppAuthenticator
+      description: JSON Web Token payload used for the push notification challenge response JWT
+      type: object
+      properties:
+        aud:
+          type: string
+          description: Audience (matches the org URL)
+        challengeResponseContext:
+          type: object
+          description: Object describing the response context
+          required:
+            - userConsent
+          properties:
+            userConsent:
+              type: string
+              description: Type of user consent
+              enum:
+                - NONE
+                - APPROVED_CONSENT_PROMPT
+                - APPROVED_USER_VERIFICATION
+                - CANCELLED_USER_VERIFICATION
+                - DENIED_CONSENT_PROMPT
+                - UV_TEMPORARILY_UNAVAILABLE
+                - UV_PERMANENTLY_UNAVAILABLE
+                - USER_ABANDONED
+              x-enumDescriptions:
+                NONE: There was no interaction with the end user as part of the authentication
+                APPROVED_CONSENT_PROMPT: The user approved the consent prompt
+                APPROVED_USER_VERIFICATION: The user approved the user verification by providing biometrics or a PIN
+                CANCELLED_USER_VERIFICATION: The user cancelled user verification by rejecting the biometrics prompt
+                DENIED_CONSENT_PROMPT: The user rejected the consent prompt
+                UV_TEMPORARILY_UNAVAILABLE: The client currently can't access the user verification key
+                UV_PERMANENTLY_UNAVAILABLE: The client permanently lost access to the user verification key
+                USER_ABANDONED: The user cancelled user verification by closing the biometrics prompt
+            transactionType:
+              type: string
+              description: Type of transaction
+              enum:
+                - LOGIN
+                - CIBA
+        deviceSignals:
+          type: object
+          description: JSON dictionary with the `signals` keys (and their values) requested in the challenge request
+          properties:
+            id:
+              type: string
+              description: ID of the device
+            isHardwareProtectionEnabled:
+              type: boolean
+              description: Indicates whether the Android device supports a hardware keystore or if the iOS device supports Secure Enclave
+            model:
+              type: string
+              description: The device type or design
+            manufacturer:
+              type: string
+              description: The vendor that created the physical device
+            displayName:
+              type: string
+              description: The display name of the device
+            platform:
+              type: string
+              description: The device operating system
+              enum:
+                - ANDROID
+                - IOS
+            osVersion:
+              type: string
+              description: The device operating system software version
+            clientInstanceId:
+              type: string
+              description: Key ID of the client instance key
+            clientInstanceBundleId:
+              type: string
+              description: ID of the application bundle
+            clientInstanceVersion:
+              type: string
+              description: Application version
+            secureHardwarePresent:
+              type: boolean
+              description: Indicates if secure hardware is present
+            screenLockType:
+              type: string
+              description: Screen lock type set on the device
+              enum:
+                - NONE
+                - PASSCODE
+                - BIOMETRIC
+              x-enumDescriptions:
+                NONE: No passcode is set on the device
+                PASSCODE: Only a passcode or password is set on the device (biometrics aren't set up)
+                BIOMETRIC: Passcode and biometrics are set on the device
+            diskEncryptionType:
+              type: string
+              description: Disk encryption type of the device profile
+              enum:
+                - NONE
+                - FULL
+                - USER
+              x-enumDescriptions:
+                NONE: No encryption has been set
+                FULL: The disk is fully encrypted
+                USER: The encryption key is tied to the user or profile (Android only)
+        exp:
+          type: string
+          description: Expiration time of token (UNIX timestamp)
+        iat:
+          type: string
+          description: Issuing time of token (UNIX timestamp)
+        iss:
+          type: string
+          description: Issuer (matches the app authenticator enrollment ID)
+        jti:
+          type: string
+          description: Randomly generated ID for every response
+        keyType:
+          type: string
+          description: Type of key used to sign the JWT
+          enum:
+            - proofOfPossession
+            - userVerification
+        methodEnrollmentId:
+          type: string
+          description: ID of the push method enrollmnet
+        nbf:
+          type: string
+          description: Token isn't valid before this time (UNIX timestamp)
+        nonce:
+          type: string
+          description: Matches the `nonce` in the challenge request
+        sub:
+          type: string
+          description: Subject (matches the user ID)
+        tx:
+          type: string
+          description: Matches the `transactionId` in the challenge request
+      required:
+        - iss
+        - sub
+        - aud
+        - jti
+        - iat
+        - exp
+        - nbf
+        - methodEnrollmentId
+        - tx
+        - nonce
+        - keyType
+        - challengeResponseContext
+    PushNotificationChallengeResponseJwtHeader:
+      x-tags:
+        - AppAuthenticator
+      description: JSON Web Token header used for the push notification challenge response JWT
+      type: object
+      properties:
+        alg:
+          type: string
+          description: Signing algorithm used
+        kid:
+          type: string
+          description: Signing key ID that matches the key ID used during the authenticator enrolment flow
+        typ:
+          type: string
+          description: Type of token
+          enum:
+            - okta-pushbind+jwt
+      required:
+        - kid
+        - typ
+        - alg
+    PushNotificationVerification:
+      description: Push notification challenge response object for an app authenticator
+      type: object
+      properties:
+        challengeResponse:
+          type: string
+          description: |
+            JWT issued by the app authenticator at the time of push notification verification
+
+            This based64-encoded JWT consists of a [JWT header](/openapi/okta-myaccount/myaccount/tag/AppAuthenticator/#tag/AppAuthenticator/schema/PushNotificationChallengeResponseJwtHeader)
+            and a [JWT payload](/openapi/okta-myaccount/myaccount/tag/AppAuthenticator/#tag/AppAuthenticator/schema/PushNotificationChallengeResponseJwt).
+        method:
+          type: string
+          enum:
+            - push
+    Schema:
+      title: Schema
+      description: Describes a user's directory profile schema (based on UD)
+      type: object
+      properties:
+        properties:
+          type: object
+          description: The properties defined in the [user profile schema](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Schema/)
+          readOnly: true
+        _links:
+          type: object
+          description: Discoverable resources related to the user's directory profile
+          properties:
+            self:
+              type: object
+              description: Link to the resource (self)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  format: uri
+                  readOnly: true
+            user:
+              type: object
+              description: Link to the resource (user)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  format: uri
+                  readOnly: true
+    UpdateAppAuthenticatorEnrollmentRequest:
+      type: object
+      properties:
+        methods:
+          type: object
+          properties:
+            push:
+              type: object
+              properties:
+                pushToken:
+                  type: string
+                keys:
+                  type: object
+                  properties:
+                    userVerification:
+                      $ref: '#/components/schemas/KeyObject'
+                      nullable: true
+                capabilities:
+                  type: object
+                  $ref: '#/components/schemas/AppAuthenticatorMethodCapabilities'
+    UpdateAuthenticatorEnrollmentRequest:
+      type: object
+      properties:
+        nickname:
+          type: string
+    WebAuthn:
+      description: WebAuthn enrollment object
+      type: object
+      properties:
+        created:
+          type: string
+          description: Date when the WebAuthn authenticator was first enrolled
+        credentialId:
+          type: string
+          description: Unique identifier of the specific WebAuthn credential
+        id:
+          type: string
+          description: Unique identifier of the WebAuthn enrollment
+          minLength: 1
+          readOnly: true
+        key:
+          type: string
+          description: Authenticator key
+        lastUpdated:
+          type: string
+          description: Date when the WebAuthn enrollment was last updated
+        name:
+          type: string
+          description: Authenticator name
+        status:
+          type: string
+          description: Enrollment status
+          enum:
+            - ACTIVE
+            - SUSPENDED
+            - EXPIRED
+          minLength: 1
+          readOnly: true
+        type:
+          type: string
+          description: Authenticator type
+          enum:
+            - security_key
+        _links:
+          type: object
+          description: Discoverable resources related to the WebAuthn enrollment
+          properties:
+            self:
+              type: object
+              description: Link to the resource (self)
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                  minLength: 1
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - DELETE
+                          - GET
+    WebAuthnRegistrationOptions:
+      type: object
+      properties:
+        expiresAt:
+          type: string
+          description: Date and time when the challenge expires
+        options:
+          type: object
+          description: WebAuthn registration options
+          properties:
+            rp:
+              type: object
+              description: Public key credential that's associated with the RP
+              properties:
+                name:
+                  type: string
+                  description: Name of the RP
+            user:
+              type: object
+              description: The user for whom the credential is created
+              properties:
+                displayName:
+                  type: string
+                  description: User's display name
+                name:
+                  type: string
+                  description: Username of the user
+                id:
+                  type: string
+                  description: Unique identifier of the user
+            pubKeyCredParams:
+              type: array
+              description: Array of public key credential parameters
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of the credential
+                    enum:
+                      - public-key
+                  alg:
+                    type: integer
+                    description: The algorithm of the cryptographic signature
+            challenge:
+              type: string
+              description: Cryptographic nonce challenge that's signed by the authenticator
+            attestation:
+              type: string
+              description: Specifies how much information about the authenticator is included in the attestation and the method for how that information is shared
+              enum:
+                - none
+                - indirect
+                - direct
+                - enterprise
+              x-enumDescriptions:
+                none: No attestation is requested
+                indirect: Attestation is requested, but the client doesn't need to verify the attestation
+                direct: Attestation is requested, and the client needs to verify the attestation
+                enterprise: Attestation is requested, and the client needs to verify the attestation. The client also needs to verify that the authenticator is managed by the enterprise.
+            authenticatorSelection:
+              type: object
+              description: Select the appropriate authenticators to create
+              properties:
+                userVerification:
+                  type: string
+                  description: Specifies whether stronger user verification is required when authenticating or enrolling a new authenticator
+                  enum:
+                    - required
+                    - preferred
+                    - discouraged
+                  x-enumDescriptions:
+                    required: Users are always prompted for user verification
+                    preferred: Users are prompted for user verification, if the authenticator supports it
+                    discouraged: Users aren't prompted for user verification
+                residentKey:
+                  type: string
+                  description: |-
+                    Specifies whether the RP wants to create a client-side discoverable credential. If `residentKey` is set as `required` or `preferred`, then a discoverable credential is created and users can authenticate without the server
+                    needing to send the credential ID. If `residentKey` is set as `discouraged`, then a non-discoverable credential is created and users must authenticate with the server that sends the credential ID.
+                    > **Note:** `residentKey` is only returned if you have enabled Passkeys Autofill as an [Early Access Self-Service](https://developer.okta.com/docs/api/openapi/okta-management/guides/release-lifecycle/#early-access-ea) feature.
+                  enum:
+                    - required
+                    - preferred
+                    - discouraged
+                requireResidentKey:
+                  type: boolean
+                  description: Indicates if the authenticator must support resident keys
+            u2fParams:
+              type: object
+              description: Supports compatibility with a universal second factor (U2F)
+              properties:
+                appid:
+                  type: string
+                  description: Full origin of the request that's used by the U2F protocol
+            excludeCredentials:
+              type: array
+              description: List of existing credentials on the same authenticator device that can't be overwritten by a new credential
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of the credential
+                    enum:
+                      - public-key
+                  id:
+                    type: string
+                    description: Credential ID
+        _links:
+          type: object
+          description: Discoverable resources related to the WebAuthn registration challenge
+          properties:
+            enroll:
+              type: object
+              description: Link to verify the challenge and complete the enrollment
+              properties:
+                href:
+                  type: string
+                  description: Link URI
+                hints:
+                  type: object
+                  description: Describes the allowed HTTP verbs for the `href`
+                  properties:
+                    allow:
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - POST
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: 'Pass the access_token as the value of the Authorization header: `Authorization: Bearer {access_token}`'
+      flows:
+        authorizationCode:
+          authorizationUrl: /oauth2/v1/authorize
+          tokenUrl: /oauth2/v1/token
+          scopes:
+            okta.myAccount.appAuthenticator.maintenance.manage: Write access to non-sensitive attributes of user app authenticator enrollments
+            okta.myAccount.appAuthenticator.maintenance.read: Read access to non-sensitive attributes of user app authenticator enrollments
+            okta.myAccount.appAuthenticator.manage: Write access to user app authenticator enrollments
+            okta.myAccount.appAuthenticator.read: Read access to user app authenticator enrollments
+            okta.myAccount.authenticators.manage: Write access to user authenticator enrollments
+            okta.myAccount.authenticators.read: Read access to user authenticator configurations and enrollments
+            okta.myAccount.email.manage: Write access to user emails
+            okta.myAccount.email.read: Read access to user emails
+            okta.myAccount.oktaApplications.read: Read access to the Okta apps list
+            okta.myAccount.organization.read: Read access to org details
+            okta.myAccount.password.manage: Write access to user password
+            okta.myAccount.password.read: Read access to user password metadata
+            okta.myAccount.phone.manage: Write access to user phones
+            okta.myAccount.phone.read: Read access to user phones
+            okta.myAccount.profile.manage: Write access to user profile and schema
+            okta.myAccount.profile.read: Read access to user profile and schema
+            okta.myAccount.sessions.manage: Write access to user sessions
+            okta.myAccount.webauthn.manage: Write access to user WebAuthn enrollments
+            okta.myAccount.webauthn.read: Read access to user WebAuthn enrollments
