@@ -103,6 +103,9 @@ public actor SessionTokenFlow: AuthenticationFlow {
     public func start(with sessionToken: String,
                       context: Context = .init()) async throws -> Token
     {
+        var context = context
+        context.pushedAuthorizationRequestEnabled = false
+
         _isAuthenticating = true
         _context = context
 

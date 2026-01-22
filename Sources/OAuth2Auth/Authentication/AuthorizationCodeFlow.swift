@@ -168,7 +168,9 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
             let openIdConfiguration = try await client.openIdConfiguration()
 
             var parUrl: URL?
-            if let parRequestUrl = openIdConfiguration.pushedAuthorizationRequestEndpoint {
+            if context.pushedAuthorizationRequestEnabled,
+               let parRequestUrl = openIdConfiguration.pushedAuthorizationRequestEndpoint
+            {
                 let request = PushedAuthorizationRequest(url: parRequestUrl,
                                                          clientConfiguration: client.configuration,
                                                          additionalParameters: additionalParameters,
