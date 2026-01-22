@@ -14,6 +14,25 @@ import Foundation
 import AuthFoundation
 
 extension AuthorizationCodeFlow {
+    struct PushedAuthorizationResponse: Codable {
+        let requestUri: String
+        let expiresIn: Int
+
+        enum CodingKeys: String, CodingKey {
+            case requestUri = "request_uri"
+            case expiresIn = "expires_in"
+        }
+    }
+    
+    struct PushedAuthorizationRequest: AuthenticationFlowRequest {
+        typealias Flow = AuthorizationCodeFlow
+        
+        let url: URL
+        let clientConfiguration: OAuth2Client.Configuration
+        let additionalParameters: [String: any APIRequestArgument]?
+        let context: Flow.Context
+    }
+
     struct TokenRequest: OAuth2TokenRequest, AuthenticationFlowRequest {
         typealias Flow = AuthorizationCodeFlow
 
@@ -59,3 +78,18 @@ extension AuthorizationCodeFlow.TokenRequest {
 }
 
 extension AuthorizationCodeFlow.TokenRequest: APIParsingContext {}
+
+extension AuthorizationCodeFlow.PushedAuthorizationRequest: APIRequest, APIRequestBody {
+    typealias ResponseType = AuthorizationCodeFlow.PushedAuthorizationResponse
+
+    var httpMethod: APIRequestMethod { .post }
+    var contentType: APIContentType? { .formEncoded }
+    var acceptsType: APIContentType? { .json }
+    var category: OAuth2APIRequestCategory { .authorization }
+    var bodyParameters: [String: any APIRequestArgument]? {
+        var result = additionalParameters ?? [:]
+        result.merge(clientConfiguration.parameters(for: category))
+        result.merge(context.parameters(for: category))
+        return result
+    }
+}

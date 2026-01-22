@@ -35,6 +35,7 @@ extension OpenIdConfiguration {
         case userinfoSigningAlgValuesSupported          = "userinfo_signing_alg_values_supported"
         case userinfoEncryptionAlgValuesSupported       = "userinfo_encryption_alg_values_supported"
         case userinfoEncryptionEncValuesSupported       = "userinfo_encryption_enc_values_supported"
+        case pushedAuthorizationRequestEndpoint         = "pushed_authorization_request_endpoint"
         case requestObjectSigningAlgValuesSupported     = "request_object_signing_alg_values_supported"
         case requestObjectEncryptionAlgValuesSupported  = "request_object_encryption_alg_values_supported"
         case requestObjectEncryptionEncValuesSupported  = "request_object_encryption_enc_values_supported"

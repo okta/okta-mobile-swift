@@ -77,6 +77,7 @@ extension OpenIdConfiguration {
     public var endSessionEndpoint: URL? { self[.endSessionEndpoint] }
     public var introspectionEndpoint: URL? { self[.introspectionEndpoint] }
     public var deviceAuthorizationEndpoint: URL? { self[.deviceAuthorizationEndpoint] }
+    public var pushedAuthorizationRequestEndpoint: URL? { self[.pushedAuthorizationRequestEndpoint] }
     public var registrationEndpoint: URL? { self[.registrationEndpoint] }
     public var revocationEndpoint: URL? { self[.revocationEndpoint] }
     public var userinfoEndpoint: URL? { self[.userinfoEndpoint] }
