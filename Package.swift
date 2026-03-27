@@ -78,6 +78,9 @@ var package = Package(
                 resources: [.process("Resources")],
                 swiftSettings: .libraryTarget),
     ] + [
+        .executableTarget(name: "CooperativePoolDeadlock",
+                          dependencies: ["CommonSupport", "AuthFoundation"]),
+    ] + [
         .target(name: "TestCommon",
                 dependencies: ["AuthFoundation"],
                 path: "Tests/TestCommon",
