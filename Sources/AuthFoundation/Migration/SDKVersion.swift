@@ -16,14 +16,6 @@ import Foundation
 import CommonSupport
 #endif
 
-#if canImport(UIKit)
-import UIKit
-#endif
-
-#if os(watchOS)
-import WatchKit
-#endif
-
 #if canImport(Android)
 import Android
 #endif
@@ -31,7 +23,11 @@ import Android
 private let deviceModel: String = {
     var system = utsname()
     uname(&system)
-    let model = withUnsafePointer(to: &system.machine.0) { ptr in
+    let model = withUnsafeBytes(of: &system.machine) { buf in
+        guard let ptr = buf.baseAddress?.assumingMemoryBound(to: CChar.self)
+        else {
+            return "unknown"
+        }
         return String(cString: ptr)
     }
     return model
@@ -52,22 +48,16 @@ private let systemName: String = {
         return "android"
     #elseif os(Linux)
         return "linux"
-    #elseif os(Android)
-        return "android"
+    #elseif os(Windows)
+        return "windows"
+    #else
+        return "unknown"
     #endif
 }()
 
 private let systemVersion: String = {
-    #if os(iOS) || os(tvOS) || (swift(>=5.10) && os(visionOS))
-    return MainActor.nonisolatedUnsafe {
-        UIDevice.current.systemVersion
-    }
-    #elseif os(watchOS)
-        return WKInterfaceDevice.current().systemVersion
-    #else
-        let osVersion = ProcessInfo.processInfo.operatingSystemVersion
-        return "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
-    #endif
+    let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+    return "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
 }()
 
 /// Utility class that allows SDK components to register their name and version for use in HTTP User-Agent values.
@@ -101,20 +91,24 @@ public struct SDKVersion: Sendable {
     @discardableResult
     public static func register(sdk: SDKVersion) -> SDKVersion {
         lock.withLock {
-            guard _sdkVersions.filter({ $0.name == sdk.name }).isEmpty else {
-                return sdk
-            }
+            _register(sdk: sdk)
+        }
+    }
 
-            _sdkVersions.append(sdk)
-
-            let sdkVersionString = _sdkVersions
-                .sorted(by: { $0.name.rawValue < $1.name.rawValue })
-                .map(\.displayName)
-                .joined(separator: " ")
-            _userAgent = "\(sdkVersionString) \(systemName)/\(systemVersion) Device/\(deviceModel)"
-
+    private static func _register(sdk: SDKVersion) -> SDKVersion {
+        guard _sdkVersions.filter({ $0.name == sdk.name }).isEmpty else {
             return sdk
         }
+        
+        _sdkVersions.append(sdk)
+        
+        let sdkVersionString = _sdkVersions
+            .sorted(by: { $0.name.rawValue < $1.name.rawValue })
+            .map(\.displayName)
+            .joined(separator: " ")
+        _userAgent = "\(sdkVersionString) \(systemName)/\(systemVersion) Device/\(deviceModel)"
+        
+        return sdk
     }
 
     /// Convenience function used to register an SDK
@@ -122,15 +116,16 @@ public struct SDKVersion: Sendable {
     ///   - name: SDK name.
     ///   - versionString: SDK version.
     /// - Returns: The resulting SDKVersion object.
-    @inlinable
     @discardableResult
     public static func register(_ name: Name, version versionString: String) -> SDKVersion? {
-        let sdk = version(for: name) ?? register(sdk: SDKVersion(sdk: name, version: versionString))
-        guard sdk.version == versionString
-        else {
-            return nil
+        lock.withLock {
+            let sdk = _version(for: name) ?? _register(sdk: SDKVersion(sdk: name, version: versionString))
+            guard sdk.version == versionString
+            else {
+                return nil
+            }
+            return sdk
         }
-        return sdk
     }
 
     /// Returns the version information for the given SDK.
@@ -138,8 +133,12 @@ public struct SDKVersion: Sendable {
     /// - Returns: Version information for the given SDK name.
     public static func version(for sdkName: Name) -> SDKVersion? {
         lock.withLock {
-            _sdkVersions.first(where: { $0.name == sdkName })
+            _version(for: sdkName)
         }
+    }
+
+    private static func _version(for sdkName: Name) -> SDKVersion? {
+        _sdkVersions.first(where: { $0.name == sdkName })
     }
 
     // MARK: Private properties / methods

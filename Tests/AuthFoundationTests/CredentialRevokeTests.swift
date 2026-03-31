@@ -52,7 +52,7 @@ final class CredentialTests: XCTestCase {
 
 
     func testRemove() async throws {
-        XCTAssertNoThrow(try credential.remove())
+        try await credential.remove()
 
         let hasCredential = await coordinator.credentialDataSource.hasCredential(for: token)
         XCTAssertFalse(hasCredential)
