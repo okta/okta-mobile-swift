@@ -50,7 +50,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
 
         return CredentialActor.sync {
             TaskData.coordinator.allIDs
-        } ?? []
+        }
     }
 
     /// The default grace interval used when refreshing tokens using ``Credential/refreshIfNeeded(graceInterval:completion:)`` or ``Credential/refreshIfNeeded(graceInterval:)``.

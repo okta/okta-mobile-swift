@@ -54,7 +54,7 @@ final class OAuth2ClientTests: XCTestCase {
                            deviceSecret: nil,
                            context: Token.Context(configuration: self.configuration,
                                                   clientSettings: [ "client_id": "clientid", "refresh_token": "refresh" ]))
-        try await Credential.store(token)
+        try Credential.store(token)
         
         openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
             OpenIdConfiguration.self,
