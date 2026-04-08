@@ -31,14 +31,14 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         get {
             assert(SDKVersion.authFoundation != nil)
 
-            return withIsolationSync { @CredentialActor in
+            return CredentialActor.sync {
                 TaskData.coordinator.default
             }
         }
         set {
             assert(SDKVersion.authFoundation != nil)
 
-            withIsolationSync { @CredentialActor in
+            CredentialActor.sync {
                 TaskData.coordinator.default = newValue
             }
         }
@@ -48,9 +48,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     public static var allIDs: [String] {
         assert(SDKVersion.authFoundation != nil)
 
-        return withIsolationSync { @CredentialActor in
+        return CredentialActor.sync {
             TaskData.coordinator.allIDs
-        } ?? []
+        }
     }
 
     /// The default grace interval used when refreshing tokens using ``Credential/refreshIfNeeded(graceInterval:completion:)`` or ``Credential/refreshIfNeeded(graceInterval:)``.
@@ -74,7 +74,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     public static func with(id: String, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> Credential? {
         assert(SDKVersion.authFoundation != nil)
 
-        return try withIsolationSyncThrowing { @CredentialActor in
+        return try CredentialActor.sync {
             try TaskData.coordinator.with(id: id,
                                           prompt: prompt,
                                           authenticationContext: authenticationContext)
@@ -102,7 +102,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     public static func find(where expression: @Sendable @escaping (Token.Metadata) -> Bool, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> [Credential] {
         assert(SDKVersion.authFoundation != nil)
 
-        return try withIsolationSyncThrowing { @CredentialActor in
+        return try CredentialActor.sync {
             try TaskData.coordinator.find(where: expression,
                                           prompt: prompt,
                                           authenticationContext: authenticationContext)
@@ -129,7 +129,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     ) throws -> Credential {
         assert(SDKVersion.authFoundation != nil)
 
-        return try withIsolationSyncThrowing { @CredentialActor in
+        return try CredentialActor.sync {
             try TaskData.coordinator.store(token: token, tags: tags, security: options)
         }
     }
@@ -181,7 +181,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
             throw CredentialError.missingCoordinator
         }
      
-        metadata = try withIsolationSyncThrowing { @CredentialActor in
+        metadata = try CredentialActor.sync {
             let metadata = try Token.Metadata(token: self.token, tags: tags)
             try coordinator.tokenStorage.setMetadata(metadata)
             return metadata
@@ -239,7 +239,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
             throw CredentialError.missingCoordinator
         }
 
-        try withIsolationSyncThrowing { @CredentialActor in
+        try CredentialActor.sync {
             try coordinator.remove(credential: self)
         }
     }
@@ -282,7 +282,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         if let coordinator,
             shouldRemove(for: type)
         {
-            try withIsolationSyncThrowing { @CredentialActor in
+            try await CredentialActor.run {
                 try coordinator.remove(credential: self)
             }
         }
@@ -376,27 +376,28 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     nonisolated(unsafe) private var _metadata: Token.Metadata?
     var metadata: Token.Metadata {
         get {
-            lock.withLock {
-                if let metadata = _metadata {
-                    return metadata
-                }
-
-                let result: Token.Metadata
-
-                let id = id
-                if let coordinator,
-                   let metadata = withIsolationSync({
-                       try? await coordinator.tokenStorage.metadata(for: id)
-                   })
-                {
-                    result = metadata
-                } else {
-                    result = Token.Metadata(id: id)
-                }
-
-                _metadata = result
-                return result
+            // Return cached value under lock, if present
+            if let cached = lock.withLock({ _metadata }) {
+                return cached
             }
+
+            // Fetch from storage outside the lock to avoid both re-entrant
+            // lock access (self.id -> self.token -> lock) and holding the
+            // lock while blocking on withIsolationSync.
+            let result: Token.Metadata
+            let id = id
+            if let coordinator,
+               let metadata = CredentialActor.sync({
+                   try? coordinator.tokenStorage.metadata(for: id)
+               })
+            {
+                result = metadata
+            } else {
+                result = Token.Metadata(id: id)
+            }
+
+            lock.withLock { _metadata = result }
+            return result
         }
         set {
             lock.withLock {

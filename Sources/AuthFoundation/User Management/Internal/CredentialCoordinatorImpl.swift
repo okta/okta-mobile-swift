@@ -208,14 +208,14 @@ extension CredentialCoordinatorImpl: OAuth2ClientDelegate {
             return
         }
 
-        withIsolationSync {
-            do {
-                try await self.tokenStorage.replace(token: token.id,
-                                                    with: newToken,
-                                                    security: nil)
-            } catch {
-                print("Error happened refreshing: \(error)")
+        do {
+            try CredentialActor.sync {
+                try self.tokenStorage.replace(token: token.id,
+                                              with: newToken,
+                                              security: nil)
             }
+        } catch {
+            print("Error happened refreshing: \(error)")
         }
     }
 }
