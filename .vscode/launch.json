@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:okta-mobile-swift}",
+      "name": "Debug CooperativePoolDeadlock",
+      "target": "CooperativePoolDeadlock",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug CooperativePoolDeadlock"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:okta-mobile-swift}",
+      "name": "Release CooperativePoolDeadlock",
+      "target": "CooperativePoolDeadlock",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release CooperativePoolDeadlock"
+    }
+  ]
+}
