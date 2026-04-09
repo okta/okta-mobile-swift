@@ -94,7 +94,10 @@ extension AuthorizationCodeFlow {
                 authenticationURL = nil
             }
         }
-
+        
+        /// Utilize Pushed Authorization Requests (PAR) if supported by the Authorization Server.
+        public var pushedAuthorizationRequestEnabled: Bool = true
+        
         /// The current authentication URL, or `nil` if one has not yet been generated.
         public internal(set) var authenticationURL: URL?
         

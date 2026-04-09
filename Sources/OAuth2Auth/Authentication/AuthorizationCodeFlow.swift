@@ -165,8 +165,34 @@ public actor AuthorizationCodeFlow: AuthenticationFlow {
 
         return try await withExpression {
             var context = context
-            let url = try self.createAuthenticationURL(from: try await client.openIdConfiguration().authorizationEndpoint,
-                                                       using: context)
+            let openIdConfiguration = try await client.openIdConfiguration()
+
+            var parUrl: URL?
+            if context.pushedAuthorizationRequestEnabled,
+               let parRequestUrl = openIdConfiguration.pushedAuthorizationRequestEndpoint
+            {
+                let request = PushedAuthorizationRequest(url: parRequestUrl,
+                                                         clientConfiguration: client.configuration,
+                                                         additionalParameters: additionalParameters,
+                                                         context: context)
+                let response = try await request.send(to: client).result
+                var components = URLComponents(url: openIdConfiguration.authorizationEndpoint,
+                                               resolvingAgainstBaseURL: true)
+                components?.queryItems = [
+                    .init(name: "client_id", value: client.configuration.clientId),
+                    .init(name: "request_uri", value: response.requestUri),
+                ]
+                parUrl = components?.url
+            }
+            
+            let url: URL
+            if let parUrl {
+                url = parUrl
+            } else {
+                url = try createAuthenticationURL(from: openIdConfiguration.authorizationEndpoint,
+                                                  using: context)
+            }
+            
             context.authenticationURL = url
             _context = context
 
