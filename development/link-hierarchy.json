@@ -1,79 +1,15 @@
 {
   "bundleID" : "CommonSupport",
   "nonSymbolPaths" : {
-    "5" : "\/tutorials\/CommonSupport",
-    "6" : "\/tutorials"
+    "2" : "\/tutorials\/CommonSupport",
+    "3" : "\/tutorials"
   },
   "pathHierarchy" : {
-    "articlesContainer" : 2,
+    "articlesContainer" : 6,
     "modules" : [
-      2
+      6
     ],
     "nodes" : [
-      {
-        "children" : [
-          {
-            "hash" : "8j0fs",
-            "kind" : "type.method",
-            "nodeID" : 7,
-            "parameterTypes" : [
-              "MainActor()->T"
-            ],
-            "returnTypes" : [
-              "T"
-            ]
-          }
-        ],
-        "name" : "MainActor",
-        "symbolID" : {
-          "interfaceLanguage" : "swift",
-          "precise" : "s:e:s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
-        }
-      },
-      {
-        "children" : [
-          {
-            "hash" : "1nohu",
-            "kind" : "init",
-            "nodeID" : 3,
-            "parameterTypes" : [
-              "String?"
-            ],
-            "returnTypes" : [
-              ""
-            ]
-          },
-          {
-            "hash" : "xw9x",
-            "kind" : "property",
-            "nodeID" : 8
-          }
-        ],
-        "name" : "BackgroundTask",
-        "symbolID" : {
-          "interfaceLanguage" : "swift",
-          "precise" : "s:13CommonSupport14BackgroundTaskC"
-        }
-      },
-      {
-        "children" : [
-          {
-            "hash" : "8pwqi",
-            "kind" : "class",
-            "nodeID" : 1
-          },
-          {
-            "hash" : "83qp",
-            "kind" : "module.extension",
-            "nodeID" : 4
-          }
-        ],
-        "name" : "CommonSupport",
-        "symbolID" : {
-          "interfaceLanguage" : "swift",
-          "precise" : "CommonSupport"
-        }
-      },
       {
         "name" : "init(named:)",
         "symbolID" : {
@@ -86,7 +22,7 @@
           {
             "hash" : "52mi8",
             "kind" : "class.extension",
-            "nodeID" : 0
+            "nodeID" : 5
           }
         ],
         "name" : "_Concurrency",
@@ -109,6 +45,70 @@
         }
       },
       {
+        "children" : [
+          {
+            "hash" : "8j0fs",
+            "kind" : "type.method",
+            "nodeID" : 4,
+            "parameterTypes" : [
+              "MainActor()->T"
+            ],
+            "returnTypes" : [
+              "T"
+            ]
+          }
+        ],
+        "name" : "MainActor",
+        "symbolID" : {
+          "interfaceLanguage" : "swift",
+          "precise" : "s:e:s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
+        }
+      },
+      {
+        "children" : [
+          {
+            "hash" : "83qp",
+            "kind" : "module.extension",
+            "nodeID" : 1
+          },
+          {
+            "hash" : "8pwqi",
+            "kind" : "class",
+            "nodeID" : 7
+          }
+        ],
+        "name" : "CommonSupport",
+        "symbolID" : {
+          "interfaceLanguage" : "swift",
+          "precise" : "CommonSupport"
+        }
+      },
+      {
+        "children" : [
+          {
+            "hash" : "1nohu",
+            "kind" : "init",
+            "nodeID" : 0,
+            "parameterTypes" : [
+              "String?"
+            ],
+            "returnTypes" : [
+              ""
+            ]
+          },
+          {
+            "hash" : "xw9x",
+            "kind" : "property",
+            "nodeID" : 8
+          }
+        ],
+        "name" : "BackgroundTask",
+        "symbolID" : {
+          "interfaceLanguage" : "swift",
+          "precise" : "s:13CommonSupport14BackgroundTaskC"
+        }
+      },
+      {
         "name" : "name",
         "symbolID" : {
           "interfaceLanguage" : "swift",
@@ -116,8 +116,8 @@
         }
       }
     ],
-    "tutorialContainer" : 5,
-    "tutorialOverviewContainer" : 6
+    "tutorialContainer" : 2,
+    "tutorialOverviewContainer" : 3
   },
   "version" : {
     "major" : 0,
