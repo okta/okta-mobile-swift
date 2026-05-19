@@ -87,7 +87,7 @@ public actor SessionTokenFlow: AuthenticationFlow {
             throw OAuth2Error.redirectUriRequired
         }
         
-        assert(SDKVersion.oauth2 != nil)
+        _ = SDKVersion.oauth2
 
         self.client = client
         self.additionalParameters = additionalParameters

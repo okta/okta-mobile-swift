@@ -76,7 +76,7 @@ public actor JWTAuthorizationFlow: AuthenticationFlow {
     public init(client: OAuth2Client,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        assert(SDKVersion.oauth2 != nil)
+        _ = SDKVersion.oauth2
 
         self.client = client
         self.additionalParameters = additionalParameters

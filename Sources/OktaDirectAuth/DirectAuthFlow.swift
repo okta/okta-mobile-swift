@@ -369,7 +369,7 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
                 supportedGrants grantTypes: [GrantType] = .directAuth,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        assert(SDKVersion.directAuth != nil)
+        _ = SDKVersion.directAuth
 
         self.client = client
         self.supportedGrantTypes = grantTypes
@@ -379,7 +379,7 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     public init(client: OAuth2Client, additionalParameters: [String: any APIRequestArgument]?) throws {
-        assert(SDKVersion.directAuth != nil)
+        _ = SDKVersion.directAuth
 
         self.client = client
         self.supportedGrantTypes = .directAuth

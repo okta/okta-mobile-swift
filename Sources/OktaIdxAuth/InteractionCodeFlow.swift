@@ -101,7 +101,7 @@ public actor InteractionCodeFlow: AuthenticationFlow {
     init(verifiedClient client: OAuth2Client,
          additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        assert(SDKVersion.oktaIdx != nil)
+        _ = SDKVersion.oktaIdx
 
         self.client = client
         self.additionalParameters = additionalParameters

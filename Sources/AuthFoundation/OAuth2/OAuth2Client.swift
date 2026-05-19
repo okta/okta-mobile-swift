@@ -115,7 +115,7 @@ public final class OAuth2Client: UsesDelegateCollection {
     ///   - configuration: The pre-formed configuration for this client.
     ///   - session: Optional URLSession to use for network requests.
     public init(_ configuration: Configuration, session: (any URLSessionProtocol)? = nil) {
-        assert(SDKVersion.authFoundation != nil)
+        _ = SDKVersion.authFoundation
 
         // Ensure the time coordinator is properly initialized
         _ = Date.coordinator

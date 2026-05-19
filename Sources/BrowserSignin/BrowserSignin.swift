@@ -311,7 +311,7 @@ public final class BrowserSignin {
     ///   - loginFlow: Authorization code flow instance for signing in to this client.
     ///   - logoutFlow: Session sign out flow to use when signing out from this client.
     public init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?) {
-        assert(SDKVersion.browserSignin != nil)
+        _ = SDKVersion.browserSignin
 
         self.signInFlow = loginFlow
         self.signOutFlow = logoutFlow
