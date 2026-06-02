@@ -36,9 +36,17 @@ struct DefaultIDTokenValidator: IDTokenValidator {
                     throw JWTError.invalidIssuer
                 }
             case .audience:
-                guard token[.audience] == clientId
-                else {
-                    throw JWTError.invalidAudience
+                // RFC 7519 §4.1.3 permits `aud` to be either a string or an
+                // array of strings. Accept both forms; for the array form,
+                // require `clientId` to be a member.
+                if let audienceArray = token.payload[JWTClaim.audience.rawValue] as? [String] {
+                    guard audienceArray.contains(clientId) else {
+                        throw JWTError.invalidAudience
+                    }
+                } else {
+                    guard token[.audience] == clientId else {
+                        throw JWTError.invalidAudience
+                    }
                 }
             case .scheme:
                 guard let tokenIssuerString = token.issuer,
