@@ -100,6 +100,7 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
         "doc:\/\/AuthFoundation\/s8SendableP"
       ],
@@ -140,7 +141,7 @@
       "anchor" : "Initializers",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/init(acrValues:additionalParameters:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/init(nonce:maxAge:audience:resource:acrValues:additionalParameters:)"
       ],
       "title" : "Initializers"
     },
@@ -149,7 +150,11 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/acrValues",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/additionalParameters"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/additionalParameters",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/audience",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/maxAge",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/nonce",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/resource"
       ],
       "title" : "Instance Properties"
     }
@@ -447,6 +452,40 @@
   "title" : "GrantType",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IDTokenValidatorContext": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to supply contextual information to a validator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "IDTokenValidatorContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "IDTokenValidatorContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "IDTokenValidatorContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/idtokenvalidatorcontext"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
   "abstract" : [
@@ -854,7 +893,57 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/standardauthenticationcontext\/additionalparameters"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/StandardAuthenticationContext/init(acrValues:additionalParameters:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/StandardAuthenticationContext/audience": {
+  "abstract" : [
+    {
+      "text" : "The logical name of the target API or resource server (",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ").",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/audience",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "audience",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/standardauthenticationcontext\/audience"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/StandardAuthenticationContext/init(nonce:maxAge:audience:resource:acrValues:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Designated initializer.",
@@ -869,6 +958,83 @@
     {
       "kind" : "text",
       "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "nonce"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "maxAge"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@NSTimeInterval",
+      "text" : "TimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "resource"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+      "text" : "ClaimCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?>, "
     },
     {
       "kind" : "externalParam",
@@ -923,17 +1089,169 @@
       "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/init(acrValues:additionalParameters:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/init(nonce:maxAge:audience:resource:acrValues:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(acrValues:additionalParameters:)",
+  "title" : "init(nonce:maxAge:audience:resource:acrValues:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/standardauthenticationcontext\/init(acrvalues:additionalparameters:)"
+  "url" : "\/documentation\/authfoundation\/standardauthenticationcontext\/init(nonce:maxage:audience:resource:acrvalues:additionalparameters:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/StandardAuthenticationContext/maxAge": {
+  "abstract" : [
+    {
+      "text" : "The maximum age the token should support when authenticating.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "maxAge"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@NSTimeInterval",
+      "text" : "TimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/maxAge",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "maxAge",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/standardauthenticationcontext\/maxage"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/StandardAuthenticationContext/nonce": {
+  "abstract" : [
+    {
+      "text" : "The ",
+      "type" : "text"
+    },
+    {
+      "code" : "nonce",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " value used when beginning the authentication process.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nonce"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/nonce",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "nonce",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/standardauthenticationcontext\/nonce"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/StandardAuthenticationContext/resource": {
+  "abstract" : [
+    {
+      "text" : "Target resource URI(s) (",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ").",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "resource"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext\/resource",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "resource",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/standardauthenticationcontext\/resource"
 },
 "doc://AuthFoundation/s8SendableP": {
   "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",
   "title" : "Swift.Sendable",
   "type" : "unresolvable"
+},
+"https://datatracker.ietf.org/doc/html/rfc8707": {
+  "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+  "title" : "RFC 8707",
+  "titleInlineContent" : [
+    {
+      "text" : "RFC 8707",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707"
 }
 }
 }

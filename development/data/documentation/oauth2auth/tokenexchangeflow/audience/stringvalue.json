@@ -13,6 +13,17 @@
       "type" : "text"
     }
   ],
+  "deprecationSummary" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Use a plain String audience instead.",
+          "type" : "text"
+        }
+      ],
+      "type" : "paragraph"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -55,6 +66,14 @@
     "modules" : [
       {
         "name" : "OAuth2Auth"
+      }
+    ],
+    "platforms" : [
+      {
+        "beta" : false,
+        "deprecated" : true,
+        "message" : "Use a plain String audience instead.",
+        "unavailable" : false
       }
     ],
     "role" : "symbol",
@@ -189,6 +208,7 @@
       "type" : "text"
     }
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -220,6 +240,7 @@
   "abstract" : [
 
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",

@@ -84,6 +84,7 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
         "doc:\/\/OAuth2Auth\/s8SendableP"
       ],
@@ -129,6 +130,15 @@
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/verification"
       ],
       "title" : "Instance Properties"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/AuthenticationContext-Implementations",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/IDTokenValidatorContext-Implementations"
+      ],
+      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -189,8 +199,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation24ProvidesOAuth2ParametersP",
-      "text" : "ProvidesOAuth2Parameters"
+      "preciseIdentifier" : "s:14AuthFoundation23IDTokenValidatorContextP",
+      "text" : "IDTokenValidatorContext"
     },
     {
       "kind" : "text",
@@ -198,8 +208,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s8SendableP",
-      "text" : "Sendable"
+      "preciseIdentifier" : "s:14AuthFoundation24ProvidesOAuth2ParametersP",
+      "text" : "ProvidesOAuth2Parameters"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
@@ -208,6 +218,43 @@
   "title" : "AuthenticationContext",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationcontext"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IDTokenValidatorContext": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to supply contextual information to a validator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "IDTokenValidatorContext"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "IDTokenValidatorContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/idtokenvalidatorcontext"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
   "abstract" : [
@@ -318,6 +365,28 @@
   "title" : "DeviceAuthorizationFlow.Context",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/Context-swift.struct/AuthenticationContext-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/AuthenticationContext-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "AuthenticationContext Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct\/authenticationcontext-implementations"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/Context-swift.struct/IDTokenValidatorContext-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/IDTokenValidatorContext-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "IDTokenValidatorContext Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct\/idtokenvalidatorcontext-implementations"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/Context-swift.struct/acrValues": {
   "abstract" : [

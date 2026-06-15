@@ -5,6 +5,15 @@
       "type" : "text"
     }
   ],
+  "defaultImplementationsSections" : [
+    {
+      "anchor" : "IDTokenValidatorContext-Implementations",
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext\/maxAge-55bfw"
+      ],
+      "title" : "IDTokenValidatorContext Implementations"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -185,6 +194,7 @@
       "type" : "text"
     }
   ],
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -219,6 +229,44 @@
   "title" : "maxAge",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/idtokenvalidatorcontext\/maxage"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IDTokenValidatorContext/maxAge-55bfw": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "maxAge"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@NSTimeInterval",
+      "text" : "TimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext\/maxAge-55bfw",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "maxAge",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/idtokenvalidatorcontext\/maxage-55bfw"
 }
 }
 }

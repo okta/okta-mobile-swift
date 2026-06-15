@@ -13,6 +13,15 @@
       "type" : "text"
     }
   ],
+  "defaultImplementationsSections" : [
+    {
+      "anchor" : "IDTokenValidatorContext-Implementations",
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext\/nonce-3ag2s"
+      ],
+      "title" : "IDTokenValidatorContext Implementations"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -201,6 +210,7 @@
       "type" : "text"
     }
   ],
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -235,6 +245,44 @@
   "title" : "nonce",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/idtokenvalidatorcontext\/nonce"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IDTokenValidatorContext/nonce-3ag2s": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nonce"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext\/nonce-3ag2s",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "nonce",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/idtokenvalidatorcontext\/nonce-3ag2s"
 }
 }
 }

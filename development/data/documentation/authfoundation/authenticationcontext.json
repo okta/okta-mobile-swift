@@ -95,19 +95,20 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation24ProvidesOAuth2ParametersP",
-              "text" : "ProvidesOAuth2Parameters"
+              "preciseIdentifier" : "s:14AuthFoundation23IDTokenValidatorContextP",
+              "text" : "IDTokenValidatorContext"
             },
             {
               "kind" : "text",
               "text" : ", "
             },
             {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:s8SendableP",
-              "text" : "Sendable"
+              "preciseIdentifier" : "s:14AuthFoundation24ProvidesOAuth2ParametersP",
+              "text" : "ProvidesOAuth2Parameters"
             }
           ]
         }
@@ -147,6 +148,68 @@
             }
           ],
           "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "code" : "AuthenticationContext",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " subsumes ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", providing ",
+              "type" : "text"
+            },
+            {
+              "code" : "nonce",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "code" : "maxAge",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " alongside",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "additional cross-cutting parameters such as ",
+              "type" : "text"
+            },
+            {
+              "code" : "audience",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "code" : "resource",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
         }
       ],
       "kind" : "content"
@@ -155,6 +218,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
         "doc:\/\/AuthFoundation\/s8SendableP"
       ],
@@ -204,7 +268,9 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext\/acrValues",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext\/persistValues"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext\/audience",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext\/persistValues",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext\/resource"
       ],
       "title" : "Instance Properties"
     }
@@ -365,6 +431,74 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationcontext\/acrvalues"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationContext/audience": {
+  "abstract" : [
+    {
+      "text" : "The logical name of the target API or resource server",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "(",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ").",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Sent in the token request.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext\/audience",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "audience",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationcontext\/audience"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationContext/persistValues": {
   "abstract" : [
     {
@@ -424,6 +558,66 @@
   "title" : "persistValues",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationcontext\/persistvalues"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationContext/resource": {
+  "abstract" : [
+    {
+      "text" : "Target resource URI(s) (",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ").",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Sent in the token request.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "resource"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext\/resource",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "resource",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationcontext\/resource"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate": {
   "abstract" : [
@@ -604,6 +798,40 @@
   "title" : "GrantType",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IDTokenValidatorContext": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to supply contextual information to a validator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "IDTokenValidatorContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "IDTokenValidatorContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "IDTokenValidatorContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/idtokenvalidatorcontext"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
   "abstract" : [
@@ -958,6 +1186,18 @@
   "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",
   "title" : "Swift.Sendable",
   "type" : "unresolvable"
+},
+"https://datatracker.ietf.org/doc/html/rfc8707": {
+  "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+  "title" : "RFC 8707",
+  "titleInlineContent" : [
+    {
+      "text" : "RFC 8707",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707"
 }
 }
 }

@@ -1,7 +1,24 @@
 {
   "abstract" : [
     {
-      "text" : "Server audience.",
+      "text" : "The logical name of the target API or resource server",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "(",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ").",
       "type" : "text"
     }
   ],
@@ -20,7 +37,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10OAuth2Auth17TokenExchangeFlowC7ContextV8audienceAC8AudienceOvp",
+    "externalID" : "s:10OAuth2Auth17TokenExchangeFlowC7ContextV8audienceSSSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -40,17 +57,12 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10OAuth2Auth17TokenExchangeFlowC",
-        "text" : "TokenExchangeFlow"
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
       },
       {
         "kind" : "text",
-        "text" : "."
-      },
-      {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10OAuth2Auth17TokenExchangeFlowC8AudienceO",
-        "text" : "Audience"
+        "text" : "?"
       }
     ],
     "modules" : [
@@ -91,20 +103,13 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10OAuth2Auth17TokenExchangeFlowC",
-              "text" : "TokenExchangeFlow"
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
             },
             {
               "kind" : "text",
-              "text" : "."
-            },
-            {
-              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/Audience",
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10OAuth2Auth17TokenExchangeFlowC8AudienceO",
-              "text" : "Audience"
+              "text" : "?"
             }
           ]
         }
@@ -182,40 +187,6 @@
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/tokenexchangeflow"
 },
-"doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/Audience": {
-  "abstract" : [
-    {
-      "text" : "Identifies the audience of the authorization server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Audience"
-    }
-  ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/Audience",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Audience"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "TokenExchangeFlow.Audience",
-  "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/audience"
-},
 "doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/Context-swift.struct": {
   "abstract" : [
     {
@@ -253,7 +224,24 @@
 "doc://OAuth2Auth/documentation/OAuth2Auth/TokenExchangeFlow/Context-swift.struct/audience": {
   "abstract" : [
     {
-      "text" : "Server audience.",
+      "text" : "The logical name of the target API or resource server",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "(",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ").",
       "type" : "text"
     }
   ],
@@ -276,17 +264,12 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OAuth2Auth17TokenExchangeFlowC",
-      "text" : "TokenExchangeFlow"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OAuth2Auth17TokenExchangeFlowC8AudienceO",
-      "text" : "Audience"
+      "text" : "?"
     }
   ],
   "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/TokenExchangeFlow\/Context-swift.struct\/audience",
@@ -295,6 +278,18 @@
   "title" : "audience",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/tokenexchangeflow\/context-swift.struct\/audience"
+},
+"https://datatracker.ietf.org/doc/html/rfc8707": {
+  "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+  "title" : "RFC 8707",
+  "titleInlineContent" : [
+    {
+      "text" : "RFC 8707",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707"
 }
 }
 }

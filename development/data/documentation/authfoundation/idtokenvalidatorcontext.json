@@ -95,6 +95,74 @@
           "type" : "heading"
         },
         {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : " now subsumes this protocol.",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "All ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : " conformers automatically satisfy",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : " requirements. New code should use",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : " directly.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        },
+        {
           "inlineContent" : [
             {
               "text" : "The ",
@@ -127,11 +195,20 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow"
       ],
       "kind" : "relationships",
       "title" : "Inherited By",
       "type" : "inheritedBy"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
     }
   ],
   "schemaVersion" : {
@@ -200,6 +277,58 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationContext": {
+  "abstract" : [
+    {
+      "text" : "Common protocol that all ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/Context-swift.associatedtype",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type aliases must conform to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationcontext"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow": {
   "abstract" : [
     {
@@ -233,6 +362,41 @@
   "title" : "AuthenticationFlow",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/Context-swift.associatedtype": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation21AuthenticationContextP",
+      "text" : "AuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/Context-swift.associatedtype",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "Context",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/context-swift.associatedtype"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Credential": {
   "abstract" : [
@@ -495,6 +659,7 @@
       "type" : "text"
     }
   ],
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -545,6 +710,7 @@
       "type" : "text"
     }
   ],
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -613,6 +779,58 @@
   "title" : "JWKValidator",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwkvalidator"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/StandardAuthenticationContext": {
+  "abstract" : [
+    {
+      "text" : "Common ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " implementation for common or generic implementations of ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StandardAuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StandardAuthenticationContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StandardAuthenticationContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/standardauthenticationcontext"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TimeCoordinator": {
   "abstract" : [

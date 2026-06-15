@@ -120,7 +120,7 @@
       "anchor" : "Initializers",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/init(state:maxAge:acrValues:additionalParameters:)"
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/init(state:maxAge:audience:resource:acrValues:additionalParameters:)"
       ],
       "title" : "Initializers"
     },
@@ -130,6 +130,7 @@
       "identifiers" : [
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/acrValues",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/additionalParameters",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/audience",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/authenticationURL",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/claimsLocales",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/display",
@@ -139,6 +140,7 @@
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/nonce",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/pkce",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/prompt",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/resource",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/state",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/uiLocales"
       ],
@@ -203,8 +205,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation24ProvidesOAuth2ParametersP",
-      "text" : "ProvidesOAuth2Parameters"
+      "preciseIdentifier" : "s:14AuthFoundation23IDTokenValidatorContextP",
+      "text" : "IDTokenValidatorContext"
     },
     {
       "kind" : "text",
@@ -212,8 +214,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s8SendableP",
-      "text" : "Sendable"
+      "preciseIdentifier" : "s:14AuthFoundation24ProvidesOAuth2ParametersP",
+      "text" : "ProvidesOAuth2Parameters"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
@@ -461,6 +463,72 @@
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/context-swift.struct\/additionalparameters"
 },
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Context-swift.struct/audience": {
+  "abstract" : [
+    {
+      "text" : "The logical name of the target API or resource server",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "(",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ").",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Sent in the token request.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/audience",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "audience",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/context-swift.struct\/audience"
+},
 "doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Context-swift.struct/authenticationURL": {
   "abstract" : [
     {
@@ -630,7 +698,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/context-swift.struct\/idtokenhint"
 },
-"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Context-swift.struct/init(state:maxAge:acrValues:additionalParameters:)": {
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Context-swift.struct/init(state:maxAge:audience:resource:acrValues:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Initializer for creating a context with a custom state string.",
@@ -679,6 +747,49 @@
     {
       "kind" : "text",
       "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "resource"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+      "text" : "ClaimCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?>, "
     },
     {
       "kind" : "externalParam",
@@ -733,12 +844,12 @@
       "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/init(state:maxAge:acrValues:additionalParameters:)",
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/init(state:maxAge:audience:resource:acrValues:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(state:maxAge:acrValues:additionalParameters:)",
+  "title" : "init(state:maxAge:audience:resource:acrValues:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/context-swift.struct\/init(state:maxage:acrvalues:additionalparameters:)"
+  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/context-swift.struct\/init(state:maxage:audience:resource:acrvalues:additionalparameters:)"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Context-swift.struct/loginHint": {
   "abstract" : [
@@ -961,6 +1072,64 @@
   "title" : "prompt",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/context-swift.struct\/prompt"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Context-swift.struct/resource": {
+  "abstract" : [
+    {
+      "text" : "Target resource URI(s) (",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ").",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Sent in the token request.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "resource"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/resource",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "resource",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/context-swift.struct\/resource"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Context-swift.struct/state": {
   "abstract" : [
@@ -1198,6 +1367,18 @@
   "identifier" : "doc:\/\/OAuth2Auth\/s8SendableP",
   "title" : "Swift.Sendable",
   "type" : "unresolvable"
+},
+"https://datatracker.ietf.org/doc/html/rfc8707": {
+  "identifier" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707",
+  "title" : "RFC 8707",
+  "titleInlineContent" : [
+    {
+      "text" : "RFC 8707",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/datatracker.ietf.org\/doc\/html\/rfc8707"
 }
 }
 }

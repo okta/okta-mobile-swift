@@ -19,7 +19,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14AuthFoundation18OAuth2TokenRequestP21tokenValidatorContextAA07IDTokengH0_pvp",
+    "externalID" : "s:14AuthFoundation18OAuth2TokenRequestP21tokenValidatorContextAA014AuthenticationH0_pvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -39,8 +39,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation23IDTokenValidatorContextP",
-        "text" : "IDTokenValidatorContext"
+        "preciseIdentifier" : "s:14AuthFoundation21AuthenticationContextP",
+        "text" : "AuthenticationContext"
       }
     ],
     "modules" : [
@@ -82,10 +82,10 @@
               "text" : ": any "
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation23IDTokenValidatorContextP",
-              "text" : "IDTokenValidatorContext"
+              "preciseIdentifier" : "s:14AuthFoundation21AuthenticationContextP",
+              "text" : "AuthenticationContext"
             },
             {
               "kind" : "text",
@@ -175,10 +175,28 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/IDTokenValidatorContext": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationContext": {
   "abstract" : [
     {
-      "text" : "Protocol used to supply contextual information to a validator.",
+      "text" : "Common protocol that all ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/Context-swift.associatedtype",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type aliases must conform to.",
       "type" : "text"
     }
   ],
@@ -193,21 +211,90 @@
     },
     {
       "kind" : "identifier",
-      "text" : "IDTokenValidatorContext"
+      "text" : "AuthenticationContext"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "IDTokenValidatorContext"
+      "text" : "AuthenticationContext"
     }
   ],
   "role" : "symbol",
-  "title" : "IDTokenValidatorContext",
+  "title" : "AuthenticationContext",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/idtokenvalidatorcontext"
+  "url" : "\/documentation\/authfoundation\/authenticationcontext"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow": {
+  "abstract" : [
+    {
+      "text" : "A protocol defining a type of authentication flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/Context-swift.associatedtype": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation21AuthenticationContextP",
+      "text" : "AuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/Context-swift.associatedtype",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "Context",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/context-swift.associatedtype"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest": {
   "abstract" : [
@@ -278,8 +365,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation23IDTokenValidatorContextP",
-      "text" : "IDTokenValidatorContext"
+      "preciseIdentifier" : "s:14AuthFoundation21AuthenticationContextP",
+      "text" : "AuthenticationContext"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/tokenValidatorContext",

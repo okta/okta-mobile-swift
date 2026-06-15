@@ -83,6 +83,7 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
         "doc:\/\/OktaDirectAuth\/SQ",
         "doc:\/\/OktaDirectAuth\/s8SendableP"
@@ -123,7 +124,9 @@
       "anchor" : "Default-Implementations",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Context-swift.struct\/Equatable-Implementations"
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Context-swift.struct\/AuthenticationContext-Implementations",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Context-swift.struct\/Equatable-Implementations",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Context-swift.struct\/IDTokenValidatorContext-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -186,8 +189,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation24ProvidesOAuth2ParametersP",
-      "text" : "ProvidesOAuth2Parameters"
+      "preciseIdentifier" : "s:14AuthFoundation23IDTokenValidatorContextP",
+      "text" : "IDTokenValidatorContext"
     },
     {
       "kind" : "text",
@@ -195,8 +198,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s8SendableP",
-      "text" : "Sendable"
+      "preciseIdentifier" : "s:14AuthFoundation24ProvidesOAuth2ParametersP",
+      "text" : "ProvidesOAuth2Parameters"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
@@ -205,6 +208,43 @@
   "title" : "AuthenticationContext",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationcontext"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IDTokenValidatorContext": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to supply contextual information to a validator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "IDTokenValidatorContext"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "IDTokenValidatorContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/idtokenvalidatorcontext"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
   "abstract" : [
@@ -321,6 +361,17 @@
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct"
 },
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Context-swift.struct/AuthenticationContext-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Context-swift.struct\/AuthenticationContext-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "AuthenticationContext Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/authenticationcontext-implementations"
+},
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Context-swift.struct/Equatable-Implementations": {
   "abstract" : [
 
@@ -331,6 +382,17 @@
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/equatable-implementations"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Context-swift.struct/IDTokenValidatorContext-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Context-swift.struct\/IDTokenValidatorContext-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "IDTokenValidatorContext Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/idtokenvalidatorcontext-implementations"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Context-swift.struct/acrValues": {
   "abstract" : [
