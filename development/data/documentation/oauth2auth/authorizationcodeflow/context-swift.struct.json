@@ -140,6 +140,7 @@
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/nonce",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/pkce",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/prompt",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/pushedAuthorizationRequestEnabled",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/resource",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/state",
         "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/uiLocales"
@@ -1072,6 +1073,43 @@
   "title" : "prompt",
   "type" : "topic",
   "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/context-swift.struct\/prompt"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Context-swift.struct/pushedAuthorizationRequestEnabled": {
+  "abstract" : [
+    {
+      "text" : "Utilize Pushed Authorization Requests (PAR) if supported by the Authorization Server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "pushedAuthorizationRequestEnabled"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthorizationCodeFlow\/Context-swift.struct\/pushedAuthorizationRequestEnabled",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "pushedAuthorizationRequestEnabled",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/authorizationcodeflow\/context-swift.struct\/pushedauthorizationrequestenabled"
 },
 "doc://OAuth2Auth/documentation/OAuth2Auth/AuthorizationCodeFlow/Context-swift.struct/resource": {
   "abstract" : [
