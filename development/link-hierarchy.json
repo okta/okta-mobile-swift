@@ -1,8 +1,8 @@
 {
   "bundleID" : "CommonSupport",
   "nonSymbolPaths" : {
-    "3" : "\/tutorials\/CommonSupport",
-    "8" : "\/tutorials"
+    "2" : "\/tutorials\/CommonSupport",
+    "7" : "\/tutorials"
   },
   "pathHierarchy" : {
     "articlesContainer" : 6,
@@ -10,6 +10,13 @@
       6
     ],
     "nodes" : [
+      {
+        "name" : "name",
+        "symbolID" : {
+          "interfaceLanguage" : "swift",
+          "precise" : "s:13CommonSupport14BackgroundTaskC4nameSSSgvp"
+        }
+      },
       {
         "children" : [
           {
@@ -25,46 +32,21 @@
         }
       },
       {
-        "children" : [
-          {
-            "hash" : "xw9x",
-            "kind" : "property",
-            "nodeID" : 2
-          },
-          {
-            "hash" : "1nohu",
-            "kind" : "init",
-            "nodeID" : 7,
-            "parameterTypes" : [
-              "String?"
-            ],
-            "returnTypes" : [
-              ""
-            ]
-          }
-        ],
-        "name" : "BackgroundTask",
-        "symbolID" : {
-          "interfaceLanguage" : "swift",
-          "precise" : "s:13CommonSupport14BackgroundTaskC"
-        }
-      },
-      {
-        "name" : "name",
-        "symbolID" : {
-          "interfaceLanguage" : "swift",
-          "precise" : "s:13CommonSupport14BackgroundTaskC4nameSSSgvp"
-        }
-      },
-      {
         "name" : "CommonSupport"
+      },
+      {
+        "name" : "nonisolatedUnsafe(_:)",
+        "symbolID" : {
+          "interfaceLanguage" : "swift",
+          "precise" : "s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
+        }
       },
       {
         "children" : [
           {
             "hash" : "8j0fs",
             "kind" : "type.method",
-            "nodeID" : 5,
+            "nodeID" : 3,
             "parameterTypes" : [
               "MainActor()->T"
             ],
@@ -80,23 +62,41 @@
         }
       },
       {
-        "name" : "nonisolatedUnsafe(_:)",
+        "children" : [
+          {
+            "hash" : "xw9x",
+            "kind" : "property",
+            "nodeID" : 0
+          },
+          {
+            "hash" : "1nohu",
+            "kind" : "init",
+            "nodeID" : 8,
+            "parameterTypes" : [
+              "String?"
+            ],
+            "returnTypes" : [
+              ""
+            ]
+          }
+        ],
+        "name" : "BackgroundTask",
         "symbolID" : {
           "interfaceLanguage" : "swift",
-          "precise" : "s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
+          "precise" : "s:13CommonSupport14BackgroundTaskC"
         }
       },
       {
         "children" : [
           {
-            "hash" : "8pwqi",
-            "kind" : "class",
+            "hash" : "83qp",
+            "kind" : "module.extension",
             "nodeID" : 1
           },
           {
-            "hash" : "83qp",
-            "kind" : "module.extension",
-            "nodeID" : 0
+            "hash" : "8pwqi",
+            "kind" : "class",
+            "nodeID" : 5
           }
         ],
         "name" : "CommonSupport",
@@ -106,18 +106,18 @@
         }
       },
       {
+        "name" : "tutorials"
+      },
+      {
         "name" : "init(named:)",
         "symbolID" : {
           "interfaceLanguage" : "swift",
           "precise" : "s:13CommonSupport14BackgroundTaskC5namedACSSSg_tcfc"
         }
-      },
-      {
-        "name" : "tutorials"
       }
     ],
-    "tutorialContainer" : 3,
-    "tutorialOverviewContainer" : 8
+    "tutorialContainer" : 2,
+    "tutorialOverviewContainer" : 7
   },
   "version" : {
     "major" : 0,
