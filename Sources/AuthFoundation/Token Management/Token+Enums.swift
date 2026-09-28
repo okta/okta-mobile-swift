@@ -43,3 +43,16 @@ public extension Token {
         case deviceSecret = "device_secret"
     }
 }
+
+extension Token {
+    /// The storage encoding a token was decoded from.
+    enum StorageFormat: Sendable, Equatable {
+        case v1
+        case legacyStringPayload
+        case current
+
+        var needsNormalization: Bool {
+            self != .current
+        }
+    }
+}

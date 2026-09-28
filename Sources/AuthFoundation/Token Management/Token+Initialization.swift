@@ -23,7 +23,8 @@ extension Token {
         var issuedAt: Date = Date.nowCoordinated
         var context: Context? = decoder.userInfo[.tokenContext] as? Token.Context
         var json: JSON
-        
+        var storageFormat: StorageFormat = .current
+
         // Initialize defaults supplied from the decoder's userInfo dictionary
         if let userInfoId = decoder.userInfo[.tokenId] as? String {
             id = userInfoId
@@ -75,6 +76,7 @@ extension Token {
             json = try JSON(payload.reduce(into: [String: Any]()) { result, item in
                 result[item.key.rawValue] = item.value
             })
+            storageFormat = .v1
         }
 
         // Attempt to decode V2 token data
@@ -86,12 +88,21 @@ extension Token {
             if container.contains(.id) {
                 id = try container.decode(String.self, forKey: .id)
             }
-            
+
             if container.contains(.issuedAt) {
                 issuedAt = try container.decode(Date.self, forKey: .issuedAt)
             }
-            
-            json = try container.decode(JSON.self, forKey: .rawValue)
+
+            // AuthFoundation 2.1.4 and earlier encoded the payload as a JSON
+            // string rather than an object. Tokens already in the keychain use
+            // that shape, so it is re-wrapped here as a value-backed JSON to
+            // match what the current format decodes to.
+            if let legacyPayload = try? container.decode(String.self, forKey: .rawValue) {
+                json = JSON(try JSON(legacyPayload).value)
+                storageFormat = .legacyStringPayload
+            } else {
+                json = try container.decode(JSON.self, forKey: .rawValue)
+            }
         }
         
         // Attempt to decode JSON data
@@ -106,9 +117,10 @@ extension Token {
         try self.init(id: id,
                       issuedAt: issuedAt,
                       context: context,
-                      json: json)
+                      json: json,
+                      decodedStorageFormat: storageFormat)
     }
-    
+
     init(id: String,
          issuedAt: Date,
          tokenType: String,
