@@ -31,7 +31,8 @@ private struct UserDefaultsKeys {
 @CredentialActor
 final class UserDefaultsTokenStorage: TokenStorage {
     private let userDefaults: UserDefaults
-    
+    private var hasAttemptedNormalization = false
+
     weak var delegate: (any TokenStorageDelegate)?
     
     init(userDefaults: UserDefaults = .standard) {
@@ -84,8 +85,27 @@ final class UserDefaultsTokenStorage: TokenStorage {
         guard let token = allTokens[id] else {
             throw TokenError.tokenNotFound(id: id)
         }
-        
+
+        normalizeStoredTokensIfNeeded()
+
         return token
+    }
+
+    /// Rewrites tokens persisted using a superseded encoding.
+    private func normalizeStoredTokensIfNeeded() {
+        guard !hasAttemptedNormalization else { return }
+        hasAttemptedNormalization = true
+
+        let staleIDs = allTokens
+            .filter { $0.value.decodedStorageFormat.needsNormalization }
+            .keys
+        guard !staleIDs.isEmpty else { return }
+
+        do {
+            try save()
+        } catch {
+            print("Could not normalize stored tokens \(Array(staleIDs)): \(error)")
+        }
     }
     
     func add(token: Token, metadata tokenMetadata: Token.Metadata?, security: [Credential.Security]) throws {

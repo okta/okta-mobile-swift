@@ -110,6 +110,8 @@ public struct Token: Sendable, Codable, Equatable, Hashable, HasClaims, Expires 
     public let json: JSON
     internal let refreshAction: CoalescedResult<Token>
 
+    internal let decodedStorageFormat: StorageFormat
+
     /// Return the relevant token string for the given type.
     /// - Parameter kind: Type of token string to return
     /// - Returns: Token string, or `nil` if this token doesn't contain the requested type.
@@ -189,13 +191,15 @@ public struct Token: Sendable, Codable, Equatable, Hashable, HasClaims, Expires 
     init(id: String,
          issuedAt: Date,
          context: Context,
-         json: JSON) throws
+         json: JSON,
+         decodedStorageFormat: StorageFormat = .current) throws
     {
         self.id = id
         self.issuedAt = issuedAt
         self.context = context
         self.json = json
         self.refreshAction = .init(taskName: "Refresh Token \(id)")
+        self.decodedStorageFormat = decodedStorageFormat
         
         if let value = json[TokenClaim.idToken.rawValue]?.string {
             idToken = try JWT(value)
