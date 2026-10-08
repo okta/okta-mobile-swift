@@ -1,47 +1,27 @@
 {
   "bundleID" : "CommonSupport",
   "nonSymbolPaths" : {
-    "5" : "\/tutorials\/CommonSupport",
-    "6" : "\/tutorials"
+    "2" : "\/tutorials",
+    "7" : "\/tutorials\/CommonSupport"
   },
   "pathHierarchy" : {
-    "articlesContainer" : 3,
+    "articlesContainer" : 1,
     "modules" : [
-      3
+      1
     ],
     "nodes" : [
       {
-        "name" : "init(named:)",
-        "symbolID" : {
-          "interfaceLanguage" : "swift",
-          "precise" : "s:13CommonSupport14BackgroundTaskC5namedACSSSg_tcfc"
-        }
-      },
-      {
-        "name" : "name",
-        "symbolID" : {
-          "interfaceLanguage" : "swift",
-          "precise" : "s:13CommonSupport14BackgroundTaskC4nameSSSgvp"
-        }
-      },
-      {
         "children" : [
           {
-            "hash" : "8j0fs",
-            "kind" : "type.method",
-            "nodeID" : 4,
-            "parameterTypes" : [
-              "MainActor()->T"
-            ],
-            "returnTypes" : [
-              "T"
-            ]
+            "hash" : "52mi8",
+            "kind" : "class.extension",
+            "nodeID" : 8
           }
         ],
-        "name" : "MainActor",
+        "name" : "_Concurrency",
         "symbolID" : {
           "interfaceLanguage" : "swift",
-          "precise" : "s:e:s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
+          "precise" : "s:m:s:e:s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
         }
       },
       {
@@ -49,12 +29,12 @@
           {
             "hash" : "83qp",
             "kind" : "module.extension",
-            "nodeID" : 8
+            "nodeID" : 0
           },
           {
             "hash" : "8pwqi",
             "kind" : "class",
-            "nodeID" : 7
+            "nodeID" : 3
           }
         ],
         "name" : "CommonSupport",
@@ -64,16 +44,6 @@
         }
       },
       {
-        "name" : "nonisolatedUnsafe(_:)",
-        "symbolID" : {
-          "interfaceLanguage" : "swift",
-          "precise" : "s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
-        }
-      },
-      {
-        "name" : "CommonSupport"
-      },
-      {
         "name" : "tutorials"
       },
       {
@@ -81,12 +51,12 @@
           {
             "hash" : "xw9x",
             "kind" : "property",
-            "nodeID" : 1
+            "nodeID" : 6
           },
           {
             "hash" : "1nohu",
             "kind" : "init",
-            "nodeID" : 0,
+            "nodeID" : 4,
             "parameterTypes" : [
               "String?"
             ],
@@ -102,22 +72,52 @@
         }
       },
       {
-        "children" : [
-          {
-            "hash" : "52mi8",
-            "kind" : "class.extension",
-            "nodeID" : 2
-          }
-        ],
-        "name" : "_Concurrency",
+        "name" : "init(named:)",
         "symbolID" : {
           "interfaceLanguage" : "swift",
-          "precise" : "s:m:s:e:s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
+          "precise" : "s:13CommonSupport14BackgroundTaskC5namedACSSSg_tcfc"
+        }
+      },
+      {
+        "name" : "nonisolatedUnsafe(_:)",
+        "symbolID" : {
+          "interfaceLanguage" : "swift",
+          "precise" : "s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
+        }
+      },
+      {
+        "name" : "name",
+        "symbolID" : {
+          "interfaceLanguage" : "swift",
+          "precise" : "s:13CommonSupport14BackgroundTaskC4nameSSSgvp"
+        }
+      },
+      {
+        "name" : "CommonSupport"
+      },
+      {
+        "children" : [
+          {
+            "hash" : "8j0fs",
+            "kind" : "type.method",
+            "nodeID" : 5,
+            "parameterTypes" : [
+              "MainActor()->T"
+            ],
+            "returnTypes" : [
+              "T"
+            ]
+          }
+        ],
+        "name" : "MainActor",
+        "symbolID" : {
+          "interfaceLanguage" : "swift",
+          "precise" : "s:e:s:ScM13CommonSupportE17nonisolatedUnsafeyxxyYbScMYcXEs8SendableRzlFZ"
         }
       }
     ],
-    "tutorialContainer" : 5,
-    "tutorialOverviewContainer" : 6
+    "tutorialContainer" : 7,
+    "tutorialOverviewContainer" : 2
   },
   "version" : {
     "major" : 0,
