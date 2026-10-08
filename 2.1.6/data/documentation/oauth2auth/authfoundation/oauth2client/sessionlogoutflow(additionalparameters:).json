@@ -1,0 +1,442 @@
+{
+  "abstract" : [
+    {
+      "text" : "Creates a new session logout flow for this redirect URI.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthFoundation",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthFoundation\/OAuth2Client"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthFoundation\/OAuth2Client\/sessionLogoutFlow(additionalParameters:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation12OAuth2ClientC0cA0E17sessionLogoutFlow20additionalParametersAD07SessionfG0CSDySSAA18APIRequestArgument_pGSg_tF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "sessionLogoutFlow"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "additionalParameters"
+      },
+      {
+        "kind" : "text",
+        "text" : ": ["
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : " : any "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+        "text" : "APIRequestArgument"
+      },
+      {
+        "kind" : "text",
+        "text" : "]?) -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
+        "text" : "SessionLogoutFlow"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OAuth2Auth",
+        "relatedModules" : [
+          "AuthFoundation"
+        ]
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "sessionLogoutFlow(additionalParameters:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "sessionLogoutFlow"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "additionalParameters"
+            },
+            {
+              "kind" : "text",
+              "text" : ": ["
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : " : any "
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+              "text" : "APIRequestArgument"
+            },
+            {
+              "kind" : "text",
+              "text" : "]? = nil) -> "
+            },
+            {
+              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
+              "text" : "SessionLogoutFlow"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Optional additional parameters you would like to supply to the authorization server",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "additionalParameters"
+        }
+      ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " to log out of this client.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oauth2auth\/authfoundation\/oauth2client\/sessionlogoutflow(additionalparameters:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequestArgument": {
+  "abstract" : [
+    {
+      "text" : "Defines an argument to an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ". Used within ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " and ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIRequestArgument",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequestargument"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth": {
+  "abstract" : [
+    {
+      "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OAuth2Auth",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/authfoundation"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthFoundation/OAuth2Client": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthFoundation\/OAuth2Client",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/authfoundation\/oauth2client"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/AuthFoundation/OAuth2Client/sessionLogoutFlow(additionalParameters:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a new session logout flow for this redirect URI.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth17SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/AuthFoundation\/OAuth2Client\/sessionLogoutFlow(additionalParameters:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "sessionLogoutFlow(additionalParameters:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/authfoundation\/oauth2client\/sessionlogoutflow(additionalparameters:)"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlow": {
+  "abstract" : [
+    {
+      "text" : "An logout flow class that implements the Session Logout Flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "actor"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionLogoutFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/sessionlogoutflow"
+}
+}
+}

@@ -1,0 +1,555 @@
+{
+  "abstract" : [
+    {
+      "text" : "Designated initializer to create a context to customize the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Context-swift.struct"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Context-swift.struct\/init(acrValues:intent:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14OktaDirectAuth0B18AuthenticationFlowC7ContextV9acrValues6intentAE0C10Foundation15ClaimCollectionVySaySSGSgG_AC6IntentOtcfc",
+    "fragments" : [
+      {
+        "kind" : "identifier",
+        "text" : "init"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "acrValues"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+        "text" : "ClaimCollection"
+      },
+      {
+        "kind" : "text",
+        "text" : "<["
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "]?>, "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "intent"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
+        "text" : "DirectAuthenticationFlow"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC6IntentO",
+        "text" : "Intent"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaDirectAuth"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Initializer",
+    "symbolKind" : "init",
+    "title" : "init(acrValues:intent:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "init"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "acrValues"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+              "text" : "ClaimCollection"
+            },
+            {
+              "kind" : "text",
+              "text" : "<["
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "]?> = nil, "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "intent"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
+              "text" : "DirectAuthenticationFlow"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Intent",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC6IntentO",
+              "text" : "Intent"
+            },
+            {
+              "kind" : "text",
+              "text" : " = .signIn)"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Optional ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "acr_values",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " to supply.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "acrValues"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The intent for this sign-in. Defaults to ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Intent\/signIn",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "intent"
+        }
+      ]
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/init(acrvalues:intent:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection": {
+  "abstract" : [
+    {
+      "text" : "Indicates a special type of claim whose value is interchangable between a whitespace-separated value, or an array of values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "attribute",
+      "text" : "@propertyWrapper"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Container"
+    },
+    {
+      "kind" : "text",
+      "text" : "> "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "where"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Container"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "ClaimCollectionContainer"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ClaimCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using Okta’s Direct Authentication API, enabling native sign-in experiences supporting Multi-Factor Authentication (MFA).",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaDirectAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow that implements the Okta Direct Authentication API.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "actor"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DirectAuthenticationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DirectAuthenticationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Context-swift.struct": {
+  "abstract" : [
+    {
+      "text" : "Configuration which can be used to customize the authentication flow, as needed.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Context-swift.struct",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.Context",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Context-swift.struct/init(acrValues:intent:)": {
+  "abstract" : [
+    {
+      "text" : "Designated initializer to create a context to customize the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "acrValues"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+      "text" : "ClaimCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?>, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "intent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
+      "text" : "DirectAuthenticationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC6IntentO",
+      "text" : "Intent"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Context-swift.struct\/init(acrValues:intent:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(acrValues:intent:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/context-swift.struct\/init(acrvalues:intent:)"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Intent": {
+  "abstract" : [
+    {
+      "text" : "Indicates the intent for the user authentication operation.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Intent"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Intent",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Intent"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.Intent",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Intent/signIn": {
+  "abstract" : [
+    {
+      "text" : "The user intends to sign in.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signIn"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Intent\/signIn",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.Intent.signIn",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent\/signin"
+}
+}
+}

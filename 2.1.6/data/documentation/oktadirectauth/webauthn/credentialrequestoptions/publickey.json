@@ -1,0 +1,300 @@
+{
+  "abstract" : [
+    {
+      "text" : "The public key request options supplied to the client from the server.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions\/publicKey"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14OktaDirectAuth8WebAuthnV24CredentialRequestOptionsV9publicKeyAC06PublicjfgH0Vvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "publicKey"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV",
+        "text" : "WebAuthn"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV33PublicKeyCredentialRequestOptionsV",
+        "text" : "PublicKeyCredentialRequestOptions"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaDirectAuth"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "publicKey"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "publicKey"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV",
+              "text" : "WebAuthn"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/PublicKeyCredentialRequestOptions",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV33PublicKeyCredentialRequestOptionsV",
+              "text" : "PublicKeyCredentialRequestOptions"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/publickey"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaDirectAuth/documentation/OktaDirectAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using Okta’s Direct Authentication API, enabling native sign-in experiences supporting Multi-Factor Authentication (MFA).",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaDirectAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn": {
+  "abstract" : [
+    {
+      "text" : "Exposes the types and classes used to authenticate using WebAuthn.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthn"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthn"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthn",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/CredentialRequestOptions": {
+  "abstract" : [
+    {
+      "text" : "Represents the credential challenge returned from the server when a WebAuthn authentication is initiated.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "CredentialRequestOptions"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "CredentialRequestOptions"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthn.CredentialRequestOptions",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/CredentialRequestOptions/publicKey": {
+  "abstract" : [
+    {
+      "text" : "The public key request options supplied to the client from the server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "publicKey"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV",
+      "text" : "WebAuthn"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV33PublicKeyCredentialRequestOptionsV",
+      "text" : "PublicKeyCredentialRequestOptions"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions\/publicKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "publicKey",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/publickey"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/PublicKeyCredentialRequestOptions": {
+  "abstract" : [
+    {
+      "text" : "The PublicKeyCredentialRequestOptions dictionary supplies get() with the data it needs to generate an assertion. Its challenge member MUST be present, while its other members are OPTIONAL.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "PublicKeyCredentialRequestOptions"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/PublicKeyCredentialRequestOptions",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "PublicKeyCredentialRequestOptions"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthn.PublicKeyCredentialRequestOptions",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions"
+}
+}
+}

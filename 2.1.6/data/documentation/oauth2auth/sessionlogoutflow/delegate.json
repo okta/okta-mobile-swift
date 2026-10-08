@@ -1,0 +1,246 @@
+{
+  "abstract" : [
+    {
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "UsesDelegateCollection.Delegate",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow\/Delegate"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "OAuth2Auth",
+    "externalID" : "s:10OAuth2Auth17SessionLogoutFlowC8Delegatea",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "typealias"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Delegate"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OAuth2Auth"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Delegate"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Type Alias",
+    "symbolKind" : "typealias",
+    "title" : "SessionLogoutFlow.Delegate"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "typealias"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Delegate"
+            },
+            {
+              "kind" : "text",
+              "text" : " = "
+            },
+            {
+              "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10OAuth2Auth25SessionLogoutFlowDelegateP",
+              "text" : "SessionLogoutFlowDelegate"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oauth2auth\/sessionlogoutflow\/delegate"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OAuth2Auth/documentation/OAuth2Auth": {
+  "abstract" : [
+    {
+      "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OAuth2Auth",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlow": {
+  "abstract" : [
+    {
+      "text" : "An logout flow class that implements the Session Logout Flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "actor"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionLogoutFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/sessionlogoutflow"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlow/Delegate": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Delegate"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow\/Delegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Delegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionLogoutFlow.Delegate",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/sessionlogoutflow\/delegate"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/SessionLogoutFlowDelegate": {
+  "abstract" : [
+    {
+      "text" : "The delegate of a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the logout flow during logout session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlowDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/SessionLogoutFlowDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlowDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionLogoutFlowDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/sessionlogoutflowdelegate"
+}
+}
+}

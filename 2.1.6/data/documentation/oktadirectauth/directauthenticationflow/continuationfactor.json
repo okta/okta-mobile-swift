@@ -1,0 +1,550 @@
+{
+  "abstract" : [
+    {
+      "text" : "Enumeration defining the list of possible authenticator “Continuation” factors, which are used.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14OktaDirectAuth0B18AuthenticationFlowC18ContinuationFactorO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ContinuationFactor"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaDirectAuth"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ContinuationFactor"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "DirectAuthenticationFlow.ContinuationFactor"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ContinuationFactor"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Some authenticators cannot complete authentication in a single step, and requires either user intervention or an additional challenge response from the client. These circumstances are represented by the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Status\/continuation(_:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " status. In this case, the appropriate Continuation Factor response type can be supplied to the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(with:)-9gu1l",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " function.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/SQ",
+        "doc:\/\/OktaDirectAuth\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Enumeration-Cases",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor\/prompt(code:)",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor\/transfer",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor\/webAuthn(response:)"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor\/Equatable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaDirectAuth/SQ": {
+  "identifier" : "doc:\/\/OktaDirectAuth\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using Okta’s Direct Authentication API, enabling native sign-in experiences supporting Multi-Factor Authentication (MFA).",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaDirectAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow that implements the Okta Direct Authentication API.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "actor"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DirectAuthenticationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DirectAuthenticationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/ContinuationFactor": {
+  "abstract" : [
+    {
+      "text" : "Enumeration defining the list of possible authenticator “Continuation” factors, which are used.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ContinuationFactor"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ContinuationFactor"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.ContinuationFactor",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/ContinuationFactor/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/equatable-implementations"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/ContinuationFactor/prompt(code:)": {
+  "abstract" : [
+    {
+      "text" : "Respond to an OOB authentication where a code is supplied to a second channel, which will be supplied here.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "prompt"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "code"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor\/prompt(code:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.ContinuationFactor.prompt(code:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/prompt(code:)"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/ContinuationFactor/transfer": {
+  "abstract" : [
+    {
+      "text" : "Continues an OOB authentication by transfering the binding to another authenticator, and waiting for its response.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "transfer"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor\/transfer",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.ContinuationFactor.transfer",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/transfer"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/ContinuationFactor/webAuthn(response:)": {
+  "abstract" : [
+    {
+      "text" : "Respond to a WebAuthn challenge with an authenticator assertion.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "webAuthn"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "response"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV",
+      "text" : "WebAuthn"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV30AuthenticatorAssertionResponseV",
+      "text" : "AuthenticatorAssertionResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor\/webAuthn(response:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.ContinuationFactor.webAuthn(response:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/webauthn(response:)"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Status/continuation(_:)": {
+  "abstract" : [
+    {
+      "text" : "Indicates that the current authentication factor requires some sort of continuation.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "continuation"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
+      "text" : "DirectAuthenticationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC16ContinuationTypeO",
+      "text" : "ContinuationType"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Status\/continuation(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.Status.continuation(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/continuation(_:)"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/resume(with:)-9gu1l": {
+  "abstract" : [
+    {
+      "text" : "Continues authentication of a current factor (either primary or secondary) when an additional step is required.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "resume"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
+      "text" : "DirectAuthenticationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC18ContinuationFactorO",
+      "text" : "ContinuationFactor"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
+      "text" : "DirectAuthenticationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC6StatusO",
+      "text" : "Status"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(with:)-9gu1l",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "resume(with:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(with:)-9gu1l"
+},
+"doc://OktaDirectAuth/s8SendableP": {
+  "identifier" : "doc:\/\/OktaDirectAuth\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

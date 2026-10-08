@@ -1,0 +1,468 @@
+{
+  "abstract" : [
+    {
+      "text" : "Used by ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " when it determines a browser should be presented to the user.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider\/open(authorizeUrl:redirectUri:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:13BrowserSigninAAC8ProviderP4open12authorizeUrl11redirectUri10Foundation3URLVAJ_AJtYaKF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "open"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "authorizeUrl"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation3URLV",
+        "text" : "URL"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "redirectUri"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation3URLV",
+        "text" : "URL"
+      },
+      {
+        "kind" : "text",
+        "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "async"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "throws"
+      },
+      {
+        "kind" : "text",
+        "text" : " -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation3URLV",
+        "text" : "URL"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "BrowserSignin"
+      }
+    ],
+    "required" : true,
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "open(authorizeUrl:redirectUri:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "open"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "authorizeUrl"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation3URLV",
+              "text" : "URL"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "redirectUri"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation3URLV",
+              "text" : "URL"
+            },
+            {
+              "kind" : "text",
+              "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "async"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "throws"
+            },
+            {
+              "kind" : "text",
+              "text" : " -> "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation3URLV",
+              "text" : "URL"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Authorization URL to open within the browser.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "authorizeUrl"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The redirect URI configured for the client.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "redirectUri"
+        }
+      ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The final URI the browser redirects to which matches the ",
+              "type" : "text"
+            },
+            {
+              "code" : "redirectUri",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " parameter.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/browsersignin\/browsersignin\/provider\/open(authorizeurl:redirecturi:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://BrowserSignin/documentation/BrowserSignin": {
+  "abstract" : [
+    {
+      "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "BrowserSignin",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin": {
+  "abstract" : [
+    {
+      "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "BrowserSignin"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "BrowserSignin"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSignin",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Provider": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to represent a specific provider type for use in presenting a browser.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Provider"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Provider"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSignin.Provider",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/provider"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Provider/open(authorizeUrl:redirectUri:)": {
+  "abstract" : [
+    {
+      "text" : "Used by ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " when it determines a browser should be presented to the user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "open"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authorizeUrl"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "redirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider\/open(authorizeUrl:redirectUri:)",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "open(authorizeUrl:redirectUri:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/provider\/open(authorizeurl:redirecturi:)"
+}
+}
+}

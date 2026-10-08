@@ -1,0 +1,825 @@
+{
+  "abstract" : [
+    {
+      "text" : "The method, or sub-type, of an authenticator.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "OktaIdxAuth",
+    "externalID" : "s:11OktaIdxAuth13AuthenticatorC6MethodO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Method"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaIdxAuth"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Method"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "Authenticator.Method"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Method"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/s8CopyableP",
+        "doc:\/\/OktaIdxAuth\/Se",
+        "doc:\/\/OktaIdxAuth\/SE",
+        "doc:\/\/OktaIdxAuth\/SQ",
+        "doc:\/\/OktaIdxAuth\/SH",
+        "doc:\/\/OktaIdxAuth\/SY",
+        "doc:\/\/OktaIdxAuth\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "Working-with-Authenticators",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Kind",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/State-swift.enum"
+      ],
+      "title" : "Working with Authenticators"
+    }
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Enumeration-Cases",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/duo",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/email",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/federated",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/idp",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/other(type:)",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/otp",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/password",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/push",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/securityQuestion",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/signedNonce",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/sms",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/totp",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/voice",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/webAuthN"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/stringValue"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "anchor" : "Default-Implementations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/Equatable-Implementations",
+        "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/RawRepresentable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaidxauth\/authenticator\/method"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaIdxAuth/SE": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/SE",
+  "title" : "Swift.Encodable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/SH": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/SQ": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/SY": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/Se": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/Se",
+  "title" : "Swift.Decodable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using policy-driven native authentication with the Okta Identity Engine.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaIdxAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator": {
+  "abstract" : [
+    {
+      "text" : "Represents information describing the available authenticators and enrolled authenticators.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Authenticator"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Collection": {
+  "abstract" : [
+    {
+      "text" : "Container that represents a collection of authenticators, providing conveniences for quickly accessing relevant objects.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Collection"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Collection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Collection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator.Collection",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/collection"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Kind": {
+  "abstract" : [
+    {
+      "text" : "The type of authenticator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Kind",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator.Kind",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/kind"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method": {
+  "abstract" : [
+    {
+      "text" : "The method, or sub-type, of an authenticator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Method"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Method"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator.Method",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/equatable-implementations"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/rawrepresentable-implementations"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/duo": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "duo"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/duo",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.duo",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/duo"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/email": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "email"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/email",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.email",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/email"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/federated": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "federated"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/federated",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.federated",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/federated"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/idp": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "idp"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/idp",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.idp",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/idp"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/other(type:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "other"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "type"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/other(type:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.other(type:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/other(type:)"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/otp": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "otp"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/otp",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.otp",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/otp"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/password": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "password"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/password",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.password",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/password"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/push": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "push"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/push",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.push",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/push"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/securityQuestion": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "securityQuestion"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/securityQuestion",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.securityQuestion",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/securityquestion"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/signedNonce": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signedNonce"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/signedNonce",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.signedNonce",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/signednonce"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/sms": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "sms"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/sms",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.sms",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/sms"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/stringValue": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "stringValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/stringValue",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "stringValue",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/stringvalue"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/totp": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "totp"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/totp",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.totp",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/totp"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/voice": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "voice"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/voice",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.voice",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/voice"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/Method/webAuthN": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "webAuthN"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/Method\/webAuthN",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Authenticator.Method.webAuthN",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/method\/webauthn"
+},
+"doc://OktaIdxAuth/documentation/OktaIdxAuth/Authenticator/State-swift.enum": {
+  "abstract" : [
+    {
+      "text" : "The state this authenticator is currently in.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "State"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaIdxAuth\/documentation\/OktaIdxAuth\/Authenticator\/State-swift.enum",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "State"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Authenticator.State",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaidxauth\/authenticator\/state-swift.enum"
+},
+"doc://OktaIdxAuth/s8CopyableP": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/s8CopyableP",
+  "title" : "Swift.Copyable",
+  "type" : "unresolvable"
+},
+"doc://OktaIdxAuth/s8SendableP": {
+  "identifier" : "doc:\/\/OktaIdxAuth\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

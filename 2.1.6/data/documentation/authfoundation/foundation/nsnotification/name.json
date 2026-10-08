@@ -1,0 +1,889 @@
+{
+  "abstract" : [
+    {
+      "text" : "Custom notifications sent from the SDK for key events.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "Foundation",
+    "externalID" : "s:e:s:So18NSNotificationNamea14AuthFoundationE19oauth2ClientCreatedABvpZ",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "extension"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "preciseIdentifier" : "c:objc(cs)NSNotification",
+        "text" : "NSNotification"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "identifier",
+        "preciseIdentifier" : "c:@T@NSNotificationName",
+        "text" : "Name"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation",
+        "relatedModules" : [
+          "Foundation"
+        ]
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Name"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Extended Structure",
+    "symbolKind" : "extension",
+    "title" : "NSNotification.Name"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "extension"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:objc(cs)NSNotification",
+              "text" : "NSNotification"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:@T@NSNotificationName",
+              "text" : "Name"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When important events occur within the SDK, your application may need to update its state when the default credential changes. Therefore you can observe the ",
+              "type" : "text"
+            },
+            {
+              "code" : "defaultCredentialChanged",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " notification.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Type-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/credentialCreated",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/credentialMigrated",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/credentialRefreshFailed",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/credentialRemoved",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/defaultCredentialChanged",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/oauth2ClientCreated",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/tokenRefreshFailed",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/tokenRefreshed"
+      ],
+      "title" : "Type Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/foundation\/nsnotification\/name"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Credential": {
+  "abstract" : [
+    {
+      "text" : "Convenience object that provides methods and properties for using a user’s authentication tokens.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Credential"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Credential"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Credential",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/credential"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Credential/default": {
+  "abstract" : [
+    {
+      "text" : "The current or “default” credential.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "`default`"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation10CredentialC",
+      "text" : "Credential"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential\/default",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "default",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/credential\/default"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Foundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNotification": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NSNotification"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NSNotification",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsnotification"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNotification/Name": {
+  "abstract" : [
+    {
+      "text" : "Custom notifications sent from the SDK for key events.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "c:objc(cs)NSNotification",
+      "text" : "NSNotification"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "c:@T@NSNotificationName",
+      "text" : "Name"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Name"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NSNotification.Name",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsnotification\/name"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNotification/Name/credentialCreated": {
+  "abstract" : [
+    {
+      "text" : "Notification broadcast when a new ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " instance is created.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "credentialCreated"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV",
+      "text" : "Notification"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV4Namea",
+      "text" : "Name"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/credentialCreated",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "credentialCreated",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsnotification\/name\/credentialcreated"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNotification/Name/credentialMigrated": {
+  "abstract" : [
+    {
+      "text" : "Notification broadcast when a credential has been migrated from a previous version.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "credentialMigrated"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV",
+      "text" : "Notification"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV4Namea",
+      "text" : "Name"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/credentialMigrated",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "credentialMigrated",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsnotification\/name\/credentialmigrated"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNotification/Name/credentialRefreshFailed": {
+  "abstract" : [
+    {
+      "text" : "Notification broadcast when a credential fails to refresh.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "credentialRefreshFailed"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV",
+      "text" : "Notification"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV4Namea",
+      "text" : "Name"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/credentialRefreshFailed",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "credentialRefreshFailed",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsnotification\/name\/credentialrefreshfailed"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNotification/Name/credentialRemoved": {
+  "abstract" : [
+    {
+      "text" : "Notification broadcast when a credential is removed from storage.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "credentialRemoved"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV",
+      "text" : "Notification"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV4Namea",
+      "text" : "Name"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/credentialRemoved",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "credentialRemoved",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsnotification\/name\/credentialremoved"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNotification/Name/defaultCredentialChanged": {
+  "abstract" : [
+    {
+      "text" : "Notification broadcast when the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential\/default",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " value changes.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "defaultCredentialChanged"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV",
+      "text" : "Notification"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV4Namea",
+      "text" : "Name"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/defaultCredentialChanged",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "defaultCredentialChanged",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsnotification\/name\/defaultcredentialchanged"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNotification/Name/oauth2ClientCreated": {
+  "abstract" : [
+    {
+      "text" : "Notification broadcast when a new ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " instance is created.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "oauth2ClientCreated"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV",
+      "text" : "Notification"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV4Namea",
+      "text" : "Name"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/oauth2ClientCreated",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "oauth2ClientCreated",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsnotification\/name\/oauth2clientcreated"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNotification/Name/tokenRefreshFailed": {
+  "abstract" : [
+    {
+      "text" : "Notification broadcast when a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " refresh fails.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "tokenRefreshFailed"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV",
+      "text" : "Notification"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV4Namea",
+      "text" : "Name"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/tokenRefreshFailed",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "tokenRefreshFailed",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsnotification\/name\/tokenrefreshfailed"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNotification/Name/tokenRefreshed": {
+  "abstract" : [
+    {
+      "text" : "Notification broadcast when a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " is refreshed.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "tokenRefreshed"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV",
+      "text" : "Notification"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12NotificationV4Namea",
+      "text" : "Name"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNotification\/Name\/tokenRefreshed",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "tokenRefreshed",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsnotification\/name\/tokenrefreshed"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
+  "abstract" : [
+    {
+      "text" : "An OAuth2 client, used to interact with a given authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Token": {
+  "abstract" : [
+    {
+      "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Token"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Token"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Token",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token"
+}
+}
+}

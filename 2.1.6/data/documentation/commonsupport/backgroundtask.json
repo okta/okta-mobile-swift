@@ -1,0 +1,257 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/CommonSupport\/documentation\/CommonSupport"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/CommonSupport\/documentation\/CommonSupport\/BackgroundTask"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:13CommonSupport14BackgroundTaskC",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "BackgroundTask"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "CommonSupport"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "BackgroundTask"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "BackgroundTask"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "final"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "BackgroundTask"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/CommonSupport\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Initializers",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/CommonSupport\/documentation\/CommonSupport\/BackgroundTask\/init(named:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/CommonSupport\/documentation\/CommonSupport\/BackgroundTask\/name"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/commonsupport\/backgroundtask"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://CommonSupport/documentation/CommonSupport": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/CommonSupport\/documentation\/CommonSupport",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "CommonSupport",
+  "type" : "topic",
+  "url" : "\/documentation\/commonsupport"
+},
+"doc://CommonSupport/documentation/CommonSupport/BackgroundTask": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "BackgroundTask"
+    }
+  ],
+  "identifier" : "doc:\/\/CommonSupport\/documentation\/CommonSupport\/BackgroundTask",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "BackgroundTask"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BackgroundTask",
+  "type" : "topic",
+  "url" : "\/documentation\/commonsupport\/backgroundtask"
+},
+"doc://CommonSupport/documentation/CommonSupport/BackgroundTask/init(named:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "named"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/CommonSupport\/documentation\/CommonSupport\/BackgroundTask\/init(named:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(named:)",
+  "type" : "topic",
+  "url" : "\/documentation\/commonsupport\/backgroundtask\/init(named:)"
+},
+"doc://CommonSupport/documentation/CommonSupport/BackgroundTask/name": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "name"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/CommonSupport\/documentation\/CommonSupport\/BackgroundTask\/name",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "name",
+  "type" : "topic",
+  "url" : "\/documentation\/commonsupport\/backgroundtask\/name"
+},
+"doc://CommonSupport/s8SendableP": {
+  "identifier" : "doc:\/\/CommonSupport\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

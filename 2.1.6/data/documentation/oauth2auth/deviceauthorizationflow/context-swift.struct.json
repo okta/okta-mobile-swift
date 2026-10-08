@@ -1,0 +1,588 @@
+{
+  "abstract" : [
+    {
+      "text" : "A model representing the context and current state for an authorization session.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "OAuth2Auth",
+    "externalID" : "s:10OAuth2Auth23DeviceAuthorizationFlowC7ContextV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Context"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OAuth2Auth"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Context"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "DeviceAuthorizationFlow.Context"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Context"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
+        "doc:\/\/OAuth2Auth\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "Device-Authorization-Flow",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlowDelegate"
+      ],
+      "title" : "Device Authorization Flow"
+    }
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Initializers",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/init(acrValues:additionalParameters:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/acrValues",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/additionalParameters",
+        "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/verification"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationContext": {
+  "abstract" : [
+    {
+      "text" : "Common protocol that all ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/Context-swift.associatedtype",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type aliases must conform to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation24ProvidesOAuth2ParametersP",
+      "text" : "ProvidesOAuth2Parameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s8SendableP",
+      "text" : "Sendable"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "AuthenticationContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationcontext"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
+  "abstract" : [
+    {
+      "text" : "Used by types that are capable of providing parameters to OAuth2 API requests.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ProvidesOAuth2Parameters"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ProvidesOAuth2Parameters",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/providesoauth2parameters"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth": {
+  "abstract" : [
+    {
+      "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OAuth2Auth",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Device Authorization Grant flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "actor"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DeviceAuthorizationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DeviceAuthorizationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DeviceAuthorizationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/Context-swift.struct": {
+  "abstract" : [
+    {
+      "text" : "A model representing the context and current state for an authorization session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DeviceAuthorizationFlow.Context",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/Context-swift.struct/acrValues": {
+  "abstract" : [
+    {
+      "text" : "The ACR values, if any, which should be requested by the client.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "acrValues"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/acrValues",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "acrValues",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct\/acrvalues"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/Context-swift.struct/additionalParameters": {
+  "abstract" : [
+    {
+      "text" : "Any additional query string parameters you would like to supply to the authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/additionalParameters",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "additionalParameters",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct\/additionalparameters"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/Context-swift.struct/init(acrValues:additionalParameters:)": {
+  "abstract" : [
+    {
+      "text" : "Initializer for creating a context with a custom state string.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "acrValues"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+      "text" : "ClaimCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?>, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?)"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/init(acrValues:additionalParameters:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(acrValues:additionalParameters:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct\/init(acrvalues:additionalparameters:)"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlow/Context-swift.struct/verification": {
+  "abstract" : [
+    {
+      "text" : "Verification information used to",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "verification"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth23DeviceAuthorizationFlowC",
+      "text" : "DeviceAuthorizationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OAuth2Auth23DeviceAuthorizationFlowC12VerificationV",
+      "text" : "Verification"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow\/Context-swift.struct\/verification",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "verification",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflow\/context-swift.struct\/verification"
+},
+"doc://OAuth2Auth/documentation/OAuth2Auth/DeviceAuthorizationFlowDelegate": {
+  "abstract" : [
+    {
+      "text" : "The delegate of ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DeviceAuthorizationFlowDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/OAuth2Auth\/documentation\/OAuth2Auth\/DeviceAuthorizationFlowDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DeviceAuthorizationFlowDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DeviceAuthorizationFlowDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/oauth2auth\/deviceauthorizationflowdelegate"
+},
+"doc://OAuth2Auth/s8SendableP": {
+  "identifier" : "doc:\/\/OAuth2Auth\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

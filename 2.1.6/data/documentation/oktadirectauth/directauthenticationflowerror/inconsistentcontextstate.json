@@ -1,0 +1,218 @@
+{
+  "abstract" : [
+    {
+      "text" : "The flow has gotten into an inconsistent state, possibly due to concurrent authentication operations being performed.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/inconsistentContextState"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14OktaDirectAuth0B23AuthenticationFlowErrorO24inconsistentContextStateyA2CmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "inconsistentContextState"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaDirectAuth"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "DirectAuthenticationFlowError.inconsistentContextState"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "inconsistentContextState"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktadirectauth\/directauthenticationflowerror\/inconsistentcontextstate"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaDirectAuth/documentation/OktaDirectAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using Okta’s Direct Authentication API, enabling native sign-in experiences supporting Multi-Factor Authentication (MFA).",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaDirectAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow that implements the Okta Direct Authentication API.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "actor"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DirectAuthenticationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DirectAuthenticationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError": {
+  "abstract" : [
+    {
+      "text" : "Errors that may be generated while authenticating using ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DirectAuthenticationFlowError"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DirectAuthenticationFlowError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlowError",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflowerror"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/inconsistentContextState": {
+  "abstract" : [
+    {
+      "text" : "The flow has gotten into an inconsistent state, possibly due to concurrent authentication operations being performed.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "inconsistentContextState"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/inconsistentContextState",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlowError.inconsistentContextState",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/inconsistentcontextstate"
+}
+}
+}

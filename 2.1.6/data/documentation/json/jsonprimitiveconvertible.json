@@ -1,0 +1,551 @@
+{
+  "abstract" : [
+    {
+      "text" : "Represents types whose values can be converted to a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Primitive",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/JSON\/documentation\/JSON"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/JSON\/documentation\/JSON\/JSONPrimitiveConvertible"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:4JSON24JSONPrimitiveConvertibleP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "JSONPrimitiveConvertible"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "JSON"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "JSONPrimitiveConvertible"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "JSONPrimitiveConvertible"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "JSONPrimitiveConvertible"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/JSON\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/Bool",
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/Double",
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/Int",
+        "doc:\/\/JSON\/documentation\/JSON\/JSON\/Primitive",
+        "doc:\/\/JSON\/documentation\/JSON\/Foundation\/NSNull",
+        "doc:\/\/JSON\/documentation\/JSON\/Swift\/String"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/JSON\/documentation\/JSON\/JSONPrimitiveConvertible\/jsonValue",
+        "doc:\/\/JSON\/documentation\/JSON\/JSONPrimitiveConvertible\/primitive"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/json\/jsonprimitiveconvertible"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://JSON/documentation/JSON": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "JSON",
+  "type" : "topic",
+  "url" : "\/documentation\/json"
+},
+"doc://JSON/documentation/JSON/Foundation/NSNull": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "c:objc(cs)NSNull",
+      "text" : "NSNull"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Foundation\/NSNull",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NSNull"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NSNull",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/foundation\/nsnull"
+},
+"doc://JSON/documentation/JSON/JSON": {
+  "abstract" : [
+    {
+      "text" : "Mutable value type representing JSON and its contents in a type-safe and performant way.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json"
+},
+"doc://JSON/documentation/JSON/JSON/Primitive": {
+  "abstract" : [
+    {
+      "text" : "Represents a primitive value (aka “leaf node”) within a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Primitive"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Primitive",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Primitive"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON.Primitive",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/json\/primitive"
+},
+"doc://JSON/documentation/JSON/JSONPrimitiveConvertible": {
+  "abstract" : [
+    {
+      "text" : "Represents types whose values can be converted to a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Primitive",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONPrimitiveConvertible"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONPrimitiveConvertible",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONPrimitiveConvertible"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONPrimitiveConvertible",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonprimitiveconvertible"
+},
+"doc://JSON/documentation/JSON/JSONPrimitiveConvertible/jsonValue": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "jsonValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV5ValueO",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONPrimitiveConvertible\/jsonValue",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "jsonValue",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonprimitiveconvertible\/jsonvalue"
+},
+"doc://JSON/documentation/JSON/JSONPrimitiveConvertible/primitive": {
+  "abstract" : [
+    {
+      "text" : "The ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSON\/Primitive",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " representation of this type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "primitive"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV",
+      "text" : "JSON"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:4JSONAAV9PrimitiveO",
+      "text" : "Primitive"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/JSONPrimitiveConvertible\/primitive",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "primitive",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/jsonprimitiveconvertible\/primitive"
+},
+"doc://JSON/documentation/JSON/Swift/Bool": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/Bool",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Bool"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Bool",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/swift\/bool"
+},
+"doc://JSON/documentation/JSON/Swift/Double": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/Double",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Double"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Double",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/swift\/double"
+},
+"doc://JSON/documentation/JSON/Swift/Int": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/Int",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Int"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Int",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/swift\/int"
+},
+"doc://JSON/documentation/JSON/Swift/String": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/JSON\/documentation\/JSON\/Swift\/String",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "String"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "String",
+  "type" : "topic",
+  "url" : "\/documentation\/json\/swift\/string"
+},
+"doc://JSON/s8SendableP": {
+  "identifier" : "doc:\/\/JSON\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

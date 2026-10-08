@@ -1,0 +1,641 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/SetAlgebra-Implementations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "BrowserSignin"
+      }
+    ],
+    "role" : "collectionGroup",
+    "roleHeading" : "API Collection",
+    "title" : "SetAlgebra Implementations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Initializers",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/init(_:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/init(arrayLiteral:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isEmpty"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "anchor" : "Instance-Methods",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isDisjoint(with:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isStrictSubset(of:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isStrictSuperset(of:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isSubset(of:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isSuperset(of:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/subtract(_:)",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/subtracting(_:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/browsersignin\/browsersignin\/option\/setalgebra-implementations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://BrowserSignin/documentation/BrowserSignin": {
+  "abstract" : [
+    {
+      "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "BrowserSignin",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin": {
+  "abstract" : [
+    {
+      "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "BrowserSignin"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "BrowserSignin"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSignin",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option": {
+  "abstract" : [
+    {
+      "text" : "Defines the options used to control the behavior of the browser and its presentation.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Option"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Option"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSignin.Option",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option/init(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "S"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "S"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/init(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option\/init(_:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option/init(arrayLiteral:)": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "ArrayLiteralElement",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Self.Element",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "arrayLiteral"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s10SetAlgebraP7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : "...)"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/init(arrayLiteral:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(arrayLiteral:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option\/init(arrayliteral:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option/isDisjoint(with:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isDisjoint"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isDisjoint(with:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isDisjoint(with:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option\/isdisjoint(with:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option/isEmpty": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isEmpty"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isEmpty",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isEmpty",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option\/isempty"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option/isStrictSubset(of:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isStrictSubset"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "of"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isStrictSubset(of:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isStrictSubset(of:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option\/isstrictsubset(of:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option/isStrictSuperset(of:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isStrictSuperset"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "of"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isStrictSuperset(of:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isStrictSuperset(of:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option\/isstrictsuperset(of:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option/isSubset(of:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isSubset"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "of"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isSubset(of:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isSubset(of:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option\/issubset(of:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option/isSuperset(of:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isSuperset"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "of"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/isSuperset(of:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isSuperset(of:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option\/issuperset(of:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option/subtract(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "subtract"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/subtract(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subtract(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option\/subtract(_:)"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Option/subtracting(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "subtracting"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Option\/subtracting(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subtracting(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/option\/subtracting(_:)"
+}
+}
+}

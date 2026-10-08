@@ -1,0 +1,210 @@
+{
+  "abstract" : [
+    {
+      "text" : "Indicates the respective authenticator can be contacted over ISO\/IEC 7816 smart card with contacts.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/smartCard"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14OktaDirectAuth8WebAuthnV22AuthenticatorTransportO9smartCardyA2EmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "smartCard"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaDirectAuth"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "WebAuthn.AuthenticatorTransport.smartCard"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "smartCard"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/smartcard"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://OktaDirectAuth/documentation/OktaDirectAuth": {
+  "abstract" : [
+    {
+      "text" : "Authenticate users using Okta’s Direct Authentication API, enabling native sign-in experiences supporting Multi-Factor Authentication (MFA).",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaDirectAuth",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn": {
+  "abstract" : [
+    {
+      "text" : "Exposes the types and classes used to authenticate using WebAuthn.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthn"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthn"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthn",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorTransport": {
+  "abstract" : [
+    {
+      "text" : "This member contains the type of the public key credential the caller is referring to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticatorTransport"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticatorTransport"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthn.AuthenticatorTransport",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorTransport/smartCard": {
+  "abstract" : [
+    {
+      "text" : "Indicates the respective authenticator can be contacted over ISO\/IEC 7816 smart card with contacts.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "smartCard"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorTransport\/smartCard",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthn.AuthenticatorTransport.smartCard",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/smartcard"
+}
+}
+}

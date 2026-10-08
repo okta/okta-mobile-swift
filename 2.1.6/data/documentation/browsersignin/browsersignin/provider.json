@@ -1,0 +1,389 @@
+{
+  "abstract" : [
+    {
+      "text" : "Protocol used to represent a specific provider type for use in presenting a browser.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "BrowserSignin",
+    "externalID" : "s:13BrowserSigninAAC8ProviderP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Provider"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "BrowserSignin"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Provider"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "BrowserSignin.Provider"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Provider"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s8SendableP",
+              "text" : "Sendable"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The default implementation will use the most appropriate browser session for use when authenticating. This facility should only be used when a built-in browser capability is unavailable in your target environment.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Important",
+          "style" : "important",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Instance-Methods",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider\/cancel()",
+        "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider\/open(authorizeUrl:redirectUri:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/browsersignin\/browsersignin\/provider"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://BrowserSignin/documentation/BrowserSignin": {
+  "abstract" : [
+    {
+      "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "BrowserSignin",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin": {
+  "abstract" : [
+    {
+      "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "BrowserSignin"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "BrowserSignin"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSignin",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Provider": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to represent a specific provider type for use in presenting a browser.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Provider"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Provider"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "BrowserSignin.Provider",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/provider"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Provider/cancel()": {
+  "abstract" : [
+    {
+      "text" : "Used by ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " when the browser window should be canceled and closed.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cancel"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider\/cancel()",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "cancel()",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/provider\/cancel()"
+},
+"doc://BrowserSignin/documentation/BrowserSignin/BrowserSignin/Provider/open(authorizeUrl:redirectUri:)": {
+  "abstract" : [
+    {
+      "text" : "Used by ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " when it determines a browser should be presented to the user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "open"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authorizeUrl"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "redirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    }
+  ],
+  "identifier" : "doc:\/\/BrowserSignin\/documentation\/BrowserSignin\/BrowserSignin\/Provider\/open(authorizeUrl:redirectUri:)",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "open(authorizeUrl:redirectUri:)",
+  "type" : "topic",
+  "url" : "\/documentation\/browsersignin\/browsersignin\/provider\/open(authorizeurl:redirecturi:)"
+},
+"doc://BrowserSignin/s8SendableP": {
+  "identifier" : "doc:\/\/BrowserSignin\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}
