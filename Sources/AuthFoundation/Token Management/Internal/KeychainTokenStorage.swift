@@ -193,11 +193,38 @@ final class KeychainTokenStorage: TokenStorage {
     }
     
     func get(token id: String, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> Token {
-        try token(with: try Keychain
-                    .Search(account: id,
-                            service: KeychainTokenStorage.serviceName)
-                    .get(prompt: prompt,
-                         authenticationContext: authenticationContext as? (any KeychainAuthenticationContext)))
+        let keychainContext = authenticationContext as? (any KeychainAuthenticationContext)
+        let item = try Keychain
+            .Search(account: id,
+                    service: KeychainTokenStorage.serviceName)
+            .get(prompt: prompt,
+                 authenticationContext: keychainContext)
+
+        let token = try token(with: item)
+        normalize(token, storedIn: item, authenticationContext: keychainContext)
+        return token
+    }
+
+    /// Rewrites a keychain item persisted using a superseded encoding.
+    /// 
+    /// **Note:** This is best effort, since the token already decoded successfully,
+    /// so a failed rewrite must not prevent the caller using it.
+    private func normalize(_ token: Token,
+                           storedIn item: Keychain.Item,
+                           authenticationContext: (any KeychainAuthenticationContext)?)
+    {
+        guard token.decodedStorageFormat.needsNormalization
+        else {
+            return
+        }
+
+        do {
+            var normalized = item
+            normalized.value = try encoder.encode(token)
+            try item.update(normalized, authenticationContext: authenticationContext)
+        } catch {
+            print("Could not normalize stored token \(token.id) from format \(token.decodedStorageFormat): \(error)")
+        }
     }
     
     func setMetadata(_ metadata: Token.Metadata) throws {
