@@ -20,6 +20,6 @@ extension SDKVersion.Name {
 extension SDKVersion {
     @_documentation(visibility: private)
     public static let directAuth: SDKVersion? = {
-        register(.directAuth, version: "2.2.0")
+        register(.directAuth, version: "2.2.1")
     }()
 }
